@@ -1,0 +1,37 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng20a74.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1fa2a.html">[^^Up^^]</A>
+<A HREF="ng210f1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Using (.ntx) and (.ndx) Files Concurrently</B>
+------------------------------------------------------------------------------
+
+     You can use (.ndx) and (.ntx) files concurrently in a CA-Clipper program
+     like this:
+
+     REQUEST DBFNDX
+
+     // (.ntx) file using default DBFNTX driver
+     USE File1 INDEX File1 NEW
+
+     // (.ndx) files using DBFNDX driver
+     USE File2 VIA "DBFNDX" INDEX File2 NEW
+
+     Note, however, that you cannot use (.ndx) and (.ntx) files in the same
+     work area.  For example, the following does not work:
+
+     USE File1 VIA "DBFNDX" INDEX File1.ntx, File2.ndx
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

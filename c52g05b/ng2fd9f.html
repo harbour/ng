@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2fbe9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2f9e1.html">[^^Up^^]</A>
+<A HREF="ng306e3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1   Why are my 5.0 .EXEs larger than Summer '87?</B>
+--------------------------------------------------------------------------------
+
+     Clipper 5.0 executable (.EXE) files are often (though not always)
+     larger than equivalent Summer '87 executables.  Generally, this is
+     because of the increased size of the Clipper runtime support system
+     (the support code is larger because of the larger feature set in
+     Clipper 5.0 and because the runtime system is more modular than in
+     previous releases).
+
+     <B>Note:</B>  The amount of memory needed to successfully run a Clipper
+     5.0 application is only indirectly related to the size of the
+     executable file.  In particular, increasing the amount of compiled
+     Clipper (.prg) code in an application has very little effect on the
+     amount of memory required to run the application.  This is because all
+     compiled Clipper code is automatically placed into dynamic overlays by
+     .RTLink.  Dynamically overlayed code is paged in and out of memory as
+     needed during execution; the amount of compiled Clipper code affects
+     the .EXE size but not the amount of memory required to run the
+     application.
+
+     In some cases the physical size of the .EXE file (as opposed to the
+     amount of memory needed for execution) is a concern.  An example would
+     be a large application that you wish to distribute on floppy disks.
+     Clipper 5.0 offers several options for breaking an application into
+     multiple files.  For more information, refer to Chapter 4 of your
+     Programming and Utilities Guide.
+
+     Compiling with the debugging option (/B) increases the size of the .EXE
+     file.  When you are through debugging your application, you should
+     recompile it without the debugging option.  Compiling with the /L
+     option (omit line number information) reduces the size of your .EXE
+     file.  For information on these options, refer to Chapter 3 of your
+     Programming and Utilities Guide.
+
+     For information about how .RTLink creates dynamic overlays (and how to
+     statically overlay non-Clipper code), refer to Chapter 4 of your
+     Programming and Utilities Guide.
+
+     For information about how dynamic overlays are handled during execution
+     (and other runtime memory management issues), refer to Release Note #6.
+
+     For information about determining how much memory is required to run
+     5.0 applications, see below.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

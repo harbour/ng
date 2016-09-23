@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng14651.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng1555a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCPASS()</B>
+ Modifies or sets the password for a bindery object
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCPASS(&lt;cName&gt;,[&lt;nType&gt;],&lt;cOldPass&gt;,&lt;cNewPass&gt;,</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cName&gt; </B> Designates the name of the bindery object that is
+     processed.
+
+     <B>&lt;nType&gt; </B> Designates a numeric value that indicates the type of
+     &lt;cName&gt;.  The header file CTNNET.CH contains symbolic constants for the
+     object types defined by Novell for use with the bindery functions of
+     CA-Clipper Tools.  The default value indicates OBJ_USER.
+
+     <B>&lt;cOldPass&gt; </B> Designates the old password for &lt;cName&gt;.
+
+     <B>&lt;cNewPass&gt; </B> Designates the new password that is set for &lt;cName&gt;.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server that contains the
+     bindery that is accessed.  Your workstation must be attached to
+     &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETCPASS() returns .T. if the new password has been set successfully.
+     If an error occurs, the Novell error code can be queried with the
+     NNETERROR() function.
+
+ <B>Description</B>
+
+     NOVELL NET CHANGE BINDERY OBJECT PASSWORD
+     With NNETCPASS(), the password of a bindery object can be modified.
+     Usually the function is used to change the password of a user.  The
+     parameters &lt;cName&gt; and &lt;nType&gt; specify the object that is processed.  If
+     the user does not have supervisor rights, the old password must be
+     passed to prove the rights to set a new password.  If no password exists
+     for &lt;cName&gt;, an empty string ("") must be passed for &lt;cOldPass&gt;.
+     &lt;cNewPass&gt; is the new password that is set.  A user with supervisor
+     rights can pass the parameter &lt;cOldPass&gt; as an empty string.
+
+     With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the bindery of any attached
+     file server can be accessed.  The connection ID of a file server can be
+     determined with NNETATTACH() or NNETLOGIN().
+
+     Supervisor rights for the bindery are required to modify passwords.  For
+     efficiency reasons, user defined object types must be passed in the high-
+     low format.
+
+ <B>Notes</B>
+
+     <B>.</B>  The password of a bindery object does not affect the access
+        possibilities to the object.  The password is only required when the
+        object logs into the file server.
+
+     <B>.</B>  When a password is first set, the object is required to have
+        "password" property.  If necessary, the "password" property must be
+        created with NNETCRTPRP().
+
+ <B>Example</B>
+
+     Change the password for user PAUL from LINDA to SILVIA:
+
+     IF NNETCPASS('PAUL',,'LINDA','SILVIA')
+     ? 'Password changed!'
+     ELSE
+     ? 'Password not changed!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1ca28.html">NNETVPASS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng129ff.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng13625.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETACCDIS()</B>
+ Sets or queries an access account lock
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETACCDIS(&lt;cUser&gt;,[&lt;lLock&gt;],[&lt;cServer&gt;|&lt;nConId&gt;),</B>
+     <B>   --&gt; lLocked</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cUser&gt; </B> Designates the name of the user for whom an access account
+     lock is set or checked.
+
+     <B>&lt;lLock&gt; </B> Allows locking (.T.) or releasing (.F.) of the access
+     account of &lt;cUser&gt;.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server where &lt;cUser&gt; is
+     established.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETACCDIS() returns .T. when the access account of &lt;cUser&gt; is currently
+     disabled.  &lt;cUser&gt; is not able to log in.  If the parameter &lt;lLock&gt; has
+     been passed and the return value does not match &lt;lLock&gt;, the user of the
+     NNETACCDIS() function did not have the rights requested for the
+     modification (see the description).
+
+ <B>Description</B>
+
+     NOVELL NET ACCOUNT DISABLED
+     With NNETACCDIS(), the access account lock for &lt;cUser&gt; can be set or
+     queried.  To determine the status of the account, do not pass a value
+     for the parameter &lt;lLock&gt;.  To set the status of the account, pass .T.
+     or .F. for &lt;lLock&gt;.  However, to lock or release an access account lock,
+     supervisor rights on the related file server are necessary.  With
+     &lt;cServer&gt; or &lt;nConId&gt;, the status of any user on any attached server can
+     be queried.  NNETATTACH() and NNETLOGIN() return the server connection
+     ID.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the access account status for user MIKE:
+
+        ? NNETACCDIS('MIKE')   // for example .T.
+
+     <B>.</B>  Disable the account for user MIKE:
+
+        NNETACCDIS('MIKE',.T.)
+
+     <B>.</B>  Release the account lock for user MIKE:
+
+        NNETACCDIS('MIKE',.F.)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng13e46.html">NNETAEXPD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

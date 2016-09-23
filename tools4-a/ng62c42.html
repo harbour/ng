@@ -1,0 +1,93 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6226a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng636bf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSARP()</B>
+ Determines the available remote printers of a print server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSARP(&lt;cPServer&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; aRemote</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B> Designates the name of the print server that is accessed.
+
+     <B>&lt;cServer&gt;</B> Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSARP() returns an array with subarrays (two-dimensional array).
+     Each subarray contains information about an available remote printer.
+     For the structure of the subarrays, see the following table:
+
+     <B>Table 27.3:  NNETPSARP() Subarray Structure</B>
+     ------------------------------------------------------------------------
+     <B>Position     Metasymbol     CTPS.CH   Definition</B>
+     ------------------------------------------------------------------------
+     1            cName          ARP_NAME  Printer name
+     2            nNumber        ARP_NUM   Printer number (0..15)
+     3            nTyp           ARP_TYPE  printer type
+     ------------------------------------------------------------------------
+
+     If an error occurs, the function returns an empty array.
+
+     For the printer type, the following values are possible:
+
+     <B>Table 27.4:  Printer Types</B>
+     ------------------------------------------------------------------------
+     <B>Value   CTPS.CH        Definition</B>
+     ------------------------------------------------------------------------
+     7       PSP_REMLPT1    Remote printer on LPT1:
+     8       PSP_REMLPT2    Remote printer on LPT2:
+     9       PSP_REMLPT3    Remote printer on LPT3:
+     10      PSP_REMCOM1    Remote printer on COM1:
+     11      PSP_REMCOM2    Remote printer on COM2:
+     12      PSP_REMCOM3    Remote printer on COM3:
+     13      PSP_REMCOM4    Remote printer on COM4:
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     NOVELL NET AVAILABLE REMOTE PRINTERS
+     Netware print servers can serve printers connected to a workstation
+     (remote printers).  NNETPSARP() allows you to determine which remote
+     printers of a print server are available.  The sample program
+     RPRINTER.PRG demonstrates how to use NNETPSARP() for the emulation of a
+     remote printer.
+
+ <B>Example</B>
+
+     Display the list of available remote printers for print server PSERVER:
+
+     #include "ctnet.ch"
+
+     aRemote=NNETPSARP('PSERVER')
+     FOR i=1 TO LEN(aRemote)
+        ? aRemote[i,ARP_NAME],aRemote[i,ARP_TYPE]
+     NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng70ce6.html">NNETPSRRP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

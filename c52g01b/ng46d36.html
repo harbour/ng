@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng467e1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng472b0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LUPDATE()</B>
+ Return the last modification date of a (.dbf) file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LUPDATE() --&gt; dModification</B>
+
+ <B>Returns</B>
+
+     LUPDATE() returns the date of last change to the open database file in
+     the current work area.  If there is no database file in USE, LUPDATE()
+     returns a blank date.
+
+ <B>Description</B>
+
+     LUPDATE() is a database function that determines the date the database
+     file in the current work area was last modified and CLOSEd.  By default,
+     LUPDATE() operates on the currently selected work area.  It will operate
+     on an unselected work area if you specify it as part of an aliased
+     expression as shown in the example below.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates that the modification date of
+        database file is not changed until the database file is closed:
+
+        ? DATE()                  // Result: 09/01/90
+        USE Sales NEW
+        ? LUPDATE()               // Result: 08/31/90
+        //
+        APPEND BLANK
+        ? LUPDATE()               // Result: 08/31/90
+        CLOSE DATABASES
+        //
+        USE Sales NEW
+        ? LUPDATE()               // Result: 09/01/90
+
+     <B>.</B>  This example uses an aliased expression to access LUPDATE()
+        for a database file open in an unselected work area:
+
+        USE Sales NEW
+        USE Customer NEW
+        ? LUPDATE(), Sales-&gt;(LUPDATE())
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng35c40.html">FIELDNAME()</A>
+<A HREF="ng44695.html">LASTREC()</A>
+<A HREF="ng5c2d2.html">RECSIZE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

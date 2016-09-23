@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng64caf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng65deb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSDNO()</B>
+ Deletes an object that is notified for a print server printer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSDNO(&lt;cPServer&gt;,&lt;NPrinter&gt;,&lt;cOBjName&gt;,[&lt;nObjType&gt;],</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;nPrinter&gt;</B>  Designates the number of the printer on &lt;cPServer&gt;.
+     Values between 0 and 15 are possible.
+
+     <B>&lt;cObjName&gt;</B>  Designates the name of the bindery object (for example,
+     a user) that is deleted from the list of notified objects.
+
+     <B>&lt;nObjType&gt;</B>  Designates a numeric value that indicates the type of
+     &lt;cObjName&gt;.  The header file CTNNET.CH contains symbolic constants for
+     the object types defined by Novell for use with the bindery functions of
+     CA-Clipper Tools.  The default value designates the object type
+     OBJ_USER.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSDNO() returns .T. if &lt;cObjName&gt; has been deleted from the list of
+     notified objects for &lt;nPrinter&gt; on &lt;cPServer&gt;.  If an error occurs (for
+     example, no operator rights), the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER NOTIFY OBJECT
+     NNETPSDNO() allows you to delete a notified object from the list of
+     notified objects for &lt;nPrinter&gt; on &lt;cPServer&gt;.  This function requires
+     operator rights for &lt;cPServer&gt;.  For efficiency reasons, numeric values
+     for &lt;nObjType&gt; must be passed in the high-low format.
+
+ <B>Example</B>
+
+     Delete user MICK from the list of notified objects for printer 0 on
+     PSERVER:
+
+     IF NNETPSDNO('PSERVER',0,'MICK')
+        ? 'User MICK deleted successfully!'
+     ELSE
+        ? 'Error!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6226a.html">NNETPSANO()</A>
+<A HREF="ng6428b.html">NNETPSCNO()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

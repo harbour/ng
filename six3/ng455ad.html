@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng44b31.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng459dd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>CLEAR ORDER:</B>
+
+  Syntax:
+
+  <B>CLEAR ORDER &lt;nOrder&gt;</B>
+
+    &lt;nOrder&gt; indicates which index order to close.
+
+  Allows you to selectively close a single index without closing any other
+  open indexes.  Any indexes in a greater order position will be moved up
+  one order position.
+
+    <B>NOTE:  If you clear the active order, order is set to zero (0).</B>
+
+    NOTE:  This command is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    LOCAL nX := 0
+
+    USE test VIA "SIXCDX"                          // Open Database
+    SET INDEX TO last, state, age, zip             // Open four IDX files
+
+    FOR nX := 1 TO Sx_IndexCount()                 // Loop thru index order
+      ? AllTrim( Str( nX )) + " " + Sx_IndexName() //  displaying each one
+    NEXT
+
+    // 1 LAST.IDX
+    // 2 STATE.IDX
+    // 3 AGE.IDX
+    // 4 ZIP.IDX
+
+    <B>CLEAR ORDER 2</B>                                  // Close just STATE.IDX
+
+    FOR nX := 1 TO Sx_IndexCount()                 // Loop thru index order
+      ? AllTrim( Str( nX )) + " " + Sx_IndexName() //  displaying each one
+    NEXT
+
+    // 1 LAST.IDX
+    // 2 AGE.IDX
+    // 3 ZIP.IDX
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng21829.html">Sx_ClearOrder()</A>
+<A HREF="ng1bc51.html">OrdListClear()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

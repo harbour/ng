@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7799.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="ng8961.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETDELPRP()</B>
+ Deletes an object property
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETDELPRP(&lt;cObjName&gt;,[&lt;nObjType&gt;],&lt;cPropName&gt;,</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cObjName&gt;</B> Designates the name of the bindery object that is
+     processed.
+
+     <B>&lt;nObjType&gt; </B> Designates a numeric value that indicates the object
+     type.  The header file CTNNET.CH contains symbolic constants for the
+     object types defined by Novell for use with the bindery functions of
+     CA-Clipper Tools.  The default value indicates the object type OBJ_USER.
+
+     <B>&lt;cPropName&gt; </B> Designates the name of the property that is deleted.
+     The name can contain the wildcards "?" and "*".  In this case, all
+     properties matching the search mask are deleted.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server for which the
+     bindery is accessed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETDELPRP() returns .T. if the property &lt;cPropName&gt; has been deleted
+     successfully.  If an error occurs, the Novell error code can be queried
+     with the NNETERROR() function.
+
+ <B>Description</B>
+
+     <B>Important!</B>  NNETDELPRP() is a low level bindery function and should
+     be used only with extensive knowledge of the bindery concept and the
+     Novell API.
+
+     NOVELL NET DELETE PROPERTY
+     NNETDELPRP() allows you to delete properties of a bindery object.
+     Sufficient bindery and object access rights are required.  The necessary
+     object access rights depend on the object security of the object that is
+     manipulated.  For efficiency reasons, user defined object types must be
+     passed in the high-low format.
+
+ <B>Examples</B>
+
+     <B>.</B>  Delete property IDENTIFICATION of the user MICK:
+
+        IF NNETDELPRP('MICK',,'IDENTIFICATION')
+        ? 'Property has been deleted successfully!'
+        ELSE
+        ? 'Property could not be deleted!'
+        ENDIF
+
+     <B>.</B>  The property IDENTIFICATION of a user object contains a user's
+        full name.  In the example above, this information is deleted.  Other
+        information, such as the user name (login name) or the password is
+        not affected.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6abb.html">NNETCRTPRP()</A>
+<A HREF="ng7799.html">NNETDELOBJ()</A>
+<A HREF="ng7b972.html">NNETERROR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,111 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng127d36.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng124407.html">[^^Up^^]</A>
+<A HREF="ng1289a1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>Reader</B>
+
+        Contains a code block to implement special READ behaviors for any
+        Get.  If Get:Reader contains a code block, READMODAL() evaluates that
+        block to READ the Get (the Get object is passed as an argument to the
+        block).  The block may in turn call any desired function to provide
+        custom editing of the Get object.  If Get:Reader does not contain a
+        code block, READMODAL() uses a default read procedure (GetReader())
+        for the Get object.
+
+        Note that Get:Reader allows particular Get objects to have
+        specialized READ behaviors without changing the standard READMODAL()
+        function.  This preserves compatibility for Gets which are to be
+        handled in the customary way and also eliminates potential conflicts
+        between different extensions to the GET/READ system.
+
+        oGet:Reader := { |oGet| MyRead( oGet ) }
+        FUNCTION MyRead( oGet )
+          LOCAL cTemp, nKey := 0
+
+          // Set Input Focus
+          oGet:SetFocus()
+
+          // Set cursor position to rightmost column
+          SETPOS( oGet:row, oGet:Col + LEN( oGet:Buffer ) - 1 )
+
+          // Store initial value of GET variable to oGet:Buffer
+          oGet:Buffer := STR( oGet:VarGet() )
+
+          // Store Get object buffer to a temporary variable
+          cTemp := IF( oGet:VarGet() == 0, "", ALLTRIM( oGet:Buffer ) )
+
+          // Key processing loop
+          WHILE ( nKey := INKEY(0) ) != K_ENTER         ;
+             .AND. nKey != K_UP                         ;
+             .AND. nKey != K_DOWN                       ;
+             .AND. nKey != K_ESC                        ;
+             .AND.  LEN( cTemp ) &lt; LEN( oGet:Buffer )   ;
+             .AND. ( CHR(nKey) $ "0123456789-" .OR. nKey == K_DEL )
+
+             IF CHR( nKey ) == "-"
+                cTemp := IF(VAL(cTemp) != 0,;
+                         ALLTRIM(STR(VAL( cTemp ) * -1 )), "")
+
+             ELSEIF nKey == K_DEL
+                cTemp := ""
+
+             ELSE
+                cTemp := cTemp + CHR( nKey )
+
+             ENDIF
+
+             IF LEN( cTemp ) &gt; 0
+                oGet:Buffer := PADL(cTemp,LEN(oGet:Buffer))
+
+             ELSE
+                oGet:Buffer := PADL("0", LEN(oGet:Buffer))
+
+             ENDIF
+                oGet:display()
+
+             // Reset cursor position to rightmost column
+             SETPOS(oGet:row, oGet:Col + LEN(oGet:Buffer) - 1)
+
+          END
+
+          // Store new value to GET variable
+          IF nKey != K_ESC
+             oGet:VarPut(VAL(oGet:Buffer))
+
+          ENDIF
+
+          // Update oGet:sxitState
+          IF nKey == K_UP
+             oGet:ExitState := GE_UP
+
+          ELSEIF nKey == K_DOWN
+             oGet:ExitState := GE_DOWN
+
+          ELSEIF nKey == K_ESC
+             oGet:ExitState := GE_ESCAPE
+
+          ELSE
+             oGet:ExitState := GE_ENTER
+
+          ENDIF
+
+          // Kill Input focus
+          oGet:killFocus()
+
+        RETURN (NIL)
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

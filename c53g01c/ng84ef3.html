@@ -1,0 +1,115 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng84567.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng85b3e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDKEYDEL()</B>
+ Delete a key from a custom built order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDKEYDEL([&lt;cOrder&gt; | &lt;nPosition&gt;],</B>
+     <B>   [&lt;cIndexFile&gt;],</B>
+     <B>   [&lt;expKeyValue&gt;]) --&gt; lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrder&gt; | &lt;nPosition&gt;</B> is the name of the order or a number
+     representing its position in the order list.  Using the order name is
+     the preferred method since the position may be difficult to determine
+     using multiple-order index files.  If omitted or NIL, the controlling
+     order is assumed.
+
+     Specifying an invalid order, such as one that is not custom built, will
+     raise a runtime error.
+
+     <B>&lt;cIndexFile&gt;</B> is the name of an index file, including an optional
+     drive and directory (no extension should be specified).  Use this
+     argument with &lt;cOrder&gt; to remove ambiguity when there are two or more
+     orders with the same name in different index files.
+
+     If &lt;cIndexFile&gt; is not open by the current process, a runtime error is
+     raised.
+
+     <B>&lt;expKeyValue&gt;</B> is a specific key value that you want to delete for
+     the current record.  The data type must match that of the order.  If not
+     specified, the order's key expression is evaluated for the current
+     record and deleted from the order.
+
+ <B>Returns</B>
+
+     ORDKEYDEL() returns true (.T.) if successful; otherwise, it returns
+     false (.F.).
+
+ <B>Description</B>
+
+     ORDKEYDEL() deletes a key from a custom built order which is an order
+     that is not automatically maintained by the DBFCDX driver.  You can
+     determine if an order is custom built using DBORDERINFO(DBOI_CUSTOM,
+     ...).  When you create such an order, it is initially empty.  You must
+     then manually add and delete keys using ORDKEYADD() and ORDKEYDEL().
+
+     <B>Note: </B> An existing order can be changed to a custom built order by
+     using the DBORDERINFO() function.
+
+     ORDKEYDEL() evaluates the key expression (or &lt;expKeyValue&gt;, if
+     specified), and then deletes the key for the current record from the
+     order.
+
+     ORDKEYDEL() will fail if:
+
+     <B>.</B>  The record pointer is positioned on an invalid record (for
+        example, EOF() returns true (.T.) or the record pointer is positioned
+        on a record that falls outside the order's scope or for condition)
+
+     <B>.</B>  The specified order is not custom built
+
+     <B>.</B>  The specified order does not exist
+
+     <B>.</B>  No order was specified and there is no controlling order
+
+     By default, this function operates on the currently selected work area.
+     It will operate on an unselected work area if you specify it as part of
+     an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a custom index, adds every fiftieth
+        record to it, and deletes every hundredth record:
+
+        USE Customer VIA "DBFCDX"
+        // Create custom-built order that is initially empty
+        INDEX ON LastName TO Last CUSTOM
+
+        // Add every 50th record
+        FOR n := 1 TO RECCOUNT() STEP 50
+           GOTO n
+           ORDKEYADD()
+        NEXT
+
+        // Remove every 100th record
+        FOR n := 1 TO RECCOUNT() STEP 100
+           GOTO n
+           ORDKEYDEL()
+        NEXT
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng824b9.html">ORDFOR()</A>
+<A HREF="ng83941.html">ORDKEYADD()</A>
+<A HREF="ng8915c.html">ORDSCOPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

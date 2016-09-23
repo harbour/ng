@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8a4c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="nga481.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Replace():</B>
+
+  Purpose:  Replaces the current index entry for &lt;nVal&gt; with the new value
+            of &lt;cExpr&gt;.  There must be at least &lt;nVal&gt; records already
+            indexed.
+
+   Syntax:  hs_Replace( &lt;hIndex&gt;, &lt;bExpr&gt;, &lt;nVal&gt; )
+
+    Where:  &lt;hIndex&gt; is an integer handle of a HiPer-SEEK index file.
+
+            &lt;bExpr&gt; is a code block that will be evaluated for the current
+              record to extract the key data to be added to the index.
+
+            &lt;nVal&gt; is an integer representing the record number to be
+              replaced.
+
+  Returns:  1 if successful or a negative integer indicating an error.
+
+  Errors Returned:
+
+      -4 (BADSEEK) Error while attempting seek during buffer flushing.
+      -6 (BADWRITE) Error while attempting write during buffer flush.
+      -7 (RECBOUND) &lt;nVal&gt; is not valid. It is either too low or greater than
+         the total number of records indexed. Test the actual value being
+         supplied as &lt;nVal&gt;. If the record pointer is set to point past the
+         last record in the .DBF file (by using a SKIP command to skip past
+         the last record), Clipper's RECNO() returns LASTREC() + 1.  This
+         value will result in a -7 (RECBOUND) error if used as the &lt;nVal&gt;
+         parameter to hs_Replace().
+     -16 (BADPARMS) Invalid parameters were passed to the function.
+     -18 (BADHANDLE) Invalid handle was passed to the function.
+
+
+  Example:
+
+    USE test EXCL
+    h := hs_Open( "NAMES.HSX", 8, 1 )
+    GOTO 10
+    bStr := { || Trim( test-&gt;FIRST ) + " " + Trim( test-&gt;LAST )}
+    IF <B>hs_Replace( h, bStr, RecNo() )</B> &lt; 1
+      ? "HiPer-SEEK replace error on record #" + LTrim( Str( RecNo() ))
+    ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng32c0.html">hs_Add()</A>
+<A HREF="ng5e0e.html">hs_Delete()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

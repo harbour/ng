@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6be78.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng6c7cf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LLG_PALETTE structure</B>
+ Structure for palette information
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   WORD      wVersion;</B>
+     <B>   WORD      wNumEntries;</B>
+     <B>   LLG_RGB   dwPalEntry[1];</B>
+     <B>} LLG_PALETTE;</B>
+     <B></B>
+     <B>typedef LLG_PALETTE far * LLG_LPPALETTE;</B>
+
+ <B>Elements</B>
+
+     <B>wVersion</B> is the version reserved for future use.
+
+     <B>wNumEntries</B> is the number of entries in the palette.
+
+     <B>dwPalEntry</B> is a pointer to an array of LLG_RGB structures--one
+     element for each color in the palette.  The palette can consist of 16,
+     256, 32 KB, 64 KB, or 16 MB colors, depending on the video mode
+     specified using _gModeSet().
+
+ <B>Files</B>   Header file is Llibg.api.
+
+ <B>Used By</B>   _gPalGet(), _gPalSet()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng68813.html">_gPalGet()</A>
+<A HREF="ng68acb.html">_gPalSet()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

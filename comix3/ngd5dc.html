@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd0c4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ngd88f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlSet()</B>               Add a record to (set bit in) a RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlSet(rl, nRecno) -&gt; NIL
+
+<B>Arguments</B>
+
+    rl is the RecordList to which the record is to be added.
+
+    nRecno is the record number to add to the RecordList.
+
+<B>Returns</B>
+
+    NIL.
+
+<B>Description</B>
+
+    rlSet() allows you to add a record to a RecordList (set a bit in the
+    RecordList).
+
+<B>Example</B>
+
+    rl := rlNew(50)
+    ? rlCount(rl)               &amp;&amp; Will return 0
+<B>    rlSet(rl, 30)               &amp;&amp; Add record 30</B>
+<B>    rlSet(rl, 40)               &amp;&amp; Add record 40</B>
+    ? rlCount(rl)               &amp;&amp; Will now return 2
+
+<B>See Also</B>
+
+    rlClear(), rlTest()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng81a5.html">rlClear()</A>
+<A HREF="ngf112.html">rlTest()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

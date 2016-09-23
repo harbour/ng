@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7c706.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7a98e.html">[^^Up^^]</A>
+<A HREF="ng7d133.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSPSTAT()</B>
+ Determines the status of a server printer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSPSTAT(&lt;nServerPrinter&gt;) --&gt; nPrinterStatus</B>
+
+     <B>Netware: 2.2 only</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nServerPrinter&gt;</B>  Designates one  of the five possible server
+     printers for which the status is determined.  Values from 0 to 4 are
+     valid.
+
+ <B>Returns</B>
+
+     NNETSPSTAT() returns the following status codes:
+
+     <B>Table 30.1:  Status Coding for Server Printer</B>
+     ------------------------------------------------------------------------
+     <B>Code    Definition</B>
+     ------------------------------------------------------------------------
+     0    Server printer ready (according to the server!)
+     1    Server printer off-line
+     2    Server printer paused from server console
+     3    Server printer off-line and paused at server console
+     -1   No corresponding printer available on server
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     NOVELL NETWORK SERVER PRINTER STATUS
+     With NNETSPSTAT(), you can determine if a particular printer on the
+     default server is currently online or offline.  If you receive a return
+     value that is greater than or equal to 2, then the designated printer
+     has been paused from the server console.
+
+     If there is no corresponding printer on the default server, the function
+     returns -1.
+
+ <B>Note</B>
+
+     <B>.</B>  Further explanations regarding the returned values of 2 or 3
+        can be found in the Novell Netware documentation, Versions 2.1 and
+        later (in the Console Reference manual under Stop Printer).
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the status of server printer 0:
+
+        ? NNETSPSTAT(0)                  // 0  Printer online
+
+     <B>.</B>  Determine the status of server printer 4:
+
+        ? NNETSPSTAT(4)                  // -1  No printer available
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng7d991.html">NNETWORK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

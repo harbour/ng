@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng26079.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng26aa8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_Encrypt():</B>
+
+  Syntax:   Sx_Encrypt( &lt;cString&gt; [, cKeyVal] )
+
+        cString = String of data to be encrypted.  The string of data is
+                  encrypted using the 64-bit password previously set by
+                  Sx_SetPass() or cKeyVal.
+
+        cKeyVal = Optional password code to use for decrypting the encrypted
+                  string.  If no password value is passed, the value set by
+                  the Sx_SetPass() function (or the USE...PASSWORD command)
+                  for the current workarea is used.
+
+  Returns:  A string containing the data encrypted from cString.  If the
+            value passed to Sx_Encrypt is not a character string, that same
+            value (unchanged) is returned.
+
+  Description:  Sx_Encrypt() and it related function Sx_Decrypt() provide
+                an easy way to integrate data security to a system.  The
+                encryption engine provides security through the use of a
+                64-bit (8 byte) security code and multi-adaptive computa-
+                tion.  Multi-adaptive computation ensures a wide uniqueness
+                within the outputted encrypted string.  If a string of all
+                blanks were encrypted you would see a wide distribution of
+                characters.  This ensures a reasonable amount of security
+                at a small speed penalty.
+
+                Of course, the best way to protect your data is to keep it
+                away from those who shouldn't have access to it.  Protect
+                your passwords, and don't store them in .DBF files.
+
+                This encryption/decryption method is _not_ DES (Data
+                Encryption Standard) compliant, so it can be used in
+                programs distributed both in the US and Overseas.
+
+  Example:
+
+    // Routine to encrypt NOTES field contents in entire .DBF
+
+    USE test VIA "SIXCDX"   // Open TEST.DBF
+    dbGoTop()               // Make sure we're at the top
+
+    // Encrypt NOTES field text for entire database
+    WHILE !eof()
+      test-&gt;NOTES := <B>Sx_Encrypt( test-&gt;NOTES, "PENGO" )</B>
+      dbSkip()
+    ENDDO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng23f2f.html">Sx_Decrypt()</A>
+<A HREF="ng23407.html">Sx_DBFencrypt()</A>
+<A HREF="ng22e80.html">Sx_DBFdecrypt()</A>
+<A HREF="ng36a01.html">Sx_SetPass()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

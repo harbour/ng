@@ -1,0 +1,194 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Reserved Words, Identifiers and Functions Names</B>
+---------------------------------------------------------------------------------
+     +-----------------------------------------------------+
+     |   <B>Reserved Words, Identifiers and Functions</B>         |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  AADD   ABS      ACHOICE   ACLONE   ACOPY   ADEL    |
+     |  ADIR   AEVAL    AFIELDS   AFILL    AINS    ALERT   |
+     |  ALIAS  ALLTRIM  ALTD      ARRAY    ASC     ASCAN   |
+     |  ASIZE  ASORT    AT        ATAIL                    |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  BIN2I  BIN2L  BIN2W  BREAK  BOF                    |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  CDOW           CHR      CMONTH     COL             |
+     |  COLORSELECT    CTOD     CURDIR                     |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  DATE              DAY            DBAPPEND          |
+     |  DBCLEARFILTER     DBCLEARINDEX   DBCLEARRELATION   |
+     |  DBCLOSEALL        DBCLOSEAREA    DBCOMMIT          |
+     |  DBCOMMITALL       DBCREATE       DBCREATEINDEX     |
+     |  DBDELETE          DBEDIT         DBEVAL            |
+     |  DBFILTER          DBFONLY        DBGOBOTTOM        |
+     |  DBGOTO            DBGOTOP        DBGSHADOW         |
+     |  DBRECALL          DBREINDEX      DBRELATION        |
+     |  DBRSELECT         DBSEEK         DBSELECTAREA      |
+     |  DBSETDRIVER       DBSETFILTER    DBSETINDEX        |
+     |  DBSETORDER        DBSETRELATION  DBSKIP            |
+     |  DBSTRUCT          DBUNLOCK       DBUNLOCKALL       |
+     |  DBUSEAREA         DEFPATH        DELETED           |
+     |  DELIM             DESCEND        DEVOUT            |
+     |  DEVOUTPICT        DEVPPOS        DIRECTORY         |
+     |  DISKSPACE         DISPBEGIN      DISPBOX           |
+     |  DISPCOUNT         DISPEND        DISPOUT           |
+     |  DISPOUTAT         DO             DOSERROR          |
+     |  DOW               DTOC           DTOS              |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  ELSE              ELSEIF         END               |
+     |  ENDCASE           ENDDO          ENDIF             |
+     |  EMPTY             EOF            ERRORBLOCK        |
+     |  ERRORINHANDLER    ERRORLEVEL     ERRORNEW          |
+     |  ERRORSYS          EXP                              |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  FCLOSE            FCOUNT         FCREATE           |
+     |  FERASE            FERROR         FIELDBLOCK        |
+     |  FIELDNAME         FIELDGET       FIELDPOS          |
+     |  FIELDPUT          FIELDWBLOCK    FILE              |
+     |  FLOCK             FOPEN          FOUND             |
+     |  FREAD             FREADSTR       FRENAME           |
+     |  FSEEK             FWRITE         FUNCTION          |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  GETACTIVE         GETAPPLYKEY       GETDOSETKEY    |
+     |  GETE              GETENV            GETNEW         |
+     |  GETPOSTVALIDATE   GETPREVALIDATE    GETREADER      |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  HARDCR   HEADER                                    |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  I2BIN       IF         IIF       INDEXEXT          |
+     |  INDEXKEY    INDEXORD   INKEY     INT               |
+     |  ISALPHA     ISCOLOR    ISDIGIT   ISLOWER           |
+     |  ISPRINTER   ISUPPER                                |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  L2BIN       LASTKEY      LASTREC   LEFT            |
+     |  LEN         LOCK         LOG       LOWER           |
+     |  LTRIM       LUPDATE                                |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  MAX         MAXCOL       MAXROW    MEMOEDIT        |
+     |  MEMOLINE    MEMOREAD     MEMORY    MEMOTRAN        |
+     |  MEMOWRIT    MEMVARBLOCK  MIN       MLCOUNT         |
+     |  MLCTOPOS    MLPOS        MONTH     MPOSTOLC        |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  NETERR      NETNAME      NEXTKEY   NOSNOW          |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  ORDBAGEXT         ORDBAGNAME     ORDCONDSET        |
+     |  ORDCREATE         ORDDESTROY     ORDFOR            |
+     |  ORDKEY            ORDLISTADD     ORDLISTCLEAR      |
+     |  ORDLISTREBUILD    ORDNAME        ORDNUMBER         |
+     |  ORDSETFOCUS       OS             OUTERR            |
+     |  OUTSTD                                             |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  PARSEHEADER     PAD        PADC      PADL          |
+     |  PADR            PCOL       PCOUNT    PROCLINE      |
+     |  PROCEDURE       PROCNAME   PROW                    |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  QOUT  QQOUT                                        |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  RANGECHECK        RAT            RDDLIST           |
+     |  RDDNAME           RDDSYS         RDDREGISTER       |
+     |  RDDSETDEFAULT     READEXIT       READFORMAT        |
+     |  READINSERT        READKEY        READKILL          |
+     |  READMODAL         READUPDATED    READVAR           |
+     |  RECCOUNT          RECNO          RECSIZE           |
+     |  REPLICATE         RESTSCREEN     RIGHT             |
+     |  RLOCK             ROUND          ROW               |
+     |  RTRIM                                              |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  SAVESCREEN     SCROLL     SDF           SECONDS    |
+     |  SELECT         SET        SETBLINK      SETCANCEL  |
+     |  SETCOLOR       SETCURSOR  SETKEY        SETMODE    |
+     |  SETPOS         SETPRC     SETTYPEAHEAD  SOUNDEX    |
+     |  SPACE          SQRT       STR           STRTRAN    |
+     |  STUFF          SUBSTR     SYSINIT                  |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  TBCOLUMNNEW  TBROWSEDB   TBROWSENEW  TIME          |
+     |  TONE         TRANSFORM   TRIM        TYPE          |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  UPDATED  UPPER  USED                               |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  VAL  VALTYPE   VERSION                             |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  WHILE  WORD                                        |
+     |                                                     |
+     |-----------------------------------------------------|
+     |                                                     |
+     |  YEAR                                               |
+     |                                                     |
+     +-----------------------------------------------------+
+
+ <B>. Notes</B>
+
+ <B>.  Reserved words</B> cannot be used for variable, procedure, or
+    user-defined function names.
+
+ <B>.  Reserved functions</B> are built into the compiler and the efore cannot
+    be redefined by an application.
+
+ <B>.  Abbreviations</B> of reserved words and functions of four or more
+    characters are also reserved.
+
+ <B>.</B>  All identifiers that begin with one or more underscore characters
+    (_) are designated as system identifiers and are therefore reserved.
+
+ <B>.</B>  All reserved words, identifiers and functions are case in-sensitive
+    (not case sensitive) and are significant for the first ten (10)
+    characters.
+
+---------------------------------------------------------------------------------
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng87f79.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng87f15.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Compound (.CDX/.NSX) Indexes:</B>
+
+  A .CDX or .NSX file is a Compound Index - an index file contains multiple
+  indexes (called <B>tags</B>).  Compound indexes allow you to have several
+  indexes available to your application while only using one file handle.
+
+  A tag within a compound index is essentially identical to an individual
+  index file and supports all of the same features.
+
+  Once a compound index is opened, all the tags contained in the file are
+  automatically updated as the records are changed.  The first tag in the
+  compound index (in order of creation) is by default the active tag when
+  the index is opened.
+
+  You can have several compound indexes for a single database file, giving
+  you the ability to go well beyond Clipper's normal 15 index limit.  A
+  compound .CDX index can have as many as 99 tags, but the practical limit
+  is around 50.  The tag limit for .NSX indexes is 50.
+
+  <B>Structural (Auto-Open) Indexes:</B>
+
+  A "structural" .CDX or .NSX (equivalent to dBASE IV's Production .MDX) is
+  a compound index that is automatically opened whenever its database file
+  is opened.  The structural index file must have the same base name as the
+  database file, and the extension must be ".CDX" under SIXCDX and ".NSX"
+  under SIXNSX.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng87f79.html">Individual (.IDX/.NTX) Indexes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3ee37.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng3fb43.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBFILTERINFO</B>
+ Specifies a filter condition to hide specified rows (records) from access
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   ITEM bExpr;</B>
+     <B>   ITEM cExpr;</B>
+     <B>} DBFILTERINFO;</B>
+     <B></B>
+     <B>typedef DBFILTERINFO far * DBFILTERINFOP;</B>
+
+ <B>Elements</B>
+
+     <B>bExpr / cExpr</B>
+
+        Contain a code block and a character string, respectively,
+        representing the condition that is evaluated at each cursor location.
+        If the result of the evaluation is false (.F.), the cursor location
+        requested is invalid according to the current filter condition.
+
+     <B>Warning! </B> You should perform code block evaluations with great
+     caution.  Save any states that are likely to change as a result of
+     re-entrance, so you can restore them after the code evaluation.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   WORKAREA, setFilter()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng56e17.html">setFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

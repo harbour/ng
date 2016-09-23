@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng278dc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng28744.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_FindRec():</B>
+
+  Syntax:  Sx_FindRec( &lt;nRecno&gt;, [&lt;lCont&gt;] )
+
+           nRecno = the DBF record number to locate
+           lCont  = .T. searches from the current record pointer, .F.
+                    searches from the top of the DBF (Default)
+
+  Returns: .T. is find is successful, .F. if not.  If no match is found,
+           the record pointer is positioned at EOF.
+
+  Description:  Locates a specific record number within the index file.
+                This is mostly useful when searching for multiple key
+                entries for the same record within a Roll-Your-Own (RYO)
+                index.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    // Create a standard Roll-Your-Own (RYO) Index
+
+    ? "Standard RYO Index:"
+    ? "-------------------"
+    USE test VIA "SIXCDX"                 // Open database
+    INDEX ON last TO last EMPTY           // Create EMPTY index file
+    GOTO 10                               // Select a record
+    ? "Sx_KeyAdd() == "
+    ?? Sx_KeyAdd()                        // Add a key for this record
+    ? "DATA: " + Sx_KeyData()             // Displays key value for this rec
+    ? "KEYS: " + Str( Sx_KeyCount(), 1 )  // Display number of keys in index
+    ?
+
+    // Create a Multi-Keyed, Free-Format RYO Index
+
+    ? "Multi-Keyed RYO Index:"
+    ? "----------------------"
+    INDEX ON sxChar(12) TO phones        // Create empty index file
+    GOTO 100                             // Select a record
+    ? "Adding three key values for this record..."
+    Sx_KeyAdd( 0,0,"213-555-1212" )      // Add one phone number for this rec
+    Sx_KeyAdd( 0,0,"213-555-9999" )      // Add another to the same record
+    Sx_KeyAdd( 0,0,"310-222-9876" )      // And yet another phone number!
+    ? "KEYS: " + Str( Sx_KeyCount(), 1 ) // Display number of keys in index
+
+    // Now display all phone numbers for this record
+    IF <B>Sx_FindRec( 100, .F. )</B>            // Find first key for this record
+      ? Sx_KeyData()                     // Display first phone number
+      DO WHILE <B>Sx_FindRec( 100, .T. )</B>    // Find any other keys for this rec
+        ? Sx_KeyData()                   // Display other phone numbers
+      ENDDO
+    ENDIF
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng301df.html">Sx_KeyGoto()</A>
+<A HREF="ng3148f.html">Sx_KeySkip()</A>
+<A HREF="ng408bf.html">Sx_WildSeek()</A>
+<A HREF="ng2eff1.html">Sx_KeyData()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

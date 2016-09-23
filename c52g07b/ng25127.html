@@ -1,0 +1,36 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng24f9e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng22190.html">[^^Up^^]</A>
+<A HREF="ng25506.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Conditional Indexes</B>
+------------------------------------------------------------------------------
+
+     Conditional indexes are produced by using a FOR condition in the index
+     creation process.  These indexes are made fully maintainable by storing
+     the FOR condition in the index header.  This condition is subsequently
+     retrieved and compiled each time the index in opened.  During updates,
+     items are added to the index only if they meet the criteria of the
+     condition.
+
+     Since older applications do not have the ability to recognize and use
+     the condition stored in the header, they must be prevented from opening
+     the index since they corrupt the index.  This is accomplished by
+     modifying the signature of the index (in the index header) preventing
+     pre-CA-Clipper 5.2 applications from being able to open the index.
+     CA-Clipper 5.2 applications can detect the flag in the header and will
+     automatically use the stored FOR condition correctly.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

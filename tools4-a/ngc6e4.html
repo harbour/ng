@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc086.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="ngd1a2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPRPSEC()</B>
+ Sets the property security
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPRPSEC(&lt;cObjName&gt;,&lt;nObjType&gt;,&lt;cProp&gt;,&lt;nSafe&gt;,</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cObjName&gt; </B> Designates the name of the object.
+
+     &lt;nObjType&gt;  Designates a numeric value that specifies the object type.
+     The header file CTNNET.CH contains symbolic constants for the object
+     types defined by Novell for use in conjunction with the bindery
+     functions of CA-Clipper Tools.
+
+     <B>&lt;cProp&gt; </B> Designates the property for which the security is modified.
+
+     <B>&lt;nSafe&gt; </B> Designates the new value for the property security.  This
+     value specifies the rights required to find (read) or to modify (write)
+     the property.  The settings are defined with a bit-coded mask.  The low-
+     ordered bits control the read access to the bindery object; the high-
+     ordered bits control the write access to the bindery object.
+
+     <B>Table 18.5:  Values for Property Security</B>
+     ------------------------------------------------------------------------
+     <B>Value  Hex  Bin     Definition</B>
+     ------------------------------------------------------------------------
+     0      0    0000    Access allowed to all users
+     1      1    0001    Access allowed to users who have logged in to the
+                         file server
+     2      2    0010    Access allowed to users who have logged in to the
+                         file server with password
+     3      3    0011    Access allowed to users who have logged in to the
+                         file server as the supervisor or as a user who has
+                         supervisor equivalence
+     4      4    0100    Access only allowed to the network operating system
+     ------------------------------------------------------------------------
+
+     <B>&lt;cServer&gt;</B> Designates the name of the file server used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPRPSEC() returns .T. if the new security value (&lt;nSafe&gt;) has been
+     set successfully.
+
+ <B>Description</B>
+
+     <B>Important! </B> NNETPRPSEC() is a low level bindery function and should
+     be used only with extensive knowledge of the bindery concept and the
+     Novell API.
+
+     NOVELL NET PROPERTY SECURITY
+     NNETPRPSEC() allows you to modify the security of existing properties.
+     For efficiency reasons numeric values for &lt;nObjType&gt; must be passed in
+     the high-low format.  This function requires supervisor rights.
+
+ <B>Example</B>
+
+     Set the security of the property IDENTIFICATION of the user object MICK
+     to 51 (hex 33):
+
+     IF NNETOBJPRP('MICK',OBJ_USER,'IDENTIFICATION',51)
+        ? 'Security modified successfully!'
+     ELSE
+        ? 'Error!'
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6abb.html">NNETCRTPRP()</A>
+<A HREF="ngb61a.html">NNETOBJSEC()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

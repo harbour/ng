@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8c1de.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng8cbaa.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCCONACT()</B>
+ Checks for an active communication connection
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCCONACT(&lt;nHandle&gt;) --&gt; lAktive</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates a communication handle that identifies the
+     communication buffer.
+
+ <B>Returns</B>
+
+     PPCCONACT() returns .T. if &lt;nHandle&gt; specifies an active connection.  If
+     an inactive connection occurs, the function returns .F..
+
+ <B>Description</B>
+
+     PPCCONACT() is used mainly in conjunction with session- oriented
+     protocols (SPX or NetBIOS session).  PPCCONACT() allows you to determine
+     if a connection has been set up after the call of a function that waits
+     for a connection setup in the background: for example, SPXLISTCON() or
+     BSLISTCON().  You can also check to see if a connection is still active.
+     If an error occurs (for example, if a connection has been canceled), the
+     function returns .F..
+
+ <B>Note</B>
+
+     <B>.</B>  When used for IPX or NetBIOS datagram connections, PPCCONACT()
+        always returns .T..
+
+ <B>Example</B>
+
+     Wait for an SPX connection setup:
+
+     nHandle=SPXLISTCON(20000,1000)
+     WHILE .NOT. PPCCONACT(nHandle)
+     ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8a055.html">NBSLISTCON()</A>
+<A HREF="ng958ca.html">SPXLISTCON()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

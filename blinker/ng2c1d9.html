@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2bc8a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2c6a2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosFreeSeg()                  Free memory block allocated with DosAllocSeg() or DosAllocHuge().</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Free a memory block allocated with DosAllocSeg() or</B></U>
+            <B>DosAllocHuge().</B>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosFreeSeg(SEL selector);</B></U>
+
+ <U>selector   <B>Protected mode selector of a memory block allocated through</B></U>
+            <B>DosAllocSeg() or DosAllocHuge().</B>
+
+ <U>Return   : <B>None</B></U>
+
+ This function is used to free memory blocks allocated through DosAllocSeg()
+ or DosAllocHuge() and should not be used to free any other type of selector.
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main (void)</B>
+    <B>{</B>
+    <B>SEL         selector;</B>
+    <B>/* Allocate a 4KB block */</B>
+    <B>if (DosAllocSeg(4096, &amp;selector, 0) != 0)</B>
+    <B>   {</B>
+    <B>   printf("DosAllocSeg() failed\n");</B>
+    <B>   exit(255);</B>
+    <B>   }</B>
+    <B>printf("4 Kb block allocated at : %04X\n",selector);</B>
+    <B>if (DosFreeSeg(selector) != 0)</B>
+    <B>   {</B>
+    <B>   printf("DosFreeSeg() failed - selector = %04X\n", </B>
+    <B>      selector);</B>
+    <B>   exit(254);</B>
+    <B>   }</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2bc8a.html">DosFreeRealSeg()</A>
+<A HREF="ng2c6a2.html">DosFreeSelector()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

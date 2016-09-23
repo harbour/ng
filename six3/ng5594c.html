@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng554d4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng55ec5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>WILDSEEK:</B>
+
+  The <B>WILDSEEK</B> command functions similarly to the standard Clipper <B>SEEK</B>
+  command.  However, as its name implies, you can perform wildcard SEEKs with
+  WILDSEEK.  Simply substitute a question mark <B>(?)</B> or an asterisk <B>(*)</B> in
+  place of the portion to contain the wildcard portion of the search string.
+
+  For example, to find the first person in your CUSTOMER database whose
+  name is either Smith or Smyth, you could do this:
+
+       USE CUSTOMER             // Open CUSTOMER.DBF
+       SET TAG TO LASTNAME      // Select LASTNAME Tag
+       <B>WILDSEEK "Sm?th"</B>         // or WILDSEEK "Sm*th"
+       WHILE found()            // Got at least one!
+         ? LAST + ", " + FIRST  // Display customer name
+         WILDSEEKNEXT "Sm?th"   // Look for next match
+       ENDDO
+
+
+  As with the standard <B>SEEK</B> command, Clipper's <B>found()</B> function will let
+  you know if <B>WILDSEEK</B> successfully found a matching record.
+
+  You can also perform WILDSEEKs where the wildcard character at the
+  beginning of the search string (i.e.; <B>WILDSEEK "*son"</B>).  However, keep
+  in mind that since WILDSEEK has no idea what the first letter might be, it
+  must start at the top of the database and SKIP through each record looking
+  for a match.  This can take just as long as using Clipper's standard
+  <B>LOCATE</B> command.
+
+    NOTE:  This command is NOT supported under SIXNTX.
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng55ec5.html">WILDSEEKNEXT</A>
+<A HREF="ng408bf.html">Sx_WildSeek()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

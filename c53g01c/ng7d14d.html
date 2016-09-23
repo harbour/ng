@@ -1,0 +1,154 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7cb04.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng7e985.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDCOND()</B>
+ Specify conditions for ordering
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDCOND([FOR &lt;lCondition&gt;]</B>
+     <B>   [ALL] [WHILE &lt;;lCondition&gt;]</B>
+     <B>   [EVAL &lt;bBlock&gt; [EVERY &lt;nInterval&gt;]]</B>
+     <B>   [RECORD &lt;nRecord&gt;] [NEXT &lt;nNumber&gt;]</B>
+     <B>   [REST] [DESCENDING])</B>
+
+ <B>Arguments</B>
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records on which
+     to create the order.  Only those records that meet the condition are
+     included in the resulting order.  &lt;lCondition&gt; is an expression that may
+     be no longer than 250 characters under the DBFNTX and DBFNDX drivers.
+     The maximum value for these expressions is determined by the RDD.  The
+     FOR condition is stored as part of the order bag and used when updating
+     or recreating the index using the ORDCREATE() or ORDREBUILD() functions.
+     Duplicate key values are not added to the order bag.
+
+     Drivers that do not support the FOR condition produce an "unsupported"
+     error.
+
+     The FOR clause provides the only scoping that is maintained for all
+     database changes.  All other scope conditions create orders that do not
+     reflect database updates.
+
+     <B>ALL</B> specifies all orders in the current or specified work area.  ALL
+     is the default scope for ORDCOND().
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies another condition that must be met by
+     each record as it is processed.  As soon as the record is encountered
+     that causes the condition to fail, the ORDCREATE() function terminates.
+     If a WHILE clause is specified, the data is processed in the controlling
+     order.  The WHILE condition is transient (i.e., it is not stored in the
+     file, not used for index updates, and not used for index updates and
+     ORDREBUILD() purposes).  The WHILE clause creates temporary orders, but
+     these orders are not updated.
+
+     Drivers that do not support the WHILE condition produce an "unsupported"
+     error.
+
+     Using the WHILE clause is more efficient and faster than using the FOR
+     clause.  The WHILE clause only processes data for which &lt;lCondition&gt; is
+     true from the current position.  The FOR clause, however, processes all
+     data in the data source.
+
+     <B>EVAL &lt;bBlock&gt;</B> evaluates a code block every &lt;nInterval&gt;, where
+     &lt;nInterval&gt; is a value specified by the EVERY clause.  The default value
+     is 1.  This is useful in producing a status bar or odometer that
+     monitors the indexing progress.  The return value of &lt;bBlock&gt; must be a
+     logical data type.  If &lt;bBlock&gt; returns false (.F.), indexing halts.
+
+     <B>EVERY &lt;nInterval&gt;</B> is a clause containing a numeric expression that
+     modifies how often &lt;bBlock&gt; is EVALuated.  The EVERY option of the EVAL
+     clause offers a performance enhancement by evaluating the condition for
+     every nth record instead of evaluating every record ordered.  The EVERY
+     keyword is ignored if you specify no EVAL conditions.
+
+     <B>RECORD &lt;nRecord&gt;</B> specifies the processing of the specified record.
+
+     <B>NEXT &lt;nNumber&gt;</B> specifies the portion of the database to process.  If
+     you specify NEXT, the database is processed in the controlling order for
+     the &lt;nNumber&gt; number of identities.  The scope is transient (i.e., it is
+     not stored in the order and not used for ORDREBUILDing purposes).
+
+     <B>REST</B> specifies the processing of all records from the current
+     position of the record pointer to the end of file (EOF).
+
+     <B>DESCENDING</B> specifies that the keyed pairs be sorted in decreasing
+     order of value.  If you create a DESCENDING index, you will not need to
+     use the DESCEND() function during a SEEK.  DESCENDING is an attribute of
+     the file, where it is stored and used for ORDREBUILDing purposes.
+
+ <B>Description</B>
+
+     ORDCOND() is designed to set up the conditions for creating a new order
+     (using the ORDCREATE() function) or rebuilding an existing order (using
+     the ORDREBUILD() function).  Do not use the ORDCOND() function if you
+     wish to create or rebuild an entire index file; it is only used for
+     setting particular conditions for the order.
+
+     ORDCREATE() or ORDREBUILD() should be used immediately following the
+     ORDCOND() function.
+
+     If the DESCENDING clause is not specified, the order is then assumed to
+     be ascending.
+
+     The EVAL clause lets you specify a code block to be evaluated as each
+     record is placed in the order.  The EVERY clause lets you modify how
+     often &lt;bBlock&gt; is called.  Instead of evaluating each record as it is
+     placed in the order, evaluation only occurs as every &lt;nInterval&gt; records
+     are placed in the order.  This can be used, for example, to create a
+     gauge that displays how far the ORDCREATE() or ORDREBUILD() has
+     progressed so far.
+
+     The FOR clause provides the only order scoping that is permanent and
+     that can be maintained across the life of the application.  The string
+     passed as the FOR condition is stored within the order for later use in
+     maintaining the order.  Though only accessing part of the database,
+     orders created using this clause exist as long as the database is
+     active.  The FOR clause lets you create maintainable scoped orders.
+
+     The WHILE, NEXT, REST, and RECORD clauses process data from the current
+     position of the database cursor in the default or specified work area.
+     If you specify these clauses, the order list remains open and the active
+     order is used to organize the database while it is being created.  These
+     clauses let you create temporary (non-maintainable) orders.  orders
+     created using these clauses contain records in which &lt;lCondition&gt; is
+     true(.T.) at the location of the record pointer.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example creates a conditional order based on a
+        FOR clause.  This index contains only records whose field TransDate
+        contains a date greater than or equal to January 1, 1992:
+
+        USE Invoice NEW
+        ORDCOND(FOR (Invoice-&gt;TransDate &gt;= CTOD
+        ("01/01/92")))
+        ORDCREATE("InvDate" , , "Invoice-&gt;TransDate")
+
+     <B>.</B>  The following example creates an order that calls a routine,
+        "MyMeter," during its creation:
+
+        USE Invoice NEW
+        ORDCOND(EVAL { | | MyMeter() } EVERY MTR_INCREMENT)
+        ORDCREATE("Invoice" , , "Invoice-&gt;Customer")
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngcc94d.html">INDEX</A>
+<A HREF="ng8059c.html">ORDCREATE()</A>
+<A HREF="ng87f8f.html">ORDLISTREBUI()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

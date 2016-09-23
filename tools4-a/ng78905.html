@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng78528.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng773df.html">[^^Up^^]</A>
+<A HREF="ng78e7d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETISTTS()</B>
+ Checks for the availability of the Transaction Tracking System (TTS)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETISTTS([&lt;lMode&gt;],[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lAvailable</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;lMode&gt;</B>  Designates the test mode of NNETISTTS().  If .F. is passed,
+     NNETISTTS() checks for the general availability of the TTS.   The
+     default value is .F..  If .T. is passed, NNETISTTS() checks to see if an
+     available TTS is activated or not.
+
+     <B>&lt;cServer&gt;</B> Designates the name of the file server that is used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETISTTS() returns .T. if the TTS is available (&lt;lMode&gt;=.F.) or
+     activated (&lt;lMode&gt;=.T.).
+
+ <B>Description</B>
+
+     NOVELL NET IS TRANSACTION TRACKING SYSTEM
+     NNETISTTS() allows applications using the TTS to check to see if the TTS
+     is available or currently activated.
+
+ <B>Examples</B>
+
+     <B>.</B>  Check for the availability of the TTS on the default server:
+
+        IF NNETISTTS()
+           ? 'TTS available!'
+        ELSE
+           ? 'TTS not available!'
+        ENDIF
+
+     <B>.</B>  Check to see if the TTS is currently activated:
+
+        IF NNETISTTS(.T.)
+           ? 'TTS activated!'
+        ELSE
+           ? 'TTS not activated!'
+        ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng78100.html">NNETDISTTS()</A>
+<A HREF="ng794c9.html">NNETTTSBEG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

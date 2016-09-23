@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf618.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ngfeb9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER OVERLAY FIXED         Specify fixed overlay allocation method</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify fixed overlay allocation method</B></U>
+
+ <U>Syntax   : <B>BLINKER OVERLAY FIXED</B></U>
+
+ <U>Default  : <B>Enabled (Optional for CA-Clipper Summer '87)</B></U>
+
+ This command is used to instruct Blinker to allocate a fixed size block of
+ memory from DOS for overlays at application start up. Once the block has
+ been allocated from DOS, the Blinker overlay manager will not allocate any
+ further memory for overlays, resulting in an application with a predictable
+ overlay overhead. This method allows parental overlays (procedures or
+ functions that called the current procedure) to be swapped out as required,
+ in order to make room to execute new procedures.
+
+ This method is the only overlay pool allocation method for all compilers
+ except CA-Clipper Summer '87, where it is optional.
+
+ Please see the previous section, BLINKER OVERLAY DYNAMIC, for a comparison
+ of the FIXED and DYNAMIC methods.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf618.html">BLINKER OVERLAY DYNAMIC</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

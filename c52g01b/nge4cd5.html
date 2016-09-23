@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge489b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge36fa.html">[^^Up^^]</A>
+<A HREF="nge5276.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GETPREVALIDATE()</B>
+ Prevalidate a Get object
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GETPREVALIDATE(&lt;oGet&gt;) --&gt; lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;oGet&gt;</B> is a reference the current Get object.
+
+ <B>Returns</B>
+
+     GETPREVALIDATE() returns a logical value indicating whether the Get
+     object has been prevalidated successfully.
+
+ <B>Description</B>
+
+     GETPREVALIDATE() is a Get system function that validates the Get object
+     for editing, including evaluating Get:preBlock (the WHEN clause) if it
+     is present.  The logical return value indicates whether the Get has been
+     prevalidated successfully.
+
+     Get:exitState is also set to reflect the outcome of the prevalidation:
+
+     <B>Get:exitState Values</B>
+     ------------------------------------------------------------------------
+     <B>Getexit.ch   Meaning</B>
+     ------------------------------------------------------------------------
+     GE_NOEXIT    Indicates prevalidation success, okay to edit
+     GE_WHEN      Indicates prevalidation failure
+     GE_ESCAPE    Indicates that a CLEAR GETS was issued
+     ------------------------------------------------------------------------
+
+     Note that in the default system, a Get:exitState of GE_ESCAPE cancels
+     the current Get and terminates READMODAL().
+
+ <B>Files:</B>  Library is CLIPPER.LIB, source file is Getsys.prg.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge4018.html">GETAPPLYKEY()</A>
+<A HREF="nge489b.html">GETPOSTVALIDATE()</A>
+<A HREF="nge5276.html">GETREADER()</A>
+<A HREF="ng5a1a6.html">READMODAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng35ef.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng4193.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER CACHE XMS             Specify amount of XMS to be used for overlay caching</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify amount of XMS to be used for overlay caching</B></U>
+
+ <U>Syntax   : <B>BLINKER CACHE XMS &lt;nuMax[%]&gt;, &lt;nuMinLeave[%]&gt;</B></U>
+
+ <U>Default  : <B>100,0% (100 Kb maximum cache size)</B></U>
+
+ <U>Example  : <B># Use a maximum of 50% of available XMS,</B></U>
+            <B># but leave at least 1024 Kb available</B>
+            <B>BLINKER CACHE XMS 50%, 1024</B>
+
+ <U>or         <B></B></U>
+            <B># Use a maximum of 512 Kb XMS,</B>
+            <B># but leave at least 25% of the total free</B>
+            <B>BLINKER CACHE XMS 512, 25%</B>
+
+ This command specifies the amount of XMS (version 2.0 and higher) memory to
+ be used for the overlay cache.
+
+ Two numeric parameters are used to specify the amount of XMS memory to be
+ allocated and the amount to be left for program use. Both parameters may be
+ specified as either a number of kb, or as a percentage of the total
+ available XMS. The second parameter always overrides the first; e.g. if the
+ first parameter calls for 256K and the second requires 50% of XMS to be left
+ free, then half of XMS will be left free and the cache will fit itself into
+ the remaining memory.
+
+ Blinker will never allocate a cache that is larger than the total size of
+ all the overlays contained within the program. Please see Appendix A 'MAP
+ file output' for information on determining the optimum cache size.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng35ef.html">BLINKER CACHE EMS</A>
+<A HREF="ng5da6.html">BLINKER ENVIRONMENT NAME</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

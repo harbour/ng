@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3ba0f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3c65e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_TagCount():</B>
+
+  Syntax:   Sx_TagCount([cIndexFileName | nIndexFileOrder])
+
+            cIndexFileName  = Name of Index file (order bag)
+            nIndexFileOrder = Position of FILE in Index FILE list.
+
+  Returns:  &lt;numeric&gt; Number of tags in the current or specified
+            index (order bag). 0 if the order is invalid, no index is open,
+            or if the current order is 0 and no parameters were passed.
+
+  Description:   This function returns the number of tags within the
+                 current or specified index.  If the current or specified
+                 index is an .IDX then Sx_TagCount() will return 1.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"             // Open database
+    INDEX ON last TAG last            // Create one tag
+    ? <B>Sx_TagCount()</B>                   // Returns: 1
+    INDEX ON state TAG state          // Create a second tag
+    ? <B>Sx_TagCount()</B>                   // Returns: 2
+    Sx_KillTag( "LAST" )              // Delete tag number 1 (LAST)
+    ? <B>Sx_TagCount()</B>                   // Returns: 1
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3c65e.html">Sx_TagInfo()</A>
+<A HREF="ng1c1b8.html">OrdName()</A>
+<A HREF="ng3d3ba.html">Sx_TagNo()</A>
+<A HREF="ng1c7a8.html">OrdNumber()</A>
+<A HREF="ng3d754.html">Sx_Tags()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

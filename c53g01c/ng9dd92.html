@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9c7f1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng9e528.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETCURSOR()</B>
+ Set the cursor shape
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETCURSOR([&lt;nCursorShape&gt;]) --&gt; nCurrentSetting</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nCursorShape&gt;</B> is a number indicating the shape of the cursor.  For
+     simpler coding, the Setcurs.ch header file provides descriptive names
+     for the various cursor shapes as shown in the table below:
+
+     <B>Cursor Shapes</B>
+     ------------------------------------------------------------------------
+     <B>Shape               Value     Setcurs.ch</B>
+     ------------------------------------------------------------------------
+     None                0         SC_NONE
+     Underline           1         SC_NORMAL
+     Lower half block    2         SC_INSERT
+     Full block          3         SC_SPECIAL1
+     Upper half block    4         SC_SPECIAL2
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     SETCURSOR() returns the current cursor shape as a numeric value.
+
+ <B>Description</B>
+
+     SETCURSOR() is an environment function that controls the shape of the
+     screen cursor.  The actual shape is dependent on the current screen
+     driver.  The specified shapes appear on IBM PC and compatible computers.
+     On other computers, the appearance may differ for each value specified.
+
+     SETCURSOR(0) is the same as SET CURSOR OFF, and any positive integer
+     value of &lt;nCursorShape&gt; less than 5 is the same as SET CURSOR ON.  The
+     cursor will display as the selected shape.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses SETCURSOR() to turn on a full block cursor
+        for the subsequent READ.  When the READ terminates, SETCURSOR() turns
+        off the cursor:
+
+        #include "Setcurs.ch"
+        //
+        USE Customer NEW
+        @ 10, 10 GET Customer-&gt;Name
+        @ 11, 10 GET Customer-&gt;Phone
+        //
+        SETCURSOR(SC_SPECIAL1)        // Change cursor to a block
+        READ
+        SETCURSOR(SC_NONE)            // Turn off cursor
+
+ <B>Files</B>   Library is CLIPPER.LIB, header file is Setcurs.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge1808.html">SET CONSOLE</A>
+<A HREF="nge2189.html">SET CURSOR</A>
+<A HREF="ng9f30f.html">SETPOS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

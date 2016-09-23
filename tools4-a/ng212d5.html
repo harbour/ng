@@ -1,0 +1,105 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng20ff8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng21e9b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETLOGIN()</B>
+ Log in a user on a file server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETLOGIN(&lt;cName&gt;,&lt;cPassword&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>    --&gt; nConId</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cName&gt;</B>  Designates the name of the user that is logged in.
+
+     <B>&lt;cPassword&gt;</B>  Designates the corresponding password.  If no password
+     is required, an empty string must be passed.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which the user
+     is logged in.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of the workstation on
+     &lt;cServer&gt;.  A connection ID can be passed only if the file server is
+     attached to the workstation.
+
+ <B>Returns</B>
+
+     If a user has been logged in successfully, NNETLOGIN() returns a value
+     between 1 and 8.  This value represents the connection ID that can be
+     used to address the file server on the workstation.  If an error occurs,
+     the function returns 0.
+
+ <B>Description</B>
+
+     NNETLOGIN() allows you to log in a user on a file server within an
+     application.  The file server must not be attached when you call this
+     function.  When NNETLOGIN() is first called, it automatically attaches
+     the workstation to &lt;cServer&gt;.  If no server is specified, the function
+     tries to log in the user on the default server.
+
+     If a user at the requesting workstation is already logged in on the
+     related file server, this user is logged out automatically.  The log out
+     is performed even if the name of the logged in user is identical to the
+     user name passed with NNETLOGIN().  If the attempt to log in is
+     unsuccessful (for example, because of an incorrect password), the
+     previous log in is canceled.  Any drives mapped to the related file
+     server are deleted and are not restored even if the log in is
+     successful.
+
+     <B>Important!</B>  Before you attempt to log in on file servers where a
+     user is already logged in on the current workstation, make sure that all
+     files on the volumes of the related file server are closed correctly.
+
+     A return value that is greater than 0 indicates that the log in has been
+     successful.  The value can be stored in a variable and used later to
+     identify the required file server.  Alternatively, the identification of
+     the server is possible with the server name.
+
+ <B>Notes</B>
+
+     <B>.</B>  The password is case sensitive.
+
+     <B>.</B>  If the log in is unsuccessful (for example, because of an
+        invalid password or user name), the server remains attached.
+
+     <B>.</B>  The function does not execute a login script.  To get a login
+        script, the function must be called.
+
+ <B>Examples</B>
+
+     <B>.</B>  Log in Paul on server NANGERTOOLS2:
+
+        IF (nConId:= NNETLOGIN('PAUL','190366','NANGERTOOLS2'))&gt;0
+        ? 'Login successful!'
+        ELSE
+        ? 'Login failed!'
+        ENDIF
+
+     <B>.</B>  Log in on an attached server:
+
+        IF (nConId:=NNETATTACH('NANGERTOOLS2'))&gt;0
+        NNETLOGIN('PAUL','190366',nConId)
+        ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1e6ed.html">NNETATTACH()</A>
+<A HREF="ng2060d.html">NNETFSLST()</A>
+<A HREF="ng21e9b.html">NNETLOGOUT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

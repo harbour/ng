@@ -1,0 +1,108 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3b852.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3c22e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_TableType():</B>
+
+  Syntax:   Sx_TableType()
+
+  Returns:  Numeric value indicating the type of the table.  Currently,
+            the following types are supported:
+
+                0 - No Table Open
+                1 - Standard .DBF File
+                2 - Encrypted .DBF File
+
+  Description:  This function allows you to determine the type of an open
+                table.  In this case, the word "type" means the condition
+                of the table as far as special options are concerned.  At
+                the present time, this function is used primarily as a means
+                to detect if the table had been previously encypted.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    LOCAL nType := 0
+
+    CLS
+    USE test VIA "SIXCDX"
+
+    ? "Table Type: "
+    nType := <B>Sx_TableType()</B>
+    DO CASE
+      CASE nType == 0
+        ?? "No Database In Use!"
+      CASE nType == 1
+        ?? "Standard .DBF"          // This CASE should be evaluated
+      CASE nType == 2
+        ?? "Encrypted .DBF"
+    ENDCASE
+
+    Sx_SetPass("foobar")
+    ? "Encrypting TEST.DBF: "
+    ?? iif( Sx_DBFencrypt(), "OK", "ERROR" )
+
+    ? "Table Type: "
+    nType := <B>Sx_TableType()</B>
+    DO CASE
+      CASE nType == 0
+        ?? "No Database In Use!"
+      CASE nType == 1
+        ?? "Standard .DBF"
+      CASE nType == 2               // This CASE should be evaluated
+        ?? "Encrypted .DBF"
+    ENDCASE
+    CLOSE ALL
+
+    // Now we'll reopen the encrypted table and use the trigger system to
+    // prompt the user for the password ("foobar") ...
+
+    USE test VIA "SIXCDX" TRIGGER "MyTrigger"
+    Browse()
+
+    //------------------------------//
+    FUNC MyTrigger( nEvent, nArea, nFieldPos, xTrigVal )
+
+    LOCAL cPassWord := Space(8)
+    LOCAL GetList := {}
+
+      DO CASE
+
+        CASE nEvent == EVENT_POSTUSE
+          IF <B>Sx_TableType( xTrigVal )</B> == 2             // Is table encrypted
+            @24,0 SAY "Enter Password:" GET cPassWord  // If so, get password
+            READ
+            Sx_SetPass( AllTrim( cPassWord ))              // And activate it
+          ENDIF
+
+      ENDCASE
+
+    Return( .T. )
+
+
+    <B>NOTE:  Make sure to trim all trailing spaces from the password before</B>
+    <B>       passing it on to the Sx_SetPass() function, unless the spaces</B>
+    <B>       are intended to be part of the password.</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng23407.html">Sx_DBFencrypt()</A>
+<A HREF="ng22e80.html">Sx_DBFdecrypt()</A>
+<A HREF="ng29f4e.html">Sx_IDtype()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

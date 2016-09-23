@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng10cb5c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngfbcd2.html">[^^Up^^]</A>
+<A HREF="ng10e2d2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>REQUEST</B>
+ Declare a module request list
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>REQUEST &lt;idModule list&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idModule list&gt;</B> is the list of modules that will be linked into the
+     current executable (.EXE) file.
+
+ <B>Description</B>
+
+     REQUEST is a declaration statement that defines a list of module
+     identifiers to the linker.  Like all other declaration statements, a
+     REQUEST statement must be specified before any executable statements in
+     either the program file, or a procedure or user-defined function
+     definition.
+
+     During the compilation of CA-Clipper source code, all explicit
+     references to procedures and user-defined functions are made to the
+     linker.  In some instances, within a source file, there may be no
+     references made to procedure or user-defined function names until
+     runtime.  REQUEST resolves this situation by forcing the named
+     procedures or user-defined functions to be linked even if they are not
+     explicitly referenced in the source file.  This is important in several
+     instances:
+
+     <B>.</B>  Procedures, user-defined functions, or formats referenced with
+        macro expressions or variables
+
+     <B>.</B>  Procedures and user-defined functions used in REPORT and LABEL
+        FORMs and not referenced in the source code
+
+     <B>.</B>  User-defined functions used in index keys and not referenced
+        in the source code
+
+     <B>.</B>  ACHOICE(), DBEDIT(), or MEMOEDIT() user functions
+
+     <B>.</B>  Initialization procedures declared with the INIT PROCEDURE
+        statement
+
+     <B>.</B>  Exit procedures declared with the EXIT PROCEDURE statement
+
+     To group common REQUESTs together, place them in a header file and then
+     include (#include) the header file into each program file (.prg) that
+     might indirectly use them.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows a typical header file consisting of common
+        REQUESTs for REPORT FORMs:
+
+        // Request.ch
+
+        REQUEST HARDCR
+        REQUEST TONE
+        REQUEST MEMOTRAN
+        REQUEST STRTRAN
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng45dc.html">ACHOICE()</A>
+<A HREF="ngfc240.html">ANNOUNCE</A>
+<A HREF="ng20e4d.html">DBEDIT()</A>
+<A HREF="ng100360.html">EXIT PROCEDURE</A>
+<A HREF="ng101299.html">EXTERNAL*</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

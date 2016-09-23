@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng50705.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng512d9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJWORK()</B>
+ Checks to see if a job is currently in service on a print server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJWORK(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; lProcess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJWORK() returns .T. if &lt;nJob&gt; is currently in service.  If a job is
+     not yet in service or if an error occurs, the function returns .F..
+     With NNETERROR() you can determine if the return value .F. results from
+     an error.
+
+ <B>Description</B>
+
+     NOVELL NET JOB WORK
+     NNETJWORK() allows you to determine whether or not a job is in service.
+     If a job is already in service, its attributes cannot be modified.
+
+ <B>Example</B>
+
+     Check to see if the first job in the queue LINEPRINTER is already in
+     service:
+
+     nJob=BIN2I(LEFT(NNETJLIST('LINEPRINTER'),2))
+     IF NNETJWORK('LINEPRINTER', nJob)
+     ? 'Job in service'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4dc8b.html">NNETJSRV()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

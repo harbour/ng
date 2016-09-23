@@ -1,0 +1,114 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge6e8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ngf8d7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ASORT()</B>
+ Sort an array
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ASORT(&lt;aTarget&gt;, [&lt;nStart&gt;],</B>
+     <B>   [&lt;nCount&gt;], [&lt;bOrder&gt;]) --&gt; aTarget</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aTarget&gt;</B> is the array to be sorted.
+
+     <B>&lt;nStart&gt;</B> is the first element of the sort.  If not specified, the
+     default starting position is one.
+
+     <B>&lt;nCount&gt;</B> is the number of elements to be sorted.  If not specified,
+     all elements in the array beginning with the starting element are
+     sorted.
+
+     <B>&lt;bOrder&gt;</B> is an optional code block used to determine sorting order.
+     If not specified, the default order is ascending.
+
+ <B>Returns</B>
+
+     ASORT() returns a reference to the &lt;aTarget&gt; array.
+
+ <B>Description</B>
+
+     ASORT() is an array function that sorts all or part of an array
+     containing elements of a single data type.  Data types that can be
+     sorted include character, date, logical, and numeric.
+
+     If the &lt;bOrder&gt; argument is not specified, the default order is
+     ascending.  Elements with low values are sorted toward the top of the
+     array (first element), while elements with high values are sorted toward
+     the bottom of the array (last element).
+
+     If the &lt;bOrder&gt; block argument is specified, it is used to determine the
+     sorting order.  Each time the block is evaluated, two elements from the
+     target array are passed as block parameters.  The block must return true
+     (.T.) if the elements are in sorted order.  This facility can be used to
+     create a descending or dictionary order sort.  See the examples below.
+
+     When sorted, character strings are ordered in ASCII sequence; logical
+     values are sorted with false (.F.) as the low value; date values are
+     sorted chronologically; and numeric values are sorted by magnitude.
+
+ <B>Notes</B>
+
+     <B>.</B>  ASORT() is only guaranteed to produce sorted output (as
+        defined by the block), not to preserve any existing natural order in
+        the process.
+
+     <B>.</B>  Because CA-Clipper implements multidimensional arrays by
+        nesting subarrays within other arrays, ASORT() will not directly sort
+        a multidimensional array.  To sort a nested array, you must supply a
+        code block which properly handles the subarrays.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates an array of five unsorted elements, sorts
+        the array in ascending order, then sorts the array in descending
+        order using a code block:
+
+        aArray := { 3, 5, 1, 2, 4 }
+        ASORT(aArray)
+        // Result: { 1, 2, 3, 4, 5 }
+
+        ASORT(aArray,,, { |x, y| x &gt; y })
+        // Result: { 5, 4, 3, 2, 1 }
+
+
+     <B>.</B>  This example sorts an array of character strings in ascending
+        order, independent of case.  It does this by using a code block that
+        converts the elements to uppercase before they are compared:
+
+        aArray := { "Fred", Kate", "ALVIN", "friend" }
+        ASORT(aArray,,, { |x, y| UPPER(x) &lt; UPPER(y) })
+
+     <B>.</B>  This example sorts a nested array using the second element of
+        each subarray:
+
+        aKids := { {"Mary", 14}, {"Joe", 23}, {"Art", 16} }
+        aSortKids := ASORT(aKids,,, { |x, y| x[2] &lt; y[2] })
+
+        Result:
+
+        { {"Mary", 14}, {"Art", 16}, {"Joe", 23} }
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd969.html">ASCAN()</A>
+<A HREF="ng418f5.html">EVAL()</A>
+<A HREF="ngf3e11.html">SORT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

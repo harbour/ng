@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng84302.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng8514d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Why is my application creating DBT memos instead of FPT/SMT memos?:</B>
+
+  If the DBT.OBJ file has been linked into your application, the SIx Driver
+  will create and use DBT memo files instead of FPT/SMT memos.  You can call
+  the <B>Sx_IsDBT()</B> function within your application to determine this at
+  runtime.
+
+  Also, if you are calling Clipper's dbCreate() function to create a DBF
+  file which includes one or more memo fields, the SIXCDX or SIXNSX driver
+  must be the currently active RDD.  This can be done in two ways:
+
+    . By linking in the SIXCDX.OBJ or SIXNSX.OBJ file, making the SIx
+      Driver flavor you're using the ONLY RDD in your application.
+
+    . By selecting the SIXCDX or SIXNSX driver with Clipper's RDDSetDefault()
+      function.
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng76298.html">DBT.OBJ</A>
+<A HREF="ng2b5ae.html">Sx_IsDBT()</A>
+<A HREF="ng7725a.html">SIXCDX.OBJ</A>
+<A HREF="ng779a2.html">SIXNSX.OBJ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

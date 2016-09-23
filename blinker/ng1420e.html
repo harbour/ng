@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng13bfe.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng14773.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CVVERSION                     Set version of CodeView information to use </B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Set the version of CodeView information to use</B></U>
+
+ <U>Syntax   : <B>CVVERSION &lt;0 | 1 | 2 | 5&gt;</B></U>
+
+ <U>Default  : <B>0</B></U>
+
+ The CVVERSION sets the version of CodeView information written to the .EXE
+ file created by Blinker. The CodeView information version number does not
+ refer to the version number of the CodeView debugger program, but rather the
+ version number of the CodeView information format. At the time of writing,
+ there are four possible versions, 0, 1, 2 or 5:
+
+    0  All versions of the CodeView debugger through version 2.2
+    1  The version of CodeView shipped with MS BASIC PDS 7.0
+    2  The version of CodeView shipped with MS C 6.0
+    5  The version of CodeView shipped with MS C/C++ 7.0, MS Visual
+       C++ and MS Visual Basic for DOS 1.0
+
+ Blinker defaults to producing executables which use CodeView information
+ format 0.
+
+ If you instruct Blinker to produce an executable to a lower version number
+ than the version your CodeView debugger supports, some debugger features may
+ not function correctly. Use the highest version number compatible with your
+ debugger.
+
+ Note: When using CodeView information version 5, please ensure Microsoft's
+ CVPACK utility is in the path.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng133de.html">CODEVIEW</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

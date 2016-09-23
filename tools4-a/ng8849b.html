@@ -1,0 +1,153 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng87ddd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng89ba9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NBSCALL()</B>
+ Opens a NetBIOS session sending and receiving buffer and attempts a
+ connection setup
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NBSCALL(&lt;cSourceName&gt;,[&lt;nRecBuffer&gt;],[&lt;nSendBuffer&gt;],</B>
+     <B>   &lt;cTargetName&gt;,[&lt;nPacket&gt;],[&lt;nRecTimeout&gt;],</B>
+     <B>   [&lt;nSendTimeout&gt;]) --&gt; nHandle</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSourceName&gt;</B>  Designates the NetBIOS name of the communication's
+     transmitting side.
+
+     <B>&lt;nRecBuffer&gt;</B>  Designates the selected size of the receiving buffer.
+     If no value is passed for &lt;nRecBuffer&gt;, no receiving buffer is
+     established.  The minimum size of the receiving buffer is &lt;nPacket&gt;.  If
+     the value for &lt;nRecBuffer&gt; is too small, it is changed automatically by
+     NBSCALL().  The maximum size of the receiving buffer is 64 KByte.
+
+     <B>&lt;nSendBuffer&gt;</B>  Designates the selected size of the sending buffer.
+     If no value is passed for &lt;nSendBuffer&gt;, no sending buffer is
+     established.  The minimum size of the sending buffer is &lt;nPacket&gt;.  If
+     the value for &lt;nSendBuffer&gt; is too small, it is changed automatically by
+     NBSCALL().  The maximum size of the sending buffer is 64 KByte.
+
+     <B>&lt;cTargetName&gt;</B>  Designates a NetBIOS name that specifies the target
+     station.
+
+     <B>&lt;nPacket&gt;</B>  Designates the packet size of the data that is sent in
+     bytes.  The default value is 512 Bytes.
+
+     <B>&lt;nRecTimeout&gt;</B>  Designates the timeout for the following receiving
+     operations in 1/2 seconds.  The default value (0) designates no timeout.
+
+     <B>&lt;nSendTimeout&gt;</B>  Designates the timeout for the following sending
+     operations in 1/2 seconds.  The default value (0) designates no timeout.
+
+ <B>Returns</B>
+
+     If an operation is successful, NBSCALL() returns a communication handle.
+     The return value contains a numeric value that is greater than 0.  You
+     should store the handle in a variable because all further operations
+     that refer to an established buffer require a communication handle.  If
+     an error occurs, the function returns 0.
+
+ <B>Description</B>
+
+     NBSCALL() allows you to establish a communication buffer for a NetBIOS
+     session communication with other workstations in the network.  The
+     communication buffer can contain the sending and receiving buffer
+     through which the interrupt controlled sending and receiving of data is
+     processed.
+
+     &lt;nSourceName&gt; is the NetBIOS name of the process that transmits the data
+     (see the Introduction to this chapter).  The name can be added to the
+     local name table with the functions NBADDNAME() or NBADDGROUP() before
+     the call of NBSCALL().  If &lt;nSourceName&gt; has not been added to the name
+     table, it is added by NBSCALL() automatically.
+
+     The parameters &lt;nRecBuffer&gt; and &lt;nSendBuffer&gt; determine the size of
+     receiving and sending buffers.  The buffers are automatically designed
+     for one NetBIOS packet.  Each buffer can be up to 64 KByte.  However,
+     the size of the buffer that is allocated by NBSCALL() depends on the
+     application and the configuration of the computer used.
+
+     The parameter &lt;cTargetName&gt; is mandatory.  The session is set up with
+     the station specified by &lt;cTargetName&gt;.
+
+     &lt;nPacket&gt; determines the maximum size of the data range of the NetBIOS
+     packets that are sent or received.  The maximum value (and the default
+     value) is 512 bytes.  Smaller packets can be sent without failure.
+     However, larger packets are discarded.  The value of &lt;nPacket&gt; is also
+     valid for use in sending data.
+
+     The seconds for the timeout are not determined individually for each
+     sending and receiving operation.  The timeout is set when the session is
+     opened by passing the parameters &lt;nRecTimeout&gt; and &lt;nSendTimeout&gt;.  The
+     parameters can contain numeric values that specify the timeout in steps
+     of 1/2 second.
+
+     If all parameters have been passed correctly and the buffers have been
+     established successfully, NBSCALL() attempts to set up a session between
+     the current workstation and the target station.  However, the target
+     station must expect the connection setup.  If a CA-Clipper application
+     is running on the target station, the function NBSLISTCON() must have
+     been called.  If no acknowledgment is returned by the target station
+     within the specified timeout, NBSCALL() releases the reserved buffers
+     and returns 0.
+
+     After a successful connection setup NBSCALL() returns a communication
+     handle  that is greater than 0.  If a value has been passed for
+     &lt;nRecBuffer&gt;, NBSCALL() initiates an interrupt controlled receiving
+     mechanism that receives incoming packets in the background and then
+     copies them to a receiving buffer.  The data can then be read with the
+     PPCREAD() function within a CA-Clipper application.  If the receiving
+     buffer is full, incoming data is discarded without notifying the sender.
+     Data should be removed from the receiving buffer and processed as soon
+     as possible.   You should either read the contents of the buffer
+     periodically (polling) or supervise the buffer on an event-oriented
+     basis: for example, with the function PPCKEY().
+
+ <B>Note</B>
+
+     <B>.</B>  Unlike a NetBIOS datagram communication, a NetBIOS session
+        communication is connection-oriented.  A connection is established
+        between two stations.  As long as no error occurs, a successful
+        delivery of sent packets is guaranteed.
+
+ <B>Examples</B>
+
+     <B>.</B>  Attempt to set up a NetBIOS session connection to workstation
+        MIKE.  If the setup is successful, a 5000 byte receiving buffer and a
+        1000 byte sending buffer are established.  The source name on the
+        local workstation is KEITH:
+
+        nHandle=NBSCALL("MICK",5000,1000,"MIKE")
+        IF nHandle=0
+           ? 'Failure!'
+        ENDIF
+
+     <B>.</B>  The destination side can wait for the connection with the
+        following call:
+
+        nHandle:=NBSLISTCON("MIKE",2000,2000)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8a055.html">NBSLISTCON()</A>
+<A HREF="ng8c1de.html">PPCCANCEL()</A>
+<A HREF="ng8d688.html">PPCKEY()</A>
+<A HREF="ng8e251.html">PPCREAD()</A>
+<A HREF="ng929cb.html">PPCWRITE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

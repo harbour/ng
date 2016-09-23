@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng26347.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng26d07.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_Error():</B>
+
+  Syntax:  Sx_Error()
+
+  Returns:  &lt;numeric&gt; Internal error code from last command/function.
+                      0 if no error occurred.
+
+  Description:  This function returns an error code that identifies the
+                specific internal error condition when a SIx Driver command
+                or function fails.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"            // Open TEST.DBF and TEST.CDX
+    SET TAG TO state                 // Select the STATE tag
+    IF <B>Sx_Error()</B> &gt; 0                // Check for error (TAG didn't exist)
+      Alert( "TAG NOT FOUND" )       // Display informative message
+    ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5695c.html">Error Codes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,93 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3054f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng31d53.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ERRORLEVEL()</B>
+ Set the CA-Clipper return code
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ERRORLEVEL([&lt;nNewReturnCode&gt;]) --&gt; nCurrentReturnCode</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nNewReturnCode&gt;</B> is the new return code setting.  This can be a
+     value between zero and 255.  The default value at startup is zero.  If
+     not specified, ERRORLEVEL() reports the current setting without
+     assigning a new value.
+
+ <B>Returns</B>
+
+     ERRORLEVEL() returns the current CA-Clipper exit code as a numeric
+     value, if one has been set using ERRORLEVEL() with an argument;
+     otherwise, it returns zero.
+
+ <B>Description</B>
+
+     ERRORLEVEL() is a dual purpose environment function.  It returns the
+     current CA-Clipper return code and optionally sets a new return code.
+     The return code is a value set by a child process so the parent process
+     can test the termination state of the child process.  Typically, the
+     parent process is DOS and the child process is an application program.
+     Retrieve a return code with the DOS ERRORLEVEL command or INT 21
+     Function 4Dh.
+
+     When a CA-Clipper program terminates, the return code is set to 1 if the
+     process ends with a fatal error.  If the process ends normally, the
+     return code is set to zero, or the last ERRORLEVEL() set in the program.
+
+     Typically, you would set a return code with ERRORLEVEL() to indicate an
+     error state to the program that invoked the current CA-Clipper program.
+     In most cases this is the application batch file.  Here you would test
+     the return code using the DOS ERRORLEVEL command.  Refer to your DOS
+     manual for more information.
+
+ <B>Notes</B>
+
+     <B>.</B>  ERRORLEVEL() is not updated after a RUN command terminates.
+        To obtain the return code of the invoked program, you must create an
+        assembler or C routine that queries the child process return code
+        using INT 21 Function 4Dh.  Refer to your DOS Technical Reference
+        manual for more information.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example saves the current CA-Clipper return code, then
+        sets a new value:
+
+        nOldCode := ERRORLEVEL()      // Get current error level
+        ERRORLEVEL(1)                 // Set new error level
+
+     <B>.</B>  This example uses ERRORLEVEL() to set a return code that can
+        be tested by the parent process:
+
+        #define ERR_FILE_MISSING      255
+        #define ERR_POST_INCOMPLETE   254
+        //
+        IF !FILE("Sysfile.dbf")
+           @ 0, 0
+           @ 1, 0
+           @ 0, 0 SAY "Fatal error: System ;
+                       file is missing...quitting"
+           ERRORLEVEL(ERR_FILE_MISSING)
+           QUIT
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9115b.html">QUIT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

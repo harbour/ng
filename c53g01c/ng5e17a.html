@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5cee0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng5e802.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>HARDCR()</B>
+ Replace all soft carriage returns in a character string with hard carriage
+ returns
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>HARDCR(&lt;cString&gt;) --&gt; cConvertedString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string or memo field to be converted.
+
+ <B>Returns</B>
+
+     HARDCR() returns a character string up to 65,535 (64K) characters in
+     length.
+
+ <B>Description</B>
+
+     HARDCR() is a memo function that replaces all soft carriage returns
+     (CHR(141)) with hard carriage returns (CHR(13)).  It is used to display
+     long character strings and memo fields containing soft carriage returns
+     with console commands.  In CA-Clipper, console commands (including
+     REPORT and LABEL FORM) do not automatically convert soft carriage
+     returns to hard carriage returns, making it necessary for you to
+     explicitly make the conversion.  Soft carriage returns are added by
+     MEMOEDIT() when lines wrap.
+
+ <B>Notes</B>
+
+     <B>.  HARDCR() in REPORT and LABEL FORMs:</B> If HARDCR() is used in a
+        REPORT FORM or LABEL FORM contents expression and nowhere else, you
+        must declare it EXTERNAL to ensure that it is linked.
+
+     <B>.</B>  HARDCR() does not remove a soft carriage return if it is
+        specified alone (i.e. HARDCR (CHR(141) ).  It requires the
+        combination of a soft carriage return and a line feed, i.e., CHR(141)
+        + CHR(10).
+
+ <B>Examples</B>
+
+     <B>.</B>  To display a memo field formatted with the automatic word
+        wrapping of MEMOEDIT():
+
+        USE Sales NEW
+        ? HARDCR(Sales-&gt;Notes)
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngab504.html">?|??</A>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ng101299.html">EXTERNAL*</A>
+<A HREF="ngd103e.html">LABEL FORM</A>
+<A HREF="ng704fe.html">MEMOTRAN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

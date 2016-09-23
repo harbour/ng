@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng925d6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng930c7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCWRITE()</B>
+ Writes data to a communication sending buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCWRITE(&lt;nHandle&gt;,&lt;cData&gt;) --&gt; nLength</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication buffer.
+
+     <B>&lt;cData&gt;</B>  Designates a character string that contains the data that
+     is written to the sending buffer.
+
+ <B>Returns</B>
+
+     PPCWRITE() returns the number of characters that could not be written to
+     the sending buffer.  Therefore, a return value larger than 0 indicates
+     an error (for example, when the sending buffer is full).
+
+ <B>Description</B>
+
+     PPCWRITE() allows you to write data into the sending buffer of a
+     communication buffer, independently of the protocol used (IPX, SPX,
+     NetBIOS datagram, or NetBIOS session).  The parameter &lt;nHandle&gt; contains
+     the handle of the communication buffer.  The data must be passed as a
+     character string (&lt;cData&gt;).  PPCWRITE() transmits the data to the
+     sending buffer.  The data is sent from the sending buffer, in an
+     interrupt controlled transmission in the background.  If the sending
+     buffer does not have enough memory to accept all the characters,
+     PPCWRITE() returns the number of characters that could not be
+     transmitted to the sending buffer.
+
+ <B>Examples</B>
+
+     <B>.</B>  Open the IPX sending buffer for a broadcast message, and send
+        the message "Good morning!":
+
+        nHandle=IPXOPEN(20000,,546,'FFFFFFFFFFFFFFFFFFFF')
+        PPCWRITE(nHandle,'Good morning!')
+
+     <B>.</B>  Send data from the character string &lt;cData&gt;, and take into
+        account that the sending buffer might be full:
+
+        nRest=LEN(cData)
+        WHILE nRest&gt;0
+           nRest = PPCWRITE(nHandle,RIGHT(cData,nRest))
+        ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8e251.html">PPCREAD()</A>
+<A HREF="ng90e95.html">PPCSNDCNT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,138 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3c22e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3d2ce.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_TagInfo():</B>
+
+  Syntax:  Sx_TagInfo( [cIndexFileName] )
+
+            cIndexFileName  = Name of Index file (order bag)
+
+  Returns:   &lt;array&gt; Multi-dimensional array containing information about
+             each tag in the compound (.CDX/.NSX) index file;  If the order
+             is invalid or no index open, an empty array is returned.
+
+  Description:    This function returns an array of six element arrays, each
+                  containing information about a tag within the current or
+                  specified compound index file.  If nOrder is not specified
+                  then the current index is used.
+
+                  The following information is returned for each tag:
+
+                      [1] = Tag name
+                      [2] = Index expression
+                      [3] = Filter expression (or "" if no filter)
+                      [4] = Logical value - .T. if index is UNIQUE
+                      [5] = Logical value - .T. if index is in DESCENDING
+                              order
+                      [6] = Logical value - .T. if index is a RYO (Roll-
+                            Your-Own) index (created using the EMPTY clause)
+
+                  This function can also be used with .IDX files, and will
+                  return a single element array containing an array with the
+                  above information.  The index name is given in place of
+                  the tag name.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    //  This program displays information for all the tags in a compound
+    //  (.NSX) index file.
+
+    #include "SIXNSX.CH"
+    #include "INKEY.CH"
+
+    LOCAL nTagCnt                // Number of tags
+    LOCAL aTagInfo               // Array to hold tag info
+    LOCAL nCnt                   // Counter variable
+    LOCAL nKey                   // User keystroke
+
+    CLS                          // Clear the screen
+
+    USE TEST VIA "SIXNSX"        // Open TEST.DBF
+
+    INDEX ON LAST  TAG LAST      // Create LAST tag
+    INDEX ON STATE TAG STATE     // Create STATE tag
+    INDEX ON AGE   TAG AGE       // Create AGE tag
+
+    nTagCnt  := Sx_TagCount()    // Get number of tag for current .NSX
+
+    aTagInfo := <B>Sx_TagInfo()</B>     // Get the tag info for current .NSX
+
+    // Now draw the display
+    @  5,2 TO 15,77 DOUBLE
+    @  5,35 SAY " Tag Info "
+    @  6, 4 SAY "Index File.......:"
+    @  6,23 SAY Sx_IndexName()           // Show the name of the index file
+    @  6,40 SAY "Tags Available...:"
+    @  6,59 SAY nTagCnt PICT "99"        // Show number of tags
+    @  8, 4 SAY "Tag Name.........:"
+    @  9, 4 SAY "Key Expression...:"
+    @ 10, 4 SAY "Filter Expression:"
+    @ 11, 4 SAY "Unique?..........:"
+    @ 12, 4 SAY "Descending?......:"
+    @ 13, 4 SAY "Roll-Your-Own?...:"
+    @ 15,26 SAY " PgUp  PgDn     Esc to quit "
+
+    nCnt := 1      // Start with first tag
+
+    // Display tag info until user can't take it any more!
+    DO WHILE (.T.)
+
+      // Display the tag info
+      @  8,23 SAY PadR( aTagInfo[ nCnt, 1 ], 8)
+      @  9,23 SAY PadR( aTagInfo[ nCnt, 2 ], 52)
+      @ 10,23 SAY PadR( aTagInfo[ nCnt, 3 ], 52)
+      @ 11,23 SAY iif( aTagInfo[ nCnt, 4 ], "Yes", "No ")
+      @ 12,23 SAY iif( aTagInfo[ nCnt, 5 ], "Yes", "No ")
+      @ 13,23 SAY iif( aTagInfo[ nCnt, 6 ], "Yes", "No ")
+
+      nKey := Inkey(0)
+
+      DO CASE
+
+        CASE nKey == K_PGDN        // Go to next one
+          IF nCnt &lt; nTagCnt
+            nCnt++
+          ENDIF
+
+        CASE nKey == K_PGUP        // Go to previous one
+          IF nCnt &gt; 1
+            nCnt--
+          ENDIF
+
+        CASE nKey == K_ESC         // Outta here!
+          EXIT
+
+        OTHERWISE                  // Bad key!
+          Tone( 1000, 3 )
+
+      ENDCASE
+
+    ENDDO
+    CLS
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3c22e.html">Sx_TagCount()</A>
+<A HREF="ng1a815.html">OrdFor()</A>
+<A HREF="ng1ad63.html">OrdKey()</A>
+<A HREF="ng1c1b8.html">OrdName()</A>
+<A HREF="ng1c7a8.html">OrdNumber()</A>
+<A HREF="ng3d754.html">Sx_Tags()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

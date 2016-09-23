@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5b812.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5575e.html">[^^Up^^]</A>
+<A HREF="ng5c6f0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPJMODE()</B>
+ Sets or queries the device mode for a print job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPJMODE([&lt;cJob&gt;],[&lt;cNewMode&gt;],[&lt;cUser&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; cMode</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cJob&gt;</B>  Designates the selected print job definition.  The default
+     value designates the default job.
+
+     <B>&lt;nNewMode&gt;</B>  Designates a new device mode for &lt;cJob&gt;.  The device
+     mode must have an entry in the printer definition file (NET$PRN.DAT) on
+     &lt;cServer&gt;.
+
+     <B>&lt;cUser&gt;</B>  Designates the name of the user whose print job definition
+     is processed.  The default value designates the current user.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which the
+     operation is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPJMODE() returns the device mode in the job definition &lt;cJob&gt;.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT JOB MODE
+     A print job definition can contain the name of a device and a
+     corresponding device mode.  The device mode can be set or queried by
+     calling NNETPJMODE().  Do not pass a value for &lt;cNewMode&gt;.  A device
+     mode can be set to query the device mode by specifying &lt;cNewMode&gt;.  To
+     reset a device mode (set to none), the parameter &lt;cNewMode&gt; must contain
+     an empty string ("").  If &lt;cUser&gt; is not the current user, access rights
+     for the mail system of the user are required.
+
+ <B>Note</B>
+
+     <B>.</B>  The device mode is validated only when it is set.  If the
+        device has been modified with NNETPJDEV(), the returned device mode
+        can be invalid.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the device mode in the job definition MYJOB:
+
+        ? NNETPJMODE('MYJOB')
+
+     <B>.</B>  Set the device mode in the job definition MYJOB to PLAIN:
+
+        ? NNETPJMODE('MYJOB', 'PLAIN')
+
+     <B>.</B>  Reset the device name and the device mode in the job
+        definition MYJOB to NONE:
+
+        ? NNETPJDEV('MYJOB', '')
+        ? NNETPJMODE('MYJOB', '')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng59e9d.html">NNETPJDEV()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

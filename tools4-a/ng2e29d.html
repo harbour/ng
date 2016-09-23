@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2d9c0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng2eb23.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETEXTATT()</B>
+ Sets or queries extended file attributes
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETEXTATT(&lt;cFile&gt;,[&lt;nAttr&gt;]) --&gt; nNewAttr</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFile&gt;</B>  Designates the file for which the extended file attributes
+     are set or queried.  &lt;cFile&gt; can contain a path specification.
+
+     <B>&lt;nAttr&gt;</B>  Designates an optional parameter that must be passed to set
+     the new extended file attributes of &lt;cFile&gt; .  The value for &lt;nAttr&gt; can
+     be calculated according to the table in the description.
+
+ <B>Returns</B>
+
+     NNETEXTATT() returns a numeric value that contains the extended file
+     attributes of &lt;cFile&gt;.  These numeric values correspond to the table in
+     the description.  If an error occurs, the function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET EXTENDED ATTRIBUTES
+     Besides the DOS file attributes, Netware supports additional extended
+     file attributes.  NNETEXTATT() allows you to set or query these
+     attributes.  The coding of the extended file attributes can be seen in
+     the following table:
+
+     <B>Table 23.4:  Coding of Extended File Attributes</B>
+     ------------------------------------------------------------------------
+     <B>Bit     Value     CTNNET.CH    Definition</B>
+     ------------------------------------------------------------------------
+     5       16        EXA_TTS      Transaction attribute
+     6       32        EXA_INDEX    Index attribute
+     7       64        EXA_READAU   Read audit attribute
+     8       128       EXA_WRITAU   Write audit attribute
+     ------------------------------------------------------------------------
+
+     To specify more attributes, the numeric values must be added.
+
+ <B>Note</B>
+
+     <B>.</B>  Currently, read and write audit attributes (protocol of read
+        and write access) are not supported by Netware.
+
+ <B>Examples</B>
+
+     <B>.</B>  Check to see if the transaction attribute is set for
+        CLIENT.DBF:
+
+        IF ISBIT(NNETEXTATT('CLIENT.DBF'),5)
+           ? 'CLIENT.DBF is flagged transactional!'
+        ELSE
+           ? 'TTS not possible for CLIENT.DBF!'
+        ENDIF
+
+     <B>.</B>  Set the transaction attribute for CLIENT.DBF:
+
+        #include "ctnnet.ch"
+
+        NNETEXTATT('CLIENT.DBF',EXA_TTS)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng794c9.html">NNETTTSBEG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5099a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng513b9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>trans()</B>
+ Copy one or more rows (records) from one workarea to another
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE trans(</B>
+     <B>               WORKAREAP wa,</B>
+     <B>               DBTRANSINFOP dbTransInfo</B>
+     <B>             )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>dbTransInfo</B> is a pointer to a structure containing information about
+     the transfer of data.
+
+ <B>Description</B>
+
+     Copies one or more rows between two tables in two different workareas.
+
+ <B>Default Behavior</B>
+
+     Copies multiple rows by passing each wa record to transRec() while the
+     following conditions are met (these are the same conditions as
+     dbEval()):
+
+     <B>.</B>  If dbTransInfo-&gt;scope.nRecord is set to a number, evalBlock()
+        is called once with that physical row (record) number
+
+     <B>.</B>  If dbTransInfo-&gt;scope.nNext is set to a number, n: n
+        iterations occur.
+
+        Otherwise, evalBlock() is called for each record while wa-&gt;eof is not
+        true and the dbTransInfo-&gt;scope.bWhile block evaluates to TRUE.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If you perform multiple iterations of this method, be careful
+        to completely emulate the behavior of Xbase scoping.  This will offer
+        the CA-Clipper developer maximum compatibility with the Xbase DML.
+        Note especially that several of the scoping conditions exclude each
+        other, so there are many opportunities for optimization.  The default
+        behavior of this method provides a very high level of optimization
+        with the default Xbase scoping.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng44010.html">DBTRANSINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng513b9.html">transRec()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

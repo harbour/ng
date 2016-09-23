@@ -1,0 +1,120 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc5dc6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbe570.html">[^^Up^^]</A>
+<A HREF="ngc75b9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SOUND()</B>
+ Creates tones (melodies) by designating frequency and duration
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SOUND(&lt;nFrequency&gt;,&lt;nDuration&gt;,[&lt;lTimer&gt;]) --&gt; cNull</B>
+
+     <B>or:</B>
+
+     <B>SOUND(&lt;cToneSequence&gt;,[&lt;lTimer&gt;]) --&gt; cNull</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nFrequency&gt;</B>  Designates the tone frequency in hertz.
+
+     <B>&lt;nDuration&gt;</B>  Designates the duration of the tones in 1/100ths
+     seconds; or when &lt;lTimer&gt; is set at .T., in intervals of 1/18.2 seconds.
+
+     <B>&lt;lTimer&gt; </B> Designates whether the tones designated as values are
+     created on a basis of 1/100ths seconds (.F.); or 1/18.2 seconds (.T.).
+     The default value is 1/100th seconds (.F.).
+
+     or:
+
+     <B>&lt;cToneSequence&gt;</B>  Designates a character string that contains an
+     entire melody.  Use the CA-Clipper I2BIN() function to produce 2-byte
+     values for frequency and duration.  The string format assumes 2 bytes
+     for frequency and 2 bytes for duration, which are alternated until the
+     melody is defined.
+
+     <B>&lt;lTimer&gt;</B>  Designates if you want the designated tones values created
+     on a basis of 1/100ths seconds (.F.) or 1/18.2 seconds (.T.).  The
+     default value is 1/100th seconds (.F.).
+
+ <B>Returns</B>
+
+     SOUND() always returns a null string as a value.
+
+ <B>Description</B>
+
+     Use SOUND() to create tones at intervals of 1/100th seconds, in the
+     range of 21 to 65535 hertz, for a maximum of 655.36 seconds.
+
+     To make it compatible with parameters for the CA-Clipper TONE() function
+     or various other programming language functions, select the 1/18.2-
+     seconds interval.  To achieve this, designate the last parameter as .T..
+
+     The table below shows tones and their frequencies for three octaves at
+     1/100th second intervals.  To go one octave higher, double the frequency
+     value.
+
+     <B>Table 13-8: Tones and their Frequencies</B>
+     ------------------------------------------------------------------------
+     <B>Tone    Freq.     Tone    Freq.     Tone    Freq.</B>
+     ------------------------------------------------------------------------
+     C 3     131       C 4     262       C 5     523
+     C#      139       C#      277       C#      554
+     D       147       D       294       D       587
+     D#      156       D#      311       D#      622
+     E       165       E       330       E       659
+     F       175       F       349       F       698
+     F#      185       F#      370       F#      740
+     G       196       G       392       G       784
+     G#      208       G#      415       G#      831
+     A       220       A       440       A       880
+     A#      233       A#      466       A#      932
+     B       247       B       494       B       988
+     ------------------------------------------------------------------------
+
+     Frequency values that lie below 21 hertz, are not perceived by the human
+     ear.  You can use them as pauses.
+
+ <B>Note</B>
+
+     <B>.</B>  You can find additional uses for SOUND() in the sample file
+        Melodies.prg.
+
+ <B>Examples</B>
+
+     <B>.</B>  Show the tonal scale:
+
+        SOUND(262, 40)
+        SOUND(294, 40)
+        SOUND(330, 40)
+        SOUND(349, 40)
+        SOUND(392, 40)
+        SOUND(440, 40)
+        SOUND(494, 40)
+        SOUND(523, 40)
+
+     <B>.</B>  Call with a string parameter:
+
+        cVar := I2BIN(262) + I2BIN(40) + I2BIN(294) + I2BIN(40)
+        SOUND(cVar)
+
+     <B>.</B>  Pause for one-half second:
+
+        SOUND(0, 50)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc47fb.html">MILLISEC()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

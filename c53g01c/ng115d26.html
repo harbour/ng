@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1153e9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng10fe9c.html">[^^Up^^]</A>
+<A HREF="ng11670e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>--</B>
+ Decrement--unary                                (Mathematical)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>--&lt;idVar&gt;       (prefix decrement)</B>
+     <B>&lt;idVar&gt;--       (postfix decrement)</B>
+
+ <B>Type</B>
+
+     Date, numeric
+
+ <B>Operands</B>
+
+     <B>&lt;idVar&gt;</B> is any valid CA-Clipper identifier, including a field
+     variable.  If &lt;idVar&gt; is a field, you must reference it prefaced with an
+     alias or declare it with the FIELD statement.
+
+     In addition, you must initialize &lt;idVar&gt; to a value before performing
+     the decrement operation, and it must be either numeric or date data
+     type.
+
+ <B>Description</B>
+
+     The decrement operator (--) decreases the value of its operand by one.
+     This operator subtracts one from the value of &lt;idVar&gt; and assigns the
+     new value to &lt;idVar&gt;.
+
+     The -- operator can appear before or after &lt;idVar&gt;.  Specifying the
+     operator before &lt;idVar&gt; decrements and assigns the value before the
+     value is used.  This is called prefix notation, and it is the most
+     common usage.  Specifying the operator after &lt;idVar&gt; decrements and
+     assigns the value after it is used.  This is postfix notation.  Stated
+     differently, postfix notation delays the assignment portion of the
+     operation until the rest of the expression is evaluated, and prefix
+     notation gives the assignment precedence over all other operations in
+     the expression.
+
+     If the reference to &lt;idVar&gt; is ambiguous (i.e., not declared at compile
+     time and not explicitly qualified with an alias), &lt;idVar&gt; is always
+     assumed to be MEMVAR.  You can assign field variables by declaring the
+     field variable name in a FIELD statement or by referring to the field
+     name prefaced by the FIELD-&gt; alias or by the name of the work area.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example of the postfix decrement operator the
+        assignment takes place before the original variable is decremented,
+        thus the two values are not the same when queried:
+
+        nValue := 1
+        nNewValue := nValue--
+        ? nNewValue                  // Result:   1
+        ? nValue                     // Result:   0
+
+     <B>.</B>  In this example, the prefix decrement operator decreases the
+        first operand of the multiplication by one, making its value 9.
+        Then, the assignment of this new value to the nValue variable takes
+        place before the rest of the expression is evaluated.  Thus, the new
+        value is used to perform the multiplication operation, and the result
+        of 9 * 9 is 81.
+
+        nValue := 10
+        ? --nValue * nValue          // Result:  81
+        ? nValue                     // Result:   9
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1149c5.html">++</A>
+<A HREF="ng1153e9.html">-</A>
+<A HREF="ng1191dc.html">:=</A>
+<A HREF="ng11b607.html">= (compound)</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

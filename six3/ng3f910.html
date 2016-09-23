@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3f509.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3fd68.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_VFGet():</B>
+
+   Syntax:  Sx_VFGet( &lt;cExpr&gt;, &lt;nLen&gt; )
+
+            &lt;cExpr&gt; = A CHARACTER field name or string expression to be
+              evaluated.
+
+            &lt;nLen&gt; = The length to pad or trim the result of the evaluated
+              expression.
+
+  Returns:  Returns the evaluated expression padded or trimmed to the
+            specified length.
+
+  Description:  To be used in creating index orders on more (or less) bytes
+                than the amount defines as 'significant' in a weakly-typed
+                "V" field holding character data.  For example, if you have a
+                CITY field declared as "V,0", so that all data is stored in
+                the memo file, this would typically not be indexable at all.
+                Yet, you could build your index on Sx_VFGet( CITY, 10 ) to
+                allow you to do SEEKs for values up to 10 bytes long.
+
+  Example:  // Create new database with first 4 bytes 'signifigant'
+            RDDSetDefault( "SIXNSX" )
+            dbCreate( "TEST", {{"FLD1","V",10,0}} )
+            USE test EXCL
+
+            // Can only SEEK for first 4 bytes of field value
+            INDEX ON test-&gt;FLD1 TAG ORD1
+
+            // Can seek up to 12 bytes of field value
+            INDEX ON <B>Sx_VFGet( test-&gt;FLD1, 12 )</B> TAG ORD2
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

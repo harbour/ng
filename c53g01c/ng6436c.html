@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng63ea6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng647b2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ISUPPER()</B>
+ Determine if the leftmost character in a string is uppercase
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ISUPPER(&lt;cString&gt;) --&gt; lBoolean</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string to be examined.
+
+ <B>Returns</B>
+
+     ISUPPER() returns true (.T.) if the first character is an uppercase
+     letter; otherwise, it returns false (.F.).
+
+ <B>Description</B>
+
+     ISUPPER() is a character function that determines whether the first
+     character of a string is uppercase.  It is the inverse of ISLOWER().
+     Both ISUPPER() and ISLOWER() relate to the UPPER() and LOWER() functions
+     which actually convert uppercase characters to lowercase, and vice
+     versa.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate ISUPPER() applied to various values:
+
+        ? ISUPPER("AbCdE")         // Result: .T.
+        ? ISUPPER("aBCdE")         // Result: .F.
+        ? ISUPPER("$abcd")         // Result: .F.
+        ? ISUPPER("8ABCD")         // Result: .F.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng62d60.html">ISALPHA()</A>
+<A HREF="ng63550.html">ISDIGIT()</A>
+<A HREF="ng639fc.html">ISLOWER()</A>
+<A HREF="ng6741f.html">LOWER()</A>
+<A HREF="nga73ff.html">UPPER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

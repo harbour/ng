@@ -1,0 +1,121 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngec0d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="ng1053d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSCNBIN()</B>
+ Scans a bindery for an object
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSCNBIN(&lt;cObjMask&gt;,[@]&lt;nType&gt;,[@]&lt;NId&gt;,</B>
+     <B>   [@&lt;nObjFlag&gt;],[@&lt;nObjSafe&gt;],[@&lt;lObjProp&gt;],</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; cObjName</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cObjMask&gt; </B> Designates a search mask that is satisfied by the
+     bindery objects that are searched.  &lt;cObjMask&gt; can contain the wildcard
+     characters "*" and "?" according to DOS regulations.  The default value
+     is "*".
+
+     <B>&lt;nType&gt; </B> Designates the object type that is searched.  The header
+     file CTNNET.CH contains symbolic constants for a number of object types.
+     When you work with numeric values, NNETSCNBIN() expects the object type
+     in the high-low format for efficiency reasons.  If &lt;nType&gt; is passed by
+     reference, the variable contains the type of the object found after the
+     function has been completed successfully.
+
+     <B>&lt;NId&gt; </B> Contains the object ID (high-low format) of the last object
+     found.  To start the search with the first object, &lt;NId&gt; must be
+     designated -1.  If &lt;NId&gt; is passed by reference, the variable contains
+     the ID of the object found after the function has been completed
+     successfully.
+
+     <B>&lt;nObjFlag&gt; </B> Designates whether the object found is static (0) or
+     dynamic (1).  This parameter must be passed by reference.  In this case,
+     the variable contains the object flag after the function has been
+     completed successfully
+
+     <B>&lt;nObjSafe&gt; </B> Designates the object security as an eight-bit number.
+     The four high-order bits control the security level for the object's
+     write access; the four low-order bits control the object's read access.
+     This parameter must be passed by reference.  In this case, the variable
+     contains the object security after the function has been completed
+     successfully.  A table for access levels can be found with the
+     NNETCRTOBJ() function.
+
+     <B>&lt;lObjProp&gt; </B> Designates whether the object has property (.T.) or not
+     (.F.).  This parameter must be passed by reference.
+
+     <B>&lt;cServer&gt;  </B> Designates the name of the file server for which the
+     bindery is accessed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETSCNBIN() returns the name of the binary object that is found.  If no
+     object has been found, the function returns a null string.  If the
+     parameters &lt;nType&gt;, &lt;NId&gt;, &lt;nObjFlag&gt;, &lt;nObjSafe&gt;, and/or &lt;lObjProp&gt; are
+     passed by reference, NNETSCNBIN() returns the object type, the object
+     ID, the object flag, the object security, and a flag for property
+     existence (see the arguments).
+
+ <B>Description</B>
+
+     <B>Important!</B>  NNETSCNBIN() is a low level bindery function and should
+     be used only with extensive knowledge of the bindery concept and the
+     Novell API.
+
+     NOVELL NET SCAN BINDERY
+     NNETSCNBIN() allows you to scan the bindery of a file server for objects
+     that satisfy a specified search mask (&lt;cObjMask&gt;) and a defined type
+     (&lt;nType&gt;).  To find the first object that matches the passed criterion,
+     the parameter &lt;NId&gt; must be designated -1.  For a successive search, the
+     object ID must be passed by reference to use the ID of the object that
+     is found at the next function call.  To find objects of any type, the
+     parameter &lt;nType&gt; must contain -1 or the symbolic constant OBJ_WILD.
+     With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the bindery of any attached
+     file server can be accessed.  The connection ID of a server is returned
+     by NNETATTACH() or NNETLOGIN().
+
+ <B>Note</B>
+
+     <B>.</B>  The object type and the object ID are expected in the high-low
+        format (see the Introduction to this chapter).
+
+ <B>Example</B>
+
+     List the names and types of all bindery objects on the default server:
+
+     #include "ctnnet.ch"
+
+     nId:=-1          // Start with the 1st object
+     WHILE .T.
+     nType=OBJ_WILD   // all objects
+     IF EMPTY(cName:=NNETSCNBIN('*',@type,@ID))
+     EXIT
+     ENDIF
+     ? cName,nType
+     ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5d43.html">NNETCRTOBJ()</A>
+<A HREF="ng1053d.html">NNETSCNPRP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

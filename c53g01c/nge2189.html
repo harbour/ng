@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge1808.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge26bd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET CURSOR</B>
+ Toggle the screen cursor on or off
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET CURSOR ON | off | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> enables the cursor display.
+
+     <B>OFF</B> disables the cursor display.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET CURSOR toggles the screen cursor on or off.  When the CURSOR is OFF,
+     keyboard entry and screen display are unaffected.  The cursor is merely
+     hidden and data entry may still be accomplished without the cursor being
+     visible.  ROW() and COL() are updated as if the cursor were visible.
+
+     This command suppresses the cursor while the screen is being painted.
+     Ideally, the only time the cursor shows in a production program is when
+     the user is editing GETs, MEMOEDIT(), or some kind of line edit.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows a typical use of SET CURSOR:
+
+        LOCAL lAnswer := .F.
+        @ 24, 0
+        @ 24, 15 SAY "Do you want to QUIT? [Y/N]";
+           GET lAnswer;
+           PICTURE "Y"
+        SET CURSOR ON
+        READ
+        SET CURSOR OFF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng19e0f.html">COL()</A>
+<A HREF="ng97e75.html">ROW()</A>
+<A HREF="nge1808.html">SET CONSOLE</A>
+<A HREF="ng9dd92.html">SETCURSOR()</A>
+<A HREF="ng9f30f.html">SETPOS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

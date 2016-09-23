@@ -1,0 +1,111 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2a35f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng26a91.html">[^^Up^^]</A>
+<A HREF="ng2b28d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COM_CRC()</B>
+ Computes a Cyclic Redundancy Check (CRC) for the string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>COM_CRC(&lt;cString&gt;,[&lt;nStart&gt;],[&lt;nPolynomial&gt;])</B>
+     <B>   --&gt; nCRCValue</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B>  Designates the character string for which a CRC is
+     computed.
+
+     <B>&lt;nStart&gt;</B>  Designates a starting value that is added to the CRC.
+     This value is computed in order to form a CRC for multiple character
+     strings.  The default value is 0.
+
+     <B>&lt;nPolynomial&gt;</B>  Designates another polynomial.  The maximum is a 17-
+     bit polynomial.  The default polynomial is CRC-16 X.25 (see below).
+
+ <B>Returns</B>
+
+     COM_CRC() returns the 16-bit CRC for &lt;cString&gt; as a numeric value
+     between 0 and 65535.
+
+ <B>Description</B>
+
+     CYCLIC  REDUNDANCY  CHECK
+     Many file transfer protocols use CRC for accurate error recognition.
+     This CRC function offers you decisive help when programming your own
+     protocols, like XMODEM or KERMIT.
+
+     The specific CRC value always depends on the polynomial that you use.
+     This information can be passed as an optional parameter in the form of
+     an integer so that the function has almost universal utility.  The CRC
+     16 X.25 polynomial used in X.25 systems,.  XMODEM is the default value
+     used in the examples below.
+
+     A few examples of polynomials:
+
+     <B>Table 3-1: The Different Polynomials</B>
+     ------------------------------------------------------------------------
+     <B>Type           Arguments Polynomial</B>
+     ------------------------------------------------------------------------
+     Parity         3         2^1+1
+     LCR-8          257       2^8+1
+     CRC-12         5011      2^12+2^11+2^3+2^2 +2^1+1
+     CRC-16 X.25    69665     2^16+2^12+2^5+1
+     CRC-16         98309     2^16+2^15+2^2+1
+     ------------------------------------------------------------------------
+
+ <B>Notes</B>
+
+     <B>.</B>  If &lt;nStart&gt; is not passed, then the loss of the previous
+        CHR(0) out of &lt;cString&gt; is not detected by a later CRC review.  This
+        can be avoided if &lt;nStart&gt; is given a starting value that is not
+        equal to 0.
+
+     <B>.</B>  A function called XMOBLOCK() is available for building XMODEM
+        blocks.
+
+ <B>Examples</B>
+
+     <B>.</B>  These are simple CRC calculations:
+
+        COM_CRC("abc")                 // 40406
+        COM_CRC("cba")                 // 54260
+
+     <B>.</B>  These are calculations for multiple strings:
+
+        nCRC1 := COM_CRC("123")
+        nCRC2 := COM_CRC("456", nCRC1)
+
+        ? nCRC2 == COM_CRC("123456")   // .T., values are equal
+
+     <B>.</B>  Form a block for data transmission.  The string is appended to
+        the data:
+
+        cData   := "ABCDEFGHIJKLMNOP"
+        nCRC    :=  COM_CRC(cData)
+
+        cCRCSTR := I2BIN(CRC)          // CRC as a string
+        cCRCSTR := CHARSWAP(cCRCSTR)   // Exchange both bytes
+        cBlock  := cData + cCRCSTR     // Transmission block
+
+     <B>.</B>  The CRC must be 0 for the entire transmitted block!
+
+        ? COM_CRC(cBlock)  = 0         // .T., when correctly
+                                       // transmitted
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng39950.html">XMOBLOCK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng44ebc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng45b2c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHARMIX()</B>
+ Mixes two strings together
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CHARMIX(&lt;cString1&gt;,&lt;cString2&gt;) --&gt; cString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString1&gt;</B>  Designates a string that is mixed with &lt;cString2&gt;.
+
+     <B>&lt;cString2&gt;</B>  Designates a string that is mixed with &lt;cString1&gt;.
+
+ <B>Returns</B>
+
+     CHARMIX() returns a string that is double the length of &lt;cString1&gt;,
+     assuming that &lt;cString2&gt; contains at least one character.
+
+ <B>Description</B>
+
+     This function allows you to mix the characters from two character
+     strings together.  The characters from &lt;cString1&gt; and &lt;cString2&gt; appear
+     alternately in the result string.  The length of &lt;cString1&gt; forms the
+     basis for the maximum count of the resulting mix.  A longer &lt;cString2&gt;
+     string is cut down to the length of &lt;cString1&gt;.  A shorter &lt;cString2&gt; is
+     processed from beginning to end, wrapping to the beginning again until
+     there are no more characters in &lt;cString1&gt;.
+
+ <B>Note</B>
+
+     <B>.</B>  This function can be used to recombine strings extracted by
+        CHAREVEN() or CHARODD().
+
+ <B>Examples</B>
+
+     <B>.</B>  This is an example of a simple mix:
+
+        ? CHARMIX("ABC", "123")       // "A1B2C3"
+
+     <B>.</B>  This is a mix where the second string is shorter:
+
+        ? CHARMIX("ABCDE", "12")      // "A1B2C1D2E1"
+
+     <B>.</B>  This is a mix where the second string is longer:
+
+        ? CHARMIX("AB", "12345")      // "A1B2"
+
+     <B>.</B>  What you can do with this?
+
+        ? CHARMIX("HELLO". " ")       // "H E L L O"
+
+     <B>.</B>  If the second parameter is null, then the first parameter is
+        returned unchanged:
+
+        ? CHARMIX("HELLO", "")        // "HELLO"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng44634.html">CHAREVEN()</A>
+<A HREF="ng46327.html">CHARODD()</A>
+<A HREF="ng4e85b.html">EXPAND()</A>
+<A HREF="ng82c06.html">SCREENMIX()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2c5cd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2980a.html">[^^Up^^]</A>
+<A HREF="ng2e2c7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_fsIsDrv()</B>
+ Check if a disk drive is available
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "filesys.api"</B>
+     <B>USHORT _fsIsDrv(</B>
+     <B>                  BYTE nDrive</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>nDrive</B> is the number of the disk drive to check.
+
+ <B>Returns</B>
+
+     _fsIsDrv() returns zero if successful; otherwise, FS_ERROR.
+
+ <B>Description</B>
+
+     This function checks if a disk drive is available.  It is equivalent to
+     the CA-Clipper function ISDISK().
+
+ <B>Examples</B>
+
+     <B>.</B>  The following code fragment illustrates the use of _fsIsDrv():
+
+        #include "filesys.api"
+        .
+        .
+        .
+        BYTEP AllDrives()
+        {
+           BYTE i, nDrives, cDrives[27];
+
+           nDrives = 0;
+           for ( i = 0, i &lt; 26, i++)
+           {
+              if(! _fsIsDrv( i ) )
+                 cDrives[nDrives++] = 'a' + i;
+           }
+           cDrives[nDrives++] = '\0';
+           return( cDrives );
+        }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Filesys.api.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,125 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7269.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2471.html">[^^Up^^]</A>
+<A HREF="ng8d65.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Concept</B>
+------------------------------------------------------------------------------
+
+     An Order is a set of keyed-pairs that provides a logical ordering of the
+     records in an associated database file.  Each key in an Order (index) is
+     associated with a particular identity (record number) in the data set
+     (database file).  The records can be processed sequentially in key
+     order, and any record can be located by performing a SEEK operation with
+     the associated key value.  An Order never physically changes the data
+     that it's applied against, but creates a different view of that data.
+
+     There are at least four basic types of processes that you can perform
+     with an Order:
+
+     1. Ordering:  Changes the sequence in which you view the data records.
+
+     2. Scoping:  Constrains the visibility of data to specified upper and
+        lower bounds.  Determines the range of data items included, through
+        a scoping rule, like the WHILE clause.
+
+     3. Filtration:  Visibility of data is subject to conditional evaluation.
+        Filtration determines which items of data are included, through a
+        filter rule, like the FOR clause.
+
+     4. Translation:  Values in underlying data source are translated (or
+        converted) in some form based on a selection criteria.  For example:
+
+        INDEX ON IIF(CUSTID &gt; 1000, "NEW", "OLD")
+
+     The difference between scope and condition as it applies to FOR and
+     WHILE is that the WHILE clause provides scope, but not filtering, but a
+     FOR clause can provide both.
+
+     There are three primary elements in Order Management:
+
+     <B>.</B>  Order:  An Order is a set that has two elements in it:  an
+        Order Name, which is a logical name that can be referenced, and an
+        Order Expression which supplies the view of the data.  The Order Name
+        provides logical access to the expression and the Order Expression
+        provides a way of viewing the underlying data source.  Data ordering
+        can also be modified to ascending or descending sequence.
+
+        -  Order Name:  An Order Name is a symbolic name, that you use to
+           manipulate an Order, like a file's alias.  The difference between
+           an Order Name and the Order Number with which you would normally
+           access indexes (Orders), is that the Order Name is stored in the
+           index file.  It is available each time you run the program, and is
+           maintained by the system.  The Order Number is generated each time
+           the Order is added to an Order List and may change from one
+           program execution to another.  This makes Order Name the preferred
+           means of referencing Orders.
+
+        -  Order Expression:  Is any valid CA-Clipper expression.  This is an
+           index expression such as:
+
+           CUSTLIST-&gt;CUSTID
+
+           This expression produces the ordered view of the data.  The values
+           derived from this expression are sorted, and it is the
+           relationship of these values to one another that provides the
+           actual ordering.
+
+     <B>.</B>  Order Number:  An Order Number is provided by the Order List.
+        An Order Number is only valid as long as the work area to which it
+        belongs is open.
+
+        -  Order Numbers provide one of the services performed by Order
+           Names, allowing you to access a specific Order.  In general, you
+           should avoid accessing Orders by number.
+
+        -  The ORDNUMBER() function returns the ordinal position of the
+           specified &lt;orderName&gt; within the specified &lt;orderList&gt;.
+
+     <B>.</B>  Order Bag:  Unsorted collection of Orders.  Each Order
+        contains two elements (Order Name and Order Expression).  Each Order
+        Bag may have zero to n Orders.  The maximum is determined by the RDD
+        driver being used.  Order Bags are similar to multiple-index files in
+        that there's no guarantee of any specific order within the container
+        or Bag.  Within an Order Bag you can access specific Orders by
+        referencing a particular Order Name.  Order Bags have persistence
+        between activations of the program.
+
+     <B>.</B>  Order List:  An Order List orders the collection of Orders
+        that are associated with and active in the current work area.  It
+        provides an access to the Orders active within a given work area.
+        Each work area has an Order List, and there is only one Order List
+        per work area.  An Order List is created when a new work area is
+        opened, and exists only as long as that work area is active.  Once
+        you close a work area, the Order List ceases to exist.
+
+        When you SET INDEX TO, the contents of the Order Bag are emptied into
+        the Order List.  At this point, the Orders in the Order List are
+        active in the work area, where they will be updated as the data
+        associated with the work area is modified.  You may access an Order
+        in the list by its Order Number or by its Order Name.  You should
+        access an Order by its name rather than a hard-coded ordinal
+        position.  You can make any Order in the Order List the controlling
+        Order by giving it focus, as explained below.
+
+     <B>.</B>  Order List Focus:  Order List Focus is, essentially, a pointer
+        to the Order that is used to change the view of the data.  It is
+        synonymous with controlling Order or controlling index, and defines
+        the active index order.  The SET ORDER TO command does not modify the
+        Order List in any way.  It does not clear the active indexes.  It
+        only changes the Order List Focus (the controlling order in the Order
+        List).
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

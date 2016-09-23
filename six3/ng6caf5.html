@@ -1,0 +1,125 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6c4d5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6c360.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Mach SIx Features:</B>
+
+   <B>.</B> AUTOMATICALLY optimizes the following Clipper commands:
+
+      <B>AVERAGE</B>
+      <B>CONTINUE</B>
+      <B>COUNT</B>
+      <B>COPY [SDF] [DELIMITED]</B>
+      <B>DELETE</B>
+      <B>DISPLAY</B>
+      <B>INDEX</B>
+      <B>LABEL</B>
+      <B>LIST</B>
+      <B>LOCATE</B>
+      <B>RECALL</B>
+      <B>REPLACE</B>
+      <B>REPORT</B>
+      <B>SET FILTER</B>
+      <B>SORT</B>
+      <B>SUM</B>
+      <B>TOTAL</B>
+
+   <B>.</B> ORDER aliasing provides a way to specify exactly what indexes
+     are used to optimize a query.   All open indexes qualify, including
+     Roll-Your-Own, Conditional, Unique, and Partial indexes.
+
+   <B>.</B> Roll-Your-Own filter functions provide a powerful yet intuitive
+     interface to MachSIx's internal filtering engine.
+
+   <B>.</B> Automatic static filtering of the non-optimizable portion of
+     a query improves SET FILTER performance by only testing that part
+     of the query against the record once.  If the test fails then the
+     record is never visited again.
+
+   <B>.</B> Full expression testing prevents mid-process error detection by
+     validating the entire query expression before optimizing begins.
+
+   <B>.</B> Query expressions can be specified in either literal or extended
+     expression form.  An extended expression differs from a literal one
+     in that you store the desired query expression into a character
+     variable and specify that variable name surrounded by parenthesis in
+     place of the literal expression.
+
+          COUNT TO nCount FOR state="CA"     // literal form
+
+          cCond := 'state = "CA"'
+          COUNT TO nCount for (cCond)        // extended form
+
+   <B>.</B> Dynamically build and optimize queries with up to 250 items!
+     That's far beyond the 256 character limit of Clipper.  (An item is any
+     simple expression or logical operator.)
+
+   <B>.</B> Optimize queries on databases with up to 524 million records.
+
+   <B>.</B> Optimized code block scan of a database with <B>m6_dbEval()</B>, our
+     version of Clipper's dbEval().
+
+   <B>.</B> Copy database records to an <B>array</B> for program manipulation or
+     for use with TBrowse() using <B>COPY TO ARRAY</B>.
+
+   <B>.</B> Store database record numbers to an <B>array</B> for later processing
+     with the <B>SEARCH FOR</B> command.
+
+   <B>.</B> Full <B>and</B> Partial index keys are optimizable.  Other query
+     optimizers require the index key in the criteria to be an <U>exact</U> match
+     of an indexed expression.  This is <B>not</B> the case with Mach SIx.  Only
+     the left most portion of the key must match.
+
+     For example, an index expression built on LAST+FIRST is optimizable on
+     just LAST.
+
+   <B>.</B> Full <B>and</B> Partial optimization of a FOR clause is supported.  A fully
+     optimizable expression is one where all expressions in the FOR clause
+     are indexed.  A partially optimizable expression is where at least one
+     expression in the FOR clause is indexed.  In the case of partial
+     optimization, non-indexed expressions piggy-back one or more indexed
+     expressions in the FOR criteria.
+
+   <B>.</B> Smart translations of indexed expressions embedded in functions into
+     optimizable expressions.  Mach SIx extends the idea of partial index
+     keys into actually recognizing the existence of a key imbedded in a
+     function call, and then translating it into an optimizable expression.
+
+     For example, <B>Empty(LAST)</B> becomes <B>LAST = Space(15)</B>, <B>Year(DATE) = 1992</B>
+     becomes <B>DtoS(DATE) = "1992"</B>, etc...  As long as you have an index built
+     on the translation, the expression is optimizable.
+
+   <B>.</B> Short-cutting.  Mach SIx was designed with the same short-cutting
+     technology found in the Clipper compiler.  If an expression joined by
+     an .AND. fails, the evaluation immediately faults, and resumes with
+     the next .OR.'ed expression, if one exists.
+
+   <B>.</B> Seamless integration.  SET FILTER optimizations are handled
+     automatically.  To optimize other supported commands using a FOR
+     condition, just #include the MACHSIX.CH header file at the top of your
+     source file (after the SIx Driver header file), recompile, and your
+     existing code will be <U>automatically</U> optimized for the commands
+     supported.
+
+   <B>.</B> Relationships supported through partial optimization.  Just make sure
+     that one expression in the FOR clause is indexed.  Better yet, index on
+     the relationship, and the expression will be <U>fully</U> optimizable.
+
+   <B>.</B> Measure the level optimization of the FOR criteria prior to issuing an
+     optimizable command, with the <B>m6_IsOptimize()</B> function.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

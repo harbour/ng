@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3836e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng38a93.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPGETPID() / SWPGETPIDBAS()  Determine if given program is parent to current program.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Determine if a given program is a parent to the current program.</B></U>
+
+ <U>Syntax   : <B>lValue = SWPGETPID(cIdString)</B></U>
+
+ <U>Return   : <B>Logical value indicating whether the passed string was set as a</B></U>
+            <B>program ID by a parent process.</B>
+
+ Determine if cIdString was a parent (at any previous level) of the currently
+ executing application. cIdString must be 31 characters or less, or the
+ function will return a false value. The string must exactly match an Id set
+ by a parent program using a call to SWPSETPID(). This can be useful in
+ preventing two copies of the same application from being executed.
+
+ Example:
+
+    <B>IdStr = "Test Program"</B>
+    <B>IF SWPGETPID(IdStr)</B>
+    <B>   ? IdStr + " is already executing!"</B>
+    <B>   QUIT</B>
+    <B>ENDIF</B>
+    <B>SWPSETPID(IdStr)</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng36b25.html">SWPDISMSG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

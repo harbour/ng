@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng38df6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng39898.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>332     String/array memory overflow</B>
+
+     <B>Explanation:</B>  The maximum capacity of the Segment Virtual Object
+     Store (SVOS) system has been exceeded.  Due to the dynamic nature of
+     SVOS, it is impossible to state exactly when this error will occur.  In
+     the worst case, this error will occur when slightly over a megabyte of
+     strings and/or arrays are in use; the best case is in excess of 16
+     megabytes.  Probably the most common cause of this error is the
+     declaration of extremely large arrays (e.g., LOCAL aArray[500][300]).
+     every array element requires memory to store (even if its value is NIL).
+     the number of array elements in an array is determined by multiplying
+     the number of elements in every dimension and adding the sum of all
+     dimensions except for the last.  For example, a 500 by 300 array has
+     (500 x 300) + 500, or 150,500 elements.  As every array element in
+     CA-Clipper requires 14 bytes, this amounts to 150,500 x 14 or 2,107,000
+     byteswell in excess of one megabyte and, therefore, potentially
+     dangerous.
+
+     <B>Action:</B>  reduce the size and/or number of strings and arrays that
+     are active at any one time.  Declare as many string variables and arrays
+     LOCAL as possible.
+
+     <B>Note: </B> There is no benefit gained by reusing arrays.  CA-Clipper is
+     much more efficient when strings and arrays are thrown away and rebuilt
+     often rather than kept around unnecessarily for long periods.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

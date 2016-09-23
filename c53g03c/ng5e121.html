@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5dd19.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5e701.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>rawLock()</B>
+ Perform various locks and unlocks
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE rawLock(</B>
+     <B>                  AREAP wa,</B>
+     <B>                  USHORT action,</B>
+     <B>                  LONG lrecord</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>action</B> is a numeric value that represents the type of locking or
+     unlocking to perform.  (See the definitions below.)
+
+     <B>lRecord</B> is a numeric value that represents the record number on
+     which to perform the lock or unlock.
+
+ <B>Description</B>
+
+     rawLock() performs one of the following actions:  file lock, file
+     unlock, record lock, record unlock, header lock, header unlock, append
+     lock, or append unlock.
+
+     The lock or unlock performed is determined by the action performed.  The
+     action parameter can be one of the following values:
+
+
+     ------------------------------------------------------------------------
+     <B>Action Value   Action Performed</B>
+     ------------------------------------------------------------------------
+     FILE_LOCK      File lock
+     FILE_UNLOCK    File unlock
+     REC_LOCK       Record lock of record number lrecord
+     REC_UNLOCK     Unlock record number lrecord
+     HEADER_LOCK    Header lock
+     HEADER_UNLOCK  Header unlock
+     APPEND_LOCK    Locks a newly appended record
+     APPEND_UNLOCK  Unlocks a newly appended record
+     ------------------------------------------------------------------------
+
+ <B>Files</B>   Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng42f2a.html">DBLOCKINFO</A>
+<A HREF="ng5dd19.html">lock()</A>
+<A HREF="ng5e701.html">unlock()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

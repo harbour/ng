@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4052.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d0.html">[^^Up^^]</A>
+<A HREF="ng4f39.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Database Utility--(DBU.EXE)</B>
+
+ <B>Overview</B>
+
+     Creates and modifies database structures; performs simple data
+     management tasks.
+
+ <B>Syntax</B>
+
+     <B>DBU [/&lt;colorString&gt;] [&lt;filename&gt;] /e</B>
+
+ <B>Command Line Arguments</B>
+
+     This is the command line syntax to invoke the CA-Clipper database
+     utility.  If issued without any arguments, the main DBU screen is
+     displayed from which you can open files and access the menu bar.
+
+     <B>&lt;colorString&gt;</B> is /C for color and /M for monochrome.
+
+     <B>&lt;filename&gt;</B> is the name of a view file (.vew) previously created in
+     DBU or a database file (.dbf).  Specifying this argument causes DBU to
+     open and browse the specified file.
+
+     Specifying <B>&lt;filename&gt;</B> on the DBU command line causes the named file
+     to be opened and browsed after DBU is loaded.
+
+     <B>/e</B> opens the file EXCLUSIVE.  This parameter is case-insensitive.
+
+ <B>System Architecture</B>
+
+     DBU is an application that is written entirely in CA-Clipper.  If you
+     installed the default configuration of the development environment, the
+     source code is located in the \CLIPPER5\SOURCE\DBU directory on the
+     disk where CA-Clipper is installed.   DBU.EXE and DBU.HLP are
+     installed in \CLIPPER5\BIN and this directory is included in the PATH
+     statement in your AUTOEXEC.BAT.  You should, therefore, be able to
+     access DBU from any drive and/or directory.
+
+     The source files needed that make up the DBU system are:
+
+     <B>.</B>  Dbu.prg
+     <B>.</B>  Dbu.hlp
+     <B>.</B>  Dbucopy.prg
+     <B>.</B>  Dbuedit.prg
+     <B>.</B>  Dbuhelp.prg
+     <B>.</B>  Dbuindx.prg
+     <B>.</B>  Dbunet.prg
+     <B>.</B>  Dbustru.prg
+     <B>.</B>  Dbuutil.prg
+     <B>.</B>  Dbuview.prg
+
+     The system is provided as source code so you can modify it to suit your
+     specific needs.  You may want to make enhancements specific to your
+     development environment or add the DBU system to your application
+     thereby giving your users the power to create their own views.
+
+     If you decide to tailor this system by making changes to the source
+     code, a make file called DBU.RMK is located in the same directory as
+     the DBU source code.  Provided that your changes do not involve
+     additional source modules or changes in the existing file dependencies,
+     issuing the following command at the DOS prompt:
+
+     C&gt;RMAKE DBU
+
+     will compile and link the system to create a new DBU.EXE file.  Refer
+     to the Program Maintenance--RMAKE.EXE chapter in the Programming and
+     Utiltites guide for more information on make files.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

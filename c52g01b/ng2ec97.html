@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2e785.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng2f1ee.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DTOS()</B>
+ Convert a date value to a character string formatted as yyyymmdd
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DTOS(&lt;dDate&gt;) --&gt; cDate</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;dDate&gt;</B> is the date value to convert.
+
+ <B>Returns</B>
+
+     DTOS() returns a character string eight characters long in the form,
+     yyyymmdd.  When &lt;dDate&gt; is a null date (CTOD("")), DTOS() returns a
+     string of eight spaces.  The return value is not affected by the current
+     date format.
+
+ <B>Description</B>
+
+     DTOS() is a date conversion function that is used when creating index
+     expressions consisting of a date value and a character expression.
+     DTOS() converts a date value to a character string that can be
+     concatenated to any other character expression.  The return value is
+     structured to preserve date order (year, month, and day).
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate DTOS() in conjunction with several
+        other functions:
+
+        ? DATE()                      // Result: 09/01/90
+        ? DTOS(DATE())                // Result: 19900901
+        ? LEN(DTOS(CTOD("")))         // Result: 8
+
+     <B>.</B>  This example demonstrates how to create an index with a
+        compound date and character key using DTOS():
+
+        USE Sales NEW
+        INDEX ON DTOS(Date) + Salesman TO DateName
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng14152.html">CTOD()</A>
+<A HREF="ng14f89.html">DATE()</A>
+<A HREF="ng2e785.html">DTOC()</A>
+<A HREF="ng895a7.html">INDEX</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

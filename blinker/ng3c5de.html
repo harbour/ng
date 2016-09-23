@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3b6d6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng3cb8d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPSETENV()                   Set environment variables for child process</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Set environment variables for the child process</B></U>
+
+ <U>Syntax   : <B>lsuccess = SWPSETENV(cString)</B></U>
+
+ <U>Return   : <B>True if cString &lt; 512 bytes long, false otherwise</B></U>
+
+ SWPSETENV() allows the parent process to add, amend and delete environment
+ strings in the child's environment. The parameter to SWPSETENV() is a single
+ string containing all the variables to be set. Each variable is separated
+ from the next by a delimiter, the character CHR(255). You do not need a
+ CHR(255) at the end of the string. If you need a CHR(255) in the string,
+ specify two in a row.
+
+ Example:
+
+    <B>str := "PROMPT=&lt;Type Exit to return&gt;&lt;$p$g" + CHR(255) + ;</B>
+    <B>   "SWAPPED=TRUE"</B>
+    <B>SWPSETENV(str)</B>
+
+ This example will change the prompt, and add (or change) the 'SWAPPED'
+ environment variable.
+
+    <B>str := "CLIPPER=" + CHR(255) + "BLINKER=/OP1"</B>
+    <B>SWPSETENV(str)</B>
+
+ This example will DELETE the 'CLIPPER' environment variable, and add (or
+ change) the 'BLINKER' environment variable.
+
+ Note that these environment changes are only set at the time the swap is
+ executed, and apply only to the child's environment, NOT the parent's copy.
+
+ Use of this function will increase the size of the kernel in memory by an
+ amount equal to the size of the new environment.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng35f87.html">SWPADDENV()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,102 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1259.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng271.html">[^^Up^^]</A>
+<A HREF="ng2667.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CLASS VAR</B>
+
+ <B>Synopsis</B>
+
+         Declare class variable(s)
+
+ <B>Syntax</B>
+
+         CLASS VAR &lt;variable name list&gt;
+              [CLASS &lt;class&gt; | TYPE &lt;type&gt;]
+              [READONLY | RO | ASSIGN &lt;assign&gt;]
+              [SHARED]
+
+ <B>Arguments</B>
+
+         <B>&lt;variable name list&gt;</B> is a list of variable names to be
+         included as class variables in the current class.
+
+         <B>CLASS &lt;class&gt;</B> specifies the name of the class which values
+         assigned to the declared variable(s) must belong. Any attempt to
+         assign values of a different class will result in a runtime error.
+         Under the Class(y) 2.4 error system, a <U>wrongClass</U> message will
+         be sent to the object which caused the error.
+
+         <B>TYPE &lt;type&gt;</B> specifies the type of value which can be assigned
+         to the variable(s) being declared. <B>&lt;type&gt;</B> can be any one of
+         the following seven Clipper data types: <U>Array</U>, <U>Block</U>,
+         <U>Character</U>, <U>Date</U>, <U>Integer</U>, <U>Logical</U> or <U>Numeric</U>.
+         An <U>Integer</U> type restriction will only accept integer values,
+         whereas <U>Numeric</U> accepts both integer and floating-point
+         values.  The types <U>Character</U> and <U>Numeric</U> can be
+         abbreviated to <U>Char</U> and <U>Num</U>.
+
+         <B>READONLY</B> or <B>RO</B> restricts assignment to the variable(s)
+         being declared. If the the declared variable(s) are exported
+         (declared after the <B>EXPORT:</B> command), assignment will only be
+         permitted from the current class and its subclasses, ie.
+         assignment will have protected visibility. If the variable(s) are
+         protected, assignment will only be permitted in the current class,
+         ie. assignment will be hidden. If the variable(s) are hidden, the
+         <B>READONLY</B> clause has no effect.
+
+         <B>ASSIGN &lt;assign&gt;</B> allows more control over the restriction of
+         assignment than the <B>READONLY</B> clause. <B>&lt;assign&gt;</B> can be one
+         of the following three values: <B>HIDDEN</B>, <B>PROTECTED</B>, or
+         <B>EXPORTED</B>. The value specified will determine the visibility of
+         assignment to the variable(s) being declared.
+
+         <B>SHARED</B> specifies that the class variable(s) being declared
+         will be shared amongst subclasses of this class. By default, each
+         class has its own copy of all class variables, including those
+         inherited from superclasses. Specifying the <B>SHARED</B> clause
+         means subclasses will share a single copy of such class variables.
+
+ <B>Description</B>
+
+         Used inside a class specification to declare one or more class
+         variables. A single copy of each class variable is shared by its
+         entire class. In this respect, class variables are different from
+         instance variables, since each instance of a class has its own
+         copy of the instance variables of that class.
+
+         Class variables are used to hold information that applies to an
+         entire class. One of the most common examples of this are
+         variables used to hold lists or counts of active instances of a
+         class. If these were instance variables, separate copies of them
+         would exist for each object in the class, and all these objects
+         would have to be updated when a new object was created. As class
+         variables, they would only have to be set once.
+
+ <B>Note</B>
+
+         Class variable names are only significant up to 9 characters,
+         instead of Clipper's usual ten. See the section entitled
+         <B>Length</B> <B>of Variable Names</B>.
+
+ <B>See Also</B>
+
+         <B>VAR</B>, <B>Length of Variable Names</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7971.html">VAR</A>
+<A HREF="ng1346f.html">Length of Variable Names</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngcd6ed.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngc8ba2.html">[^^Up^^]</A>
+<A HREF="ngcea39.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>-</B>
+ Subtraction, unary negative, concatenation      (Math, Character)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>&lt;nNumber1&gt; - &lt;nNumber2&gt;          (subtraction)</B>
+     <B>&lt;dDate1&gt;   - &lt;dDate2&gt;            (subtraction)</B>
+     <B>&lt;dDate&gt;    - &lt;nNumber&gt;           (subtraction)</B>
+     <B>&lt;cString1&gt; - &lt;cString2&gt;          (concatenation)</B>
+
+ <B>Type</B>
+
+     Character, date, memo, numeric
+
+ <B>Operands</B>
+
+     <B>&lt;nNumber1&gt;</B> is a numeric value to decrement by <B>&lt;nNumber2&gt;</B>.
+
+     <B>&lt;dDate1&gt;</B> is a date value to decrement by <B>&lt;dDate2&gt;</B>.
+
+     <B>&lt;dDate&gt;</B> is a date value to decrement by <B>&lt;nNumber&gt;</B> days.
+
+     <B>&lt;cString2&gt;</B> is a character string to join to the end of
+     <B>&lt;cString1&gt;</B> after trimming the trailing blanks from &lt;cString1&gt;.
+
+ <B>Description</B>
+
+     The (-) operator performs different operations depending on the data
+     types of the operands:
+
+     <B>.  Unary negative sign (numeric):</B> A numeric expression prefaced
+        with the minus (-) operator performs the equivalent of multiplying
+        the operand by (-1), returning a negative numeric value.
+
+     <B>.  Binary subtraction (numeric, date):</B> If both operands are
+        numeric data type, &lt;nNumber2&gt; is subtracted from &lt;nNumber1&gt; and the
+        result is returned as a numeric value.  If both operands are date
+        data type, &lt;dDate2&gt; is subtracted from &lt;dDate1&gt; and the result is
+        returned as a numeric value representing the number of days between
+        the two dates.  If the left operand is date data type and the right
+        operand numeric data type, the &lt;nNumber&gt; is subtracted as days from
+        &lt;dDate&gt; and a date value is returned.  If the order of operands is
+        reversed, a runtime error occurs.
+
+     <B>.  Concatenation (character, memo):</B> If both operands are
+        character data type, &lt;cString2&gt; is joined  to &lt;cString1&gt;, returning a
+        character string. Trailing blanks are trimmed from &lt;cString1&gt; and
+        joined to the end of the return string.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate the various forms of the - operator:
+
+        // Binary subtraction (numeric)
+        ? 1 - 1                         // Result: 0
+        ? 1 - 0                         // Result: 1
+        ? 0 - 1                         // Result: -1
+
+        // Binary subtraction (date)
+        ? CTOD("12/12/88") - 12         // Result: 11/30/88
+
+        ? 12 - CTOD("12/12/88")         // Result: Runtime error
+
+        // Concatenation (character)
+        ? "Hi " - "There" + "*"         // Result: Hithere *
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc9493.html">%</A>
+<A HREF="ngcc7f1.html">*</A>
+<A HREF="ngccb52.html">**</A>
+<A HREF="ngccf74.html">+</A>
+<A HREF="ngd1358.html">/</A>
+<A HREF="ngd42aa.html">= (compound)</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

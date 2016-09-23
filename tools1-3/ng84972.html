@@ -1,0 +1,164 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng844da.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng85e02.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETFONT()</B>
+ Loads the font directly out of a string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETFONT(&lt;cFontString&gt;, [&lt;nFontArea&gt;], [&lt;nOffset&gt;],</B>
+     <B>   [&lt;nCounter&gt;]) --&gt;nErrorCode</B>
+
+     <B>or</B>
+
+     <B>ETFONT(&lt;cFontString&gt;, [&lt;nFontArea&gt;], [&lt;lCompute&gt;])</B>
+     <B>   --&gt; nErrorCode</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFontString&gt;</B>  Designates a string that contains a valid font
+     definition.
+
+     <B>&lt;nFontArea&gt;</B>  Designates the number of the desired font area.  For
+     EGA adapters, the values are 1 to 4, for VGA, they are 1 to 8 or the
+     number allowed by MAXFONT().
+
+     <B>&lt;nOffset&gt;</B>  Designates the character position at which the font table
+     is transmitted to the screen adapter.  The default value is 0.
+
+     <B>&lt;nCounter&gt;</B>  Designates the number of characters for which a new font
+     is loaded.  The default value is 256.
+
+     <B>&lt;lCompute&gt;</B>  Use this parameter only when &lt;nOffset&gt; and &lt;nCounter&gt;
+     are not in concurrent use.  When designated as .T., the function
+     computes the pixel height from the length of the font string.
+
+ <B>Returns</B>
+
+     The function returns an error code with the following definitions:
+
+     <B>Table 6-4: Error Code Definitions</B>
+     ------------------------------------------------------------------------
+     <B>Error Code   Definition</B>
+     ------------------------------------------------------------------------
+      0           Font loaded successfully
+     -1           Invalid font area designated
+     -2           Impossible in current video mode
+     -4           The &lt;lOtherPixelHeight&gt; mode is invalid (the Extended
+                  Drivers has not been linked in)
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     With SETFONT(), you can load a screen font from a string into the font
+     area of an EGA or VGA card.  FONTSELECT() allows you to determine the
+     font to serve for normal and the font to serve for high-density output.
+
+ <B>Technical Background</B>
+
+     EGA and VGA cards permit you to modify all 256 characters of the
+     character generator or any portion of it with software.  For this
+     purpose, load a previously created pixel pattern for the character in
+     the corresponding position in a font area on the screen card.  Normally,
+     an EGA card has a maximum of four font areas and a VGA has eight.  You
+     can redefine any of the 256 characters within these font areas.  Use
+     MAXFONT() to determine the actual number of font areas.
+
+     Building fonts into a program requires unnecessary memory space.  It is
+     also awkward to construct string fonts within a program.  The GETFONT()
+     and SETFONT() functions load a font from a screen card into a string
+     variable, or from such a variable into a font area on the card.
+     However, FONTLOAD() only offers the ability to load a font from a file
+     into a particular area of the screen card.  In both cases, use
+     FONTSELECT() to activate the loaded font when necessary.
+
+     To construct new fonts, a font editor is included in CA-Clipper.
+
+ <B>Variable Pixel Height</B>
+
+     In principle, the EGA and VGA screen adapters provide the ability to
+     display fonts with 2 to 32 pixels per character (1 pixel/character only,
+     when there are 200 scan lines).  ROM fonts are only available for pixel
+     heights of 8, 14, and 16, which explains the great expansion of the EGA
+     25/43-line and VGA 25/28/50-line modes.  You must construct individual
+     fonts for all other pixel heights.  This is easy with the
+     CA-Clipper Tools font editor.
+
+     If you deviate from the mode just set, use SETFONT() to implement other
+     desired pixel heights, where the &lt;lCompute&gt; parameter is designated as
+     .T.  The pixel height is computed with the following formula:
+
+               Pixel height = LEN(Font-String)/256
+
+     Partial fonts cannot be used for this calculation, only fonts that
+     contain the full 256 characters.
+
+     Since a change in pixel height also leads to a change in the screen mode
+     and line count, always link in the CTUS.LIB Extended Drivers.
+
+ <B>Notes</B>
+
+     <B>.</B>  The screen adapters do not permit you to mix fonts with
+        different pixel heights.
+
+     <B>.</B>  When an EGA card does not require the full use of memory, you
+        can reduce a maximum number of four font areas.  Use MAXFONT() to
+        determine the number of available fonts at any given time.
+
+ <B>Examples</B>
+
+     <B>.</B>  Load all 256 font characters in font area 2:
+
+        ? SETFONT(cFontString, 2)      // 0 &lt; OK
+        FONTSELECT(2)                  // Font area 2 for&lt;R&gt;
+                                       // non-highlighted
+
+     <B>.</B>  Exchange the top 128 characters of a font in font area 3:
+
+        ? SETFONT(cFontString, 3, 128, 128)   // 0 &lt;F128M&gt;&lt;142&gt;&lt;F255D&gt;&lt;N&gt;OK
+        FONTSELECT(3)                         // Font area 3 for&lt;R&gt;
+                                              // non-highlighted
+
+     <B>.</B>  In this example, the just-installed font height is doubled
+        wherever possible.  This is simple, since each byte in the font
+        string is doubled:
+
+        cFont  :=  GETFONT()
+        SETFONT(CHARMIX(cFont, cFont), .T.)
+
+     <B>.</B>  The font strings can be torn down to individual pixel lines.
+        This example shows pixel lines as a bit pattern in a binary display:
+
+        cFont  :=  GETFONT()
+        nPixel :=  CHARPIX()
+
+        FOR A = 0 TO 255
+           FOR B = 1 TO nPixel
+              nByte  := ASC(SUBSTR(cFont, (nPixel * A) + B, 1))
+              ? NTOC(nByte, 2, 8, "0")
+           NEXT B
+           INKEY(0)
+           ?
+        NEXT A
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7a40e.html">GETFONT()</A>
+<A HREF="ng76af3.html">FONTLOAD()</A>
+<A HREF="ng795e6.html">FONTSELECT()</A>
+<A HREF="ng77f31.html">FONTRESET()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

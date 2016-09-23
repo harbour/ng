@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng67c38.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng639de.html">[^^Up^^]</A>
+<A HREF="ng684f2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Array storage in FPT/SMT memo fields:</B>
+
+  You can store and retrieve arrays (<B>even multi-dimensional arrays</B>) to an
+  FPT/SMT memo field, just as you would store and retrieve a string.
+
+  For example, assuming that PHONES is a memo field in our CUSTOMER.DBF
+  file, we could do this:
+
+   +----------------------------------------------------------------------+
+   |  LOCAL aPhones := {}, aTesting := {}, nCount                         |
+   |                                                                      |
+   |  // Add four elements to the aPhones array                           |
+   |  aadd( aPhones, "714-252-4263" )                                     |
+   |  aadd( aPhones, "213-555-1212" )                                     |
+   |  aadd( aPhones, "310-666-5333" )                                     |
+   |  aadd( aPhones, "214-567-0987" )                                     |
+   |                                                                      |
+   |  use CUSTOMER via "SIXNSX"     // Open our database                  |
+   |  dbAppend()                    // Add a new record                   |
+   |  customer-&gt;PHONES := aPhones   // Store the array in the memo field  |
+   |  ? ValType( customer-&gt;PHONES ) // Returns: "A"                       |
+   |                                                                      |
+   |  // Just to make sure it stored okay...                              |
+   |  aTesting := customer-&gt;PHONES  // Store memo field value to a memvar |
+   |                                                                      |
+   |  // Display contents of the memvar (array)                           |
+   |  for nCount := 1 to len( aTesting )                                  |
+   |    ? aTesting[ nCount ]                                              |
+   |  next                                                                |
+   |                                                                      |
+   +----------------------------------------------------------------------+
+
+  That's it!
+
+  <B>NOTE</B>:  The only caveats to be aware of are that array elements that
+         contain code blocks will be converted to NIL.  This is not a bug.
+         It's just a law of physics.  Code blocks can't be stored and
+         retrieved to/from a file.  Also, if you attempt to store a recur-
+         sive array in a memo field (i.e., one of the array elements is a
+         reference to the same array), your PC will take off for Never-Never
+         Land.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

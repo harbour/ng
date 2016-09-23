@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng136a1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng1402e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_GetAreaFilter():</B>
+
+  Purpose:  Gets a handle to a workarea filter so you can manipulate it
+            with any of the RYO filter functions.
+
+   Syntax:  m6_GetAreaFilter()
+
+  Returns:  A handle to the workarea filter.  A handle of 0 indicates an error
+            occurred or that no filter exists in this workarea.  To determine
+            the exact reason for a failure call m6_Error().
+
+     Note:  The system still retains ownership of the any filter handle
+            returned by this function.
+
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         USE Customer via "SIXCDX"
+
+         SET INDEX TO State
+
+         //...........................................set optimizable filter
+         SET FILTER TO State = 'CA'
+
+         //............................................initalize the filter
+         GO TOP
+
+         //...............................get a handle to the workarea filter
+         nHandle := <B>m6_GetAreaFilter()</B>
+
+         //...............................add a couple records to the filter
+         m6_FiltAddRec( nHandle, 10 )
+         m6_FiltAddRec( nHandle, 20 )
+
+         //..browse records in filter.  Note 10 and 20 will also be visible
+         Browse()
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngdc96.html">m6_FiltAddRec()</A>
+<A HREF="ng169b6.html">m6_SetAreaFilter()</A>
+<A HREF="ngc1a5.html">m6_ChgOwner()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

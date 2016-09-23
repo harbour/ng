@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbd59.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ngc701.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ALLTRIM()</B>
+ Remove leading and trailing spaces from a character string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ALLTRIM(&lt;cString&gt;) --&gt; cTrimString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character expression to trim.
+
+ <B>Returns</B>
+
+     ALLTRIM() returns a character string with leading and trailing spaces
+     removed.
+
+ <B>Description</B>
+
+     ALLTRIM() is a character function that removes both leading and trailing
+     spaces from a string.  It is related to LTRIM() and RTRIM() which remove
+     leading and trailing spaces, respectively.  The inverse of ALLTRIM(),
+     LTRIM(), and RTRIM() are the PADC(), PADL(), and PADR() functions which
+     center, left-justify, or right-justify, character strings by padding
+     them with fill characters.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a string with both leading and trailing
+        spaces, and then trims them with ALLTRIM():
+
+        cString := SPACE(10) + "string" + SPACE(10)
+        ? LEN(cString)                     // Result: 26
+        ? LEN(ALLTRIM(cString))            // Result: 6
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng467e1.html">LTRIM()</A>
+<A HREF="ng54cc4.html">PAD()</A>
+<A HREF="ng5f53e.html">RTRIM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

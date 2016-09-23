@@ -1,0 +1,123 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng40efb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng41f36.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBORDERCONDINFO</B>
+ Information needed for the creation of a conditional Order
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct _ORDERCONDINFO_</B>
+     <B>{</B>
+     <B>   BOOL  active;</B>
+     <B>   BYTEP cFor;</B>
+     <B>   ITEM  bFor;</B>
+     <B>   ITEM  bWhile;</B>
+     <B>   ITEM  bEval;</B>
+     <B>   LONG  step;</B>
+     <B>   LONG  startRecord;</B>
+     <B>   LONG  nextCount;</B>
+     <B>   LONG  record;</B>
+     <B>   BOOL  rest;</B>
+     <B>   BOOL  descending;</B>
+     <B>   BOOL  scoped;</B>
+     <B>   BOOL  all;</B>
+     <B>} DBORDERCONDINFO;</B>
+     <B></B>
+     <B>typedef DBORDERCONDINFO far * DBORDERCONDINFOP;</B>
+
+ <B>Elements</B>
+
+     <B>active</B>
+
+        Contains a boolean value indicating whether one or more valid
+        conditions have been specified in the structure.
+
+     <B>cFor / bFor</B>
+
+        Contain a CA-Clipper-level reference to a string and a matching code
+        block containing the key expression defining the FOR condition to be
+        used for the creation and maintenance of the Order.
+
+     <B>bWhile</B>
+
+        Contains a CA-Clipper-level reference to a code block defining the
+        WHILE condition to be used for the creation of the Order.  If NIL, no
+        WHILE condition is being specified.
+
+     <B>bEval</B>
+
+        Contains a CA-Clipper-level reference to a code block defining the
+        expression to be evaluated every step rows (records) during the
+        creation of the Order.  The code block referenced should always
+        evaluate to either TRUE (indicating that creation of the Order should
+        continue normally) or FALSE (indicating that Order creation should
+        terminate).  A return value of FALSE from bEval does not constitute
+        an error condition but rather is the mechanism by which an RDD is
+        informed that no more rows are to be included in the Order.
+
+     <B>step</B>
+
+        Contains a numeric value determining the frequency of the evaluation
+        of bEval.
+
+     <B>startRecord</B>
+
+        Contains a numeric value indicating the row at which to begin
+        processing when either the nextCount or rest scoping options are
+        specified.
+
+     <B>nextCount</B>
+
+        Contains a numeric value indicating the number of rows to process for
+        Order creation.
+
+     <B>record</B>
+
+        Contains a numeric value indicating a single row to include in the
+        Order.
+
+     <B>rest</B>
+
+        Contains a boolean value indicating that only the rows specified by
+        startRecord through end-of-file (EOF) are to be included in the
+        Order.
+
+     <B>descending</B>
+
+        Contains a boolean value indicating whether the Order should be
+        created in descending Order.
+
+     <B>scoped</B>
+
+        Contains a boolean value indicating whether the Order is to be
+        scoped.  scoped will be TRUE if any of bWhile, nextCount, record,
+        rest, or all are specified.
+
+     <B>all</B>
+
+        Contains a boolean value indicating whether all rows are to be
+        processed during Order creation.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   DBORDERCREATEINFO, orderCreate()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng41f36.html">DBORDERCREATEINFO</A>
+<A HREF="ng54712.html">orderCreate()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

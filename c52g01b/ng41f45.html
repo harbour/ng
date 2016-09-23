@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng41bf0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng42381.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ISALPHA()</B>
+ Determine if leftmost character in a string is alphabetic
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ISALPHA(&lt;cString&gt;) --&gt; lBoolean</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string to examine.
+
+ <B>Returns</B>
+
+     ISALPHA() returns true (.T.) if the first character in &lt;cString&gt; is
+     alphabetic; otherwise, it returns false (.F.).
+
+ <B>Description</B>
+
+     ISALPHA() is a character function that determines if the specified
+     string begins with an alphabetic character.  An alphabetic character
+     consists of any uppercase or lowercase letter from A to Z.  ISALPHA()
+     returns false (.F.) if the string begins with a digit or any other
+     character.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples demonstrate various results of ISALPHA():
+
+        ? ISALPHA("AbcDe")               // Result: .T.
+        ? ISALPHA("aBcDE")               // Result: .T.
+        ? ISALPHA("1BCde")               // Result: .F.
+        ? ISALPHA(".FRED")               // Result: .F.
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4272d.html">ISDIGIT()</A>
+<A HREF="ng42bd1.html">ISLOWER()</A>
+<A HREF="ng4353d.html">ISUPPER()</A>
+<A HREF="ng46305.html">LOWER()</A>
+<A HREF="ng6da2d.html">UPPER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

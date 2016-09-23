@@ -1,0 +1,244 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng88b8c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng8bd72.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>INDEX</B>
+ Create an index file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>INDEX ON &lt;expKey&gt; TO &lt;xcIndex&gt; [UNIQUE]</B>
+     <B>   [&lt;scope&gt;]</B>
+     <B>   [FOR &lt;lCondition&gt;]</B>
+     <B>   [WHILE &lt;lCondition&gt;]</B>
+     <B>   [[EVAL &lt;lCondition&gt;][EVERY &lt;nRecords&gt;]]</B>
+     <B>   [ASCENDING | DESCENDING]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;expKey&gt;</B> is an expression that returns the key value to place in the
+     index for each record in the current work area.  &lt;expKey&gt; can be
+     character, date, logical, or numeric type.  The maximum length of the
+     index key expression is 250 characters.
+
+     <B>TO &lt;xcIndex&gt;</B> specifies the name of the index file to create.  You
+     can specify the filename either as a literal filename or as a character
+     expression enclosed in parentheses.  If the specified name does not
+     include a file extension, a default extension is used.  For standard
+     CA-Clipper indexes the default extension is (.ntx).  For dBASE III PLUS
+     compatible indexes, the default extension is (.ndx).
+
+     <B>UNIQUE</B> specifies that &lt;xcIndex&gt; includes only unique key values.
+
+     <B>&lt;scope&gt;</B> is the portion of the current database to INDEX.  The
+     default is ALL records.  All other valid scope clauses (i.e., NEXT
+     &lt;nRecords&gt;, REST, and RECORD &lt;nRecord&gt;) are permitted.  If you specify a
+     scope, the database is processed in the controlling index order.  The
+     scope is transient (i.e., is not stored in the (.ntx) file and not used
+     for REINDEXing purposes).
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records on which
+     to index.  Only those records that meet the condition are included in
+     the resulting index (.ntx) file.  The maximum length of the FOR
+     expression is 250 characters.  The FOR condition is stored as part of
+     the (.ntx) file and therefore used when updating or recreating the index
+     using the REINDEX command.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies another condition that each record
+     processed must meet; as soon as a record is encountered that causes the
+     condition to fail, the INDEX command terminates.  If a WHILE clause is
+     specified, the database file is processed in the controlling index
+     order.  The WHILE condition is transient (i.e., is not stored in the
+     (.ntx) file and not used for index updates and REINDEXing purposes).
+
+     <B>EVAL &lt;lCondition&gt;</B> specifies a condition that is evaluated either for
+     each record processed or at the interval specified by the EVERY clause.
+     This clause provides a flexible way to monitor the progress of the
+     indexing operation.  &lt;lCondition&gt; may be any logical expression,
+     including a user-defined function that displays status information and
+     then returns a logical value.  The value of &lt;lCondition&gt; is transient
+     which means that it is discarded after the index is created (i.e., it is
+     not retained for REINDEXing purposes).  Indexing stops if the EVAL
+     condition returns false (.F.)
+
+     <B>EVERY &lt;nRecords&gt;</B> specifies a numeric expression that modifies how
+     often EVAL is evaluated.  When using EVAL, the EVERY option offers a
+     performance enhancement by evaluating the condition for every nth record
+     instead of for each record indexed.  The EVERY keyword is ignored if no
+     EVAL condition is specified.
+
+     <B>Note: </B> Since &lt;scope&gt;, WHILE, EVAL, and EVERY are transient, they
+     will not be available when the database is REINDEXed.  Although the
+     REINDEX command does provide for EVAL and EVERY clauses, &lt;scope&gt; and
+     WHILE are not allowed as part of the REINDEX operation.  Thus, scoping
+     is useful only for immediate queries.
+
+     <B>ASCENDING</B> specifies that the index keys be sorted in increasing
+     order of value.  If neither ASCENDING nor DESCENDING is specified,
+     ASCENDING is assumed.  Although not stored as an explicit part of the
+     (.ntx) file, ASCENDING is an implicit (.ntx) file attribute that is
+     understood by the REINDEX command.
+
+     <B>DESCENDING</B> specifies that the index keys be sorted in decreasing
+     order of value.  Using this keyword is the same as specifying the
+     DESCEND() function within &lt;expKey&gt;, but without the performance penalty
+     during index updates.  If you create a DESCENDING index, you won't need
+     to use the DESCEND() function during a SEEK.  DESCENDING is an attribute
+     of the (.ntx) file, where it is stored and used for REINDEXing purposes.
+
+ <B>Description</B>
+
+     INDEX is a database command that creates a file containing an index of
+     records in the current database file, based on &lt;expKey&gt;.  When the index
+     file is used, the database file records appear in key expression order
+     although the index does not alter the physical order of records within
+     the database file.  INDEX orders character keys in accordance with the
+     ASCII value of each character within the string, numeric values in
+     numeric order, date values chronological order with blank dates treated
+     as low values, and logical values sorted with true (.T.) treated as high
+     values.  Memo fields cannot be INDEXed.
+
+     When INDEX ON is invoked, all open index files in the current work area
+     are closed and the new index file is created.  When the indexing
+     operation finishes, the new index remains open becoming the controlling
+     index and the record pointer is positioned to the first record in the
+     index.
+
+     INDEX is like SORT but does not make a physical copy of the database
+     file and is updated each time a new key value is entered in the current
+     database file.  SORT is primarily used to copy an ordered subset of
+     records to another database file.
+
+     In a network environment, INDEX opens &lt;xcIndex&gt; exclusive.  Failure to
+     open the file raises , a runtime error.  Refer to the Network
+     Programming chapter in the Programming and Utilities guide for more
+     information.
+
+ <B>Notes</B>
+
+     <B>.  Date indexes:</B> CA-Clipper supports date indexes for both (.ntx)
+        and (.ndx) index types.  For a key expression that includes a date as
+        a subset of the key, create the expression as character data type and
+        use DTOS() to convert the date to character.
+
+     <B>.  Declared variables:</B> You cannot use local and static variables
+        in index key expressions.  This is because index expressions are
+        saved as text in the index files and are later compiled and run using
+        the macro operator (&amp;) to produce the actual key values.  Since
+        locals and statics are invisible within macro variables and
+        expressions, references to them within index key expressions are not
+        resolved properly.
+
+        For similar reasons, a variable declared with any of the other
+        compile-time declarations such as MEMVAR or FIELD, are not valid
+        within an index key expression.  If you need aliasing or variable
+        qualification in an index key expression, implement it explicitly in
+        the expression rather than through compiler declarations.  Refer to
+        the discussion on variables in the Basic Concepts chapter of the
+        Programming and Utilities guide.
+
+     <B>.  Deleted and filtered records:</B> Records that are filtered or
+        marked for deletion are included in the index.
+
+     <B>.  Dictionary order indexes:</B> To create a dictionary order index
+        of character keys, use UPPER(&lt;expKey&gt;) as the index expression.
+        Dictionary order is an order where capitalization is ignored.
+
+     <B>.  Compatible index files:</B> CA-Clipper supports dBASE III PLUS
+        compatible index files using a special database driver.  Refer to the
+        CA-Clipper Linker chapter in the Programming and Utilities guide for
+        instructions on linking drivers.
+
+     <B>Warning! </B> The dBASE III PLUS database driver supports the CA-Clipper
+     locking mechanism in place of the dBASE III PLUS mechanism.  This means
+     you cannot have both a CA-Clipper program and dBASE III PLUS
+     concurrently accessing the same index files on a network without
+     compromising integrity.  With two CA-Clipper programs, however, the
+     dBASE III PLUS database driver works the same as the standard CA-Clipper
+     database driver.
+
+     <B>.  Unique indexes:</B> When you INDEX...UNIQUE or SET UNIQUE ON,
+        CA-Clipper creates an index with uniqueness as an attribute.  As
+        indexing proceeds and two or more records have the same key value,
+        CA-Clipper includes only the first record in the index.  Whenever the
+        unique index is updated, REINDEXed, or PACKed, only unique records
+        are added.  Note that a unique index retains the uniqueness attribute
+        and is unaffected by subsequent invocations of SET UNIQUE.
+
+     <B>.  Trimming key values:</B> In CA-Clipper, an &lt;expKey&gt; that changes the
+        key length may create an inoperable index.  This happens because
+        CA-Clipper stores index key values in fixed increments and index key
+        sizes are calculated by evaluating &lt;expKey&gt; on a blank record.  A
+        trimmed &lt;expKey&gt;, therefore, always evaluates to a null string ("")
+        leading to a size mismatch between the target and the defined key
+        length.  To use any of the TRIM() functions within a key expression,
+        use PADR() to guarantee a fixed length like this:
+
+        USE Customer NEW
+        INDEX ON PADR(RTRIM(Last) + First, 40) TO CustName
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a simple index:
+
+        USE Customer NEW
+        INDEX ON Name TO Customer
+
+     <B>.</B>  This example creates a unique index:
+
+        USE Customer NEW
+        INDEX ON Name TO Customer UNIQUE
+
+     <B>.</B>  This example creates a simple descending index:
+
+        USE Customer NEW
+        INDEX ON Name TO Customer DESCENDING
+
+     <B>.</B>  This example creates an index with a progress indicator which
+        displays the percentage of the database indexed every 10 records:
+
+        USE Customer NEW
+        INDEX ON Name TO Customer EVAL NtxProgress();
+                 EVERY LASTREC()/10
+
+        FUNCTION NtxProgress
+        LOCAL cComplete := LTRIM(STR((RECNO()/LASTREC()) * 100))
+        @ 23, 00 SAY "Indexing..." + cComplete + "%"
+        RETURN .T.
+
+     <B>.</B>  This example creates a simple conditional index using a FOR
+        condition:
+
+        USE Customer NEW
+        INDEX ON Name TO Customer FOR PostalCode = "95605"
+
+     <B>.</B>  This example creates a subindex using an existing order:
+
+        USE Customer INDEX Customer NEW
+        SEEK "SMITH"
+        IF FOUND()
+           INDEX ON PostalCode TO PostCode WHILE Name = "SMITH"
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng28ae3.html">DESCEND()</A>
+<A HREF="ng2ec97.html">DTOS()</A>
+<A HREF="ng93235.html">REINDEX</A>
+<A HREF="nga475d.html">SET INDEX</A>
+<A HREF="nga6e00.html">SET ORDER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

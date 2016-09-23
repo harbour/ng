@@ -1,0 +1,104 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2f1ee.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng3054f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>EOF()</B>
+ Determine when end of file is encountered
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>EOF() --&gt; lBoundary</B>
+
+ <B>Returns</B>
+
+     EOF() returns true (.T.) when an attempt is made to move the record
+     pointer beyond the last logical record in a database file; otherwise, it
+     returns false (.F.).  If there is no database file open in the current
+     work area, EOF() returns false (.F.).  If the current database file
+     contains no records, EOF() returns true (.T.).
+
+ <B>Description</B>
+
+     EOF() is a database function used to test for an end of file boundary
+     condition when the record pointer is moving forward through a database
+     file.  Any command that can move the record pointer can set EOF().
+
+     The most typical application is as a part of the &lt;lCondition&gt; argument
+     of a DO WHILE construct that sequentially processes records in a
+     database file.  Here &lt;lCondition&gt; would include a test for .NOT. EOF(),
+     forcing the DO WHILE loop to terminate when EOF() returns true (.T.).
+
+     EOF() and FOUND() are often used interchangeably to test whether a SEEK,
+     FIND, or LOCATE command failed.  With these commands, however, FOUND()
+     is preferred.
+
+     When EOF() returns true (.T.), the record pointer is positioned at
+     LASTREC() + 1 regardless of whether there is an active SET FILTER or SET
+     DELETED is ON.  Further attempts to move the record pointer forward
+     return the same result without error.  Once EOF() is set to true (.T.),
+     it retains its value until there is another attempt to move the record
+     pointer.
+
+     By default, EOF() operates on the currently selected work area.  It can
+     be made to operate on an unselected work area by specifying it within an
+     aliased expression (see example below).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates EOF() by deliberately moving the
+        record pointer beyond the last record:
+
+        USE Sales
+        GO BOTTOM
+        ? EOF()            // Result: .F.
+        SKIP
+        ? EOF()            // Result: .T.
+
+     <B>.</B>  This example uses aliased expressions to query the value of
+        EOF() in unselected work areas:
+
+        USE Sales NEW
+        USE Customer NEW
+        ? Sales-&gt;(EOF())
+        ? Customer-&gt;(EOF())
+
+     <B>.</B>  This example illustrates how EOF() can be used as part of a
+        condition for sequential database file operations:
+
+        USE Sales INDEX CustNum NEW
+        DO WHILE !EOF()
+           nOldCust := Sales-&gt;CustNum
+           nTotalAmount := 0
+           DO WHILE nOldCust = Sales-&gt;CustNum .AND. (!EOF())
+              ? Sales-&gt;CustNum, Sales-&gt;Description, ;
+                    Sales-&gt;SaleAmount
+              nTotalAmount += Sales-&gt;SaleAmount
+              SKIP
+           ENDDO
+           ? "Total amount: ", nTotalAmount
+        ENDDO
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng11111.html">BOF()</A>
+<A HREF="ng39f03.html">FOUND()</A>
+<A HREF="ng88b8c.html">GO</A>
+<A HREF="ng44695.html">LASTREC()</A>
+<A HREF="ng8edb9.html">LOCATE</A>
+<A HREF="ng994cb.html">SEEK</A>
+<A HREF="ngac2d7.html">SKIP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

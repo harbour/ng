@@ -1,0 +1,101 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng14b57.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng163f9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_NewFilter():</B>
+
+  Purpose:  Creates a new Roll-Your-Own filter in memory to be used in
+            filtering operations.
+
+   Syntax:  m6_NewFilter( [&lt;xExpr&gt;] )
+
+    Where:  &lt;xExpr&gt;     --  Can be either character or numeric.
+
+                            If it's character, it represents a query
+                            condition to base the filter list on.
+
+                            If it's numeric, then an empty filter list is
+                            created whose maximum record limit is equal to
+                            the value specified.
+
+            If no parameter is specified, the RYO filter will be dimensioned
+            to the record count of the file in the current workarea.  If
+            no file is open in the selected workarea this function will
+            fail, and return a handle of 0.
+
+  Returns:  A numeric handle used to identify the filter list for future
+            filter operations. ( Think of it as a DOS file handle.)
+
+     Note:  When a condition is specified, this function may take a few
+            moments to complete as it evaluates the indexed portion of the
+            query. The non-indexed or "unknown" portion of the query
+            is stored with the filter list and may be resolved later using the
+            m6_EvalPartial() function.  To view details about the filter call
+            m6_FiltInfo().
+
+            Always destroy RYO filters that are no longer being used with
+            m6_FreeFilter().
+
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         USE Customer via "SIXCDX"
+
+         SET INDEX TO State
+
+         //...............create a RYO filter based on a query condition
+         nHandle := <B>m6_NewFilter( 'State = "CA" .and. Age = 25' )</B>
+
+         //.............................get information about the filter
+         aInfo := m6_FiltInfo( nHandle )
+
+         //.......................................display filter details
+         ? "Filter information"
+         ? "------------------"
+         ? aInfo[ INFO_EXPR    ]      //  STATE="CA".AND.AGE=25
+         ? aInfo[ INFO_NONEXPR ]      //  AGE=25
+         ? aInfo[ INFO_OPTLVL  ]      //  1
+         ? aInfo[ INFO_COUNT   ]      //  100
+         ? aInfo[ INFO_SIZE    ]      //  10000
+         ? aInfo[ INFO_OWNER   ]      //  2
+         ? aInfo[ INFO_POS     ]      //  1
+
+         //...........................free memory allocated to RYO filter
+         m6_FreeFilter( nHandle )
+
+         //......create RYO filter that can contain records from 1 to 100
+         nHandle:= m6_NewFilter( 100 )
+
+         //.........Add records 10, 5, and 101 to filter.  Note 101 fails
+         ? m6_AddRec( nHandle, 10  )  //  .T.
+         ? m6_AddRec( nHandle,  5  )  //  .T.
+         ? m6_AddRec( nHandle, 101 )  //  .F.
+
+         //........Set work area filter to the RYO filter we just created
+         m6_SetAreaFilter( nHandle )
+
+         //..........Browse data.  Only records 5 and 10 will be visible
+         browse()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf867.html">m6_FiltInfo()</A>
+<A HREF="ng136a1.html">m6_FreeFilter()</A>
+<A HREF="ng169b6.html">m6_SetAreaFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

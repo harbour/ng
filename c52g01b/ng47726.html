@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng472b0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng47ae4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MAXCOL()</B>
+ Determine the maximum visible screen column
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MAXCOL() --&gt; nColumn</B>
+
+ <B>Returns</B>
+
+     MAXCOL() returns the column number of the rightmost visible column for
+     display purposes.
+
+ <B>Description</B>
+
+     MAXCOL() is a screen function that determines the maximum visible column
+     of the screen.  Row and column numbers start at zero in CA-Clipper.
+
+     If you use a C or other extended function to set the video mode, use the
+     SETMODE() function so your CA-Clipper application returns the correct
+     value for MAXCOL().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses MAXROW() and MAXCOL() to determine the area
+        to draw a box then executes DBEDIT() within the box region:
+
+        CLS
+        @ 0, 0 TO MAXROW(), MAXCOL() DOUBLE
+        DBEDIT(1, 1, MAXROW() + 1, MAXCOL() - 1)
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng13297.html">COL()</A>
+<A HREF="ng47ae4.html">MAXROW()</A>
+<A HREF="ng5ee92.html">ROW()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

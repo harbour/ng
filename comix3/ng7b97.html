@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7822.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng81a5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlAnd()</B>               AND together two RecordList's
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlAnd(rl1, rl2) -&gt; rlResult
+
+<B>Arguments</B>
+
+    rl1 &amp; rl2 are the two RecordList's to be AND'd together.
+
+<B>Returns</B>
+
+    rl1 (AND'd with rl2).
+
+<B>Description</B>
+
+    rlAnd() AND's together two RecordList's so that only records contained
+    in both RecordList's are contained in the result.
+
+    rl2 is destroyed by this function.  The returned RecordList is actually
+    rl1 (with its bit-maps properly AND'd).  This saves the the developer
+    from having to explicitly destroy the AND'd recordList.
+
+<B>Example</B>
+
+    rl1 := rlNew(10)                &amp;&amp; Set up rl1 with recs 5 &amp; 7
+    rlSet(rl1, 5)
+    rlSet(rl1, 7)
+    ? rlCount(rl1)                  &amp;&amp; Will return 2
+
+    rl2 := rlNew(10)
+    rlSet(rl2, 5)
+    rlSet(rl2, 9)
+    ? rlCount(rl2)                  &amp;&amp; Will return 2
+
+<B>    rl1 := rlAnd(rl1, rl2)          &amp;&amp; AND them together</B>
+    ? rlCount(rl1)                  &amp;&amp; Will return 1 (because only record
+                                    &amp;&amp; 5 was in both RecordList's)
+
+    rlDestroy(rl1)                  &amp;&amp; Now clean up (rl2 was destroyed
+                                    &amp;&amp; by the rlAnd() above)
+
+<B>Example</B>
+
+    rl1 := rlNew(10)
+    rlSet(rl1, 5)
+    rl2 := rlNew(10)
+    rlSet(rl2, 5)
+    rlSet(rl2, 7)
+    ? rlCount(rl1), " records are in the first RecordList"
+    ? rlCount(rl2), " records are in the second RecordList"
+<B>    rlResult = rlAnd(rl1, rl2)</B>
+    ? rlCount(rlResult), " records are in both RecordList's"
+
+    ? (rlResult == rl1)             &amp;&amp; Will return .T.
+    ? (rlResult == rl2)             &amp;&amp; Will return .F.
+    rlDestroy(rlResult)
+
+<B>See Also</B>
+
+    rlOr(), rlNot()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacaf.html">rlOr()</A>
+<A HREF="ngcd6e.html">rlNot()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

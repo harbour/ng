@@ -1,0 +1,88 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7dc04.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng7e974.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>How do I use the SIx Driver with an existing application?:</B>
+
+  Getting started with the SIx Driver is simple.  The following steps will
+  get you up and running with your current application:
+
+    <B>NOTE:  The text below uses the SIXNSX flavor of the SIx Driver for the</B>
+    <B>       examples.  If you are using the SIXCDX or SIXNTX flavor instead,</B>
+    <B>       simply substitute the appropriate RDD name instead of "SIXNSX".</B>
+
+
+  <B>1. Add the appropriate SIx Driver header file to each source code file</B>
+  <B>   where database support is required.</B>  For example:
+
+         <U>#include "SIXNSX.CH"</U>
+
+
+  <B>2. Make sure index extensions aren't hard-coded in your application.</B>
+
+     The default extension for SIx Driver indexes under SIXNSX is .NSX.
+     Under the SIXCDX flavor, the default index extension is .IDX.  As
+     with CA-Clipper's DBFNTX driver, our SIXNTX driver also uses the .NTX
+     index extension and format.
+
+     The best way to determine index extensions from within an application
+     is to call Clipper's OrdBagExt() function.
+
+     For example, if you use the following code to determine the existence
+     of an index file:
+
+          <B>IF !file("INDEX.NTX")</B>
+            <B>INDEX ON field TO index</B>
+          <B>ENDIF</B>
+
+     you should change the code to use Clipper's OrdBagExt() function
+     instead, as follows:
+
+          <B>IF !file( "INDEX" + OrdBagExt() )</B>
+            <B>INDEX ON field TO index</B>
+          <B>ENDIF</B>
+
+
+      <U>NOTE: Under Clipper 5.01a, the OrdBagExt() function was known as</U>
+      <U>      IndexExt().</U>
+
+
+  <B>3. Add SIXNSX.OBJ to your link command or link script.</B>  This will make
+     the SIx Driver's SIXNSX flavor the default RDD.  (Place SIXNSX.OBJ
+     <B>after</B> your main application files.)
+
+  <B>4. If your application uses memo fields</B>, add <B>DBT.OBJ</B> to your link command
+     or link script to add .DBT support until you get a chance to convert
+     your .DBT's to .SMT/.FPT's (optional).  Converting .DBT memo files to
+     .SMT/.FPT's is covered elsewhere in this section.
+
+  <B>5. Add SIX3.LIB as a library to your link command or link script.</B>  If you
+     are using Blinker, you can overlay most of the SIX3.LIB file simply by
+     specifying the SIX3.LNK link script, like this:
+
+        <B>BLINKER FI myapp,sixnsx,dbt</B> <U>@six3</U> <B>LIB clipper</B>
+
+  That's it!  You've converted your application to use the SIx Driver's
+  high-performance index format.  Now you can start to make use of the SIx
+  Drivers extended features, such as compound indexes, index scoping,
+  roll-your-own indexes, ...
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7e974.html">How Do I Specify An RDD</A>
+<A HREF="ng76298.html">DBT.OBJ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

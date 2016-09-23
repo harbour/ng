@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng4124.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>AADD()</B>
+ Add a new element to the end of an array
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>AADD(&lt;aTarget&gt;, &lt;expValue&gt;) --&gt; Value</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aTarget&gt;</B> is the array to add a new element to.
+
+     <B>&lt;expValue&gt;</B> is the value assigned to the new element.
+
+ <B>Returns</B>
+
+     AADD() evaluates &lt;expValue&gt; and returns its value.  If &lt;expValue&gt; is not
+     specified, AADD() returns NIL.
+
+ <B>Description</B>
+
+     AADD() is an array function that increases the actual length of the
+     target array by one.  The newly created array element is assigned the
+     value specified by &lt;expValue&gt;.
+
+     AADD() is used to dynamically grow an array.  It is useful for building
+     dynamic lists or queues.  A good example of this is the GetList array
+     used by the GET system to hold Get objects.  After a READ or CLEAR GETS,
+     GetList becomes an empty array.  Each time you execute an @...GET
+     command, the GET system uses AADD() to add a new element to the end of
+     the GetList array, and then assigns a new Get object to the new element.
+
+     AADD() is similar to ASIZE() but only adds one element at a time;
+     ASIZE() can grow or shrink an array to a specified size.  AADD(),
+     however, has the advantage that it can assign a value to the new
+     element, while ASIZE() cannot.  AADD() may also seem similar to AINS(),
+     but they are different:  AINS() moves elements within an array, but it
+     does not change the array's length.
+
+     <B>Note: </B> If &lt;expValue&gt; is another array, the new element in the target
+     array will contain a reference to the array specified by &lt;expValue&gt;.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples demonstrate the effects of multiple invocations
+        of AADD() to an array:
+
+        aArray := {}               // Result: aArray is an empty array
+        AADD(aArray, 5)            // Result: aArray is { 5 }
+        AADD(aArray, 10)           // Result: aArray is { 5, 10 }
+        AADD(aArray, { 12, 10 })   // Result: aArray is
+                                   // { 5, 10, { 12, 10 } }
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngae9a.html">AINS()</A>
+<A HREF="nge58b.html">ASIZE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

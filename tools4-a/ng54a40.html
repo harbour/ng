@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng54122.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng552c4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETREMQUS()</B>
+ Removes a queue user
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETREMQUS(&lt;cQueue&gt;,&lt;cUser&gt;|&lt;aUser&gt;,[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;])    --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates a print queue on the default server or on
+     &lt;cServer&gt;|&lt;nConId&gt;.
+
+     <B>&lt;cUser&gt;</B>  Designates the login name of a user that is removed from
+     the user list of &lt;cQueue&gt;.
+
+     <B>&lt;aUser&gt;</B>  Designates a number of elements of the type string.  Each
+     element designates the name of a user that is removed from the user list
+     of &lt;cQueue&gt;.
+
+     <B>&lt;cServer&gt;</B> Designates the name of the file server used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETREMQUS() returns the number of users that have been removed
+     successfully from the user list of &lt;cQueue&gt;.  The value 0 indicates that
+     no user has been deleted.
+
+ <B>Description</B>
+
+     NOVELL NET REMOVE QUEUE USER
+     NNETREMQUS() allows you to remove one or more users from the user list
+     of a print queue.  To remove one user, the user name must be passed in
+     &lt;cUser&gt;.  By passing an array containing the user names as elements
+     (&lt;aUser&gt;), more users can be deleted.  With the parameters &lt;cServer&gt; or
+     &lt;nConId&gt;, the user list of any attached server can be modified.  The
+     connection ID of a server can be determined with NNETATTACH() or
+     NNETLOGIN().
+
+     Supervisor rights of the requesting user on the related file server are
+     required to remove users from an user list.
+
+ <B>Note</B>
+
+     <B>.</B>  NNETREMQUS() is a high level function based on the low level
+        functions of the bindery access.  The CA-Clipper source code can be
+        found on the product disks.
+
+ <B>Examples</B>
+
+     <B>.</B>  Remove user MICK from the user list of the queue LINEPRINTER:
+
+        IF NNETREMQUS('LINEPRINTER','MICK')&gt;0
+           ? 'User removed successfully!'
+        ELSE
+           ? 'Error!'
+        ENDIF
+
+     <B>.</B>  Remove the users JIM, PETER, and MIKE from the user list of
+        the queue LINEPRINTER:
+
+        NNETREMQUS('LINEPRINTER',{'JIM','PETER','MIKE'})
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40b40.html">NNETADDQOP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

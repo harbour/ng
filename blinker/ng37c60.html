@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng378a5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng37fe7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPFREEMS()                   Limit use of EMS memory for swapping</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Limit use of EMS memory for swapping</B></U>
+
+ <U>Syntax   : <B>niValue = SWPFREEMS(niValue)</B></U>
+
+ <U>Return   : <B>The previous setting</B></U>
+
+ This function can be used to limit the amount of EMS used by the swap system
+ for program image storage, so that the specified amount can be left free for
+ the child program.
+
+ Please note that this function only restricts the amount of EMS used by
+ SWPRUNCMD(), it does not cause any EMS in use by the application to be
+ freed. The amount of EMS specified as a parameter to this function must
+ already be free at the time SWPRUNCMD() is executed.
+
+ Example:
+
+    <B>SWPUSEEMS(TRUE)      // Enable use of EMS (default) but leave</B>
+    <B>SWPFREEMS(512)    // at least 512 Kb free if possible</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng37fe7.html">SWPFREXMS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

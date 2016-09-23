@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7ed2a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng813da.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CLOSESOCK()</B>
+ Closes the socket and all connected IPX/SPX handles
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CLOSESOCK(&lt;nSocket&gt;) --&gt; NIL</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nSocket&gt;</B>  Designates the number of the socket that is closed.
+
+ <B>Returns</B>
+
+     CLOSESOCK() always returns NIL when closing a socket according to IPX.
+
+ <B>Description</B>
+
+     CLOSE SOCKET
+     CLOSESOCK() allows you to close a socket that is used for IPX/SPX
+     communication.  At the same time, all IPX/SPX communication buffers for
+     which &lt;nSocket&gt; has been specified as the source socket are closed.  The
+     related communication handles are then invalid.
+
+ <B>Example</B>
+
+     Open and close the IPX receiving buffer with source socket 20000:
+
+     nHandle=IPXOPEN(20000,2000)
+     CLOSESOCKET(20000)  // nHandle is now invalid
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng818ee.html">IPXOPEN()</A>
+<A HREF="ng8b5d6.html">OPENSOCK()</A>
+<A HREF="ng8c1de.html">PPCCANCEL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3c5de.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng3cf4e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPSETPID() / SWPSETPIDBAS()  Set program ID string for current program.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Set a program ID string for the current program.</B></U>
+
+ <U>Syntax   : <B>lValue = SWPSETPID(cIdString)</B></U>
+
+ <U>Return   : <B>True if the ID was set</B></U>
+
+ Set the program ID of the current application to cIdString. The maximum
+ length of cIdString is 31 characters. If the string length is greater than
+ 31, the function will return false, and the program ID will not be set.
+
+ A program ID can always be set, regardless of whether a program at a higher
+ level has set the same ID. A child process of the current program can
+ determine whether a given ID has been set using the function SWPGETPID().
+
+ Example:
+
+    <B>* Set the program ID to "Test Program"</B>
+    <B>IdStr = "Test Program"</B>
+    <B>SWPSETPID(IdStr)</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3642c.html">SWPADDSTR()</A>
+<A HREF="ng386b5.html">SWPGETPID()</A>
+<A HREF="ng38a93.html">SWPGETSTR()</A>
+<A HREF="ng3cf4e.html">SWPSETSTR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3ab23.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng26a91.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ZEROREMOVE()</B>
+ Removes 0-bits in a file block
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ZEROREMOVE(&lt;idDataBlock&gt;) --&gt; cString</B>
+
+ <B>Argument</B>
+
+     <B>&lt;idDataBlock&gt;</B>  Designates a character string in which a 0-bit has
+     been inserted using ZEROINSERT().
+
+ <B>Returns</B>
+
+     ZEROREMOVE() returns the character string to the same condition it was
+     in prior to ZEROINSERT().
+
+ <B>Description</B>
+
+     This function is the opposite of ZEROINSERT().  This means that the 0-
+     bit that was inserted, according to the special CCITT rule, is now
+     removed.  Removing the bit decreases the length of the block up to 20%.
+
+ <B>Example</B>
+
+     This example shows the construction of a typical data block:
+
+     cFlag   :=  CHR(CTON("01111110", 2))          // According to
+                                                   // CCITT
+     cData   :=  "Also transmit ????!"
+     CRC    :=  COM_CRC(cData)
+
+     cBlock  := cData + SUBSTR(L2BIN(CRC), 1, 2)   // Add CRC to
+                                                   // string
+     cBlock  := ZEROINSERT(cBlock)
+     cBlock  := cFlag + cBlock + cFlag
+
+     * ... transmission of the data block:
+
+     cData   := REMALL(cFlag, cBlock)              // Remove flag
+     cData   := ZEROREMOVE(cData)
+     *... and subsequently the important CRC checks, etc.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3ab23.html">ZEROINSERT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

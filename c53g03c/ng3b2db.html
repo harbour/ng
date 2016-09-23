@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3a680.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng31a91.html">[^^Up^^]</A>
+<A HREF="ng3b8b6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gtSetBlink()</B>
+ Toggle asterisk (*) interpretation in color strings between blinking and
+ background intensity
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "gt.api"</B>
+     <B>ERRCODE _gtSetBlink(</B>
+     <B>                     BOOL bBlink</B>
+     <B>                   )</B>
+
+ <B>Arguments</B>
+
+     <B>bBlink</B> toggles the meaning of the asterisk (*) character in a color
+     string.  Specifying TRUE causes the asterisk to mean blinking and FALSE
+     causes it to mean high intensity background.  The default is TRUE.
+
+ <B>Returns</B>
+
+     _gtSetBlink() returns zero if successful.  Any other value indicates an
+     error.
+
+ <B>Description</B>
+
+     _gtSetBlink() toggles the blinking/background intensity attribute.  When
+     you call _gtSetBlink() with bBlink equal to TRUE, you can make
+     characters written to the screen blink by including an asterisk (*) in
+     the color string passed to _gtSetColorStr().  When you call
+     _gtSetBlink() with bBlink equal to FALSE, the asterisk (*) causes the
+     background color to be intensified instead.  Thus, blinking and
+     background intensity attributes are not available at the same time.
+
+     <B>Note: </B> This function is meaningful only on IBM PC or compatible
+     computers with CGA, EGA, or VGA display hardware.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example enables high intensity backgrounds:
+
+        #include "gt.api"
+
+        .
+        .
+        .
+           _gtSetBlink( FALSE )
+        .
+        .
+        .
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Gt.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3b8b6.html">_gtSetColorStr()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

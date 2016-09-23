@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf4a23.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf5f32.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SUM</B>
+ Sum numeric expressions and assign results to variables
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SUM &lt;nExp list&gt; TO &lt;idVar list&gt;</B>
+     <B>   [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nExp list&gt;</B> is the list of numeric values to sum for each record
+     processed.
+
+     <B>TO &lt;idVar list&gt;</B> identifies the receiving variables to be assigned
+     assign the results of the sum.  Variables that either do not exist or
+     are not visible are created as private variables.  &lt;idVar list&gt; must
+     contain the same number of elements as &lt;nExp list&gt;.
+
+     <B>&lt;scope&gt;</B> is the portion of the current database file to SUM.  The
+     default scope is ALL records.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to SUM
+     within the given scope.
+
+ <B>Description</B>
+
+     SUM is a database command that totals a series of numeric expressions
+     for a range of records in the current work area and assigns the results
+     to a series of variables.  The variables specified in &lt;idVar list&gt; can
+     be field, local, private, public, or static.
+
+     Note that the &lt;nExp list&gt; is required and not optional as it is in other
+     dialects.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates the use of SUM:
+
+        LOCAL nTotalPrice, nTotalAmount
+        USE Sales NEW
+        SUM Price * .10, Amount TO nTotalPrice, nTotalAmount
+        //
+        ? nTotalPrice               // Result: 151515.00
+        ? nTotalAmount              // Result: 150675.00
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbfa7f.html">AVERAGE</A>
+<A HREF="ng23f25.html">DBEVAL()</A>
+<A HREF="ngf6736.html">TOTAL</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

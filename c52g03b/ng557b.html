@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4edd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng242.html">[^^Up^^]</A>
+<A HREF="ng5af8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_retds()</B>
+ Post a date return value using a date string
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "extend.api"</B>
+     <B>void _retds(</B>
+     <B>             char far * fpString</B>
+     <B>           )</B>
+
+ <B>Arguments</B>
+
+     <B>fpString</B> is a far pointer to a null-terminated string representing
+     the date value to be returned.  The date string must have the form
+     yyyymmdd.
+
+ <B>Returns</B>
+
+     _retds() has no return value.
+
+ <B>Description</B>
+
+     _retds() posts a date value into CA-Clipper's return value area.  When
+     your Extend routine returns control to the calling CA-Clipper program,
+     the posted value becomes the CA-Clipper return value of your Extend
+     routine.
+
+     _retds() converts the supplied string into a CA-Clipper date value.  If
+     you supply a string that does not represent a valid date, a blank date
+     value will be stored.
+
+     <B>Note: </B> _retds() converts the supplied string to a date value.  The
+     string need not be preserved after the call to _retds().
+
+ <B>Examples</B>
+
+     <B>.</B>  From C:
+
+        _retds("19991231");
+
+     <B>.</B>  From Assembly language:
+
+        EXTRN __retds:FAR
+              mov   dx, seg MyString     ; pass address of string
+                                         ; (creation of string not shown)
+              push  dx
+              mov   ax, offset MyString
+              push  ax
+              call  __retds
+              add   sp, 4
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Extend.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1948.html">_pards()</A>
+<A HREF="ng7a5b.html">_stords()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

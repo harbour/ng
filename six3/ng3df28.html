@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3db8a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3e5cc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_Thermometer():</B>
+
+  Syntax:  Sx_Thermometer([[nTagNo | cTagName,] nOrder | cIndexName])
+
+           nTagNo     = Position of tag within compound index file
+           cTagName   = Name of the tag
+           nOrder     = Position of index in list of indexes
+           nIndexName = Name of the index
+
+  Returns:   A numeric value indicating update status of the tag or index
+             as outlined above.
+
+  Description:  This version returns a value which indicates the update
+                status of the specified tag or index.  The values are as
+                follows:
+
+                  <B>1 - Full Update</B>
+                  <B>2 - Full Update (partial index)</B>
+                  <B>3 - Changes Only</B>
+                  <B>4 - No Update</B>
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+       // Assume that CUSTOMER.DBF also has a structural index
+       // (CUSTOMER.CDX), the Tag, NAME exists in CUSTOMER.CDX,
+       /  and SPECIAL.IDX and OFFER.IDX were created on AcctNo.
+
+       USE Customer via "SIXCDX"  // Opens CUSTOMER.DBF and CUSTOMER.CDX
+
+       SET INDEX TO Special, ;    // Open SPECIAL.IDX, and OFFER1.IDX
+                    Offer1        // Note CUSTOMER.CDX is moved to
+                                  // index order position 3
+
+       ? <B>Sx_Thermometer( 1, 3)</B>    // Display update status of NAME tag.
+       //..1 - Full Update
+
+       ? <B>Sx_Thermometer( 1 )</B>      // Display update status of special
+       //..2 - Full Update(part)  // offer index, SPECIAL.IDX
+
+       ? <B>Sx_Thermometer( 2 )</B>      // Display update status of OFFER1.IDX
+       //..4 - No Update          // See Sx_Freeze() example for origin
+                                  // of OFFER1.IDX
+
+       <B>Sx_Chill( 1 )</B>              // Chill special offer index SPECIAL.IDX
+                                  // Will only allow existing keys to be
+                                  // updated
+
+       <B>? Sx_Thermometer( 1 )</B>      // Display update status of SPECIAL.IDX
+       //..3 - Changes only
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng212d3.html">Sx_Chill()</A>
+<A HREF="ng28c2f.html">Sx_Freeze()</A>
+<A HREF="ng40076.html">Sx_Warm()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

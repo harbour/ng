@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng530d9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng538ab.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>close()</B>
+ Close the table in the work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE close(</B>
+     <B>                  AREAP wa</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     The close() method closes the data table in the work area defined by wa.
+
+ <B>Default Behavior</B>
+
+     close() clears the work area referenced by wa, and performs the following
+     additional functions:
+
+     1. Calls clearFilter() and clearLocate() passing wa to each.
+
+     2. If wa has any parent work areas, any relations pointing to the
+        work area are killed.
+
+     3. Fields are unlinked from the symbol table, and the wa-&gt;atomAlias
+        symbol is reset.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  The default implementation of close() should deallocate system
+        information hooked into the AREA structure.  Your implementation of
+        close() should clear relations, if necessary, (with clearRel()),
+        flush buffers, close physical files, call writeDBHeader(), and then
+        call SUPER_CLOSE().
+
+     <B>.</B>  If a memo file is involved, close() should call
+        closeMemFile().
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng58bd3.html">clearRel()</A>
+<A HREF="ng5ee39.html">closeMemFile()</A>
+<A HREF="ng54de4.html">open()</A>
+<A HREF="ng55ca4.html">release()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

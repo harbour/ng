@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5d5f4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5dd19.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>setLocate()</B>
+ Set the locate scope for the specified work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE setLocate(</B>
+     <B>                        AREAP wa,</B>
+     <B>                        LPDBSCOPEINFO lpdbScopeInfo</B>
+     <B>                     )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpdbScopeInfo</B> is a pointer to a structure containing information
+     about the locate scope for the work area.
+
+ <B>Description</B>
+
+     setLocate() sets the locate scope for the work area referenced by wa.
+
+ <B>Default Behavior</B>
+
+     setLocate() sets the locate scope for wa from lpdbScopeInfo.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Prior to setting the new locate scope, setLocate() must
+        perform a clearLocate() which releases the items held by the wa-&gt;dbsi
+        structure.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng45972.html">DBSCOPEINFO</A>
+<A HREF="ng5cd1e.html">clearLocate()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

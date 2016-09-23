@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3b698.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng39198.html">[^^Up^^]</A>
+<A HREF="ng3c72b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETMSGRD()</B>
+ Reads the message from broadcast buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETMSGRD([&lt;lNotDelete&gt;]) --&gt; cMessage</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lNotDelete&gt;</B>  Designates an optional parameter that allows you to
+     read a message from the buffer without changing the contents of the
+     buffer.  If &lt;lNotDelete&gt;  is designated .T., the message remains in the
+     buffer.  If &lt;lNotDelete&gt; is designated .F., the message is deleted from
+     buffer.
+
+ <B>Returns</B>
+
+     NNETMSGRD() returns a character string that contains the message that
+     has been received previously in the background.
+
+ <B>Description</B>
+
+     NOVELL NET MESSAGE READ
+     NNETMSGRD() allows you to read messages from the broadcast buffer after
+     the buffer has been opened with NNETMSGOPN().  NNETMSGRD() always
+     returns the oldest message.  If the buffer is empty or if the broadcast
+     system is not installed, NNETMSGRD() returns an empty string.
+
+ <B>Example</B>
+
+     Read a message from the broadcast buffer, and emulate the Novell
+     standard behavior:
+
+     #include "inkey.ch"
+
+     IF .NOT. EMPTY(cMsg:=NNETMSGRD())
+     @ 24,0 SAY cMsg
+     WHILE INKEY()!=K_CTRL_RETURN
+     ENDDO
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3b698.html">NNETMSGOPN()</A>
+<A HREF="ng3af97.html">NNETMSGCNT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

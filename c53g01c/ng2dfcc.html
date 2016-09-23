@@ -1,0 +1,92 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2db8d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng2e977.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBRELATION()</B>
+ Return the linking expression of a specified relation
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBRELATION(&lt;nRelation&gt;) --&gt; cLinkExp</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nRelation&gt;</B> is the position of the desired relation in the list of
+     current work area relations.  The relations are numbered according to
+     the order in which they were defined with SET RELATION.
+
+ <B>Returns</B>
+
+     DBRELATION() returns a character string containing the linking
+     expression of the relation specified by &lt;nRelation&gt;.  If there is no
+     RELATION SET for &lt;nRelation&gt;, DBRELATION() returns a null string ("").
+
+ <B>Description</B>
+
+     DBRELATION() is a database function used with DBRSELECT() to determine
+     the linking expression and work area of an existing relation created
+     with the SET RELATION command.
+
+     DBRELATION() returns the linking expression defined by the TO clause.
+     DBRSELECT() returns the work area linked as defined by the INTO clause.
+
+     By default, DBRELATION() operates on the currently selected work area.
+     It will operate on an unselected work area if you specify it as part of
+     an aliased expression (see example below).
+
+ <B>Notes</B>
+
+     <B>.  Declared variables:</B> A character string returned by
+        DBRELATION() may not operate correctly when recompiled and executed
+        using the macro operator (&amp;) if the original expression contained
+        references to local or static variables, or otherwise depends on
+        compile-time declarations.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example opens three database files, sets two child
+        relations from the parent work area, and then displays the linking
+        expression to the second child work area:
+
+        USE Invoices INDEX Invoices NEW
+        USE BackOrder INDEX BackOrder NEW
+        USE Customer INDEX Customer NEW
+        SET RELATION TO CustNum INTO Invoices, OrderNum ;
+              INTO BackOrder
+        //
+        ? DBRELATION(2)                  // Result: OrderNum
+
+     <B>.</B>  Later you can query the same linking expression from an
+        unselected work area by using an aliased expression like this:
+
+        USE Archive NEW
+        ? Customer-&gt;(DBRELATION(2))   // Result: OrderNum
+
+     <B>.</B>  This example is a user-defined function, Relation(), that
+        returns the results of both DBRELATION() and DBRSELECT() as an array:
+
+        FUNCTION Relation( nRelation )
+           RETURN { DBRELATION(nRelation), ;
+                 ALIAS(DBRSELECT(nRelation)) }
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2731e.html">DBFILTER()</A>
+<A HREF="ng2f329.html">DBRSELECT()</A>
+<A HREF="ngef11d.html">SET RELATION</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

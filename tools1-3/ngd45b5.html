@@ -1,0 +1,104 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd38e1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngd1d84.html">[^^Up^^]</A>
+<A HREF="ngd524c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GETSECRET()</B>
+ Keyboard input function for hidden input (similar to a GET field)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GETSECRET(&lt;cDefault&gt;,[&lt;nRow&gt;],[&lt;nColumn&gt;],[&lt;lSAY&gt;],</B>
+     <B>   [&lt;cPrompt&gt;]) --&gt; cInput</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDefault&gt;</B>  Designates the length and contents of the input field.
+
+     <B>&lt;nRow&gt; </B> Designates the row in which the input occurs.  The default
+     is the current cursor position.
+
+     <B>&lt;nColumn&gt;</B>  Designates the column in which the input occurs.  The
+     default is the current cursor position.
+
+     <B>&lt;lSAY&gt;</B>  When you specify .T. and close GETSECRET(), the actual data
+     input is displayed with the default color attribute.
+
+     <B>&lt;cPrompt&gt;</B>  Designates the text to display in front of the input
+     field at the selected coordinates.
+
+ <B>Returns</B>
+
+     GETSECRET() returns the input string.
+
+ <B>Description</B>
+
+     If you call this function, a simple input field is made available.  All
+     characters input are displayed as asterisks (*) to hide the actual
+     input.  All control keys are interpreted exactly as in a CA-Clipper GET
+     mask.
+
+     The length and default for the string are specified in the &lt;cDefault&gt;
+     parameter.  This allows a normal input field to be portrayed with VAR =
+     SPACE(length).  The input field starts at the current cursor position or
+     at the designated row and column.
+
+     Similar to @ ... SAY ... GET, you can also display text just before the
+     input field.  The field starting position is moved accordingly
+
+     In the CA-Clipper SET COLOR TO command, the first color you designate is
+     used for screen output; the second for input fields. GETSECRET() uses
+     these color designators exactly like CA- Clipper.  If you designate the
+     &lt;lSAY&gt; parameter as .T., you can determine (as with a SAY), whether the
+     data is redisplayed in its amended form at the point of input.  However,
+     GETSECRET() only displays asterisks to hide this data.  This is useful
+     when input breaks off due to an ESC, because at least the correct number
+     of asterisks is displayed.  The affected area also contains the standard
+     color attribute.
+
+ <B>Notes</B>
+
+     <B>.</B>  GETSECRET() uses the CA-Clipper console input internal
+        routines and supports the INS display in SCOREBOARD.  In addition,
+        the SET ESCAPE, SET BELL, SET INTENSITY, SET DELIMITERS, and SET
+        CONFIRM switches are acknowledged.
+
+     <B>.</B>  Key traps may occur with GETSECRET() when the cursor position
+        within a field is saved.  You can then call GETSECRET() recursively,
+        as long as sufficient stack memory is available.
+
+ <B>Examples</B>
+
+     <B>.</B>  Show the secret field at the current cursor position:
+
+        cVar:= SPACE(20)            // 20 position secret field
+        cVar:= GETSECRET(cVar)      // Retain input attribute
+
+     <B>.</B>  Show the secret a 10-space field,  row 10, column 20:
+
+        cVar:= GETSECRET(SPACE(10), 10, 20)
+
+     <B>.</B>  After input is finished, the actual data input is redisplayed
+        on the screen.  This area contains the standard color attribute.  The
+        input is moved by the text preceding the input field:
+
+        SET CONFIRM ON              //  Close with RETURN
+        cVar:= "Default text"
+        GETSECRET(cVar, 10, 20, .T., "Please input: ")
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd38e1.html">GETINPUT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

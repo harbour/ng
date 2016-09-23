@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6775d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng68632.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gModeGet()</B>
+ Retrieve parameters for the current video mode
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>ERRCODE _gModeGet(</B>
+     <B>                   int iMode,</B>
+     <B>                   LLG_LPVIDEOMODE lpVideoModeGet</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>iMode</B> is the video mode, which you specify using one of the
+     following values:
+
+     <B>Video Mode Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant                      Video Mode</B>
+     ------------------------------------------------------------------------
+     LLG_VIDEO_TXT                 Text
+     LLG_VIDEO_VESA_80_60          VESA text 80 x 60
+     LLG_VIDEO_VESA_132_25         VESA text 132 x 25
+     LLG_VIDEO_VESA_132_43         VESA text 132 x 43
+     LLG_VIDEO_VESA_132_50         VESA text 132 x 50
+     LLG_VIDEO_VESA_132_60         VESA text 132 x 60
+     LLG_VIDEO_VESA_800_592_16     VESA 800 x 592 x 16 colors
+     LLG_VIDEO_VESA_1024_768_16    VESA 1024 x 768 x 16 colors
+     LLG_VIDEO_VESA_1280_1024_16   VESA 1280 x 1024 x 16 colors
+     LLG_VIDEO_VESA_640_480_256    VESA 640 x 480 x 256 colors
+     LLG_VIDEO_VESA_800_592_256    VESA 800 x 592 x 256 colors
+     LLG_VIDEO_VESA_1024_768_256   VESA 1024 x 768 x 256 colors
+     LLG_VIDEO_VESA_1280_1024_256  VESA 1280 x 1024 x 256 colors
+     LLG_VIDEO_VESA_640_480_32K    VESA 640 x 480 x 32 K colors
+     LLG_VIDEO_VESA_800_592_32K    VESA 800 x 592 x 32 K colors
+     LLG_VIDEO_VESA_1024_768_32K   VESA 1024 x 768 x 32 K colors
+     LLG_VIDEO_VESA_1280_1024_32K  VESA 1280 x 1024 x 32 K colors
+     LLG_VIDEO_VESA_640_480_64K    VESA 640 x 480 x 64 K colors
+     LLG_VIDEO_VESA_800_592_64K    VESA 800 x 592 x 64 K colors
+     LLG_VIDEO_VESA_1024_768_64K   VESA 1024 x 768 x 64 K colors
+     LLG_VIDEO_VESA_1280_1024_64K  VESA 1280 x 1024 x 64 K colors
+     LLG_VIDEO_VESA_640_480_16M    VESA 640 x 480 x 16 M colors
+     LLG_VIDEO_VESA_800_592_16M    VESA 800 x 592 x 16 M colors
+     LLG_VIDEO_VESA_1024_768_16M   VESA 1024 x 768 x 16 M colors
+     LLG_VIDEO_VESA_1280_1024_16M  VESA 1280 x 1024 x 16 M colors
+     LLG_VIDEO_VGA_640_480_16      VGA 640 x 480 x 16 colors
+     ------------------------------------------------------------------------
+
+     <B>lpVideoModeGet</B> is a pointer to an LLG_VIDEOMODE structure that you
+     must allocate prior to calling this function.  _gModeGet() writes
+     information regarding the specified video mode to this structure.
+
+ <B>Returns</B>
+
+     SUCCESS if successful; otherwise, an error code.
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng68632.html">_gModeSet()</A>
+<A HREF="ng6d26d.html">LLG_VIDEOMODE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

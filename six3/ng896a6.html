@@ -1,0 +1,125 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Performance Tips:</B>
+
+  Mach SIx achieves performance over conventional query methods, by
+  narrowing down the records that must be tested in the database to satisfy
+  the query by searching the index files first.  If the indexed portion of
+  the query has not effectively reduced the number of target records to a
+  reasonable percentage of the source table, gains in query performance
+  will be marginal at best.  Remember to target the smallest possible set
+  of records with the indexed portion of your queries.  This way maximum
+  efficiency will be obtained.
+
+  <B>Set the current index order to 0 with the SET ORDER TO command.</B>
+
+  If you do not need the result of your query in the current index order,
+  set the index order to natural order.  This can be accomplished by
+  issuing a SET TAG TO, SET TAGORDER TO, or SET ORDER TO.  By querying the
+  database in natural record order you eliminate the need for Mach SIx to
+  create any temporary indexes and as a result the increase the speed of
+  the query.
+
+  <B>Enclose ranges in parenthesis.</B>
+
+  Any time you specify a range in a query condition, make sure you enclose
+  it in parenthesis.  This way Mach SIx will be sure to evaluate the two
+  expressions together, setting upper and lower bounds on its index scan.
+  When a either bound is exceeded the scan of the index terminates.
+  Otherwise, two separate scans to opposite ends of the index would be
+  necessary to satisfy the range.  In the following example, the range
+  of ages is bound in parenthesis.
+
+      COUNT FOR  State = "CA" .AND. <B>(Age &gt;= 20 .AND. Age &lt;= 30)</B>
+
+  <B>Optimizing with DELETED records.</B>
+
+  When Mach SIx optimizes a fully indexed COUNT query, it has the potential
+  to completely satisfy the query directly from the index files, with one
+  exception.  Normally if SET DELETED is ON, Mach SIx is forced to visit
+  all the records found in the indexes to test their deletion status.
+  However, you can eliminate this requirement by simply maintaining an
+  index or tag on <B>DELETED()</B> for the database files you will frequently
+  query.  This way COUNTS will truly be 100% optimizable!  Not only will
+  COUNTS execute faster, but other commands as well, especially for
+  databases with a large number of deleted records.  The following code
+  demonstrates creating an index on DELETED().
+
+
+       // Open Account database
+       USE Account VIA "SIXCDX"
+
+       // Create deleted tag in structural CDX for faster queries
+       INDEX ON Deleted() TAG Delete OF Account
+
+
+  <B>Direct temporary files to a local hard or ram drive.</B>
+
+  When optimizing the COPY, DISPLAY, LIST, and TOTAL commands, Mach SIx
+  must create  a temporary index file to sort the resulting collection of
+  data when the current index order is not set to 0.
+
+  To speed creation of temporary indexes, set the Mach SIx temporary file
+  path to a local hard or RAM drive.  You can accomplish this one of two
+  ways.  First, you can set the path with the DOS environment variable
+  <B>M6TEMP</B> or call the <B>m6_SetTemp()</B> function with the path as the
+  parameter.  The path set by m6_SetTemp() will have precedence over the
+  environment variable.
+
+  The following example demonstrates setting the temporary file path
+  to root directory of ram drive D:
+
+  From DOS, type the following command:
+
+      <B>SET M6TEMP=D:\</B>
+
+  Or, in your program call:
+
+      <B>m6_SetTemp("D:\")</B>
+
+  <B>Specify expressions in "most likely to fail first" order.</B>
+
+  Mach SIx was designed with the same short circuiting technology handling
+  logical conditions found in the Clipper compiler.  If at any time an
+  expression joined by .AND. returns 0 records, that portion of the query
+  terminates immediately and resumes with the next .OR.'ed expression if
+  one exists.
+
+  <B>List index keys to the left of the operator, and constants on the right.</B>
+
+  While Mach SIx will recognize an index key listed on either side of the
+  relational operator ( =, #, &gt;, &lt;, etc..), it has been designed to
+  indentify the key on the left first.  The last place it checks is on
+  the right.  Unless it's absolutely necessary, always list index keys
+  on the left and constants on the right.  See the following example.
+
+     USE Customers
+
+     SET INDEX TO State, Name, Age, Amount
+
+     COUNT TO nCount FOR Amount = 50.00   // This one will be processed
+                                          // in one active index key scan
+
+     COUNT TO nCount FOR 50.00 = Amount   // This one will require two
+                                          // scans to locate the Amount
+                                          // index or tag
+
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

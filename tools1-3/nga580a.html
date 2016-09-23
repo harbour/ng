@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga5598.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga1476.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TOF()</B>
+ Determines if CA-Clipper is at top of form (TOF)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TOF() --&gt; lTopOfForm</B>
+
+ <B>Returns</B>
+
+     Returns the logical value .T. to designate if a printer is at TOF.
+
+ <B>Description</B>
+
+     TOF() determines if the printer should execute a formfeed or not.
+
+ <B>Note</B>
+
+     <B>.</B>  TOF() acknowledges the values that CA-Clipper maintains
+        internally. TOF() cannot determine if the printer is actually at
+        TOF()
+
+ <B>Example</B>
+
+     When the printer is not at top of form, execute an EJECT:
+
+     IF .NOT. TOF()
+        EJECT
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga2595.html">PRINTINIT()</A>
+<A HREF="nga386e.html">PRINTSEND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

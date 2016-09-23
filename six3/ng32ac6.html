@@ -1,0 +1,113 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng32407.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng33441.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_MakeSem():</B>
+
+  Syntax:  Sx_MakeSem( [nOrder | cName] )
+
+           nOrder = Position of index in list of indexes
+           cName  = Name for the semaphore file
+
+  Returns:   &lt;numeric&gt; Number of users for this semaphore file.
+                  -1 if an error occurred.
+
+  Description:    This function is used to create a semaphore file using
+                  the name of an active index or a specified name.
+
+                  A file is created using the specified name.  If an index
+                  order is specified, then the name of that index is used
+                  for the file.  The current index name (if any) is used if
+                  no argument is supplied.  The default extension for
+                  semaphore files is ".SEM".
+
+                  If the specified semaphore file already exists, then the
+                  user count for the file is incremented.  The value
+                  returned represents the number of users for the specified
+                  semaphore file (including current user).
+
+                  Semaphore files are normally used to signal something to
+                  others on a network who are sharing the same files or
+                  resources.  The intention of Sx_MakeSem() and Sx_KillSem()
+                  is to provide a simple mechanism for using semaphores in
+                  conjunction with indexes, as well as more generic
+                  semaphore uses.
+
+  Example:
+
+    /*
+      This is a simple example showing the usage of the semaphore functions
+      (Sx_MakeSem(), Sx_KillSem(), Sx_IsSem()).  Finding a practical use for
+      this is left as an exercise for the programmer. &lt;g&gt;
+    */
+
+    #include "SIXCDX.CH"
+    #include "INKEY.CH"
+
+    LOCAL nKey, nSemCount := 0
+
+    CLS
+
+    // Draw the display
+    @ 9,11 TO 15,67 DOUBLE
+    @  9,30 SAY " SEMAPHORE EXAMPLE "
+    @ 11,29 SAY "TEST.SEM exists?:"
+    @ 13,29 SAY "User Count......:"
+    @ 15,13 SAY " [F1] = Add User   [F2] = Remove User   [ESC] = Quit "
+
+    // Show initial values
+    @ 11,47 SAY iif( Sx_IsSem("TEST"), "Yes", "No " )
+    @ 13,47 SAY nSemCount PICTURE "999"
+
+    DO WHILE (nKey := Inkey(0)) != K_ESC
+
+      DO CASE
+
+        CASE nKey == K_F1                 // Add a user
+          nSemCount := <B>Sx_MakeSem("TEST")</B>
+
+        CASE nKey == K_F2                 // Remove a user
+          IF nSemCount &gt; 0
+            nSemCount := Sx_KillSem("TEST")
+          ENDIF
+
+       OTHERWISE                          // Don't bother going any further
+          LOOP
+
+      ENDCASE
+
+      // Show semaphore state
+      @ 11,47 SAY iif(Sx_IsSem("TEST"), "Yes", "No ")
+      @ 13,47 SAY nSemCount PICTURE "999"
+
+    ENDDO
+
+    CLS
+
+    // See if the semaphore file is there
+    IF (Sx_IsSem("TEST"))
+      // Kill off remaining user count
+      DO WHILE (Sx_KillSem("TEST") &gt; 0)
+      ENDDO
+    ENDIF
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng317b2.html">Sx_KillSem()</A>
+<A HREF="ng2d028.html">Sx_IsSem()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

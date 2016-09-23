@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng40b40.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng41c2e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETADDQSV()</B>
+ Adds a print server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETADDQSV(&lt;cQueue&gt;,&lt;cPServer&gt;|&lt;aPServer&gt;,[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;) --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates a print queue on the default server or on
+     &lt;cServer&gt;|&lt;nConId&gt;.
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of a print server that is added as
+     the server for &lt;cQueue&gt;.
+
+     <B>&lt;aPServer&gt;</B>  Designates a number of elements of the type string.
+     Each element contains the name of a print server that is added as the
+     server for &lt;cQueue&gt;.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETADDQSV() returns the number of print servers that have been added
+     successfully as servers of &lt;cQueue&gt;.  A value of 0 indicates that no
+     server has been added.
+
+ <B>Description</B>
+
+     NOVELL NET ADD QUEUE SERVER
+     NNETADDQSV() allows you to add one or more print servers as servers of a
+     print queue.  To add one server, the name of the server must be passed
+     in &lt;cPServer&gt;.  To add more servers, an array containing all print
+     server names can be passed in &lt;aPServer&gt;.  With the parameters &lt;cServer&gt;
+     or &lt;nConId&gt;, the operation can be performed on any attached server.  The
+     connection ID of a server can be determined with NNETATTACH() or
+     NNETLOGIN().
+
+     Supervisor rights are required on the related file server to add a print
+     server as the server for a queue.
+
+ <B>Note</B>
+
+     <B>.</B>  NNETADDQSV() is a high level function based on the low level
+        functions of the bindery access.  The CA-Clipper source code can be
+        found on the product disks.
+
+ <B>Examples</B>
+
+     <B>.</B>  Add the print server PSERVERTOOLS1 as the server for the queue
+        LINEPRINTER:
+
+        IF NNETADDQSV('LINEPRINTER','PSERVERTOOLS1')&gt;0
+        ? 'Print server added successfully!'
+        ELSE
+        ? 'Error!'
+        ENDIF
+
+     <B>.</B>  Add the print servers PSERVERTOOLS1 and PSERVERDEV1 as servers
+        for the queue LINEPRINTER:
+
+        NNETADDQSV('LINEPRINTER',{'PSERVERTOOLS1','PSERVERDEV1'})
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng54122.html">NNETREMQSV()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

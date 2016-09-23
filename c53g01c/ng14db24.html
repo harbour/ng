@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng14d8db.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng14cec7.html">[^^Up^^]</A>
+<A HREF="ng14e025.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>bitmaps                                    (Assignable)</B>
+
+        Contains an array of exactly two elements.  The first element of this
+        array is the file name of the bitmap to be displayed when the radio
+        button is selected.  The second element of this array is the file
+        name of the bitmap to be displayed when the radio button is not
+        selected.
+
+        Drive and directory names are not allowed; the file name extension is
+        required.  A bitmap file can be stored as a file on disk or in a
+        bitmap library.  If stored as a file, the file must reside in the
+        same directory as the application.  If stored in a bitmap library,
+        the library must reside in the same directory as the application and
+        it also must have the same name as the application with a .BML
+        extension.
+
+        CA-Clipper will search for the file name first and, if it is not
+        found, search in the bitmap library second.  If no file is found
+        either on disk or in the library, no bitmap will be displayed.
+
+        If this instance variable is not used, and the application is running
+        in graphic mode, the files RADIO_F.BMU and RADIO_E.BMU will be used
+        for the selected bitmap and unselected bitmap, respectively.
+
+        This instance variable only affects applications running in graphic
+        mode and is ignored in text mode.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

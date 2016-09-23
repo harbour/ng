@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng4198a.html">[^^Up^^]</A>
+<A HREF="ng4277b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+     This section is a summary of error messages possible when using RMAKE,
+     the CA-Clipper make utility.  The messages are divided into categories
+     according to severity and the point in the make process where the error
+     occurs.  Each category is described below, followed by a listing of all
+     messages in each category.  For specific information on the syntax and
+     operation of RMAKE, refer to the "Program Maintenance--RMAKE.EXE"
+     chapter in the Programming and Utilities Guide.
+
+ <B>RMAKE Warnings</B>
+
+     RMAKE warnings indicate potential errors in the make file but do not
+     prevent the make process from continuing.  The DOS return code is
+     unaffected by warnings.
+
+     The general format of an RMAKE warning message is as follows:
+
+     <B>&lt;filename&gt;(&lt;line&gt;) Warning RMAKE/R1xxx &lt;message text&gt;</B>
+     <B>   [: &lt;symbol&gt;]</B>
+
+     If the warning is not associated with a particular line of a make file,
+     no filename or line number is displayed.  Unless the /W option is
+     specified, RMAKE does not display any warning messages.
+
+ <B>RMAKE Execution Errors</B>
+
+     RMAKE results in an execution error if any program executed as an action
+     in a make file results in a DOS return code other than zero.  RMAKE sets
+     the DOS return code to 1 after an execution error and, unless the /I
+     option was specified, terminates the make run.
+
+     The general format of an RMAKE execution error message is as follows:
+
+     <B>&lt;filename&gt;(&lt;line&gt;) Error RMAKE/R2xxx Exit &lt;n&gt;:</B>
+     <B>   &lt;command line text&gt;</B>
+
+     The exit number indicates the DOS return code of the indicated command
+     line in the make file.
+
+ <B>RMAKE Fatal Errors</B>
+
+     Fatal error messages identify serious make file problems from which
+     RMAKE cannot recover.  Fatal errors may occur during either the parse or
+     the make phase.  After a fatal error, RMAKE terminates the make run and
+     sets the DOS return code to 1.
+
+     The general format of a fatal error message is as follows:
+
+     <B>&lt;filename&gt;(&lt;line&gt;) Fatal RMAKE/R3xxx &lt;message text&gt;</B>
+     <B>   [: &lt;symbol&gt;]</B>
+
+     If the error is not associated with a particular line of a make file, no
+     file name or line number is displayed.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

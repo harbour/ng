@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2b16.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng35ef.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BEGINAREA                     Specify start of dynamic overlay area</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify the start of a dynamic overlay area</B></U>
+
+ <U>Syntax   : <B>BEGINAREA</B></U>
+
+ The BEGINAREA command is used to specify to the linker the start of an
+ overlay area in the output file. Each BEGINAREA should have a corresponding
+ ENDAREA to indicate the end of the overlay area.
+
+ With static overlays BEGINAREAs, and therefore overlay areas, may be nested
+ within one another so long as there is a corresponding ENDAREA for each
+ BEGINAREA. This allows the developer to create a structure of overlays
+ within an area to use the minimum amount of memory for the maximum number of
+ overlay routines.
+
+ With Blinker dynamic overlays, as opposed to static overlays, the mutual
+ dependency of each overlay procedure or file is unimportant. Also, the
+ multiple nested overlay areas associated with static overlays are no longer
+ necessary, although multiple overlay areas may be helpful in ordering the
+ included libraries. The BEGINAREA and ENDAREA commands are simply treated as
+ markers to the beginning and end of code which is to be overlaid.
+
+ For most compilers, the .OBJ files listed between a BEGINAREA and ENDAREA
+ are managed at runtime on a segment basis, i.e. the whole CODE segment for
+ each .OBJ is loaded into memory whenever any function or procedure within
+ that .OBJ file is called.
+
+ For more details on how functions and procedures may be kept in separate
+ segments to reduce the overlay unit size, please refer to the appropriate
+ compiler manual for the language being used.
+
+ <B>Note for CA-Clipper:</B>
+
+ All CA-Clipper Summer '87 .OBJ files listed between a BEGINAREA and ENDAREA
+ are managed at runtime on a procedure or function basis, no matter how many
+ procedures or functions are present in the .OBJ file. Therefore excessively
+ large procedures and functions should be avoided. The CA-Clipper 5.x dynamic
+ paging system automatically breaks procedures down into 1kb pages for
+ improved execution speed, so this is not a concern.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng15d76.html">ENDAREA</A>
+<A HREF="ng1ba4f.html">SECTION INTO</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

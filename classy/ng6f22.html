@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng62d5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng271.html">[^^Up^^]</A>
+<A HREF="ng76e0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>METHOD (declaration)</B>
+
+ <B>Synopsis</B>
+
+         Declare method(s) with same named message(s)
+         (inside class specification)
+
+ <B>Syntax</B>
+
+         METHOD &lt;method name list&gt; [CONSTRUCTOR | CTOR]
+
+ <B>Arguments</B>
+
+         <B>&lt;method name list&gt;</B> is a list of methods to be declared. Each
+         such method should be defined later in the same module using the
+         <B>METHOD definition</B> command.
+
+ <B>Description</B>
+
+         This command is used within a class specification to declare one
+         or more methods for that class. Once a method has been declared
+         using this command, the actual code of the method must be defined
+         using the <B>METHOD definition</B> command (see next entry).
+
+         Methods declared and defined in this way can be invoked by sending
+         a message of the same name as the method to an instance of the
+         class.
+
+         With Class(y), the name of a message and the name of the
+         associated method is usually the same, and the <B>METHOD</B> command
+         assumes this. See the <B>MESSAGE...METHOD</B> command for information
+         about declaring messages whose methods have a different name.
+
+         It is strongly recommended that methods declared using this syntax
+         are defined in the same program module as the class specification.
+         See the section <B>External Methods</B> for alternatives.
+
+         If the optional <B>CONSTRUCTOR</B> clause is included (or its
+         abbreviation <B>CTOR</B>), then the message is flagged as a
+         constructor message. See <B>Constructor Messages</B> for more
+         information.
+
+ <B>Note</B>
+
+         This form of the <B>METHOD</B> command is referred to as a <B>method</B>
+         <B>declaration</B> command, and is only valid inside a class
+         specification. After the class specification, the <B>METHOD</B>
+         command is treated as a <B>method definition</B> command (described
+         in the following entry).
+
+ <B>See Also</B>
+
+         <B>MESSAGE...METHOD</B>, <B>METHOD (definition)</B>, <B>External</B>
+         <B>Methods</B>, <B>Constructor Messages</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng62d5.html">MESSAGE...METHOD</A>
+<A HREF="nga87f.html">METHOD (definition)</A>
+<A HREF="ng17ce1.html">External Methods</A>
+<A HREF="ngf58a.html">Constructor Messages</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

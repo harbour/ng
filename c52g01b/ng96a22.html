@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9588b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng97305.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RESTORE</B>
+ Retrieve memory variables from a memory (.mem) file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RESTORE FROM &lt;xcMemFile&gt; [ADDITIVE]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcMemFile&gt;</B> is the memory (.mem) file to load from disk.  If an
+     extension is not specified, the extension (.mem) is assumed.  The
+     filename may be specified as a literal string or as a character
+     expression enclosed in parentheses.
+
+     <B>ADDITIVE</B> causes memory variables loaded from the memory file to be
+     added to the existing pool of memory variables.
+
+ <B>Description</B>
+
+     RESTORE is a memory variable command that recreates public and private
+     variables previously SAVEd to a memory (.mem) file and initializes them
+     with their former values.  The scope of the variable is not SAVEd with
+     the variable but is instead established when the variable is RESTOREd.
+     Arrays and local variables cannot be SAVEd or RESTOREd.
+
+     When memory variables are RESTOREd, they are recreated as private
+     variables with the scope of the current procedure or user-defined
+     function unless they exist as public variables and you specify the
+     ADDITIVE clause .  If ADDITIVE is specified, public and private
+     variables with the same names are overwritten unless hidden with
+     PRIVATE.  If ADDITIVE is not specified, all public and private variables
+     are released before the memory file is loaded.
+
+     Local and static variables are unaffected by RESTORE.  If a local or
+     static variable has been declared in the current procedure or
+     user-defined function, and a variable with the same name is RESTOREd,
+     only the local or static variable is visible unless references to the
+     RESTOREd variable are prefaced with the MEMVAR alias.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates a typical application of SAVE and
+        RESTORE.  Here memory variables containing screens are SAVEd TO and
+        RESTOREd FROM memory files:
+
+        // Create and use a pseudoarray of screens
+        SAVE SCREEN TO cScreen1
+        SAVE ALL LIKE cScreen* TO Screens
+        //
+        &lt;statements&gt;...
+        //
+        RESTORE FROM Screens ADDITIVE
+        nNumber = "1"
+        RESTORE SCREEN FROM ("cScreen" + nNumber)
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbfbea.html">LOCAL</A>
+<A HREF="ngc25d0.html">PRIVATE</A>
+<A HREF="ngc587f.html">PUBLIC</A>
+<A HREF="ng983ea.html">SAVE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,47 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6aeb6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng6be78.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LLG_FNTCLIP structure</B>
+ Structure for font clipping information
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   int   iPixTop;</B>
+     <B>   int   iPixBot;</B>
+     <B>} LLG_FNTCLIP;</B>
+     <B></B>
+     <B>typedef LLG_FNTCLIP far * LLG_LPFNTCLIP;</B>
+
+ <B>Elements</B>
+
+     <B>iPixTop</B> is the starting row number, in pixels, of the font matrix.
+     Values can range from one to the height of the font.
+
+     <B>iPixBot</B> is the ending row number, in pixels, of the font matrix.
+     Values can range from one to the height of the font.
+
+ <B>Files</B>   Header file is Llibg.api.
+
+ <B>Used By</B>   _gFntClipGet(), _gFntClipSet()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6621f.html">_gFntClipGet()</A>
+<A HREF="ng6651d.html">_gFntClipSet()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

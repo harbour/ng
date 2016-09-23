@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng460a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng652f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Delete():</B>
+
+  Purpose:  Deletes specifed index record from HiPer-SEEK index file.
+
+   Syntax:  hs_Delete( &lt;hIndex&gt;, &lt;nVal&gt; )
+
+    Where:  &lt;hIndex&gt; is an integer handle of a HiPer-SEEK index file.
+
+            &lt;nVal&gt; is a integer representing the record number to be deleted.
+
+  Returns:  1 if successful or a negative integer indicating an error.
+
+  Errors Returned:
+
+      -4 (BADSEEK) Error while attempting seek during buffer flushing.
+      -5 (BADREAD) System generated a read error while reading.
+      -6 (BADWRITE) Error while attempting write during buffer flush.
+      -7 (RECBOUND) 'record number' is not valid. It is either too low or
+         greater than the total number of records indexed.
+      -8 (ISDELETED) Specified record number is already marked as deleted.
+     -16 (BADPARMS) Invalid parameters were passed to the function.
+     -18 (BADHANDLE) Invalid handle was passed to the function.
+
+  Comments:
+
+    1. hs_Delete() is used to set a delete flag for an individual index
+    record. The actual index record is not physically deleted from the
+    index, rather it is only marked as deleted. Marking an index record as
+    deleted prevents it from being returned by hs_Next(). This reflects the
+    way deleted records are handled in a .DBF file.
+
+    2. If your application reuses deleted .DBF records, write the new .DBF
+    record, undelete (using hs_UnDelete()) the corresponding index record,
+    then replace (using hs_Replace()) the index corresponding record.
+
+  Example:
+
+    USE sales EXCL
+    h := hs_Open( "SALES.HSX", 10, 1 )
+    DO WHILE !eof()
+      IF deleted()                        // If DBF record is deleted
+        nVal := <B>hs_Delete( h, RecNo() )</B>   // Delete HiPer-SEEK index record
+        IF nVal &lt; 1
+          ? "HiPer-SEEK delete error: " + LTrim( Str( RecNo() ))
+        ENDIF
+      ENDIF
+      SKIP
+    ENDDO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngace9.html">hs_UnDelete()</A>
+<A HREF="ng6ce1.html">hs_IfDel()</A>
+<A HREF="ng9e41.html">hs_Replace()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

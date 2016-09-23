@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng86ce8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng87629.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>STRSCREEN()</B>
+ Displays a string with characters and attributes on the screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>STRSCREEN(&lt;cCharacterstring&gt;, [&lt;nRow&gt;],</B>
+     <B>   [&lt;nColumn&gt;]) --&gt; cNull</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cCharacterstring&gt;</B>  Designates the character string to display.
+
+     <B>&lt;nRow&gt;</B>  Designates the starting line for the output.  The default is
+     the cursor line.
+
+     <B>&lt;nColumn&gt;</B>  Designates the starting column for output.
+
+ <B>Returns</B>
+
+     STRSCREEN() always returns a null string.
+
+ <B>Description</B>
+
+     STRSCREEN() displays the contents of a variable to the screen (assuming
+     that it is in a particular format).  You must always have a character,
+     an attribute, another character, etc., in the designated character
+     string.
+
+     &lt;nRow&gt; and &lt;nColumn&gt; specify the first row and column in which to write
+     the string.
+
+ <B>Notes</B>
+
+     <B>Warning!</B>   The string must also contain attribute bytes.  Use
+     COLORTON() to create the combined numeric attributes.
+
+     <B>.</B>  Output does not alter the cursor position.
+
+ <B>Examples</B>
+
+     <B>.</B>  Output "ABC" at the current cursor position with a different
+        attribute for each character:
+
+        STRSCREEN("A"+CHR(1)+"B"+CHR(2)+"C"+CHR(3))
+
+     <B>.</B>  Output ABC with different attributes at the current cursor
+        column in line 24:
+
+        STRSCREEN("A"+CHR(1)+"B"+CHR(2)+"C"+CHR(3), 24)
+
+     <B>.</B>  Output ABC with different attributes at column 70, line 24:
+
+        STRSCREEN("A"+CHR(1)+"B"+CHR(2)+"C"+CHR(3), 24, 70)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8392c.html">SCREENSTR()</A>
+<A HREF="ng6f15a.html">Introduction</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

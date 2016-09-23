@@ -1,0 +1,37 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng12cce.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng13899.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Length of Variable Names</B>
+
+  Due to the way assignment to instance (and class) variables is implemented
+  in Clipper, there is a limitation on the length of such variable names. By
+  treating instance and class variables as though their names are only
+  significant to nine characters, no problems will occur.
+
+  <B>Technical Note</B>
+
+  The reason for the nine-character limitation on instance variable names is
+  that there are two messages associated with each member variable - the
+  name of the variable as specified in the class specification, and the same
+  name with an underscore prepended. The Clipper compiler converts
+  assignments to member variables into a message send using the modified
+  instance variable name. Due to the standard ten character width of the
+  Clipper symbol table, a variable with a ten character name effectively has
+  the last character truncated for assignment purposes. This means that it
+  is not possible to have two variables in a class distinguished only by the
+  tenth character of their name.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

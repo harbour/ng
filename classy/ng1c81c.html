@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1c34c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng1cea7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Reserved Words</B>
+
+  Class(y) defines a number of system classes. Some of these have names
+  which may conflict with other names in your application, specifically
+  Class and Object. If your application defines functions or classes with
+  these names, you will need to modify your application accordingly. Most
+  other Class(y) system classes have names which have been qualified by a
+  three-letter prefix such as CSY or CMS, so they should not conflict with
+  other class or function names. See the <B>System Classes</B> section for more
+  information.
+
+  It is also unwise to use the scalar class names Array, Block, Character,
+  Date, Integer, Logical, Nil, and Numeric, since these class names are used
+  by standard Clipper, and some of them, such as Array and NIL, are Clipper
+  reserved words.
+
+  <B>Reserved Message Names</B>
+
+  The Class and Object classes define a number of messages which are
+  inherited by other classes in the system. Some of these, such as those
+  covered in the <B>Predefined Messages</B> section, should not be used as
+  message names elsewhere. However, others can be overridden, as with any
+  inherited method. Overriding inherited system methods should be done with
+  caution, since it could lead to compatibility problems when used with
+  classes written by other people.
+
+  <B>Clipper Reserved Words</B>
+
+  Clipper reserved words cannot be used as method names, but they can be
+  used as message names. To define a method with the same name as a Clipper
+  reserved word, use the <B>MESSAGE...METHOD</B> command. See the Clipper
+  documentation for a full list of reserved words.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1dd17.html">System Classes</A>
+<A HREF="ng62d5.html">MESSAGE...METHOD</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

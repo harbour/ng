@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng18643.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng197b9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MAXCOL()</B>
+ Extends the CA-Clipper MAXCOL() function
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MAXCOL([&lt;lMode&gt;]) --&gt; nMaxColumn</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lMode&gt;</B>  When .F. is passed, or when no parameter is specified, the
+     function returns the highest column number of the selected window.  When
+     .T. is passed, it returns the highest column number for the entire
+     screen.  The default value (.F.) returns the highest column number for
+     the selected window.
+
+ <B>Returns</B>
+
+     MAXCOL() returns the highest column number available within a window or
+     within the physical screen.
+
+ <B>Description</B>
+
+     MAXCOL() is also a CA-Clipper function.  Without parameters, or when
+     specifying .F., MAXCOL() always returns a value for the selected window.
+     In the absence of CA-Clipper Tools, this value is always Window 0, which
+     is exactly the same size as the entire screen.  However, if the extended
+     driver CTUS.LIB and the CA-Clipper Tools window functions are
+     implemented, this value can change.  If you want the highest column for
+     the entire screen, regardless of the window selected, you can pass .T.
+     for the optional &lt;lMode&gt; parameter.
+
+ <B>Note</B>
+
+     <B>.</B>  The explanation of this function was taken from the Video
+        Functions chapter and placed in the Extended Driver chapter.  Now all
+        CA-Clipper Tools functions that replace and/or extend CA-Clipper
+        functions when CTUS.LIB is linked in are in the same chapter.  The
+        extensions to the CA-Clipper versions of these functions are only of
+        interest when used in conjunction with the other extended driver
+        functions and their accompanying windows.
+
+ <B>Example</B>
+
+     Display the highest column number:
+
+     WOPEN(10, 10, 20, 70)            // Open a window
+     ? MAXCOL()                       // Relates to a window
+     ? MAXCOL(.T.)                    // Back to the physical screen
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7ec29.html">NUMCOL()</A>
+<A HREF="ng19adf.html">MAXROW()</A>
+<A HREF="ngfe1c.html">CGA40()</A>
+<A HREF="ng1de06.html">SETMAXCOL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

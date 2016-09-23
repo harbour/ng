@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng12ddd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng96fc.html">[^^Up^^]</A>
+<A HREF="ng1381f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_itemPutL()</B>
+ Place a logical value into an Item
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "item.api"</B>
+     <B>ITEM _itemPutL(</B>
+     <B>                ITEM itemLogic,</B>
+     <B>                BOOL bValue</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>itemLogic</B> is the Item in which you want to place the logical value.
+     If itemLogic is NULL, _itemPutL() will create a new Item.
+
+     <B>bValue</B> is the logical (boolean) value to place into the Item.  As
+     with C, zero represents FALSE, and nonzeros represent TRUE.
+
+ <B>Returns</B>
+
+     A new Item reference containing the logical value passed.
+
+ <B>Description</B>
+
+     The _itemPutL() function allows you to place a logical value into an
+     Item.  Note that if the first parameter passed to _itemPutL() is NULL,
+     _itemPutL() will create a new Item and place the logical value lValue in
+     that Item.  The data contained in itemLogic is released to SVOS for
+     garbage collection.
+
+     <B>Caution! </B> Do not assume that the address in itemLogic will be the
+     same address returned by _itemPutL().
+
+ <B>Examples</B>
+
+     /*
+     *
+     * IsDouble( nNumber ) -&gt; lIsIt
+     *
+     *
+     * Returns true if the number passed is
+     * internally represented as a double.
+     */
+
+     CLIPPER IsDouble( void )
+     {
+        ITEM itemRet, itemNum;
+
+        itemRet = _itemPutL( NULL, FALSE );
+
+        if (PCOUNT &gt; 0)
+        {
+           itemNum = _itemParam( 1 );
+
+           if (_itemType( itemNum ) &amp; DOUBLE)
+              itemRet = _itemPutL( itemRet, TRUE );
+
+           _itemRelease( itemNum );
+        }
+
+        _itemRelease( _itemReturn( itemRet ) );
+
+        return;
+     }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Item.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf7e5.html">_itemGetL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

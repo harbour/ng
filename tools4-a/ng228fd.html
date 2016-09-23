@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng21e9b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng22fc1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETNAME()</B>
+ Determines the user name for an internal netaddress
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETNAME(&lt;cInterNetAdr&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; cUser</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cInterNetAdr&gt;</B>  Designates a 20-character string containing a 10-
+     character hexadecimal byte sequence.  Two characters represent one byte
+     in hexadecimal form.  The leading eight characters of &lt;cInterNetAdr&gt;
+     (four byte) indicate the network number of &lt;cUser&gt;.  The remaining 12
+     characters (six byte) contain the station ID of &lt;cUser&gt; (number of the
+     network adapter, Node Address).
+
+     <B>&lt;cServer&gt;</B> Designates the name of the file server that is used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETNAME() returns the name of the user that is logged in with the
+     internet address, &lt;cInterNetAdr&gt;.  The function returns an empty string
+     if the user cannot be determined.
+
+ <B>Description</B>
+
+     NOVELL NET NAME
+     NNETNAME() allows you to determine the name of a user with an internal
+     netaddress and can be used in conjunction with the SPX functions of the
+     Point to Point communication.  Functions like SPXCONTARG() always return
+     the communication's destination as an internet address.  If both the
+     current station and the station specified by &lt;cInterNetAdr&gt; are logged
+     in on &lt;cServer&gt;, NNETNAME() allows you to determine the user name of a
+     passed internet address.
+
+ <B>Example</B>
+
+     Determine the destination's user name of an SPX session:
+
+     ? NNETNAME(SPXCONTARG(nHandle))
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng239bb.html">NNETSTAID()</A>
+<A HREF="ng930c7.html">SPXCONTARG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,120 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng35151.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng369a3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETTRSLST()</B>
+ Determines the trustee directories and files
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETTRSLST(&lt;cName&gt;,[&lt;nType&gt;],[&lt;cServer&gt;|&lt;nConId&gt;]</B>
+     <B>   --&gt; aTrusteeDir</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cName&gt;</B>  Designates the name of the bindery object for which the
+     trustee directories and files are determined.  In most cases, &lt;cName&gt;
+     represents the login name of a user.
+
+     <B>&lt;nType&gt;</B>  Designates the object type of &lt;cName&gt;.  The default value
+     designates the object type, user.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which the
+     trustee directories and files are determined.  Your workstation must be
+     attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETTRSLST() returns a two-dimensional array.
+
+     The number of lines of the array corresponds to the number of trustee
+     directories and files of &lt;cName&gt; on the related file server.  Each line
+     (subarray) contains a complete path name (including the volume name) and
+     the rights of &lt;cName&gt; in this directory.
+
+ <B>Description</B>
+
+     NOVELL NET TRUSTEES LIST
+     Under Netware, the access rights for each user can be assigned on the
+     directory level.  Under Netware 3.x, the access rights for each user can
+     be assigned on the file level.  These rights are called trustee rights.
+     NNETTRSLST() allows you to determine all trustee assignments for a
+     bindery object.  However, supervisor rights on the related file server
+     are required.
+
+     NNETTRSLST() returns a two-dimensional array that contains each trustee
+     assignment as a separate line (subarray).  Each subarray consists of two
+     elements: a complete pathname that specifies the directory or the file
+     for which the trustee rights have been granted, and a numeric value that
+     represents the rights that have been granted to &lt;cName&gt; for the
+     directory.
+
+     The interpretation of the numeric value depends on the Netware version
+     used.  Table 23.17 and 23.18 show the definition of the bits.  A right
+     is granted if the corresponding bit is represented in the return value.
+
+     <B>Table 23.17:  Rights Coding under Netware 2.x</B>
+     ------------------------------------------------------------------------
+     <B>Bit     Definition     Description</B>
+     ------------------------------------------------------------------------
+     1       READ           Read files
+     2       WRITE          Write files
+     3       OPEN           Open files
+     4       CREATE         Create new files
+     5       DELETE         Delete files
+     6       PARENTAL       Create new directories
+     7       SEARCH         Search files in directories
+     8       MODIFY         Modify files or attributes
+     ------------------------------------------------------------------------
+
+     <B>Table 23.18:  Rights Coding under Netware 3.x</B>
+     ------------------------------------------------------------------------
+     <B>Bit     Definition     Description</B>
+     ------------------------------------------------------------------------
+     1       READ           Read files
+     2       WRITE          Write to files
+     3       RESERVED
+     4       CREATE         Create new files
+     5       ERASE          Delete files
+     6       ACCESS CONTROL Trustee rights can be modified
+     7       FILE SCAN      Search files in directories
+     8       MODIFY         Modify files or attributes
+     9       SUPERVISORY    All rights / can grant rights
+     ------------------------------------------------------------------------
+
+ <B>Note</B>
+
+     <B>.</B>  For detailed information about rights and security, see the
+        Novell documentation.
+
+ <B>Examples</B>
+
+     Determine and display the trustee directories and files for user MIKE.
+     Granted rights are represented by the first letter of their definition:
+
+     aTrust=NNETTRSLST('MIKE')
+     FOR i = 1 TO LEN(aTrust)
+     ? PADR(aTrust[i,1],64),BITTOC(aTrust[i,2],NNETRGHMSK(),.T.)
+     NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng369a3.html">NNETTRUST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

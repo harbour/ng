@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng37f6b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng346a0.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>12  The Extend System</B>
+------------------------------------------------------------------------------------------
+
+     The Extend system is a set of functions that are used by C and Assembly
+     language programs to interface with Clipper programs.  The Extend
+     system includes two memory allocation functions, _xalloc() and
+     _xgrab(), which allow C programs to allocate memory from Clipper.
+     These functions call the fixed memory allocator (see above).
+
+     The Extend system also allows C programs to gain access to Clipper data
+     values.  The Extend system _parc() function, used to inspect character
+     values passed from Clipper, is defined as returning an address in real
+     memory.  Since character values are stored in virtual memory under SVOS
+     (see above), the Extend system automatically locks the appropriate VM
+     segments in response to _parc() requests.  The segments are
+     automatically unlocked when the C function returns control to Clipper
+     (they may also be unlocked manually from C, see below).
+
+     A conflict can occur if a C function locks a VM segment via _parc() and
+     then attempts to allocate a large amount of memory using the Extend
+     allocators.  If the segment is locked near the low end of the swap
+     space, the fixed allocator may be unable to lock or expand a fixed
+     segment to satisfy the allocation request.  If this occurs, a new fixed
+     segment is created and locked higher in memory.  This reduces memory
+     efficiency because the VMM is not allowed to move fixed segments (in
+     severe cases, the VMM may issue a <B>swap space exhausted</B> error
+     because the swap space has become too cluttered with fixed segments).
+     To prevent this, the VMM maintains a <B>safety zone</B> at the low end of
+     the swap space.  _parc() requests are prevented from locking segments
+     within this zone.
+
+     <B>Configuration:</B>  The Clipper 5.0 VMM defines an entry point called
+     _xunlock().  This function can be called from C or assembly language
+     programs to unlock SVOS segments when large amounts of memory are to be
+     allocated after _parc() has been called.
+
+     <B>Caution:</B>  Calling _xunlock() causes any pointers returned from
+     previous _parc() calls to become invalid.  To access a Clipper
+     character value after calling _xunlock(), you must make another call to
+     _parc() to get a new pointer.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

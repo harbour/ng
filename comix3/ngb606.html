@@ -1,0 +1,156 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb0ff.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ngc16d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlNewDup()</B>            Create a duplicate of a RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlNewDup(rlSrc) -&gt; rlResult
+
+<B>Arguments</B>
+
+    rlSrc is the RecordList to be duplicated
+
+<B>Returns</B>
+
+    rlNewDup() returns a duplicate of the given RecordList.
+
+<B>Description</B>
+
+    rlNewDup() creates a new RecordList which is a duplicate of the given
+    RecordList.
+
+    This allows you to save RecordList's as needed.
+
+<B>Example</B>
+
+    *   Let the user tag certain records and add them to the list
+    rlTag := userTag()  
+
+    *   Restrict to just the J's
+    cmFilter("last = 'J'")
+
+    *   Now, further restrict to only show tagged records, but dup()
+    *   rlTag so that we don't lose it
+<B>    rlAnd(rlGetFilter(), rlNewDup(rlTag))</B>
+
+    dbedit()
+    ...
+
+    *   Now we're done, so get rid of rlTag
+    rlDestroy(rlTag)    
+
+<B>Example</B>
+
+    *   Do a cross-tab of records meeting various conditions
+
+    *                         &lt;--- Columns ---&gt;
+    *               state='SC'      state='FL'      state='CA'
+    *   age = 21        10              5               0
+    *   age = 22        12              7               2
+    *   age = 23         9              3               3
+    *
+    *   aRetVal is the 2-D count array: {{10,5,0}, {12,7,2}, {9,3,3}}
+
+    #define COL_WIDTH       15
+
+    use demo index age, state
+
+    *   Generate the cross-tab
+    aCondRow := { "age = 21", "age = 22", "age = 23" }
+    aCondCol := { "state='SC'", "state='FL'", "state='CA'" }
+    aRetVal := crossTab(aCondRow, aCondCol)
+
+    *   Now output it
+    clear
+
+    *   Output the column headers
+    for i := 1 to len(aCondCol)
+        @ 0, (i * COL_WIDTH) say aCondCol[i]
+    next i
+
+    *   For each row
+    for i := 1 to len(aCondRow)
+
+        *   Say the condition
+        @ i, 0 say aCondRow[i]
+
+        *   And each of the titles
+        for j := 1 to len(aRetVal[i])
+            @ i, (j * COL_WIDTH) say aRetVal[i][j]
+        next j
+    next i
+    return
+
+
+    function crossTab(aCondRow, aCondCol)
+    local retVal[len(aCondRow)][len(aCondCol)]
+    local rlRow := aRlNewQuery(aCondRow)
+    local rlCol := aRlNewQuery(aCondCol)
+    local rlResult
+    local i, j
+
+    *   For each row condition
+    for i := 1 to len(aCondRow)
+
+        *   For each column condition (for this row condition)
+        for j := 1 to len(aCondCol)
+
+            *   AND them together, rlNewDup()'ing each one so that the
+            *   original is not destroyed or altered
+            *
+<B>            rlResult := rlAnd(rlNewDup(rlRow[i]), rlNewDup(rlCol[j]))</B>
+
+            *   Get the count as the result
+            retVal[i][j] := rlCount(rlResult)
+
+            *   Destroy the result recordList
+            rlDestroy(rlResult)
+        next j
+    next i
+
+    *   Destroy the array of RecordList's
+    aRlDestroy(rlCol)
+    aRlDestroy(rlRow)
+
+    *   Return the array of counts
+    return retVal
+
+
+    *   Construct an array of RecordList's for an array of conditions
+    function aRlNewQuery(aCond)
+    local retVal[len(aCond)]
+    local i := 1
+    aeval(aCond, {|cCond| retVal[i++] := rlNewQuery(cCond)})
+    return retVal
+
+
+    *   Destroy an array of RecordList's
+    function aRlDestroy(aRl)
+    aeval(aRl, {|rl| rlDestroy(rl)})
+    return
+
+<B>See Also</B>
+
+    rlNew(), rlNewQuery()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb0ff.html">rlNew()</A>
+<A HREF="ngc16d.html">rlNewQuery()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

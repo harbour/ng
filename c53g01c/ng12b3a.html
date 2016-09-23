@@ -1,0 +1,121 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng12129.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng139ca.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLOBDIRECTIMPORT()</B>
+ Import a file into a BLOB file and return a pointer to the data
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>BLOBDIRECTIMPORT(&lt;nOldPointer&gt;, &lt;cSourceFile&gt;)</B>
+     <B>    --&gt; nNewPointer</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nOldPointer&gt;</B> is a pointer to the BLOB data which will be released
+     after the import.  This pointer can be obtained using BLOBDIRECTPUT(),
+     BLOBDIRECTIMPORT(), or DBFIELDINFO(DBS_BLOB_POINTER, &lt;nFieldPos&gt;).
+     Passing zero (0) disables the release of data.
+
+     <B>Important! </B> If specified, BLOBDIRECTIMPORT() releases the space
+     associated with &lt;nOldPointer&gt; for reuse by other data.  Therefore, it is
+     illegal to use &lt;nOldPointer&gt; with any of the BLOB functions after
+     passing it as an argument to this function.  Use the function's return
+     value to refer to the newly stored data.
+
+     <B>&lt;cSourceFile&gt;</B> is the name of the file from which to read the BLOB
+     data, including an optional drive, directory, and extension.  See
+     SETDEFAULT() and SETPATH() for file searching and creation rules.  No
+     default extension is assumed.
+
+     This function attempts to open &lt;cSourceFile&gt; in shared mode.  If the
+     file does not exist, a runtime error is raised.  If the file is
+     successfully opened, the operation proceeds.  If access is denied
+     because another process has exclusive use of the file, for example,
+     NETERR() is set to true (.T.).  Concurrency control:and
+     BLOBDIRECTIMPORT()
+
+     <B>Note: </B> There are no restrictions on the size of &lt;cSourceFile&gt; except
+     that you must have enough disk space to make the copy.
+
+ <B>Returns</B>
+
+     BLOBDIRECTIMPORT() returns a numeric pointer to the BLOB image stored in
+     &lt;cSourceFile&gt;.
+
+ <B>Description</B>
+
+     BLOBDIRECTIMPORT() provides a mechanism for copying the contents of a
+     file into a BLOB file.  By default, this function operates on the
+     currently selected work area.  It can be made to operate on an
+     unselected work area by specifying it within an aliased expression.
+
+     BLOBDIRECTIMPORT() is used in conjunction with BLOBDIRECTEXPORT() to
+     transfer data back and forth between external files and BLOB files.  You
+     can use BLOBDIRECTIMPORT() with a variety of file types, including
+     graphic images, word processor files, and printer fonts.  These two
+     functions are excellent for creating databases for documents, graphics,
+     sounds, etc.
+
+     <B>Important! </B> After importing a file with BLOBDIRECTIMPORT(),
+     nNewPointer, the return value, is the only way to access the data from
+     the BLOB file.  It is up to you to provide permanent storage for this
+     reference (see example below).
+
+     <B>Note: </B> DBFIELDINFO(DBS_BLOB_TYPE, &lt;nFieldPos&gt;) will return "C"
+     (string) for any memo field created using BLOBDIRECTIMPORT().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example imports a bitmap (.bmp) file to be part of an
+        array of startup data.  The data, stored in the root area of the BLOB
+        file, could then be used to display the application's startup screen:
+
+        FUNCTION PUTPIX()
+           LOCAL cBMPFile
+           LOCAL aSettings
+
+           cBMPFile := "logo.bmp"
+           aSettings := {}
+
+           // Customer database where startup parameters
+           // are stored for convenience
+           USE Customer NEW VIA "DBFMEMO"
+
+           // Get default path settings
+           AADD(aSettings, STARTPATHS())
+
+           // Get default color settings
+           AADD(aSettings, DEFAULTCOLORS())
+
+           // Get company logo for display at startup.
+           // There is nothing to free because this
+           // is the first time importing.
+           nPointer := BLOBDIRECTIMPORT(0, cBMPFile)
+           AADD(aSettings, nPointer)
+
+           // Store the settings in the root area of
+           // the customer.fpt file
+
+           BLOBROOTPUT(aSettings)
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng11361.html">BLOBDIRECTEXP()</A>
+<A HREF="ng1583f.html">BLOBIMPORT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,122 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1db68.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng13657.html">[^^Up^^]</A>
+<A HREF="ng1ec4e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_itemRelease()</B>
+ Make an item available for garbage collection
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "item.api"</B>
+     <B>BOOL _itemRelease(</B>
+     <B>                   ITEM itmRef</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>itmRef</B> is the item to release.
+
+ <B>Returns</B>
+
+     TRUE if the item passed was successfully released.
+
+ <B>Description</B>
+
+     The _itemRelease() function drops your Extend routine's reference to a
+     CA-Clipper-level item.  If your Extend routine was the only reference to
+     that item, then the item becomes garbage and a candidate for collection.
+     However, if the item is referred to elsewhere, then it will not be
+     collected until its last reference is released.
+
+     <B>Warning! </B> It is vitally important that items be released once you no
+     longer have need for them.  Failure to do so may cause a CA-Clipper
+     stack fault or memory errors.
+
+ <B>Examples</B>
+
+     /*
+     *
+     * CharCount( cString, cChar )
+     *
+
+
+     * Count occurrences of a single character
+     * in a CA-Clipper string.  Version 1.00
+     *
+     */
+
+     CLIPPER CharCount( void )
+     {
+        USHORT uiChars = 0;
+        USHORT uiLen;
+        USHORT i;
+        HANDLE vmhString;
+
+        BYTEP  cStringP;
+        BYTE   cFindMe;
+
+        ITEM   itmString, itmFindMe, itmRet;
+
+        if (PCOUNT != 2)
+        {
+           _ret();               // NOTE: Withhold service
+           return;               // Early return!
+        }
+
+        itmRet    = _itemPutNL( NULL, 0 );
+        itmString = _itemParam( 1 );
+        itmFindMe = _itemParam( 2 );
+
+        if ( (_itemType( itmString ) == CHARACTER) &amp;&amp;
+              (_itemType( itmFindMe ) == CHARACTER) )
+        {
+           _itemCopyC( itmFindMe, &amp;cFindMe, 1 );
+
+           vmhString = _xvalloc( _itemSize( itmString ), NULL );
+           cStringP = _xvlock( vmhString );
+
+           uiLen = _itemCopyC( itmString, cStringP, NULL );
+
+           for( i = 0; i &lt; uiLen; i++ )
+           {
+              if ( cStringP[i] == cFindMe )
+                 uiChars++;
+           }
+
+           _xvunlock( vmhString );
+           _xvfree( vmhString );
+
+           itmRet = _itemPutNL( itmRet, (long)uiChars );
+
+        }
+
+        _itemReturn( itmRet );
+
+        _itemRelease( itmRet );
+        _itemRelease( itmString );
+        _itemRelease( itmFindMe );
+
+        return;
+     }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Item.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng14a59.html">_evalPutParam()</A>
+<A HREF="ng158d7.html">_itemArrayGet()</A>
+<A HREF="ng1626d.html">_itemArrayNew()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

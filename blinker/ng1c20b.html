@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1ba4f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng1c62d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>STACK                         Specify stack size of .EXE file</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify stack size of .EXE file</B></U>
+
+ <U>Syntax   : <B>STACK &lt;nuSize&gt;</B></U>
+
+ <U>Default  : <B>Determined by compiler</B></U>
+
+ <U>Example  : <B>STACK 6148 # Set stack size to 6148 bytes</B></U>
+
+ The STACK command is used to specify to Blinker in DECIMAL the stack size in
+ bytes required by the program .EXE file. Please note that the stack size is
+ specified in DECIMAL, whereas the Microsoft Link stack size is specified in
+ HEX. Therefore, a stack size of 1000 with Microsoft Link would directly
+ equate to a stack size of 4096 with Blinker.
+
+ <B>Notes for CA-Clipper:</B>
+
+ For CA-Clipper developers, a preferable way of increasing the stack size and
+ therefore the maximum depth of procedure calls is to use the BLINKER
+ PROCEDURE DEPTH command.
+
+ BLINKER's default stack size when linking CA-Clipper programs is 5120 bytes,
+ which corresponds to a PROCEDURE DEPTH of approximately 50.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1238c.html">BLINKER PROCEDURE DEPTH</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng37de5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng38a9b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DIRCHANGE()</B>
+ Change the current DOS directory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DIRCHANGE(&lt;cDir&gt;) --&gt; nSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDir&gt;</B> is the name of the directory to change to, including the
+     drive.
+
+ <B>Returns</B>
+
+     DIRCHANGE() returns 0 if successful; -1 if there is an argument error.
+     Otherwise, DIRCHANGE() returns the DOS error code.
+
+ <B>Description</B>
+
+     DIRCHANGE() changes the current DOS directory.  This function may also
+     be used to determine whether or not a directory exists.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example attempts to change to the "c:\dos"
+        directory.  If it is unsuccessful, an error message is displayed.
+
+        nResult :=  DIRCHANGE("c:\dos")
+
+        IF nResult != 0
+           ? "Cannot change directory. "
+           DO CASE
+              CASE nResult == 3
+                 ?? "Directory does not exist."
+              CASE nResult == 5
+                 ?? "Access to directory denied."
+           END
+           BREAK
+        ENDIF
+
+       You may also use something like this:
+
+        DIRCHANGE( "..\..\test" )
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1b556.html">CURDIR()</A>
+<A HREF="ngca064.html">DIR*</A>
+<A HREF="ng39600.html">DIRMAKE()</A>
+<A HREF="ng39adb.html">DIRREMOVE()</A>
+<A HREF="ng39fcf.html">DISKCHANGE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

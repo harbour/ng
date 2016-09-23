@@ -1,0 +1,114 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngacef0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ngae9a4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>STORE*</B>
+ Assign a value to one or more variables
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>STORE &lt;exp&gt; TO &lt;idVar list&gt;</B>
+     <B>&lt;idVar&gt; = &lt;exp&gt;</B>
+     <B>&lt;idVar&gt; := [ &lt;idVar2&gt; := ...] &lt;exp&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp&gt;</B> is a value of any data type that is assigned to the specified
+     variables.
+
+     <B>TO &lt;idVar list&gt;</B> defines a list of one or more local, static, public,
+     private, or field variables that are assigned the value &lt;exp&gt;.  If any
+     &lt;idVar&gt; is not visible or does not exist, a private variable is created
+     and assigned &lt;exp&gt;.
+
+ <B>Description</B>
+
+     STORE assigns a value to one or more variables of any storage class.
+     The storage classes of CA-Clipper variables are local, static, field,
+     private, and public.  STORE is identical to the simple assignment
+     operators (=) and (:=).  In fact, a STORE statement is preprocessed into
+     an assignment statement using the inline operator (:=).  Like all of the
+     assignment operators, STORE assigns to the most recently declared and
+     visible variable referenced by &lt;idVar&gt;.  If, however, the variable
+     reference is ambiguous (i.e., not declared at compile time or not
+     explicitly qualified with an alias), it is assumed to be MEMVAR.  At
+     runtime, if no private or public variable exists with the specified
+     name, a private variable is created.
+
+     To override a declaration, you can specify the &lt;idVar&gt; prefaced by an
+     alias.  If &lt;idVar&gt; is a field variable, use the name of the work area.
+     For private and public variables, you can use the memory variable alias
+     (MEMVAR-&gt;).  To assign to a field variable in the currently selected
+     work area (as opposed to a particular named work area), you can use the
+     field alias (FIELD-&gt;).
+
+     As a matter of principle, all variables other than field variables
+     should be declared.  Preface field variables with the alias.  Use of
+     private and public variables is discouraged since they violate basic
+     principles of modular programming and are much slower than local and
+     static variables.
+
+     Note that the STORE command is a compatibility command and not
+     recommended for any assignment operation.  CA-Clipper provides
+     assignment operators that supersede the STORE command, including the
+     inline assignment operator (:=), the increment and decrement operators
+     (++) and (--), and the compound assignment operators (+=, -=, *=, /=).
+     Refer to the Operators and Variables sections of the Basic Concepts
+     chapter in the Programming and Utilities guide for more information.
+
+ <B>Notes</B>
+
+     <B>.  Assigning a value to an entire array:</B> In CA-Clipper, neither
+        the STORE command nor the assignment operators can assign a single
+        value to an entire array.  Use the AFILL() function for this purpose.
+
+     <B>.  Memo fields:</B> Assigning a memo field to a variable assigns a
+        character value to that variable.
+
+ <B>Examples</B>
+
+     <B>.</B>  These statements create and assign values to undeclared
+        private variables:
+
+        STORE "string" TO cVar1, cVar2, cVar3
+        cVar1:= "string2"
+        cVar2:= MEMVAR-&gt;cVar1
+
+     <B>.</B>  These statements assign multiple variables using both STORE
+        and the inline assignment operator (:=).  The methods produce
+        identical code:
+
+        STORE "value" to cVar1, cVar2, cVar3
+        cVar1 := cVar2 := cVar3 := "value"
+
+     <B>.</B>  These statements assign values to the same field referenced
+        explicitly with an alias.  The first assignment uses the field alias
+        (FIELD-&gt;), where the second uses the actual alias name:
+
+        USE Sales NEW
+        FIELD-&gt;CustBal = 1200.98
+        Sales-&gt;CustBal = 1200.98
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc25d0.html">PRIVATE</A>
+<A HREF="ngc587f.html">PUBLIC</A>
+<A HREF="ng93c77.html">RELEASE</A>
+<A HREF="ng94bb4.html">REPLACE</A>
+<A HREF="ng96a22.html">RESTORE</A>
+<A HREF="ng983ea.html">SAVE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

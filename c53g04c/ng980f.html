@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng909d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d0.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Report and Label Utility--RL.EXE</B>
+ Creates and modifies report (.frm) and label (.lbl) files.
+------------------------------------------------------------------------------
+
+     <B>RL</B>
+
+ <B>System Architecture</B>
+
+     RL is provided in source code form.  If you installed CA-Clipper in the
+     default Configuration, the following source files are located in the
+     \CLIP53\SOURCE\RL directory:
+
+     <B>.</B>  Rlfront.prg
+     <B>.</B>  Rllack.prg
+     <B>.</B>  Rldialg.prg
+
+     The system is provided as source code so you can modify it to suit your
+     specific needs.  You may want to make enhancements specific to your
+     development environment or simply add the RL system to your application,
+     thereby giving your users the power to create their own reports and
+     labels.
+
+     The RL system is broken up into two primary subsystems: front and back.
+     The RL front subsystem (found in Rlfront.prg) is the user interface of
+     the entire RL system.  The back subsystem (found in Rlback.prg) contains
+     all of the routines for reading and writing (.frm) and (.lbl) files.
+     The system is organized in this way so that you can create your own user
+     interface and easily access the lower-level routines to read and write
+     the form files.
+
+     To facilitate maintenance of the RL program files, the make file,
+     RL.RMK, is also installed with the RL source files.  Assuming your
+     current DOS directory is \CLIP53\SOURCE\RL, you can easily rebuild
+     RL.EXE after you make source code changes with the following command:
+
+     RMAKE RL
+
+     If your changes involve additional source modules or changes in the
+     existing file dependencies, you will need to update RL.RMK to reflect
+     those changes.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

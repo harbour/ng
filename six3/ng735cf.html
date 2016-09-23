@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng731eb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6dbf4.html">[^^Up^^]</A>
+<A HREF="ng73964.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Searching for Embedded Text and Text Fragments:</B>
+
+  HiPer-SEEK has no difficulty finding instances of embedded text. In pure
+  Clipper, you might use a technique like this:
+
+    <B>DO WHILE !eof()              </B>
+    <B>  IF &lt;search text&gt; $ field1  </B>
+    <B>    ? "Got one!"             </B>
+    <B>  ENDIF                      </B>
+    <B>  SKIP                       </B>
+    <B>ENDDO                        </B>
+
+  While this method will work, it forces you, just as LOCATE does, to
+  search sequentially through your file(s) to find instances of the search
+  text.  Clipper's native indexes are of no use in situations like this,
+  since all matches using SEEK require that valid finds match from the
+  beginning of the indexed string.
+
+  With a HiPer-SEEK index in place, you already have the ability to search
+  for embedded strings. HiPer-SEEK's indexing mechanism will return all
+  valid hits for a given search string, regardless of where that string
+  falls within the index's records.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

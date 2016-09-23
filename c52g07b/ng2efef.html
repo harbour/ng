@@ -1,0 +1,44 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2ec47.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c81b.html">[^^Up^^]</A>
+<A HREF="ng2f5a0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>The NOVTERM Alternate Terminal Driver</B>
+------------------------------------------------------------------------------
+
+     The NOVTERM terminal driver is a special-purpose driver that circumvents
+     an incompatibility between some nondedicated network server software and
+     CA-Clipper.  This incompatibility causes printers connected to the
+     server to slow to an unusable rate.
+
+     CA-Clipper applications and nondedicated servers compete for resources.
+     CA-Clipper  applications make use of the time between keystrokes to
+     perform various system tasks.  This greatly improves the application's
+     overall performance by limiting its idle time.  Certain nondedicated
+     servers only attempt to print within an application's idle time.  Since
+     a CA-Clipper application is seldom idle, this greatly slows printing.
+
+     <B>Important! </B> The NOVTERM terminal driver corrects the incompatibility
+     by preventing the CA-Clipper application from using idle time.  Because
+     this can severely hamper performance, you should only use the NOVTERM
+     terminal driver when necessary, and then you should link it only into
+     those applications that are physically running the nondedicated server.
+
+     <B>Note: </B> The NOVTERM terminal driver fully supports all screen and
+     keyboard functionality of the default terminal driver.  This includes
+     the ability to save and restore screens and support for all keys on the
+     standard 101-key keyboard.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

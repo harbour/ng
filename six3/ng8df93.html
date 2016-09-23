@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>With LOCALs and STATICs:</B>
+
+  A limitation imposed by the macro compiler in Clipper prevents Mach SIx
+  from using LOCAL and STATIC variables as portions of an expression.
+
+  As you may have noticed from perusing the Mach SIx header file,
+  MACHSIX.CH, Mach SIx functions receive both character and block forms of
+  the FOR condition for all optimizable commands.  Since there is no way to
+  internally de-compile a code block, Mach SIx evaluates queries solely
+  from the string copy of the FOR condition.
+
+  Each condition in the query is evaluated separately; indexed conditions
+  first, non-indexed second.  The problem becomes evident when a string
+  containing LOCALs or STATICs is macro compiled from deep within the Mach
+  SIx code and those variables are no longer in scope.  (The code block
+  form of the condition is only used when Mach SIx cannot optimize the
+  expression and control is transferred to Clipper.)
+
+  You can work around this limitation by manually creating a string
+  condition and calling the desired optimizable command with the condition
+  as an extended expression.  The following are several examples using
+  character, number, and date query conditions.
+
+     #include "SIXCDX.CH"
+     #include "MACHSIX.CH"
+
+     LOCAL cState, nAge, dDate, cCond1, cCond2, cCond3, nCount
+
+     //............................................ STATE = 'CA'
+     cState := 'CA'
+     cCond1 := "STATE=='" + cState + "'"
+     COUNT TO nCount FOR ( cCond1 )
+     ? "Poof!"
+     ? nCount
+
+     //............................................... AGE &lt; 30
+     nAge = 30
+     cCond2 := 'AGE &lt; ' + alltrim( str ( nAge ) )
+     COUNT TO nCount FOR ( cCond2 )
+     ? "Poof!"
+     ? nCount
+
+     //............................. HIREDATE = ctod('04/01/93')
+     dDate = ctod("04/01/93")
+     cCond3 := "HireDate = ctod('" + dtoc( dDate ) + "')"
+     COUNT TO nCount FOR ( cCond3 )
+     ? "Poof!"
+     ? nCount
+
+     //............................STATE == 'CA' .AND.  AGE &lt; 30
+     COUNT TO nCount FOR ( cCond1 + " .AND. " + cCond2 )
+     ? "Poof!"
+     ? nCount
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

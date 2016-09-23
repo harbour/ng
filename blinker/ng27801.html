@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2716d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng27d1e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLISERNUM() / BLISERNUMBAS()  Get burned in serial number</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get burned in serial number</B></U>
+
+ <U>Syntax   : <B>cValue = BLISERNUM()</B></U>
+
+ <U>Return   : <B>Serial number character string</B></U>
+
+ This function is used to examine a serial number and other information of up
+ to 100 characters encrypted into the executable file at link time, for
+ example to hide a serial number and licensee number in the .EXE file as a
+ form of copy protection.
+
+ The information is stored as a string of up to 100 characters in length,
+ which is copied directly into the .EXE file and returned in exactly the same
+ format at runtime.
+
+ For example, to encrypt a program with a serial number of 00100001, a 5 user
+ license and a licensee name of Blink, Inc. use the following command:
+
+    <B>BLINKER EXECUTABLE SERIAL 00100001 5 Blink, Inc.</B>
+
+ At program runtime these values can be examined by assigning the serial
+ number to a string and then manipulating it using a substring function, for
+ example:
+
+    <B>TMPSERNUM = BLISERNUM()</B>
+    <B>? "Serial number:", SUBSTR(TMPSERNUM,1,8)</B>
+    <B>? "No. of Users :", VAL(SUBSTR (TMPSERNUM,10,1))</B>
+    <B>? "Licensed to :", SUBSTR(TMPSERNUM,12,20)</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng98ec.html">BLINKER EXECUTABLE SERIAL</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

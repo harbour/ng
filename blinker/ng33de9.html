@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng33723.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng341b0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosSetRealVec()               Install real mode interrupt handler</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Install a real mode interrupt handler</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosSetRealVec( USHORT intno,</B></U>
+            <B>REALPTR newhandler, REALPTR _far *prevhandler);</B>
+
+ <U>intno      <B>Interrupt number.</B></U>
+
+ <U>newhandler <B>Pointer to new handler.</B></U>
+
+ <U>prevhandler<B>Pointer to a function pointer to receive the address of the</B></U>
+            <B>previous interrupt handler.</B>
+
+ <U>Return   : <B>Address of the previous interrupt handler.</B></U>
+
+ DosSetRealVec() sets the pointer for the specified real mode interrupt in
+ the real mode interrupt vector table. DosSetRealVec() also returns a pointer
+ to the previous interrupt handler.
+
+ An example of how to use this function can be found in the files INTMAIN.C,
+ INTHAND.ASM and INTMAIN.LNK in the C subdirectory of where Blinker is
+ installed.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2e7e3.html">DosGetRealVec()</A>
+<A HREF="ng33723.html">DosSetProtVec()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

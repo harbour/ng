@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1b2ce.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng19942.html">[^^Up^^]</A>
+<A HREF="ng1bf9a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlNewQuery()/rlSetFilter() don't seem to work!  Why?</B>
+
+rlNewQuery() determines records that meet the condition based ONLY on
+available indexes and it does NOT look at the database.
+
+rlSetFilter() uses ONLY the RecordList to determine which records to
+access.
+
+Since it is possible that rlNewQuery() may not have the indexes it needs to
+fully determine which records meet the condition, it can return a RecordList
+which contains more records than actually meet the condition.
+
+For example, consider the following code:
+
+    use demo index age
+    rlp := rlNewQuery("age &gt; 25 .and. salary &gt; 30000")
+    rlSetFilter(rlp)
+    list age, salary
+
+rlNewQuery() will return only records with age &gt; 25 _but_ the salary part of
+the condition is not resolved.  All records with age &gt; 25 will be included
+in the returned RecordList.  These records are known as "Maybe's".  They
+_may_ meet the condition or they _may_ not (based on whether or not their
+salary is OK).
+
+cmFilter() uses rlNewQuery()/rlSetFilter(), _but_ first does a dbSetFilter()
+of the condition.  This is done so that each record accessed is checked
+against the full explicit condition;  this eliminates any non-matching
+"maybe" records when they are read in.
+
+If you want to use rlNewQuery()/rlSetFilter() (and the condition is not
+fully optimizable) give dbSetFilter() a semantically equivalent condition. 
+For example:
+
+    dbSetFilter({|| myUDF()}, "myUDF()")
+    rl := rlNewQuery(&lt;condition&gt;)
+    rlSetFilter(rl)
+
+    function myUDF()
+    return (&lt;condition&gt;)
+
+Since rlNewQuery() can handle much larger conditions than cmFilter()
+(cmFilter() is limited by Clipper's macro compiler), this technique is
+sometimes useful.
+
+Please note that dbSetFilter() must be called before rlSetFilter(), because
+any existing Filter RecordList for the workarea is discarded when
+dbSetFilter() is called.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

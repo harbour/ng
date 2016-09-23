@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng20944.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng212d3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_BLOB2File():</B>
+
+  Syntax:   Sx_BLOB2File( &lt;cFileName&gt;, &lt;cFldName&gt; )
+
+       cFileName = The name of the file to be retrieved from the .FPT/.SMT
+                   memo and created.  If a file of this name already exists
+                   on the current or specified drive, it will be overwritten.
+
+        cFldName = The name of the .FPT/.SMT memo field retrieve the file
+                   from.
+
+  Returns:   Logical.  TRUE (.T.) if successful, FALSE (.F.) if not.
+
+  Description:   Sx_BLOB2File() will write the contents of an .FPT/.SMT memo
+                 field out to a file.  If the contents of the memo field is a
+                 file that was previously stored with Sx_File2BLOB(), any
+                 required decompression or encryption will be performed
+                 automatically.
+
+                 The term "BLOB" is an acronym for <B>B</B>inary <B>L</B>arge <B>OB</B>ject,
+                 which means basically any type of binary data, not just
+                 plain ASCII text that would normally be associated with
+                 memo fields.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Examples:
+
+    USE test VIA "SIXCDX"  // Open TEST.DBF and TEST.FPT
+
+    // Extract the IMAGE.PCX file from the NOTES field, writing it to disk
+    <B>Sx_BLOB2File( "IMAGE.PCX", "NOTES" )</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng278dc.html">Sx_File2BLOB()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

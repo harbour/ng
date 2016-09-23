@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng807c0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng812d1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>What is TURBOREAD?:</B>
+
+  Did you know that Clipper automatically puts a file lock on your index
+  file when you do any record pointer movement (SEEKs, SKIPs, etc...) on a
+  network?  This means that anyone else on the network has to wait for your
+  SEEK to finish before they can do a SEEK...or a record update...or an
+  append...or a delete.  Needless to say, this can cause quite a bit of
+  slowing on a large database with a lot of users.
+
+  By using the SIx Driver's <B>SET TURBOREAD ON</B> command, you turn off Clipper's
+  forced index locking, allowing your application to run faster.  However,
+  if you turn off the index locking, this means that if somebody does an
+  update during your SEEK, it may throw the record pointers off.  Your SEEK
+  may point to the wrong record!  So, you may be wondering <B>when</B> and <B>how</B> to
+  use <B>SET TURBOREAD ON</B> safely.  Here are some situations:
+
+   <B>*</B>  On some large systems, network users input their new data into
+      temporary database files.  Then, batch updates are done on the
+      primary database files at night, appending the new data from the
+      temporary files.  During the day, the network users would only be
+      accessing the primary database files for queries and reports, but
+      no direct updates.
+
+      In this case, during the day, you can <B>SET TURBOREAD ON</B> without a
+      care.  Since you know that nobody will be performing updates, there
+      is no reason at all to lock the index files.
+
+
+   <B>*</B>  In cases where network users <B>are</B> doing updates directly on the
+      primary database, you could use the SIx Driver's semaphore-locking
+      functions to prevent index corruption.  Take a look at the descrip-
+      tions in the <B>SIx Driver Functions</B> section on the following
+      semaphore-related functions:
+
+         <B>Sx_MakeSem()  -  Creates a semaphore file</B>
+         <B>Sx_IsSem()    -  Checks for the existence of a semaphore file</B>
+         <B>Sx_KillSem()  -  Deletes a semaphore file</B>
+
+      Network users that want fast access to the database and indexes should
+      call Sx_MakeSem() to signal that no updates should be done.  Then <B>SET</B>
+      <B>TURBOREAD ON</B> and blaze through the file.  When done, <B>SET TURBOREAD</B>
+      <B>OFF</B> and call Sx_KillSem() to allow other users to update the index.
+
+
+  <B>WARNING:  As a general rule, NO updating should be done on a network with</B>
+            <B>with SET TURBOREAD ON.  This is extremely risky, and could</B>
+            <B>result in index and/or data corruption.</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng51ea9.html">SET TURBOREAD</A>
+<A HREF="ng32ac6.html">Sx_MakeSem()</A>
+<A HREF="ng2d028.html">Sx_IsSem()</A>
+<A HREF="ng317b2.html">Sx_KillSem()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

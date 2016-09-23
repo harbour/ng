@@ -1,0 +1,88 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge0c18.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngd8973.html">[^^Up^^]</A>
+<A HREF="nge193c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>#ifndef</B>
+ Compile a section of code if an identifier is undefined
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>#ifndef &lt;identifier&gt;</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>[#else]</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>#endif</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;identifier&gt;</B> is the name of a definition whose absence is being
+     verified.
+
+ <B>Description</B>
+
+     #ifndef...#endif lets you perform conditional compilation by identifying
+     a section of source code to compile if the specified &lt;identifier&gt; is
+     undefined.
+
+     The #else directive specifies the code to compile if &lt;identifier&gt; is
+     defined.  The #endif terminates the conditional compilation block.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment is a general skeleton for conditional
+        compilation with #ifndef:
+
+        #define DEBUG
+        .
+        . &lt;statements&gt;
+        .
+        #ifndef DEBUG
+           &lt;optimized version of code&gt;
+        #else
+           &lt;debugging version of code&gt;
+        #endif
+
+     <B>.</B>  This example compiles a section of code if a specific
+        identifier is undefined.
+
+        In DOS:
+
+        C&gt;CLIPPER Myfile
+
+        In the program (.prg) file:
+
+        #ifndef NODEBUG
+           Assert(&lt;some condition&gt;)
+        #endif
+
+     <B>.</B>  This example overrides a default definition in the program
+        (.prg) file using a manifest constant defined on the compiler command
+        line with the /D option:
+
+        In DOS:
+
+        C&gt;CLIPPER Myfile /DM_MARGIN=10
+
+        In the program (.prg) file:
+
+        #ifndef M_MARGIN
+           #define M_MARGIN   15
+        #endif
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngde423.html">#define</A>
+<A HREF="nge0c18.html">#ifdef</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3ad5b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2fc37.html">[^^Up^^]</A>
+<A HREF="ng3b8dd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gtSetMode()</B>
+ Change display mode to a specified number of rows and columns
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "gt.api"</B>
+     <B>ERRCODE _gtSetMode(</B>
+     <B>                    USHORT uiRows,</B>
+     <B>                    USHORT uiCols</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>uiRows</B> is the number of rows in the desired display mode.
+
+     <B>uiCols</B> is the number of columns in the desired display mode.
+
+ <B>Returns</B>
+
+     _gtSetMode() returns zero if successful.  Any other value indicates an
+     error.
+
+ <B>Description</B>
+
+     _gtSetMode() attempts to change the mode of the display hardware to
+     match the number of rows and columns specified.  The change in screen
+     size is reflected in the values returned by _gtMaxRow() and _gtMaxCol().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example displays a message after successfully selecting
+        43-line mode:
+
+        #include "gt.api"
+        .
+        .
+        .
+           if ( _gtSetMode(43, 80) = 0 )
+              _gtWriteAt( 0, 0, "43-line mode set", 16 );
+        .
+        .
+        .
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Gt.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng349a8.html">_gtMaxCol()</A>
+<A HREF="ng34cba.html">_gtMaxRow()</A>
+<A HREF="ng3842a.html">_gtScrDim()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

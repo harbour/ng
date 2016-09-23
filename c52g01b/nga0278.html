@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9fc92.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="nga0ae0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET DELIMITERS</B>
+ Toggle or define GET delimiters
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET DELIMITERS on | OFF | &lt;xlToggle&gt;</B>
+     <B>SET DELIMITERS TO [&lt;cDelimiters&gt; | DEFAULT]</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> displays delimiters for GET variables.
+
+     <B>OFF</B> suppresses the delimiter display.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+     <B>TO &lt;cDelimiters&gt;</B> defines a one or two character delimiter.
+     Specifying a single character uses the same character as both the
+     beginning and ending delimiter.  Specifying two characters uses the
+     first as the beginning delimiter and the second as the ending delimiter.
+
+     <B>TO DEFAULT</B> or no delimiters SETs the delimiters to colons which are
+     the default delimiters.
+
+ <B>Description</B>
+
+     SET DELIMITERS is a dual purpose command that both defines characters
+     used to delimit GETs and toggles the automatic display of delimiters ON
+     or OFF.  The @...GET command can display delimiters that surround a GET
+     object's display.  If DELIMITERS is ON, the delimiters add two
+     characters to the length of the Get object display.
+
+     You can configure the delimiter characters using the TO &lt;cDelimiters&gt;
+     clause.  The DEFAULT delimiter character is the colon (:).  When
+     specifying delimiters, the beginning and ending delimiter characters can
+     be different.  If you wish to suppress either the right, left, or both
+     delimiters, use a space instead of the delimiter character.
+
+     Typically, delimiters are unnecessary since GETs display in reverse
+     video or enhanced color if INTENSITY is ON.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example SETs DELIMITERS TO a colon and a space for the
+        first GET and the square bracket characters for the second:
+
+        LOCAL cVar := SPACE(5), cVar2 := SPACE(5)
+        SET DELIMITERS ON
+        SET DELIMITERS TO ": "
+        @ 1, 0 SAY "Enter" GET cVar
+        SET DELIMITERS TO "[]"
+        @ 2, 0 SAY "Enter" GET cVar2
+        READ
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng73148.html">@...GET</A>
+<A HREF="nga506b.html">SET INTENSITY</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5b47a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng5c2d2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RECNO()</B>
+ Return the current record number of a work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RECNO() --&gt; nRecord</B>
+
+ <B>Returns</B>
+
+     RECNO() returns the current record number as an integer numeric value.
+     If the work area contains a database file with zero records, RECNO()
+     returns one, BOF() and EOF() both return true (.T.), and LASTREC()
+     returns zero.
+
+     If the record pointer is moved past the last record, RECNO() returns
+     LASTREC() + 1 and EOF() returns true (.T.).  If an attempt is made to
+     move before the first record, RECNO() returns the record number of the
+     first logical record in the database file and BOF() returns true (.T.).
+     If no database file is open, RECNO() will return a zero.
+
+ <B>Description</B>
+
+     RECNO() is a database function that returns the current record number in
+     a work area.  In the CA-Clipper database file scheme, each database file
+     is physically ordered by record number.  Each work area in turn
+     maintains a pointer to the current record in its open database file.
+     That record number is reported by RECNO().  The record numbering
+     facility allows direct access to a record without sequentially scanning
+     the database file to reach the specified record position.
+
+     RECNO(), typically, generalizes routines that process records by record
+     number.  This includes SET RELATION...TO RECNO() which links database
+     files by record number.  GO RECNO() also refreshes the current record
+     data from disk.
+
+     By default, RECNO() operates on the currently selected work area.  It
+     operates on an unselected work area if you specify it as part of an
+     aliased expression (see example below).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example queries RECNO() after deliberately moving the
+        record pointer:
+
+        USE Customers NEW
+        GO 3
+        ? RECNO()                       // Result: 3
+        GO TOP
+        ? RECNO()                       // Result: 1
+        nRecord := 3
+        GO nRecord
+        ? RECNO()                       // Result: 3
+        GO BOTTOM
+        SKIP
+        ? RECNO(), LASTREC()            // Result: 11 10
+
+     <B>.</B>  This example uses aliased expressions to query the value of
+        RECNO() in unselected work areas:
+
+        USE Sales NEW
+        USE Customer NEW
+        //
+        ? Sales-&gt;(RECNO())
+        ? Customer-&gt;(RECNO())
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng11111.html">BOF()</A>
+<A HREF="ng2fa9c.html">EOF()</A>
+<A HREF="ng88b8c.html">GO</A>
+<A HREF="ng44695.html">LASTREC()</A>
+<A HREF="ngac2d7.html">SKIP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

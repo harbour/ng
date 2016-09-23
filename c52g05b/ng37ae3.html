@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng377d7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng346a0.html">[^^Up^^]</A>
+<A HREF="ng37f6b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>10  Memvar Tables</B>
+------------------------------------------------------------------------------------------
+
+     Clipper 5.0 offers several different storage classes for program
+     variables.  Local and static variables are stored in a dedicated area
+     of real memory.  Private and public (MEMVAR) variables are stored in VM
+     segments.  Since MEMVAR variables are created and destroyed dynamically
+     during execution, the associated VM segments grow dynamically depending
+     on how many MEMVAR variables are in use.
+
+     For performance reasons, these segments remain locked during most
+     operations (they are unlocked during RUN commands and certain other
+     memory intensive operations).  In low memory situations, the MEMVAR
+     tables may have a significant effect on the amount of available swap
+     space (each MEMVAR variable uses 20 bytes in the MEMVAR segments, which
+     grow in increments of 1K or more).
+
+     MEMVAR variables also require symbol information to be maintained at
+     runtime (see below).  Converting private and public variables to local
+     and static variables may reduce memory requirements for some
+     applications.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

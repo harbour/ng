@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng87cf2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng8829c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDLISTREBUILD()</B>
+ Rebuild all orders in the order list of the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDLISTREBUILD() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     ORDLISTREBUILD() always returns NIL.
+
+ <B>Description</B>
+
+     ORDLISTREBUILD() is an order management function that rebuilds all the
+     orders in the current or aliased order list.
+
+     To only rebuild a single order use the function ORDCREATE().
+
+     Unlike ORDCREATE(), this function rebuilds all orders in the order list.
+     It is equivalent to REINDEX.
+
+ <B>Examples</B>
+
+     USE Customer NEW
+     SET INDEX TO CuAcct, CuName, CuZip
+     ORDLISTREBUILD()     // Causes CuAcct, CuName, CuZip to
+                          // be rebuilt
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd6dd9.html">REINDEX</A>
+<A HREF="ngcc94d.html">INDEX</A>
+<A HREF="ng8059c.html">ORDCREATE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

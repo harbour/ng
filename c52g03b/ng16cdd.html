@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng16839.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng16770.html">[^^Up^^]</A>
+<A HREF="ng17123.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_xfree()</B>
+ Free allocated memory
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "fm.api"</B>
+     <B>void _xfree(</B>
+     <B>             void far * vlpMem</B>
+     <B>           )</B>
+
+ <B>Arguments</B>
+
+     <B>vlpMem</B> is a far pointer to memory allocated with _xalloc() or
+     _xgrab().
+
+ <B>Returns</B>
+
+     _xfree() has no return value.
+
+ <B>Description</B>
+
+     _xfree() releases memory allocated by _xalloc() or _xgrab().  Note that
+     the pointer returned by _xalloc() or _xgrab() must be passed as the
+     argument to _xfree().
+
+     <B>Note: </B> In Fm.api, _exmback() is #defined to _xfree() to maintain
+     compatibility with Summer '87.
+
+ <B>Examples</B>
+
+     <B>.</B>  From C:
+
+        char *mem;
+        mem = _xgrab(320);
+        _xfree(mem);
+
+     <B>.</B>  From Assembly language:
+
+        EXTRN __xgrab:FAR
+        EXTRN __xfree:FAR
+              mov   ax, 320
+              push  ax
+              call  __xgrab            ; pointer in DX:AX
+              add   sp, 2              ; reset stack pointer
+              push  dx
+              push  ax
+              call  __xfree            ; give it right back
+              add   sp, 4
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Fm.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng16839.html">_xalloc()</A>
+<A HREF="ng17123.html">_xgrab()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

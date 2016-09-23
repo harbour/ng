@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng20744.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng2192c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETPXLAT()</B>
+ Establishes translation tables for printer output
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETPXLAT([&lt;nASCIIPos|cCharacter&gt;,</B>
+     <B>   &lt;cPrintCharacter&gt;]) --&gt; lActiveTable</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nASCIIPos|cCharacter&gt;</B>  Designates the position or the character in
+     the key table that is overwritten by the &lt;cPrintCharacter&gt;.  This
+     parameter can be designated as a numeric value, between 0 and 255, or as
+     an individual character.
+
+     <B>&lt;cPrintCharacter&gt;</B>  Designates the sequence of characters that are
+     copied into the key table, starting from the &lt;nASCIIPos&gt; position.
+
+     ()  By invoking the function with no parameters, the existing key table
+     is cleared.
+
+ <B>Returns</B>
+
+     SETPXLAT() returns .T. when the key table is active.
+
+ <B>Description</B>
+
+     CA-Clipper normally passes all characters between 0 and 255 to the
+     printer, without changing any of the characters.  This always leads to
+     problems when the printer is set up with a different font style.  For
+     example, a 7 bit printer, which looks for things like German umlauts,
+     can cause problems with the IBM extended character set.  Output through
+     a key table that you can build yourself is more flexible than a special
+     drive module for different printers.
+
+     Imagine the key table as a memory area of 256 bytes.  Memory position 65
+     normally contains the character CHR(65).  Using SETPXLAT() you could
+     exchange this character for CHR(66).  Thus an "A" sent to the printer no
+     longer produces an "A", but a "B".  There are also other ways to
+     substitute characters from a particular position.
+
+ <B>Note</B>
+
+     <B>.</B>  The key table is only created at the moment that an exchange
+        under SETPXLAT() is requested.  Therefore, memory is not used up
+        unnecessarily.
+
+ <B>Examples</B>
+
+     <B>.</B>  Here is the solution for multiple calls of SETPXLAT():
+
+        SETPXLAT(65, CHR(66))            //  B
+
+     <B>.</B>  You can also call the function as follows:
+
+        SETPXLAT("1", "AB")              // 12  AB
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng16668.html">GETPXLAT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

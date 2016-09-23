@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7a0b4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng7a790.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GETFONT()</B>
+ Queries the current font
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GETFONT([&lt;nFontArea&gt;]) --&gt; cFontString</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nFontArea&gt;</B>  Designates out of which font area within the screen
+     adapter, the font is loaded into a string.  Values from 1 to MAXFONT()
+     are permitted.
+
+ <B>Returns</B>
+
+     GETFONT() returns a font from the selected area in string form.
+
+ <B>Description</B>
+
+     GETFONT() transfers a font table from an available font area on the
+     screen card into a string.  This allows you to store loaded fonts.
+
+ <B>Note</B>
+
+     <B>.</B>  If an invalid value is specified for &lt;nFontArea&gt;, the function
+        returns a null string.
+
+ <B>Examples</B>
+
+     <B>.</B>  Save font 1 ...
+
+        cVar  := GETFONT(1)
+
+     <B>.</B>  ...and reset again:
+
+        ? SETFONT(cVar, 1)      // 0, if OK
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng84972.html">SETFONT()</A>
+<A HREF="ng76af3.html">FONTLOAD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng157415.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng154bf5.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>&lt;oScrollBar&gt;:hitTest( &lt;nMouseRow&gt;, &lt;nMouseCol&gt; )</B>
+     <B>   --&gt; nHitStatus</B>
+
+        &lt;nMouseRow&gt; is a numeric value that indicates the current screen row
+        position of the mouse cursor.
+
+        &lt;nMouseCol&gt; is a numeric value that indicates the current screen
+        column position of the mouse cursor.
+
+        Returns a numeric value that indicates the action to perform based on
+        the logical position of the mouse cursor in the scroll bar's region
+        of the screen.
+
+        <B>Scroll Bar hittest Return Values</B>
+        ---------------------------------------------------------------------
+        <B>Value     Constant            Mouse Cursor Position</B>
+        ---------------------------------------------------------------------
+        0         HTNOWHERE           Not within the scroll bar's region of
+                                      the screen
+        -3073     HTSCROLLTHUMBDRAG   On the thumb
+        -3074     HTSCROLLUNITDEC     On the previous arrow
+        -3075     HTSCROLLUNITINC     On the next arrow
+        -3076     HTSCROLLBLOCKDEC    Between the previous arrow and the
+                                      thumb
+        -3077     HTSCROLLBLOCKINC    Between the thumb and the next arrow
+        ---------------------------------------------------------------------
+
+        Button.ch contains manifest constants for the ScrollBar:hitTest()
+        return value.
+
+        hitTest() is a method of the ScrollBar class that is used for
+        determining if the mouse cursor is within the region of the screen
+        that the scroll bar occupies.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,30 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng5b482.html">[^^Up^^]</A>
+<A HREF="ng5b84a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Blinker environment setting /DI3</B>
+------------------------------------------------------------------------------
+
+ Setting /DI3 (DEBUG INT 3) in the BLINKER environment variable causes a
+ debug interrupt 3 to be created just before the far jump to the first byte
+ of the actual program. This is after both the extender and the Blinker
+ Kernel have loaded and initialised. This instruction can be stepped into in
+ the normal way to take you to the first byte of the actual program.
+
+ In high level language programs this will be the library start up code, so
+ to skip over the library start up to the start of your program (function
+ MAIN) type 'G MAIN' or its equivalent.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

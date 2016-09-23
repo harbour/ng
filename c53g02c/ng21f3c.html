@@ -1,0 +1,30 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng21bdc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng18790.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1217:   overlay vector corrupted during execution</B>
+
+     <B>Explanation:</B>  This message indicates that the overlay manager has
+     detected an invalid overlay vector.  The most likely cause of this is
+     corruption at runtime due to an invalid pointer, or an attempt to
+     overlay a non-overlayable module.  Another possible cause is the use of
+     a debugger to place breakpoints in the code after an overlay call, since
+     this replaces the vector data with a debugger breakpoint.
+
+     <B>Action:</B>  Use of the MURPHY command for debugging overlays may help
+     to identify whether non-overlayable modules are responsible for this
+     message.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

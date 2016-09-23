@@ -1,0 +1,69 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1bdb3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng1ca28.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETUSINGR()</B>
+ Determines the users that are members of a group
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETUSINGR(&lt;cGroup&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; aUserList</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cGroup&gt; </B> Designates the group for which the members are determined.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server on which &lt;cGroup&gt;
+     is established.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.  If no server is specified, the function uses the default
+     server.
+
+ <B>Returns</B>
+
+     NNETUSINGR() returns a one-dimensional array.  Each array element
+     contains a user name.
+
+ <B>Description</B>
+
+     NOVELL NET USERS IN GROUP
+     To improve organization and simplify user access to file server
+     resources, you can create user groups under Novell Netware.  Each user
+     can be a member of one or more groups.  With the function NNETUSINGR(),
+     all the members of a user group can be determined.
+
+     This function requires that the requesting user be logged in on the
+     related file server.  If the requesting user is not logged in on the
+     related file server, the function returns an empty array.
+
+ <B>Example</B>
+
+     Display all the users that are members of the STONES group on the
+     current file server:
+
+     aList:=NNETUSINGR('STONES')
+     FOR i = 1 TO LEN(aList)
+     ? aList[i]
+     NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1662f.html">NNETGROUPS()</A>
+<A HREF="ng16c3d.html">NNETGRPMEM()</A>
+<A HREF="ng17365.html">NNETINGRPS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

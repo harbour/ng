@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngcfd6d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngd103e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>KEYBOARD</B>
+ Stuff a string into the keyboard buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>KEYBOARD &lt;cString&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the string to stuff into the keyboard buffer.
+
+ <B>Description</B>
+
+     KEYBOARD is a keyboard command that stuffs &lt;cString&gt; into the keyboard
+     buffer after clearing any pending keystrokes.  The characters remain in
+     the keyboard buffer until fetched by a wait state such as ACCEPT, INPUT,
+     READ, ACHOICE(), MEMOEDIT(), and DBEDIT(), or INKEY().  In addition to
+     display characters, &lt;cString&gt; may include control characters.
+
+     Generally, to convert an INKEY() code of a control key to a character
+     value, use CHR().  There are, however, some limitations.  You can only
+     stuff characters with INKEY() codes between zero and 255, inclusive,
+     into the keyboard buffer.
+
+     Typically, KEYBOARD is used in a SET KEY procedure to reassign keys in a
+     wait state.  Another use within the ACHOICE() user function is to input
+     the keys you want ACHOICE() to execute before returning control to it.
+     The same concept applies to DBEDIT().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses KEYBOARD to stuff a GET with an item
+        selected from a picklist each time the GET is entered:
+
+     #include "Inkey.ch"
+        LOCAL cVar1 := SPACE(10), nVar := 2500, ;
+              cVar2 := SPACE(10)
+        CLEAR
+        @ 09, 10 GET cVar1
+        @ 10, 10 GET cVar2 WHEN PickList()
+        @ 11, 10 GET nVar
+        READ
+        RETURN
+
+        FUNCTION PickList
+           STATIC aList := { "First", "Second", ;
+              "Three", "Four" }
+           LOCAL cScreen, nChoice, nKey := LASTKEY()
+           cScreen := SAVESCREEN(10, 10, 14, 20)
+           @ 10, 10 TO 14, 20 DOUBLE
+           IF (nChoice := ACHOICE(11, 11, 13, 19, aList)) != 0
+              KEYBOARD CHR(K_CTL_Y) + aList[nChoice] + ;
+                    CHR(nKey)
+
+           ENDIF
+           RESTSCREEN(10, 10, 14, 20, cScreen)
+           RETURN .T.
+
+ <B>Files</B>   Library is CLIPPER.LIB, header file is Inkey.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng194af.html">CHR()</A>
+<A HREF="ng61b6e.html">INKEY()</A>
+<A HREF="ng64c89.html">LASTKEY()</A>
+<A HREF="ng7bcb0.html">NEXTKEY()</A>
+<A HREF="ngea03c.html">SET KEY</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc1244.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngc1bcf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CLEAR GETS</B>
+ Release Get objects from the current GetList array
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CLEAR GETS</B>
+
+ <B>Description</B>
+
+     CLEAR GETS explicitly releases all Get objects in the current and
+     visible GetList array, and terminates the calling READ, releasing any
+     remaining objects in the calling READ, if executed within a SET KEY
+     procedure or a user-defined function invoked by a VALID clause.  CLEAR
+     GETS releases Get objects by assigning an empty array to the variable
+     GetList.  GetList is the name of the variable used to hold an array of
+     Get objects for subsequent READ commands.  There are two other
+     mechanisms that automatically release Get objects: CLEAR specified
+     without the SCREEN clause, and READ specified without the SAVE clause.
+
+     CLEAR GETS has two basic uses.  First, it can be used to terminate a
+     READ from a SET KEY procedure or VALID user-defined function.  Second,
+     it can be used to delete Get objects from the GetList array when you
+     have not executed a READ or you have saved the Get objects by using READ
+     SAVE.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngaca2c.html">@...CLEAR</A>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngc26c8.html">CLOSE</A>
+<A HREF="ngd4eb5.html">READ</A>
+<A HREF="ngd7830.html">RELEASE</A>
+<A HREF="ngf1c3d.html">SET TYPEAHEAD</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

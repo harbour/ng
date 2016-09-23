@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng44b82.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng4587e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJCOPY()</B>
+ Sets or determines the number of copies for a job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJCOPY(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;nNewCopies&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; nCopies</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;nNewCopies&gt;</B>  Designates the new number of copies for &lt;nJob&gt;.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJCOPY() returns the number of copies of &lt;nJob&gt; that are printed.  If
+     an error occurs, the function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET JOB COPIES
+     The queue management allows you to print out more than one copy of a
+     print job.  With NNETJCOPY(), you can set or determine the number of
+     copies of &lt;nJob&gt;.  To query the number of copies, do not pass a value
+     for &lt;nNewCopies&gt;.
+
+     The required job is specified by its job number.  The job number has
+     nothing to do with the logical position of a job within a queue; for
+     example, the job with the highest priority in a queue is not
+     automatically job number 1.  The job number must be determined with
+     NNETCAPJOB() or NNETJLIST().
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the number of copies for the first job in the queue
+        LINEPRINTER:
+
+        nJob = BIN2I(LEFT(NNETJLIST('LINEPRINTER'), 2))
+        ? NNETJCOPY('LINEPRINTER', nJob)
+
+     <B>.</B>  Set the number of copies for the first job in the queue
+        LINEPRINTER to 5:
+
+        nJob = BIN2I(LEFT(NNETJLIST('LINEPRINTER'), 2))
+        ? NNETJCOPY('LINEPRINTER', nJob, 5)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng58833.html">NNETPJCOPY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

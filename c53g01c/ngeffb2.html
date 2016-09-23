@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngef11d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf06d8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET SCOPE</B>
+ Change the top and/or bottom boundaries for scoping key values in the
+ controlling order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET SCOPE TO [&lt;expNewTop&gt; [, &lt;expNewBottom&gt;]]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;expNewTop&gt;</B> is the top range of key values that will be included in
+     the controlling order's current scope.  &lt;expNewTop&gt; can be an expression
+     that matches the data type of the key expression in the controlling
+     order or a code block that returns the correct data type.
+
+     <B>&lt;expNewBottom&gt;</B> is the bottom range of key values that will be
+     included in the controlling order's current scope.  &lt;expNewBottom&gt; can
+     be an expression that matches the data type of the key expression in the
+     controlling order or a code block that returns the correct data type.
+
+     <B>Note: </B> If &lt;expNewBottom&gt; is not specified, &lt;expNewTop&gt; is taken for
+     both the top and bottom range values.
+
+ <B>Description</B>
+
+     SET SCOPE, when used with no arguments, clears the top and bottom
+     scopes; this is equivalent to ORDSCOPE(0, NIL) followed by ORDSCOPE(1,
+     NIL).  If &lt;expNewTop&gt; is specified alone, SET SCOPE sets the top and
+     bottom scope to the indicated value (i.e., ORDSCOPE(0, &lt;expNewTop&gt;)
+     followed by ORDSCOPE(1, &lt;expNewTop&gt;).  If both &lt;expNewTop&gt; and
+     &lt;expNewBottom&gt; are specified, SET SCOPE sets the top and bottom scope as
+     indicated (i.e., ORDSCOPE(0, &lt;expNewTop&gt;) followed by ORDSCOPE(1,
+     &lt;expNewBottom&gt;).  Refer to the ORDSCOPE() function for more information.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example illustrates the SET SCOPE command:
+
+        USE Inventor NEW
+        INDEX ON PartNo TO Parts
+
+        SET SCOPE TO 1750, 2000
+        // Only part numbers between 1750 and 2000 will be used
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8915c.html">ORDSCOPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

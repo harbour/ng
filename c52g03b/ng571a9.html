@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng56e17.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng574ef.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>setLocate()</B>
+ Set the locate scope for the workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE setLocate(</B>
+     <B>                   WORKAREAP wa,</B>
+     <B>                   DBSCOPEINFOP dbScopeInfo</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>dbScopeInfo</B> is a pointer to a structure containing information about
+     the locate scope for the workarea.
+
+ <B>Description</B>
+
+     Sets the locate scope for the workarea.
+
+ <B>Default Behavior</B>
+
+     setLocate() sets the locate scope for wa from dbScopeInfo.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Prior to setting the new locate scope, setLocate() must
+        perform a clearLocate() which releases the Items held by the
+        wa-&gt;locate structure.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42e9f.html">DBSCOPEINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng5655c.html">clearLocate()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng706a5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng7125a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHARWIN()</B>
+ Exchanges particular characters in a screen area.
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CHARWIN([&lt;nTopline&gt;,&lt;nLeftcolumn&gt;,&lt;nBottomline&gt;,</B>
+     <B>   &lt;nRightcolumn&gt;, [&lt;cNewcharacter|nNewcharacter&gt;],</B>
+     <B>   [&lt;cOldcharacter|nOldcharacter&gt;]]) --&gt; cNull</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTopline&gt;</B>  Designates the line for the top-left corner of the area.
+
+     <B>&lt;nLeftcolumn&gt;</B>  Designates the column for the top-left corner the
+     area.
+
+     <B>&lt;nBottomline&gt;</B>  Designates the line for the bottom-right corner of
+     the area.
+
+     <B>&lt;nRightcolumn&gt;</B>  Designates  the column for the bottom-right corner
+     of the area.
+
+     <B>&lt;cNewcharacter|nNewcharacter&gt; </B> Designates the new character for the
+     screen area.  Specify the parameter as a numeric in the range of 0 to
+     255 or as a character string.  The default value is the CLEARB.
+
+     <B>&lt;cOldcharacter|nOldcharacter&gt;</B>  Designates which character to
+     exchange.  Specify the parameter as a numeric in the range of  0 to 255
+     or as a character string.  The default is to exchange all characters.
+
+     ()  When no parameter is designated, the function replaces all
+     characters in the screen area with CLEARB.
+
+ <B>Returns</B>
+
+     The function always returns a null string.
+
+ <B>Description</B>
+
+     Within a screen area, CHARWIN() replaces all characters or just a
+     particular character with a new one.  If &lt;cNewcharacter|nNewcharacter&gt;
+     is not designated, the function uses the character set with SETCLEARB(),
+     where the preset value is CHR(255).  The upper-left and lower-right
+     corner rows and columns are given for the borders of the area.  If these
+     arguments are missing, then the entire screen area is exchanged.
+
+ <B>Examples</B>
+
+     <B>.</B>  Exchange all characters for CLEARB:
+
+        SETCLEARB("X")       // Exchanges within CHARWIN() entire screen
+
+     <B>.</B>  Exchange all "A" for "B":
+
+        CHARWIN(10, 10, 20, 70, "B", "A")    // Always returns a ("") null
+                                             // string
+
+     <B>.</B>  Numeric characters can also be designated:
+
+        CHARWIN(10, 10, 20, 70, 66, 65)      // A = 65, B = 66
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng844da.html">SETCLEARB()</A>
+<A HREF="ng74f95.html">COLORWIN()</A>
+<A HREF="ng6f15a.html">Introduction</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

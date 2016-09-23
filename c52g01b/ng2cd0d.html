@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2c1bd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng2d22f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DISPCOUNT()</B>
+ Return the number of pending DISPEND() requests
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DISPCOUNT() --&gt; nDispCount</B>
+
+ <B>Returns</B>
+
+     DISPCOUNT() Returns the number of DISPEND() calls required to restore
+     the original display context.
+
+ <B>Description</B>
+
+     You can use DISPCOUNT() to determine the current display context.
+     CA-Clipper uses display contexts to buffer and and to supervise screen
+     output operations.
+
+     Each call to DISPBEGIN() defines a new display context.  Output to the
+     display context is suppressed until a matching DISPEND() statement
+     executes.
+
+     Since you may nest DISPBEGIN() calls, use DISPCOUNT() to determine
+     whether there are pending screen refresh requests.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example saves the setting of DISPCOUNT(), then releases
+        all pending display contexts before writing to the screen:
+
+        PROCEDURE ForceDisplay(cExp)
+           LOCAL nSavCount
+
+        nSavCount := DISPCOUNT()
+
+        //  Discard pending display contexts
+        DO WHILE ( DISPCOUNT() &gt; 0)
+           DISPEND()
+        ENDDO
+
+        DISPOUT(cExp)
+
+        //  "Rewind" the current display context
+
+        DO WHILE (DISPCOUNT() &lt; nSavCount )
+           DISPBEGIN()
+        ENDDO
+
+        RETURN
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2b905.html">DISPBEGIN()</A>
+<A HREF="ng2d22f.html">DISPEND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

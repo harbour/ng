@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng44695.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng452d7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LEFT()</B>
+ Extract a substring beginning with the first character in a string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LEFT(&lt;cString&gt;, &lt;nCount&gt;) --&gt; cSubString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is a character string from which to extract characters.
+     The maximum size of &lt;cString&gt; is 65,535 (64K) bytes.
+
+     <B>&lt;nCount&gt;</B> is the number of characters to extract.
+
+ <B>Returns</B>
+
+     LEFT() returns the leftmost &lt;nCount&gt; characters of &lt;cString&gt; as a
+     character string.  If &lt;nCount&gt; is negative or zero, LEFT() returns a
+     null string ("").  If &lt;nCount&gt; is larger than the length of the
+     character string, LEFT() returns the entire string.
+
+ <B>Description</B>
+
+     LEFT() is a character function that returns a substring of a specified
+     character string.  It is the same as SUBSTR(&lt;cString&gt;, 1, &lt;nCount&gt;).
+     LEFT() is also like RIGHT() which returns a substring beginning with the
+     last character in a string.
+
+     LEFT(), RIGHT(), and SUBSTR() are often used with both the AT() and
+     RAT() functions to locate the first and/or the last position of a
+     substring before extracting it.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example extracts the first three characters from the left
+        of the target string:
+
+        ? LEFT("ABCDEF", 3)                 // Result: ABC
+
+     <B>.</B>  This example extracts a substring from the beginning of a
+        string up to the first occurrence of a comma:
+
+        LOCAL cName := "James, William"
+        ? LEFT(cName, AT(",", cName) - 1)   // Result: James
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf688.html">AT()</A>
+<A HREF="ng467e1.html">LTRIM()</A>
+<A HREF="ng5876b.html">RAT()</A>
+<A HREF="ng5d64a.html">RIGHT()</A>
+<A HREF="ng5f53e.html">RTRIM()</A>
+<A HREF="ng68e99.html">STUFF()</A>
+<A HREF="ng69c3b.html">SUBSTR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

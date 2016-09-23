@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3fab4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng40fd0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>INDEXORD()</B>
+ Return the order position of the controlling index
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>INDEXORD() --&gt; nOrder</B>
+
+ <B>Returns</B>
+
+     INDEXORD() returns an integer numeric value.  The value returned is
+     equal to the position of the controlling index in the list of open
+     indexes for the current work area.  A value of zero indicates that there
+     is no controlling index and records are being accessed in natural order.
+     If no database file is open, INDEXORD() will also return a zero.
+
+ <B>Description</B>
+
+     INDEXORD() is a database function that determines the position of the
+     controlling index in the list of index files opened by the last
+     USE...INDEX or SET INDEX TO in the current work area.  It is often
+     useful to save the last controlling index so it can be restored later.
+
+     By default, INDEXORD() operates on the currently selected work area.  It
+     will operate on an unselected work area if you specify it as part of an
+     aliased expression (see example below).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses INDEXORD() to save the current order.  After
+        changing to a new order, it uses the saved value to restore the
+        original order:
+
+        USE Customer INDEX Name, Serial NEW
+        nOrder := INDEXORD()                  // Result: 1
+        SET ORDER TO 2
+        ? INDEXORD()                          // Result: 2
+        SET ORDER TO nOrder
+        ? INDEXORD()                          // Result: 1
+
+     <B>.</B>  This example uses an aliased expression to determine the order
+        number of the controlling index in an unselected work area:
+
+        USE Sales INDEX Salesman, CustNum NEW
+        USE Customer INDEX Name, Serial NEW
+        ? Sales-&gt;(INDEXORD())                 // Result: 1
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng895a7.html">INDEX</A>
+<A HREF="ng3fab4.html">INDEXKEY()</A>
+<A HREF="nga475d.html">SET INDEX</A>
+<A HREF="nga6e00.html">SET ORDER</A>
+<A HREF="ngb1e6f.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

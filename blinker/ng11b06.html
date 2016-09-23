@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng115be.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng1238c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER OVERLAY UMB           Enable use of XMS UMBs for overlays</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Enable use of the XMS UMBs for overlays</B></U>
+
+ <U>Syntax   : <B>BLINKER OVERLAY UMB ON | OFF</B></U>
+
+ <U>Default  : <B>ON</B></U>
+
+ <U>Example  : <B># Do not use XMS UMB's for the overlay area</B></U>
+            <B>BLINKER OVERLAY UMB OFF</B>
+
+ This command used in conjunction with a suitable XMS driver allows the
+ Blinker overlay manager to execute overlays in upper memory blocks above
+ 640kb. Blinker's use of UMBs is dependent on there being a suitably large
+ contiguous block available. The size of the UMB allocated will be the same
+ as the program's overlay opsize.
+
+ Use of this command requires a 386 processor (or better), and an XMS 2.0
+ extended memory driver that supports UMB's (upper memory blocks). UMB's are
+ blocks of memory which are mapped into the area above 640kb, using the
+ memory management capabilities of the 386/486 family of processors. Upper
+ memory blocks are sometimes referred to as 'high memory' or LOADHI areas.
+
+ If your XMS driver supports the loading of drivers into high memory, it is
+ likely that you can use this feature. Blinker will need a UMB at least as
+ large as the overlay area, so you may need to alter the placement of your
+ programs in high memory to facilitate this. Most 386 memory managers provide
+ utilities to help optimize this area. If both this command and the PAGEFRAME
+ command are used, and both the pageframe and a UMB are available, then
+ Blinker will use the pageframe.
+
+ If either or both of these are specified and are not available on the end
+ user's system, Blinker will automatically ignore these commands and allocate
+ the overlay area from conventional memory. This use of UMB's may be adjusted
+ at runtime through the use of the BLINKER environment variable (see the
+ 'Environment Variable' section in Chapter 2).
+
+ <B>Notes for CA-Clipper Summer '87:</B>
+
+ This command is only effective when the fixed overlay allocation method is
+ selected with the command BLINKER OVERLAY FIXED.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5da6.html">BLINKER ENVIRONMENT NAME</A>
+<A HREF="ngfa66.html">BLINKER OVERLAY FIXED</A>
+<A HREF="ng10871.html">BLINKER OVERLAY PAGEFRAME</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

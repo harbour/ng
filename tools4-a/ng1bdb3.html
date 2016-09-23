@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1b9d6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng1c43a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETUSERS()</B>
+ Determines the users on a file server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETUSERS([&lt;cServer&gt;|&lt;nConId&gt;],[&lt;cMask&gt;])</B>
+     <B>   --&gt; aUserListe</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server for which the
+     users are determined.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.  If no server is specified, the function uses the default
+     server.  .
+
+     <B>&lt;cMask&gt; </B> Designates a search mask that can contain the wildcard
+     characters  "?" and "*".  The default character "*" indicates that all
+     users are determined.
+
+ <B>Returns</B>
+
+     NNETUSERS() returns a one-dimensional array.  Each array element
+     contains a user name.
+
+ <B>Description</B>
+
+     NOVELL NET USERS
+     NNETUSERS() allows you to determine all the users of a file server.  The
+     file server can be specified by either its name or its connection ID.
+     The connection ID of a server is returned by NNETATTACH() or
+     NNETLOGIN().
+
+     In order to achieve results with this function, the requesting user must
+     be currently logged in on the specified file server.  If the requesting
+     user is not currently logged in on the specified file server, the
+     function returns an empty array.
+
+     The users currently logged in on a file server can be determined with
+     the function NNETLGUSER().
+
+ <B>Example</B>
+
+     Display a list of all the users on file server NANGERTOOLS2:
+
+     aList=NNETUSERS('NANGERTOOLS2')
+     FOR i = 1 TO LEN(aList)
+     ? aList[i]
+     NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng17a2e.html">NNETLGUSER()</A>
+<A HREF="ng1662f.html">NNETGROUPS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

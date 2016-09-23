@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1dd35.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng1ed86.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETATTACH()</B>
+ Attaches a file server to a workstation
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETATTACH(&lt;cServer&gt;) --&gt; nConId</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the server that is attached.
+
+ <B>Returns</B>
+
+     If the server has been attached successfully, NNETATTACH() returns a
+     numeric value between 1 and 8.  This value specifies the connection ID.
+     The workstation uses the connection ID to address the server.
+
+     If an error occurs, NNETATTACH() returns 0.  The error code can be
+     queried with the function NNETERROR().
+
+ <B>Description</B>
+
+     NOVELL NET ATTACH
+     A workstation can be attached to up to eight file servers.  This logical
+     connection between workstation and file server is necessary to access
+     network services and resources.  NNETATTACH() allows you to establish a
+     connection without a login of the user on &lt;cServer&gt;.
+
+     If the server has been attached successfully, NNETATTACH() returns a
+     value between 1 and 8.  The return value can be stored in a variable and
+     can be used later to identify a file server.  Alternatively, a file
+     server can also be identified by using the server name.
+
+     Using the NNETLOGIN() function to log in a user on a file server does
+     not require the call of NNETATTACH().  NNETLOGIN() attaches the file
+     server automatically if necessary.
+
+ <B>Note</B>
+
+     <B>.</B>  The names of the attached file servers can be determined by
+        using the function NNETFSLIST() or the Novell utility SLIST.
+
+ <B>Example</B>
+
+     Attach the file server NANGERTOOLS2:
+
+     nConId=NNETATTACH("NANGERTOOLS2")
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng212d5.html">NNETLOGIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

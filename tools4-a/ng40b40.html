@@ -1,0 +1,88 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4082d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng4137a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETADDQOP()</B>
+ Adds operators to a print queue
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETADDQOP(&lt;cQueue&gt;,&lt;cUser&gt;|&lt;aUser&gt;,[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;) --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates a print queue on the default server or on
+     &lt;cServer&gt;|&lt;nConId&gt;.
+
+     <B>&lt;cUser&gt;</B>  Designates the name of a user that is added as an operator
+     of &lt;cQueue&gt;.
+
+     <B>&lt;aUser&gt;</B>  Designates a number of elements of the type string.  Each
+     element contains the name of a user that is added as an operator of
+     &lt;cQueue&gt;.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETADDQOP() returns the number of users that have been added
+     successfully as operators of &lt;cQueue&gt;.  A value of 0 indicates that no
+     operator has been added.
+
+ <B>Description</B>
+
+     NOVELL NET ADD QUEUE OPERATOR
+     NNETADDQOP() allows you to add one or more users as operators of a print
+     queue.  To add one user, the login name of the user must be passed in
+     &lt;cUser&gt;.  To add more users, an array containing all user names can be
+     passed in &lt;aUser&gt;.  With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the
+     operation can be performed on any attached server.  The connection ID of
+     a server can be determined with NNETATTACH() or NNETLOGIN().
+
+     Supervisor rights are required on the related file server to add a user
+     as a queue operator.
+
+ <B>Note</B>
+
+     <B>.</B>  NNETADDQOP() is a high level function based on the low level
+        functions of the bindery access.  The CA-Clipper source code can be
+        found on the product disks.
+
+ <B>Examples</B>
+
+     <B>.</B>  Add user MICK as an operator of the queue LINEPRINTER:
+
+        IF NNETADDQOP('LINEPRINTER','MICK')&gt;0
+           ? 'User added successfully!'
+        ELSE
+           ? 'Error!'
+        ENDIF
+
+     <B>.</B>  Add users PETER, MIKE, and JIM as operators of the queue
+        LINEPRINTER:
+
+        NNETADDQOP('LINEPRINTER',{'PETER','MIKE','JIM'})
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng53859.html">NNETREMQOP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

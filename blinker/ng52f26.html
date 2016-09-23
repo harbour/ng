@@ -1,0 +1,29 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng52c8d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3dfc5.html">[^^Up^^]</A>
+<A HREF="ng53170.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1211: overlay manager stack overflow</B>
+------------------------------------------------------------------------------
+
+ The Blinker overlay manager maintains a reload stack used in the management
+ of dynamic overlays, and this stack has overflowed. The most common cause of
+ this error is uncontrolled or unintentional recursion within an overlaid
+ procedure or function, where a particular procedure or function is calling
+ itself repeatedly.
+
+ Please increase your BLINKER PROCEDURE DEPTH when it is low, and check your
+ code for unintentional recursion.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

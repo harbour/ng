@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng15f2e6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng15a315.html">[^^Up^^]</A>
+<A HREF="ng15fa29.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>applyKey(&lt;nKey&gt;) --&gt; nResult</B>
+
+        Evaluates the code block associated with &lt;nKey&gt; that is contained
+        within the TBrowse:setKey() dictionary.  &lt;nResult&gt;, which is the code
+        block's return value, specifies the manner in which the key was
+        processed.
+
+        <B>TBrowse:ApplyKey() Return Values</B>
+        ---------------------------------------------------------------------
+        <B>Constant      Value   Meaning</B>
+        ---------------------------------------------------------------------
+        TBR_EXIT      -1      User request for the browse to lose input focus
+        TBR_CONTINUE   0      Code block associated with &lt;nKey&gt; was evaluated
+        TBR_EXCEPTION  1      Unable to locate &lt;nKey&gt; in the dictionary, key
+                              was not processed
+        ---------------------------------------------------------------------
+
+        Tbrowse.ch contains manifest constants for the TBrowse:applyKey()
+        return values.
+
+        Previously, before TBrowse:applyKey() was available, a TBrowse was
+        typically maintained by placing an Inkey() and a case structure
+        within a while loop.  For example:
+
+        WHILE (.T.)
+           oTB:ForceStable()
+           nKey := Inkey(0)
+           DO CASE
+           CASE (nKey == K_UP)
+              oTB:Up()
+           CASE (nKey == K_DOWN)
+              oTB:Down()
+           .
+           .
+           .
+           CASE (nKey := K_ESC)
+              EXIT
+           ENDCASE
+        ENDDO
+
+        Because this code was external to the browse, it did not encapsulate
+        the relationship between a key press and its effect on the browse.
+        TBrowse:applyKey() resolves this by placing the key and its
+        associated code block in a dictionary within the TBrowse object.
+        This effectively makes creating and managing a browse simple, yet
+        flexible.  For example:
+
+        WHILE (.T.)
+           oTB:ForceStable()
+           IF (oTB:ApplyKey(Inkey(0)) == TBR_EXIT)
+              EXIT
+           ENDIF
+        ENDDO
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

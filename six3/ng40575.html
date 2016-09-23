@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng40076.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng408bf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_WildMatch():</B>
+
+  Syntax:   Sx_WildMatch( cPattern, cValue )
+
+            cPattern = Pattern string to match (may include wildcard
+                       characters)
+            cValue   = String to compare against pattern string
+
+  Returns:  &lt;logical&gt; .T. if the value string matches the wildcard
+            pattern, .F. if it doesn't match.
+
+  Description:  Compares a character string with a pattern string.  The
+                pattern string may consist of one or more <B>wildcard</B> characters
+                (<B>?</B> or <B>*</B>), which are treated in the traditional manner
+                (<B>? matches any one character, * matches any one or more</B>
+                <B>characters</B>).
+
+
+  Example:   // To browse all people named Smith or Smyth
+             LOCAL cSearchStr := "Sm?th"
+             FIELD LASTNAME
+             USE TEST VIA "SIXCDX"
+             <B>SET FILTER TO Sx_WildMatch( cSearchStr, LASTNAME )</B>
+             Browse()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng408bf.html">Sx_WildSeek()</A>
+<A HREF="ng5594c.html">WILDSEEK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

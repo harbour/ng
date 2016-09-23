@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7a57e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng75ccf.html">[^^Up^^]</A>
+<A HREF="ng7b728.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SIXINI.EXE:</B>
+
+  The SIXINI.EXE utility allows the developer to easily encrypt or decrypt
+  a SIx Driver Data Dictionary (.INI) file with a specified password.  This
+  will protect the information contained within the .INI file from being
+  read or modified by unauthorized people.
+
+  The command-line syntax for using SIXINI.EXE is as follows:
+
+    SIXINI &lt;cFileName&gt;[.INI] &lt;cPassword&gt; [cOutputFile]
+
+    Where:  cFileName = File to encrypt or decrypt.  If no file extension is
+                        used, .INI is assumed.
+            cPassword = Password to use on the file.  This <B>is</B> case-sensitive.
+          cOutputfile = Optional output filename.  The default output file
+                        name is SIXINI.OUT.
+
+  Examples:
+
+    // Encrypts TEST.INI with the password "Homer" to the default SIXINI.OUT
+    <B>SIXINI test Homer</B>
+
+    // Encrypts TEST.TXT with the password "FooBar" to PASSWORD.TXT
+    <B>SIXINI test.txt FooBar password.txt</B>
+
+    // Encrypts FOO.INI with the password "12345" to SECRET.INI
+    <B>SIXINI foo.ini 12345 secret.ini</B>
+
+
+  <U>NOTE:  Although this utility is provided primarily as a means to encrypt</U>
+  <U>       and decrypt the SIx Driver's Data Dictionary (.INI) files, it can</U>
+  <U>       actually be used to encrypt/decrypt</U> <B>any</B> <U>text file.</U>
+
+  <U>       As the file is encrypted, an ASCII 255 is prepended to the front of</U>
+  <U>       the file.  This is how the SIx Driver detects an encrypted .INI</U>
+  <U>       file from a non-encrypted one.  If you are using SIXINI.EXE to</U>
+  <U>       encrypt a file for your own handling via the Sx_Decrypt() function,</U>
+  <U>       you'll need to strip off the first byte of the file prior to</U>
+  <U>       decrypting it.</U>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng61c47.html">.INI Files</A>
+<A HREF="ng2b0ce.html">Sx_INIheader()</A>
+<A HREF="ng2f9f.html">_sx_INIinit()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

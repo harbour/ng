@@ -1,0 +1,36 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1acb3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng1b664.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Invoking Inititalizers</B>
+
+  In the init() method of a multiply inherited class, it is usually
+  necessary to invoke the initializers of all direct parent classes. Since
+  the <B>METHOD definition</B> command only allows a single parent initializer
+  to be invoked, it is best to invoke parent initializers explicitly. For
+  example, assume a class is multiply inherited from two classes, x and y.
+  The init method in the subclass should then look something like this:
+
+    METHOD init(...)
+       ::x:init(...)
+       ::y:init(...)
+       //...
+    RETURN self
+
+  This makes use of scope resolution messages to invoke the correct method
+  in the specified parent class. Scope resolution messages are discussed
+  further in the following sections.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

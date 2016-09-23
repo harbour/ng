@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6621f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng66814.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gFntClipSet()</B>
+ Set the clipping region for the active font
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>ERRCODE _gFntClipSet(</B>
+     <B>                      LLG_LPFNTCLIP lpFntClipSet</B>
+     <B>                    )</B>
+
+ <B>Arguments</B>
+
+     <B>lpFntClipSet</B> is a pointer to an LLG_FNTCLIP structure that you must
+     allocate and initialize prior to calling this function.  _gFntClipSet()
+     uses the members of this structure to set the clipping region for the
+     active font--as set by the most recent call to _gFntSet().
+
+ <B>Returns</B>
+
+     SUCCESS if successful; otherwise, an error code.
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6621f.html">_gFntClipGet()</A>
+<A HREF="ng66d39.html">_gFntSet()</A>
+<A HREF="ng6bba7.html">LLG_FNTCLIP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,136 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2994d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng27ce3.html">[^^Up^^]</A>
+<A HREF="ng2b376.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Index Management</B>
+------------------------------------------------------------------------------
+
+     The greatest variation from the standard Xbase database design in
+     Paradox tables is index management.  As in other systems, Paradox
+     indexes are an efficient method of dynamically sorting or locating
+     specific data within a table without forcing a search of all data in
+     that table.  Paradox tables take two forms: unkeyed and keyed.
+
+     An unkeyed table has no fields in its structure that have been
+     identified as specific index keys.  Therefore, records are maintained in
+     natural order.  New records are added to the end of an existing table,
+     and the unique identity for each record is a record number.
+
+     Unlike Xbase data files, unkeyed tables are not more efficient in design
+     or faster to traverse than keyed tables.  This is because Paradox tables
+     are built as linked lists rather than fixed-length, sequential tables.
+     Therefore, it is actually less efficient to SKIP through a unkeyed table
+     than it is through a keyed table.
+
+     A keyed table, on the other hand, can be lightning fast as long as the
+     data you seek is part of the key.  Otherwise, just as in an unkeyed
+     table, you are forced to do a sequential search through the table's data
+     fields.
+
+     Paradox tables support two types of keys or indexes.
+
+     <B>.</B>  Primary
+
+     <B>.</B>  Secondary
+
+ <B>Primary Indexes</B>
+
+     Primary indexes are directly tied to keyed tables because a primary
+     index indicates the table is keyed.  Simply, it is impossible to have a
+     keyed table without a primary index.  If you remove the primary index
+     from a keyed table it becomes an unkeyed table.
+
+     When you identify one or more of the table's fields as a key field (by
+     placing an asterisk (*) at the end of the field name) during table
+     creation/restructuring, these fields are used to create a primary index.
+     (Note that all key fields must be together as the first fields in a
+     table).  This invisibly rebuilds the table's structure, though in
+     operation it only seems to change or create the key index.
+
+     Once you identify this primary key, the table is automatically
+     maintained in the key field order and all new records are checked to
+     make sure that no duplicate keys are added to the table.  This type of
+     index is called a unique key index.  You may have only one primary key
+     per table, but this key can be a composite of many fields in the table.
+     You may only modify by restructuring the table.
+
+     If it is necessary to change a primary key and restructure a table, all
+     data in the table will still be bound to the unique key restriction.
+     This is important if you change the primary key by adding a new field to
+     it and there is already data in the table where this new composite key
+     would have duplicates.
+
+     DBPX handles this situation by generating a runtime error and removing
+     every record that violates this unique key and moving it to another
+     table named KEYVIOL.db which has the identical structure of the
+     offending table.
+
+     The KEYVIOL.db is automatically generated whenever this situation
+     occurs.  If there is already a KEYVIOL table, it is overwritten.
+     Because of this you should always check for the existence of a
+     KEYVIOL.db table immediately after any type of table restructuring.
+
+ <B>Secondary Indexes</B>
+
+     Secondary indexes are more like common Xbase-type indexes because they
+     can be generated or modified on the fly without having any effect on the
+     data or table structure and aren't restricted to unique key data.
+
+     Unlike Xbase indexes, secondary indexes can only contain a single field
+     as their key.  As mentioned earlier, primary indexes are automatically
+     maintained so that they are always up to date.  Secondary indexes are
+     created in two different types.
+
+     <B>.</B>  Incremental (for keyed tables)
+
+     <B>.</B>  Independent (for unkeyed tables)
+
+     Independent indexes are created only for unkeyed tables and are not
+     dynamically maintained in any way.  Because of this they can only be
+     considered accurate at the time of their creation.  If data changes
+     inside the table that affects the index, the index must be completely
+     regenerated before it can be considered useful again.
+
+     Alternately, incremental indexes are created only for keyed tables and
+     are automatically maintained similarly to primary indexes except that
+     instead of a complete rebuild at every change, only the portion of the
+     index affected is updated.  Incremental indexes are preferable when you
+     are handling large tables since they take considerably less time and
+     energy to keep accurate.
+
+ <B>Temporary Indexes</B>
+
+     ALL, NEXT, RECORD, and REST are all supported in the scoping
+     expressions. The syntax of these keywords is identical to that used in
+     CA-Clipper.  Note that you can only use one scope keyword at a time.  If
+     more than one of these keywords is encountered in a scoping expression,
+     then the last keyword in the expression is the option used.
+
+     The ALL keyword (default) specifies that all records in the table should
+     be included in the operation, starting at the first record.
+
+     NEXT processes the specified number of records, starting with the
+     current record.  For example, NEXT 5 would process the current record
+     and the four records following it.
+
+     The RECORD keyword identifies a specific record to process.  The desired
+     record number should follow the keyword RECORD.  To process record
+     number 3, you would include "RECORD 3" in the expression.
+
+     The REST keyword causes processing to begin with the current record,
+     instead of starting at the beginning of the table.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2810.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng359b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmFiltCount()</B>         Get the number of records which meet the condition
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmFiltCount() -&gt; nMatches
+
+<B>Arguments</B>
+
+    None.
+
+<B>Returns</B>
+
+    cmFiltCount() returns the number of records which meet the filter
+    condition which has been set by cmFilter().
+
+<B>Description</B>
+
+    cmFiltCount() returns the number of records which meet the filter
+    condition set up by cmFilter().  cmFilter() is used if it is called
+    explicitly _or_ if cm52.ch has been #include'd into a file and a SET
+    FILTER TO is used.
+
+    This function will force Linear Optimization to be performed so that the
+    return value is fully accurate (however, please note that DELETED
+    records are included as part of the count unless you have explicitly
+    added !deleted() as part of the condition).
+
+    cmFiltCount() does _not_ obey any index scope in effect.  It returns the
+    number of records which meet the condition independent of any index
+    scope.  cmKeyCount(), however, will return the the number of records
+    which meet the condition _and_ fall within the scope of the current
+    master index.
+
+<B>Example</B>
+
+    use demo index last, lastcall
+
+    *   Select down to these records
+    cmFilter("last = 'J' .and. lastcall &gt;= ctod('1/1/80')")
+
+    *   Say how many meet the condition
+<B>    ? cmFiltCount(), " records meet the condition: " + dbFilter()</B>
+
+    *   Now list them out
+    list last, lastcall
+
+<B>See Also</B>
+
+    cmFilter(), cmReFilter(), cmKeyCount()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng359b.html">cmFilter()</A>
+<A HREF="ng582a.html">cmReFilter()</A>
+<A HREF="ng434c.html">cmKeyCount()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

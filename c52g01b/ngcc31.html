@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc701.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ngd40d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ARRAY()</B>
+ Create an uninitialized array of specified length
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ARRAY(&lt;nElements&gt; [, &lt;nElements&gt;...]) --&gt; aArray</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nElements&gt;</B> is the number of elements in the specified dimension.
+     The maximum number of elements in a dimension is 4096.  Arrays in
+     CA-Clipper can have an unlimited number of dimensions.
+
+ <B>Returns</B>
+
+     ARRAY() returns an array of specified dimensions.
+
+ <B>Description</B>
+
+     ARRAY() is an array function that returns an uninitialized array with
+     the specified number of elements and dimensions.  If more than one
+     &lt;nElements&gt; argument is specified, a multidimensional array is created
+     with the number of dimensions equal to the number of &lt;nElements&gt;
+     arguments specified.  Any &lt;nElements&gt; that is itself an array creates a
+     nested array.
+
+     In CA-Clipper, there are several ways to create an array.  You can
+     declare an array using a declaration statement such as LOCAL or STATIC;
+     you can create an array using a PRIVATE or PUBLIC statement; you can
+     assign a literal array to an existing variable; or you can use the
+     ARRAY() function.  ARRAY() has the advantage that it can create arrays
+     within expressions or code blocks.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a one-dimensional array of five elements
+        using the ARRAY() function, and then shows the equivalent action by
+        assigning a literal array of NIL values:
+
+        aArray := ARRAY(5)
+        aArray := { NIL, NIL, NIL, NIL, NIL }
+
+     <B>.</B>  This example shows three different statements which create the
+        same multidimensional array:
+
+        aArray := ARRAY(3, 2)
+        aArray := { {NIL, NIL}, {NIL, NIL}, {NIL, NIL} }
+        aArray := { ARRAY(2), ARRAY(2), ARRAY(2) }
+
+     <B>.</B>  This example creates a nested, multidimensional array:
+
+        aArray := ARRAY(3, {NIL,NIL})
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng392a.html">AADD()</A>
+<A HREF="ng7f92.html">ADEL()</A>
+<A HREF="nga78a.html">AFILL()</A>
+<A HREF="ngae9a.html">AINS()</A>
+<A HREF="ngbfbea.html">LOCAL</A>
+<A HREF="ngc587f.html">PUBLIC</A>
+<A HREF="ngc78ff.html">STATIC</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

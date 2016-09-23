@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng1358ad.html">[^^Up^^]</A>
+<A HREF="ng13708e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Get </B>
+ Provides objects for interactive editing of database fields and variables
+------------------------------------------------------------------------------
+ <B>Description</B>
+
+     A Get object is a general purpose mechanism for editing data.  It is
+     used in CA-Clipper to implement the @...GET and READ commands.  Get
+     objects provide a sophisticated architecture for formatting and editing
+     data, including cursor navigation and data validation.  Data validation
+     is performed via user-supplied code blocks, and display formatting can
+     be controlled using standard picture strings.
+
+     Normally, a Get object is associated with a particular variable
+     (referred to as the GET variable).  The Get object does not directly
+     access this variable; instead, the variable is manipulated by evaluating
+     a supplied code block.  When a Get object is created using the standard
+     @...GET command, a code block is automatically created which provides
+     access to the variable named in the command.  For a Get object created
+     with the GetNew() function, you must specify an appropriate code block.
+
+     A Get object evaluates the supplied code block to retrieve the value of
+     the GET variable.  The value is converted to a displayable form and
+     copied into a buffer referred to as the editing buffer.  You can display
+     the editing buffer on the screen for editing.  Programmable behaviors
+     allow the navigation of the editing buffer and subsequent copying of its
+     contents back to the GET variable.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a new Get object, assigns some new
+        attributes to its instance variables, and then edits the GET with the
+        READMODAL() function:
+
+        LOCAL cVar := SPACE(10)
+        //
+
+        // Create a new Get object
+        objGet := GetNew()
+        //
+
+        // Assign some instance variables
+        objGet:row := 10
+        objGet:col := 10
+        //
+
+        // Assign the name of the associated
+        // variable and the block
+        objGet:name := "cVar"
+        objGet:block := { |cValue| IF(PCOUNT() &gt; 0,;
+                           cVar := cValue, cVar) }
+        //
+        objGet:picture := "@!"
+        objGet:colorSpec := "BG+/B, W+/BG"
+        objGet:postBlock := { |oGet| !EMPTY(oGet:varGet()) }
+        //
+
+        // Edit the single Get object
+        READMODAL({objGet})
+
+ <B>Files</B>   Source file is Getsys.prg.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngd4eb5.html">READ</A>
+<A HREF="ng92f8a.html">READMODAL()</A>
+<A HREF="ng94144.html">READVAR()</A>
+<A HREF="ng9c7f1.html">SETCOLOR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

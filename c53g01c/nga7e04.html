@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga7a8d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="nga84cd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>VAL() </B>
+ Convert a character number to numeric type
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>VAL(&lt;cNumber&gt;) --&gt; nNumber</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cNumber&gt;</B> is the character expression to be converted.
+
+ <B>Returns</B>
+
+     VAL() returns &lt;cNumber&gt; converted to a numeric value including decimal
+     digits.
+
+ <B>Description</B>
+
+     VAL() is a character conversion function that converts a character
+     string containing numeric digits to a numeric value.  When VAL() is
+     executed, it evaluates &lt;cNumber&gt; until a second decimal point, the first
+     non-numeric character, or the end of the expression is encountered.
+     Leading spaces are ignored.  When SET FIXED is ON, VAL() returns the
+     number of decimal places specified by SET DECIMALS, rounding &lt;cNumber&gt;
+     if it is specified with more digits than the current DECIMALS value.  As
+     with all other functions that round, digits between zero and four are
+     rounded down, and digits between five and nine are rounded up.  When SET
+     FIXED is OFF, VAL() returns the number of decimal places specified in
+     &lt;cNumber&gt;.
+
+     VAL() is the opposite of STR() and TRANSFORM(), which convert numeric
+     values to character strings.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate VAL() with SET FIXED ON and SET
+        DECIMALS TO 2:
+
+        SET DECIMALS TO 2
+        SET FIXED ON
+        //
+        ? VAL("12.1234")         // Result:   12.12
+        ? VAL("12.1256")         // Result:   12.13
+        ? VAL("12A12")           // Result:   12
+        ? VAL("A1212")           // Result:      0
+        ? VAL(SPACE(0))          // Result:      0
+        ? VAL(SPACE(1))          // Result:      0
+        ? VAL(" 12.12")          // Result:   12.12
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng97783.html">ROUND()</A>
+<A HREF="nge302a.html">SET DECIMALS</A>
+<A HREF="nge8018.html">SET FIXED</A>
+<A HREF="nga0e79.html">STR()</A>
+<A HREF="nga46c2.html">TRANSFORM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

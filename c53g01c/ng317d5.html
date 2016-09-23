@@ -1,0 +1,95 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng31343.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng3228f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBSETFILTER()</B>
+ Set a filter condition
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBSETFILTER(&lt;bCondition&gt;, [&lt;cCondition&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;bCondition&gt;</B> is a code block that expresses the filter condition in
+     executable form.
+
+     <B>&lt;cCondition&gt;</B> stores the filter condition as a character string for
+     later retrieval by the DBFILTER() function.  If you omit this optional
+     parameter, the DBFILTER() function will return an empty string for the
+     work area.
+
+ <B>Returns</B>
+
+     DBSETFILTER() always returns NIL.
+
+ <B>Description</B>
+
+     DBSETFILTER() sets a logical filter condition for the current work area.
+     When a filter is set, records which do not meet the filter condition are
+     not logically visible.  That is, database operations which act on
+     logical records will not consider these records.
+
+     The filter expression supplied to DBSETFILTER() evaluates to true (.T.)
+     if the current record meets the filter condition; otherwise, it should
+     evaluate to false (.F.).
+
+     The filter expression may be a code block (&lt;bCondition&gt;) or both a code
+     block and equivalent text (&lt;cCondition&gt;).  If both versions are
+     supplied, they must express the same condition.  If the text version is
+     omitted, DBFILTER() will return an empty string for the work area.
+
+     DBSETFILTER() performs the same function as the standard SET FILTER
+     command.  For more information, refer to the SET FILTER command.
+
+ <B>Notes</B>
+
+     <B>.  Logical records:</B> DBSETFILTER() affects the logical visibility
+        of records (see above).
+
+     <B>.  Side effects:</B> Setting a filter condition is only guaranteed to
+        restrict visibility of certain records as described above.  The
+        filter expression is not necessarily evaluated at any particular
+        time, by any particular means, or on any particular record or series
+        of records.  If the filter expression relies on information external
+        to the database file or work area, the effect is unpredictable.  If
+        the filter expression changes the state of the work area (e.g., by
+        moving to a different record or changing the contents of a record),
+        the effect is unpredictable.
+
+     <B>.  Evaluation context:</B> When the filter expression is evaluated,
+        the associated work area is automatically selected as the current
+        work area before the evaluation; the previously selected work area is
+        automatically restored afterward.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example limits data access to records in which the Age
+        field value is less than 40:
+
+        USE Employee NEW
+        DBSETFILTER( {|| Age &lt; 40}, "Age &lt; 40" )
+        DBGOTOP()
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1c934.html">DBCLEARFIL()</A>
+<A HREF="ng2731e.html">DBFILTER()</A>
+<A HREF="nge3d1f.html">SET DELETED</A>
+<A HREF="nge78b0.html">SET FILTER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

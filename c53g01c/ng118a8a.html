@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng118655.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng10fe9c.html">[^^Up^^]</A>
+<A HREF="ng1191dc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>:</B>
+ Send--binary                                    (Object)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>&lt;object&gt;:&lt;message&gt;[(&lt;argument list&gt;)]</B>
+
+ <B>Type</B>
+
+     Object
+
+ <B>Operands</B>
+
+     <B>&lt;object&gt;</B> is the name of the object that is to receive the message.
+
+     <B>&lt;message&gt;</B> is the name of a method or instance variable.
+
+     <B>&lt;argument list&gt;</B> is a list of parameters that are passed to the
+     specified message.  The parentheses surrounding the argument list are
+     optional if no parameters are supplied in the message send.  By
+     convention, however, parentheses distinguish a message send with no
+     parameters from an access to an exported instance variable.
+
+ <B>Description</B>
+
+     Each class defines a set of operations that can be performed on objects
+     of that class.  Perform these operations by sending a message to the
+     object using the send operator (:).
+
+     When a message is sent to an object, the system examines the message.
+     If the object is of a class that defines an operation for that message,
+     the system automatically invokes a method to perform the operation on
+     the specified object.  If the class does not define a method for the
+     specified message, a runtime error occurs.
+
+     Executing a message send produces a return value, much like a function
+     call.  The return value varies depending on the operation performed.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, myBrowse is the name of a variable that
+        contains a TBrowse object reference.  pageUp() is a method that
+        specifies the operation to be performed.  The available operations
+        and corresponding methods vary depending on the class of the object.
+        The Error, Get, TBColumn, and TBrowse classes are documented in this
+        chapter.
+
+        myBrowse:pageUp()
+
+     <B>.</B>  This example forces the checkbox state to true (.T.):
+
+        myCheck : Select (.T.)
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

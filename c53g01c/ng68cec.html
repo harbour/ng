@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6891e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng6907d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MAXROW()</B>
+ Determine the maximum visible screen row
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MAXROW() --&gt; nRow</B>
+
+ <B>Returns</B>
+
+     MAXROW() returns the row number of the bottommost visible row for
+     display purposes.
+
+ <B>Description</B>
+
+     MAXROW() is a screen function that determines the maximum visible row of
+     the screen.  Row and column numbers start at zero in CA-Clipper.
+
+     If you use a C or other extended function to set the video mode, use the
+     SETMODE() function so your CA-Clipper application returns the correct
+     value for MAXCOL().
+
+ <B>Examples</B>
+
+     <B>.</B>  This user-defined function, ScreenSize(), uses MAXROW() and
+        MAXCOL() to return an array containing the current screen size:
+
+        FUNCTION ScreenSize
+           RETURN { MAXROW(), MAXCOL() }
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng19e0f.html">COL()</A>
+<A HREF="ng6891e.html">MAXCOL()</A>
+<A HREF="ng97e75.html">ROW()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng452d7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng46305.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LOG()</B>
+ Calculate the natural logarithm of a numeric value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LOG(&lt;nExp&gt;) --&gt; nNaturalLog</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nExp&gt;</B> is a numeric value greater than zero to convert to its
+     natural logarithm.
+
+ <B>Returns</B>
+
+     LOG() returns the natural logarithm as a numeric value.  If &lt;nExp&gt; is
+     less than or equal to zero, LOG() returns a numeric overflow (displayed
+     as a row of asterisks).
+
+ <B>Description</B>
+
+     LOG() is a numeric function that calculates the natural logarithm of a
+     number and is the inverse of EXP().  The natural logarithm has a base of
+     e which is approximately 2.7183.  The LOG() function returns x in the
+     following equation:
+
+     e**x = y
+
+     where y is the numeric expression used as the LOG() argument (i.e.,
+     LOG(y) = x).  Due to mathematical rounding, the values returned by LOG()
+     and EXP() may not agree exactly (i.e., EXP(LOG(x)) may not always equal
+     x).
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples demonstrate various results of LOG():
+
+        ? LOG(10)                // Result: 2.30
+        ? LOG(10 * 2)            // Result: 3.00
+        ? EXP(LOG(1))            // Result: 1.00
+        ? LOG(2.71)              // Result: 1.00
+
+     <B>.</B>  This example is a user-defined function that returns the base
+        10 logarithm:
+
+        FUNCTION Log10( nNumber )
+        IF nNumber &gt; 0
+           RETURN LOG(nNumber)/LOG(10)
+        ELSE
+           RETURN NIL
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng325c8.html">EXP()</A>
+<A HREF="ng9efaa.html">SET DECIMALS</A>
+<A HREF="nga33cc.html">SET FIXED</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

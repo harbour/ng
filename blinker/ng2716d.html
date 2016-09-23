@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng26f8a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng27801.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIPTRINC()                   Huge pointer increment</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Huge pointer increment</B></U>
+
+ <U>Syntax   : <B>BLIPTRINC(pointer, nlvalue)</B></U>
+
+ <U>Return   : <B>Incremented pointer</B></U>
+
+ Some C/C++ compilers generate code using huge protected mode pointers quite
+ happily (such as Borland C++ in most cases), while others generate
+ references to __AHSHIFT and __AHINCR. These symbols are used to advance huge
+ pointers over segment boundaries, and are provided in the compiler runtime
+ library as constants that work correctly in real mode only. As it is
+ impossible for Blinker to provide single values for these constants that
+ will work in both real mode and protected mode, there are two possible
+ solutions:
+
+ 1) BLXSHFPT.OBJ or BLXSHFTR.OBJ can be linked as a FILE to resolve these
+ symbols with protected mode or real mode compatible values respectively, but
+ the resulting .EXE will ONLY run correctly IN PROTECTED MODE as the
+ increments are hard coded for protected mode.
+
+ 2) The code can be updated to use two Blinker functions BLIPTRINC() and
+ BLIPTRDEC() to advance the pointers correctly in all modes, including dual
+ mode.
+
+ For example if BLOCK is some complex type then :
+
+    <B>1  memptr = (BLOCK huge *) halloc ((long) BLKMAX,sizeof (BLOCK));</B>
+    <B>2  if (memptr)</B>
+    <B>3     {</B>
+    <B>4     tmpptr = memptr;</B>
+    <B>5     for (i = 0; i &lt; BLKMAX; i++)</B>
+    <B>6        {</B>
+    <B>7        ...      /* Some operation */</B>
+    <B>8        tmpptr++;      Borland handles huge pointers ok */</B>
+    <B>9        }</B>
+    <B>10    }</B>
+    <B></B>
+
+ Line 8 can be replaced with
+
+    <B>tmpptr = BLIPTRINC (tmpptr, (long) sizeof (BLOCK));</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng26f8a.html">BLIPTRDEC()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

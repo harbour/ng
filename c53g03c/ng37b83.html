@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3749d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng31a91.html">[^^Up^^]</A>
+<A HREF="ng381fe.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gtRectSize()</B>
+ Determine the buffer size needed to save a specified screen region
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "gt.api"</B>
+     <B>ERRCODE _gtRectSize(</B>
+     <B>                     USHORT  uiTop,</B>
+     <B>                     USHORT  uiLeft,</B>
+     <B>                     USHORT  uiBottom,</B>
+     <B>                     USHORT  uiRight,</B>
+     <B>                     USHORTP uipBuffSize</B>
+     <B>                   )</B>
+
+ <B>Arguments</B>
+
+     <B>uiTop</B>, <B>uiLeft</B>, <B>uiBottom</B>, and <B>uiRight</B> define the coordinates
+     of the rectangular region to be calculated.  If all coordinates are
+     NULL, the entire display region is used.
+
+     <B>uipBuffSize</B> is the size of the buffer needed to contain the
+     specified region.
+
+ <B>Returns</B>
+
+     _gtRectSize() returns zero if successful.  Any other value indicates an
+     error.
+
+ <B>Description</B>
+
+     _gtRectSize() analyzes the specified screen region, determines the
+     buffer size needed to save it, and saves the buffer size as a numeric
+     value.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses _gtRectSize() to calculate the memory needed
+        by _xvalloc() (see the "Virtual Memory API Reference" chapter of this
+        guide) to properly save the screen buffer:
+
+        #include "gt.api"
+        #include "vm.api"
+        .
+        .
+        .
+           BYTEP    psBuff;
+           USHORT   uiBuffSize;
+           HANDLE   hVM;
+
+           _gtRectSize( 1, 1, 10, 25, &amp;uiBuffSize );
+
+           hVM      = _xvalloc( uiBuffSize, 0 );
+           scrBuff  = _xvlock( hVM );
+           _gtSave( 1, 1, 10, 25, fpBuff );   // Save area under rect
+           .
+           . &lt;manipulate screen&gt;
+           .
+           _gtRest( 1, 1, 10, 25, fpBuff );   // Restore screen
+
+           _xvunlock( hVM );
+
+           _xvfree( hVM );
+        .
+        .
+        .
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Gt.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng388a7.html">_gtRest()</A>
+<A HREF="ng395f8.html">_gtSave()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

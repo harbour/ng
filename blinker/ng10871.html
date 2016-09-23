@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngfeb9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng115be.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER OVERLAY PAGEFRAME     Enable use of EMS pageframe for overlays</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Enable use of the EMS pageframe for overlays</B></U>
+
+ <U>Syntax   : <B>BLINKER OVERLAY PAGEFRAME ON | OFF</B></U>
+
+ <U>Default  : <B>OFF</B></U>
+
+ <U>Example  : <B># Use the EMS pageframe</B></U>
+            <B>BLINKER OVERLAY PAGEFRAME ON</B>
+
+ Note: Please read this section fully before using this command.This command
+ will allow the overlay manager to utilize the expanded memory pageframe for
+ the overlay pool (maximum size 64kb), on machines equipped with LIM EMS (3.2
+ or higher) expanded memory boards or emulators.
+
+ Note: This command will be ignored at runtime in the absence of an EMS
+ driver (or pageframe).
+
+ To use this option there must be 64kb or more of available expanded memory,
+ and the program's overlay OPSIZE must be less than 64kb. At runtime, if
+ expanded memory is available and this option is enabled, the overlay manager
+ will allocate 4 expanded memory pages, map them into the pageframe, and use
+ the pageframe for overlay execution. The overlay OPSIZE will automatically
+ be expanded to use all 64kb available in the pageframe, resulting in
+ increased execution speed of overlaid code.
+
+ WARNING: When using this command, your program MUST NOT use ANY functions
+ which access expanded memory via the EMS pageframe UNLESS the pageframe
+ mapping state is preserved, and you make sure no overlaid functions are
+ called prior to restoring the mapping state.
+
+ Additionally, overlaid functions will not be able to access expanded memory
+ via the EMS pageframe UNLESS they take particular care to determine within
+ which page(s) they are executing, otherwise they may map themselves out of
+ memory. Failure to adhere to these guidelines will result in program
+ failure, corruption of the program's expanded memory, or both. Also be aware
+ that some TSRs, network drivers and disk caches do not save/restore the
+ pageframe mapping state correctly, which may lead to program failure when
+ overlays are executed in the pageframe. The use of the pageframe may be
+ adjusted at runtime through the use of the BLINKER environment variable (see
+ the 'Environment Variable' section in chapter 2).
+
+ If both this command and the UMB command are used, and both the pageframe
+ and a UMB are available, Blinker will use the pageframe in preference.
+
+ If either or both of these are specified and are not available on the end
+ user's system, Blinker will automatically ignore these commands and allocate
+ the overlay area from conventional memory.
+
+ <B>Notes for CA-Clipper Summer '87:</B>
+
+ This command is only effective when the fixed overlay allocation method is
+ selected with the command BLINKER OVERLAY FIXED. When this command is
+ activated with CA-Clipper Summer'87, Blinker will disable CA-Clipper's use
+ of expanded memory by automatically burning in the E0 setting to the CLIPPER
+ environment variable.
+
+ <B>Notes for CA-Clipper 5.x:</B>
+
+ When this command is activated with CA-Clipper 5.x, Blinker will
+ automatically burn in the BADCACHE setting to the CLIPPER environment
+ variable, causing CA-Clipper 5.x to save the pageframe mapping state between
+ each access to expanded memory. This will protect the overlay area in the
+ pageframe from corruption.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5da6.html">BLINKER ENVIRONMENT NAME</A>
+<A HREF="ngfa66.html">BLINKER OVERLAY FIXED</A>
+<A HREF="ng11b06.html">BLINKER OVERLAY UMB</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

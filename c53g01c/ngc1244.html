@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc0ec3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngc16d9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CLEAR ALL*</B>
+ Close files and release public and private variables
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CLEAR ALL</B>
+
+ <B>Description</B>
+
+     CLEAR ALL releases all public and private variables, closes all open
+     databases and related files in all active work areas, and SELECTs work
+     area 1.  Related files are index, alternate, and memo files.  CLEAR ALL,
+     however, does not release local or static variables.
+
+     CLEAR ALL is a compatibility command and therefore not recommended.  Its
+     usage in CA-Clipper is superseded by the command or function that
+     performs the specific action you need.  You can close files associated
+     with work areas with one of the various forms of the CLOSE command.  You
+     can release private and public variables using the RELEASE command
+     although explicitly releasing variables is discouraged in most
+     instances.  For more information on the scope and lifetime of variables,
+     refer to the "Basic Concepts" chapter in the Programming and Utilities
+     Guide.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc16d9.html">CLEAR GETS</A>
+<A HREF="ngc1bcf.html">CLEAR MEMORY</A>
+<A HREF="ngc26c8.html">CLOSE</A>
+<A HREF="ngd7830.html">RELEASE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

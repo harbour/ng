@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2b333.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng2bf34.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCOPY()</B>
+ Copies files within a Novell file server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCOPY(&lt;cSourceFile&gt;,&lt;cTargetFile&gt;,[&lt;nBytes&gt;])</B>
+     <B>   --&gt; nCopiedBytes</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSourceFile&gt;</B>  Designates the name of the file that is copied.  This
+     parameter can contain the drive and path designation but must be
+     resident on a network drive.
+
+     <B>&lt;cTargetFile&gt;</B>  Designates  the name of the target file that is
+     created.  This parameter can contain the drive and path designation but
+     must be resident on a network drive.
+
+     <B>&lt;nBytes&gt;</B>  Designates the number of bytes that are copied.  The
+     default value designates the entire file.
+
+ <B>Returns</B>
+
+     NNETCOPY() returns the number of bytes copied.  If a copy did not occur,
+     the function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET COPY
+     This function was planned specifically for copying files within a Novell
+     file server.  The copy speed is very high because the file content is
+     copied within the server and is not transmitted over the network.  In
+     this way the function corresponds to the Novell NCOPY utility program.
+
+ <B>Notes</B>
+
+     <B>.</B>  If the size of the file that is copied is already known,
+        (through FILESEEK()/FILESIZE()), you should pass that size as the
+        third parameter.  The function then does not have to determine the
+        size of the source file and the copy speed is quicker.
+
+     <B>.</B>  Notice that the source and target file must be resident on
+        network drives on the same file server.  You cannot copy to or from
+        hard disks or floppies, or copy between different servers.
+        FILECOPY() must be used for all other file copying.
+
+     <B>.</B>  Distinctions can be made based on the source of the error
+        through ERRORCODE() (source file not found; target file cannot be
+        created) or through NNETERROR() (different file servers).
+
+ <B>Examples</B>
+
+     <B>.</B>  Drive J: is mapped on a Novell server.  Copy a file, giving
+        the source and target path:
+
+        NNETCOPY("J:\SUPPORT\TEST.EXE", "J:\USER\TEST2.EXE")
+
+     <B>.</B>  FILECOPY() is a simple method of copying a file every time.
+        If you cannot copy with NNETCOPY(), use FILECOPY():
+
+        IF FILE(cFileName)
+           IF NNETCOPY(cFileName, cTargetFile) = -1
+              FILECOPY(cFileName, cTargetFile)
+           ENDIF
+           IF ERRORCODE(.T.) = 0
+              ? "File copied successfully!"
+           ENDIF
+        ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7b972.html">NNETERROR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

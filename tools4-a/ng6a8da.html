@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6a392.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng6af71.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSLIN()</B>
+ Logs in a print server to a file server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSLIN(&lt;cPServer&gt;,&lt;cPassword&gt;,&lt;cServer1&gt;,[&lt;cServer2&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is logged
+     in on &lt;cServer1&gt;.
+
+     <B>&lt;cPassword&gt;</B>  Designates the password defined for &lt;cPServer&gt; on
+     &lt;cServer1&gt;.
+
+     <B>&lt;cServer1&gt;</B>  Designates the file server on which &lt;cPServer&gt; is logged
+     in.
+
+     <B>&lt;cServer2&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer2&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer2&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer2&gt;.
+
+ <B>Returns</B>
+
+     NNETPSLIN() returns .T. if the function has been executed successfully.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER LOGIN
+     To service a queue on a file server, a print server must be logged in on
+     the file server.  NNETPSLIN() allows you to log in a print server on a
+     file server (&lt;cServer1&gt;) after it has been started.  For a print server
+     login, a password can be queried and then passed for &lt;cPassword&gt;.  An
+     empty string ("") for &lt;cPassword&gt; must be passed if no password has been
+     specified for &lt;cPServer&gt; on &lt;cServer1&gt;.
+
+ <B>Example</B>
+
+     Log in the print server PSERVER on file server TOOLS1 (with password
+     SECRET):
+
+     IF NNETPSLIN('PSERVER','SECRET','TOOLS1')
+        ? 'Log in successful!'
+     ELSE
+        ? 'Error!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6af71.html">NNETPSLOUT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

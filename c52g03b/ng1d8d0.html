@@ -1,0 +1,110 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1d383.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1763f.html">[^^Up^^]</A>
+<A HREF="ng1e0fc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_xvrealloc()</B>
+ Change the size of a VM segment
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "vm.api"</B>
+     <B>HANDLE _xvrealloc(</B>
+     <B>                   HANDLE hSegment,</B>
+     <B>                   USHORT uiSize,</B>
+     <B>                   USHORT uiFlags</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>hSegment</B> is the VM segment handle returned by _xvalloc().
+
+     <B>uiSize</B> is the new VM segment size in bytes.
+
+     <B>uiFlags</B> is currently unused and must be set to zero.
+
+ <B>Returns</B>
+
+     If successful, _xvrealloc() returns the original VM segment handle;
+     otherwise, it returns zero.
+
+ <B>Description</B>
+
+     _xvrealloc() resizes a previously allocated VM segment, shortening or
+     lengthening the VM segment to match the specified size.  If you shorten
+     the VM segment, bytes at the end of the segment are lost.
+
+     If the resizing is unsuccessful (indicated by a return value of zero),
+     the segment retains its original size.
+
+     <B>Note: </B> _xvrealloc() can resize locked segments, but the chance of
+     success is lower because the function will be constrained by other
+     locked segments that are currently in memory.
+
+     <B>Warning! </B> Use _xvheapresize(), not _xvrealloc(), to resize a segment
+     heap.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example resizes a previously allocated segment:
+
+        // CA-Clipper include files
+        #include "vm.api"
+
+        #define VR_SHRANK     1
+        #define VR_GREW       2
+        #define VR_NOCHANGE   3
+        #define VR_ERROR      0
+
+        // Prototype
+        int VMResizeExample(HANDLE hSegment, unsigned uiNewSize);
+
+
+        int VMResizeExample(HANDLE hSegment, unsigned uiNewSize)
+        {
+           int iResult = VR_ERROR;
+           unsigned int uiOldSize;
+           long lChange;
+
+           uiOldSize = _xvsize(hSegment);
+
+
+           // Attempt to resize and assign result
+           //
+           if (_xvrealloc(hSegment, uiNewSize, 0))
+              {
+              lChange = (_xvsize(hSegment) - uiOldSize);
+
+              if (lChange &gt; 0)
+                 iResult = VR_GREW;
+
+              if (lChange == 0)
+                 iResult = VR_NOCHANGE;
+
+              if (lChange &lt; 0)
+                 iResult = VR_SHRANK;
+              }
+
+           return (iResult);
+        }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Vm.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng179e4.html">_xvalloc()</A>
+<A HREF="ng1b7f8.html">_xvheapresize()</A>
+<A HREF="ng1e0fc.html">_xvsize()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

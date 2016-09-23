@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngef52.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ngf58a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Comparing Objects</B>
+
+  When comparing two variables to see if both refer to the same object, the
+  exact comparison operator (double equal, ==) must be used. The inexact
+  comparison operator (single equal, =) will cause a runtime error, as will
+  a 'not equal' (&lt;&gt; or !=). If you wish to check that two variables refer to
+  different objects, it can be done as follows:
+
+    IF !(obj1 == obj2)
+
+  This is the standard behaviour of the Clipper language, and similarly
+  applies to comparisons of arrays.
+
+  When comparing an object with NIL, however, the 'not equal' operator can
+  be used. For example:
+
+    IF obj &lt;&gt; NIL
+
+  This will work in all cases.
+
+  The reason for this behavior is that such comparisons of objects are
+  actually comparing references to objects (pointers). Asking whether one
+  such reference is greater than or less than another is meaningless, in the
+  Clipper environment. The inexact comparison operator is similarly
+  meaningless.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nged70.html">Comparing Classes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

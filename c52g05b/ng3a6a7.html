@@ -1,0 +1,101 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3a55b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3a47c.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1   Memo Fields and Soft Carriage Returns in Clipper 5.0</B>
+--------------------------------------------------------------------------------
+
+     The text handling (memo) functions in Clipper 5.0 use a slightly
+     different formatting algorithm than in previous versions.  The
+     change concerns the way soft carriage return/line feed characters
+     are inserted into the text when word-wrapping occurs under
+     MEMOEDIT().
+
+     Under either version, word-wrapping occurs when a line of text is
+     too wide to fit within the line width specified in the call to
+     MEMOEDIT().  The line is broken into two lines by inserting a soft
+     carriage return/line feed after the right-most word that will fit
+     within the specified line width.
+
+     In the Summer '87 version of MEMOEDIT(), when a soft carriage
+     return/line feed is inserted, a single space character is removed
+     from the text at the point where the soft carriage return/line feed
+     is inserted.  If the text is later reformatted using a different
+     line width, each soft carriage return/line feed is replaced by a
+     single space.  This generally results in equivalent text,
+     regardless of the formatting width.  A problem arises, however, if
+     a single word is too long to fit within the specified line width.
+     In this case, a soft carriage return/line feed is inserted in the
+     middle of the word.  If the text is later reformatted with a
+     greater line width, the word will appear as two words because the
+     soft carriage return/line feed is replaced with a space.
+
+     In Clipper 5.0, the insertion of soft carriage return/line feed
+     characters is never allowed to change the significant content of
+     the text.  That is, when a soft carriage return/line feed is
+     inserted between two words, the space characters between the two
+     words are preserved.  When text is reformatted, any soft carriage
+     return/line feed characters are simply removed.  This leaves the
+     text in its original form and properly handles the case where a
+     soft carriage return/line feed has been inserted in the middle of a
+     word.
+
+     If a text string formatted using Summer '87 MEMOEDIT() is
+     reformatted using any of the 5.0 text handling functions, words
+     that were separated by a soft carriage return/line feed will be run
+     together because the soft carriage return/line feed is not replaced
+     with a space.
+
+     To prevent this, text that was formatted using Summer '87
+     MEMOEDIT() should be processed to change any soft carriage
+     return/line feed pairs into space characters.  This can be
+     accomplished using the STRTRAN() function.
+
+       STRTRAN( &lt;text&gt;, CHR(141)+CHR(10), " " )
+
+     To convert memo values in an existing database, the following two
+     line program can be used:
+
+       USE &lt;xcDatabase&gt;
+       REPLACE ALL &lt;idMemo&gt; WITH ;
+         STRTRAN( &lt;idMemo&gt;, CHR(141)+CHR(10), " " )
+
+     Because of the (.dbt) file format, replacing all occurrences of a
+     memo field can cause the (.dbt) file to grow significantly.  The
+     (.dbt) file can be reduced by copying the (.dbf) to a new file.
+
+     For very large (.dbt) files, it may not be feasible to perform the
+     above procedure.  The supplied utility program, DBT50.EXE located
+     in \CLIPPER5\BIN, may be useful in these cases.  DBT50 scans an
+     entire (.dbt) file, replacing any soft carriage return/line feed
+     pairs with two spaces.  Although this has the undesirable effect of
+     causing certain words to be separated by two spaces instead of one,
+     it allows the file to be processed in place without using
+     additional disk space.  DBT50 modifies only soft carriage
+     return/line feed pairs in the target file.  Other text is
+     unaffected.
+
+     Whatever method is chosen, the translation should be performed
+     before text in the target file is reformatted and written using the
+     Clipper 5.0 MEMOEDIT() function.
+
+     -------------------------------------------------------------------
+     <B>. Important</B>
+
+     As with any file upgrade operation, you should make backup copies
+     of the affected files before operating on them.
+     -------------------------------------------------------------------
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

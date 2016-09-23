@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng716e8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6dbf4.html">[^^Up^^]</A>
+<A HREF="ng72649.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Additional Restrictions:</B>
+
+  It is important to note that even with a verify process the HiPer-SEEK
+  subroutines have been designed to retrieve records very quickly. In fact,
+  a large variety of post-search operations can be completed in less time
+  than it would take to do a conventional sequential search.  Another
+  verification type that might be created is a proximity search for two
+  strings within text records. After a text record passes a hs_Verify()
+  type 3 verification confirming the presence of both strings, the number
+  of characters between search strings could be counted and compared to a
+  user established maximum.
+
+  HiPer-SEEK does not contain a Previous function. This feature can be
+  implemented by saving the results of a search; that is, saving the
+  numbers returned by hs_Next() and verified by hs_Verify() in an array, a
+  temporary file, or a subindex or by copying the actual records to a new
+  .DBF file.
+
+  In a somewhat similar way, logical OR and NOT type searches can be made.
+  In the case of OR, the saved results of a search for a particular
+  string(s) would be combined with the results of another search. The
+  resulting list of numbers, after eliminating duplicates, would represent
+  all text records containing either of the two strings.
+
+  The NOT case can be implemented using the verify process. First use
+  hs_Set(), hs_Next() and hs_Verify() to find records containing the first
+  term. then search each of these records, again using hs_Verify(), for the
+  occurrence of the second, unwanted term, rejecting those records
+  containing it.
+
+  It is also possible, using hs_Verify(), to limit a search to a portion of
+  a text record. For example, if an .HSX index was built based on all
+  fields of a data file, you can limit a search to a particular field by
+  supplying only that field to hs_Verify() rather than supplying the entire
+  source text record. Only records containing the search string(s) in that
+  field will pass the verification.
+
+  Searches can be limited to a range of records by testing the return
+  values of hs_Next() against a desired range of record numbers. For
+  example, if you were to build an application based on the text of the
+  Bible, you might want to limit a search to a particular book. By knowing
+  that the Book of John was made up of records 300 through 400, you could
+  ignore any hs_Next() return value outside of that range. It would be
+  important to exclude these values before the verification stage. In fact,
+  you should always attempt to reduce the number of records needing
+  verification.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

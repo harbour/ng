@@ -1,0 +1,112 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6ab10.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng6bba7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gWriteAt()</B>
+ Draw graphic text without background
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>int _gWriteAt(</B>
+     <B>               int iX,</B>
+     <B>               int iY,</B>
+     <B>               DWORD dwFontColor,</B>
+     <B>               int iFontID,</B>
+     <B>               char far * fpString,</B>
+     <B>               int iMode,</B>
+     <B>               int iAttribute</B>
+     <B>             )</B>
+
+ <B>Arguments</B>
+
+     <B>iX</B> is the pixel-based X coordinate of the starting point.
+
+     <B>iY</B> is the pixel-based Y coordinate of the starting point.
+
+     <B>dwFontColor</B> is the font color.  The range of valid values is limited
+     to the number of colors available in the selected video mode.  For
+     example, in 16-color modes, valid values are between zero and 15, and in
+     256-color modes, valid values are between zero and 255.
+
+     <B>iFontID</B> is the font handle.
+
+     <B>fpString</B> is a pointer to the display text.
+
+     <B>iMode</B> is the display mode, which you specify using one of the
+     following values:
+
+     <B>Display Mode Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant            Display Mode</B>
+     ------------------------------------------------------------------------
+     LLG_MODE_SET        Overwrite existing pixels that are beneath where the
+                         string will be displayed.  This is the most common
+                         display mode.
+     LLG_MODE_AND        Perform a logical AND on existing pixels--and on the
+                         display color--that are beneath where the string
+                         will be displayed.
+     LLG_MODE_OR         Perform a logical OR on existing pixels--and on the
+                         display color--that are beneath where the string
+                         will be displayed.
+     LLG_MODE_XOR        Perform a logical XOR on existing pixels--and on the
+                         display color--that are beneath where the string
+                         will be displayed (see Note below).
+     LLG_MODE_NO_DISPLAY Compute the width of the string without displaying
+                         anything on the screen.  Be aware that .FNT fonts
+                         are proportional (e.g., an "m" and an "i" do not use
+                         the same number of pixels).
+     ------------------------------------------------------------------------
+
+     <B>Note:</B>  LLG_MODE_XOR allows you to move objects around on the screen
+     without damaging the background.  To retrieve the initial background,
+     simply repeat the function call using the XOR display mode.
+
+     <B>iAttribute</B> is the font attribute, which you specify using one or
+     more of the following values:
+
+     <B>Font Attribute Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant            Font Attribute</B>
+     ------------------------------------------------------------------------
+     LLG_FONT_BOLD       Bold
+     LLG_FONT_ITALIC     Italic
+     LLG_FONT_UNDERLINE  Underline
+     ------------------------------------------------------------------------
+
+     To specify more than one attribute, simply add the values together.
+     Note also that you can specify a value of zero for this parameter if you
+     do not want to specify any font attributes.
+
+ <B>Returns</B>
+
+     The length of *fpString in pixels.
+
+ <B>Notes</B>
+
+     <B>.  Restrictions:</B>  You cannot use this function unless you have
+        set the screen to one of the graphic modes using _gModeSet().  This
+        function respects the screen clipping region as set by _gClipSet().
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng644bc.html">_gClipSet()</A>
+<A HREF="ng66b47.html">_gFntLoad()</A>
+<A HREF="ng66d39.html">_gFntSet()</A>
+<A HREF="ng68632.html">_gModeSet()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

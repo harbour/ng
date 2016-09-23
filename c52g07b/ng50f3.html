@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3f77.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2471.html">[^^Up^^]</A>
+<A HREF="ng5b6c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>The Language Implementation</B>
+------------------------------------------------------------------------------
+
+     To support the RDD architecture and let you design applications that are
+     independent of the data format you are using, many existing CA-Clipper
+     commands and functions have been enhanced, and several new language
+     elements have been added.  The following tables summarize these changes
+     and additions.  See the Reference chapter of this guide for more
+     detailed information on a particular item.
+
+     <B>Enhanced Commands and Functions</B>
+     ------------------------------------------------------------------------
+     <B>Command/Function  Changes</B>
+     ------------------------------------------------------------------------
+     APPEND FROM       VIA clause
+     COPY TO           VIA clause
+     DBAPPEND()        Terminology
+     GO                Terminology
+     DBAPPEND()        Terminology
+     INDEX             ALL, EVAL, EVERY, NEXT, RECORD, REST, TAG, and
+                       UNIQUE clauses
+     SEEK              SOFTSEEK option
+     SET INDEX         ADDITIVE clause
+     SET ORDER         IN, TAG clauses
+     DBSETINDEX()      Terminology
+     RECNO()           Terminology
+     ------------------------------------------------------------------------
+
+     <B>New Commands and Functions</B>
+     ------------------------------------------------------------------------
+     <B>Command/Function    Description</B>
+     ------------------------------------------------------------------------
+     DELETE TAG          Delete a Tag (Order)
+     DBGOTO()            Position record pointer to a specific identity
+     DBRLOCK()           Lock the record at the current or specified identity
+     DBRLOCKLIST()       Return an array of the currently locked records
+     DBRUNLOCK           Release all or specified record locks
+     ORDBAGEXT()         Return the Order Bag file extension
+     ORDBAGNAME()        Return the Order Bag name of a specific Order
+     ORDCREATE()         Create an Order in an Order Bag
+     ORDDESTROY()        Remove a specified Order from an Order Bag
+     ORDFOR()            Return the FOR expression of an Order
+     ORDKEY()            Return the Key expression of an Order
+     ORDLISTADD()        Add Order Bag contents or single Order to the Order
+                         List
+     ORDLISTCLEAR()      Clear the current Order List
+     ORDLISTREBUILD()    Rebuild all Orders in the Order List of the current
+                         work area
+     ORDNAME()           Return the name of an Order in the work area
+     ORDNUMBER()         Return the position of an Order in the current Order
+                         List
+     ORDSETFOCUS()       Set focus to an Order in an Order List
+     RDDLIST()           Return an array of the available Replaceable
+                         Database Drivers
+     RDDNAME()           Return the name of the RDD active in the current or
+                         specified work area
+     RDDSETDEFAULT()     Set or return the default RDD for the application
+     ------------------------------------------------------------------------
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge4cd5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge36fa.html">[^^Up^^]</A>
+<A HREF="nge5654.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GETREADER()</B>
+ Execute standard READ behavior for a Get object
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GETREADER(&lt;oGet&gt;) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;oGet&gt;</B> is a reference to a Get object.
+
+ <B>Returns</B>
+
+     GETREADER() always returns NIL.
+
+ <B>Description</B>
+
+     GETREADER() is a Get system function that implements the standard READ
+     behavior for Gets.  By default, READMODAL() uses the GETREADER()
+     function to read Get objects.  GETREADER() in turn uses other functions
+     in Getsys.prg to do the work of reading the Get object.
+
+ <B>Notes</B>
+
+     <B>.</B>  If a Get object's Get:reader instance variable contains a code
+        block, READMODAL() will evaluate that block in lieu of the call to
+        GETREADER().  For more information refer to the Get:reader reference.
+
+ <B>Files:</B>  Library is CLIPPER.LIB, source file is Getsys.prg.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge4018.html">GETAPPLYKEY()</A>
+<A HREF="nge489b.html">GETPOSTVALIDATE()</A>
+<A HREF="nge4cd5.html">GETPREVALIDATE()</A>
+<A HREF="ng5a1a6.html">READMODAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

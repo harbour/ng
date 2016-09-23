@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd02c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga179.html">[^^Up^^]</A>
+<A HREF="ngdb7c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_parnd()</B>
+ Retrieve a numeric parameter as a double
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "extend.api"</B>
+     <B>double _parnd(</B>
+     <B>               int iParamNum</B>
+     <B>               [, int iArrayIndex]</B>
+     <B>             )</B>
+
+ <B>Arguments</B>
+
+     <B>iParamNum</B> is the one-based ordinal position of the parameter in the
+     parameter list.
+
+     <B>iArrayIndex</B> is an array index that specifies a particular element if
+     the iParamNum parameter is an array.
+
+ <B>Returns</B>
+
+     _parnd() returns the value of the specified parameter as a double.
+
+ <B>Description</B>
+
+     _parnd() retrieves a numeric value passed as a parameter from CA-Clipper
+     and converts it to a double-precision floating point value.
+
+     _parnd() returns a far pointer to a statically allocated buffer that
+     contains the double numeric value.  When you call _parnd() from C, the
+     double value is automatically copied from the buffer into your C
+     variable.  If you call from Assembly language, however, you should take
+     care to preserve the double value since subsequent calls to _parnd()
+     will overwrite the buffer.
+
+ <B>Examples</B>
+
+     <B>.</B>  From C:
+
+        double num;
+        num = _parnd(1);
+
+     <B>.</B>  From Assembly language:
+
+        EXTRN __parnd:FAR
+              mov   ax, 1
+              push  ax
+              call  __parnd        ; value pointed to by DX:AX
+              add   sp, 2          ; reset stack pointer
+              mov   es, dx         ; load pointer in ES:BX
+              mov   bx, ax         ; copy double into save area
+                                   ; (creation of save area not shown)
+                                   ;
+              mov   word ptr MySaveArea, es:[bx]
+              mov   word ptr MySaveArea+2, es:[bx+2]
+              mov   word ptr MySaveArea+4, es:[bx+4]
+              mov   word PTR MySaveArea+6, es:[bx+6]
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Extend.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngdb7c.html">_parni()</A>
+<A HREF="ngdfa7.html">_parnl()</A>
+<A HREF="ngfe1b.html">_retnd()</A>
+<A HREF="ng12602.html">_stornd()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,100 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng2fc37.html">[^^Up^^]</A>
+<A HREF="ng30e19.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gtBox()</B>
+ Draw a box on the screen
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "gt.api"</B>
+     <B>ERRCODE _gtBox(</B>
+     <B>                USHORT uiTop,</B>
+     <B>                USHORT uiLeft,</B>
+     <B>                USHORT uiBottom,</B>
+     <B>                USHORT uiRight,</B>
+     <B>                BYTEP fpBoxString</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>uiTop</B>, <B>uiLeft</B>, <B>uiBottom</B>, and <B>uiRight</B> define the coordinates
+     of the box.  Allowable row values are from zero to _gtMaxRow() and
+     allowable column values are from zero to _gtMaxCol().  Coordinates that
+     are not within this range will result in that area being drawn off the
+     screen.
+
+     <B>fpBoxString</B> defines a string of eight border characters and a fill
+     character to be used in drawing the box.
+
+ <B>Returns</B>
+
+     _gtBox() returns zero if successful.  Any other value indicates an
+     error.
+
+ <B>Description</B>
+
+     _gtBox() draws a box at the specified display coordinates.  _gtBox()
+     draws the box using the characters in fpBoxString starting from the
+     upper lefthand corner, proceeding clockwise and filling the screen
+     region with the ninth character.  If the ninth character is not
+     specified, the screen region within the box is not painted.  Existing
+     text and color remain unchanged.
+
+     After _gtBox() executes, the cursor is located in the upper corner of
+     the boxed region (uiTop + 1 and uiLeft + 1).  The internal row and
+     column coordinates are updated so the CA-Clipper functions, ROW() and
+     COL() will reflect the new cursor position.
+
+     The following table shows the manifest constants defined in Gt.api that
+     you can use with this function to facilitate its use:
+
+     <B>Manifest Constants for Box Drawing</B>
+     ------------------------------------------------------------------------
+     <B>Gt.api              Description</B>
+     ------------------------------------------------------------------------
+     _B_SINGLE           Single-line box
+     _B_DOUBLE           Double-line box
+     _B_SINGLE_DOUBLE    Single horizontal lines, double vertical lines
+     _B_DOUBLE_SINGLE    Double horizontal lines, single vertical lines
+     ------------------------------------------------------------------------
+
+ <B>Examples</B>
+
+     <B>.</B>  This example draws framed text at a specified screen row and
+        column.  The frame is made up of single horizontal lines and double
+        vertical lines:
+
+        #include "gt.api"
+
+        void boxText( USHORT uiRow, USHORT uiCol, BYTEP fpStr );
+
+        void boxText( USHORT uiRow, USHORT uiCol, BYTEP fpStr )
+        {
+           _gtBox( uiRow, uiCol, uiRow + 2, uiCol + strlen( fpStr ) + 2,
+                   _B_SINGLE_DOUBLE );
+           _gtWrite( fpStr, strlen( fpStr ) );
+        }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Gt.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng30e19.html">_gtBoxD()</A>
+<A HREF="ng31463.html">_gtBoxS()</A>
+<A HREF="ng349a8.html">_gtMaxCol()</A>
+<A HREF="ng34cba.html">_gtMaxRow()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngfdfa1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngfbcd2.html">[^^Up^^]</A>
+<A HREF="ngff79f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DO CASE</B>
+ Execute one of several alternative blocks of statements
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DO CASE</B>
+     <B>CASE &lt;lCondition1&gt;</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>[CASE &lt;lCondition2&gt;]</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>[OTHERWISE]</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>END[CASE]</B>
+
+ <B>Arguments</B>
+
+     <B>CASE &lt;lCondition&gt;</B> defines a block of statements to be executed if
+     &lt;lCondition&gt; evaluates to true (.T.).
+
+     <B>OTHERWISE</B> defines a block of statements to be executed if none of
+     the specified CASE conditions evaluates to true (.T.).
+
+ <B>Description</B>
+
+     DO CASE...ENDCASE is a control structure that executes one of several
+     blocks of statements depending on which of the associated conditions is
+     true (.T.).  It works by branching execution to the statements following
+     the first CASE &lt;lCondition&gt; that evaluates to true (.T.).  Execution
+     continues until the next CASE, OTHERWISE, or ENDCASE is encountered.
+     Control then branches to the first statement following the next ENDCASE
+     statement.
+
+     If none of the CASE conditions evaluates to true (.T.), the statements
+     following the OTHERWISE statement are executed up to the matching
+     ENDCASE statement.  If an OTHERWISE statement is omitted, control
+     branches to the first statement following the matching ENDCASE
+     statement.
+
+     You may nest any number of statements, including other control
+     structures (i.e., DO WHILE and FOR), within a single DO CASE structure.
+     In addition, within a single DO CASE structure, there is no fixed limit
+     on the number of CASE statements that a DO CASE structure may contain.
+
+     DO CASE...ENDCASE is identical to IF...ELSEIF...ENDIF with neither
+     syntax having a specific advantage over the other.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses DO CASE in a menu structure to branch
+        control based on user selection:
+
+        @ 3, 25 PROMPT "First choice"
+        @ 4, 25 PROMPT "Second choice"
+        MENU TO nChoice
+        //
+        DO CASE
+        CASE nChoice = 0
+           RETURN
+        CASE nChoice = 1
+           ChoiceOne()
+        CASE nChoice = 2
+           ChoiceTwo()
+        ENDCASE
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfc7b7.html">BEGIN SEQUENCE</A>
+<A HREF="ngff79f.html">DO WHILE</A>
+<A HREF="ng102596.html">FOR</A>
+<A HREF="ng1054c7.html">IF</A>
+<A HREF="ng5f2f0.html">IF()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

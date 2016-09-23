@@ -1,0 +1,224 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng36a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d0.html">[^^Up^^]</A>
+<A HREF="ng2a8b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CA-Clipper Linker--(RTLINK.EXE)</B>
+
+ <B>Overview</B>
+
+     Combines object files (.OBJ) with library files (.LIB) to form an
+     executable file (.EXE) or prelink library (.PLL).
+
+ <B>Syntax</B>
+
+     The default, FREEFORMAT syntax to invoke .RTLink is as follows:
+
+     <B>RTLINK [FILE &lt;objFile list&gt;</B>
+     <B>      [OUTPUT &lt;outputFile&gt;]</B>
+     <B>      [LIBRARY [&lt;libFile list&gt;]</B>
+     <B>      [&lt;linkOption list&gt;]] | [@&lt;scriptFile&gt;]</B>
+
+     The POSITIONAL syntax is:
+
+     <B>RTLINK [&lt;objFile list&gt;,</B>
+     <B>      [&lt;outputFile&gt;],</B>
+     <B>      [&lt;mapFile&gt;],</B>
+     <B>      [&lt;libFile list&gt;]</B>
+     <B>      [&lt;linkOption list&gt;]] | [@&lt;scriptFile&gt;][;]</B>
+
+     If used without arguments, .RTLink enters prompt mode in which you are
+     prompted for linker input.
+
+ <B>Command Line Arguments</B>
+
+     <B>&lt;objFile list&gt;</B> is a list of object files to link.
+
+     <B>&lt;outputFile&gt;</B> is the name of the output file to be generated.  If not
+     specified, the name of the first file on the .RTLink command line is
+     used.
+
+     <B>&lt;mapFile&gt;</B> is the name of a map file to generate.
+
+     <B>&lt;libFile list&gt;</B> is the list of library files to search in order to
+     resolve any undefined symbols.
+
+     <B>&lt;linkOption list&gt;</B> refers to the use of one or more of the linker
+     options described below.
+
+     <B>&lt;scriptFile&gt;</B> is the name of an ASCII text file used as the linker
+     script file.  The default extension for this file is (.LNK).
+
+ <B>Script File</B>
+
+     Using the FREEFORMAT syntax, options specified in the script file do not
+     have to be in a specific order.  However, when using POSITIONAL syntax,
+     the format of the script file must be as follows:
+
+     <B>&lt;objFile list&gt;[&lt;linkOption list&gt;]</B>
+     <B>   [&lt;outputFile&gt;]</B>
+     <B>   [&lt;mapFile&gt;]</B>
+     <B>   [&lt;libFile list&gt;]  [;]</B>
+
+ <B>Linker Options</B>
+
+     For many options, two syntaxes are given and the correct one depends on
+     the input mode used.  Specifying options in POSITIONAL mode requires the
+     option to begin with a forward slash (if no forward slash is included in
+     the syntax, the option is allowed only in FREEFORMAT). FREEFORMAT mode
+     allows you to use either syntax, and where there is only one syntax
+     representation it allows you to omit both the slash and the colon.
+
+     <B>/BATCH | /NOBATCH</B>
+
+     BATCH prevents the linker from prompting you when it is unable to locate
+     a file.  NOBATCH is the default.
+
+     <B>BEGINAREA</B>
+     <B>.</B>
+     <B>. &lt;statements&gt;</B>
+     <B>.</B>
+     <B>ENDAREA</B>
+
+     Designates a static overlay area with all sections specified between
+     these two commands becoming static overlay sections within the overlay
+     area.  Static overlay areas may be nested by specifying a
+     BEGINAREA...ENDAREA construct inside of another.
+
+     <B>/DEBUG</B>
+
+     Causes the .RTLink overlay manager to display a message that identifies
+     each overlay as it is loaded into memory during program execution.
+
+     <B>/DEFAULTLIBRARYSEARCH | /NODEFAULTLIBRARYSEARCH</B>
+
+     NODEFAULTLIBRARYSEARCH causes .RTLink to ignore any library names
+     embedded by the compiler.  DEFAULTLIBRARYSEARCH is the default.
+
+     <B>/DYNAMIC[:&lt;ovlFile&gt;]</B>
+     <B>DYNAMIC [INTO &lt;ovlFile&gt;]</B>
+
+     DYNAMIC forces the linker to place any subsequent CA-Clipper-compiled
+     modules into a dynamic overlay instead of placing the module in the root
+     section.  DYNAMIC is the opposite of RESIDENT and is the default mode.
+
+     <B>/EXCLUDE:&lt;symbol&gt;</B>
+     <B>EXCLUDE &lt;symbol list&gt;</B>
+
+     In prelink mode, causes any module defining the specified symbol(s) to
+     be excluded from the link.
+
+     <B>/EXTDICTIONARY | /NOEXTDICTIONARY</B>
+
+     /NOEXTDICTIONARY causes the linker not to search the extended
+     dictionary.  /EXTDICTIONARY is the default.
+
+     <B>/FREEFORMAT</B>
+
+     Configures the linker interface to FREEFORMAT input mode when .RTLink
+     switches to a new input stream. /FREEFORMAT is the opposite of
+     /POSITIONAL and the default input mode.
+
+     <B>/HELP</B>
+
+     Lists the linker options to the console.
+
+     <B>/IGNORECASE | /NOIGNORECASE</B>
+
+     NOIGNORECASE causes case to be significant in symbol and segment names.
+     IGNORECASE is the default.
+
+     <B>/INCREMENTAL[:&lt;wastedSpace&gt;] | /NOINCREMENTAL</B>
+
+     INCREMENTAL enables incremental linking of CA-Clipper-compiled modules.
+     When a program is linked, only modules that have changed are relinked.
+     NOINCREMENTAL is the default.
+
+     <B>/MAP[:&lt;mapOption list&gt;]</B>
+     <B>MAP [= &lt;mapFile&gt;] [&lt;mapOption list&gt;]</B>
+
+     Generates a map file containing one or more reports about the link
+     session.
+
+     <B>MODULE &lt;moduleName list&gt;</B>
+
+     Moves the segments from the specified modules into the current static
+     overlay section.
+
+     <B>/PLL:&lt;prelinkLib&gt;</B>
+
+     Used in link mode to specify a prelinked library file the output
+     executable file depends on.
+
+     <B>/POSITIONAL</B>
+
+     Configures the linker interface to the POSITIONAL input mode when
+     .RTLink switches to a new input stream. /POSITIONAL is the opposite of
+     /FREEFORMAT which is the default input mode.
+
+     <B>/PRELINK</B>
+
+     Changes .RTLink to prelink mode.  In this mode the &lt;outputFile&gt;
+     generated by .RTLink is a prelink library (.PLL) file instead of an
+     executable file (.EXE).
+
+     <B>PRELOAD</B>
+
+     Causes the current static overly section to be loaded into memory before
+     the program begins execution.  Normally, only the resident sections of
+     the program are loaded into memory before execution begins.
+
+     <B>/REFER:&lt;symbol&gt;</B>
+     <B>REFER &lt;symbol list&gt;</B>
+
+     In prelink mode, forces .RTLink to search all specified libraries in
+     order to load the necessary code associated with the specified symbols.
+
+     <B>/RESIDENT</B>
+
+     Causes subsequent CA-Clipper-compiled modules to be loaded into the root
+     section of the current program, overriding the automatic creation of
+     dynamic overlays for all CA-Clipper-compiled code. RESIDENT is the
+     opposite of DYNAMIC.
+
+     <B>SECTION [= &lt;sectionName&gt;] [INTO &lt;ovlFile&gt;]</B>
+
+     Creates a static overlay section, and causes segments within any non-
+     CA-Clipper object modules specified in subsequent FILE or LIBRARY
+     options to become a part of that section.
+
+     <B>/SILENT</B>
+
+     Suppresses the display of the linker prompts and responses when .RTLink
+     is invoked with a script file.
+
+     <B>/STACK:&lt;sizeBytes&gt;</B>
+
+     Specifies a program stack overriding the stack size specified in the
+     object module.  &lt;sizeBytes&gt; is a numeric values up to 65,535.
+
+     <B>/VERBOSE[:&lt;level&gt;]</B>
+
+     Causes .RTLink to display status messages during linking indicating the
+     modules being linked and in what order. &lt;level&gt; specifies the amount of
+     information to display (0, 1, or 2).
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9c26.html">SET LIB</A>
+<A HREF="nga008.html">SET OBJ</A>
+<A HREF="nga300.html">SET PLL</A>
+<A HREF="nga8f2.html">SET RTLINKCMD</A>
+<A HREF="ngadd5.html">SET TMP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

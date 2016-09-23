@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng33441.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng33f27.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_MemoPack():</B>
+
+  Syntax:  Sx_MemoPack( [&lt;nBlock&gt;] [,&lt;bOption&gt; [,&lt;nStep&gt;]] )
+
+            nBlock = a number from 16 to 1024 (in multiples of 16).  The
+                     &lt;nBlock&gt; parameter is only applicable when using .FPT or
+                     .SMT memo files.  The block size currently being used
+                     within the FPT/SMT file will be used if no block size
+                     parameter is specified.
+           bOption = a code block to evaluate for each record processed or,
+                     when used in conjunction with the &lt;nStep&gt; parameter, for
+                     each &lt;nStep&gt; records.
+            nStep  = numeric value representing how often, in number of
+                     records processed, to call the &lt;bOption&gt; code block.
+
+  Returns:  .T. if memo was packed successfully, .F. if not.
+
+  Description:  Purges unused blocks from a memo file without having to do
+                the old <B>COPY TO ... FOR !Deleted()</B> kludge.  Can also be used
+                to alter the block size used by an FPT memo file.
+
+    <B>CAUTION:</B>  Do NOT attempt to use this function if you specify paths
+              using the Netware-specific syntax. <U>You will lose data!</U>  For
+              example, <U>never</U> do this:
+
+               <B>USE FS\SYS:data\datafile</B>
+               <B>MEMOPACK</B>
+
+                This is fine:
+
+               <B>USE y:\data\datafile</B>
+               <B>MEMOPACK</B>
+
+   Example:
+
+       // Packs BOGUS.FPT, using 32 byte blocks, outputting a dot (.) to the
+       // screen for every 10% of the records processed to show progress.
+
+       USE bogus EXCLUSIVE VIA "SIXCDX"
+       ? "Packing BOGUS.FPT: "
+       IF <B>Sx_MemoPack( 32, {|| QQOut(".")}, LastRec() / 10 )</B>
+         ? "Memo file packed successfully."
+       ELSE
+         ? "Memo file NOT packed successfully."
+       ENDIF
+
+
+   NOTE:  The DBF file must be opened in <B>EXCLUSIVE</B> mode to use this
+          function.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4a866.html">MEMOPACK</A>
+<A HREF="ng364a2.html">Sx_SetMemoBlock()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

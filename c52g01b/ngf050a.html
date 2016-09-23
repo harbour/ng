@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf020f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngf0b5a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDBAGNAME() function</B>
+ Return the Order Bag name of a specific Order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     ORDBAGNAME(&lt;nOrder&gt; | &lt;cOrderName&gt;) --&gt; cOrderBagName
+
+ <B>Arguments</B>
+
+     <B>&lt;nOrder&gt;</B> is an integer that identifies the position in the Order
+     List of the target Order whose Order Bag name is sought.
+
+     <B>&lt;cOrderName&gt;</B> is a character string that represents the name of the
+     target Order whose Order Bag name is sought.
+
+ <B>Returns</B>
+
+     ORDBAGNAME() returns a character string, the Order Bag name of the
+     specific Order.
+
+ <B>Description</B>
+
+     ORDBAGNAME() is an Order management function that lets you access the
+     name of the Order Bag in which &lt;cOrderName&gt; resides.  You may identify
+     the Order as a character string or with an integer that represents its
+     position in the Order List.  In case of duplicate names, ORDBAGNAME()
+     only recognizes the first matching name.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example uses ORDBAGNAME() with the default
+        DBFNTX driver:
+
+        USE Customer VIA "DBFNTX" NEW
+        SET INDEX TO CuAcct, CuName, CuZip
+        ORDBAGNAME( 2 )               // Returns: CuName
+        ORDBAGNAME( 1 )               // Returns: CuAcct
+        ORDBAGNAME( 3 )               // Returns: CuZip
+
+
+     <B>.</B>  In this example, Customer.cdx contains three orders named
+        CuAcct, CuName, CuZip:
+
+        USE Customer VIA "DBFCDX" NEW
+        SET INDEX TO Customer
+        ORDBAGNAME( "CuAcct" )        // Returns: Customer
+        ORDBAGNAME( "CuName" )        // Returns: Customer
+        ORDBAGNAME( "CuZip" )         // Returns: Customer
+
+ <B>Status:</B>  New
+
+ <B>See also:</B>  ORDBAGEXT()
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf020f.html">ORDBAGEXT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3ad5a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng39198.html">[^^Up^^]</A>
+<A HREF="ng3b2cf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETMSGCNT()</B>
+ Determines the number of messages in the broadcast buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETMSGCNT() --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Returns</B>
+
+     NNETMSGCNT() returns the number of messages in the broadcast buffer.  If
+     the broadcast buffer is empty, the function returns 0.
+
+ <B>Description</B>
+
+     NOVELL NET MESSAGE COUNT
+     NNETMSGCNT() allows you to determine the number of messages in the
+     broadcast buffer.  If the broadcast buffer is empty, or if the broadcast
+     system is not installed, the function returns 0.
+
+ <B>Example</B>
+
+     Read and display all the messages from the broadcast buffer:
+
+     FOR i = 1 TO NNETMSGCNT()
+     ? NNETMSGRD()
+     NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3b698.html">NNETMSGOPN()</A>
+<A HREF="ng3c222.html">NNETMSGRD()</A>
+<A HREF="ng3c72b.html">NNETMSGSIZ()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

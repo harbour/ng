@@ -1,0 +1,35 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2168a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1fa2a.html">[^^Up^^]</A>
+<A HREF="ng21edc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Sharing Data on a Network</B>
+------------------------------------------------------------------------------
+
+     As mentioned above, the DBFNDX driver does not support dBASE III PLUS
+     file and record locking schemes.  Instead, the DBFNDX driver supports
+     the DBFNTX file and record locking scheme.  This means that if the same
+     database and index files are open in CA-Clipper and dBASE III PLUS,
+     CA-Clipper program locks are not visible to dBASE III PLUS and vice
+     versa.
+
+     <B>Warning!</B> Database integrity is not guaranteed and index corruption
+     will occur if CA-Clipper and dBASE III PLUS programs attempt to write to
+     a database or index file at the same time.  For this reason, concurrent
+     use of the same database (.dbf) and index (.ndx) files by dBASE III PLUS
+     and CA-Clipper  programs is strongly discouraged and not supported by
+     Computer Associates.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

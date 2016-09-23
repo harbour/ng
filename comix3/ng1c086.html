@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1c028.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng19942.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>How can I make cmFilter() find EOF() and BOF() faster?</B>
+
+ClipMore can sometimes take a long time to determine that EOF() or BOF() has
+been reached.
+
+For example:
+
+    use demo index last
+    cmFilter("last = 'J'")
+    go top                      &amp;&amp; May take a little while
+
+Since there is an index available on last, ClipMore will quickly determine
+which records meet the condition.
+
+However, when doing the go top (since you are in last name order), you will
+have some dead time while ClipMore skips through the A's, the B's, etc.
+until it reaches the first J.  Similarly once you skip past the last J,
+ClipMore you will have some dead time while ClipMore runs through the rest
+of the index (i.e, the K's, the L's, the M's, etc.).
+
+In general, this occurs when the filter condition is very restrictive on the
+master index.  If the master index had been on AGE, then you probably would
+never see any delay.
+
+There are two possible solutions:
+
+    1)  SET SCOPE on the master index when it is referenced in the
+        condition.
+
+    2)  Put the database in a different order (natural or some other
+        index).  This eliminates the "grouping" of non-matching records.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

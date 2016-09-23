@@ -1,0 +1,140 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng83cf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng9e41.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Open():</B>
+
+  Purpose:  This function is used to open an existing HiPer-SEEK index file.
+
+   Syntax:  hs_Open( &lt;cExpr&gt;, &lt;nVal1&gt;, &lt;nVal2&gt; )
+
+    Where:  &lt;cExpr&gt; a string representing a file path name. It may contain
+              drive and subdirectory information.
+
+            &lt;nVal1&gt; is an integer which will be multiplied by 1024 to
+              determine how much buffer space is to be used by the HiPer-SEEK
+              routines for this index. For example, a value of 20 will
+              allocate 20k or 20480 bytes of buffer space plus a small amount
+              of overhead. See the comments section for hs_Create() for how
+              to use this number most wisely. The minimum size is 1.
+
+              Performance will improve greatly if the entire index file will
+              fit into this buffer. If not, some experimentation will be
+              helpful in determining the best size. In network operation this
+              buffer is automatically set to the minimum size.
+
+              The memory buffer size is less critical in the newer more
+              powerful computers where fast fixed disks and extensive disk
+              caching are common. Some experimentation will help chose the
+              proper settings for any particular application and environment.
+
+            &lt;nVal2&gt; is an integer expression indicating the read-write and
+              sharing modes for the file. A HiPer-SEEK index can be opened
+              read-write or read-only and EXCLUSIVE or SHARED. The EXCLUSIVE
+              and SHARED modes follow Clipper's use of the terms. When an
+              index is opened read-write, the application can read existing
+              index records and write new ones to the file. When the file is
+              opened read-only, the application can only read records from
+              the index.  This mode is useful with CD-ROM applications or
+              with applications that must prevent users from inadvertently
+              updating an existing index.
+
+              The values to use are:
+
+                  0 READ-WRITE + SHARED
+                  1 READ-WRITE + EXCLUSIVE
+                  2 READ-ONLY + SHARED
+                  3 READ-ONLY + EXCLUSIVE
+
+
+  Returns:  An integer HiPer-SEEK index handle (0 through 63) if successful,
+            else returns a negative integer indicating an error (see below).
+            The hs_Create(), hs_Index(), and hs_Open() return a 'HANDLE' to
+            the calling program.  You must save the handle returned by these
+            functions for use with the remaining HiPer-SEEK functions. The
+            value of a HiPer-SEEK handle is only meaningful to other
+            HiPer-SEEK func- tions. Although you may inspect the value of the
+            handle, its value is arbitrary and of no significance except to
+            other HiPer- SEEK functions. Under no circumstances should your
+            application ever change the value of a HiPer-SEEK handle.
+
+  Errors Returned:
+
+      -2 (MEMERR) System was unable to allocate the memory requested.  Try
+         again with a smaller value of &lt;nVal&gt;.
+      -5 (BADREAD) System generated a read error while reading the index file
+         header.  This error is associated with trying to open a file that is
+         already open.
+     -10 (OPENERR)  Open failure.  System was unable to open the file
+         specified by &lt;cExpr&gt;. Insure that the file does exist and it is not
+         read protected.
+     -16 (BADPARMS)  Invalid parameters were passed to the function.
+     -17 (NOMOREHANDLES) Ran out of HiPer-SEEK handles.
+     -20 (LOCKFAILED) Unable to lock file.
+     -21 (NOMORELOCKS) Lock table exhausted.
+     -22 (CANNOTUNLOCK) Unable to unlock file.
+
+  Comments:
+
+    <B>Network Operation:</B>
+
+    The hs_Open() mode parameter is patterned after Clipper's Net_Use()
+    function.  Whenever a new HiPer-SEEK index file is created it is always
+    created in EXCLUSIVE mode. If an application needs to create an index and
+    then use it in SHARED mode, it must create the index using hs_Create(),
+    then close the index, and use hs_Open() to reopen the file with the
+    SHARING mode on.
+
+    Note that hs_Index() does require a mode parameter. This is because
+    once the function creates and builds a new index, it closes the index
+    and then reopens it in the desired mode.
+
+    It is possible, on some systems, to get a -20, LOCKFAILED error. If
+    hs_Open() cannot lock the file, after trying three times, it will
+    return the -20 error. You can insert code to trap the -20 and force the
+    program to try again. This will prove satisfactory in most cases.
+
+    <B>How HiPer-SEEK Works on a Local Area Network:</B>
+
+    When an application tries to open an index in SHARED mode, hs_Open()
+    tests for the presence of support for file locking and adjusts its
+    behavior accordingly. Assuming that you are on a network and you open
+    your HiPer-SEEK index in SHARED mode, HiPer-SEEK automatically institutes
+    a system of locks while keeping its buffers flushed. In the event that
+    you attempt open a HiPer-SEEK index in SHARED mode on a machine that does
+    not support file and record locking, HiPer-SEEK does not try to lock
+    files and it manages its buffers in the same way that using a "1" open
+    mode would.  (The READ-ONLY open-mode does not change the way HiPer-SEEK
+    handles its internal buffers when running in SHARED mode. That is, the
+    memory buffer is set to 1K.)
+
+
+  Example:
+
+    USE test EXCL
+
+    h := <B>hs_Open( "LOOKUP.HSX", 16, 1 )</B>
+    IF h &lt; 0
+      ? "Error opening HiPer-SEEK index!"
+    ENDIF
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng409f.html">hs_Close()</A>
+<A HREF="ng460a.html">hs_Create()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

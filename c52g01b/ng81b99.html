@@ -1,0 +1,96 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng81504.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng8258a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COPY STRUCTURE EXTENDED</B>
+ Copy field definitions to a (.dbf) file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>COPY STRUCTURE EXTENDED</B>
+     <B>   TO &lt;xcExtendedDatabase&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;xcExtendedDatabase&gt;</B> is the name of the target structure extended
+     database file.  This argument can be specified either as a literal
+     database filename or as a character expression enclosed in parentheses.
+
+ <B>Description</B>
+
+     COPY STRUCTURE EXTENDED creates a database file whose contents is the
+     structure of the current database file with a record for the definition
+     of each field.  The structure extended database file has the following
+     structure:
+
+     <B>Structure of an Extended File</B>
+     ------------------------------------------------------------------------
+     <B>Field   Name           Type        Length  Decimals</B>
+     ------------------------------------------------------------------------
+     1       Field_name     Character   10
+     2       Field_type     Character   1
+     3       Field_len      Numeric     3       0
+     4       Field_dec      Numeric     4       0
+     ------------------------------------------------------------------------
+
+     Used in application programs, COPY STRUCTURE EXTENDED permits you to
+     create or modify the structure of a database file programmatically.  To
+     create a new database file from the structure extended file, use CREATE
+     FROM.  If you need an empty structure extended file, use CREATE.
+
+ <B>Notes</B>
+
+     <B>.  Character field lengths greater than 255:</B> In CA-Clipper, the
+        maximum character field length is 64K.  For compatibility reasons,
+        field lengths greater than 255 are represented as a combination of
+        the Field_dec and Field_len fields.  After COPYing STRUCTURE
+        EXTENDED, you can use the following formula to determine the length
+        of any character field:
+
+        nFieldLen := IF(Field_type = "C" .AND. ;
+              Field_dec != 0, Field_dec * 256) + ;
+              Field_len, Field_len)
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates Struc.dbf from Sales.dbf as a structure
+        extended file then lists the contents of Struc.dbf to illustrate the
+        typical layout of field definitions:
+
+        USE Sales NEW
+        COPY STRUCTURE EXTENDED TO Struc
+        USE Struc NEW
+        LIST Field_name, Field_type, Field_len, Field_dec
+
+        Result:
+
+        1 BRANCH        C      3      0
+        2 SALESMAN      C      4      0
+        3 CUSTOMER      C      4      0
+        4 PRODUCT       C     25      0
+        5 AMOUNT        N      8      2
+        6 NOTES         C      0    125
+        // Field length is 32,000 characters
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng81504.html">COPY STRUCTURE</A>
+<A HREF="ng842a6.html">CREATE</A>
+<A HREF="ng849db.html">CREATE FROM</A>
+<A HREF="ng35c40.html">FIELDNAME()</A>
+<A HREF="ng6c53d.html">TYPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

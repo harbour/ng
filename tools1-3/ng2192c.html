@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng21126.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng21e3e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETQNAME()</B>
+ Changes the file and path name for the QUIT file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETQNAME([&lt;cFileSpecification&gt;]) --&gt; lAmended</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cFileSpecification&gt;</B>  Designates the new file name for the QUIT file
+     which can include a path and file extension.  The default name for this
+     file is the name of the active .EXE file with a .Q extension.
+
+ <B>Returns</B>
+
+     SETQNAME() returns .T. when the new name and path are successfully set.
+
+ <B>Description</B>
+
+     The DSETQFILE() function allows you to create a QUIT file when a
+     CA-Clipper application returns to DOS.  The default name for this file
+     is the name of the .EXE file with a .Q extension.  Unless otherwise
+     specified, the QUIT file is saved in the directory from which the
+     application was started.
+
+     Using SETQNAME() you can designate an alternate name and a completely
+     different path for saving the QUIT file.
+
+ <B>Note</B>
+
+     <B>.</B>  Calling this function without parameters returns .F., the
+        default value.  The QUIT file name is reset to the default name.
+
+ <B>Example</B>
+
+     Change the name for the QUIT file:
+
+     SETQNAME("C:\LOGS\PROTO.LOG")
+     DSETQFILE(.T.)               // Alternative name for QUIT file
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng11464.html">DSETQFILE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

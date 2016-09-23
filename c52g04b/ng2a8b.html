@@ -1,0 +1,227 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng11c4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d0.html">[^^Up^^]</A>
+<A HREF="ng4052.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Program Maintenance--(RMAKE.EXE)</B>
+
+ <B>Overview</B>
+
+     Automates the maintenance of multi-file program systems by keeping files
+     up to date.  It does this by comparing the date and time stamps of files
+     related to one another and performs a series of actions if the date and
+     time stamps do not match.
+
+ <B>Syntax</B>
+
+     <B>RMAKE [&lt;makeFile list&gt;]</B>
+     <B>   [&lt;macroDef list&gt;] [&lt;option list&gt;]</B>
+
+ <B>Command Line Arguments</B>
+
+     This is the command line syntax to invoke the CA-Clipper make utility.
+     If issued without any arguments, a help screen is displayed.
+
+     <B>&lt;makeFile list&gt;</B> is a list of one or more make files to process.  The
+     default extension for this file is (.RMK).
+
+     <B>&lt;macroDef list&gt;</B> is a list of one or more macro definitions of the
+     form &lt;macroName&gt;=&lt;value&gt;.
+
+     <B>&lt;option list&gt;</B> is a list of one or more options to control the course
+     of the make, all of which are described below.
+
+ <B>RMAKE Options</B>
+
+     <B>/B</B>
+
+     Displays debugging information.
+
+     <B>/D&lt;macroName&gt;[:&lt;value&gt;]</B>
+
+     Defines a macro and an optional value.  If the value is not supplied,
+     the macro is defined with a null value.
+
+     <B>/I</B>
+
+     Ignores execution errors.
+
+     <B>/N</B>
+
+     Performs a null make displaying the commands that would be executed
+     without actually executing them.
+
+     <B>/S</B>
+
+     Searches subdirectories for make files.
+
+     <B>/U</B>
+
+     Enables the # character as a comment indicator and suppresses its use as
+     a directive indicator.
+
+     <B>/W</B>
+
+     Displays certain warning messages.
+
+     <B>/XS&lt;numSymbols&gt;</B>
+
+     Sets the size of the internal symbol table.  If not specified, the
+     default is 500 symbols.
+
+     <B>/XW&lt;numBytes&gt;</B>
+
+     Sets the size of the internal workspace.  If not specified, the default
+     is 2048 bytes.
+
+ <B>Comments</B>
+
+     Comments may be specified using C-style inline comments (e.g. /* .. */ )
+     or C-style line comments (//) or, if the /U option is used, Unix make-
+     style comments (#).  Comments cannot be nested.
+
+ <B>Dependency Rules</B>
+
+     A dependency rule causes certain actions to be performed if any of the
+     dependent files have a newer date and time stamp than the target file:
+
+     <B>&lt;targetFile&gt;: &lt;dependentFile list&gt;</B>
+     <B>   [&lt;action&gt;]</B>
+     <B>   [&lt;action&gt;]...</B>
+
+ <B>Inference Rules</B>
+
+     An inference rule is used to complete a dependency rule specified with
+     no actions.  It defines the actions to take for any incomplete
+     dependency rule that satisfies certain filename extensions:
+
+     <B>.&lt;dependentExtension&gt;.&lt;targetExtension&gt;:</B>
+     <B>   [&lt;action&gt;]</B>
+     <B>   [&lt;action&gt;]...</B>
+
+ <B>Macro Definitions</B>
+
+     Macros are defined in make files using the following syntax:
+
+     <B>&lt;macroName&gt; = &lt;value&gt;</B>
+
+     Once defined, a macro can be referred to using the following syntax:
+
+     <B>$(&lt;macroName&gt;)</B>
+
+     To assign the contents of a macro to another macro, use the following
+     syntax:
+
+     <B>&lt;macroName&gt; := $(&lt;macroName&gt;)</B>
+
+ <B>Makepath Macros</B>
+
+     Makepath macros are special macros that define where RMAKE searches and
+     creates classes of files as defined by extension.  Makepath macros are
+     defined using the following syntax:
+
+     <B>makepath[.&lt;extension&gt;] = &lt;pathSpec&gt;</B>
+
+ <B>Predefined Macros</B>
+
+     In addition to user-defined macros, there are several predefined macros
+     that can be used to access dependency and target filenames.
+
+     <B>$*</B>
+
+     Expands to the target filename without a path or extension.
+
+     <B>$@</B>
+
+     Expands to the target filename including path and extension.
+
+     <B>$**</B>
+
+     Expands to the complete list of full dependency filenames.
+
+     <B>$&lt;</B>
+
+     Expands to the full name of the first file in the dependent file list.
+
+     <B>$?</B>
+
+     Expands to a list of dependencies that have a more recent date and time
+     stamp than the target file.
+
+ <B>Directives</B>
+
+     RMAKE provides directives to control the operation of the make process.
+     Directives cannot be used as action lines.  Macros encountered in a
+     directive are expanded immediately.  By default, either the # character
+     or the ! character can be used to specify a directive. If the /U option
+     is used, the # character is interpreted as a comment indicator, and
+     cannot be used to specify directives.
+
+     <B>#! &lt;action&gt;</B>
+
+     Execute a DOS command.
+
+     <B>#else</B>
+
+     Executes statements between the #else and the next #endif directive when
+     the corresponding #if directive evaluates to false (.F.).
+
+     <B>#end[if]</B>
+
+     Terminates the block of statements defined by a #if directive.
+
+     <B>#ifdef &lt;macroName&gt;</B>
+
+     Executes statements between the #ifdef directive and the corresponding
+     #else or #endif directives if the specified &lt;macroName&gt; exists.
+
+     <B>#ifeq &lt;word1&gt; &lt;word2&gt;</B>
+
+     Executes statements between the #ifeq directive and the corresponding
+     #else or #endif directives if &lt;word1&gt; and &lt;word2&gt; are identical.  A word
+     consists of one or more characters up to the next white space character.
+     To include a white space character within a word, enclose the word in
+     double-quote (") marks.
+
+     <B>#iffile &lt;fileSpec&gt;</B>
+
+     Executes statements between the #iffile directive and the corresponding
+     #else or #endif directives if any files match the specified &lt;fileSpec&gt;.
+
+     <B>#ifndef &lt;macroName&gt;</B>
+
+     Executes statements between the #ifndef directive and the corresponding
+     #else or #endif directives if the specified &lt;macroName&gt; does not exist.
+
+     <B>#include .&lt;fileName&gt;.</B>
+
+     Inserts and processes the contents of &lt;fileName&gt; before continuing with
+     the current make file.
+
+     <B>#stderr "&lt;text&gt;"</B>
+
+     Writes the &lt;text&gt; to the standard error file or device.
+
+     <B>#stdout "&lt;text&gt;"</B>
+
+     Writes the &lt;text&gt; to the standard output file or device.
+
+     <B>#undef &lt;macroName&gt;</B>
+
+     Removes any previous definition of the specified &lt;macroName&gt;.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga685.html">SET RMAKE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

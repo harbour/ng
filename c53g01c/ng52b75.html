@@ -1,0 +1,110 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng52630.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng5364b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GFNTLOAD()</B>
+ Load a font file into memory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GFNTLOAD(&lt;cFontFile&gt;) --&gt; aFont</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFontFile&gt;</B> is a character value that represents the name of the
+     font file to load.
+
+ <B>Returns</B>
+
+     GFNTLOAD() returns a pointer to the VMM region where the font is loaded.
+     This value can later be used as input to GFNTERASE().
+
+ <B>Description</B>
+
+        CA-Clipper supports two types of fonts:
+
+        1.  Video ROM fonts--.FND
+
+        Video ROM .FND fonts are used in all the standard CA-Clipper terminal
+        calls such as DEVOUT(), TBROWSE(), and GWRITEAT().  The size of .FND
+        fonts is always 16x8.  If you want to use a different size font, such
+        as 8x8, you will need to supply the font file.
+
+        2.  Windows Bitmap fonts--.FNT
+
+        The Windows Bitmap .FNT fonts can be used with the GWRITEAT()
+        function.
+
+     <B>.  Using .FND fonts:</B>  The .FND fonts are 16 pixels high.
+        Therefore, the font is displayed from pixel 1 to pixel 16 of each
+        screen row.  CA-Clipper allows you to control the number of pixel
+        rows to use for the font:
+
+        GFNTSET(aFont, nClipTop, nClipBottom)
+
+        Pass &lt;aFont&gt; as NIL if you only want to change the &lt;nClipTop&gt; and
+        &lt;nClipBottom&gt;.
+
+        This feature provides the ability to display a one pixel frame around
+        a GET or MENU PROMPT, etc. without having to use GWRITEAT(), because
+        DEVOUT() (@..SAY..) is faster than GWRITEAT().
+
+     <B>.  Using .FNT fonts:</B>  Be aware that .FNT fonts are proportional.
+        For example, this means that the characters "m" and "i" will not be
+        the same number of pixels in width.
+
+        To use .FNT fonts, load a FNT font into memory :
+
+        aFntFont := GFNTLOAD( "MyFnt.FNT" )
+
+        GWRITEAT( X, Y, cString, nColor, LLG_MODE_SET, aFont )
+
+        By passing LLG_MODE_NIL to GWRITEAT(), you can retrieve the width of
+        the string to be displayed on screen (without displaying it).
+
+        &lt;nWidth&gt; will contain the # of pixels of the string:
+
+        nWidth := GWRITEAT( X , Y, cString, nColor, LLG_MODE_NIL, aFntFont)
+
+        &lt;nColumns&gt; will contain the # of columns:
+
+        nColumns := nWidth / 8.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example loads a Font file called MyFont.FND:`
+
+        // Function ShowOneFont (cString)
+        LOCAL aFont
+        // Load a specific font file (MyFont.FND) into memory
+        aFont := GFNTLOAD("MyFont.FND")
+        // Display cString using the loaded font
+        GWRITEAT(X, Y, cString, nColor, LLG_MODE_SET, aFont)
+        // *Important*
+        // You must erase the font from memory if it is no longer
+        // needed.
+        // This is because CA-Clipper's VMM is unable to automatically
+        // free the memory occupied by aFont.
+        GFNTERASE(aFont)
+        RETURN
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5364b.html">GFNTSET()</A>
+<A HREF="ng52630.html">GFNTERASE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

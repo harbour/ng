@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng801cc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng80cbd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SAYSPREAD()</B>
+ Displays screen output with "spread" effect
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SAYSPREAD(&lt;cCharacterstring&gt;, [&lt;nDelay&gt;],</B>
+     <B>   [&lt;nLine&gt;], [&lt;nColumn&gt;]) --&gt; cNull</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cCharacterstring&gt;</B>  Designates the string to output with the spread
+     effect.
+
+     <B>&lt;nDelay&gt;</B>  Designates a time delay in milliseconds.  The default
+     value
+     is 4.
+
+     <B>&lt;nLine&gt;</B>  Designates the line from which the output begins.  The
+     default is the cursor line.
+
+     <B>&lt;nColumn&gt;</B>  Designates the column from which the output begins.  The
+     default is the cursor column.
+
+ <B>Returns</B>
+
+     SAYSPREAD() always returns a null string.
+
+ <B>Description</B>
+
+     SAYSPREAD() has a particular effect on a string output to screen.  From
+     a center point, which corresponds to the center of the screen, window or
+     &lt;nColumn&gt;, characters are displayed outward (they have a type of spread
+     effect).  The SET COLOR TO attribute setting is used.  The current
+     cursor position is not changed with this function.
+
+ <B>Note</B>
+
+     <B>.</B>  Control characters, as with @...SAY commands in CA-Clipper are
+        not interpreted.
+
+ <B>Example</B>
+
+     Show special effect output that begins in the middle of the screen or
+     window at line 10, with a 100-millisecond time delay:
+
+     SAYSPREAD("Characters", 100, 10)
+
+     Output will be in the following steps, but always on the same line:
+
+               ac
+              ract
+             aracte
+            haracter
+           Characters         // Result on line 10
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7faea.html">SAYMOVEIN()</A>
+<A HREF="ng7f4fe.html">SAYDOWN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

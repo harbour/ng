@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng497cf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng4a743.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJLIST()</B>
+ Determines a list of job numbers in a queue
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJLIST(&lt;cQueue&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; cJobNum</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJLIST() returns a string in form of a byte sequence that contains
+     the job numbers of the jobs in &lt;cQueue&gt;.  Two bytes correspond to one
+     job number.  If an error occurs (for example, if &lt;cQueue&gt; does not
+     exist), the function returns an empty string.
+
+ <B>Description</B>
+
+     NOVELL NET JOB LIST
+     Netware internally uses job numbers in form of 16-bit integers for the
+     administration of jobs within a queue.  The job number has nothing to do
+     with the logical position of a job within a queue; for example, the
+     first job in a queue is not automatically job number 1.  The job number
+     is assigned to a job by the Queue Management System (QMS) when the job
+     is placed in the queue.  Job numbers are used only to identify a job
+     unambiguously.
+
+     You must know the job number to work with the functions (NNETJXXX()).
+     NNETJLIST() returns the job numbers in a queue as a string where two
+     bytes contain one job number. With the functions SUBSTR() and BIN2I(),
+     you can extract each job number (see the example).  The sequence of the
+     job numbers in the string corresponds to the logical job sequence.  The
+     first two bytes represent the job with the highest priority in the
+     queue.
+
+ <B>Note</B>
+
+     <B>.</B>  This function requires that the requesting user have access to
+        the queue as a user or an operator.
+
+ <B>Example</B>
+
+     Determine and output the job numbers for the queue LINEPRINTER:
+
+     cJobs=NNETJLIST('LINEPRINTER')
+     FOR i= 0 TO LEN(cJobs)/2-1
+     ? BIN2I(SUBSTR(cJobs,2*i+1,2))
+     NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42436.html">NNETCAPJOB()</A>
+<A HREF="ng44b82.html">NNETJCNT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

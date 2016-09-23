@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7f36e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng7fe8b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Why am I getting a "DBCMD/1015 Argument Error: DBUSEAREA"?:</B>
+
+  The most common cause of this error is incorrect usage of the VIA clause.
+
+    <B>USE &lt;.dbf&gt; VIA "&lt;rdd&gt;"</B>
+
+  When using the VIA clause with the USE command, always make sure the RDD
+  name is in "quotes" and spelled correctly.  To open a TEST.DBF using the
+  SIx Driver's SIXCDX flavor, the correct syntax would be:
+
+    <B>USE test VIA "SIXCDX"</B>
+
+  Another possible cause for this error is attempting to use an RDD that
+  has not been linked into your application.  The default RDD (normally
+  DBFNTX, unless SIXCDX.OBJ, SIXNSX.OBJ, SIXMDX.OBJ, or SIXNTX.OBJ have been
+  linked in) is automatically linked into your application.  All others must
+  be explicitly declared with the REQUEST command.  The SIx Driver header
+  files contain the correct REQUEST declaration for the SIx Driver flavor
+  they belong to, and needs only to be #included in your source file(s).
+
+  This is how the SIx Driver header files cause the SIx Driver (SIXCDX) to
+  be linked into your application:
+
+    <B>REQUEST SIXCDX</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7e974.html">How Do I Specify An RDD?</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

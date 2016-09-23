@@ -1,0 +1,42 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng115bc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf3b9.html">[^^Up^^]</A>
+<A HREF="ng11d32.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>wrt0011 Public symbol '&lt;symbol&gt;' redefined</B>
+
+     <B>Explanation:</B>  Redefinition messages are especially important when a
+     .PLL is involved.  Often programmers will rewrite a routine in a
+     referenced library and not include the new module until they create the
+     .EXE.  When a .PLL is built referring to the library and .RTLink needs
+     to resolve the name of the routine, it has not seen the new definition
+     but needs to find a definition for the symbol.  It would therefore pull
+     in the module from the library into the .PLL.  When you later linked the
+     .EXE which referenced the .PLL, you would get redefinition messages.
+     The addresses in the .PLL have been bound so that they call the library
+     function, while the addresses in the .EXE have been bound to reference
+     your function.
+
+     <B>Action:</B>  The redefinition of symbols in .RTLink is normally a
+     serious error; however, in some instances a knowledgeable programmer may
+     ignore this warning if the symbol will never be referenced.  Do this at
+     your own risk, however, because in most cases this warning is
+     catastrophic.  It implies that occurrences of the symbol may be replaced
+     by different addresses in different parts of the program.  Use of the
+     EXCLUDE option can often help out with symbol redefinition messages
+     (especially when you wish to delay the definition of some symbol in a
+     .PLL since the linker will not see the correct definition until .EXE
+     link time).
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

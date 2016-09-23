@@ -1,0 +1,108 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5d64a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng5e79b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RLOCK()</B>
+ Lock the current record in the active work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RLOCK() --&gt; lSuccess</B>
+
+ <B>Returns</B>
+
+     RLOCK() returns true (.T.) if the record lock is obtained; otherwise, it
+     returns false (.F.).
+
+ <B>Description</B>
+
+     RLOCK() is a network function that locks the current record, preventing
+     other users from updating the record until the lock is released.
+     RLOCK() provides a shared lock, allowing other users read-only access to
+     the locked record while allowing only the current user to modify it.  A
+     record lock remains until another record is locked, an UNLOCK is
+     executed, the current database file is closed, or an FLOCK() is obtained
+     on the current database file.
+
+     For each invocation of RLOCK(), there is one attempt to lock the current
+     record, and the result is returned as a logical value.  An attempt to
+     obtain a record lock fails if another user currently has a file or
+     record lock, or EXCLUSIVE USE of the database file.  An attempt to
+     RLOCK() in an empty database returns true (.T.).
+
+     By default, RLOCK() operates on the currently selected work area.  It
+     will operate on an unselected work area if you specify it as part of an
+     aliased expression (see example below).  This feature is useful since
+     RLOCK() does not automatically attempt a record lock for related files.
+
+     As a general rule, RLOCK() operates solely on the current record.  This
+     includes the following commands:
+
+     <B>.</B>  @...GET
+
+     <B>.</B>  DELETE (single record)
+
+     <B>.</B>  RECALL (single record)
+
+     <B>.</B>  REPLACE (single record)
+
+     Refer to the Network Programming chapter in the Programming and
+     Utilities guide for more information.
+
+ <B>Notes</B>
+
+     <B>.  SET RELATION:</B> CA-Clipper does not automatically lock all
+        records in the relation chain when you lock the current work area
+        record.  Also, an UNLOCK has no effect on related work areas.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example deletes a record in a network environment, using
+        RLOCK():
+
+        USE Customer INDEX CustName SHARED NEW
+        SEEK "Smith"
+        IF FOUND()
+           IF RLOCK()
+              DELETE
+              ? "Smith deleted"
+           ELSE
+              ? "Record in use by another"
+           ENDIF
+        ELSE
+           ? "Smith not in Customer file"
+        ENDIF
+        CLOSE
+
+     <B>.</B>  This example specifies RLOCK() as an aliased expression to
+        lock a record in an unselected work area:
+
+        USE Sales SHARED NEW
+        USE Customer SHARED NEW
+        //
+        IF !Sales-&gt;(RLOCK())
+           ? "The current Sales record is in use by another"
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7af04.html">APPEND BLANK</A>
+<A HREF="ng384c9.html">FLOCK()</A>
+<A HREF="nga2467.html">SET EXCLUSIVE*</A>
+<A HREF="ngb0c58.html">UNLOCK</A>
+<A HREF="ngb1e6f.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

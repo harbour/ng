@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng242f6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng24fe8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIMGRSTS()                   Get program status information</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get program status information</B></U>
+
+ <U>Syntax   : <B>nlvalue = BLIMGRSTS(niOption)</B></U>
+
+ <U>Return   : <B>Various</B></U>
+
+ BLIMGRSTS() is a multi-purpose function which can be used to obtain status
+ information concerning the currently executing program and environment.
+
+ This function can be called from most languages using the normal calling
+ conventions for the language being used. BLIMGRSTS() takes a single
+ parameter - an option number indicating the status information required.
+ Information that is undefined in the current environment will be returned as
+ zero (eg cache size in a protected mode program).
+
+ The constant parameters to BLIMGRSTS() are defined in the header files
+ BLINKER.*. The values currently defined are :
+
+    BliHostMode       Get DOS extender host mode (DPMI/VCPI/XMS)
+
+    BliMachineMode    Get current machine mode (real, protected)
+
+    BliCacheLoc       Get location of real mode overlay cache (EMS/XMS)
+
+    BliCacheSize      Get size of overlay cache
+
+    BliOverlayLoc     Get location of overlay area
+
+    BliOverlaySize    Get size of overlay area
+
+    BliExtMemAvail    Get bytes extended memory available to the extender
+
+    BliRealMemAvail   Get bytes real memory available to the extender
+
+    BliVirMemAvail    Get bytes virtual memory available to the extender
+
+ Example :
+
+    <B>* Get processor and overlay cache status</B>
+    <B>*</B>
+    <B>if (BLIMGRSTS(BliMachineMode) = BliModeReal)</B>
+    <B>   ? "Running in real mode"</B>
+    <B>   cacheloc = BLIMGRSTS(BliCacheLoc)</B>
+    <B>   do case</B>
+    <B>   case cacheloc = BliCacheNone</B>
+    <B>      ? "No cache available"</B>
+    <B>   case cacheloc = BliCacheXMS</B>
+    <B>      ? "Cache is in XMS"</B>
+    <B>   case cacheloc = BliCacheEMS</B>
+    <B>      ? "Cache is in EMS"</B>
+    <B>   endcase</B>
+    <B>else</B>
+    <B>   ? "Running in protected mode"</B>
+    <B>   hosttype = BLIMGRSTS(BliHostMode)</B>
+    <B>   ? "DOS extender host is : "</B>
+    <B>   do case</B>
+    <B>   case hosttype = BliHostDPMI</B>
+    <B>      ?? "DPMI"</B>
+    <B>   case hosttype = BliHostVCPI</B>
+    <B>      ?? "VCPI"</B>
+    <B>   case hosttype = BliHostXMS</B>
+    <B>      ?? "XMS"</B>
+    <B>   endcase</B>
+    <B>endif</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

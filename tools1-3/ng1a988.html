@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1a5bb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng1af1d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PRINTERROR()</B>
+ Returns the error code for the last printer output
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PRINTERROR() --&gt; nError</B>
+
+ <B>Returns</B>
+
+     PRINTERROR() returns the code for the last error that occurred in a
+     print output.  The following table provides an overview of all the error
+     codes and their meanings:
+
+     <B>Table 2-3: Print Output Error Coding</B>
+     ------------------------------------------------------------------------
+     <B>Code    Definition</B>
+     ------------------------------------------------------------------------
+     0       No error occurred
+     5       Access denied
+     6       Invalid Handle
+     127     Canceled by Ctrl-Break
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     PRINTERROR() allows you to determine why the last print output failed.
+     This function gives you the ability to determine the source of the error
+     from within the CA-Clipper error system and react accordingly.  To
+     identify an abort command that used Ctrl-Break, CA-Clipper Tools returns
+     a value of 127.
+
+ <B>Note</B>
+
+     <B>.</B>  PRINTERROR() only returns an error code for print errors that
+        occur during a CA-Clipper printing operation.
+
+ <B>Example</B>
+
+     React to an error during a print operation:
+
+     nStatus  :=  PRINTERROR()
+
+     IF nStatus = 127
+     ? "Print operation aborted by user!"
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga189c.html">Introduction</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

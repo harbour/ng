@@ -1,0 +1,108 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng38285.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng3911e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FLOCK()</B>
+ Lock an open and shared database file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FLOCK() --&gt; lSuccess</B>
+
+ <B>Returns</B>
+
+     FLOCK() returns true (.T.) if an attempt to lock a database file in USE
+     in the current work area succeeds; otherwise, it returns false (.F.).
+     For more information on file locking, refer to the Network Programming
+     chapter in the Programming and Utilities guide.
+
+ <B>Description</B>
+
+     FLOCK() is a database function used in network environments to lock an
+     open and shared database file, preventing other users from updating the
+     file until the lock is released.  Records in the locked file are
+     accessible for read-only operations.
+
+     FLOCK() is related to USE...EXCLUSIVE and RLOCK().  USE...EXCLUSIVE
+     opens a database file so that no other user can open the same file at
+     the same time and is the most restrictive locking mechanism in
+     CA-Clipper.  RLOCK() is the least restrictive and attempts to place an
+     update lock on a shared record, precluding other users from updating the
+     current record.  FLOCK() falls in the middle.
+
+     FLOCK() is used for operations that access the entire database file.
+     Typically, these are commands that update the file with a scope or a
+     condition such as DELETE or REPLACE ALL.  The following is a list of
+     such commands:
+
+     <B>Commands that require an FLOCK()</B>
+     ------------------------------------------------------------------------
+     <B>Command                       Mode</B>
+     ------------------------------------------------------------------------
+     APPEND FROM                   FLOCK() or USE...EXCLUSIVE
+     DELETE (multiple records)     FLOCK() or USE...EXCLUSIVE
+     RECALL (multiple records)     FLOCK() or USE...EXCLUSIVE
+     REPLACE (multiple records)    FLOCK() or USE...EXCLUSIVE
+     UPDATE ON                     FLOCK() or USE...EXCLUSIVE
+     ------------------------------------------------------------------------
+
+     For each invocation of FLOCK(), there is one attempt to lock the
+     database file, and the result is returned as a logical value.  A file
+     lock fails if another user currently has a file or record lock for the
+     same database file or EXCLUSIVE USE of the database file.  If FLOCK() is
+     successful, the file lock remains in place until you UNLOCK, CLOSE the
+     DATABASE, or RLOCK().
+
+     By default, FLOCK() operates on the currently selected work area as
+     shown in the example below.
+
+ <B>Notes</B>
+
+     <B>.  SET RELATION:</B> CA-Clipper does not automatically lock all work
+        areas in the relation chain when you lock the current work area, and
+        an UNLOCK has no effect on related work areas.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses FLOCK() for a batch update of prices in
+        Inventory.dbf:
+
+        USE Inventory NEW
+        IF FLOCK()
+           REPLACE ALL Inventory-&gt;Price WITH ;
+                 Inventory-&gt;Price * 1.1
+        ELSE
+           ? "File not available"
+        ENDIF
+
+     <B>.</B>  This example uses an aliased expression to attempt a file lock
+        in an unselected work area:
+
+        USE Sales NEW
+        USE Customer NEW
+        //
+        IF !Sales-&gt;(FLOCK())
+           ? "Sales is in use by another"
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5dd2e.html">RLOCK()</A>
+<A HREF="nga2467.html">SET EXCLUSIVE*</A>
+<A HREF="ngb0c58.html">UNLOCK</A>
+<A HREF="ngb1e6f.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

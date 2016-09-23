@@ -1,0 +1,113 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng15de0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf477.html">[^^Up^^]</A>
+<A HREF="ng179bc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>Appendix B: Error Codes</B>
+
+There are only a few errors which are produced by ClipMore.
+
+
+<B>9001: Invalid RecordList</B>
+
+This is a runtime error which occurs when you attempt to reference an
+invalid RecordList.
+
+There are two ways this can happen:
+
+1.  Attempt to reference an invalid or destroy'd RecordList.
+
+2.  Destroy the Filter RecordList.
+
+As an example of the first error, consider the following code:
+
+    rl1 := rlNew()                  &amp;&amp; AOK
+    rlResult := rlAnd(rl1, rl2)     &amp;&amp; BAD!!! Reference to invalid rl (rl2)
+
+The rlAnd() will produce the error because you have referenced an
+uninitialized RecordList (rl2).
+
+As another example of the first error, consider the following code:
+
+    rl := rlNew()                   &amp;&amp; AOK
+    rlDestroy(rl)                   &amp;&amp; AOK
+    return rlNot(rl)                &amp;&amp; BAD!!! Reference to destroyed rl
+
+In this case, rl _was_ a valid RecordList, but has been destroyed (by the
+call the rlDestroy()).  You may not reference a RecordList once it is
+destroyed.
+
+As another example of this type of error (invalid Filter RecordList),
+consider this example:
+
+    rl := rlGetFilter()             &amp;&amp; Get the filter
+    rlSet(rl, 50)                   &amp;&amp; Add record 50 (AOK)
+    rlSet(rl, 100)                  &amp;&amp; Add record 100 (AOK)
+    rlDestroy(rl)                   &amp;&amp; BAD!!!  Destroyed the Filter
+                                    &amp;&amp; RecordList _but_ no immediate error
+    skip                            &amp;&amp; This line will error out
+
+The rlDestroy() causes the Filter RecordList to be destroyed.  However,
+since ClipMore still owns it, it will attempt to reference a RecordList
+which has been destroyed.
+
+However, the error does not show up until the skip, when ClipMore attempts
+to reference the destroyed RecordList.
+
+
+<B>9002: Couldn't Resize RecordList</B>
+
+This error should never occur.  It indicates that an attempt to resize the
+RecordList failed.  Please report any such occurrence with the example code
+which caused the problem to Technical Support, preferably via BBS.
+
+
+<B>9003: Invalid Node Type</B>
+
+This error should never occur.  It indicates an internal error in the
+ClipMore's condition parser.  Please report any such occurrence with the
+example code and specific filter condition which caused the problem to
+Technical Support, preferably via BBS.
+
+
+<B>9004: Filter Expression Too Long</B>
+
+This error indicates that the filter expression was over 2044 characters.
+This is the maximum length condition which ClipMore can process.  If you
+conditions which exceed this length, we recommend that you break the
+condition apart, pass the separate portions to rlNewQuery(), and then
+rlAnd()/rlOr() the results together to get the full result.
+
+
+<B>9900: Demo Limit Exceeded</B>
+
+    This error applies only to the demo version of ClipMore.  Currently
+    there is only one limit:
+
+    o   No more than two database files can be open simultaneously.
+
+    Attempting to open more than two database files simultaneously
+    (regardless of RDD) will result in this error being generated. 
+    Also, please note that APPEND FROM implicitly causes a database to
+    be opened.
+
+
+<B>Other</B>
+
+The other runtime errors which will show up are passing an invalid condition
+to cmFilter().  This will show up at run time.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

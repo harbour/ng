@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6663d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng639de.html">[^^Up^^]</A>
+<A HREF="ng67298.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Multi-Key, Free-Format Indexes:</B>
+
+  This is one step beyond the standard Roll-Your-Own (RYO) index feature.
+  With the addition of the third parameter for the Sx_KeyAdd() function,
+  you can add entries to a "template" key.  This key doesn't care where
+  the values will be coming from (i.e., field name, function call, etc).
+  All it cares about, is that the <B>type</B> of data matches the type that
+  was used in creating the key.
+
+  This information is provided by four special sx* functions to define the
+  data type and, in the case of character values, the length.  These special
+  functions are:
+
+    <B>sxChar( &lt;nLen&gt; ) -  Adds an empty character key of &lt;nLen&gt; length</B>
+    <B>sxNum()          -  Adds an empty numeric key                   </B>
+    <B>sxDate()         -  Adds an empty date key                      </B>
+    <B>sxLog()          -  Adds an empty logical key                   </B>
+
+
+  The extended Sx_KeyAdd() syntax for adding keys to a free-format RYO
+  Index is:
+
+    <B>Sx_KeyAdd( cTagName | nTagNum, cIndexName | nIndexOrd, [&lt;xVal&gt;] )</B>
+
+      where:  &lt;xVal&gt; is the key value to be used for this entry
+
+  +--------------------------------------------------------------------------+
+  | Example:                                                                 |
+  |--------------------------------------------------------------------------|
+  | USE foobar VIA "SIXNSX"                  // Open FOOBAR.DBF              |
+  | INDEX ON sxChar(10) TAG bogus            // Create "BOGUS" Tag (*)       |
+  | SET ORDER TO 0                           // Deselects Index TAG          |
+  | GO TOP                                   // Make sure we're at the top   |
+  | Sx_KeyAdd( "BOGUS", 1, left(LAST,10) )   // Adds a key for this rec      |
+  | Sx_KeyAdd( "BOGUS", 1, left(FIRST,10) )  // Adds second key for same rec |
+  |--------------------------------------------------------------------------|
+  | (*) The BOGUS tag was created to use ANY 10 character string for the key |
+  +--------------------------------------------------------------------------+
+
+
+   <B>WARNING:  If the Template RYO is a TAG within a .CDX/.NSX file, all keys</B>
+   <B>          within the TAG will be removed during a REINDEX.  If it's an IDX,</B>
+   <B>          it will not be touched at all by a REINDEX.  For this reason, it</B>
+   <B>          is suggested that you always use an .IDX file (under SIXCDX) or</B>
+   <B>          a single order .NSX file (under SIXNSX) for your Multi-Keyed</B>
+   <B>          indexing.</B>
+
+   <U>NOTE:  See the MULTIKEY.PRG and HYPER.PRG programs for some practical</U>
+   <U>       examples of how Multi-Keyed, Free-Format indexes can be used.</U>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2d4d1.html">Sx_KeyAdd()</A>
+<A HREF="ng1e7a8.html">sxChar()</A>
+<A HREF="ng1f251.html">sxNum()</A>
+<A HREF="ng1fa83.html">sxDate()</A>
+<A HREF="ng1fea0.html">sxLog()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1f4ac.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng13657.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_itemType()</B>
+ Determine an item's type
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "item.api"</B>
+     <B>USHORT _itemType(</B>
+     <B>                  ITEM itmRef</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>itmRef</B> is the item whose type you want to determine.
+
+ <B>Returns</B>
+
+     One of a number of manifest constants that indicate the item's
+     CA-Clipper type, as shown in the following section.
+
+ <B>Description</B>
+
+     The _itemType() function is used to determine an item's CA-Clipper type.
+     The returned type corresponds to the table below:
+
+     <B>Item Type Manifest Constants from Extend.api</B>
+     ------------------------------------------------------------------------
+     <B>Manifest Constant       CA-Clipper Type</B>
+     ------------------------------------------------------------------------
+     UNDEF                   NIL or simply undefined
+     CHARACTER               Character string
+     NUMERIC                 Numeric (long or double)
+     LOGICAL                 Boolean value
+     DATE                    Date value
+     MPTR                    Item is passed by reference
+     MEMO                    Memo field
+     ARRAY                   CA-Clipper-level array
+     BLOCK                   Code block
+     DOUBLE                  Double numeric
+     ------------------------------------------------------------------------
+
+     These constants do not distinctly represent CA-Clipper types.  Numeric
+     values are divided into word and double, and system-defined objects as
+     well as object type (classname) are not determinable.  CA-Clipper-level
+     objects are identified as arrays by the Item API.
+
+     <B>Note: </B> Computer Associates does not recommend use of the Item API to
+     modify object values, as such modifications would violate an object's
+     interface and encapsulation.
+
+     An item's _itemType() may be a combination of manifest constants from
+     the list above.  For example, an item may be a character string passed
+     by reference.  In this case, the flags CHARACTER and MPTR would be set.
+     A call to _itemType() for a numeric such as 42.102 would set both
+     NUMERIC and DOUBLE flags.  To test for multiple flags, simply OR them
+     together (e.g., CHARACTER | MPTR).
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Item.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1f4ac.html">_itemSize()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

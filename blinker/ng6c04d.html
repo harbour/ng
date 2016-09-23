@@ -1,0 +1,103 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6bec2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng69344.html">[^^Up^^]</A>
+<A HREF="ng6cd4c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SEGMENTS                      Set attributes for specific segments</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Set attributes for specific segments</B></U>
+
+ <U>Syntax   : <B>SEGMENTS [']segname['] [CLASS 'classname']</B></U>
+            <B>[attribute [attribute ...]]</B>
+
+ <U>Example  : <B>SEGMENTS</B></U>
+            <B>seg1 CLASS 'mycode' EXECUTEONLY</B>
+            <B>seg2 CLASS 'mydata'</B>
+
+ The SEGMENTS command sets attributes for one or more segments on a segment
+ by segment basis, overriding the defaults set by the CODE and DATA commands.
+ The sequence of specified segments establishes their order in the output
+ file. The segment class defaults to 'CODE' if CLASS 'classname' is not
+ specified.
+
+ The following attributes may be specified , with the defaults shown first
+ for each set of options :
+
+ discard [NONDISCARDABLE | DISCARDABLE]
+
+    This is used only for CODE and SEGMENTS commands. It determines whether a
+    code segment can be discarded from memory to fill a different memory
+    request.
+
+ execute [EXECUTEREAD | EXECUTEONLY]
+
+    This is used only for CODE and SEGMENTS commands. It determines whether a
+    code segment can be read as well as executed. The EXECUTEREAD option is
+    necessary for a program to run under a debugger which processes CodeView
+    information.
+
+ instance [MULTIPLE | SINGLE | NONE]
+
+    This is used for the DATA command only. It affects the sharing attributes
+    of DGROUP, the default data segment. This option interacts with the
+    shared attribute.
+
+    MULTIPLE, the default for programs, specifies that DGROUP is copied for
+    each instance of the program.
+
+    SINGLE, which is the default for DLLs, specifies that one DGROUP is
+    shared by all instances of the DLL or program.
+
+    NONE tells the loader not to allocate DGROUP. This is used when a DLL has
+    no data and uses the program's DGROUP.
+
+    This option interacts with the shared attribute for data segments.
+
+ load [LOADONCALL | PRELOAD]
+
+    This is used for CODE, DATA and SEGMENTS commands. It determines when a
+    segment is loaded. LOADONCALL specifies that the segment should not be
+    loaded until accessed, and only if not already loaded. PRELOAD specifies
+    that the segment should be loaded when the program starts.
+
+ moveable [FIXED | MOVEABLE]
+
+    This is used for CODE, DATA and SEGMENTS commands. It determines whether
+    a segment of a Windows program can be moved in memory. This command can
+    also be used to force segments of a DOS extended program to be loaded in
+    conventional memory.
+
+ read [READWRITE | READONLY]
+
+    This is used for DATA and SEGMENTS commands only. It determines access
+    rights to a data segment.
+
+ shared [NONSHARED | SHARED]
+
+    This is used for real-mode Windows sessions only. It determines whether
+    all instances of the program can share EXECUTEREAD and READWRITE
+    segments.
+
+    NONSHARED, which is the default for programs, specifies that the segment
+    must be loaded seperately for each process. An alternative keyword is
+    IMPURE.
+
+    SHARED, which is the default for DLLs, specifies that only one copy of
+    the segment should be loaded and shared among all processes that access
+    the program or DLL. This setting saves memory and can be used for code
+    that is not self-modifying. An alternative keyword is PURE. This option
+    interacts with the instance attribute for data segments.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

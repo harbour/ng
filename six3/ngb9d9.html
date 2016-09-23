@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb3f9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ngc1a5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_AddScoped():</B>
+
+  Purpose:  Scan a selected index and add records to a filter based on
+            high and low key values.
+
+   Syntax:  m6_AddScoped( &lt;nHandle&gt;, [&lt;xLowVal&gt;], [&lt;xHighVal&gt;], [&lt;nOrder&gt;] )
+
+    Where:  &lt;nHandle&gt;     --  Is a handle to a previously allocated
+                              filter.
+
+            &lt;xLowVal&gt;     --  The beginning key value in a range (inclusive).
+                              The key at which the index scan should begin.  A
+                              NIL value indicates the scan should start at the
+                              top of the index.
+
+            &lt;xHighVal&gt;    --  The ending key value in the range (inclusive).
+                              Beyond this value the index scan will terminate.
+                              A NIL value indicates the scan should continue
+                              until the end of the index file.
+
+            &lt;nOrder&gt;      --  Order list position for the index file to
+                              scan.  If no parameter is specified then
+                              the current index is scanned.
+
+  Returns:  The number of indexed records in the filter.
+
+     Note:  *Always free RYO filters that are no longer being used.*
+
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         //................................................use customer file
+         USE Customer via "SIXCDX"
+
+         //...................................open indexes used for querying
+         SET INDEX TO State, Age
+
+         //...............................................create RYO filter1
+         nHandle1 := m6_NewFilter()
+
+         //...............................................create RYO filter2
+         nHandle2 := m6_NewFilter()
+
+         //............................Add records to filter1 for State ='CA'
+         m6_AddScoped( nHandle1, "CA", "CA" )
+
+         //.............................Add records to filter2 for Age &gt;= 25
+         m6_AddScoped( nHandle2, 25, NIL, 2 )
+
+         //.........................join the filters,  Filter1 .AND. Filter2
+         m6_FiltJoin( nHandle1, nHandle2, JOIN_INTERSECT )
+
+         //..SET FILTER TO my RYO filter ( Note: System now owns the filter )
+         m6_SetAreaFilter( nHandle1 )
+
+         //...............................................Browse the results
+         Browse()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng159ed.html">m6_NewFilter()</A>
+<A HREF="ng106e4.html">m6_FiltJoin()</A>
+<A HREF="ng169b6.html">m6_SetAreaFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

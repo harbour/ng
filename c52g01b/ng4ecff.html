@@ -1,0 +1,69 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4e55c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng4f2ef.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MEMOWRIT()</B>
+ Write a character string or memo field to a disk file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MEMOWRIT(&lt;cFile&gt;, &lt;cString&gt;) --&gt; lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFile&gt;</B> is the name of the target disk file including the file
+     extension and optional path and drive designator.
+
+     <B>&lt;cString&gt;</B> is the character string or memo field to write to &lt;cFile&gt;.
+
+ <B>Returns</B>
+
+     MEMOWRIT() returns true (.T.) if the writing operation is successful;
+     otherwise, it returns false (.F.).
+
+ <B>Description</B>
+
+     MEMOWRIT() is a memo function that writes a character string or memo
+     field to a disk file.  If a path is not specified, MEMOWRIT() writes
+     &lt;cFile&gt; to the current DOS directory and not the current DEFAULT
+     directory.  If &lt;cFile&gt; already exists, it is overwritten.
+
+     MEMOWRIT() is generally used with MEMOREAD() to load text files into
+     memory where they can be edited, displayed, and written back to disk.
+     You can also use MEMOWRIT() as a quick way of exporting a memo field to
+     a text file.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses MEMOWRIT() with MEMOREAD() to allow editing
+        of memo fields with an external editor:
+
+        LOCAL cEditor := "MYEDIT.EXE"
+        USE Sales NEW
+        IF MEMOWRIT("Cliptmp.txt", Notes)
+           RUN (cEditor + " Cliptmp.txt")
+           REPLACE Notes WITH MEMOREAD("Cliptmp.txt")
+        ELSE
+           ? "Error while writing Cliptmp.txt"
+           BREAK
+        ENDIF
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng47e75.html">MEMOEDIT()</A>
+<A HREF="ng4d81f.html">MEMOREAD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

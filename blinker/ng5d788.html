@@ -1,0 +1,40 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5d280.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5b482.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Problems when debugging</B>
+------------------------------------------------------------------------------
+
+ <B>Blinker error 1203</B>
+
+ Some debuggers require exclusive access to the executable file during
+ debugging, which may cause problems with overlaid programs, the usual
+ symptom of which is a Blinker error 1203. To alleviate this problem, use the
+ Blinker READONLY script command to create the executable with a read only
+ attribute, or use the DOS ATTRIB command to set the read only attribute
+ following the link.
+
+ When debugging overlaid programs, ensure you are using the current version
+ of the vector source file (.VEC), otherwise things may become confusing!
+
+ <B>Overlays and debuggers other than CodeView</B>
+
+ When the overlay manager loads or unloads an overlay, it informs CodeView
+ that a section change has occurred. If your debugger, or other utility is
+ not fully compatible with CodeView, you may not be able to use it to debug
+ overlaid programs, although you should still be able to debug modules in the
+ root.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

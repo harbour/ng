@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf5675.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngf62aa.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RDDNAME() function</B>
+ Return the name of the RDD active in the current or specified work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     RDDNAME() --&gt; cRDDName
+
+ <B>Returns</B>
+
+     Returns a character string, cRDDName, the registered name of the active
+     RDD in the current or specified work area.
+
+ <B>Description</B>
+
+     RDDNAME() is an RDD function that returns a character string, cRDDName,
+     the name of the active RDD in the current or specified work area.
+
+     You can specify a work area other than the currently active work area by
+     aliasing the function.
+
+ <B>Examples</B>
+
+     USE Customer VIA "DBFNTX" NEW
+     USE Sales    VIA "DBFCDX" NEW
+
+     ? RDDNAME()                          // Returns: DBFCDX
+     ? Customer-&gt;( RDDNAME() )            // Returns: DBFNTX
+     ? Sales-&gt;( RDDNAME() )               // Returns: DBFCDX
+
+ <B>Status:</B>  New
+
+ <B>See also:</B>  RDDLIST()
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf5675.html">RDDLIST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1b483.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng182ca.html">[^^Up^^]</A>
+<A HREF="ng1bbcb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BASE/1004    No exported method</B>
+
+     <B>Explanation:</B>
+
+     1. You sent a message using the send operator (:), but the left operand
+        was not a reference to an object or the receiving object has no
+        method with the specified name.
+
+     2. You called the EVAL() function and did not pass a code block as the
+        first argument.
+
+     3. You specified a value other than a code block in a context where a
+        code block was required.
+
+     <B>Action:</B>
+
+     1. Check to make sure that the value being operated on is of the proper
+        type or class.
+
+     2. If the error occurs on the send operator (:), make sure the message
+        is one of the messages defined for the class.
+
+     3. If the missing method is "EVAL," make sure that code blocks have been
+        supplied where required.
+
+     <B>See Also:</B>  Basic Concepts chapter in the Programming and Utilities
+     guide, Language Reference chapter of the Reference guide
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

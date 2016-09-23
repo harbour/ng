@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng35d10.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng3642c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPADDENV()                   Increase size of child environment block.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Increase size of child environment block.</B></U>
+
+ <U>Syntax   : <B>niValue = SWPADDENV(NumberOfBytes)</B></U>
+
+ <U>Return   : <B>The previous setting</B></U>
+
+ By default, when the DOS EXEC function starts a process (SWPRUNCMD()
+
+ uses this DOS function), the environment that is created for the child is
+ truncated so that there is very little, if any, free space.
+
+ This function can be used to increase the size of the child program's
+ environment by the number of bytes passed as a parameter. This is necessary
+ if the program (or batch file) that will be run as a child process needs to
+ add or change environment variables. The maximum size of an environment
+ block is 32 KB.
+
+ Note that this function increases the size of the child environment at the
+ time the child process is executed, it does not modify the parent
+ environment in any way.
+
+ The child environment is destroyed when the child process terminates.
+
+ Example:
+
+    <B>// Ensure 128 bytes free in environment</B>
+    <B>OldSize = SWPADDENV(128)</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3c5de.html">SWPSETENV()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

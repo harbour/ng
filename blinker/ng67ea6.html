@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Transparent interrupt and function support</B>
+------------------------------------------------------------------------------
+
+
+ <B>BIOS Interrupts</B>
+
+ The following BIOS interrupt calls are handled transparently:
+
+    INT 10h  Video          Functions 00h -1Ch
+    INT 11h  Equipment list
+    INT 12h  Get mem size
+    INT 13h  Disk           Functions 00h -19h
+    INT 14h  RS232          Functions 00h -05h
+    INT 16h  Keyboard       Functions 00h -12h
+    INT 17h  Printer        Functions 00h -02h
+    INT 1Ah  Clock
+    INT 1Bh  Control Break
+    INT 1Ch  User Timer Tick
+    INT 33h  Mouse
+    INT 7Ah  IPX / SPX
+
+ <B>DOS Interrupts</B>
+
+ The following DOS interrupt calls are handled transparently :
+
+    INT 21h  Functions 00h - 6ch except :
+       0FH   Open file (fcb)
+       10H   Close file (fcb)
+       14H   Sequential disk file read
+       15H   Sequential disk file write
+       16H   Create file
+       21H   Random disk record read
+       22H   Random disk record write
+       23H   Get file size
+       24H   Set random record field
+       27H   Random block read
+       28H   Random block write
+       31H   TSR
+       5DH   Miscellaneous DOS internal functions
+       5EH   Microsoft Networks functions 3 and above
+       5FH   Network functions 6 and above
+       63H   Asian 2 byte character support
+    INT 23h  Control C
+    INT 25h  Absolute DOS Read
+    INT 26h  Absolute DOS Write
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

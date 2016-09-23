@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Notes For International Users ONLY:</B>
+
+
+    <B>NOTE:  This section only applies to people using the International</B>
+    <B>       releases of CA-Clipper and SIx 3.0.  If you are using the</B>
+    <B>       Domestic (U.S.) releases of CA-Clipper and SIx 3.0, this section</B>
+    <B>       does not apply to you at all.</B>
+
+
+  In order to use the International SIx 3.0 release, you must also link in
+  one additional .OBJ module for your language's character sorting order.
+  These .OBJ files will have been installed in the same directory as the
+  other SIx Driver .OBJ files. By default, this would be in the \SIX3\OBJ
+  directory.  The foreign nation modules currently included with the SIx 3.0
+  release are as follows:
+
+    <B>SIXUK.OBJ    - Standard (American/British)</B>
+    <B>SIXDAN.OBJ   - Danish                     </B>
+    <B>SIXDUT.OBJ   - Dutch                      </B>
+    <B>SIXFIN.OBJ   - Finnish                    </B>
+    <B>SIXFRE.OBJ   - French                     </B>
+    <B>SIXGER.OBJ   - German                     </B>
+    <B>SIXIC850.OBJ - Icelandic (Code page 850)  </B>
+    <B>SIXIC861.OBJ - Icelandic (Code page 861)  </B>
+    <B>SIXITA.OBJ   - Italian                    </B>
+    <B>SIXNOR.OBJ   - Norwegian                  </B>
+    <B>SIXPOR.OBJ   - Portuguese                 </B>
+    <B>SIXSPA.OBJ   - Spanish                    </B>
+    <B>SIXSWE.OBJ   - Swedish                    </B>
+
+  For example, to link the German sort module into your SIXNSX application,
+  you would include the SIXGER.OBJ like this:
+
+    <B>BLINKER FI test, sixger, sixnsx LI six3</B>
+
+
+  <B>NOTE:  Failure to include one of the nations modules will result in</B>
+  <B>       Unresolved External errors for the following four symbols at</B>
+  <B>       link-time:</B>  <U>__ZCMP, __NPREVC, __NNEXTC, and __FORCE_ASCII.</U>
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

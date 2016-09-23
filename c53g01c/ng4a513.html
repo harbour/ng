@@ -1,0 +1,92 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng49aff.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng4ae3b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FREAD()</B>
+ Read characters from a binary file into a buffer variable
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FREAD(&lt;nHandle&gt;, @&lt;cBufferVar&gt;, &lt;nBytes&gt;) --&gt; nBytes</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nHandle&gt;</B> is the file handle obtained from FOPEN(), FCREATE(), or
+     predefined by DOS.
+
+     <B>&lt;cBufferVar&gt;</B> is the name of an existing and initialized character
+     variable used to store data read from the specified file.  The length of
+     this variable must be greater than or equal to &lt;nBytes&gt;.  &lt;cBufferVar&gt;
+     must be passed by reference and, therefore, must be prefaced by the pass-
+     by-reference operator (@).
+
+     <B>&lt;nBytes&gt;</B> is the number of bytes to read into the buffer.
+
+ <B>Returns</B>
+
+     FREAD() returns the number of bytes successfully read as an integer
+     numeric value.  A return value less than &lt;nBytes&gt; or zero indicates end
+     of file or some other read error.
+
+ <B>Description</B>
+
+     FREAD() is a low-level file function that reads characters from a binary
+     file into an existing character variable.  It reads from the file
+     starting at the current DOS file pointer position, advancing the file
+     pointer by the number of bytes read.  All characters are read including
+     control, null, and high-order (above CHR(127)) characters.
+
+     FREAD() is similar in some respects to both FREADSTR() and FSEEK().
+     FREADSTR() reads a specified number of bytes from a file up to the next
+     null (CHR(0)) character.  FSEEK() moves the file pointer without
+     reading.
+
+     If there is an error during the file read, FERROR() returns the DOS
+     error number.  See FERROR() for the list of error numbers.
+
+     <B>Warning! </B> This function allows low-level access to DOS files and
+     devices.  It should be used with extreme care and requires a thorough
+     knowledge of the operating system.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses FREAD() after successfully opening a file to
+        read 128 bytes into a buffer area:
+
+        #define F_BLOCK      128
+        //
+        cBuffer := SPACE(F_BLOCK)
+        nHandle := FOPEN("Temp.txt")
+        //
+        IF FERROR() != 0
+           ? "File open error:", FERROR()
+        ELSE
+           IF FREAD(nHandle, @cBuffer, F_BLOCK) &lt;&gt; F_BLOCK
+              ? "Error reading Temp.txt"
+           ENDIF
+           FCLOSE(nHandle)
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1019e.html">BIN2I()</A>
+<A HREF="ng107aa.html">BIN2L()</A>
+<A HREF="ng10d6f.html">BIN2W()</A>
+<A HREF="ng42616.html">FCLOSE()</A>
+<A HREF="ng431be.html">FCREATE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,88 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Order Aliasing:</B>
+
+  "Order aliasing" provides a means for you to specify exactly what
+  indexes are used to optimize a query.  This is especially useful when
+  you want to optimize a query using multiple Roll-Your-Own or any of
+  the other non-standard indexes ( conditional, subindex, and unique ).
+
+  In previous versions of MachSIx your were restricted to using only one
+  non-standard index at time and it had to be selected when the query
+  was executed.   This restriction still exists but can now be worked-
+  around using "order aliasing".
+
+  The reasoning behind this restriction is that these type of indexes do
+  not represent the entire data set thus MachSIx cannot indiscriminately
+  choose between one of these indexes to resolve a query.  But now you
+  can decide what indexes are eligible on a query by query basis.
+
+  To use "order aliasing" simply replace the field portion of your
+  simple expression with the index order name aliased by the special
+  MachSIx alias, <B>_ORDER</B>.   The following example demonstrates two calls
+  to m6_IsOptimize(); the first with the query condition specified in
+  the conventional manner and the second using "order aliasing".
+
+     #define RDDNAME "SIXCDX"
+
+     //...............................................use accounts
+     USE Account VIA RDDNAME
+
+     //................................................create index
+     INDEX ON State TO Temp
+
+     //................................conventional query statement
+     ? m6_IsOptimize( 'State = "CA"' )                        // 2
+
+     //..................................query via "order aliasing"
+     ? <B>m6_IsOptimize( '_ORDER-&gt;Temp = "CA"' )</B>                 // 2
+
+  In the next example two RYO indexes are simultaneously used to look up
+  all winter season boots currently in stock.
+
+      #define RDDNAME  "SIXCDX"
+
+      //..........................................use inventory file
+      USE Inventory VIA RDDNAME
+
+      //..................................open inventory query index
+      SET INDEX TO InvQry
+
+      //....... Assume that InvQry contains tags Season, and Descrip
+      // INDEX ON Sx_Char(4)  TAG Season  OF InvQry
+      // INDEX ON Sx_Char(15) TAG Descrip OF InvQry
+
+
+      //.................................................Set filter
+      <B>SET FILTER TO _ORDER-&gt;Season  = "WINT"   .AND. ;</B>
+                    <B>_ORDER-&gt;Descrip = "BOOTS"  .AND. ;</B>
+                    <B>!Empty( InStock )</B>
+
+      //........................initialize filter, browse() results
+      GO TOP
+      Browse()
+
+
+  Note that MachSIx will only match the first unique index name in the
+  order list to the one specified after the _ORDER alias.  In the above
+  example, if you opened a second index, say InvQry2 that contained its
+  own Season and Descrip tags, only the first one in the order list
+  would be used.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

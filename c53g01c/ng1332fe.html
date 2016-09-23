@@ -1,0 +1,126 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng132e67.html">[^^Up^^]</A>
+<A HREF="ng133e99.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Error</B>
+ Provides objects containing information about runtime errors
+------------------------------------------------------------------------------
+ <B>Description</B>
+
+     An Error object is a simple object that contains information pertaining
+     to a runtime error.  Error objects have no methods, only exported
+     instance variables.  When a runtime error occurs, CA-Clipper creates a
+     new Error object and passes it as an argument to the error handler block
+     specified with the ERRORBLOCK() function.  Within the error handler, the
+     Error object can then be queried to determine the nature of the error
+     condition.
+
+     Error objects can also be returned to the RECOVER statement of a BEGIN
+     SEQUENCE construct with a BREAK statement.  Here, the error object can
+     be queried for local error handling.  For more detailed information and
+     examples refer to the "Error Handling Strategies" chapter in the
+     Programming and Utilities Guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates how a file open operation might be
+        handled in an error handler replicating the default CA-Clipper
+        behavior.  When, for example, an attempt to open a database file with
+        a USE command fails, control returns to the statement following the
+        offending command:
+
+        #include "Error.ch"
+        #command RETRY      =&gt; RETURN (.T.)   // Retry operation
+        #command RESUME      =&gt; RETURN (.F.)   // Default recovery
+        //
+
+        FUNCTION MyError( &lt;oError&gt; )
+           //
+           // Handle file open error
+           IF &lt;oError&gt;:genCode == EG_OPEN .AND.;
+              &lt;oError&gt;:canDefault .AND.;
+              NETERR()
+              //
+              RESUME
+           ENDIF
+           .
+           . &lt;other error statements&gt;
+           .
+           RETURN NIL
+
+     <B>.</B>  This example retries an operation within an error handler a
+        specified number of times:
+
+        #include "Error.ch"
+        #command RETRY      =&gt; RETURN (.T.)   // Retry operation
+        #command RESUME      =&gt; RETURN (.F.)   // Default recovery
+        //
+
+        FUNCTION MyError( &lt;oError&gt; )
+           //
+           // Handle printer not ready error
+           IF &lt;oError&gt;:genCode == EG_PRINT .AND.;
+              &lt;oError&gt;:canRetry .AND.;
+              &lt;oError&gt;:tries &lt; 25
+              //
+              RETRY
+           ENDIF
+           .
+           . &lt;other error statements&gt;
+           .
+           RETURN NIL
+
+     <B>.</B>  This code fragment returns an error object from an error
+        handler to the RECOVER statement for further processing:
+
+        LOCAL objLocal, bLastHandler
+        //
+        // Save current and set new error handler
+        bLastHandler := ERRORBLOCK({    |oErr| ;
+                          MyHandler(oErr, .T.)})
+        //
+        BEGIN SEQUENCE
+           .
+           . &lt;operation that might fail&gt;
+           .
+        RECOVER USING objLocal
+           .
+           . &lt;send messages to objLocal and handle the error&gt;
+           .
+        END
+        //
+        // Restore previous error handler
+        ERRORBLOCK( bLastHandler )
+
+        FUNCTION MyHandler( &lt;oError&gt;, lLocalHandler )
+           //
+           // Handle locally returning the error object
+           IF lLocalHandler
+              BREAK &lt;oError&gt;
+           ENDIF
+           .
+           . &lt;other statements to handle the error&gt;
+           .
+           RETURN NIL
+
+ <B>Files</B>   Header file is Error.ch, default error handler is in Errorsys.prg.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfc7b7.html">BEGIN SEQUENCE</A>
+<A HREF="ng3d861.html">DOSERROR()</A>
+<A HREF="ng40105.html">ERRORBLOCK()</A>
+<A HREF="ng7afc4.html">NETERR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

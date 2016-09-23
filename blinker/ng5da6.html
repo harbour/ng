@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5792.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng6241.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER ENVIRONMENT NAME      Specify name of environment variable for Blinker run time options</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify the name of the environment variable for Blinker run time</B></U>
+            <B>options</B>
+
+ <U>Syntax   : <B>BLINKER ENVIRONMENT NAME &lt;cname&gt;</B></U>
+
+ <U>Default  : <B>BLINKER</B></U>
+
+ <U>Example  : <B># Rename the Blinker variable</B></U>
+            <B>BLINKER ENVIRONMENT NAME Testapp</B>
+
+    and use the following command at the DOS prompt:     <B>         SET TESTAPP=/OO30</B>
+
+    to alter the OPSIZE at program runtime without having to relink.
+
+ This command is used to change the name of the BLINKER environment variable.
+
+ At program runtime the Blinker overlay manager checks the DOS environment
+ for the BLINKER environment variable, and if this is present then the
+ variable is examined for certain runtime parameters.
+
+ Following linking with the above command, the overlay manager will check the
+ environment for the TESTAPP variable. For a listing of the BLINKER
+ environment variable's valid parameters, please see Chapter 2.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfeb9.html">BLINKER OVERLAY OPSIZE</A>
+<A HREF="ng10871.html">BLINKER OVERLAY PAGEFRAME</A>
+<A HREF="ng11b06.html">BLINKER OVERLAY UMB</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng70cd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng7b97.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmVersion()</B>           Get ClipMore version
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmVersion([nDetail]) -&gt; cVersion
+
+<B>Arguments</B>
+
+    nDetail is optional, and if provided results in a more detailed version
+    of the version being returned.
+
+    If nDetail is not provided or 0, then a string of the form "N.NN" will
+    be returned.
+
+    If nDetail is 1, then a string of the form "N.NN.NN" will be returned.
+
+    If nDetail is 2, then a string of the form "N.NN.NN (ClipMore/5.x)"
+    will be returned.
+
+<B>Returns</B>
+
+    cmVersion() returns a character string containing version information.
+
+<B>Description</B>
+
+    cmVersion() allows you to determine what version of ClipMore you are
+    using.
+
+<B>Example</B>
+
+<B>    ? cmVersion()           &amp;&amp; 3.00</B>
+<B>    ? cmVersion(1)          &amp;&amp; 3.00.00</B>
+<B>    ? cmVersion(2)          &amp;&amp; 3.00.00 (ClipMore/5.2)</B>
+
+<B>See Also</B>
+
+    None.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

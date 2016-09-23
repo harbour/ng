@@ -1,0 +1,41 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng84e05.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng854ea.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Can I use .DBT's with the SIx Driver?:</B>
+
+  Yes.  To do so, simply include <B>DBT.OBJ</B> in your link command or link
+  script.  This will cause the SIx driver to use Clipper .DBT files for memo
+  fields.
+
+  However, There are some good reasons for using FPT or SMT memos.  Most
+  important is definable block size.  Clipper's .DBT's use a fixed block
+  size of 512 bytes.  That means that every time you store even 1 byte in
+  a memo field Clipper uses 512 bytes to store it.  And if the data in a
+  memo field grows to 513 bytes, then TWO blocks required.
+
+  When creating FPT's or SMT's, you can define the block size (from 16 to
+  1024 bytes) so that it's optimized for your specific needs.  The default
+  block size for FPT's is 64 bytes.  A simple conversion from DBTs to
+  FPT/SMTs will generally shrink your memo files by over 50%.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng76298.html">DBT.OBJ</A>
+<A HREF="ng4f3c5.html">SET MEMOBLOCK</A>
+<A HREF="ng364a2.html">Sx_SetMemoBlock()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

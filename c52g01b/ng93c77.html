@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng93235.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng943cc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RELEASE</B>
+ Delete public and private memory variables
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RELEASE &lt;idMemvar list&gt;</B>
+     <B>RELEASE ALL [LIKE | EXCEPT &lt;skeleton&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idMemvar list&gt;</B> is a list of private or public variables or arrays
+     to delete.
+
+     <B>ALL [LIKE|EXCEPT &lt;skeleton&gt;]</B> defines the set of visible private
+     memory variables to assign, or to exclude from assignment of, a NIL
+     value.  &lt;skeleton&gt; is the wildcard mask to specify a group of memory
+     variables to delete.  The wildcard characters supported are * and ?.
+
+ <B>Description</B>
+
+     RELEASE is a memory variable command that performs one of two actions
+     depending on how it is specified.  If RELEASE is specified with
+     &lt;idMemvar list&gt;, the specified public and private memory variables
+     and/or arrays are deleted from memory.  Previous hidden instances
+     (public or private variables defined in higher-level procedures) become
+     accessible upon termination of the procedure where the variable was
+     originally created.
+
+     If RELEASE is specified with any form of the ALL clause, private memory
+     variables created at the current procedure level are assigned a NIL and
+     not deleted until the current procedure or user-defined function
+     terminates.  Public variables are unaffected by this form of the RELEASE
+     command.  To release public variables, you must RELEASE them explicitly
+     or use CLEAR MEMORY.
+
+     Local or static variables are not affected by the RELEASE command.
+     Local variables are released automatically when the procedure or
+     user-defined function where the variables were declared terminates.
+     Static variables cannot be released since they exist for the duration
+     of the program.
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7ef5b.html">CLEAR MEMORY</A>
+<A HREF="ngbfbea.html">LOCAL</A>
+<A HREF="ngc25d0.html">PRIVATE</A>
+<A HREF="ngc587f.html">PUBLIC</A>
+<A HREF="ng9115b.html">QUIT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

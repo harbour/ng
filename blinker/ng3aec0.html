@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng38dd4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng3b3c7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPKEYCLR()                   Alter SWPKEYBRD() behaviour</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Alter SWPKEYBRD() behaviour</B></U>
+
+ <U>Syntax   : <B>niValue = SWPKEYCLR(niClearCount)</B></U>
+
+ <U>Return   : <B>The previous setting.</B></U>
+
+ This function alters the number of times that SWPKEYBRD() clears the
+ keyboard buffer between stuffing keystrokes into the child process.
+
+ Normally, SWPKEYBRD() indicates to the child program that the keyboard
+ buffer is empty between stuffing each keystroke. This prevents loss of
+ keystrokes if the child program tries to clear the keyboard buffer itself by
+ discarding any pending keystrokes.
+
+ However, under multi-tasking systems, such as DesqView, the operating system
+ itself polls the keyboard to detect idle time, and as a result may 'steal'
+ the keyboard buffer clear signal that the swap kernel is trying to send to
+ the child process. For this reason, the swap kernel sends not one, but 5
+ keyboard clear signals between each keystroke, to ensure the child program
+ will see at least one of them.
+
+ If you seem to be losing keystrokes, increasing this value through the use
+ of this function may help.
+
+ Example:
+
+    <B>SWPKEYCLR(10)        // 10 clears between each key</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng38dd4.html">SWPKEYBRD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

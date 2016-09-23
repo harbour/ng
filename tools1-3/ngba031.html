@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb9a7f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb7bb9.html">[^^Up^^]</A>
+<A HREF="ngba5b1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ERRORBASE()</B>
+ Source of the most-recent DOS error
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ERRORBASE() --&gt; nErrorCode</B>
+
+     <B>Warning!</B>  This function requires DOS 3.1 or higher.
+
+ <B>Returns</B>
+
+     ERRORBASE() returns a numeric code that provides additional information
+     about the cause of the error.  These codes and their definitions are in
+     the table below:
+
+     <B>Table 12-3: Causes for DOS Errors</B>
+     ------------------------------------------------------------------------
+     <B>Code      Definition</B>
+     ------------------------------------------------------------------------
+     1         Insufficient memory
+     2         Access temporarily denied
+     3         No access for this user
+     4         Internal error, system software
+     5         Hardware error
+     6         Error in system software
+     7         Error in applications program
+     8         File not found
+     9         Wrong file format or type
+     10        File is protected
+     11        Incorrect medium in drive
+     12        Other error
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     If an error is detected with ERRORCODE(), use ERRORBASE() for more
+     information about the cause of the error, from within the data returned
+     by DOS.
+
+ <B>Example</B>
+
+     Determine the cause for an error:
+
+     nCause  :=  ERRORBASE()
+     IF nCause = 3
+        ? "Access denied!"
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb9a7f.html">ERRORACT()</A>
+<A HREF="ngba5b1.html">ERRORCODE()</A>
+<A HREF="ngbaf45.html">ERRORORG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

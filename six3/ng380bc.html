@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng37ce6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3842c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_SetTagNo():</B>
+
+  Syntax:   Sx_SetTagNo([cTag | nOrder] [,cIndexName])
+
+            cTag       = Name of the tag to make active
+            nOrder     = Position of order within the passed or current FILE
+            cIndexName = Name of index FILE (orderbag)
+
+  Returns:   &lt;logical&gt; .T. if successful, .F. if an error occurred.
+
+  Description:   This function works like Sx_SetTag(), except that
+                 Sx_SetTagNo() only searches ONE index FILE (orderbag)
+                 for the passed tag name or tag number.  If you do not pass
+                 cIndexName, the currently active orderBag will be searched.
+
+         <B>NOTE:  Sx_SetTagNo() is an obsolete index file-based function.  It</B>
+         <B>       is provided for compatibility only.  See OBSOLETE.PRG and</B>
+         <B>       OBSOLETE.CH.</B>
+
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng37ce6.html">Sx_SetTag()</A>
+<A HREF="ng1cc0f.html">OrdSetFocus()</A>
+<A HREF="ng3d3ba.html">Sx_TagNo()</A>
+<A HREF="ng1c7a8.html">OrdNumber()</A>
+<A HREF="ng517e3.html">SET TAG / ORDER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

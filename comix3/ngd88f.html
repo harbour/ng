@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd5dc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ngdf84.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlSetFilter()</B>         Set the Filter RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlSetFilter(rl) -&gt; NIL
+
+<B>Arguments</B>
+
+    rl is the RecordList to be made the Filter RecordList.
+
+<B>Returns</B>
+
+    NIL.
+
+<B>Description</B>
+
+    rlSetFilter() allows you to control which records are made visible,
+    similar to a SET FILTER TO.  When rlSetFilter(rl) is used, only records
+    contained in rl will be retrieved.
+
+    rlSetFilter() will automatically destroy any previously existing Filter
+    RecordList.  It also transfers ownership of the RecordList to ClipMore.
+    In other words, once you rlSetFilter() you should _not_ destroy it
+    yourself.  ClipMore will automatically destroy it.
+
+    rlSetFilter() is used by cmFilter() in order to optimize filters.
+    cmFilter() uses rlNewQuery() to get a RecordList of records which meet
+    the condition, and then use rlSetFilter() so that only records which
+    meet the condition (i.e., are in the RecordList) are stopped at.
+
+    The source code for cmFilter() &amp; cmReFilter() will give you good
+    examples of how this function is used.
+
+<B>Example</B>
+
+    use demo
+
+    *   Let the user tag Records
+    rl := rlUserTag()
+
+    *   Now make only these records visible
+<B>    rlSetFilter(rl)</B>
+
+    *   List out the last and first names for records the user has tagged
+    list last, first
+
+    *   NOTE: No need to destroy the RecordList because ClipMore will do
+    *         so automatically (with rlSetFilter(), ownership of the
+    *         RecordList has transferred to ClipMore)
+
+    *   Should let user tag records, but just a dummy stub for simplicity
+    function rlUserTag()
+    local rl := rlNew()
+    rlSet(rl, 50)
+    rlSet(rl, 75)
+    return rl
+
+<B>See Also</B>
+
+    rlExFilter(), rlGetFilter()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8a55.html">rlExFilter()</A>
+<A HREF="ng9110.html">rlGetFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

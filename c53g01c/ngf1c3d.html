@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf138f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf2199.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET TYPEAHEAD</B>
+ Set the size of the keyboard buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET TYPEAHEAD TO &lt;nKeyboardSize&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;nKeyboardSize&gt;</B> specifies the number of keystrokes the keyboard
+     buffer can hold from a minimum of zero to a maximum of 4096.  The
+     default size of the keyboard buffer is machine-dependent but 16 is the
+     minimum size.
+
+ <B>Description</B>
+
+     SET TYPEAHEAD defines the size of the CA-Clipper keyboard buffer that
+     caches keystrokes input directly by the user.  SET TYPEAHEAD, however,
+     does not affect the number of characters that can be stuffed
+     programmatically using the KEYBOARD command.  When executed, SET
+     TYPEAHEAD clears the keyboard buffer and sets the size to
+     &lt;nKeyboardSize&gt;.
+
+     When TYPEAHEAD is SET TO zero, keyboard polling is suspended.  An
+     explicit request for keyboard input, however, will temporarily enable
+     the keyboard and read any pending keystrokes from the BIOS buffer.
+     Calling NEXTKEY() constitutes such an explicit request.  NEXTKEY() reads
+     any pending keystrokes from the BIOS buffer and returns the INKEY()
+     value of the first keystroke read, or zero if no keystrokes are pending.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc80d.html">ALTD()</A>
+<A HREF="ngc2300.html">CLEAR TYPEAHEAD</A>
+<A HREF="ng61b6e.html">INKEY()</A>
+<A HREF="ngd087b.html">KEYBOARD</A>
+<A HREF="ng7bcb0.html">NEXTKEY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

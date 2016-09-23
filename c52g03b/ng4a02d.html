@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng49c83.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4a39c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>fieldCount()</B>
+ Determine the number of columns (fields) in the workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE fieldCount(</B>
+     <B>                    WORKAREAP wa,</B>
+     <B>                    USHORTP fieldCount</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>fieldCount</B> is a pointer to an unsigned short value that specifies
+     the number of columns in the workarea.
+
+ <B>Description</B>
+
+     Gets the physical column count for wa.
+
+ <B>Default Behavior</B>
+
+     Copies wa-&gt;fieldCount into fieldCount.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If the number of columns is dynamic, fieldCount() should
+        return the count for the current row (record).
+
+     <B>Warning!</B>  fieldCount must point to sizeof(USHORT) bytes of allocated
+     memory.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng4a39c.html">fieldName()</A>
+<A HREF="ng4cde1.html">reccount()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

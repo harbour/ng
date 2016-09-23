@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6a087.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng6a78b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gRGBColorSet()</B>
+ Set the color for a particular palette index
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>ERRCODE _gRGBColorSet(</B>
+     <B>                       int iPalNum,</B>
+     <B>                       DWORD dwColorSet</B>
+     <B>                     )</B>
+
+ <B>Arguments</B>
+
+     <B>iPalNum</B> is the palette index for color, beginning with one (1), that
+     you want to define.
+
+     <B>dwColorSet</B> is the color.  The range of valid values is limited to
+     the number of colors available in the selected video mode.  For example,
+     in 16-color modes, valid values are between zero and 15, and in 256-
+     color modes, valid values are between zero and 255.
+
+ <B>Returns</B>
+
+     SUCCESS if successful; otherwise, an error code.
+
+ <B>Description</B>
+
+     _gRGBColorSet() sets a single color for the specified palette.  This
+     function is similar to _gPalSet() but instead of setting the entire
+     palette, it sets only one color.
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng68acb.html">_gPalSet()</A>
+<A HREF="ng6a087.html">_gRGBColorGet()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

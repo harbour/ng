@@ -1,0 +1,120 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng133bc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf477.html">[^^Up^^]</A>
+<A HREF="ng146e5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>Quick Start</B>
+------------------------------------------------------------------------------
+
+    <B>Really Quick Start</B>
+
+Make sure you've installed ClipMore (as described in the Installation
+Chapter).
+
+Create a temporary directory.
+
+Copy a:\util\dbgen.exe (a test database generator on your ClipMore diskette)
+into the temporary directory.
+
+Write a quick program, test.prg:
+
+    use demo
+    if (ordNumber("last") == 0)
+        index on last tag last
+    endif
+    if (ordNumber("age") == 0)
+        index on age tag age
+    endif
+
+    cmFilter("last = 'J'")
+    ? cmFiltCount(), " matches"
+
+    set order to tag age
+    list age, last
+
+Now compile and link it:
+
+    clipper test
+    rtlink /stack:7168 file test,cm52,cmx52 lib cm52,cmx52
+
+Note that cm52.obj is specified before cmx52.obj and cm52.lib is specified
+before cmx52.lib.  This is the general rule:  ClipMore _before_ Comix.
+
+Now let's create a 1000 record database and run the program a couple times:
+
+    dbgen 1000
+    test
+    test
+    test
+
+You should see the 'J' records being displayed quickly in age order.  The
+first run of TEST.EXE will take a little time as the indexes need to be
+built.  The filter should always be very fast.
+
+
+    <B>Next Step</B>
+
+The best way to start using ClipMore is to find a small program that you
+already have working with Comix and get it to work with ClipMore.
+
+Usually there are a few key places where you are using filters (or an
+equivalent) that are taking a long time.  Replace the SET FILTER TO commands
+with a call to the cmFilter() function.  Alternatively,  #include "cm52.ch"
+and SET FILTER TO will be mapped automatically to the cmFilter() function.
+
+One important caveat is that you cannot reference local, static or array
+variables in a condition.  However, this can be handled using the cm2Str()
+function.  For example you can replace the code as follows:
+
+    function myFun(cLast)
+
+            //  Set up the filter
+        set filter to field-&gt;last = cLast
+
+            //  Do operations
+        ...
+
+            //  Clear the filter
+        set filter to
+    return nil
+
+changes to:
+
+    function myFun(cLast)
+
+            //  Set up the filter
+        cmFilter( "field-&gt;last = " + cm2Str(cLast) )
+
+            //  Do operations
+        ...
+
+            //  Clear the filter
+        cmFilter()
+    return nil      
+
+FOR conditions are not handled automatically (with the exception of the
+INDEX and XINDEX commands).  To use the optimizer with FOR conditions, you
+can replace the code as follows:
+
+    copy to temp for &lt;cCond&gt;
+    
+changes to:
+
+    cmFilter(&lt;cCond&gt;)
+    copy to temp
+    cmFilter()
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

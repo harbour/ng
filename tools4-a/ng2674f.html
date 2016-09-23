@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng26147.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng24507.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCAPSSF()</B>
+ Sets the Novell capture mode flags
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCAPSSF(&lt;nPrinter&gt;,[&lt;lPageFeed&gt;,&lt;lBanner&gt;,</B>
+     <B>   &lt;nServerPrinterNr&gt;,&lt;nTimeout&gt;,&lt;nTab&gt;,&lt;nCopies&gt;,</B>
+     <B>   &lt;nForm&gt;]) --&gt; lAmended</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nPrinter&gt;</B>  Designates the number of the LPT device for which the
+     flags are set.  LPT1(1) to LPT3(3) are possible.
+
+     <B>&lt;lPageFeed&gt;</B>  Designates whether the form feed at the end of a print
+     job is suppressed (.T.) or transmitted (.F.).  The default value is .F..
+
+     <B>&lt;lBanner&gt;</B>  Designates whether a banner page is transmitted (.T.) or
+     not (.F.).  The default value is .F..
+
+     <B>&lt;nServerPrinterNr&gt;</B>  Designates the server printer number between 0
+     and 4.  The default value for the server printer is 0.
+
+     <B>&lt;nTimeout&gt;</B>  Designates if a timeout is used and which one.  When you
+     input 0, print jobs are not "sent off" after a particular time span.
+     However, you can specify a time delay in seconds.  The default value (0)
+     specifies no timeout.
+
+     <B>&lt;nTab&gt;</B>  Designates which tabs are used, if any.  If this parameter
+     is a 0, there are no tabs.  You can designate tab values between 1 and
+     18.  The default value (0) specifies no tabs.
+
+     <B>&lt;nCopies&gt;</B>  Designates the number of copies of the print job that the
+     server creates.  Values between 1 and 255 are valid.  The default value
+     (1) creates one copy.
+
+     <B>&lt;nForm&gt;</B>  Designates the form definition that the server uses during
+     printing.  Values between 0 and 255 are valid.  The default value
+     specifies that no form definition is used.
+
+ <B>Returns</B>
+
+     NNETCAPSSF() returns .T. when the flags for the capture system have been
+     changed to the designated values.
+
+ <B>Description</B>
+
+     NOVELL NETWORK CAPTURE SET SPECIFIC FLAGS
+     This function allows you to make settings for the Novell capture mode.
+     These setting are normally done in conjunction with the CAPTURE command
+     in the DOS environment or through the PRINTCON for the print job.  All
+     capture mode settings must be complete before you initiate a START
+     CAPTURE command, or there is no effect.
+
+ <B>Notes</B>
+
+     <B>.</B>  If this function has not yet been called during the course of
+        an application, the values preset by Novell or those selected in the
+        last capture mode apply.
+
+     <B>.</B>  A precise description of the flags can be found in the Novell
+        Command Utilities Handbook under the Capture Commands heading.
+
+ <B>Examples</B>
+
+     <B>.</B>  Configure a print job.  Specify LPT1; suppress the form feed,
+        and the "banner page"; and specify server printer 1:
+
+        ? NNETCAPSSF(1, .T., .F., 1)      // .T. when set
+
+     <B>.</B>  Specify LPT2, with form feed and banner page, server printer
+        0, a 5-second timeout, a tab width of 8, and two print copies:
+
+        NNETCAPSSF(2, .F., .T., 0, 5, 8, 2)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng251b9.html">NNETCAPBEG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

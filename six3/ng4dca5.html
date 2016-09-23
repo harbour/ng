@@ -1,0 +1,36 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4d6c5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng4df76.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SET DELETED ON|OFF:</B>
+
+  The SIx Driver (and the Mach SIx query optimizer) support the SET DELETED
+  command in the exact same way as in native Clipper, with one exception.
+
+  Normally if SET DELETED is ON, Mach SIx is forced to visit all the records
+  found in the indexes to test their deletion status.  However, you can
+  eliminate this requirement by simply maintaining an index or tag on
+  <B>DELETED()</B> for the database files you will frequently query.
+
+  This way, COUNTs with SET DELETED ON can truly be 100% optimizable!  Not
+  only will COUNTS execute faster, but other commands as well, especially
+  for databases with a large number of deleted records.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng896a6.html">Performance Tips</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

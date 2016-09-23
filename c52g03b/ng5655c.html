@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5626d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng568aa.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>clearLocate()</B>
+ Clear the active locate expression
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE clearLocate(</B>
+     <B>                     WORKAREAP wa</B>
+     <B>                   )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     Clears the locate expression currently in use for a specified workarea.
+
+ <B>Default Behavior</B>
+
+     clearLocate() removes the locate expressions in wa-&gt;locate.  The Items
+     held by wa-&gt;locate.bFor, wa-&gt;locate.cFor, wa-&gt;locate.bWhile,
+     wa-&gt;locate.cWhile, wa-&gt;locate.nNext, wa-&gt;locate.nRecord, and
+     wa-&gt;locate.lRest are all released and set to NULL.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Verify that all Items are properly released upon any
+        reimplementation of clearLocate().
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng571a9.html">setLocate()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

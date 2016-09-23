@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng46564.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3dfc5.html">[^^Up^^]</A>
+<A HREF="ng47194.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1116: fixup overflow at offset &lt;offset&gt; in segment &lt;segment&gt; contained in &lt;module&gt; referencing &lt;symbol&gt; contained in module &lt;module&gt;</B>
+------------------------------------------------------------------------------
+
+ This message indicates the exact point in a program which makes a near
+ reference to a symbol more than 64 Kb away. This may occur in one of a
+ number of situations:
+
+ Two related libraries may have been separated by other libraries in the link
+ script file, so that the code in one library cannot reach the code in the
+ other library. This may also occur when related .OBJ files, possibly
+ extracted from the same library, have been separated by too many other .OBJ
+ files in the script file.
+
+ Non-overlayable code may have been overlaid. When third party products are
+ linked into the program, please refer to the file 3RDPARTY.DOC supplied on
+ the distribution diskette and to the products' documentation for their
+ suggested method for dynamic overlaying.
+
+ Two libraries may have declared the same segment names in different classes,
+ which should not occur in most programs.
+
+ Two or more libraries may have been specified in an incorrect order within
+ the link script. See the section, "Ordering the Libraries" in chapter 4 of
+ this manual.
+
+ If these solutions do not resolve the problem then it will be necessary to
+ modify the code so that &lt;symbol&gt; is accessed with a far reference, or ensure
+ that the specified segment and symbol are accessible to one another by
+ examining the MAP file for their respective locations. To determine which
+ library is causing the problem, systematically remove each linbrary and
+ relink.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

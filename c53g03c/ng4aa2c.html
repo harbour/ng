@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4a677.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4b135.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>goToId()</B>
+ Position the cursor to a specific, physical identity
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE goToId(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     ITEM itmRecID</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>itmRecID</B> is the physical identity of the row.  This may be a row
+     number or some other unique identifier.
+
+ <B>Description</B>
+
+     goTold() repositions the work area cursor for wa to the physical row identifier
+     itmRecID.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  This method is used to implement the DBGOTO() function.  It is
+        designed so that the driver can identify rows using a means other
+        than the physical row number.
+
+     <B>.</B>  Since goToId() repositions the cursor to a physical row
+        number, you need not consider active scopes, filters, or orders.  If
+        lRec is not in the range of available rows, you can generate an error
+        or position the cursor to the physical end-of-file.
+
+     <B>.</B>  In CA-Clipper, the idea of a phantom row is vital to the
+        performance of certain functions.  The goToId() method should permit
+        access to the phantom row.  The phantom row is defined as the last
+        row + 1 and is the position at which end-of-file is set to TRUE.  All
+        columns of the phantom row are empty.  An lRec value greater than the
+        last row in the table should position the cursor to the phantom row.
+        If you do not support the concept of the phantom row in your driver,
+        you must document this fact as an incompatibility between your driver
+        and the high-level CA-Clipper functionality.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4a086.html">go()</A>
+<A HREF="ng4a677.html">goBottom()</A>
+<A HREF="ng4b135.html">goTop()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

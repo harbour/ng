@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng17443.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng17cb8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_Version():</B>
+
+  Purpose:  Reports the Mach SIx version number and sub-version information.
+
+   Syntax:  m6_Version( [&lt;nType&gt;] )
+
+    where:  &lt;nType&gt; = an optional numeric value from 0 to 3 indicating
+                      the type of version information desired.
+
+  Returns:  One of four values, depending on value of nType:
+
+        0 -&gt; Primary version number as a string (i.e., "1.1b")
+     <B>*</B>  1 -&gt; Date stamp of release as a DATE type (i.e., 03/25/93)
+        2 -&gt; Time stamp of release as a string (i.e., "12:00a")
+        3 -&gt; Verbose string containing the following information:
+             PRODUCT NAME, DIALECT, VERSION NUMBER, DATE STAMP, TIME STAMP
+             (i.e., "Mach SIx, CDX/IDX, v1.1b, 03/25/93, 12:00a")
+
+  <B>NOTE: Keep in mind that m6_Version(1) returns a date value (type "D"),</B>
+        <B>while all other parameters return a character string (type "C").</B>
+        <B>If you intend to use the return value of m6_Version(1) as a string,</B>
+        <B>you'll need to convert it using Clipper's DTOC() or DTOS() function.</B>
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

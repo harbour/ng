@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng164ea.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng16edf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Full Polymorphism Using Delegation</B>
+
+  Message forwarding alone is not as powerful as inheritance. The reason is
+  that no polymorphism exists between the delegator and the delegatee. If a
+  delegator defines a method that is also defined in a delegatee, methods of
+  the delegatee will not be able to invoke the method defined in the
+  delegator by sending a message to self. This is in contrast to the
+  situation with class inheritance, in which a method defined in a subclass
+  can be invoked by methods defined in ancestor classes, by sending a
+  message to self.
+
+  To achieve full polymorphism between a delegator and delegatee in
+  Class(y), methods in the class of the delegatee should avoid the use of
+  self in most cases. Instead, they should send messages to SENDER(). This
+  means that the delegator must support all messages that the delegatee will
+  send, although it can do so via delegation if appropriate.
+
+  A typical method in a delegatee class would then look something like this:
+
+    METHOD foo( p1, p2 )
+       LOCAL sender := SENDER()
+       sender:bar( p1 )
+       sender:x += p2
+    RETURN sender
+
+  This kind of code takes delegation to an extreme, and should only be used
+  in situations where there is a clear advantage to using delegation instead
+  of inheritance.
+
+  When implementing full delegation like this, be aware that at present, the
+  SENDER() function currently only supports full polymorphism for one level
+  of delegation. If a message is doubly delegated, ie. delegated by the
+  delegatee, SENDER() will refer to the intermediate delegatee, not to the
+  original delegator. This is likely to change in future versions.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

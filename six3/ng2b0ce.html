@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2adb3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng2b5ae.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_INIheader():</B>
+
+  Syntax:   Sx_INIheader( &lt;cHeaderName&gt; [, &lt;nArea&gt;] )
+
+         cHeaderName = The name of the section header within the .INI file
+                       for which the information is to be retrieved.
+
+               nArea = Optional workarea number whose .INI file is to be
+                       accessed.  By default, the .INI file for the database
+                       in the currently active workarea is assumed.
+
+  Returns:  A two dimensional array containing the LeftValue and RightValue
+            members from the specified section of the .INI file.
+
+  Description:  See return value.
+
+  Example:
+
+    LOCAL aInfo := {}
+
+    USE test VIA "SIXCDX"
+
+    aInfo := <B>Sx_INIheader( "USERINFO" )</B>
+    ? "User Name: " + aInfo[1,2]        // Assuming the first entry in the
+                                        // USERINFO section held the user's
+                                        // name
+
+  <U>NOTE:</U>  All of the information from the .INI file is read into the array
+         elements as character strings.  Any desired conversions to numeric,
+         logical, etc. values would need to be handled by the developer.
+
+         The .INI file can be encrypted using the Sx_Encrypt() function.
+         Assuming the same password code is active, the SIx Driver will
+         automatically decrypt it when it reads in the .INI file
+         information.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2f9f.html">_sx_INIinit()</A>
+<A HREF="ng61c47.html">.INI Files</A>
+<A HREF="ng61033.html">The SXINIINFO Array</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

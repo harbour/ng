@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5b44.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3cf.html">[^^Up^^]</A>
+<A HREF="ng625f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>56  CHANGED: MEMOEDIT()</B>
+--------------------------------------------------------------------------------
+
+     A header file, Memoedit.ch, is provided to make MEMOEDIT() more
+     readable.
+
+     The MEMOEDIT() function in Clipper 5.0 uses a slightly different
+     formatting algorithm than in previous versions.  The change
+     concerns the way soft carriage return/line feed (soft-CRLF)
+     characters are inserted into the text when word-wrap occurs under
+     MEMOEDIT().
+
+     In Summer '87, if a single word is wrapped and later reformatted
+     with a greater line width, the word will appear as two words
+     because the soft-CRLF is replaced with a space.  In Clipper 5.0,
+     the insertion of soft-CRLF characters is never allowed to change
+     the significant content of the text.  The new method leaves the
+     text in its original form and properly handles the case where a
+     soft-CRLF has been inserted in the middle of a word.
+
+     If a text string formatted using Summer '87 MEMOEDIT() is viewed
+     using Clipper 5.0 MEMOEDIT(), words that were separated by a
+     soft-CRLF will be run together because the soft-CRLF is not
+     replaced with a space.  To prevent this, you can either change all
+     soft-CRLF pairs into space characters using STRTRAN(), or you can
+     use the supplied utility DBT50.EXE.  DBT50.EXE scans an entire .dbt
+     file, replacing any soft-CRLF pair with two spaces.  Although this
+     has the undesirable effect of causing certain words to be separated
+     by two spaces instead of one, it allows the file to be processed in
+     place without using additional disk space.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

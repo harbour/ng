@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng86113.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng86c28.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NBNAME()</B>
+ Reads a NetBIOS name from the name table of a workstation
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NBNAME(&lt;nPos&gt;,[&lt;cStatName&gt;]) --&gt; cName</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nPos&gt;</B>  Designates the position in the local name table that is
+     read.
+
+     <B>&lt;cStatName&gt;</B>  Designates a station name of the workstation from which
+     the name table is read.  The default value specifies the local
+     workstation.
+
+ <B>Returns</B>
+
+     NBNAME() returns the NetBIOS name on position &lt;nPos&gt; in the local name
+     table of &lt;cStatName&gt;.  If an error occurs (for example, if &lt;nPos&gt; is not
+     used or &lt;cStatName&gt; cannot be found), the function returns an empty
+     string.
+
+ <B>Description</B>
+
+     Each NetBIOS workstation keeps a local name table with up to 20 NetBIOS
+     names.  NBNAME() allows you to determine the names on each position of
+     the table.  The names can be determined for the local workstation or for
+     any workstation in the network, if you pass a NetBIOS station name
+     &lt;cStatName&gt;.
+
+     NBNAME() always returns a 15-character string.  All NetBIOS names are
+     internally padded with blanks to a length of 15 characters.
+
+ <B>Examples</B>
+
+     <B>.</B>  Read the name table of the local workstation:
+
+        FOR i = 1 TO 20
+           ? NBNAME(i)
+        NEXT i
+
+     <B>.</B>  Read the name table of workstation MIKE:
+
+        FOR i = 1 TO 20
+           ? NBNAME(i,"MIKE")
+        NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng83ed3.html">NBADDGROUP()</A>
+<A HREF="ng8442b.html">NBADDNAME()</A>
+<A HREF="ng8498b.html">NBDELNAME()</A>
+<A HREF="ng86c28.html">NBNAMECNT()</A>
+<A HREF="ng87469.html">NBNAMESTAT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

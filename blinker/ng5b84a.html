@@ -1,0 +1,105 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5b58c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5b482.html">[^^Up^^]</A>
+<A HREF="ng5c986.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Microsoft CodeView</B>
+------------------------------------------------------------------------------
+
+ <B>Overview</B>
+
+ Note: The Microsoft CodeView debugger CANNOT be used to debug DOS Extended
+ programs - instead use a debugger such as Soft-Ice/W or Periscope/32 for
+ Windows.
+
+ Blinker supports CodeView debugging of REAL mode programs with compilers
+ that produce CodeView information levels 0, 1, 2 and 5. This encompasses all
+ MS compilers through C/C++ version 7.x and Visual C++ (C8), Visual BASIC for
+ DOS 1.0, BASIC PDS 7.1, Pascal 4.0, Fortran 5.0 and MASM 6.x. At the time of
+ writing, other manufacturer's compilers that produce CodeView information
+ comply with this requirement. To enable Blinker's processing of CodeView
+ information, add the following command to your link script:
+
+    <B>CODEVIEW</B>
+
+ <B>CodeView Versions</B>
+
+ CodeView version numbers in this discussion relate to the version number of
+ the information, not to any particular revision of the CodeView debugger
+ software.
+
+ The CodeView information that Blinker produces by default conforms to the
+ lowest level of support, that is CodeView version 0. This level of
+ information is supported by all versions of CodeView and any utility that
+ makes use of CodeView information. However, later versions of the CodeView
+ debugger may support additional features that are not suppported by
+ information level 0. In this case you will need to instruct Blinker to
+ produce information to a higher level than the default. The CVVERSION
+ command is used for this purpose:
+
+    <B>CVVERSION 5    # Provide level 5 Codeview support as</B>
+    <B>               # required by Microsoft Visual C++</B>
+
+ Valid CodeView versions are 0, 1, 2 and 5. Do not use a CodeView version
+ number higher than that which your debugger supports.
+
+ <B>CodeView and Overlays</B>
+
+ Note: you must always use external overlay(s) when debugging overlaid
+ programs under CodeView.
+
+ The CodeView information standard prior to version 5 makes no provision for
+ the concept of a dynamic overlay linker like Blinker, the reason being that
+ Microsoft overlay linkers could create only statically overlaid programs.
+ Version 5 is supported by the CodeView that comes with Microsoft Visual C++,
+ and by most compatible compilers, so users of those compilers need read no
+ further.
+
+ For older versions of CodeView the primary difference is that with a
+ statically overlaid program, the address at which an overlay will execute
+ can be determined at program link time, as it is within the executable
+ image, whereas a dynamically linked program executes overlays at an address
+ the can only be determined at program run time.
+
+ In order for Blinker to provide compatibility with the CodeView standard,
+ and still retain the advantages of dynamic overlaying, Blinker creates a
+ static overlay area, the size of which is determined by the largest overlaid
+ object module, within the executable image. At program execution time, the
+ overlay manager will identify those modules that are within a 'CodeView
+ area' and copy them into the static area for execution. The creation of the
+ static overlay area within the program image will increase the loadsize of
+ the program by the size of the largest overlaid module for which codeview
+ information is active.
+
+ In order to allow you to single step and trace into overlaid modules,
+ Blinker will create a source file with the same name as the executable, but
+ with the extension .VEC. This file should be made available to CodeView at
+ program execution time, as if it were one of your own source files. When
+ tracing your program, follow the directions given in this source file as to
+ when to step over and when to step into the overlay vectors and overlay
+ manager.
+
+ There is a penalty in execution speed while debugging overlaid code under
+ the older versions of CodeView, which is primarily caused by the overlay
+ manager having to copy modules into the static overlay area. In effect this
+ causes a worst case overlay situation whereby modules are being constantly
+ swapped in and out of a single memory area, the impact of which will vary
+ depending on the program (and modules) being debugged. There are two things
+ that can be done to help alleviate this problem:
+
+    .  Limit the amount of code that is to be debugged by using CodeView
+       areas
+    .  Increase the size of the overlay cache to speed up overlay operations
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

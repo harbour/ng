@@ -1,0 +1,87 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4b5df.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng4c790.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJPOS()</B>
+ Determines or changes the position of a job in a queue
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJPOS(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;nNewPos&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; nPos</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;nNewPos&gt;</B>  Designates an optional parameter that contains the new
+     position of &lt;nJob&gt; in the logical sequence of &lt;cQueue&gt;.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJPOS() returns the new position of &lt;nJob&gt; in the logical sequence of
+     &lt;cQueue&gt;.  If an error occurs (for example, if  &lt;cQueue&gt; does not
+     exist), the function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET JOB POSITION
+     Within a queue, the jobs are organized as a waiting line.  Generally,
+     the jobs are put into a queue in the sequence of their creation.  With
+     NNETJPOS(), you can determine the position of a job within a queue.  The
+     job with position 1 is serviced first.  The required job is specified by
+     its job number.  The job number has nothing to do with the logical
+     position of a job within a queue; for example, the job with the highest
+     priority in a queue is not automatically job number 1.  The job number
+     must be determined with NNETCAPJOB() or NNETJLIST().
+
+     NNETJPOS() allows a queue operator to change the position of &lt;nJob&gt; in
+     &lt;cQueue&gt; by passing the parameter &lt;nNewPos&gt;.
+
+ <B>Note</B>
+
+     <B>.</B>  To determine a job position, the requesting user must have
+        access to the queue as a user or a queue operator.  The modification
+        of a job position is reserved for queue operators.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the position of the last created capture job via
+        LPT1 in the queue LINEPRINTER:
+
+        ? NNETJPOS('LINEPRINTER',NNETCAPJOB(1))
+
+     <B>.</B>  Change the priority of the job:
+
+        IF NNETJPOS('LINEPRINTER',NNETCAPJOB(1),1)&lt;&gt;1
+        ? 'No queue operator rights!'
+        ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42436.html">NNETCAPJOB()</A>
+<A HREF="ng49eec.html">NNETJLIST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

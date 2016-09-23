@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng16f7c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng178d1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_SetTemp():</B>
+
+  Purpose:  Use this function to set the path for temporary files from
+            within your Clipper application.  For optimal performance
+            set the path to a local hard disk or RAM drive.  Mach SIx
+            will only create temporary files when it determines that it's
+            necessary to obtain the best performance.
+
+   Syntax:  m6_SetTemp( &lt;cPath&gt; )
+
+    where:  &lt;cPath&gt; = Path where temporary files are to be created.
+
+  Returns:  The current temporary file path.
+
+    Notes:  Will override the DOS environment variable M6TEMP if set.
+
+  Example:   #include "SIXCDX.CH"
+             #include "MACHSIX.CH"
+
+             USE Account via "SIXCDX"   // Structural index ACCOUNT.CDX
+                                        // opened automatically
+             //..............................set temp path to ram drive
+             <B>m6_SetTemp( "D:\")</B>
+             SET TAG TO Name
+
+             // Copying records with an index order set will cause a
+             // temporary index to be created ( if Mach SIx determines
+             // that the best performance can obtained with a
+             // temporary index ) in the root directory of
+             // ramdrive D: in Indexkey() order, in this case,
+             // Account-&gt;Last + Account-&gt;First.
+
+             COPY TO Temp FOR State = "CA"
+             CLOSE DATA
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,120 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3de4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng11a0.html">[^^Up^^]</A>
+<A HREF="ng5366.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_xvheapnew()</B>
+ Allocate a VM segment for use as a segment heap
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "vm.api"</B>
+     <B>HANDLE _xvheapnew(</B>
+     <B>                   USHORT uiSize</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>uiSize</B> is the size of the VM segment to allocate as a segment heap.
+
+ <B>Returns</B>
+
+     If successful, _xvheapnew() returns a 16-bit segment handle; otherwise,
+     it returns zero.
+
+ <B>Description</B>
+
+     _xvheapnew() allocates a VM segment for use as a segment heap.
+
+     <B>Warning! </B> You must eventually free a segment allocated by
+     _xvheapnew() with _xvheapdestroy().
+
+ <B>Notes</B>
+
+     <B>.  Actual heap size:</B> In CA-Clipper, there are two bytes of overhead
+        for every memory block allocated within the segment heap.  Therefore,
+        you cannot use a segment heap to hold a string that approaches the
+        CA-Clipper maximum string length (65,519 bytes).  In such cases,
+        you should dedicate an entire VM segment to the string.
+
+     <B>.  Efficiency:</B> The VMM system is most efficient when managing a small
+        number of relatively large segments.  The segment heap functions
+        allow a single segment to be treated as a C-style heap (using
+        _xvheapalloc() and _xvheapfree()), making it possible to store
+        multiple data items in one segment.  This can greatly increase the
+        overall efficiency of the VMM system.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a segment heap with _xvheapnew() and
+        allocates a memory block in the segment heap.  The block is then
+        locked and the string is copied into it.  Later, the memory block is
+        unlocked, the memory freed, and the heap destroyed:
+
+        // CA-Clipper include files
+        #include "extend.api"
+        #include "vm.api"
+
+        // Microsoft C include files
+        #include "string.h"
+
+        // Prototype
+        Boolean VMHeapExample(char * spSrc);
+
+        #define HEAP_SIZE   4096
+
+        Boolean VMHeapExample(char * spSrc)
+        {
+           HANDLE hSegment;
+           unsigned uiStringOffset;
+           unsigned uiBufflen;
+           char * spString;
+           Boolean bResult = FALSE;
+
+           if (hSegment = _xvheapnew(HEAP_SIZE))
+              {
+              uiBufflen = strlen(spSrc) + 1;
+              uiStringOffset = _xvheapalloc(hSegment, uiBufflen);
+              if (uiStringOffset)
+                 {
+                 spString = _xvheaplock(hSegment, uiStringOffset);
+                 if (spString != NULL)
+                    {
+                    strcpy(spString, spSrc);
+
+                    .
+                    . &lt;statements&gt;
+                    .
+
+                    bResult = TRUE;
+
+                    _xvheapunlock(hSegment, uiStringOffset);
+                    }
+                 _xvheapfree(hSegment, uiStringOffset);
+                 }
+              _xvheapdestroy(hSegment);
+              }
+
+           return (bResult);
+        }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Vm.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2341.html">_xvheapalloc()</A>
+<A HREF="ng2d4c.html">_xvheapdestroy()</A>
+<A HREF="ng34f2.html">_xvheapfree()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

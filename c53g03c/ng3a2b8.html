@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng395f8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng31a91.html">[^^Up^^]</A>
+<A HREF="ng3a680.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gtScrDim()</B>
+ Get the current screen dimensions
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "gt.api"</B>
+     <B>ERRCODE _gtScrDim(</B>
+     <B>                   USHORTP uipHeight,</B>
+     <B>                   USHORTP uipWidth</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>uipHeight</B> receives the screen height.
+
+     <B>uipWidth</B> receives the screen width.
+
+ <B>Returns</B>
+
+     _gtScrDim() returns zero if successful.  Any other value indicates an
+     error.
+
+ <B>Description</B>
+
+     _gtScrDim() saves the current screen dimensions in uipWidth and
+     uipHeight.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, a function uses _gtScrDim() to get the screen
+        dimensions then returns the height:
+
+        #include "gt.api"
+
+        USHORT scrGetHeight( void );
+
+        USHORT scrGetHeight( )
+
+        {
+           USHORT uiHeight;
+           USHORT uiWidth;
+
+           _gtScrDim( &amp;uiHeight, &amp;uiWidth );
+
+           return (uiHeight);
+        }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Gt.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3d317.html">_gtSetMode()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

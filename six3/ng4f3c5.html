@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4ec5c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng4f80c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SET MEMOBLOCK:</B>
+
+  Syntax:
+
+  <B>SET MEMOBLOCK TO &lt;value&gt;</B>
+
+  <B>&lt;value&gt;</B> specifies the block size to use (in bytes) for new memo files.
+  Valid block sizes are from 16 to 1024 bytes, with a default value of 64
+  bytes.
+
+  This command sets the default memo block size for .FPT (SIXCDX) or .SMT
+  (SIXNSX) memo files.  This setting is valuable ONLY when CREATING new
+  tables that contain memo fields.
+
+    NOTE:  This command is NOT supported under SIXNTX.
+
+
+  Example:
+
+    #include "SIXNSX.CH"
+
+    // Display something on the screen
+    ? "Creating MEMOTEST.DBF..."
+
+    // Make the SIx Driver's SIXNSX flavor the default RDD
+    RDDSetDefault("SIXNSX")
+
+    //Set the memo block size to 32 bytes
+    <B>SET MEMOBLOCK TO 32</B>
+
+    // Create a new database with a memo field using modified block size
+    dbCreate( "MEMOTEST", {{ "LAST",    "C", 20, 0 }, ;
+                           { "FIRST",   "C", 20, 0 }, ;
+                           { "STREET",  "C", 30, 0 }, ;
+                           { "CITY",    "C", 15, 0 }, ;
+                           { "STATE",   "C",  2, 0 }, ;
+                           { "BALANCE", "N",  8, 2 }, ;
+                           { "NOTES",   "M", 10, 0 }} )
+    ?? "Done!"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng364a2.html">Sx_SetMemoBlock()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

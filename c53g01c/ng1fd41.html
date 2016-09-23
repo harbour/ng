@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1ec28.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng2078f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBCREATEINDEX()</B>
+ Create an index file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBCREATEINDEX(&lt;cIndexName&gt;, &lt;cKeyExpr&gt;,</B>
+     <B>   [&lt;bKeyExpr&gt;], [&lt;lUnique&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cIndexName&gt;</B> is a character value that specifies the file name of
+     the index file to be created.
+
+     <B>&lt;cKeyExpr&gt;</B> is a character value that expresses the index key
+     expression in textual form.
+
+     <B>&lt;bKeyExpr&gt;</B> is a code block that expresses the index key expression
+     in executable form.
+
+     <B>&lt;lUnique&gt;</B> is an optional logical value that specifies whether a
+     unique index is to be created.  If &lt;lUnique&gt; is omitted, the current
+     global _SET_UNIQUE setting is used.
+
+ <B>Returns</B>
+
+     DBCREATEINDEX() always returns NIL.
+
+ <B>Description</B>
+
+     DBCREATEINDEX() creates an index for the database (.dbf) file associated
+     with the current work area.  If the work area has active indexes, they
+     are closed.  After the new index is created, it becomes the controlling
+     index for the work area and is positioned to the first logical record.
+
+     DBCREATEINDEX() performs the same function as the standard INDEX
+     command.  For more information, refer to the INDEX command.
+
+ <B>Notes</B>
+
+     <B>.  Side effects:</B> DBCREATEINDEX() is guaranteed to create an index
+        that, when made active, will impose the specified logical order on
+        the database.  The key expression is not necessarily evaluated at any
+        particular time, by any particular means, or on any particular record
+        or series of records.  If the key expression relies on information
+        external to the database file or work area, the effect is
+        unpredictable.  If the key expression changes the state of the work
+        area (e.g., by moving to a different record or changing the contents
+        of a record), the effect is unpredictable.
+
+     <B>.  Evaluation context:</B> When the key expression is evaluated, the
+        associated work area is automatically selected as the current work
+        area before the evaluation; the previously selected work area is
+        automatically restored afterward.
+
+     <B>.  Network environment:</B> DBCREATEINDEX() creates the new index for
+        the exclusive use of the current process.
+
+     <B>.  Illegal expression:</B> If &lt;cKeyExpr&gt; evaluates to an illegal
+        expression, the code block will always evaluate to end-of-file (EOF).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates an index file, Name, indexed on the Name
+        field:
+
+        USE Employees NEW
+        DBCREATEINDEX( "Name", "Name", { || Name })
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1cd58.html">DBCLEARIND()</A>
+<A HREF="ng2db8d.html">DBREINDEX()</A>
+<A HREF="ng3228f.html">DBSETINDEX()</A>
+<A HREF="ng328c0.html">DBSETORDER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

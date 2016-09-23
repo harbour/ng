@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng52916.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng535ee.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SORT</B>
+
+  Syntax:
+
+  <B>SORT [TO &lt;(file)&gt;] [ON &lt;fields,...&gt;]  ;</B>
+  <B>[FOR &lt;for&gt;]                           ;</B>
+  <B>[WHILE &lt;while&gt;]                       ;</B>
+  <B>[NEXT &lt;next&gt;]                         ;</B>
+  <B>[RECORD &lt;rec&gt;]                        ;</B>
+  <B>[REST]                                ;</B>
+  <B>[ALL]                                 ;</B>
+  <B>[USECURRENT]                          ;</B>
+  <B>[NOOPTIMIZE]</B>
+
+  Generally, this command works the same way as it does in Clipper.  The
+  only difference being the <B>USECURRENT</B> clause which allows you to keep
+  an index active during the copy out/sort procedure.  This is most impor-
+  tant for conditional indexes, allowing you to create a new sorted table
+  with only records that match the index condition.
+
+  <B>NOOPTIMIZE</B>, preempts optimization and forces default Clipper processing.
+
+  Example:
+
+    // This program demonstrates a sort based on a conditional index.
+
+    #include "SIXCDX.CH"
+
+    // Open up the TEST database
+    USE TEST VIA "SIXCDX"
+
+    // Create a conditional index to use as a base for the sort
+    INDEX ON LAST TO TEMP FOR SALARY &lt; 100000
+
+    // Show that we're sorting
+    ? "Sorting..."
+
+    // Now sort to a new database file
+    <B>SORT TO sorttest ON last,first USECURRENT</B>
+    USE SORTTEST
+    Browse()
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3a698.html">Sx_SortOption()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1082ed.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngfbcd2.html">[^^Up^^]</A>
+<A HREF="ng10989f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PARAMETERS</B>
+ Create private parameter variables
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PARAMETERS &lt;idPrivate list&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idPrivate list&gt;</B> is one or more parameter variables separated by
+     commas.  The number of receiving variables does not have to match the
+     number of arguments passed by the calling procedure or user-defined
+     function.
+
+ <B>Description</B>
+
+     The PARAMETERS statement creates private variables to receive passed
+     values or references.  Receiving variables are referred to as
+     parameters.  The values or references actually passed by a procedure or
+     user-defined function invocation are referred to as arguments.
+
+     When a PARAMETERS statement executes, all variables in the parameter
+     list are created as private variables and all public or private
+     variables with the same names are hidden until the current procedure or
+     user-defined function terminates.  A PARAMETERS statement is an
+     executable statement and, therefore, can occur anywhere in a procedure
+     or user-defined function, but must follow all compile-time variable
+     declarations, such as FIELD, LOCAL, MEMVAR, and STATIC.
+
+     Parameters can also be declared as local variables if specified as a
+     part of the PROCEDURE or FUNCTION declaration statement (see the
+     example).  Parameters specified in this way are referred to as formal
+     parameters.  Note that you cannot specify both formal parameters and a
+     PARAMETERS statement with a procedure or user-defined function
+     definition.  Attempting to do this results in a fatal compiler error and
+     an object file is not generated.
+
+     In CA-Clipper the number of arguments and parameters do not have to
+     match.  If you specify more arguments than parameters, the extra
+     arguments are ignored.  If you specify fewer arguments than parameters,
+     the extra parameters are created with a NIL value.  If you skip an
+     argument, the corresponding parameter is initialized to NIL.  The
+     PCOUNT() function returns the position of the last argument passed in
+     the list of arguments.  This is different from the number of parameters
+     passed since it includes skipped parameters.
+
+     For more information on passing parameters, refer to the Functions and
+     Procedures section in the "Basic Concepts" chapter of the Programming
+     and Utilities Guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This user-defined function receives values passed into private
+        parameters with a PARAMETERS statement:
+
+        FUNCTION MyFunc
+           PARAMETERS cOne, cTwo, cThree
+           ? cOne, cTwo, cThree
+           RETURN NIL
+
+     <B>.</B>  This example is similar, but receives values passed into local
+        variables by declaring the parameter variables within the FUNCTION
+        declaration:
+
+        FUNCTION MyFunc( cOne, cTwo, cThree )
+           ? cOne, cTwo, cThree
+           RETURN NIL
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng10316b.html">FUNCTION</A>
+<A HREF="ng106eaa.html">LOCAL</A>
+<A HREF="ng8d555.html">PCOUNT()</A>
+<A HREF="ng10989f.html">PRIVATE</A>
+<A HREF="ng10a778.html">PROCEDURE</A>
+<A HREF="ng10ec05.html">STATIC</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

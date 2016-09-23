@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng74e73.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng745f1.html">[^^Up^^]</A>
+<A HREF="ng759a5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSEMOPC()</B>
+ Determines the number of stations that have opened a particular semaphore
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSEMOPC(&lt;nHandle&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the semaphore handle that is returned by
+     NNETSEMOPN() when the semaphore is opened.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;nHandle&gt;
+     has been created.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID for your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETSEMOPC() returns the number of stations that have opened the
+     semaphore specified by &lt;nHandle&gt;.  If an error occurs (for example, if
+     the handle is invalid), the function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET SEMAPHOR OPEN COUNT
+     NNETSEMOPC() allows you to determine the number of stations currently
+     accessing a specific semaphore.  The semaphore is specified by a handle.
+     The file server manages two values for each semaphore.  This function
+     determines the number of stations that have opened &lt;nHandle&gt;.  This
+     information has nothing to do with the semaphore's value.
+
+ <B>Examples</B>
+
+     <B>.</B>  Open semaphore TEST and determine the number of stations that
+        have also opened this semaphore:
+
+        nHandle=NNETSEMOPN("test")
+        ? "Number of stations:", NNETSEMOPC(nHandle)
+
+     <B>.</B>  The evaluation of the return value of  NNETSEMOPC() in an "if"
+        statement allows you to limit the access to a semaphore's resource.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng76738.html">NNETSEMVAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

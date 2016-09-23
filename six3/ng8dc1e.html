@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>With Partial Indexes:</B>
+
+   A partial index is any index with the one or more of the following
+   attributes.
+
+       <B>. Created with a FOR condition</B>
+       <B>. Is Roll-Your-Own</B>
+       <B>. Was created UNIQUE</B>
+
+   Mach SIx will only optimize a query condition using one of the above
+   types of indexes when the current order is set to that index.  The
+   following example shows, when a partial index will and will not be used
+   to optimize a query.
+
+      USE Customers
+
+      INDEX ON Age TO Partial FOR Married
+
+      SET INDEX TO State, Name, Partial
+
+      SET ORDER TO 3
+
+      // Fully optimizable with order set to Partial index
+      ? m6_IsOptimize()                                          //...2
+
+      ? "Counting..."
+      COUNT TO nCount
+      ? "Poof!"
+
+      ? nCount
+
+      SET ORDER TO 1
+
+      // Count not optimizable with order set to 1
+      ? m6_IsOptimize()                                          //...0
+
+      ? "Counting..."
+      COUNT TO nCount
+      ? "Finally..."
+
+      ? nCount
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

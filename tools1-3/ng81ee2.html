@@ -1,0 +1,109 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng81141.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng82c06.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SCREENMARK()</B>
+ Searches for a string on the screen and marks it with an attribute
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SCREENMARK(&lt;cSearchString&gt;, &lt;cAttr|nAttr&gt;,</B>
+     <B>   &lt;lUpperLower&gt;, [&lt;lAll&gt;],</B>
+     <B>   [&lt;cForwardDelimiter&gt;],    [&lt;cTrailingDelimiter&gt;])</B>
+     <B>    --&gt; lFound</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSearchString&gt;</B>  Designates the character string to search for in
+     screen memory.
+
+     <B>&lt;cAttr|nAttr&gt;</B>  Designates the new color attribute to use in the
+     sequence located in screen memory.  Can be specified as a numeric or in
+     the manner required under CA-Clipper.
+
+     <B>&lt;lUpperLower&gt;</B>  Designates whether the function is case sensitive
+     (.T.) or not (.F.).
+
+     <B>&lt;lAll&gt;</B>  Designates whether to mark each occurrence (.T.) or only the
+     first (.F.).  The default marks only the first (.F.).
+
+     <B>&lt;cForwardDelimiter&gt;</B>  This optional parameter designates which
+     character preceding the &lt;cSearchString&gt; to use as a delimiter.  The
+     default is no delimiter considered.
+
+     <B>&lt;cTrailingDelimiter&gt;</B>  This optional parameter designates which
+     character after the &lt;cSearchString&gt; to use as a delimiter.  The default
+     is no delimiter considered.
+
+ <B>Returns</B>
+
+     SCREENMARK() returns a .T. when it locates the designated string at
+     least once.
+
+ <B>Description</B>
+
+     SCREENMARK() searches in the screen memory for a specified character
+     sequence and emphasizes it with a new attribute.  For example, you could
+     mark words out of MEMOEDIT() in inverse video.  When you press a cursor
+     key, SCREENMARK() is always called in the MEMOEDIT() that controls UDF.
+
+     If you are searching for a specific word, then designate &lt;lUpperLower&gt;
+     as .T..  If case sensitivity is not a major consideration, then
+     designate &lt;lUpperLower&gt; as .F..
+
+     If you want only words and not word fragments, then work with the two
+     delimiter characters &lt;cForwardDelimiter&gt; and &lt;cTrailingDelimiter&gt;.
+     Otherwise, the word "LOCK" is marked if the word "BLOCK" occurred.
+
+     If you define a space (see Note) for &lt;cForwardDelimiter&gt; as a separator
+     for the expression, then LOCK is no longer marked with BLOCK.  You can
+     specify all delimiters that could be valid in character string form.
+     The function allows a targeted expression to begin in the first position
+     or end at the last position on the screen or window.
+
+ <B>Notes</B>
+
+     <B>Important! </B> The CA-Clipper Tools uses CHR(255) as the default to
+     clear the screen, since the character can take on a color attribute on
+     all screen adapters.  Be sure to consider this when you create a
+     delimiter list.
+
+     <B>.</B>  The cursor position is not changed with this function.
+
+ <B>Examples</B>
+
+     <B>.</B>  Mark the first word "Clipper" on the screen (exactly) with the
+        INVERS attribute:
+
+        ? SCREENMARK("Clipper", "0/7", .T.)            // Not found if .F.
+
+     <B>.</B>  Mark all occurrences of "Clipper" (regardless of the case),
+        the attribute is white/blue:
+
+        ? SCREENMARK("Clipper", "W/B", .F., .T.)       // Not found if .F.
+
+     <B>.</B>  Search for all "LOCK" words.  Expressions, such as "BLOCK" are
+        not to be marked.  Blanks (when you use the CA-Clipper Tools these
+        are CHR(255)), slashes, dashes, and brackets, are delimiters:
+
+        cListA  :=  CHR(255) + "/("
+        cListB  :=  CHR(255) + "-)"
+        ? SCREENMARK("LOCK", "W/B", .F., .T., cListA, cListB)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6f15a.html">Introduction</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

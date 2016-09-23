@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga685.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng743f.html">[^^Up^^]</A>
+<A HREF="ngadd5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET RTLINKCMD</B>
+ Set default .RTLink command line options
+-------------------------------------------------------------------------------
+
+    <B>SET RTLINKCMD=&lt;option list&gt;</B>
+
+ <B>Arguments</B>
+
+    <B>&lt;option list&gt;</B> specifies a list of linker options used each time
+    the linker is executed.  In FREEFORMAT mode, the list may also include
+    command line arguments such as FILE and LIBRARY.
+
+ <B>Description</B>
+
+    The RTLINKCMD environment variable specifies a list of default linker
+    options to process.  Each time .RTLink is invoked, it reads the options
+    specified in RTLINKCMD before processing options specified on the
+    command line and in the script file.  This behavior allows defaults to
+    be overridden by options specified on the compiler command line or in
+    the script file (.lnk).
+
+    In addition to RTLINKCMD environment variable, .RTLink configuration
+    options can be defined in RTLINK.CFG.  If this file exists, the options
+    defined are overidden by those specified in RTLINKCMD as well as the
+    command line and script file (.lnk).
+
+ <B>Examples</B>
+
+    The following example makes the default input mode POSITIONAL and sets
+    incremental linking on:
+
+    SET RTLINKCMD=/POSITIONAL /INCR:50
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng11c4.html">CA-Clipper Linker</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

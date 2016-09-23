@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1cf21.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng18790.html">[^^Up^^]</A>
+<A HREF="ng1d8f9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1116:   fixup overflow at &lt;offset&gt; in segment &lt;segment&gt; in &lt;module&gt;</B>
+ <B>        referencing &lt;symbol&gt; in module &lt;module&gt;</B>
+
+     <B>Explanation:</B> This message indicates the exact point in the code that
+     refers to another symbol more than 64Kb away.  This may occur in one of
+     a number of situations:
+
+     1. Two related libraries may have been separated by other libraries in
+        the link script file, so that the code in one library cannot reach
+        the code in the other library.  This may also occur when related .OBJ
+        files, possibly extracted from the same library, have been separated
+        by too many other .OBJ files in the script file.
+
+     2. Non-overlayable code may have been overlaid.  When third-party
+        products are linked into the program, refer to the third-party
+        documentation for their suggested method for dynamic overlaying.
+
+     3. Two libraries may have declared the same segment names in different
+        classes.  This should not occur in most programs.
+
+     4. Two or more libraries may have been specified in an incorrect order
+        within the link script.
+
+     <B>Action:</B>  Determine which library is causing the problem by
+     systematically removing each library and relinking.  When the offending
+     library is found, contact Computer Associates technical support.  If the
+     offending library is not found, modify the code so that &lt;symbol&gt; is
+     accessed with a far reference, or ensure that the specified segment and
+     symbol are accessible to one another by examining the MAP file for their
+     respective locations.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

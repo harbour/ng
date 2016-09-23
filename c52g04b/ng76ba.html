@@ -1,0 +1,197 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng743f.html">[^^Up^^]</A>
+<A HREF="ng959c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET CLIPPER</B>
+ Runtime configuration of CA-Clipper-compiled programs
+------------------------------------------------------------------------------
+
+     Environment Variable:
+
+     <B>SET CLIPPER=</B>
+        <B>[//BADCACHE]</B>
+        <B>[//CGACURS]</B>
+        <B>[//DYNF:&lt;nHandles&gt;]</B>
+        <B>[//E:&lt;nExpandedKbytes&gt;]</B>
+        <B>[//F:&lt;nHandles&gt;]</B>
+        <B>[//INFO]</B>
+        <B>[//NOIDLE]</B>
+        <B>[//SWAPK:&lt;nBytes&gt;]</B>
+        <B>[//SWAPPATH:'&lt;path&gt;']</B>
+        <B>[//TEMPPATH:'&lt;path&gt;']</B>
+        <B>[//X:&lt;nKbytes&gt;]</B>
+
+     Application Command Line:
+
+     <B>C&gt;&lt;app&gt; [//&lt;setting&gt; ... ] [&lt;app arguments&gt;]</B>
+
+     You should adhere to the following rules when specifying these
+     environment settings regardless of whether they are specified on the
+     application command line or in the CLIPPER environment variable.
+
+     <B>.</B>  Preface each setting with a double-slash
+
+     <B>.</B>  Place a single blank space between settings
+
+     <B>.</B>  Place a colon between setting and argument with no intervening space
+
+ <B>Description</B>
+
+     CA-Clipper provides runtime configuration control of CA-Clipper-
+     compiled programs with a number of settings.  You can specify settings
+     in the DOS environment variable CLIPPER or on the command line used to
+     invoke an application.  You can enter the CLIPPER variable at the DOS
+     prompt or include it in the AUTOEXEC.BAT file.  If the user will be
+     accessing the application from a network, you can also add the SET
+     CLIPPER command to the user's login script.
+
+     Settings that you specify on the application program command line must
+     precede application arguments.  If you wish to use the command line
+     method instead of the CLIPPER environment variable but want to hide the
+     complexity from your end user, use an application batch file to invoke
+     the application with the configuration settings.
+
+ <B>Settings</B>
+
+     <B>BADCACHE</B> causes the Virtual Memory Manager (VMM) to preserve and
+     restore the state of the EMM page frame before and after every EMM
+     access (the EMM page frame is an area in real address space through
+     which EMM data is accessed).  This setting can be used to correct
+     problems when there are conflicts with other programs that use EMM.
+
+     Note that on some EMM systems, the BADCACHE setting may adversely
+     affect VMM performance.  It should only be used if you experience disk
+     or file corruption because of a conflict with a disk cache or other
+     resident software.
+
+     <B>CGACURS</B> prevents the use of the extended cursor capability of the
+     EGA/VGA.  Specifying this setting may preclude some cursor modes by
+     some display adaptors.  The CGACURS prevents the cursor weirdness when
+     a CA-Clipper program is executed in some multitasking and TSR
+     environments.
+
+     <B>DYNF:&lt;nHandles&gt;</B> specifies the number of file handles the dynamic
+     overlay system is allowed to use.  Valid settings range from 1 to 8
+     inclusive.  If not specified, the default is 2.
+
+     <B>E:&lt;nExpandedKbytes&gt;</B> restricts the amount of expanded memory
+     automatically allocated to &lt;nExpandedKbytes&gt;.  CA-Clipper-compiled and
+     linked programs can use expanded memory to speed up processing as well
+     as some disk-based operations.  CA-Clipper can use memory configured
+     as expanded memory according to the Lotus-Intel-Microsoft (LIM)
+     Expanded Memory Specification (EMS) version 4.0 or higher.
+
+     Expanded memory is automatically allocated in its entirety at startup;
+     there is no dynamic allocation as execution proceeds.  The maximum
+     amount allocated is limited by four factors:
+
+     <B>.</B>  The amount available
+     <B>.</B>  The SET CLIPPER=//E:nnn environment setting
+     <B>.</B>  A theoretical maximum of 32MB
+     <B>.</B>  The amount of conventional memory available
+
+     Note that a certain amount of conventional memory must be used to
+     contain management tables for the virtual memory system--the more total
+     memory (both conventional and expanded), the more space taken up by
+     this control information.  The amount of expanded memory used may be
+     less than the amount available if there is insufficient conventional
+     memory to hold the tables.
+
+     <B>F:&lt;nHandles&gt;</B> is used in combination with the value specified with
+     the FILES command in CONFIG.SYS to inform CA-Clipper of the maximum
+     number of file handles to use.  This setting is only valid for
+     application programs using more than 20 files and running under DOS
+     3.3 or greater.  When specified, CA-Clipper determines the number of
+     files that can be opened using the smaller of the F setting and the
+     CONFIG.SYS FILES value.  For example, if the FILES command is set to
+     120 and the F parameter is set to 50, the maximum number of files that
+     can be opened is 50.  The ideal &lt;nHandles&gt; is an odd number and 5 less
+     than specified with the FILES command.
+
+     <B>INFO</B> Provides the following information about CA-Clipper's memory
+     usage at startup of an application.
+
+     <B>.</B>  The first line describes the general product version, revision,
+        and international version.
+
+     <B>.</B>  DS=&lt;offset&gt;:0000 is the address for the data segment or DGROUP.
+
+     <B>.</B>  DS avail=&lt;memory&gt;KB reflects the amount of DGROUP available.
+
+     <B>.</B>  OS avail=&lt;memory&gt;KB represents the amount of conventional
+        memory available for VMM swap space.
+
+     <B>.</B>  EMM avail=&lt;EMM memory&gt;KB shows the amount of EMM (expanded
+        memory) allocated to the current application.
+
+     <B>.</B>  Fixed Heap=&lt;fixed heap&gt;KB/&lt;number of fixed segments&gt; shows the
+        size of the fixed heap in kilobyte increments in addition to the
+        number of fixed segments.
+
+     <B>NOIDLE</B> prevents CA-Clipper from detecting and taking advantage of idle
+     time during execution of compiled applications.  CA-Clipper detects
+     idle states (e.g. keyboard wait states) during execution of compiled
+     applications.  When an idle condition is detected, the system uses the
+     slack time to perform garbage collection, file updates, and other
+     routine housekeeping duties.  This increases system performance by
+     performing this work while the application is waiting for user input.
+
+     <B>Note: </B>NOIDLE is provided for applications in which idle time processing
+     is unacceptable.  Since it reduces overall system performance, its use
+     is generally not recommended.
+
+     <B>SWAPK:&lt;nBytes&gt;</B> specifies the maximum allowable size of the disk
+     swap file used for the virtual memory (VM) system.  Settings are
+     specified in kilobyte increments.  Valid settings range from 256 to
+     65,535 inclusive.  If this setting is not specified, the default is
+     16,384 (16 MB).
+
+     <B>Note: </B>Swap space is only allocated as needed--a particular setting
+     does not guarantee that the swap file will get that big.  Suppressing or
+     restricting disk swapping may cause an application to fail.
+
+     <B>SWAPPATH:'&lt;path&gt;'</B> specifies the location of the virtual memory swap
+     file.  If not specified, the swap file is created in the current DOS
+     drive and directory.
+
+     <B>TEMPPATH:'&lt;path&gt;'</B> controls the placement of temporary files created
+     during sorting and indexing.  By default these files are placed in
+     the current DOS directory.
+
+     <B>Note: </B>Temporary files created during sorting and indexing can be quite
+     large.  Setting TEMPPATH to a small volume (e.g. a ram disk) may cause
+     these operations to fail.  In general, the volume where these temporary
+     files will be written should have an available capacity at least twice
+     the size of the largest index to be created or database file to be
+     sorted.
+
+     <B>X:&lt;nKbytes&gt;</B> specifies the amount of memory to exclude from being
+     allocated, except for the RUN command.  Specified in kilobytes, valid
+     values range from zero to 64 inclusive.  If not specified, the default
+     value is zero.
+
+ <B>Examples</B>
+
+     This example shows a series of settings using the CA-Clipper
+     environment variable:
+
+     SET CLIPPER=//F:50 //DYNF:4 //SWAPK:4096 //NOIDLE
+
+     This example shows how the same settings can be used on the
+     application's command line:
+
+     C&gt;ACCOUNTS //F:50 //DYNF:4 //SWAPK:4096 //NOIDLE
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

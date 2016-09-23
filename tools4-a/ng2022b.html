@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1fdc2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng2060d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETENLOG()</B>
+ Enables a file server for logins
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETENLOG([&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cServer&gt;</B> Designates the name of the file server that is used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETENLOG() returns .T. if the file server has been successfully enabled
+     for logins.  If an error occurs (for example, insufficient access
+     rights), the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET ENABLE LOGINS
+     NNETENLOG() allows you to enable a file server for logins if it has been
+     previously disabled with NNETDISLOG().  Console rights are required to
+     enable a file server for logins with NNETENLOG().
+
+ <B>Example</B>
+
+     Enable the default server for logins:
+
+     NNETENLOG()
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1fdc2.html">NNETDISLOG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

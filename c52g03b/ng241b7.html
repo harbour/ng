@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng23768.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng20611.html">[^^Up^^]</A>
+<A HREF="ng247fa.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_errNew()</B>
+ Create a new Error object
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "error.api"</B>
+     <B>ERRORP _errNew(void)</B>
+
+ <B>Returns</B>
+
+     _errNew() returns a pointer to a new Error object.
+
+ <B>Description</B>
+
+     _errNew() creates an empty Error object and returns a pointer to it.
+     You may modify the variables within the object using the "_errPut"
+     functions and inspect them using the "_errGet" functions.  You may,
+     then, send the object to the CA-Clipper Error Handler.
+
+     The values of the variables in the Error object created by _errNew() are
+     compatible with the instance variables in CA-Clipper Error objects.
+     This allows the use of the constants in the Error.ch include file.
+
+     Proper error handling is the responsibility of the subsystem programmer.
+     The CA-Clipper API systems provide low-level services and normally
+     provide only simple return values indicating success or failure.  The
+     exception is the _fsExtOpen() function from the File System API
+     (demonstrated in the Usage Example at the end of this chapter) which can
+     assign values to an Error object.
+
+     <B>Note: </B> When it is no longer required, release all memory allocated
+     by the Error object using _errRelease().
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment demonstrates how to create an Error object:
+
+        #include "error.api"
+           .
+           .
+           .
+           ERRORP pError;
+
+           pError = _errNew();
+           .
+           .
+           .
+
+           _errRelease( pError );
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Error.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng23768.html">_errLaunch()</A>
+<A HREF="ng286f8.html">_errRelease()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

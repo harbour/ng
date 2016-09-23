@@ -1,0 +1,162 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng289a1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng2a6f6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBINFO()</B>
+ Return and optionally change information about a database file opened in a
+ work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBINFO(&lt;nInfoType&gt;, [&lt;expNewSetting&gt;])</B>
+     <B>   --&gt; uCurrentSetting</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nInfoType&gt;</B> determines the type of information, as specified by the
+     constants below.  Note, however, that not all constants are supported
+     for all RDDs.  These constants are defined in the Dbinfo.ch header file,
+     which must be included (#include) in your application.
+
+     <B>File Information Type Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant                 Description</B>
+     ------------------------------------------------------------------------
+     DBI_ALIAS                Alias name of the work area as a string.
+     DBI_BLOB_DIRECT_LEN      Returns the storage length of a data item in a
+                              BLOB file.  &lt;expNewSetting&gt; must specify a
+                              valid BLOB pointer obtained from
+                              DbFieldInfo(DBS_BLOB_POINTER, &lt;nFieldpos&gt;),
+                              BLOBDirectPut() or BLOBDirectImport().
+     DBI_BLOB_DIRECT_TYPE     Returns the data type of a data item in a BLOB
+                              file. &lt;expNewSetting&gt; must specify a valid BLOB
+                              pointer obtained from
+                              DbFieldInfo (DBS_BLOB_POINTER, &lt;nFieldpos&gt;),
+                              BLOBDirectPut(), or BLOBDirectImport().
+     DBI_BLOB_INTEGRITY       Tests a BLOB file for the integrity of its
+                              internal tables and returns a logical value
+                              indicating the success, true (.T.) or failure,
+                              false (.F.) of the integrity check.  If the
+                              integrity check fails, you can run
+                              dbInfo(DBI_BLOB_RECOVER) which will
+                              automatically correct the BLOB file's tables.
+                              Checking a BLOB file's integrity is a disk
+                              intensive operation and should only be
+                              performed when the file's integrity is in
+                              question.
+     DBI_BLOB_OFFSET          Returns the file offset of a data item in a
+                              BLOB file. &lt;expNewSetting&gt; must specify a valid
+                              BLOB pointer obtained from
+                              DbFieldInfo(DBS_BLOB_POINTER, &lt;nFieldpos&gt;),
+                              BLOBDirectPut(), or BLOBDirectImport().
+     DBI_BLOB_RECOVER         Recovers a damaged BLOB file by correcting its
+                              internal tables. You should run this function
+                              only is dbInfo(DBI_BLOB_INTEGRITY) returns
+                              false (.F.). Note that this function can only
+                              correct the BLOB file's internal tables, it
+                              cannot restore any data that may have become
+                              corrupted.
+     DBI_BOF                  Logical value indicating the work area's
+                              beginning of file status (see BOF()).
+     DBI_CANPUTREC            Logical value indicating whether the work area
+                              supports putting records.
+     DBI_CHILDCOUNT           Number of relations set from this work area.
+     DBI_DB_VERSION           String containing version information of the
+                              host RDD.  If the optional &lt;expNewSetting&gt;
+                              parameter is provided, and it is one (1), the
+                              result is a more detailed version of the
+                              version being returned.
+     DBI_DBFILTER             Filter expression as a string (see DBFILTER()).
+     DBI_EOF                  Logical value indicating the work area's end of
+                              file status (see EOF()).
+     DBI_FCOUNT               Number of fields (see FCOUNT()).
+     DBI_FILEHANDLE           Integer representing the DOS file handle for
+                              this database file.
+     DBI_FOUND                Logical value indicating the success or failure
+                              of the last seek operation in the work area
+                              (see FOUND()).
+     DBI_FCOUNT               Number of fields (see FCOUNT()).
+     DBI_FULLPATH             Returns the full path name of the opened
+                              database file.
+     DBI_GETDELIMITER         Default delimiter.
+     DBI_GETHEADERSIZE        Header size of the file (see HEADER()).
+     DBI_GETLOCKARRAY         Array of locked records.
+     DBI_GETRECSIZE           Record size of the file (see RECSIZE()).
+     DBI_ISDBF                Logical value indicating whether the RDD
+                              provides support for the .dbf file format.
+     DBI_ISFLOCK              File lock status.
+     DBI_LASTUPDATE           Last date on which the file was updated (see
+                              LUPDATE()).
+     DBI_LOCKCOUNT            Number of locked records.
+     DBI_LOCKOFFSET           Current locking offset as a numeric value.
+     DBI_MEMOBLOCKSIZE        Block size for the memo file associated with
+                              this database.
+     DBI_MEMOEXT              Default extension for the memo file associated
+                              with this database.
+     DBI_MEMOHANDLE           Integer representing the DOS file handle for
+                              the memo file associated with this database
+                              file.
+     DBI_RDD_VERSION          String containing version information of the
+                              RDD for this database.  If the optional
+                              &lt;expNewSetting&gt; parameter is provided, and it
+                              is one (1), the result is a more detailed
+                              version of the version being returned.
+     DBI_SETDELIMITER         Default delimiter.
+     DBI_SHARED               Shared flag value.
+     DBI_TABLEEXT             Database file extension.
+     DBI_VALIDBUFFER          Logical value indicating whether the current
+                              buffer is valid.
+     ------------------------------------------------------------------------
+
+     <B>Important! </B> DBI_USER is a constant that returns the minimum value
+     that third-party RDD developers can use for defining new &lt;nInfoType&gt;
+     parameters.  Values less than DBI_USER are reserved for Computer
+     Associates development.
+
+     <B>&lt;expNewSetting&gt;</B> is reserved for RDDs that allow the file information
+     to be changed, in addition to being retrieved.  None of the RDDs
+     supplied with CA-Clipper support this argument.  It can be omitted or
+     specified as NIL.
+
+ <B>Returns</B>
+
+     DBINFO() returns the current setting if &lt;expNewSetting&gt; is not
+     specified, .  If &lt;expNewSetting&gt; is specified, the previous setting is
+     returned.
+
+ <B>Description</B>
+
+     DBINFO() retrieves information about a database file.  By default, this
+     function operates on the currently selected work area.  It can be made
+     to operate on an unselected work area by specifying it within an aliased
+     expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following examples return work area information:
+
+        #include Dbinfo.ch
+
+        ? DBINFO(DBI_GETHEADERSIZE)         // Same as HEADER()
+        ? DBINFO(DBI_LASTUPDATE)            // Same as LUPDATE()
+        ? DBINFO(DBI_GETRECSIZE)            // Same as RECSIZE()
+        ? DBINFO(DBI_FILEHANDLE)            // DOS file handle for
+                                            // the current database
+                                            // file
+
+ <B>Files</B>   Library is CLIPPER.LIB, header file is Dbinfo.ch.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

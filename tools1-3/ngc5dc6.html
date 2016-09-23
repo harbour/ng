@@ -1,0 +1,106 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc5576.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbe570.html">[^^Up^^]</A>
+<A HREF="ngc69d1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SHOWKEY()</B>
+ Continuously displays the INSERT and LOCK status
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SHOWKEY([&lt;cKey&gt;, [[&lt;nLine&gt;], [&lt;nColumn&gt;], &lt;cTextON&gt;,</B>
+     <B>   &lt;cTextOFF&gt;, [&lt;cAttrON|nAttrON&gt;],</B>
+     <B>   [&lt;cAttrOFF|nAttrOFF&gt;]]]) --&gt; cNull</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cKey&gt;</B>  Designates which key to monitor in the form of a letter
+     ("C", "N", "S", or "I").  If &lt;cKey&gt; is the only parameter in SHOWKEY()
+      (C, N, S, or I), the respective key monitoring is uninstalled.
+
+     <B>&lt;Line&gt; </B> Designates the line where the display occurs.
+
+     <B>&lt;nColumn&gt;</B>  Designates the column where the display occurs.
+
+     <B>&lt;cTextON&gt;</B>  Designates text for the active status.  A maximum length
+     of 15 characters is allowed.
+
+     <B>&lt;cTextOFF&gt;</B>  Designates text for the inactive status. There is a
+     maximum of 15 characters and it must have the same length as &lt;cTextON&gt;.
+
+     <B>&lt;cAttrON|nAttrON&gt;</B>  Designates the color attribute for the active
+     status.  The default value is 7/0.
+
+     <B>&lt;cAttrOFF|nAttrOFF&gt; </B> Designates the color attribute for the inactive
+     status.  The default value is the same as in &lt;cAttrON|nAttrON&gt;.
+
+     ()  If you call SHOWKEY() without parameters, it uninstalls.
+
+ <B>Returns</B>
+
+     The SHOWKEY() function always returns a null string.
+
+ <B>Description</B>
+
+     SHOWKEY() is an extremely versatile system that can be used to monitor
+     the NUM-LOCK, SCROLL-LOCK, CAPS-LOCK, and INSERT keys.  After it is
+     installed, you can display an indicator for each key, the desired screen
+     position, and a color attribute (without concerning the CA-Clipper
+     program).  You can establish a display for both the active and inactive
+     status with individual color attributes.  However, both these strings
+     must have the same length.
+
+     Since the system INSERT status is handled separately from the
+     CA-Clipper INSERT status, this monitoring can only be implemented from
+     within a READ.  An indicator display, in so far as it has been
+     activated, is refreshed in intervals of approximately 200 milliseconds.
+     Therefore, when you clear a portion or the complete screen, do not
+     concern yourself with restoring this display.
+
+ <B>Note</B>
+
+     <B>Warning!</B>  Always uninstall this function before you leave a program
+     or use the Extended Drivers provided with this CA-Clipper Tools.  The
+     function changes interrupt vectors.  You may cause a system crash, if
+     the old status is not restored before you exit the program!  Use the
+     enclosed INTSAVE program to avoid this problem.
+
+ <B>Examples</B>
+
+     <B>.</B>  Display "CAPS" if CAPS-LOCK is on: CAPS-LOCK for off: "    ",
+        in line 24, column 50.  The default value for on and off is "7/0"
+
+        SHOWKEY("C", 24, 50, "CAPS", "    ")
+
+     <B>.</B>  Attributes can be numeric and or designated as in CA-Clipper:
+
+        SHOWKEY("N", 24, 60, "NUM ON", "NUMOFF", 112, "W/R")
+
+     <B>.</B>  Inverse the display for on and off:
+
+        SHOWKEY("S", 24, 70, "SCRL", "  ", "0/7")
+
+     <B>.</B>  Uninstall the NUM-LOCK display:
+
+        SHOWKEY("N")
+
+     <B>.</B>  Uninstall the function:
+
+        SHOWKEY()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngabcf9.html">SHOWTIME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

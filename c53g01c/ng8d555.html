@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8c995.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng8dc3d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PCOUNT()</B>
+ Determine the position of the last actual parameter passed
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PCOUNT() --&gt; nLastArgumentPos</B>
+
+ <B>Returns</B>
+
+     PCOUNT() returns, as an integer numeric value, the position of the last
+     argument passed.  If no arguments are passed, PCOUNT() returns zero.
+
+ <B>Description</B>
+
+     PCOUNT() reports the position of the last argument in the list of
+     arguments passed when a procedure or user-defined function is invoked.
+     This information is useful when determining whether arguments were left
+     off the end of the argument list.  Arguments skipped in the middle of
+     the list are still included in the value returned.
+
+     To determine if a parameter did not receive a value, test it for NIL.
+     Skipped parameters are uninitialized and, therefore, return NIL when
+     accessed.  Another method is to test parameters with the VALTYPE()
+     function.  This can establish whether the argument was passed and
+     enforce the correct type at the same time.  If a parameter was not
+     supplied, a default value can be assigned.
+
+     For more information on passing parameters, refer to the "Basic
+     Concepts" chapter in the Programming and Utilities Guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example is a user-defined function that opens a database
+        file and uses PCOUNT() to determine whether the calling procedure
+        passed the name of the database file to be opened.  If the name was
+        not passed, OpenFile() asks for the name:
+
+        FUNCTION OpenFile( cFile )
+           IF PCOUNT() = 0
+              ACCEPT "File to use: " TO cFile
+           ENDIF
+           USE (cFile)
+           RETURN (NETERR())
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfdfa1.html">DO*</A>
+<A HREF="ng10316b.html">FUNCTION</A>
+<A HREF="ng108d37.html">PARAMETERS</A>
+<A HREF="ng10a778.html">PROCEDURE</A>
+<A HREF="nga84cd.html">VALTYPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

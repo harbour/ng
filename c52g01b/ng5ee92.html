@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5e79b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng5f53e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ROW()</B>
+ Return the screen row position of the cursor
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ROW() --&gt; nRow</B>
+
+ <B>Returns</B>
+
+     ROW() returns the cursor row position as an integer numeric value.  The
+     range of the return value is zero to MAXROW().
+
+ <B>Description</B>
+
+     ROW() is a screen function that returns the current row or line position
+     of the screen cursor.  The value of ROW() is updated by both console and
+     full-screen commands and functions.  @...SAY only updates ROW() when the
+     current DEVICE is the SCREEN.
+
+     ROW() is used with COL() and all variations of the @ command to position
+     the cursor to a new line relative to the current line.  In particular,
+     you can use ROW() and COL() to create screen position-independent
+     procedures or functions where you pass the upper left row and column as
+     parameters.
+
+     ROW() is related to PROW() and PCOL() which track the current printhead
+     position instead of the screen cursor position.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, ROW() simulates the LIST command, displaying
+        text on the same line but in different columns:
+
+        LOCAL nRow
+        USE Customer INDEX CustName NEW
+        DO WHILE .NOT. EOF()
+           CLS
+           @ 1, 1 SAY PADR("Name", LEN(CustName))
+           @ ROW(), COL() + 2 SAY PADR("Address", ;
+                 LEN(Address))
+           @ ROW(), COL() + 2 SAY PADR("Phone", LEN(Phone))
+           nRow = 0
+           DO WHILE nRow++ &lt;= 15 .AND. (!EOF())
+              @ ROW() + 1, 1 SAY CustName
+              @ ROW(), COL() + 2 SAY Address
+              @ ROW(), COL() + 2 SAY Phone
+              SKIP
+           ENDDO
+           WAIT
+        ENDDO
+        CLOSE Customer
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7174c.html">?|??</A>
+<A HREF="ng78049.html">@...SAY</A>
+<A HREF="ng13297.html">COL()</A>
+<A HREF="ng47ae4.html">MAXROW()</A>
+<A HREF="ng57877.html">PROW()</A>
+<A HREF="nga0ae0.html">SET DEVICE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng53128.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng53a7b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>relEval()</B>
+ Evaluate block against the relation in the specified workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE relEval(</B>
+     <B>                 WORKAREAP wa,</B>
+     <B>                 DBRELINFOP dbRelInfo</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>dbRelInfo</B> is a pointer to a structure containing information on a
+     relation.
+
+ <B>Description</B>
+
+     Performs a relational seek from parent wa to child specified by
+     dbRelInfo.
+
+ <B>Default Behavior</B>
+
+     Evaluates the block held in the structure pointed to by
+     dbRelInfo-&gt;bExpr.  The expression resulting from the evaluation is
+     placed in wa-&gt;result, and the return code indicates success or failure.
+
+     <B>Note: </B> The selected workarea is saved and restored.
+
+     <B>Warning! </B> If the Item held in dbRelInfo-&gt;bExpr is not a code block,
+     a BASE/1004 "No exported method" error is generated.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If any global state necessary for the operation of your driver
+        could be modified by the code block in dbRelInfo-&gt;bExpr (i.e., any
+        CA-Clipper code), you should save that state, call SUPERRELEVAL(),
+        then restore the state.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42845.html">DBRELINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng52cb2.html">forceRel()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

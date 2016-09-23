@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6ec3b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6d7d4.html">[^^Up^^]</A>
+<A HREF="ng6f6b9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ExoProtectedPtr()</B>
+ Creates a protected mode pointer from a real mode pointer
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>void *ExoProtectedPtr(void *rm_ptr, unsigned int size)</B>
+
+ <B>Returns</B>
+
+     This function returns the protected mode pointer (pm_ptr), or NULL if
+     the pointer cannot be allocated.  A new descriptor is allocated.
+
+ <B>Description</B>
+
+     The protected mode data pointer created by this function points to a
+     segment of size bytes.  Since a value of 64KB is too large for an
+     unsigned variable, use 0 to specify 64KB for size.  The offset of pm_ptr
+     is always 0.  The base physical address of pm_ptr's segment is the
+     absolute address of rm_ptr, which is segment(rm_ptr) * 16 +
+     offset(rm_ptr).  Because ExoProtectedPtr() is run with interrupts
+     enabled, realtime applications should not call it from an external
+     interrupt handler.
+
+     The offset of the pointer returned by ExoProtectedPtr() will ALWAYS be
+     0.
+
+     ExoFreeSelector() must be called to free the selector allocated with
+     ExoProtectedPtr().  Selectors are a limited resource and repeated calls
+     to ExoProtectedPtr() as well as ExoSegCSAlias() and ExoSegDSAlias()
+     could use up all the available selectors causing the program to crash.
+     Once you are done with a pointer created with ExoProtectedPtr(), free
+     the selector unless you will be using the pointer throughout the
+     program..
+
+ <B>Examples</B>
+
+     See example for ExoFreeSelector().
+
+ <B>Files</B>   Library is EXOSPACE.LIB, header file is Exospace.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6f6b9.html">ExoRealPtr()</A>
+<A HREF="ng6dbad.html">ExoFreeSelector()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

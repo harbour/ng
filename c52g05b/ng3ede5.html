@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3eb40.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b69f.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>15  Passing a NULL Pointer to _storc() or _storclen()</B>
+--------------------------------------------------------------------------------
+
+     Passing a NULL pointer to _storc() or _storclen() has a special
+     meaning: it means you wish to create a true duplicate copy of the
+     parameter's current value.  If the specified parameter or array
+     element is a character value, a new (duplicate) copy of the data is
+     created and stored.  This allows you to modify a string in place
+     without locking two copies of it.  Note that, for _storclen(), the
+     existing data is duplicated to the extent possible within the
+     specified length.  If the specified length is longer than the
+     existing value, the excess bytes in the copy are uninitialized.  If
+     the existing value is not character type, the new string is left
+     uninitialized.  For example:
+
+     <B>.</B>  Storing a new string into an array element:
+
+        char far *p;
+
+        /* create new string in first element of third param */
+        _storclen(NULL, 10, 3, 1);
+
+        /* get a locked pointer to the new string */
+        p = _parc(3, 1);
+
+        /* put some bytes in the new string */
+        strcpy(p, "some bytes");
+
+     <B>.</B>  Modifying an array element in place:
+
+        char far *p;
+
+        /* first dupe the element, expanding the length if needed */
+        _storclen(NULL, 100, 3, 1);
+
+        /* get a locked pointer to the copy */
+        p = _parc(3, 1);
+
+        /* modify the string */
+        strcpy(p + 50, "YOW!");
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

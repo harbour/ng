@@ -1,0 +1,107 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng517e3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng52916.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SET TURBOREAD:</B>
+
+  Syntax:
+
+  <B>SET TURBOREAD [ON | OFF]</B>
+
+  This command allows you to turn-off the automatic locking of index
+  files during certain read-only processes, ie: SEEK, GO TOP, SKIP, FIND,
+  etc.  This powerful feature has one serious side-effect:  <B>IT ALLOWS</B>
+  <B>OTHERS TO UPDATE YOUR INDEX WHILE YOU ARE SEARCHING IT!</B>  Basically,
+  this means that even though your SEEK may return a FOUND() = .T.
+  status, if the index was changed during the SEEK process, it would not
+  necessarily be accurate.  That's why we call it a "dirty" read. &lt;g&gt;
+
+  To offer some type of solution to this integrity problem, semaphore
+  management functions (Sx_MakeSem(), Sx_KillSem(), etc) have been included
+  so that you may have a mechanism through which you can inform other network
+  users that you are in the SEEK process.  With this, they can be forced to
+  wait until your process is complete before performing the index file
+  update.
+
+  <U>NOTE: Using this function, while somewhat risky, will improve your</U>
+  <U>      network performance by up to 100%, so weigh the options carefully.</U>
+
+    NOTE:  This command is NOT supported under SIXNTX.
+
+  Example:
+
+    /*
+        This program demonstrates the speed difference dirty read makes when
+        skipping though a shared database.
+    */
+
+    #include "SIXNSX.CH"
+
+    LOCAL nStart, nEnd
+
+    SET EXCLUSIVE OFF         // Make SHARED the default
+
+    USE TEST VIA "SIXNSX"     // Open up the TEST database
+    INDEX ON last TO last     // Build an index; Since it's exclusive after
+    CLOSE DATA                //  just creating it, close the database and
+    USE TEST VIA "SIXNSX"     //  reopen it
+    SET INDEX TO LAST         // Then set our index active again
+
+    ? "Skip test - shared"
+    ?
+    nStart := Seconds()       // Save starting time
+    FOR nCnt := 1 TO 240      // Cruise through the database for a bit
+      ?? "."                  // Print a dot
+      DO WHILE !eof()         // Skip to the end of the file
+        SKIP
+      ENDDO
+      DO WHILE !bof()         // Skip back to the beginning of the file
+        SKIP -1
+      ENDDO
+    NEXT
+    nEnd := Seconds()         // Save ending time
+
+    ? "Elapsed time:", nEnd - nStart, "seconds"
+    ?
+
+    // Now turn dirty read on
+    <B>SET TURBOREAD ON</B>
+
+    ? "Skip test - shared with dirty read on"
+    ?
+    nStart := Seconds()       // Save starting time
+    FOR nCnt := 1 TO 240      // Cruise through the database for a bit
+      ?? "!"                  // Print an exclamation point
+      DO WHILE !eof()         // Skip to the end of the file
+        SKIP
+      ENDDO
+      DO WHILE !bof()         // Skip back to the beginning of the file
+        SKIP -1
+      ENDDO
+    NEXT
+    nEnd := Seconds()         // Save ending time
+
+    ? "Elapsed time:", nEnd - nStart, "seconds"
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng39407.html">Sx_SetTurbo()</A>
+<A HREF="ng3e5cc.html">Sx_TurboArea()</A>
+<A HREF="ng32ac6.html">Sx_MakeSem()</A>
+<A HREF="ng7c739.html">What's TURBOREAD?</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

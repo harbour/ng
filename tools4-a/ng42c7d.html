@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng42436.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng431cc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCRTQ()</B>
+ Creates a new print queue
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCRTQ(&lt;cQueue&gt;,[&lt;cQueuePath&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the queue that is created.
+
+     <B>&lt;cQueuePath&gt;</B>  Designates the directory where the new queue is
+     created.
+
+ <B>Returns</B>
+
+     NNETCRTQ() returns .T. if the new queue (&lt;cQueue&gt;) has been created
+     successfully.  If an error occurs, the Novell error code can be queried
+     with the NNETERROR() function.
+
+ <B>Description</B>
+
+ NOVELL NET CREATE QUEUE
+
+     NNETCRTQ() allows you to create a new print queue on a file server.  In
+     addition to the name of the queue (&lt;cQueue&gt;), you can specify the
+     directory (&lt;cQueuePath&gt;) where the new queue is created.  If no
+     directory is passed, the queue directory is established in the
+     SYS:SYSTEM directory of the default server.  Supervisor rights are
+     required to create a new print queue.
+
+ <B>Examples</B>
+
+     <B>.</B>  Create the queue LINEPRINTER on the default server:
+
+        IF NNETCRTQ('LINEPRINTER')
+        ? 'Queue created successfully!'
+        ELSE
+        ? 'Queue could not be created!'
+        ENDIF
+
+     <B>.</B>  Create the queue LINEPRINTER on the file server DEV:
+
+        NNETCRTQ('LINEPRINTER','DEV/SYS:SYSTEM')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng41c2e.html">NNETADDQUS()</A>
+<A HREF="ng431cc.html">NNETDELQ()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

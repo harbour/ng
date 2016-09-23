@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng33f27.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng349b5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_RLock():</B>
+
+  Syntax:   Sx_RLock([&lt;nRecNo | aRecArray&gt;])
+
+            nRecNo    = Record number of a single record to lock
+            aRecArray = Array of record numbers of records to lock
+
+  Returns:  &lt;logical&gt; Indicates success or failure of single record lock.
+
+            -or-
+
+            &lt;array&gt; Array of logical values indicating success or failure
+                    of record lock for corresponding records in aRecArray.
+
+  Description:  Locks one or more records in a shared database without
+                unlocking any other previously-locked records (as with
+                Clipper's RLock() function).
+
+  Example:
+
+
+    #include "SIXCDX.CH"
+
+    LOCAL aRec := { 5, 20, 57, 100, 324 }  // Array of records to lock
+    LOCAL nCount
+
+    USE test SHARED                        // Open TEST.DBF
+    <B>Sx_RLock( aRec )</B>                       // Lock all five records
+
+    //...( Do some stuff with those five records )...
+
+    // Make sure they're all locked
+    aRec := Sx_GetLocks()                  // Get array of locked records
+    FOR nCount := 1 TO Len( aRec )         // Cycle through array
+      ? aRec[ nCount ]                     //  displaying each record number
+    NEXT
+
+    Sx_UnLock( 57 )                        // Unlock just record number 57
+    <B>Sx_RLock( 500 )</B>                        // Lock record 500
+    <B>Sx_RLock( {75,80,90} )</B>                 // Lock records 75, 80, and 90
+
+    Sx_UnLock( {5,100,324} )               // Unlock records 5, 100, and 324
+    UNLOCK                                 // Unlock all locked records
+
+
+  Notes:    If no parameters are passed then the current record is locked.
+
+            Clipper's RLOCK() function automatically unlocks <B>all</B> previously
+            locked records before locking the current record.  Since the
+            Sx_RLock() function supports multiple-record locking, this
+            function does not unlock any previously locked records.
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng290d2.html">Sx_GetLocks()</A>
+<A HREF="ng2b953.html">Sx_IsLocked()</A>
+<A HREF="ng3ef96.html">Sx_UnLock()</A>
+<A HREF="ng812d1.html">Why can't I lock more than 20 records at a time?</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

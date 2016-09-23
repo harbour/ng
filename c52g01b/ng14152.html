@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1392d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng149d9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CTOD()</B>
+ Convert a date string to a date value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CTOD(&lt;cDate&gt;) --&gt; dDate</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDate&gt;</B> is a character string consisting of numbers representing the
+     month, day, and year separated by any character other than a number.
+     The month, day, and year digits must be specified in accordance with the
+     SET DATE format.  If the century digits are not specified, the century
+     is determined by the rules of SET EPOCH.
+
+ <B>Returns</B>
+
+     CTOD() returns a date value.  If &lt;cDate&gt; is not a valid date, CTOD()
+     returns an empty date.
+
+ <B>Description</B>
+
+     CTOD() is a character conversion function that converts a character
+     string to a date.  To initialize an empty date for date entry, specify
+     &lt;cDate&gt; as a null string (""), SPACE(8), or "  /  /  ".
+
+     CTOD() is used whenever you need a literal date value.  Some examples
+     are:
+
+     <B>.</B>  Initializing a variable to a date value
+
+     <B>.</B>  Specifying a literal date string as an argument of a RANGE
+        clause of @...GET
+
+     <B>.</B>  Specifying a literal date string in order to perform date
+        arithmetic
+
+     <B>.</B>  Comparing the result of a date expression to a literal date
+        string
+
+     <B>.</B>  REPLACEing a date field with a literal date string
+
+     CTOD() is the inverse of DTOC() which converts a date value to a
+     character string in the format specified by SET DATE and SET CENTURY.
+     DTOS() also converts a date value to a character string in the form
+     yyyymmdd.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses CTOD() to initialize two date variables,
+        using one as a GET and the other for RANGE validation:
+
+        SET CENTURY ON
+        dBegin := CTOD("01-26-1876")
+        dCurrent := CTOD("")
+        @ 10, 10 SAY "Enter date:" GET dCurrent ;
+              RANGE dBegin, DATE()
+        READ
+
+     <B>.</B>  This example uses CTOD() to create a date value within a FOR
+        condition:
+
+        USE Inventory NEW
+        REPLACE ALL Inventory-&gt;Price WITH ;
+           Inventory-&gt;Price * 1.1 FOR ;
+           Inventory-&gt;InvDate &lt; CTOD("10/10/90")
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng14f89.html">DATE()</A>
+<A HREF="ng2e785.html">DTOC()</A>
+<A HREF="ng2ec97.html">DTOS()</A>
+<A HREF="ng9b693.html">SET CENTURY</A>
+<A HREF="ng9e636.html">SET DATE</A>
+<A HREF="nga1148.html">SET EPOCH</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

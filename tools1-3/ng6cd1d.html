@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6c5a9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng64deb.html">[^^Up^^]</A>
+<A HREF="ng6d16e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NUMXOR()</B>
+ Performs a 16-bit "XOR" of two numbers
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NUMXOR(&lt;nWORD1|cHexWORD1&gt;,&lt;nWORD2|cHexWORD2&gt;)</B>
+     <B>    --&gt; nWORD-XOR</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nWORD1|cHexWORD1&gt;</B> and<B> &lt;nWORD2|cHexWORD2&gt;</B>  Designates as either
+     decimal numbers or hexadecimal digit strings.
+
+ <B>Returns</B>
+
+     The returned value corresponds to all the values designated as
+     parameters joined with a logical exclusive OR.
+
+ <B>Description</B>
+
+     Only those bits that are different in the 2-bit fields and that you want
+     to link together, are set to 1 in the result value.  Use NUMXOR() to
+     encode smaller numbers.
+
+ <B>Note</B>
+
+     <B>.</B>  An invalid parameter returns a result of -1.
+
+ <B>Examples</B>
+
+     <B>.</B>  Link two numbers with NUMXOR():
+
+        Value 1 in binary:      00000011
+        Value 2 in binary:      00000101
+                                ________
+        The result: (6)         00000110
+        ? NUMXOR(3, 5)                  // Result:  6
+
+     <B>.</B>  Encode and decode numbers:
+
+        ? NUMXOR(NUMXOR(nNumber, 9), 9)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6a7c7.html">NUMAND()</A>
+<A HREF="ng6bde1.html">NUMNOT()</A>
+<A HREF="ng6c199.html">NUMOR()</A>
+<A HREF="ng6dcc1.html">SETBIT()</A>
+<A HREF="ng694ba.html">ISBIT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

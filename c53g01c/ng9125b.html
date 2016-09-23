@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng90d84.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng917eb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>READEXIT()</B>
+ Toggle Up arrow and Down arrow as READ exit keys
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>READEXIT([&lt;lToggle&gt;]) --&gt; lCurrentState</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;lToggle&gt;</B> toggles the use of Up arrow and Down arrow as READ exit
+     keys.  Specifying true (.T.) enables them as exit keys, and false (.F.)
+     disables them.
+
+ <B>Returns</B>
+
+     READEXIT() returns the current setting as a logical value.
+
+ <B>Description</B>
+
+     READEXIT() is an environment function that reports the current state of
+     Up arrow and Down arrow as keys the user can press to exit a READ from
+     the first or last Get object in a GetList.  If the optional &lt;lToggle&gt;
+     argument is specified, Up arrow and Down arrow are either enabled or
+     disabled as READ exit keys.  At program startup, Up arrow and Down arrow
+     are not enabled as READ exit keys.  Normally, READ exit keys include
+     only Pgup, Pgdn, Esc, or Return from the last GET.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows READEXIT() enabling Up arrow and Down arrow
+        exit keys before a READ then resetting them after the READ
+        terminates:
+
+        cMyvar = SPACE(10)
+        lLastExit = READEXIT(.T.)   // Result: Turn on exit keys
+        //
+        @ 10, 10 SAY "Enter: " GET cMyvar
+        READ
+        READEXIT(lLastExit)         // Result: Restore previous setting
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngd4eb5.html">READ</A>
+<A HREF="ng91ce6.html">READINSERT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

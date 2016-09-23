@@ -1,0 +1,42 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng351a1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng346a0.html">[^^Up^^]</A>
+<A HREF="ng35ca4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>3   Disk Swapping</B>
+------------------------------------------------------------------------------------------
+
+     If insufficient EMM is available to contain swapped segments, a
+     temporary disk file (the <B>swap file</B>) is created to hold them.
+     By default, the VMM will use a maximum of 8MB of disk space for
+     the swap file.  Disk space is used only as needed.
+
+     <B>Configuration:</B>  The maximum size of the disk swap file can be
+     controlled using the SWAPK setting in the CLIPPER environment
+     variable.  Valid settings are from 256 to 64000 (256K to
+     64MB).  The SWAPK setting has no effect on VMM swapping
+     activity; it merely serves to establish an upper limit on the
+     size of the swap file.  If the limit is exceeded, the VMM will
+     terminate the application.
+
+     <B>Example:</B>  SET CLIPPER=SWAPK:16000
+
+     <B>Configuration:</B>  The disk drive and directory where the VMM swap
+     file is created can be controlled using the SWAPPATH setting in
+     the CLIPPER environment variable.  By default, the swap file is
+     created in the current DOS directory.
+
+     <B>Example:</B>  SET CLIPPER=SWAPPATH:'C:\SWAP'
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

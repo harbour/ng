@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9121.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4610.html">[^^Up^^]</A>
+<A HREF="ng9f98.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>WFORMAT()</B>
+ Determines the usable area within a window
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>WFORMAT([&lt;nTopRow&gt;, &lt;nLeftColumn&gt;, &lt;nBottomRow&gt;,</B>
+        <B>&lt;nRightColumn&gt;]) --&gt; nWindow</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTopRow&gt;,&lt;nLeftColumn&gt;,&lt;nBottomRow&gt;,&lt;nRightColumn&gt;</B>  Designate the
+     coordinate values for the text output area of a selected window.
+
+ <B>Returns</B>
+
+     WFORMAT() returns the currently selected window's handle.
+
+ <B>Description</B>
+
+     The WFORMAT() function can be used to reduce the area in which text
+     output occurs compared to the actual area of the window.  This allows
+     you to define a margin between the text and the borders of a window
+     where you cannot write.  The four parameters define the margin between
+     the old border and the output area.
+
+ <B>Notes</B>
+
+     <B>.</B>  The sum of the &lt;nTopRow&gt; and &lt;nBottomRow&gt; values must not
+        exceed the internal height of the window and that the sum of the
+        &lt;nLeftColumn&gt; and &lt;nRightColumn&gt; values must not exceed the internal
+        width of the window.  In any size window, the output area can be
+        reduced down to one character.
+
+     <B>.</B>  Negative values increase the text output area while positive
+        values reduce it.  A WFORMAT() with very large negative values
+        removes all borders.
+
+     <B>.</B>  This function cannot be used with the physical screen (Window
+        0).
+
+     <B>.</B>  To write in the border area, you can also use a negative row
+        value in @ .. SAY: (@ -1, 5 SAY "Help with input").
+
+ <B>Examples</B>
+
+     <B>.</B>  The function reduces the output area of the selected window at
+        the top and bottom by one row each, and by two columns each on the
+        right and left.  The area becomes two rows and four columns smaller:
+
+        WSELECT(nWindow)
+        WFORMAT(1, 2, 1, 2)
+
+     <B>.</B>  Here, all borders previously set with WFORMAT() are canceled,
+        making it possible to write within the entire window again:
+
+        WFORMAT()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngcd91.html">WSELECT()</A>
+<A HREF="ng6aa0.html">WBOX()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

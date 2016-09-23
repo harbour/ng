@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4b393.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng4bce9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHARUNPACK()</B>
+ Decompresses (unpacks) a string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CHARUNPACK(&lt;idPackCharacterstring&gt;) --&gt; cString</B>
+
+ <B>Argument</B>
+
+     <B>&lt;idPackCharacterstring&gt;</B>  Designates a string that was previously
+     compressed with the CHARPACK() function.
+
+ <B>Returns</B>
+
+     CHARUNPACK() returns an uncompressed string.
+
+ <B>Description</B>
+
+     This function unpacks strings compressed by the CHARPACK() function.
+     Notice that the related pack method is automatically recognized.  Since
+     we presuppose that the CHARUNPACK() string parameter was compressed
+     previously with CHARPACK(), it is assured that the returned string is
+     not longer than the maximum permitted under CA-Clipper.
+
+ <B>Example</B>
+
+     The CHARUNPACK() function recreates a string:
+
+     ? CHARUNPACK(CHARPACK("AAAAAAAAAAAA"))   // "AAAAAAAAAAAA"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng47993.html">CHARPACK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

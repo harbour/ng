@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng207af.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1fa2a.html">[^^Up^^]</A>
+<A HREF="ng20e9b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Using the DBFNDX Database Driver</B>
+------------------------------------------------------------------------------
+
+     To use (.ndx) files in a CA-Clipper program:
+
+     1. Place a REQUEST DBFNDX at the beginning of your application or at the
+        top of the first program file (.prg) that opens a database file using
+        the DBFNDX driver.
+
+     2. Specify the VIA "DBFNDX" clause if you open the database file with
+        the USE command.
+
+        -OR-
+
+     3. Specify "DBFNDX" for the &lt;cDriver&gt; argument if you open the database
+        file with the DBUSEAREA() function.
+
+        -OR-
+
+     4. Use RDDSETDEFAULT("DBFNDX") to set the default driver to DBFNDX.
+
+        Except in the case of REQUEST, the RDD name must be a literal
+        character string or a variable.  In all cases it is important that
+        the driver name be spelled correctly.
+
+     The following program fragments illustrate:
+
+     REQUEST DBFNDX
+     .
+     .
+     .
+     USE Customers INDEX Name, Address NEW VIA "DBFNDX"
+
+     -OR-
+
+     REQUEST DBFNDX
+     RDDSETDEFAULT( "DBFNDX" )
+     .
+     .
+     .
+     USE Customers INDEX Name, Address NEW
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

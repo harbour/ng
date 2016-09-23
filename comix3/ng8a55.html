@@ -1,0 +1,87 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8723.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng9110.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlExFilter()</B>          Extract the Filter RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlExFilter() -&gt; rl
+
+<B>Arguments</B>
+
+    None.
+
+<B>Returns</B>
+
+    The Filter RecordList for the current workarea.
+
+<B>Description</B>
+
+    rlExFilter() "extracts" the current Filter RecordList.  When the Filter
+    RecordList is extracted, ownership of the RecordList transfers from
+    ClipMore to you;  i.e., you are now responsible for destroying it.
+
+    This is different than rlGetFilter().  rlGetFilter() also returns the
+    Filter RecordList, but ClipMore retains ownership of it.
+
+<B>Example</B>
+
+    use demo index age
+    cmFilter("age &gt;= 25 .and. age &lt;= 30")
+
+    seek 40
+    ? found(), age          &amp;&amp; Will return .F. (outside of filter)
+    save := goRaw()         &amp;&amp; Set up for no filter while we're seeking
+    seek 40                 &amp;&amp; will find it
+    ? found(), age          &amp;&amp; Will return .T. (suspended filter)
+    restRaw(save)           &amp;&amp; Restore back to where we were
+
+
+    *   Set to no filter, BUT save the current filter info
+    function goRaw()
+
+    *   Save the current filter info (extracting it)
+<B>    local retVal := l2bin(rlExFilter()) + dbFilter()</B>
+
+    *   Now clear the filter condition (this would destroy the Filter
+    *   RecordList if we hadn't already extracted it)
+    cmClrFilter()
+
+    *   Return with our saved description of the filter
+    return retVal
+
+
+    *   Restore the saved filter;  no work necessary to create the Filter
+    *   RecordList, since we saved the previous one
+    
+    function restRaw(cSave)
+    local rl := bin2l(cSave)
+    local cFilt := substr(cSave, 5)
+    dbSetFilter(&amp;("{||" + cFilt + "}"), cFilt)
+    rlSetFilter(rl)
+    return
+
+<B>See Also</B>
+
+    rlGetFilter(), rlSetFilter()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9110.html">rlGetFilter()</A>
+<A HREF="ngd88f.html">rlSetFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

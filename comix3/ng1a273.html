@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1a1a7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng19942.html">[^^Up^^]</A>
+<A HREF="ng1a562.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>I'm moving from ClipMore/NTX to /CMX &amp; have Unresolved Externals!  Why?</B>
+    
+The commands and functions in ClipMore/CMX and ClipMore/NTX are different.
+Some of the commands and functions implemented in ClipMore/NTX are no longer
+necessary in ClipMore/CMX.  ClipMore/CMX uses a RecordList instead of a
+temporary index to isolate records meeting the filter condition.
+
+Here are the missing functions with their equivalents:
+
+    Old Function        New Replacement
+    ------------        ---------------
+    cmClose()           USE
+    cmCloseDB()         CLOSE DATABASES
+    cmCloseAll()        CLOSE ALL
+    cmGetIndCnt()       cmxIndexCnt()
+    cmIndex()           INDEX ON .. FOR
+    cmIndexOrd()        indexOrd()
+    cmAddIndex()        dbSetIndex()
+    cmSetOrder()        dbSetOrder() or ordSetFocus()
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

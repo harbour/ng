@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1043c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng11002.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DSETKBIOS()</B>
+ Turns the extended keyboard mode on or off through BIOS (additional keys F11,
+ F12)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DSETKBIOS([&lt;lNewKeyboardMode&gt;]) --&gt; lOldKeyboardMode</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lNewKeyboardMode&gt;</B>  Designates whether the extended keyboard input
+     mode is on (.T.) or off (.F.).  The default value (.T.) designates that
+     the extended keyboard input mode is on.
+
+ <B>Returns</B>
+
+     When called without the parameter, this function returns the current
+     setting for DSETKBIOS().  If you pass a parameter, then it returns the
+     previous setting.
+
+ <B>Description</B>
+
+     Beginning with CA-Clipper 5.0, all keyboard entries are read through the
+     BIOS instead of DOS.  The default setting for DSETKBIOS() is now the
+     opposite of what it was in previous versions.  The default setting for
+     the enhanced keyboard is on (.T.).  When the enhanced keyboard mode is
+     off, keyboard entries are redirected through DOS.  This function is very
+     useful if file inputs must be read at program start.
+
+ <B>Note</B>
+
+     <B>.</B>  Symbolic constants for keyboard coding are found in the
+        CTSCAN.CH include file and in Appendix A.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows a keyboard entry that is redirected through
+        DOS:
+
+        C:\&gt;TEST &lt; KEYS.DAT
+
+     <B>.</B>  This example shows the application TEST.EXE:
+
+        DSETKBIOS(.F.)            // Switch to DOS input mode
+        ACCEPT "" TO cInput
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng17f0c.html">KEYREAD()</A>
+<A HREF="ng18643.html">KEYSEND()</A>
+<A HREF="ng1c8af.html">SETKXLAT()</A>
+<A HREF="ngc4f17.html">SCANKEY()</A>
+<A HREF="ngc2cb1.html">KBDTYPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

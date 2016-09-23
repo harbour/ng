@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng28c2f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng29628.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_GetLocks():</B>
+
+  Syntax:   Sx_GetLocks()
+
+  Returns:  &lt;array&gt; Array of record numbers of record that are locked by
+            the current user.
+
+  Description:  Returns an array containing the record numbers of all
+                currently locked records (locked by current user).
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    LOCAL aRec := { 5, 20, 57, 100, 324 }  // Array of records to lock
+    LOCAL nCount
+
+    USE test SHARED                        // Open TEST.DBF
+    Sx_RLock( aRec )                       // Lock all five records
+
+    //...( Do some stuff with those five records )...
+
+    // Make sure they're all locked
+    aRec := <B>Sx_GetLocks()</B>                  // Get array of locked records
+    FOR nCount := 1 TO Len( aRec )         // Cycle through array
+      ? aRec[ nCount ]                     //  displaying each record number
+    NEXT
+
+    Sx_UnLock( 57 )                        // Unlock just record number 57
+    Sx_RLock( 500 )                        // Lock record 500
+    Sx_RLock( {75,80,90} )                 // Lock records 75, 80, and 90
+
+    Sx_UnLock( {5,100,324} )               // Unlock records 5, 100, and 324
+    UNLOCK                                 // Unlock all locked records
+
+
+  Notes:    This functions returns only records that have been explicitly
+            locked using Sx_RLock() or RLOCK().  Implicit record locks
+            (i.e., records locked by dbAppend() ) are not included, as is
+            the case with Clipper's dbRLockList() function.
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3ef96.html">Sx_UnLock()</A>
+<A HREF="ng342f2.html">Sx_RLock()</A>
+<A HREF="ng2b953.html">Sx_IsLocked()</A>
+<A HREF="ng812d1.html">Why can't I lock more than 20 records at a time?</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

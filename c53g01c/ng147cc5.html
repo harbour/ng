@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng147a75.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng143d7a.html">[^^Up^^]</A>
+<A HREF="ng148410.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>&lt;oPopUp&gt;:hitTest(&lt;nMouseRow&gt;, &lt;nMouseCol&gt;)</B>
+     <B>   --&gt; nHitStatus</B>
+
+        &lt;nMouseRow&gt; is a numeric value that indicates the current screen row
+        position of the mouse cursor.
+
+        &lt;nMouseCol&gt; is a numeric value that indicates the current screen
+        column position of the mouse cursor.
+
+        Returns a numeric value that indicates the relationship of the mouse
+        cursor with the pop-up menu.
+
+        <B>Applicable Hit Test Return Values</B>
+        ---------------------------------------------------------------------
+        <B>Value   Constant       Description</B>
+        ---------------------------------------------------------------------
+        &gt; 0     Not Applicable The position in the pop-up menu of the item
+                               whose region the mouse is within
+        0       HTNOWHERE      The mouse cursor is not within the region of
+                               the screen that the menu occupies
+        -1      HTTOPLEFT      The mouse cursor is on the top left corner of
+                               the pop-up menu's border
+        -2      HTTOP          The mouse cursor is on the pop-up menu's top
+                               border
+        -3      HTTOPRIGHT     The mouse cursor is on the top right corner of
+                               the pop-up menu's border
+        -4      HTRIGHT        The mouse cursor is on the pop-up menu's right
+                               border
+        -5      HTBOTTOMRIGHT  The mouse cursor is on the bottom right corner
+                               of the pop-up menu's border
+        -6      HTBOTTOM       The mouse cursor is on the pop-up menu's bottom
+                               border
+        -7      HTBOTTOMLEFT   The mouse cursor is on the bottom left corner
+                               of the pop-up menu's border
+        -8      HTLEFT         The mouse cursor is on the pop-up menu's left
+                               border
+        -4098   HTSEPARATOR    The mouse is on a menu separator line
+        ---------------------------------------------------------------------
+
+        Button.ch contains manifest constants for the PopUpMenu:hitTest()
+        return value.
+
+        hitTest() is a method of the PopUpMenu class that is used for
+        determining if the mouse cursor is within the region of the screen
+        that the pop-up menu occupies.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

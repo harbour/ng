@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng47993.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng483b0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHARRELA()</B>
+ Correlates the character positions in paired strings
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CHARRELA(&lt;cSearchFor1&gt;,&lt;cString1&gt;,&lt;cSearchFor2&gt;,</B>
+     <B>   &lt;cString2&gt;) --&gt; nPosition</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSearchFor1&gt;</B>  Designates the character that is searched for in
+     &lt;cString1&gt;.
+
+     <B>&lt;cString1&gt;</B>  Designates the character string to search with
+     &lt;cSearchFor1&gt;.
+
+     <B>&lt;cSearchFor2&gt;</B>  Designates the character that is searched for in
+     &lt;cString2&gt;.
+
+     <B>&lt;cString2&gt;</B>  Designates the character string to search with
+     &lt;cSearchFor2&gt;.
+
+ <B>Returns</B>
+
+     CHARRELA() returns the positions where &lt;cSearchFor1&gt; and &lt;cSearchFor2&gt;
+     occur in the corresponding character strings.
+
+ <B>Description</B>
+
+     This function builds a relationship (CHAR RELAtion) between two
+     character strings.  It determines the positions where the characters in
+     &lt;cSearchFor1&gt; appear in &lt;cString1&gt; and  where the characters in
+     &lt;cSearchFor2&gt; appear in &lt;cString2&gt;.
+
+ <B>Note</B>
+
+     <B>.</B>  The function returns a value of 0 if no relationship is found.
+
+ <B>Example</B>
+
+     Search for the first position in which a "b" appears in the first string
+     and a "1" appears in the second:
+
+     ? CHARRELA("b", "b b b b", "1", "bbb11111")      // 5
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng483b0.html">CHARRELREP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

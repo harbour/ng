@@ -1,0 +1,134 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2eb23.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng30b91.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETMAXRGH()</B>
+ Sets or queries the maximum and inherited rights for a directory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETMAXRGH([&lt;cPath&gt;],[&lt;nRights&gt;|&lt;cRights&gt;]) --&gt; nRights</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPath&gt;</B>  Designates a directory or a file (only Netware 3.x) of
+     which the maximum (Netware 2.x) or the inherited (Netware 3.x) rights
+     are set or queried.  If no value is passed for &lt;cPath&gt;, the maximum or
+     inherited rights for the current directory are determined.
+
+     <B>&lt;cRights&gt;</B>  Designates a character string that contains the rights
+     for the new directory in form of symbols (maximum rights under Netware
+     2.x, inherited rights under Netware 3.x).  If no value is passed for
+     &lt;cRights&gt; or &lt;nRights&gt;, the rights for &lt;cPath&gt; are not modified.
+
+     <B>&lt;nRights&gt;</B>  Designates a numeric value that contains a bit mask for
+     the determination of the rights for the new directory (maximum rights
+     under Netware 2.x, inherited rights under Netware 3.x).  If no value is
+     passed for &lt;cRights&gt; or &lt;nRights&gt;, the rights for  &lt;cPath&gt; are not
+     modified.
+
+ <B>Returns</B>
+
+     NNETMAXRGH() returns the maximum rights (Netware 2.x) or the inherited
+     rights (Netware 3.x) for &lt;cPath&gt;.
+
+ <B>Description</B>
+
+     NOVELL NET MAXIMUM RIGHTS
+     Under Netware 2.x, NNETMAXRGH() allows you to set or query the maximum
+     rights for a directory.  The maximum rights are the rights a user can be
+     granted for a directory.  The maximum rights cannot be exceeded even if
+     additional trustee rights are defined for a user.  To query the rights,
+     do not pass a value for &lt;cRights&gt;|&lt;nRights&gt;.
+
+     Rights can be set by passing a character string whereby each character
+     indicates an attribute (&lt;cRights&gt;), or by passing a numeric value that
+     results from a bitwise OR operation of the binary significance  of the
+     attributes (nRights).  The maximum rights are coded as follows:
+
+     <B>Table 23.8:  Rights Coding under Netware 2.x</B>
+     ------------------------------------------------------------------------
+     <B>Bit     Definition     Description</B>
+     ------------------------------------------------------------------------
+     1       READ           Read files
+     2       WRITE          Write files
+     3       OPEN           Open files
+     4       CREATE         Create new files
+     5       DELETE         Delete files
+     6       PARENTAL       Create new directories
+     7       SEARCH         Search files in directories
+     8       MODIFY         Modify files or attributes
+     ------------------------------------------------------------------------
+
+     The symbols for &lt;cRights&gt; correspond to the first letter of each keyword
+     under "Definition" in the above table.  Individual rights of the return
+     value can be checked with ISBIT().
+
+     Under Netware 3.x, NNETMAXRGH() allows you to set or query the inherited
+     rights for a directory as well as for individual files.  The inherited
+     rights determine which trustee rights a directory or a file inherits
+     from a parent directory, as long as a user has not been explicitly
+     granted trustee rights for the directory or file.
+
+     Under Netware 3.x, the rights are coded as follows:
+
+     <B>Table 23.9:  Rights Coding under Netware 3.x</B>
+     ------------------------------------------------------------------------
+     <B>Bit     Definition     Description</B>
+     ------------------------------------------------------------------------
+     1       READ           Read files
+     2       WRITE          Write to files
+     3       RESERVED
+     4       CREATE         Create new files
+     5       ERASE          Delete files
+     6       ACCESS CONTROL Trustee rights can be modified
+     7       FILE SCAN      Search files in directories
+     8       MODIFY         Modify files or attributes
+     9       SUPERVISORY    All rights / can grant rights
+     ------------------------------------------------------------------------
+
+     The first letter of each keyword under "Definition" represents the
+     symbol for &lt;cRights&gt;.
+
+ <B>Note</B>
+
+     <B>.</B>  For detailed information about rights and security, see the
+        Novell documentation.
+
+ <B>Examples</B>
+
+     <B>.</B>  Query the rights for the directory L:DATA:
+
+        nRights=NNETMAXRGH('L:DATA')
+        IF NNETVER('L:')&lt;'3'
+           ? 'Maximum rights:',nRights
+        ELSE
+           ? 'Inherited rights:',nRights
+        ENDIF
+
+     <B>.</B>  Set the rights for the directory VOL1:DATA/APRIL:
+
+        IF NNETVER()&lt;'3'
+           NNETMAXRGH('VOL1:DATA/APRIL','RWOCDPSM')
+        ELSE
+           NNETMAXRGH('VOL1:DATA/APRIL','RWCEFM')
+        ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng30b91.html">NNETMKDIR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

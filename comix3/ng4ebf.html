@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4aec.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng542c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmKeyNo()</B>             Return the logical key number (filtered)
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmKeyNo( [nOrder] | [cTag [, cBag]] ) -&gt; nKeyNo
+
+<B>Arguments</B>
+
+    nOrder, cTag and cBag are optional parameters which specify the index.
+    If omitted, the current master index will be used.
+
+<B>Returns</B>
+
+    The logical key number obeying the filter condition (and any index scope
+    in effect).
+
+<B>Description</B>
+
+    cmKeyNo() is similar to cmxKeyNo(), but returns the logical key number
+    of records which meet the filter condition.  (cmxKeyNo() returns the
+    "raw" count regardless of the filter).
+
+    cmKeyNo() will force Linear Optimization to be performed so that the
+    return value is accurate.
+
+    cmKeyNo() obeys the current index scope (if any).  cmKeyNo() will return
+    1 for the first record which meets the filter condition and falls within
+    the current index scope, etc..
+
+<B>Example</B>
+
+    index on age to age
+    index on last to last
+    use demo index age, last
+
+    go top
+    ? "cmxKeyNo(): ", cmxKeyNo()
+<B>    ? " cmKeyNo(): ", cmKeyNo()             &amp;&amp; Will return same (no filter)</B>
+
+    cmFilter("age &gt;= 25")
+    go top
+    skip 1
+    ? "cmxKeyNo(): ", cmxKeyNo()            &amp;&amp; Who knows?
+<B>    ? " cmKeyNo(): ", cmKeyNo()             &amp;&amp; Will return 2</B>
+    
+<B>See Also</B>
+
+    cmKeyCount(), cmKeyGoto(), cmKeySkip()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng434c.html">cmKeyCount()</A>
+<A HREF="ng4aec.html">cmKeyGoto()</A>
+<A HREF="ng542c.html">cmKeySkip()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

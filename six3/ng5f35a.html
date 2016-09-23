@@ -1,0 +1,155 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5ec2c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5ea96.html">[^^Up^^]</A>
+<A HREF="ng60702.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Linking the SIx Driver With Your Application:</B>
+
+
+    <B>NOTE:  If you are using the International CA-Clipper release with</B>
+    <B>       the International SIx 3.0, see the <U>"Notes For International</B></U>
+    <B>       <U>Users"</U> </B>section earlier in this documentation for important<B></B>
+    <B>       information on linking your application with SIx 3.0.</B>
+
+
+  Linking the SIx Driver with your application is a simple process.  There
+  are two steps that should be taken whenever you want to include the SIx
+  Driver in your application:
+
+    <B>1.  Include the SIx Driver header file in your source file(s) using</B>
+    <B>    the #include directive:</B>
+
+      For SIXCDX:  #include "SIXCDX.CH"
+
+      For SIXNSX:  #include "SIXNSX.CH"
+
+      For SIXNTX:  #include "SIXNTX.CH"
+
+    <B>NOTE:  If you will be using extended expressions in your indexing</B>
+    <B>       commands, use the SIXCDX2.CH, SIXNSX2.CH, and/or SIXNTX2.CH</B>
+    <B>       file(s) instead of the one(s) listed above.</B>
+
+
+    <B>2.  Add SIX3.LIB as a library to your link command or link script before</B>
+    <B>    the CLIPPER.LIB file. For example:</B>
+
+      EXOSPACE FI myapp, myfuncs LIB six3, clipper<U></U>
+
+      BLINKER FI myapp, myfuncs LIB six3, clipper<U></U>
+
+
+  <B>SIx Driver (SIXCDX, SIXNSX or SIXNTX) Only:</B>
+
+  To make one of the SIx Driver flavors the default RDD, include either
+  SIXCDX.OBJ, SIXNSX.OBJ, or SIXNTX.OBJ as a file in your link command or
+  link script.  This causes  the selected SIx Driver flavor to replace
+  DBFNTX as the default RDD, thereby reducing your load size (memory
+  requirements).  You also need to add SIX3.LIB to your link command or
+  link script as a library.
+
+    <B>For SIXCDX:</B>
+
+      EXOSPACE FI myapp, myfuncs, sixcdx LIB six3, clipper
+
+      BLINKER FI myapp, sixcdx LIB six3, clipper
+
+    <B>For SIXNSX:</B>
+
+      EXOSPACE FI myapp, myfuncs, sixnsx LIB six3, clipper
+
+      BLINKER FI myapp, sixnsx LIB six3, clipper
+
+    <B>For SIXNTX:</B>
+
+      EXOSPACE FI myapp, myfuncs, sixntx LIB six3, clipper
+
+      BLINKER FI myapp,sixntx LIB six3, clipper
+
+
+  <B>SIx Driver (SIXCDX and/or SIXNSX) and DBFNTX:</B>
+
+  Instead of linking Clipper's DBFNTX driver into your application with the
+  SIx Driver (SIXCDX and/or SIXNSX), we recommend using our SIXNTX driver
+  which is included in the SIX3.LIB file.
+
+  Since SIXNTX shares common code with SIXCDX and SIXNSX, the memory
+  requirements will be much less than if DBFNTX were used instead.  To use
+  SIXNTX in your SIXCDX or SIXNSX application, link as you normally would
+  for just SIXCDX or SIXNSX (as shown above) and simply add the following
+  line of code at the top of one of your applcation source modules (usually
+  the main source module):
+
+    <B>REQUEST SIXNTX</B>
+
+
+
+  <B>Combining All Four SIx Driver Flavors In The Same Application:</B>
+
+  To use all four SIx Driver flavors in the same application, you would do
+  the following:
+
+    1.  Select which flavor you want to be considered the "default" driver
+        (either SIXCDX, SIXNSX, SIXMDX, or SIXNTX), and link in the same-
+        named .OBJ file (SIXCDX.OBJ, etc...).
+
+        Note that the SIXNTX.OBJ file forces the SIXNTX flavor to be the
+        default driver, and effectively prevents Clipper's DBFNTX driver
+        from being linked in (as the SIXCDX.OBJ or SIXNSX.OBJ file also
+        would):
+
+          <B>BLINKER FI myapp, sixntx @six3</B>
+
+    2.  Add REQUEST lines in your main source module to force the other
+        three flavors to also be linked in.
+
+          <B>REQUEST SIXCDX</B>  // Forces SIXCDX to be linked in
+          <B>REQUEST SIXNSX</B>  // Forces SIXNSX to be linked in
+          <B>REQUEST SIXMDX</B>  // Forces SIXMDX to be linked in
+
+
+  <B>Overlaying the SIx Driver:</B>
+
+  The SIx Driver can be overlayed with a linker that can overlay C and
+  Assembly object files, such as Blinker, WarpLink, or RTLink Plus.  The
+  RTLink that comes bundled with Clipper cannot overlay C and Assembly code,
+  and may not perform well with the SIx Driver on large applications.
+
+    <B>NOTE:  The SIx Driver is also 100% compatible with protected mode</B>
+    <B>       linkers such as Blinker 3.x, ExoSpace, and CauseWay.</B>
+
+  An overlay link script file called SIX3.LNK is provided for use with
+  Blinker 1.5 and above.  To use this link script from the DOS command-
+  line, you would do this:
+
+    For SIXCDX: BLINKER FI myapp, sixcdx @six3.lnk
+
+    For SIXNSX: BLINKER FI myapp, sixnsx @six3.lnk
+
+    For SIXNTX: BLINKER FI myapp, sixntx @six3.lnk
+
+
+  <B>NOTE:  It is highly recommended that you use the supplied link script</B>
+  <B>       to overlay the SIX3.LIB file.  If you simply overlay the entire</B>
+  <B>       library without using the overlay script file to force certain</B>
+  <B>       .OBJ modules into the root, your application will most likely</B>
+  <B>       run very slow.  The same slow result can occur by placing the</B>
+  <B>       entire library in the root section (not overlaying it at all).</B>
+  <B>       If this causes your application to be critically low on memory,</B>
+  <B>       VM will start swapping to try and provide more memory to your</B>
+  <B>       application. This action will slow your application down.</B>
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5f2f0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng6017a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>IIF()</B>
+ Return the result of an expression based on a condition
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>[I]IF(&lt;lCondition&gt;, &lt;expTrue&gt;, &lt;expFalse&gt;) --&gt; Value</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;lCondition&gt;</B> is a logical expression to be evaluated.
+
+     <B>&lt;expTrue&gt;</B> is the value, a condition-expression, of any data type,
+     returned if &lt;lCondition&gt; is true (.T.).
+
+     <B>&lt;expFalse&gt;</B> is the value, of any date type, returned if &lt;lCondition&gt;
+     is false (.F.).  This argument need not be the same data type as
+     &lt;expTrue&gt;.
+
+ <B>Returns</B>
+
+     IIF() returns the evaluation of &lt;expTrue&gt; if &lt;lCondition&gt; evaluates to
+     true (.T.) and &lt;expFalse&gt; if it evaluates to false (.F.).  The value
+     returned is the data type of the valid condition-expression.
+
+ <B>Description</B>
+
+     IIF() is a logical conversion function.  It is one of the most powerful
+     and versatile functions in CA-Clipper.  It provides a mechanism to
+     evaluate a condition within an expression.  With this ability you can
+     convert a logical expression to another data type.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example converts a logical data value to a numeric data
+        value:
+
+        lPaid = .T.
+        ? IIF(lPaid, 1, 0)               // Result: 1
+
+     <B>.</B>  In this example a logical field is formatted depending on
+        whether the Customer is past due or not:
+
+        @ ROW() + 1, 25 SAY IIF(lPaid, SPACE(10), "Go get 'em")
+
+     <B>.</B>  If you are printing forms, you can print an indicating symbol
+        in different columns depending on the value of a logical field:
+
+        @ ROW(), IIF(InHospital, 10, 12) SAY "X"
+
+     <B>.</B>  You can also use IIF() to force the LABEL FORM to print blank
+        lines.  Enter the following expression when you create the label with
+        RL.EXE:
+
+        IIF(EMPTY(Company), CHR(255), Company)
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfef37.html">DO CASE</A>
+<A HREF="ng5f2f0.html">IF()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

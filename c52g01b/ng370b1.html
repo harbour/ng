@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng36a8b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng378ce.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FIELDWBLOCK()</B>
+ Return a set-get code block for a field in a given work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FIELDWBLOCK(&lt;cFieldName&gt;, &lt;nWorkArea&gt;)</B>
+     <B>   --&gt; bFieldWBlock</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFieldName&gt;</B> is the name of the field specified as a character
+     string.
+
+     <B>&lt;nWorkArea&gt;</B> is the work area number where the field resides
+     specified as a numeric value.
+
+ <B>Returns</B>
+
+     FIELDWBLOCK() returns a code block that, when evaluated, sets (assigns)
+     or gets (retrieves) the value of &lt;cFieldName&gt; in the work area
+     designated by &lt;nWorkArea&gt;.  If &lt;cFieldName&gt; does not exist in the
+     specified work area, FIELDWBLOCK() returns NIL.
+
+ <B>Description</B>
+
+     FIELDWBLOCK() is a database function that builds a code block.  When
+     evaluated with the EVAL() function, the code block first selects the
+     designated &lt;nWorkArea&gt;.  If an argument was passed, the code block then
+     assigns the value of the argument to &lt;cFieldName&gt;.  If no argument was
+     passed, the code block retrieves the value of &lt;cFieldName&gt;.  The
+     original work area is then reselected before the code block returns
+     control.
+
+     Note that the specified field variable may not exist when the code block
+     is created but must exist before the code block is executed.
+
+ <B>Notes</B>
+
+     <B>.</B>  FIELDWBLOCK() is similar to FIELDBLOCK(), except that
+        FIELDBLOCK() incorporates a fixed work area into the set-get block.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example compares FIELDWBLOCK() to a code block created
+        using the macro operator.  Note that using FIELDWBLOCK() avoids the
+        speed and size overhead of the macro operator:
+
+        // Set-Get block for work area 1 defined with
+        // macro operator
+        bSetGet := &amp;( "{ |setVal| IF( setVal == NIL, ;
+           1-&gt;FName, 1-&gt;FName := setVal ) }" )
+        // Set-Get block defined using FIELDWBLOCK()
+
+        // bSetGet created here is the functional
+        // equivalent of bSetGet above
+        bSetGet := FIELDWBLOCK("FName", 1)
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng34ec2.html">FIELDBLOCK()</A>
+<A HREF="ng4f2ef.html">MEMVARBLOCK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng39600.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng39fcf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DIRREMOVE()</B>
+ Remove a directory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DIRREMOVE(&lt;cDirName&gt;) --&gt; nSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDirName&gt;</B> is the name of the directory to erase, including an
+     optional drive.  If you do not specify a drive, the current one is used.
+
+ <B>Returns</B>
+
+     DIRREMOVE() returns 0 if successful; -1 if there is an argument error.
+     Otherwise, DIRREMOVE returns the DOS error code.
+
+ <B>Description</B>
+
+     DIRREMOVE() removes a specified directory.  Note that you must first
+     have sufficient rights to delete a directory.  A directory must be empty
+     in order to be deleted.  Therefore, to delete a directory that contains
+     subdirectories, you must first delete the subdirectories (see example
+     below).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses DIRREMOVE() to delete a subdirectory named
+        C:\TEST\ONE, which only contains an empty subdirectory named
+        C:\TEST\ONE\TWO:
+
+        DIRREMOVE("c:\test\one\two")        // First delete lowest dir
+        nResult := DIRREMOVE("c:\test\one")  // Then delete higher dir
+        IF nResult != 0
+           ? "Cannot remove directory, DOS error ", siResult
+           BREAK
+        ENDIF
+
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3861e.html">DIRCHANGE()</A>
+<A HREF="ng39600.html">DIRMAKE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

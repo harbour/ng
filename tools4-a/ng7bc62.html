@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7b972.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7a98e.html">[^^Up^^]</A>
+<A HREF="ng7bfea.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETINFO()</B>
+ Returns the information string of the Netware in use
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETINFO() --&gt; cInfo</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Returns</B>
+
+     NNETINFO() returns an information string to the Novell network software
+     in use on the default file server.  The return has a maximum of 512
+     characters.
+
+ <B>Description</B>
+
+     NOVELL NET INFO
+     This function can call an information string contained in Novell network
+     software.  This information always relates to the default file server.
+     For example, the character string contains specifications regarding the
+     company that sold the software being used.  This can be of particular
+     interest for OEM users.
+
+ <B>Example</B>
+
+     Display the information string:
+
+     ? NNETINFO()         // String of up to 512 characters
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng7d4d3.html">NNETVER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

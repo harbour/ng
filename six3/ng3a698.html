@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3a170.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3abaa.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_SortOption():</B>
+
+  Syntax:  Sx_SortOption([lUseCurrent])
+
+           lUseCurrent = .T. if sort is to be based on current index,
+                         .F. if not.
+
+  Returns:   &lt;logical&gt; Current "dirty read" setting.
+
+  Description:    This function sets the USECURRENT state for a subsequent
+                  SORT.
+
+                  <B>lUseCurrent</B> specifies whether or not to leave the current
+                  index or tag active while sorting the table.  This is
+                  useful if the current index is a conditional index,
+                  allowing the sorted table to be built with only the
+                  records matching the index filter condition.
+
+                  If a scope has been set (using <B>Sx_SetScope()</B> or <B>SET</B>
+                  <B>SCOPETOP/SET SCOPE BOTTOM</B>) and <B>lUseCurrent</B> is .T., then
+                  the active scope is used to limit the range of records
+                  included in the sorted table.
+
+                  This function is used in the <B>SORT</B> command.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"                        // Use database
+    INDEX ON last TO temp FOR salary &lt; 100000    // Create conditional index
+    <B>Sx_SortOption(.T.)</B>                           // Utilize current index
+    ? "Sorting..."                               // Show that we're sorting
+
+    // Now sort to a new database file
+    __dbSort("SORTDEMO",{"LAST","FIRST"},NIL,NIL,NIL,NIL,.F.)
+
+    USE SORTDEMO VIA "SIXCDX"                    // Open up the new database
+    Browse()                                     // Browse the database
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng53177.html">SORT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

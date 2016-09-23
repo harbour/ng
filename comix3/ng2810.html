@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2359.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng2f7b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmDoLinear()</B>          Perform Linear Optimization/eliminate maybe's
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmDoLinear() -&gt; NIL
+
+<B>Arguments</B>
+
+    None.
+
+<B>Returns</B>
+
+    NIL.
+
+<B>Description</B>
+
+    cmDoLinear() performs Linear Optimization.  Basically, this process
+    minimally scans the database in order to isolate only records which
+    fully meet the condition.
+
+    As an example, consider the condition: "(age &lt; 25 .and. salary &lt; 25000)
+    .or. last = 'J'", and suppose that we have an indexes on "age" and
+    "last", but do _not_ have an index on salary.
+
+    In this case, ClipMore will be able to to isolate the records meeting
+    the "age" condition and the "last" condition using indexes, but will not
+    be able to determine the records that meet the salary condition.  This
+    will result in the Filter RecordList having Maybe's (since records
+    meeting the age condition may or may not meet the salary condition).
+
+    If you execute cmDoLinear(), the database will be minimally scanned to
+    eliminate all the Maybe's.  The Filter RecordList will then only contain
+    records which do in fact meet the full condition.
+
+    This process can, however, take substantial time based on the number
+    of Maybe's in the RecordList.
+    
+    If the Filter RecordList has no Maybe's (i.e., the filter condition was
+    fully optimizable), then this function will return immediately because
+    there is nothing to do.
+
+    If you have Linear Optimization turned on (cmSetLinear(.t.)), then this
+    function will automatically be invoked by cmFilter() and cmReFilter().
+
+<B>Example</B>
+
+    use demo index age
+
+    *   Do the filtering (using available indexes)
+    cmFilter("age &lt;= 25 .and. salary &lt;= 30000")
+
+<B>    cmDoLinear()                        &amp;&amp; Quickly remove the Maybe's</B>
+
+<B>See Also</B>
+
+    cmGetLinear(), cmSetLinear(), cmFilter()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3fec.html">cmGetLinear()</A>
+<A HREF="ng6d03.html">cmSetLinear()</A>
+<A HREF="ng359b.html">cmFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

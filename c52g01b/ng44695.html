@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng43e47.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng44c6e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LASTREC()</B>
+ Determine the number of records in the current (.dbf) file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LASTREC() | RECCOUNT()* --&gt; nRecords</B>
+
+ <B>Returns</B>
+
+     LASTREC() returns the number of physical records in the current database
+     file as an integer numeric value.  Filtering commands such as SET FILTER
+     or SET DELETED have no effect on the return value.  LASTREC() returns
+     zero if there is no database file in USE in the current work area.
+
+ <B>Description</B>
+
+     LASTREC() is a database function that determines the number of physical
+     records in the current database file.  LASTREC() is identical to
+     RECCOUNT() which is supplied as a compatibility function.
+
+     By default, LASTREC() operates on the currently selected work area.  It
+     will operate on an unselected work area if you specify it as part of an
+     aliased expression (see example below).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates the relationship between LASTREC(),
+        RECCOUNT(), and COUNT:
+
+        USE Sales NEW
+        ? LASTREC(), RECCOUNT()          // Result: 84 84
+        //
+        SET FILTER TO Salesman = "1001"
+        COUNT TO nRecords
+        ? nRecords, LASTREC()            // Result: 14 84
+
+     <B>.</B>  This example uses an aliased expression to access the number
+        of records in a open database file in an unselected work area:
+
+        USE Sales NEW
+        USE Customer NEW
+        ? LASTREC(), Sales-&gt;(LASTREC())
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng83c58.html">COUNT</A>
+<A HREF="ng2fa9c.html">EOF()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

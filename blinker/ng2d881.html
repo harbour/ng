@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2d443.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2dda4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosGetHugeShift()             Get left shift count to apply to 1 to get huge selector increment value.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get the left shift count to apply to 1 to get the huge selector</B></U>
+            <B>increment value.</B>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosGetHugeShift(PUSHORT shiftcount);</B></U>
+
+ <U>shiftcount <B>Pointer to an integer to receive the huge shift value.</B></U>
+
+ <U>Return   : <B>Left-shift count integer.</B></U>
+
+ The huge increment value is obtained by applying the left-shift count
+ returned by this function to1. For example, a left-shift count of 3 gives a
+ huge increment of 8 (1 &lt;&lt; 3 == 8). This increment is added to the base
+ selector returned by DosAllocHuge() to give the next consecutive selector
+ for a huge memory block.
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main (void)</B>
+    <B>{</B>
+    <B>USHORT      shiftcount;</B>
+    <B>int         increment;</B>
+    <B>/* Get the huge shift count */</B>
+    <B>if (DosGetHugeShift(&amp;shiftcount) != 0);</B>
+    <B>   {</B>
+    <B>   printf("DosGetHugeShift() failed\n");</B>
+    <B>   exit(255);</B>
+    <B>   }</B>
+    <B>increment = 1 &lt;&lt; shiftcount;</B>
+    <B>printf("Huge shift : %04X\n",shiftcount);</B>
+    <B>printf("Huge increment : %04X\n",increment);</B>
+    <B>}</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

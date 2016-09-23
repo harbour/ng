@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng25f7f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng26f8a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIOVLSUS()                   Suspend overlay manager operations</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Suspend overlay manager operations</B></U>
+
+ <U>Syntax   : <B>BLIOVLSUS(niValue)</B></U>
+
+ <U>Return   : <B>Nothing</B></U>
+
+ This function shuts down the overlay manager. Depending on the level of
+ shutdown required, the overlay manager will free up some or all of the
+ system resources which it is using. The valid parameters are the numeric
+ values 1 through 3, and the system resources freed for each are as follows:
+
+    1  Closing all open overlay files, freeing up the DOS handles.
+    2  As (1) above, plus freeing of the EMS/XMS used for the overlay cache
+    3  Freeing ALL resources used by the overlay manager including the
+       overlay pool.
+
+ When the overlay manager is resumed using the BLIOVLRES() function, it will
+ attempt to reallocate the same resources it had before. If it is unable to
+ reallocate an overlay area, then the program will terminate with a Blinker
+ error 1216, 'Overlay manager unable to resume'. If the overlay area is
+ reallocated successfully, but there are no resources available for the
+ overlay cache, then execution will continue without caching of overlays.
+
+ Note: This routine must be called from the root, as the overlay manager will
+ be inactive on return from this call until a call to BLIOVLRES() is made.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng25d97.html">BLIOVLRES()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

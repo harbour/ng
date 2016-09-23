@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng317b2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng32407.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_KillTag():</B>
+
+  Syntax:   Sx_KillTag(cTagName | lAll [, cIndName])
+
+            cTagName = Name of the tag to delete
+            lAll     = Logical .T. indicating DELETE TAG ALL
+            cIndName = Name of the .CDX/.NSX file to delete from
+
+  Returns:   &lt;logical&gt; .T. if the tag (or .CDX/.NSX file) was deleted.
+                  .F. if an error occurred.
+
+  Description:    This function deletes one or all tags from one of the
+                  currently active or specified compound index files
+                  (.CDX/.NSX).  If cIndName is specified, then only that
+                  file is searched for the specified tag.  Otherwise, the
+                  active .CDX/.NSX files are searched in the order opened.
+
+                  If a logical .T. is passed as the first argument, then
+                  the .CDX/.NSX file is deleted.  If cIndName is not
+                  specified, then the current .CDX/.NSX file is deleted.
+
+                  If the specified tag is the only tag in the .CDX/.NSX file,
+                  then the .CDX/.NSX file is automatically deleted.
+
+                  This function is used in the <B>DELETE TAG</B> and <B>DELETE</B>
+                  <B>TAG ALL</B> commands.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+    NOTE:  Be sure that an order is actually set when passing
+               TRUE (delete all tags). Otherwise Sx_KillTag() will
+               return FALSE and the tags will not be killed.
+               For instance:
+
+               USE test VIA "SIXNSX"       // TEST.NSX auto opens
+               ? sx_killTag(.t.)           // .F. and no tags are killed.
+
+               Instead, do this:
+
+               USE test VIA "SIXNSX"       // TEST.NSX auto opens
+               ordsetFocus(1)              // make sure an order is set
+               ? sx_killTag(.t.)           // .T. and tags are killed.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"             // Open database
+    INDEX ON last TAG last            // Create one tag
+    ? Sx_TagCount()                   // Returns: 1
+    INDEX ON state TAG state          // Create a second tag
+    ? Sx_TagCount()                   // Returns: 2
+    <B>Sx_KillTag( "LAST" )</B>              // Delete tag number 1 (LAST)
+    ? Sx_TagCount()                   // Returns: 1
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng468c3.html">DELETE TAG</A>
+<A HREF="ng1a349.html">OrdDestroy()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

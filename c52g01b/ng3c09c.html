@@ -1,0 +1,116 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3b8fa.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng3cd4a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FSEEK()</B>
+ Set a binary file pointer to a new position
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FSEEK(&lt;nHandle&gt;, &lt;nOffset&gt;, [&lt;nOrigin&gt;]) --&gt; nPosition</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nHandle&gt;</B> is the file handle obtained from FOPEN(), FCREATE(), or
+     predefined by DOS.
+
+     <B>&lt;nOffset&gt;</B> is the number of bytes to move the file pointer from the
+     position defined by &lt;nOrigin&gt;.  It can be a positive or negative number.
+     A positive number moves the pointer forward, and a negative number moves
+     the pointer backward in the file.
+
+     <B>&lt;nOrigin&gt;</B> defines the starting location of the file pointer before
+     FSEEK() is executed.  The default value is zero, representing the
+     beginning of file.  If &lt;nOrigin&gt; is the end of file, &lt;nOffset&gt; must be
+     zero or negative.
+
+     <B>Methods of Moving the File Pointer</B>
+     ------------------------------------------------------------------------
+     <B>Origin  Fileio.ch      Description</B>
+     ------------------------------------------------------------------------
+     0       FS_SET         Seek from beginning of file
+     1       FS_RELATIVE    Seek from the current pointer position
+     2       FS_END         Seek from end of file
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     FSEEK() returns the new position of the file pointer relative to the
+     beginning of file (position 0) as an integer numeric value.  This value
+     is without regard to the original position of the file pointer.
+
+ <B>Description</B>
+
+     FSEEK() is a low-level file function that moves the file pointer forward
+     or backward in an open binary file without actually reading the contents
+     of the specified file.  The beginning position and offset are specified
+     as function arguments, and the new file position is returned.
+     Regardless of the function arguments specified, the file pointer cannot
+     be moved beyond the beginning or end of file boundaries.
+
+     <B>Warning! </B> This function allows low-level access to DOS files and
+     devices.  It should be used with extreme care and requires a thorough
+     knowledge of the operating system.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses FSEEK() to determine the length of a file by
+        seeking from the end of file.  Then, the file pointer is reset to the
+        beginning of file:
+
+        #include "Fileio.ch"
+        //
+        // Open the file read-only
+        IF (nHandle := FOPEN("Temp.txt")) &gt;= 0
+           //
+           // Get length of the file
+           nLength := FSEEK(nHandle, 0, FS_END)
+           //
+           // Reset file position to beginning of file
+           FSEEK(nHandle, 0)
+           FCLOSE(nHandle)
+        ELSE
+           ? "File open error:", FERROR()
+        ENDIF
+
+     <B>.</B>  This pseudofunction positions the file pointer at the last
+        byte in a binary file:
+
+        #define FileBottom(nHandle);
+              (FSEEK(nHandle, 0, FS_END))
+
+     <B>.</B>  This pseudofunction positions the file pointer at the first
+        byte in a binary file:
+
+        #define FileTop(nHandle);
+              (FSEEK(nHandle, 0))
+
+     <B>.</B>  This pseudofunction reports the current position of the file
+        pointer in a specified binary file:
+
+        #define FilePos(nHandle);
+              (FSEEK(nHandle, 0, FS_RELATIVE))
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Fileio.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng335f5.html">FCREATE()</A>
+<A HREF="ng3477a.html">FERROR()</A>
+<A HREF="ng3911e.html">FOPEN()</A>
+<A HREF="ng3a91a.html">FREAD()</A>
+<A HREF="ng3b241.html">FREADSTR()</A>
+<A HREF="ng3cd4a.html">FWRITE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

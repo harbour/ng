@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8c66.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng242.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_stornl()</B>
+ Assign a numeric value to a referenced variable using a long
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "extend.api"</B>
+     <B>int _stornl(</B>
+     <B>             long lNumber,</B>
+     <B>             int iParamNum</B>
+     <B>             [, int iArrayIndex]</B>
+     <B>           )</B>
+
+ <B>Arguments</B>
+
+     <B>lNumber</B> is a numeric expression of type long.
+
+     <B>iParamNum</B> is the one-based ordinal position in the parameter list of
+     the parameter to be assigned.
+
+     <B>iArrayIndex</B> is an array index that specifies a particular element if
+     the iParamNum parameter is an array.
+
+ <B>Returns</B>
+
+     _stornl() returns one if the function is successful; otherwise, it
+     returns zero.
+
+ <B>Description</B>
+
+     _stornl() stores a numeric value to a variable passed by reference as a
+     parameter from CA-Clipper.  If the parameter specified by iParamNum is
+     not passed by reference, _stornl() ignores the call and returns a value
+     of zero.
+
+ <B>Examples</B>
+
+     <B>.</B>  From C:
+
+        _stornl( 123456789L, 1 );
+
+     <B>.</B>  From Assembly language:
+
+        EXTRN __stornl:FAR
+              mov   ax, 1
+              push  ax                  ; iParamNum
+              mov   dx, 1883
+              mov   ax, 52501
+              push  dx                  ; push hi-order first
+              push  ax
+              call  __stornl
+              add   sp, 6               ; reset stack pointer
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Extend.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4069.html">_parnl()</A>
+<A HREF="ng66a8.html">_retnl()</A>
+<A HREF="ng86b1.html">_stornd()</A>
+<A HREF="ng8c66.html">_storni()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

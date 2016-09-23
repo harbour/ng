@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng28744.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng290d2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_Freeze():</B>
+
+  Syntax:  Sx_Freeze([[nTagNo | cTagName,] nOrder | cIndexName])
+
+           nTagNo     = Position of tag within compound index file
+           cTagName   = Name of the tag
+           nOrder     = Position of index in list of indexes
+           nIndexName = Name of the index
+
+  Returns:  &lt;logical&gt; .T. if successful, .F. if an error occurred
+
+  Description:  This function converts a "Full Update" or "Changes Only"
+                index or tag to a "No Update" tag or index.  After this
+                conversion no automatic updates are made.  All changes to
+                the tag or index <B>must</B> be done using Sx_KeyAdd() and
+                Sx_KeyDrop().
+
+    <U>NOTE:  This conversion is NOT reversible!</U>
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+
+  Example:
+
+    // Assume that CUST.DBF also has a structural index (CUST.CDX)
+    // SPECIAL.IDX created on cust-&gt;ACCTNO.
+
+    USE cust VIA "SIXCDX"      // Opens CUST.DBF and CUST.CDX
+
+    COPY FILE special.idx    ; // Copy special offer index to OFFER1
+           TO offer1.idx
+
+    SET INDEX TO offer1        // Open OFFER1 index
+
+    <B>Sx_Freeze(1)</B>               // Freeze index, so that no more
+                                // customers can ever be added or
+                                // deleted.
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng212d3.html">Sx_Chill()</A>
+<A HREF="ng3df28.html">Sx_Thermometer()</A>
+<A HREF="ng40076.html">Sx_Warm()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

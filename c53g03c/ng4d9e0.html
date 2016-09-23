@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4d577.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4dd8b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>deleted()</B>
+ Determine deleted status for a row (record)
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE deleted(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     BOOLP isDeleted</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>isDeleted</B> is a pointer to a boolean value that determines whether a
+     row is deleted.
+
+ <B>Description</B>
+
+     deleted() queries the row at the current work area cursor to determine
+     if it has been marked for deletion.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If your RDD supports relations, update them with a forceRel()
+        prior to attempting relative movement.
+
+     <B>Warning!  isDeleted</B> must point to sizeof(BOOL) bytes of allocated
+     memory.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4d577.html">delete()</A>
+<A HREF="ng58f71.html">forceRel()</A>
+<A HREF="ng51501.html">recall()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

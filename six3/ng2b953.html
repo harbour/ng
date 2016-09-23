@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2b790.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng2be74.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_IsLocked():</B>
+
+  Syntax:   Sx_IsLocked([nRecNo])
+
+            nRecNo = record number of record to check
+
+  Returns:  Logical .T. if record is locked, .F. if not locked.
+
+  Description:  Returns lock status for an individual record.
+
+  Example:
+
+    // Assuming this is being run on a network drive, or a local drive
+    // with SHARE.EXE loaded...
+
+    USE test VIA "SIXCDX"       // Open the database
+    dbGoto( 100 )               // Move to record 100
+    IF RLock()                  // Try to lock the record
+      ? <B>Sx_IsLocked()</B>           // Since it locked, this should return .T.
+    ELSE                        // Otherwise...
+      ? <B>Sx_IsLocked()</B>           // This would return .F.
+    ENDIF
+
+    // Check to see if record 1000 is locked
+    ? <B>Sx_IsLocked( 1000 )</B>
+
+  Notes:    If no record number is specified then the current record is
+            assumed.  This function will report record locks for records
+            that were locked by other users as well as the current user.
+
+  WARNING: <B>RLock() and Sx_RLock() will always return .T. on a local drive</B>
+  <B>         that does not have SHARE.EXE loaded, even though it didn't</B>
+  <B>         really lock the record (since there was no need).  However,</B>
+  <B>         the Sx_IsLocked() will always return the TRUE locked state of</B>
+  <B>         the record.</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3ef96.html">Sx_UnLock()</A>
+<A HREF="ng342f2.html">Sx_RLock()</A>
+<A HREF="ng290d2.html">Sx_GetLocks()</A>
+<A HREF="ng812d1.html">Why can't I lock more than 20 records at a time?</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

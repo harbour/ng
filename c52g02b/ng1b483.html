@@ -1,0 +1,42 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1b26e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng182ca.html">[^^Up^^]</A>
+<A HREF="ng1b83a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BASE/1003    Undefined variable</B>
+
+     <B>Explanation:</B>  You specified a variable that does not exist or is not
+     visible.
+
+     <B>Action:</B>
+
+     1. If you specified a database field, make sure you opened the
+        appropriate database file and selected the appropriate work area.  If
+        you don't want to select another work area, preface the field
+        variable reference with the target work area alias.
+
+     2. If you specified a private or public variable, make sure you created
+        the variable using either a PRIVATE or PUBLIC statement.
+
+     3. If you specified a local or static variable reference within a macro
+        variable, rearrange the code to refer to the variable directly (local
+        and static variables are not visible within macro variables).
+
+     The /W compiler option is useful in finding mispelled or incorrectly
+     specified variable references.
+
+     <B>See Also: </B> Basic Concepts chapter in the Programming and Utilities
+     guide
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

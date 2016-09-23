@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1e6ed.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng1f223.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCCNSRV()</B>
+ Determines the number of attached file servers
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCCNSRV([&lt;lLoggedIn&gt;]) --&gt; nServer</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lLoggedIn&gt; </B> Designates whether the number of all attached servers
+     (.F.) or if the number of servers with logged in users (.T.) is
+     determined.  The default value (.F.) counts all servers.
+
+ <B>Returns</B>
+
+     NNETCCNSRV() returns the number of attached servers.
+
+ <B>Description</B>
+
+     NOVELL NET COUNT CONNECTED SERVERS
+     With the function NNETCCNSRV() you can determine the number of attached
+     servers without having to specify the server names (NNETFSLST()).
+     Alternatively, you can determine the number of servers, where the user
+     is currently logged in.
+
+ <B>Example</B>
+
+     Server1 is attached.  A user then logs into another server.  The
+     information about the attached servers is determined by using
+     NNETCCNSRV():
+
+     NNETATTACH('SERVER1')
+     NNETLOGIN('PAUL','190366','SERVER2')
+
+     ? NNETCCNSRV()      // Returns: 2
+     ? NNETCCNSRV(.T.)   // Returns: 1
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1e6ed.html">NNETATTACH()</A>
+<A HREF="ng1ed86.html">NNETCCNSRV()</A>
+<A HREF="ng212d5.html">NNETLOGIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

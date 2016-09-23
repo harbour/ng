@@ -1,0 +1,137 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng22552.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng240e5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TRAPANYKEY()</B>
+ Calls a procedure with any keyboard input
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TRAPANYKEY(&lt;cProcedure&gt;) --&gt; cOldProcedure</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cProcedure&gt;</B>  Designates the name of the procedure that is called
+     when any input key is touched.
+
+     ()  If you call the function without parameters, the procedure to
+     monitor selected keyboard input is uninstalled.
+
+ <B>Returns</B>
+
+     At any given time, the function returns the name of the previously
+     active trap procedure.  If no call has ever been made to TRAPANYKEY(),
+     the function returns a null string.
+
+ <B>Description</B>
+
+     TRAPANYKEY() calls a given procedure for all keys that generate input.
+     This is somewhat similar to SET KEY &lt;AnyKey&gt; TO &lt;cProcName&gt;.
+
+     The scan code transmitted by the key is passed as a parameter to the
+     trap procedure, but it is not yet stored in the keyboard buffer.  To
+     input normally, each character must be sent to the keyboard buffer using
+     either the KEYBOARD command, or the KEYSEND() function.  Using KEYSEND()
+     is generally preferred because the previous keyboard buffer is always
+     added to the characters that have not yet been amended by the CA-Clipper
+     application -- therefore you do not lose input.
+
+     <B>The Procedure Call</B>
+     When you use this function, you do not call any CA-Clipper key trap.
+     When CA-Clipper tries to collect a keyboard input, this call is
+     redirected within the driver by the TRAPANYKEY() procedure.  CA-Clipper
+     checks the keyboard, with the exception of special input commands like
+     GET/READ, so these traps almost always work.
+
+     <B>Important!</B>  In contrast to CA-Clipper key traps, these internal
+     input commands do not have the option to ignore the interruption because
+     no internal input routine is reentrant.  You cannot, under any
+     circumstances, use the same input command in the called procedure.  This
+     applies the GET/READ, PROMPT, ACCEPT, and any similar input
+     instructions.  You can easily use INPUTMODE(.T.) to determine which
+     input command is currently active when you call a procedure.
+
+ <B>Notes</B>
+
+     <B>.</B>  The transmitted key codes must continue to be processed within
+        the trap procedure.  Otherwise no additional input is possible, and
+        you cannot even exit the program using Alt-C.
+
+     <B>.</B>  In contrast to CA-Clipper KEY TRAPS, recursions are
+        automatically avoided.
+
+     <B>.</B>  If the designated procedure does not exist, then the function
+        uninstalls itself and does not produce a runtime error.  If a warning
+        regarding a missing procedure is required during linking, use the
+        EXTERNAL &lt;procedure&gt; statement.
+
+ <B>Example</B>
+
+     In this example, two established abbreviations are input within
+     MEMOEDIT(), and then the accompanying phrases are expanded into the
+     text.  The trap procedure recognizes the last three keys that were input
+     and compares this sequence with the defined abbreviations.  In each
+     case, these phrases are sent using KEYSEND() and inserted in the
+     existing keyboard buffer.  Since the functions are called with .T. for
+     the second parameter, no characters are lost even if you type quickly.
+
+     At this time, the third character of the recognized abbreviation has not
+     yet been placed in the keyboard buffer and therefore does not yet exist
+     in text, so only two CHR(8) (backspace) characters are used to delete
+     the two characters that have already been transmitted.  The entire
+     sequence must be expanded with CHR(0) before it can be placed in the
+     keyboard buffer because KEYSEND() works on the basis of scan codes.
+
+     Notice the SET TYPEAHEAD enlarged keyboard buffer.
+
+     CLEAR
+
+     cLastThree := ""
+     SET TYPEAHEAD TO 50
+
+     TRAPANYKEY("Trap_Key")
+
+     cTextVar := SPACE(5000)
+     @@ 00, 00 TO MAXROW(), MAXCOL(), DOUBLE
+     cTextVar := MEMOEDIT(cTextVar, 1, 1, MAXROW() -1,    MAXCOL() -1)
+
+     TRAPANYKEY()
+
+     RETURN
+
+     PROCEDURE Trap_Key(nKey)
+
+        cLastThree := RIGHT(cLastThree, 2) + CHR(nKey)
+
+        DO CASE
+        CASE cLastThree == "ys"
+           cLine := CHR(8) + "Yours Sincerely"
+           KEYSEND(CHARMIX(cLine, CHR(0)), .T.)
+        CASE cLastThree == "yvt"
+           cLine := CHR(8) + "Yours Very Truly"
+           KEYSEND(CHARMIX(cLine, CHR(0)), .T.)
+        OTHERWISE
+           KEYSEND(I2BIN(nKey), .T.)
+        ENDCASE
+
+        RETURN
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng250b1.html">TRAPSHIFT()</A>
+<A HREF="ng17795.html">INPUTMODE()</A>
+<A HREF="ng18643.html">KEYSEND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

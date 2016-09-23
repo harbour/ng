@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbbf15.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb7bb9.html">[^^Up^^]</A>
+<A HREF="ngbc5f9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ISANSI()</B>
+ Tests to see if the ANSI screen driver is installed
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ISANSI() --&gt; lInstalledDriver</B>
+
+ <B>Returns</B>
+
+     ISANSI() returns .T. when ANSI.SYS or a comparable driver has been
+     loaded from CONFIG.SYS.
+
+ <B>Description</B>
+
+     ISANSI() determines if ANSI.SYS or another comparable driver has been
+     loaded from CONFIG.SYS.  Some full-page displays require the ANSI
+     driver.  If the driver is present, the display is fully operational.
+
+ <B>Note</B>
+
+     <B>Warning!</B>  You must implement DSETWINDOW(.F.) for ISANSI() to return
+     a correct result.
+
+ <B>Example</B>
+
+     If ANSI.SYS is present, output through DOS.  This allows a simple
+     terminal emulation:
+
+     IF ISANSI()                  // ANSI driver present?
+        COM_DOSCON(dDate)         // Output via DOS
+     ELSE
+        *...                      // Individual ANSI handling
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2b9ce.html">COM_DOSCON()</A>
+<A HREF="ng1240a.html">DSETWINDOW()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

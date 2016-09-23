@@ -1,0 +1,122 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4dc8b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng4f6af.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJSTIME()</B>
+ Queries or sets the job start time
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJSTIME(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;cNew&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; cTime</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;cNew&gt;</B>  Designates a new job start time for &lt;nJob&gt;.  The time must
+     be passed as a string in the form ("HH:MM:SS").
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJSTIME() returns the earliest time for &lt;nJob&gt; in &lt;cQueue&gt; as a
+     string in the form ("HH:MM:SS").  The function returns an empty string
+     ("  :  :  ") if the job start time has not been set or if an error
+     occurs (for example, if &lt;cQueue&gt; does not exist).
+
+ <B>Description</B>
+
+     NOVELL NET JOB START DATE
+     The Queue Management System (QMS) allows you to provide each job with a
+     retention period.  A job is not serviced before the specified time (job
+     start time).  With NNETJSTIME(), you can query or set the job start time
+     of &lt;nJob&gt; in &lt;cQueue&gt;.  The required job is specified by its job number.
+     The job number has nothing to do with the logical position of a job
+     within a queue; for example, the job with the highest priority in a
+     queue is not automatically job number 1.  The job number must be
+     determined with NNETCAPJOB() or NNETJLIST().
+
+     NNETJSTIME() returns the job start time.  An empty string indicates that
+     no time has been set.  In this case, the job is serviced as soon as a
+     print server is available.  ( An empty string can also indicate an
+     error.  A differentiation is possible with the NNETERROR() function.)
+
+     A new job start time can be set by passing a time with the &lt;dNew&gt;
+     parameter.  If &lt;dNew&gt; contains an empty time string ("  :  :  "), a
+     previously set job start date is removed.  If you reset a job start
+     time, the job start date is removed automatically.
+
+     To avoid an incorrect interpretation by the QMS of a date that has not
+     been initialized, always set a job start date with the job start time.
+
+ <B>Notes</B>
+
+     <B>.</B>  To determine a job start time, the requesting user must have
+        access to the queue as a user or an operator.  The modification of a
+        job start time is reserved for the user who created the job or for
+        queue operators.
+
+     <B>.</B>  A job that is already in progress cannot be modified.
+
+ <B>Examples</B>
+
+     <B>.</B>  Query the job start time for the first job in the queue
+        LINEPRINTER:
+
+        nJob=BIN2I(LEFT(NNETJLIST('LINEPRINTER'),2))
+        ? NNETJSTIME('LINEPRINTER',nJob)
+
+     <B>.</B>  Create the capture job, set the job start date for the
+        following day, and set the job start time for 10 PM:
+
+        NNETCAPSSF(1)
+        NNETCAPBEG(1)
+        NNETSETQ(1,'LINEPRINTER')
+        SET PRINTER ON
+        ? 'Hello'
+        nJob=NNETCAPJOB(1)
+        NNETJSDATE('LINEPRINTER',nJob,DATE()+1)
+        NNETJSTIME('LINEPRINTER',nJob,'22:00:00')
+        NNETCAPFLU(1)
+
+     <B>.</B>  The new job is always created at the first output (? "Hello"),
+        not by calling NNETCAPBEG().  Therefore, NNETJSTIME() must be called
+        after the first output.  If NNETJSTIME() is not called after the
+        first output, NNETCAPJOB() returns the number of the previous capture
+        job and the job start date is modified for the wrong job.
+
+     <B>.</B>  Remove the retention period for the first job in the queue
+        LINEPRINTER (date and time):
+
+        nJob=BIN2I(LEFT(NNETJLIST('LINEPRINTER'),2))
+        ? NNETJSDATE('LINEPRINTER',nJob,('  :  :  '))
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42436.html">NNETCAPJOB()</A>
+<A HREF="ng49eec.html">NNETJLIST()</A>
+<A HREF="ng7bfea.html">NNETSDATE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

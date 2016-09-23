@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6709d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng67baa.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSJDSC()</B>
+ Determines the description of the active job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSJDSC(&lt;cPServer&gt;,&lt;nPrinter&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; cDescription</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;nPrinter&gt;</B>  Designates the number of the printer on &lt;cPServer&gt;.
+     Values between 0 and 15 are possible.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSJDSC() returns the job description of the active job of
+     &lt;nPrinter&gt;.  If an error occurs (for example, no job active), the
+     function returns an empty string.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER JOB DESCRIPTION
+     NNETPSJDSC() allows you to determine the description of the active job
+     of &lt;nPrinter&gt; on &lt;cPServer&gt;.  The job is already active, so the
+     description cannot be modified.
+
+ <B>Example</B>
+
+     Determine the description of the active job of printer 0 on PSERVER:
+
+     ? NNETPSJDSC('PSERVER',0))
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng46721.html">NNETJDESC()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

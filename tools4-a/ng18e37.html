@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1882d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng195bb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPEXPD()</B>
+ Sets or determines the password expiration date
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPEXPD(&lt;cUser&gt;,[&lt;dDate&gt;],[&lt;cServer&gt;|&lt;nConId&gt;)</B>
+     <B>   --&gt; dExpiration</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cUser&gt; </B> Designates the name of the user whose password is set or
+     determined.
+
+     <B>&lt;dDate&gt; </B> Designates the new expiration date for the password of
+     &lt;cUser&gt;.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server to which &lt;cUser&gt;
+     has access.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPEXPD() returns the current expiration date of the password for
+     &lt;cUser&gt;.  If &lt;dDate&gt; has been passed and the return value does not match
+     &lt;dDate&gt;, the requesting user did not have the rights required for the
+     modification.
+
+ <B>Description</B>
+
+     NOVELL NET PASSWORD EXPIRATION DATE
+     NNETPEXPD() allows you to query or set the expiration date of the
+     password of &lt;cUser&gt;. To determine the expiration date, do not pass a
+     date for &lt;dDate&gt;.  If &lt;dDate&gt; contains a date, NNETPEXPD() tries to set
+     a new expiration date.  Supervisor rights are required on the related
+     file server to modify the expiration date.  An existing expiration date
+     can be removed with an empty date.  With &lt;cServer&gt; or &lt;nConId&gt;, the
+     password expiration date of users on any attached file servers can be
+     modified.  The connection ID of a server is returned by NNETATTACH() or
+     NNETLOGIN().
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the password expiration date for user MIKE:
+
+        ? NNETPEXPD('MIKE')               // z.B. 03/19/92
+
+     <B>.</B>  Set the new password expiration date for user MIKE:
+
+        NNETPEXPD('MIKE',CTOD('06/01/92'))
+
+     <B>.</B>  Remove the password expiration date for user MIKE:
+
+        NNETPEXPD("MIKE",CTOD(""))
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng195bb.html">NNETPEXPI()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

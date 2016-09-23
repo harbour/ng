@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2d07e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2d881.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosGetHostMode()              Get current DOS extender host mode (DPMI, VCPI, XMS).</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get the current DOS extender host mode (DPMI, VCPI, XMS).</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosGetHostMode(BYTE *hostmode);</B></U>
+
+ <U>hostmode   <B>Pointer to a byte to receive the host mode.</B></U>
+
+ <U>Return   : <B>Host mode indicator byte.</B></U>
+
+ This function is used to determine under which host mode the DOS extended
+ program is running.
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main (void)</B>
+    <B>{</B>
+    <B>BYTE        hostmode ;</B>
+    <B>if(DosGetHostMode(&amp;hostmode) == 0 )</B>
+    <B>   {</B>
+    <B>   printf("The host mode is ");</B>
+    <B>   switch(hostmode)</B>
+    <B>      {</B>
+    <B>      case BliHostDPMI :</B>
+    <B>         printf("DPMI");</B>
+    <B>         break;</B>
+    <B>      case BliHostVCPI :</B>
+    <B>         printf("VCPI");</B>
+    <B>         break;</B>
+    <B>      case BliHostXMS :</B>
+    <B>         printf("XMS");</B>
+    <B>         break;</B>
+    <B>      default :</B>
+    <B>         printf("Unknown!!");</B>
+    <B>      }</B>
+    <B>   }</B>
+    <B>}</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

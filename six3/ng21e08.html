@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng21829.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng22348.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_ClrScope():</B>
+
+  Syntax:    Sx_ClrScope([nWhich])
+
+           nWhich = Value identifying which scope value to clear
+                    (0 = TOP, 1 = BOTTOM)
+
+  Returns:  NIL
+
+  Description:  This function clears the specified scope value for the
+                current tag or index.  nWhich is used to identify which
+                value to clear.
+
+                     0 = SCOPETOP     (default)
+                     1 = SCOPEBOTTOM
+
+  NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"       // Open TEST.DBF
+    INDEX ON state TAG state    // Create an index on the STATE field
+
+    CLEAR
+    WAIT "First we'll browse the database without a SCOPE set..."
+    Browse()
+
+    CLEAR
+    ? "Now we'll set the top SCOPE value to 'AZ' and the bottom SCOPE value"
+    ? "to 'CA' to limit the range of visible records by STATE..."
+    Inkey(0)
+
+    Sx_SetScope( 0, "AZ" )      // Sets the SCOPETOP to "AZ"
+    Sx_SetScope( 1, "CA" )      // Sets the SCOPETOP to "CA"
+    Browse()                    // Browse all records w/ states from AZ-CA
+
+    CLEAR
+    WAIT "Now we'll clear the SCOPE condition..."
+    <B>Sx_ClrScope(0)</B>              // Clear SCOPETOP
+    <B>Sx_ClrScope(1)</B>              // Clear SCOPEBOTTOM
+    Browse()
+
+  <U>NOTE: The SET SCOPE command (with no parameters) will clear both the</U>
+  <U>      SCOPETOP and SCOPEBOTTOM values.</U>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng372fc.html">Sx_SetScope()</A>
+<A HREF="ng50a71.html">SET SCOPE</A>
+<A HREF="ng40c12.html">SET SCOPETOP / SET SCOPEBOTTOM</A>
+<A HREF="ng459dd.html">CLEAR SCOPE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

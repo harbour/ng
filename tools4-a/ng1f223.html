@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1ed86.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng1f978.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCLRCON()</B>
+ Clears a connection number
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCLRCON(&lt;nConnect&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>    --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nConnect&gt;</B> Designates the connection number that is cleared.
+
+     <B>&lt;cServer&gt;</B> Designates the name of the file server that is used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETCLRCON() returns .T. if &lt;nConnect&gt; has been cleared successfully.
+     If an error occurs, the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET CLEAR CONNECTION
+     When a workstation is first attached to a server, the Netware file
+     server returns a connection number (connection ID) to the workstation.
+     The file server keeps the connection ID even after a logout and is
+     assigned to the related workstation at the next connection setup.
+     However, the connection ID is changed, if all connection numbers are
+     used.  In this case, the connection ID can be assigned to another
+     workstation. NNETCLRCON() allows you to clear used connection numbers.
+
+     <B>Important! </B> If the connection &lt;nConnect&gt; is currently active, it is
+     interrupted immediately.  This can lead to data loss on the related
+     workstation, as all drive mappings become invalid and the writing of
+     data to the server is no longer possible.
+
+     Supervisor rights on the related file server are required to clear a
+     connection.
+
+ <B>Note</B>
+
+     <B>.</B>  This function should be used very carefully as data loss is
+        possible if &lt;nConnect&gt; is currently active.
+
+ <B>Example</B>
+
+     Determine the connection ID of the user MICK, and clear the connection
+     (ATTENTION: MICK will be logged out):
+
+     NNETCLRCON(NNETSTANUM('MICK'))
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng23dee.html">NNETSTANUM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

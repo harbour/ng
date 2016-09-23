@@ -1,0 +1,98 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng92566.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng89afa.html">[^^Up^^]</A>
+<A HREF="ng935ab.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FILEAPPEND()</B>
+ Appends data to a file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FILEAPPEND(&lt;cSourceFile&gt;, &lt;cTargetFile&gt;)</B>
+     <B>   --&gt; nAttachedByte</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSourceFile&gt;</B>  Designates the file that is appended to
+     &lt;cTargetFile&gt;.
+
+     <B>&lt;cTargetFile&gt;</B>  Designates the file to which &lt;cSource&gt; is appended.
+     Drive and path designation are permitted for both files, wildcards are
+     not.
+
+ <B>Returns</B>
+
+     FILEAPPEND() returns the number of characters appended on to
+     &lt;cTargetFile&gt;.
+
+ <B>Description</B>
+
+     FILEAPPEND() takes fragmented files, split them up on different floppies
+     and reassemble them.  This sort of fragmented file could be created with
+     the FILECOPY() system described in this chapter.  You only need explicit
+     information, such as VOLUME labels, to recognize the different disks.
+     If the target file does not exist, it is created with FILEAPPEND().  If
+     an error occurs while appending to the target file, the file deletes
+     completely to avoid accidental and incorrect results.
+
+     Never append data to file if there is no backup copy.
+
+ <B>Notes</B>
+
+     <B>.</B>  Use SETFCREATE(), if FILEAPPEND() creates a new file and an
+        alternative attribute needs to be specified.
+
+     <B>.</B>  Use SETSHARE() to protect a target file from access, if it is
+        on a network drive.
+
+ <B>Examples</B>
+
+     Shown below is a simplified program to reassemble a file that is divided
+     among several disks by a FILECOPY() backup.
+
+     A catalog contains a list of the disks used during backup in the form of
+     volume labels and backup file names.
+
+     Structure of the DISKLIST catalog:
+
+     <B>Table 7-10: DISKLIST File Structure</B>
+     ------------------------------------------------------------------------
+     <B>Field Name     Field Content</B>
+     ------------------------------------------------------------------------
+     VolLabel       Back up disk drive and volume label
+     BackupName     Back up file name, incl. drive and path
+     ------------------------------------------------------------------------
+
+     The data in DISKLIST is created by a FILECOPY() backup:
+
+     USE DISKLIST                                 // Saved volume labels
+     cTargetFile  :=  "C:\TARGET.TXT"
+     DO WHILE .NOT. EOF()
+        IF .NOT. EMPTY(FILESEEK(cVolLabel, 8)     // Correct disk ?
+           FILEAPPEND(cBackupName, cTargetFile)   // Yes, append data
+           SKIP
+        ELSE
+           ? "Please insert the correct disk  !"
+        ENDIF
+     ENDDO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng959a3.html">FILECOPY()</A>
+<A HREF="ng97ad4.html">FILESEEK()</A>
+<A HREF="ng9e9ad.html">SETSHARE()</A>
+<A HREF="ng9dd66.html">SETFCREATE()</A>
+<A HREF="ngb4677.html">CSETSAFETY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

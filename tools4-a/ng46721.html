@@ -1,0 +1,103 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4605f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng47251.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJDESC()</B>
+ Reads and modifies the job description
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJDESC(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;cDescription&gt;],</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; cDescription</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;cDescription&gt;</B>  Designates the new job description for &lt;nJob&gt;.  The
+     job description can be up to 49 characters long.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJDESC() returns the job description of &lt;nJob&gt; in &lt;cQueue&gt;.  If an
+     error occurs (for example, if &lt;cQueue&gt; does not exist), the function
+     returns an empty string.
+
+ <B>Description</B>
+
+     NOVELL NET JOB DESCRIPTION
+     NNETJDESC() allows you to read or to modify the description of each job
+     in a queue.  The description can be up to 49 characters long and is
+     printed on the banner page.  By passing the parameter &lt;cDescription&gt;,
+     you can overwrite the default description "LPTnCatch".  The operation
+     has been successful if the returned character string is identical to the
+     parameter &lt;cDescription&gt;.
+
+     The required job is specified by its job number.  The job number has
+     nothing to do with the logical position of a job within a queue.  The
+     job number can be determined with NNETCAPJOB() or NNETJLIST().
+
+ <B>Notes</B>
+
+     <B>.</B>  The reading of a job description requires that the requesting
+        user has access to the queue as a user or an operator.  The right to
+        modify a job description is reserved for the user who has created the
+        job and for the queue operator.
+
+     <B>.</B>  A job that is already in progress cannot be modified.
+
+ <B>Examples</B>
+
+     <B>.</B>  Query the job description for the first job in the queue
+        LINEPRINTER:
+
+        nJob=BIN2I(LEFT(NNETJLIST('LINEPRINTER'),2))
+        ? NNETJDESC('LINEPRINTER',nJob)
+
+     <B>.</B>  Start the capture mode for LPT1, send output to the queue
+        LINEPRINTER, and set the description of the resulting job to
+        "!CONFIDENTIAL!":
+
+        NNETCAPSSF(1)
+        NNETCAPBEG(1)
+        NNETSETQ(1,'LINEPRINTER')
+        SET PRINTER ON
+        ? 'Hello'
+        NNETJDESC('LINEPRINTER',NNETCAPJOB(1),'!CONFIDENTIAL!')
+        NNETCAPFLU(1)
+
+     <B>.</B>  The new job is always created at the first output (? "Hello"),
+        not by calling NNETCAPBEG().  Therefore, NNETJDESC() must be called
+        after the first output.  If NNETJDESC() is not called after the first
+        output, NNETCAPJOB() returns the number of the previous capture job
+        and the wrong description is modified.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42436.html">NNETCAPJOB()</A>
+<A HREF="ng44402.html">NNETJBNAME()</A>
+<A HREF="ng49eec.html">NNETJLIST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

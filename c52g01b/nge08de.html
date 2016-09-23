@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngde423.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngd8973.html">[^^Up^^]</A>
+<A HREF="nge0c18.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>#error</B>
+ Generate a compiler error and display a message
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>#error [&lt;messageText&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;messageText&gt;</B> is the text of the message to be displayed.
+     &lt;messageText&gt; is a literal character string--do not enclose the message
+     in quotations unless you want them to appear as part of the display.
+
+ <B>Description</B>
+
+     #error causes the compiler to generate error number C2074.  If the
+     &lt;messageText&gt; parameter is specified, an error message is displayed.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example displays an error message based on whether or not
+        a NETWORK identifier was defined:
+
+        #ifdef NETWORK
+           #error Network version not implemented.
+        #endif
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd8bff.html">#command</A>
+<A HREF="nge0c18.html">#ifdef</A>
+<A HREF="nge1372.html">#ifndef</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

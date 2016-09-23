@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng50765.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng51359.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MLPOS()</B>
+ Determine the position of a line in a character string or memo field
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MLPOS(&lt;cString&gt;, &lt;nLineLength&gt;,</B>
+     <B>   &lt;nLine&gt;, [&lt;nTabSize&gt;], [&lt;lWrap&gt;]) --&gt; nPosition</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is a character string or memo field.
+
+     <B>&lt;nLineLength&gt;</B> specifies the number of characters per line.
+
+     <B>&lt;nLine&gt;</B> specifies the line number.
+
+     <B>&lt;nTabSize&gt;</B> defines the tab size.  The default is four.  If
+     &lt;nTabSize&gt; is greater than or equal to &lt;nLineLength&gt;, then the tab size
+     is adjusted to &lt;nLineLength&gt; - 1.
+
+     <B>&lt;lWrap&gt;</B> toggles word wrap on and off.  Specifying true (.T.) toggles
+     word wrap on, and false (.F.) toggles it off.  The default is true
+     (.T.).
+
+ <B>Returns</B>
+
+     MLPOS() returns the character position of &lt;nLine&gt; in &lt;cString&gt; as an
+     integer numeric value.  If &lt;nLine&gt; is greater than the number of lines
+     in &lt;cString&gt;, MLPOS() returns the length of &lt;cString&gt;.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses MLPOS() to find the position of a specific
+        line, given a line length:
+
+        cString = MEMOREAD("Temp.txt")
+        nLineLength = 40
+        nLine = 5
+        nPosition = MLPOS(cString, nLineLength, nLine)
+        ? SUBSTR(cString, nPosition, 12)
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4cb68.html">MEMOLINE()</A>
+<A HREF="ng4e55c.html">MEMOTRAN()</A>
+<A HREF="ng4fe86.html">MLCOUNT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

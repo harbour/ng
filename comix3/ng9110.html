@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8a55.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng9559.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlGetFilter()</B>         Get the Filter RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlGetFilter() -&gt; rl
+
+<B>Arguments</B>
+
+    None.
+
+<B>Returns</B>
+
+    rlGetFilter() returns the Filter RecordList for the current workarea.
+
+<B>Description</B>
+
+    rlGetFilter() returns the Filter RecordList for the current workarea,
+    _but_ ClipMore retains ownership of it.
+
+    This allows you to quickly manipulate the Filter RecordList as needed.
+
+<B>Example</B>
+
+    *   Restrict to unpaid invoices over 30 days old
+    cmFilter("invDate &lt;= (date() - 30) .and. .not. paid")
+
+    *   Let user browse them (to clear off people he doesn't want to bill)
+    browseIt()
+
+    *   Now do the past due invoicing
+    ...
+
+    *   browseIt() is too complicated to show here.  The idea is that you'll
+    *   have a key which when pressed will cause a call to removeFromList()
+
+    *   Discard the current record from the RecordList
+    function removeFromList()
+<B>    rlClear(rlGetFilter(), recno())</B>
+    return
+
+<B>See Also</B>
+
+    rlExFilter(), rlSetFilter()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8a55.html">rlExFilter()</A>
+<A HREF="ngd88f.html">rlSetFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

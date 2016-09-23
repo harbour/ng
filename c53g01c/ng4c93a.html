@@ -1,0 +1,93 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4bc9b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng4d165.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FWRITE()</B>
+ Write to an open binary file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FWRITE(&lt;nHandle&gt;, &lt;cBuffer&gt;, [&lt;nBytes&gt;])</B>
+     <B>   --&gt; nBytesWritten</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nHandle&gt;</B> is the file handle obtained from FOPEN(), FCREATE(), or
+     predefined by DOS.
+
+     <B>&lt;cBuffer&gt;</B> is the character string to write to the specified file.
+
+     <B>&lt;nBytes&gt;</B> indicates the number of bytes to write beginning at the
+     current file pointer position.  If omitted, the entire content of
+     &lt;cBuffer&gt; is written.
+
+ <B>Returns</B>
+
+     FWRITE() returns the number of bytes written as an integer numeric
+     value.  If the value returned is equal to &lt;nBytes&gt;, the operation was
+     successful.  If the return value is less than &lt;nBytes&gt; or zero, either
+     the disk is full or another error has occurred.
+
+ <B>Description</B>
+
+     FWRITE() is a low-level file function that writes data to an open binary
+     file from a character string buffer.  You can either write all or a
+     portion of the buffer contents.  Writing begins at the current file
+     position, and the function returns the actual number of bytes written.
+
+     If FWRITE() results in an error condition, FERROR() can be used to
+     determine the specific error.
+
+     <B>Warning! </B> This function allows low-level access to DOS files and
+     devices.  It should be used with extreme care and requires a thorough
+     knowledge of the operating system
+
+ <B>Examples</B>
+
+     <B>.</B>  This example copies the contents of one file to another:
+
+        #include "Fileio.ch"
+        #define F_BLOCK      512
+        //
+        cBuffer := SPACE(F_BLOCK)
+        nInfile := FOPEN("Temp.txt", FO_READ)
+        nOutfile := FCREATE("Newfile.txt", FC_NORMAL)
+        lDone := .F.
+        //
+        DO WHILE !lDone
+           nBytesRead := FREAD(nInfile, @cBuffer, F_BLOCK)
+           IF FWRITE(nOutfile, cBuffer, nBytesRead) &lt; ;
+                       nBytesRead
+              ? "Write fault: ", FERROR()
+              lDone := .T.
+           ELSE
+              lDone := (nBytesRead == 0)
+           ENDIF
+        ENDDO
+        //
+        FCLOSE(nInfile)
+        FCLOSE(nOutfile)
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42616.html">FCLOSE()</A>
+<A HREF="ng431be.html">FCREATE()</A>
+<A HREF="ng44341.html">FERROR()</A>
+<A HREF="ng48d15.html">FOPEN()</A>
+<A HREF="ng5ed2f.html">I2BIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

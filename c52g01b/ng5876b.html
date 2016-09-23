@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng58006.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng58dbb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RAT()</B>
+ Return the position of the last occurrence of a substring
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RAT(&lt;cSearch&gt;, &lt;cTarget&gt;) --&gt; nPosition</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSearch&gt;</B> is the character string to locate.
+
+     <B>&lt;cTarget&gt;</B> is the character string to search.
+
+ <B>Returns</B>
+
+     RAT() returns the position of &lt;cSearch&gt; within &lt;cTarget&gt; as an integer
+     numeric value.  If &lt;cSearch&gt; is not found, RAT() returns zero.
+
+ <B>Description</B>
+
+     RAT() is a character function that returns the position of the last
+     occurrence of a character substring within another character string.  It
+     does this by searching the target string from the right.  RAT() is like
+     the AT() function which returns the position of the first occurrence of
+     a substring within another string.  RAT() is also like the $ operator
+     which determines whether a substring is contained within a string.
+
+     Both the RAT() and AT() functions are used with SUBSTR(), LEFT(), and
+     RIGHT() to extract substrings.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses RAT() to create a user-defined function,
+        FilePath(), that extracts the path from a file specification.  If the
+        path is unspecified, FilePath() returns a null string (""):
+
+        ? FilePath("C:\DBF\Sales.dbf")      // Result: C:\DBF\
+
+        FUNCTION FilePath( cFile )
+           LOCAL nPos, cFilePath
+           IF (nPos := RAT("\", cFile)) != 0
+              cFilePath = SUBSTR(cFile, 1, nPos)
+           ELSE
+              cFilePath = ""
+           ENDIF
+           RETURN cFilePath
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf688.html">AT()</A>
+<A HREF="ng44c6e.html">LEFT()</A>
+<A HREF="ng5d64a.html">RIGHT()</A>
+<A HREF="ng687c7.html">STRTRAN()</A>
+<A HREF="ng69c3b.html">SUBSTR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

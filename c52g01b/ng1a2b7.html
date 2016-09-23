@@ -1,0 +1,374 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng19bfd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng1d373.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBEDIT()*</B>
+ Browse records in a table layout
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBEDIT([&lt;nTop&gt;], [&lt;nLeft&gt;],</B>
+     <B>   [&lt;nBottom&gt;], &lt;nRight&gt;],</B>
+     <B>   [&lt;acColumns&gt;],</B>
+     <B>   [&lt;cUserFunction&gt;],</B>
+     <B>   [&lt;acColumnSayPictures&gt; | &lt;cColumnSayPicture&gt;],</B>
+     <B>   [&lt;acColumnHeaders&gt; | &lt;cColumnHeader&gt;],</B>
+     <B>   [&lt;acHeadingSeparators&gt; | &lt;cHeadingSeparator&gt;],</B>
+     <B>   [&lt;acColumnSeparators&gt; | &lt;cColumnSeparator&gt;],</B>
+     <B>   [&lt;acFootingSeparators&gt; | &lt;cFootingSeparator&gt;],</B>
+     <B>   [&lt;acColumnFootings&gt; | &lt;cColumnFooting&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B>, and <B>&lt;nRight&gt;</B> define the
+     upper left and lower right coordinates of the DBEDIT() window.  Row
+     values can range from zero to MAXROW() and column positions can range
+     from zero to MAXCOL().  If not specified, the default coordinates are 0,
+     0, MAXROW(), and MAXCOL().
+
+     <B>&lt;acColumns&gt;</B> is an array of character expressions containing database
+     field names or expressions to use as column values for each row
+     displayed.  If this argument is not specified, DBEDIT() displays all
+     fields in the current work area as columns.
+
+     <B>&lt;cUserFunction&gt;</B> is the name of a user-defined function that executes
+     when an unrecognizable key is pressed or there are no keys pending in
+     the keyboard buffer.  Specify the function name as a character
+     expression without parentheses or arguments.  Note that the behavior of
+     DBEDIT() is affected by the presence of this argument.  Refer to the
+     discussion below for more information.
+
+     <B>&lt;acColumnSayPictures&gt;</B> is a parallel array of picture clauses to
+     format each column.  Specifying &lt;cColumnSayPicture&gt; instead of an array
+     displays all columns with the same format.  Refer to TRANSFORM() or
+     @...SAY for more information on pictures.
+
+     <B>&lt;acColumnHeaders&gt;</B> is a parallel array of character expressions that
+     define the headings for each column.  Specifying &lt;cColumnHeader&gt; gives
+     the same heading for all columns.  To display a multiline heading, embed
+     a semicolon in the heading expression where you want the string to
+     break.  If not specified, column headings are taken from the &lt;acColumns&gt;
+     array, or the field names in the current work area if the &lt;acColumns&gt;
+     argument is not specified.
+
+     <B>&lt;acHeadingSeparators&gt;</B> is a parallel array of character expressions
+     that define the characters used to draw horizontal lines separating
+     column headings from the field display area. Specifying
+     &lt;cHeadingSeparator&gt; instead of an array uses the same heading separator
+     for all columns.  If this argument is not specified, the default
+     separator is a double graphics line.
+
+     <B>&lt;acColumnSeparators&gt;</B> is a parallel array of character expressions
+     that define the characters used to draw vertical lines separating the
+     columns.  Specifying &lt;cColumnSeparator&gt; instead of an array uses the
+     same separator for all columns.  If this argument is not specified, the
+     default separator is a single graphics line.
+
+     <B>&lt;acFootingSeparators&gt;</B> is a parallel array of character expressions
+     that define the characters used to draw horizontal lines separating
+     column footings from the field display area.  Specifying
+     &lt;cFootingSeparator&gt; instead of an array uses the same footing separator
+     for all columns.  If this argument is not specified, there is no footing
+     separator.
+
+     <B>&lt;acColumnFootings&gt;</B> is a parallel array of character expressions that
+     define footings for each column.  Specifying &lt;cColumnFooting&gt; instead of
+     an array gives the same footing for all columns.  To display a multiline
+     footing, embed a semicolon in the footing expression where you want the
+     string to break.  If this argument is not specified, there are no column
+     footings.
+
+ <B>Returns</B>
+
+     DBEDIT() always returns NIL.
+
+ <B>Description</B>
+
+     DBEDIT() is a user interface and compatibility function that displays
+     records from one or more work areas in a table form.  The DBEDIT()
+     window display is a grid of cells divided into columns and rows.
+     Columns correspond to database fields and rows correspond to database
+     records.  Each column is defined by an element of the &lt;acColumns&gt; array.
+     The display width of each column is determined by the evaluation of the
+     column expression in &lt;acColumns&gt; array or the column picture specified
+     in the &lt;acColumnSayPictures&gt; array.
+
+     All cursor movement keys are handled within DBEDIT(), including PgUp,
+     PgDn, Home, End, the four arrow keys, and all Ctrl key combinations that
+     produce cursor movement.  The navigation keys that DBEDIT() responds to
+     when a user function argument is not specified are listed in the Active
+     Keys table below:
+
+     <B>DBEDIT() Active Keys</B>
+     ------------------------------------------------------------------------
+     <B>Key                 Action</B>
+     ------------------------------------------------------------------------
+     Uparrow             Up one row
+     Dnarrow             Down one row
+     Leftarrow           Column left
+     Rightarrow          Column right
+     Ctrl-Leftarrow      Pan left one column
+     Ctrl-Rightarrow     Pan right one column
+     Home                Leftmost current screen column
+     End                 Rightmost current screen column
+     Ctrl-Home           Leftmost column
+     Ctrl-End            Rightmost column
+     PgUp                Previous screen
+     PgDn                Next screen
+     Ctrl-PgUp           First row of current column
+     Ctrl-PgDn           Last row of current column
+     Return              Terminate DBEDIT()
+     Esc                 Terminate DBEDIT()
+     ------------------------------------------------------------------------
+
+     When the user function argument (&lt;cUserFunction&gt;) is specified, all keys
+     indicated in the Active Keys table are active with the exception of Esc
+     and Return.  When DBEDIT() calls the user function, it automatically
+     passes two arguments:
+
+     <B>.</B>  The current mode passed as a numeric value
+
+     <B>.</B>  The index of the current column in &lt;acColumns&gt; passed as a
+        numeric value
+
+     The mode parameter indicates the current state of DBEDIT() depending on
+     the last key executed.  The possible mode values are listed in the
+     DBEDIT() Modes table below:
+
+     <B>DBEDIT() Modes</B>
+     ------------------------------------------------------------------------
+     <B>Status  Dbedit.ch      Description</B>
+     ------------------------------------------------------------------------
+     0       DE_IDLE        Idle, any cursor movement keystrokes have been
+                            handled and no keystrokes are pending
+     1       DE_HITTOP      Attempt to cursor past top of file
+     2       DE_HITBOTTOM   Attempt to cursor past bottom of file
+     3       DE_EMPTY       No records in work area
+     4       DE_EXCEPT      Key exception
+     ------------------------------------------------------------------------
+
+     The index parameter points to the position of the current column
+     definition in the &lt;acColumns&gt; array.  If &lt;acColumns&gt; is not specified,
+     the index parameter points to the position of the field in the current
+     database structure.  Access the field name using FIELD().
+
+     A user-defined function must return a value that indicates to DBEDIT()
+     the action to perform.  The User Function Return Values table below
+     lists the possible return values and the corresponding actions:
+
+     <B>DBEDIT() User Function Return Values</B>
+     ------------------------------------------------------------------------
+     <B>Value   Dbedit.ch      Description</B>
+     ------------------------------------------------------------------------
+     0       DE_ABORT       Abort DBEDIT()
+     1       DE_CONT        Continue DBEDIT()
+     2       DE_REFRESH     Force reread/repaint and continue; after repaint,
+                            process keys and go to idle
+     ------------------------------------------------------------------------
+
+     A number of instances effect calls to the user function:
+
+     <B>.</B>  A key exception occurs.  This happens when DBEDIT() fetches a
+        keystroke that it does not recognize from the keyboard.  Any pending
+        keys remain in the keyboard buffer until fetched within the user
+        function or until DBEDIT() continues.
+
+     <B>.</B>  DBEDIT() enters the idle mode (i.e., all pending keys have
+        been processed).  This happens when the keyboard is empty or after a
+        screen refresh.  In this instance, there is one call to the user
+        function and then DBEDIT() waits for a key.
+
+     <B>.</B>  Beginning or end of file is encountered.  This is the same as
+        idle.  All executable keys are performed, and there is one call to
+        the user function with the appropriate status message.
+
+     Note that when DBEDIT() is first executed, all keys pending in the
+     keyboard buffer are executed and then DBEDIT() enters the idle mode with
+     a user function call.  If no keys are pending, the idle mode is
+     immediate.
+
+     The user function should handle all modes and status messages received
+     from DBEDIT().
+
+     A user-defined function must assure that the DBEDIT() status is
+     equivalent to DE_EXCEPT (4) otherwise the value of LASTKEY() is
+     meaningless and a Return value of DE_REFRESH (2) will place the
+     application into an endless loop.
+
+     FUNCTION DBEditFunc ( nMode, nColumnPos )
+        LOCAL RetVal := DE_CONT
+
+        IF ( nMode == DE_EXCEPT )
+           IF ( LASTKEY() == K_F5 )
+              RetVal := DE_REFRESH
+           ENDIF
+        ENDIF
+     RETURN(  RetVal )
+
+     DBEDIT() is fully reentrant, which means you can make nested calls to
+     it.  Using this feature, you can have multiple browse windows on the
+     screen at the same time.
+
+     DBEDIT() is a compatibility function and, therefore, no longer
+     recommended as a programmable browse facility.  As such, it is
+     superseded by the TBrowse object class.  For more information, refer to
+     TBrowse class in this chapter.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates a generic call to DBEDIT():
+
+        USE Names NEW
+        DBEDIT()
+
+     <B>.</B>  This example demonstrates calling DBEDIT() with a user
+        function:
+
+        #include "dbedit.ch"
+        #include "inkey.ch"
+
+        // Array must be visible to other user-defined programs in
+        // program
+
+        STATIC acColumns := {}
+
+        PROCEDURE Main()
+
+           USE Names NEW
+           INDEX ON Names-&gt;Lastname + Names-&gt;FirstName TO Names
+
+           CLS
+
+           acColumns := { "LastName", "FirstName" }
+
+           DBEDIT( 5, 5, 20, 70, acColumns, "UserFunc" )
+
+        RETURN
+
+
+        FUNCTION UserFunc( nMode, nCol )
+           LOCAL nKey := LASTKEY()
+           LOCAL nRetVal := DE_CONT         // Default return value
+
+           DO CASE
+           CASE nMode == DE_IDLE
+              nRetVal := IdleFunc()
+           CASE nMode == DE_HITTOP
+              TONE( 100, 3 )
+           CASE nMode == DE_HITBOTTOM
+              TONE( 100, 3 )
+              nRetVal := AppendFunc( nKey )
+           CASE nMode == DE_EMPTY
+              nRetVal := EmptyFunc()
+           CASE nMode == DE_EXCEPT
+              nRetVal := ExceptFunc( nKey, nCol )
+           OTHERWISE
+              TONE( 100, 3 )
+           ENDCASE
+
+        RETURN nRetVal
+
+        FUNCTION AppendFunc( nKey )
+           LOCAL nRetVal := DE_CONT         // Default return value
+
+           IF nKey == K_DOWN                // If DOWN ARROW
+              APPEND BLANK                  // Append blank record
+        // Note: The appended record will appear at the top of the
+        //       DBEDIT() screen when the database file is indexed.
+
+              nRetVal := DE_REFRESH         // Refresh screen
+           ENDIF
+
+
+        RETURN nRetVal
+
+        FUNCTION ExceptFunc( nKey, nCol )
+           LOCAL nRetVal := DE_CONT         // Default return value
+
+           DO CASE
+           CASE nKey == K_ESC               // If ESCAPE
+              nRetVal := DE_ABORT           // Exit
+           CASE nKey == K_RETURN            // If RETURN
+              nRetVal := EditFunc( nCol )   // Function to edit
+                                            // field
+
+           // Toggle DELETED status
+           CASE nKey == K_DEL .AND. LASTREC() != 0  // DELETE pressed
+              IF DELETED()
+                 RECALL
+              ELSE
+                 DELETE
+              ENDIF
+           OTHERWISE
+                 TONE( 100, 1 )
+           ENDCASE
+
+        RETURN nRetVal
+
+
+        FUNCTION EditFunc( nCol )
+           LOCAL cIndexVal         // Value of current key expression
+           LOCAL nRetVal           // Return value
+           LOCAL nField            // Position of current field
+           LOCAL cFieldVal         // Value of current field
+           LOCAL nCursSave         // Preserve state of cursor
+
+           // This will return an error if no index is open
+           cIndexVal := &amp;( INDEXKEY(0) )
+
+           nField := FIELDPOS( acColumns[nCol] )
+
+           IF nField != 0
+              nCursSave := SETCURSOR()         // Save state of cursor
+              SETCURSOR(1)                     // Change cursor shape
+              cFieldVal := FIELDGET( nField )  // Save contents
+                                               // of field
+              @ ROW(), COL() GET cFieldVal     // GET new value
+              READ
+              FIELDPUT( nField, cFieldVal )    // REPLACE with
+                                               // new value
+              SETCURSOR( nCursSave )           // Restore cursor
+                                               // shape
+           ENDIF
+
+
+           IF cIndexVal != &amp;( INDEXKEY(0) )    // If key expression
+                                               // changed
+
+              nRequest := DE_REFRESH           // Refresh screen
+           ELSE                                // Otherwise
+              nRequest := DE_CONT              // Continue
+           ENDIF
+
+        RETURN nRequest
+
+        FUNCTION IdleFunc()
+           // Idle routine
+        RETURN DE_CONT
+
+        FUNCTION EmptyFunc()
+           // Empty Records routine
+        RETURN DE_CONT
+
+ <B>Files:</B>  Library is EXTEND.LIB, header files are Dbedit.ch and Inkey.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng73148.html">@...GET</A>
+<A HREF="ng45a7.html">ACHOICE()</A>
+<A HREF="ng11c73.html">BROWSE()*</A>
+<A HREF="ng47e75.html">MEMOEDIT()</A>
+<A HREF="ng6b445.html">TRANSFORM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

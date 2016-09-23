@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng26db7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng278a8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBUNLOCKALL()</B>
+ Release all locks for all work areas
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBUNLOCKALL() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DBUNLOCKALL() always returns NIL.
+
+ <B>Description</B>
+
+     DBUNLOCKALL() releases any record or file locks obtained by the current
+     process for any work area.  DBUNLOCKALL() is only meaningful on a shared
+     database in a network environment.  It is equivalent to calling
+     DBUNLOCK() on every occupied work area.
+
+     DBUNLOCKALL() performs the same function as the UNLOCK ALL command.  For
+     more information, refer to the UNLOCK ALL command.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example marks a record for deletion if an
+        RLOCK() attempt is successful, then clears all locks in all work
+        areas:
+
+        cLast := "Winston"
+        USE Sales SHARED NEW VIA "DBFNTX"
+        DBSETINDEX( "SALEFNAM" )
+        DBSETINDEX( "SALELNAM" )
+        //
+        USE Colls SHARED NEW VIA "DBFNTX"
+        DBSETINDEX( "COLLFNAM" )
+        DBSETINDEX( "COLLLNAM" )
+        //
+        DBSELECTAREA( "Sales" )     // select "Sales" work area
+        //
+        IF ( Colls-&gt;(DBSEEK(cLast)) )
+           IF Colls-&gt;( DELETED() )
+              ? "Record deleted: ", Colls-&gt;( DELETED() )
+              IF Colls-&gt;( RLOCK() )
+                 Colls-&gt;( DBRECALL() )
+                 ? "Record recalled..."
+              ENDIF
+           ENDIF
+        ELSE
+           ? "Not found"
+           DBUNLOCKALL()            // remove all locks in
+        ENDIF                       // all work areas
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng26db7.html">DBUNLOCK()</A>
+<A HREF="ng384c9.html">FLOCK()</A>
+<A HREF="ng5dd2e.html">RLOCK()</A>
+<A HREF="ngb0c58.html">UNLOCK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

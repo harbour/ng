@@ -1,0 +1,38 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngda39.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3cf.html">[^^Up^^]</A>
+<A HREF="ngdf20.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>149 NEW: { }, ||</B>
+--------------------------------------------------------------------------------
+
+     The { } operator is a new operator used to define literal arrays
+     and code blocks:
+
+     1. <B>Literal arrays:</B>  Curly braces ({ }) used to indicate literal
+        arrays.  This operator can be used anywhere an array can be
+        specified.  For example:
+
+        aArray := { 1, 2, 3, 4 }
+
+        defines a literal array, assigning it to aArray.
+
+     2. <B>Code blocks:</B>  Curly braces are also used to define a code
+        block.  A code block consists of list of expressions.  In
+        addition, the vertical bars (||) are used to specify an argument
+        list to pass to the code block.  For example:
+
+        bBlock := { |a, b| QOUT("The sum is: "), QQOUT(a + b) }
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

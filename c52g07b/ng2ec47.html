@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2e9c6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c81b.html">[^^Up^^]</A>
+<A HREF="ng2efef.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Other Incompatibilities</B>
+------------------------------------------------------------------------------
+
+     1. ISCOLOR() always returns false (.F.).
+
+     2. When you load DBU, the default color mode is monochrome unless you
+        specify DBU with the /C command line option.
+
+     3. The first time you invoke the Debugger, the default color mode is
+        also monochrome unless you set the Options:Mono display off.
+
+     4. When an application linked with the ANSITERM terminal driver
+        terminates, the last color set in the application becomes the DOS
+        color.  This happens since colors set with ANSITERM are global to DOS
+        and CA-Clipper cannot query DOS for the current screen colors as the
+        application loads.
+
+     5. Nondisplaying ASCII characters are presented as a space by the
+        ANSITERM terminal driver.  These include BELL (CHR(7)), BS (CHR(8)),
+        TAB (CHR(9)), LF (CHR(10)), CR (CHR(13)), and ESC (CHR(27)).
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

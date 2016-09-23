@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng25343.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng26942.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBFILEGET()</B>
+ Insert the contents of a field into a file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBFILEGET(&lt;nFieldPos&gt;, &lt;cTargetFile&gt;, &lt;nMode&gt;)</B>
+     <B>   --&gt; lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nFieldPos&gt;</B> is the position of the field in the database file
+     structure.
+
+     <B>&lt;cTargetFile&gt;</B> is the name of the file where the field data will be
+     written, including an optional drive, directory and extension. See
+     SetDefault() and SetPath() for file searching and creation rules. No
+     default extension is assumed.
+
+     If &lt;cTargetFile&gt; does not exist, it is created. If it exists, this
+     function attempts to open the file in exclusive mode and if successful,
+     the file is written to without warning or error. If access is denied
+     because, for example, another proess is using the file, NetErr() is set
+     to TRUE.
+
+     <B>&lt;nMode&gt;</B> is a constant defining the copy mode, as shown in the table
+     below:
+
+     <B>DBFILEGET() Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant            Description</B>
+     ------------------------------------------------------------------------
+     FILEGET_APPEND      Appends to the file.
+     FILEGET_OVERWRITE   Overwrites the file.  This is the default.
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     DBFILEGET() returns true (.T.) if successful; otherwise it returns false
+     (.F.).
+
+ <B>Description</B>
+
+     DBFILEGET() provides a mechanism for copying the contents of a field
+     into a file.  By default, this function operates on the currently
+     selected work area.  It can be made to operate on an unselected work
+     area by specifying it within an aliased expression.
+
+     DBFILEGET() is used in conjunction with DBFILEPUT() to transfer data
+     back and forth between files and database fields.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example exports the contents of a field that stores a
+        picture to a .GIF file, so that the file can be programmatically
+        displayed:
+
+        FUNCTION ShowPix()
+           LOCAL cPixFile := "picture.gif"
+           LOCAL nPos
+
+           // Customer database with a picture of each
+           // customer stored in a field called "Pix"
+           USE customer NEW VIA "DBFCDX"
+           nPos := FieldPos("Pix")
+
+           // Export the file's data for the current Pix field
+           IF ! DBFILEGET(nPos, cPixFile, FILEGET_OVERWRITE )
+              Alert("Export of picture " + cPixFile +
+              " failed!")
+
+           ELSE
+              // Code for displaying picture would go here
+           ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB, header is Dbinfo.ch
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng26942.html">DBFILEPUT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng274f4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng272ab.html">[^^Up^^]</A>
+<A HREF="ng27c37.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETDELFAK()</B>
+ Deletes the fake root mapping for a drive
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETDELFAK([&lt;cDrive&gt;]) --&gt; NIL</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cDrive&gt;</B>  Designates a drive (A to .Z) or a search drive that has
+     been mapped to a network directory as a fake root.  When called without
+     the parameter, NNETDELFAK() uses the default drive.
+
+ <B>Description</B>
+
+     NOVELL NET DELETE FAKE ROOT MAPPING
+     NNETDELFAK() deletes an existing fake root mapping for &lt;Drive&gt;.  The
+     function does not affect the drive mapping.  After the fake root mapping
+     has been deleted, you can also access parent directories of the fake
+     root on &lt;cDrive&gt;.
+
+ <B>Note</B>
+
+     <B>.</B>  Fake roots require Novell shell version 3.01 or higher.
+
+ <B>Example</B>
+
+     Map drive M: as a fake root, then delete the fake root mapping and
+     change to the parent directory of the fake root:
+
+     NNETMAP('M','SYS:PAUL',.T.)
+     NNETDELFAK('M')
+     DIRCHANGE('M:..')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng281fb.html">NNETMAP()</A>
+<A HREF="ng27c37.html">NNETFAKDEP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng46803.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng474f5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBTRANSINFO</B>
+ Define global transfer of data items from one work area to another
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   struct _AREA  far * lpaSource;</B>
+     <B>   struct _AREA  far * lpaDest;</B>
+     <B>   DBSCOPEINFO   dbsci;</B>
+     <B>   USHORT        uiFlags;</B>
+     <B>   USHORT        uiItemCount;</B>
+     <B>   LPDBTRANSITEM lpTransItems;</B>
+     <B>} DBTRANSINFO;</B>
+     <B></B>
+     <B>typedef DBTRANSINFO far * LPDBTRANSINFO;</B>
+
+ <B>Elements</B>
+
+     <B>lpaSource</B>
+
+        Contains a pointer to the source work area.
+
+     <B>lpaDest</B>
+
+        Contains a pointer to the destination work area.
+
+     <B>dbsci</B>
+
+        Contains a data structure describing the limits of the scope of the
+        transfer (see DBSCOPEINFO).
+
+     <B>uiFlags</B>
+
+        Contains literal constants specifying transfer attributes.  The flag
+        values are defined in Rdd.api and have the following meanings:
+
+        <B>DBTRANSINFO Transfer Flag Values</B>
+        ---------------------------------------------------------------------
+        <B>Constant       Meaning</B>
+        ---------------------------------------------------------------------
+        DBTF_MATCH     Both this work area and the destination work area have
+                       identical row structures (i.e., all fields match)
+        DBTF_PUTREC    The RDD has the ability to transfer an entire row
+        ---------------------------------------------------------------------
+
+     <B>uiItemCount</B>
+
+        Contains a numeric value specifying the number of items in the
+        lpTransItems array, below.  (This is usually the number of fields to
+        be transferred).
+
+     <B>lpTransItems</B>
+
+        An array of character data type values, assumed to be the items to
+        transfer to the destination work area.  lpTransItems is usually a list
+        of field mappings from the source to the destination (see
+        DBTRANSITEM).
+
+ <B>Files</B>  Header file is Rdd.api.
+
+ <B>Used By</B>    DBSORTINFO, trans(), transRec()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng46495.html">DBSORTINFO</A>
+<A HREF="ng56d06.html">trans()</A>
+<A HREF="ng57370.html">transRec()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

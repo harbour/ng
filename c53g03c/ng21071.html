@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng20b9e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng206af.html">[^^Up^^]</A>
+<A HREF="ng2152a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_errGetFileName()</B>
+ Get the filename
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "error.api"</B>
+     <B>BYTEP _errGetFileName(</B>
+     <B>                       ERRORP pError</B>
+     <B>                     )</B>
+
+ <B>Arguments</B>
+
+     <B>pError</B> is a pointer to the Error object from which the value is to
+     be retrieved.
+
+ <B>Returns</B>
+
+     _errGetFileName() returns a pointer to the string containing the
+     filename.
+
+ <B>Description</B>
+
+     _errGetFileName() retrieves a pointer to a string containing the name of
+     the file being operated on, if any, when the error occurred.  This value
+     should be empty for operations that do not involve files.
+
+     <B>Note: </B> The _fsExtOpen() function automatically sets filename to the
+     correct value, if an error occurs.  See the "File System API Reference"
+     chapter in this guide and the Usage Example at the end of this chapter
+     for more information.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment retrieves a pointer to the string filename:
+
+        #include "error.api"
+           .
+           .
+           .
+           BYTEP fpFileName;
+           fpFileName = _errGetFileName( pError );
+           .
+           .
+           .
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Error.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng24eb0.html">_errPutFileName()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

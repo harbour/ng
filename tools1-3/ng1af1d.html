@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1a988.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng1b4c2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETBELL()</B>
+ Sets the tone frequency and duration for CHR(7) or CA-Clipper's "beep"
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETBELL([&lt;nFrequency&gt;,&lt;nDuration&gt;]) --&gt; cBlank</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nFrequency&gt;</B>  Designates the frequency for the bell tone in Hertz.
+     Values from 21 to 65535 are possible.
+
+     <B>&lt;nDuration&gt;</B>  Designates the duration of the bell tone in 1/100
+     seconds.  Values from 1 to 65535 are possible.
+
+     ()  Calling this function without parameters resets the function to the
+     default value of 880.30 (a frequency of 880 Hertz and a duration of 0.3
+     seconds).
+
+ <B>Returns</B>
+
+     This function always returns a null string.
+
+ <B>Description</B>
+
+     Previously, when you output CHR(7) or completed a GET command with SET
+     BELL ON, only an unchangeable tone was produced.  With SETBELL(), the
+     frequency and duration of this tone can be modified.  The frequency
+     range for this tone is between 21 and 65535 Hertz.  However, the use of
+     frequencies outside the audible range (above approximately 16000)
+     doesn't make much sense.
+
+     The bell tone default setting is 880 Hertz with a duration of 0.3
+     seconds.  These values are reset if no parameters are passed.
+
+ <B>Examples</B>
+
+     <B>.</B>  Select a tone of 300 Hz with 0.2 second duration:
+
+        SETBELL(300, 20)
+
+     <B>.</B>  Reset the function to the default values:
+
+        SETBELL()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc69d1.html">SOUND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng87327.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng87f8f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDLISTCLEAR()</B>
+ Clear the current order list
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDLISTCLEAR() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     ORDLISTCLEAR() always returns NIL.
+
+ <B>Description</B>
+
+     ORDLISTCLEAR() is an order management function that removes all orders
+     from the order list for the current or aliased work area.  When you are
+     done, the order list is empty.
+
+     This function supersedes the function DBCLEARINDEX().
+
+ <B>Examples</B>
+
+     USE Sales NEW
+     SET INDEX TO SaRegion, SaRep, SaCode
+     .
+     . &lt;statements&gt;
+     .
+     ORDLISTCLEAR()      // Closes all the current indexes
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge93ab.html">SET INDEX</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

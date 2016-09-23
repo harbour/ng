@@ -1,0 +1,40 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng128b41.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng124407.html">[^^Up^^]</A>
+<A HREF="ng128e0c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+.
+
+     <B>SubScript                                    (Assignable)</B>
+
+        Contains an array of numeric values representing the subscripts  of a
+        GET array element.  Each element of Get:subscript represents a
+        dimension of the GET array.  For example:
+
+        @ 1,1 GET aTestA[4]        // Get:SubScript contains {4}
+        @ 1,1 GET aTestB[3,6]      // Get:SubScript contains {3,6}
+
+        If the GET does not involve an array, Get:SubScript contains NIL.
+
+        If ( oGet:SubScript &lt;&gt; NIL )
+           for i := 1 to len(oGet:SubScript)
+               name += "[" + ltrim( str( oGet:SubScript[i] ) ) + "]"
+
+           next
+
+        Endif
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,210 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb1c41.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngb5961.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>@...GET LISTBOX</B>
+ Create a new list box Get object and display it to the screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>@ &lt;nTop&gt;, &lt;nLeft&gt;, &lt;nBottom&gt;, &lt;nRight&gt;</B>
+     <B>   GET &lt;nVar|cVar&gt;</B>
+     <B>   LISTBOX &lt;aList&gt;</B>
+     <B>      [CAPTION&lt;cCaption&gt;]</B>
+     <B>      [MESSAGE &lt;cMessage&gt;]</B>
+     <B>      [WHEN &lt;lPreExpression&gt;]</B>
+     <B>      [VALID &lt;lPostExpression&gt;]</B>
+     <B>      [COLOR &lt;cColorString&gt;]</B>
+     <B>      [FOCUS &lt;fblock&gt;]</B>
+     <B>      [STATE &lt;bBlock&gt;]</B>
+     <B>      [DROPDOWN]</B>
+     <B>      [SCROLLBAR]</B>
+     <B>      [SEND &lt;msg&gt;]</B>
+     <B>      [GUISEND &lt;guimsg&gt;]</B>
+     <B>      [BITMAP &lt;cBitmap&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B> and <B>&lt;nRight&gt;</B> specify the
+     screen position for the list box and its caption.  Output which extends
+     beyond the visible extent of the display is clipped and does not appear.
+
+     <B>GET &lt;nVar|cVar&gt;</B> specifies the name of the variable associated with
+     the GET.  Its value indicates which item (if any) in the list is
+     selected.  A numeric value refers to the position in the list of the
+     selected item.  A value of 0 indicates no selected item.  A character
+     string value refers to the data or text contained within the selected
+     item.  A character string that does not refer to any item in the list
+     indicates no selected item.
+
+     <B>LISTBOX &lt;aList&gt;</B> specifies an array that contains the items in the
+     list.  The array may be either a single- or two-dimensional array.  Use
+     a single-dimension array when the data being displayed is the same as
+     the data being saved; otherwise, use a two-dimensional array.  In this
+     case, the data in the first element of each subarray is displayed and
+     the data in the second element is used for determining which item is
+     selected.
+
+     <B>CAPTION &lt;cCaption&gt;</B> specifies a character string that concisely
+     describes the GET on the screen.  Caption differs from the SAY argument
+     in two ways.  The first is that the caption is displayed each time the
+     GET is shown on the screen.  The other difference is that the caption,
+     along with its screen position, is maintained within the Get object.
+     This allows the GET to receive input when the mouse's left button is
+     clicked and its cursor is on the caption.  By default, the caption
+     appears to the left of the GET.  Use the Get object's capRow or capCol
+     variable to change the screen position of the caption.
+
+     When present, the <B>&amp;</B> character specifies that the character
+     immediately following it in the caption is the list box's accelerator
+     key. The accelerator key provides a quick and convenient mechanism for
+     the user to move input focus from one data input control to the list
+     box.  The user performs the selection by pressing the Alt key in
+     combination with an accelerator key.  The case of an accelerator key is
+     ignored.
+
+     <B>MESSAGE &lt;cMessage&gt;</B> specifies a character string that is displayed on
+     the Get system's status bar line when the GET has input focus.
+     Typically, it describes the anticipated contents or user response of the
+     GET.  Refer to the READ command for details pertaining to the Get
+     system's status bar.
+
+     <B>WHEN &lt;lPreExpression&gt;</B> specifies an expression that must be satisfied
+     before the cursor can enter the GET during a READ.  The expression can
+     optionally be a code block.  The Get object is passed as a parameter to
+     the code block.
+
+     <B>VALID &lt;lPostExpression&gt;</B> specifies an expression that must be
+     satisfied before the cursor can leave the GET during a READ.  The
+     expression can optionally be a code block.  The Get object is passed as
+     a parameter to the code block.
+
+     <B>COLOR &lt;cColorString&gt;</B> defines the color settings for the list box.
+     &lt;cColorString&gt; is a character expression containing exactly seven color
+     settings if there is no drop-down list box, and eight if there is a
+     drop-down list box.
+
+     <B>ListBox Color Attributes</B>
+     ------------------------------------------------------------------------
+     <B>Position     Applies To                             Default Value from</B>
+     <B>in colorSpec                                        System Color Setting</B>
+     ------------------------------------------------------------------------
+     1            List box items that are not selected     Unselected
+                  when the list does not have input focus
+     2            The selected list box item when the      Unselected
+                  List does not have input focus
+     3            List box items that are not selected     Unselected
+                  when the list has input focus
+     4            The selected list box item when the      Enhanced
+                  list has input focus
+     5            The list box's border                    Border
+     6            The list box's caption                   Standard
+     7            The list box caption's accelerator key   Background
+     8            The list box's drop-down button          Standard
+     ------------------------------------------------------------------------
+
+     <B>Note:</B>  In graphic mode, colorSpec position 8 has no affect and is
+     ignored.
+
+     <B>FOCUS &lt;fblock&gt;</B> specifies a code block that is evaluated each time
+     the list box receives focus.  The code block takes no implicit
+     arguments.  Use the PushButton:hasFocus instance variable to determine
+     if the push button has focus.
+
+     <B>STATE &lt;bBlock&gt;</B> specifies a code block that is evaluated immediately
+     after the list box object's selection changes.  The code block takes no
+     implicit arguments.  Use the ListBox:buffer instance variable to
+     determine the current selection.
+
+     <B>DROPDOWN</B> indicates that the list box will be a drop-down list box.
+     Drop-down list boxes are displayed differently on the screen than
+     regular list boxes.  A regular list box is always displayed regardless
+     of whether it has input focus.  A drop-down list box's display behavior
+     is determined by whether it is closed or open.  By default, a drop-down
+     list box is closed.  In this case, only the caption, the selected item,
+     and the open button are displayed.
+
+     When open, the actual list box is displayed in addition to the caption,
+     selected item, and open button.
+
+     Drop-down list boxes are useful in situations where screen space is
+     limited.
+
+     <B>SCROLLBAR</B> indicates that the list box will be created with a scroll
+     bar whether or not it is needed.  Normally a scroll bar is not needed if
+     the data being displayed fits inside the list box.
+
+     <B>SEND &lt;msg&gt;</B> sends the specified message to the Get object.  &lt;msg&gt; is
+     sent before the GET is displayed.  Any message can be sent, including
+     method calls and instance variable assignments.  Method calls must
+     include parentheses even if no arguments are passed.
+
+     <B>GUISEND &lt;guimsg&gt;</B> can be used to send a message (such as the
+     display() method) to a GUI object.  The GUI objects available in
+     CA-Clipper are check boxes, list boxes, push buttons, and radio button
+     groups.  To send a message to a non-GUI object, such as standard GETs
+     and TBrowses, use the SEND clause.
+
+     <B>BITMAP &lt;cBitmap&gt;</B> defines the bitmap that will be used as the down
+     arrow on a drop-down list box.  Drive and directory names are not
+     allowed; the file name extension is required.  A bitmap file can be
+     stored as a file on disk or in a bitmap library.  If stored as a file,
+     the file must reside in the same directory as the application.  If
+     stored in a bitmap library, the library must reside in the same
+     directory as the application and it also must have the same name as the
+     application with a .bml extension.
+
+     CA-Clipper will search for the file name first and, if it is not found,
+     search in the bitmap library second.  If no file is found either on disk
+     or in the library, no bitmap will be displayed.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates how to add a list box to a data
+        entry screen.  It utilizes the position-oriented method of selection:
+
+        nColor := 1     //default to the first item.
+        @ 5, 20, 8, 28 GET nColor LISTBOX { "Red", Green", "Blue" }
+
+     <B>.</B>  This example demonstrates a list box that has a caption and a
+        message.  It utilizes the data-oriented method of selection:
+
+        cColor := "Red" //default to red.
+        @ 5, 20, 8, 28 GET cColor LISTBOX { "Red", Green", "Blue" };
+                CAPTION "&amp;Color" ;
+                MESSAGE "Select the background color"
+
+     <B>.</B>  This example demonstrates a list box that utilizes a two-
+        dimensional array.
+
+        cState := "NY"
+
+        @ 5, 20, 10, 30 GET cState LISTBOX { { "Alabama", "AL" }, ;
+                                     { "Alaska", AK" }   , ;
+                                     { "Arizona", "AZ" }, ;
+                                     { etc...          } } ;
+                CAPTION "&amp;State" ;
+                MESSAGE "Select the client's state"
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ng1358ad.html">Get class</A>
+<A HREF="ng13b74b.html">ListBox class</A>
+<A HREF="ngd4eb5.html">READ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,44 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng39b05.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng3a3a3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>416     Read error on overlay</B>
+
+     <B>Explanation:</B>  This error indicates that the runtime manager could
+     not READ from overlay.
+
+     <B>Action:</B>  Some suggestions to resolve the problem are:
+
+     1. Make sure you are not deleting or FCLOSE()ing any file handles that
+        you did not specifically create.
+
+     2. If you are on a network, make sure that the server did not lock up.
+        Also make sure that the workstation has not been disconnected.  Check
+        Check the validity of the network cards, cabling, drivers, etc.
+
+     3. Increase the number of file handles available to the application.
+
+     4. Check that the application's EXE drive and directory are still valid.
+
+     5. Make sure the .EXE is marked READONLY (dynamic manager always opens
+        page files SHARED and READONLY).
+
+     6. Make sure there are no duplicates of the .EXE file available through
+        any MAP, PATH or SEARCH drive.  ERASE duplicate .EXE files.
+
+     7. Do not rename the .EXE. Recreate it with an alternative OUTPUT link
+        command.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

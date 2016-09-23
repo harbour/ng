@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng278a8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng28ae3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DELETED()</B>
+ Return the deleted status of the current record
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DELETED() --&gt; lDeleted</B>
+
+ <B>Returns</B>
+
+     DELETED() returns true (.T.) if the current record is marked for
+     deletion; otherwise, it returns false (.F.).  If there is no database
+     file in USE in the current work area, DELETED() returns false (.F.).
+
+ <B>Description</B>
+
+     DELETED() is a database function that determines if the current record
+     in the active work area is marked for deletion.  Since each work area
+     with an open database file can have a current record, each work area has
+     its own DELETED() value.
+
+     By default, DELETED() operates on the currently selected work area.  It
+     will operate on an unselected work area if you specify it as part of an
+     aliased expression (see example below).
+
+     In applications, DELETED() is generally used to query the deleted status
+     as a part of record processing conditions, or to display the deleted
+     status as a part of screens and reports.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses DELETED() in the current and in an
+        unselected work area:
+
+        USE Customer NEW
+
+        USE Sales NEW
+        ? DELETED()                     // Result: .F.
+        DELETE
+        ? DELETED()                     // Result: .T.
+        ? Customer-&gt;(DELETED())         // Result: .F.
+
+     <B>.</B>  This example uses DELETED() to display a record's deleted
+        status in screens and reports:
+
+        @ 1, 65 SAY IF(DELETED(), "Inactive", "Active")
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng85cb0.html">DELETE</A>
+<A HREF="ng90b67.html">PACK</A>
+<A HREF="ng92bb9.html">RECALL</A>
+<A HREF="ng9fc92.html">SET DELETED</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

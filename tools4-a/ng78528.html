@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng78100.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng773df.html">[^^Up^^]</A>
+<A HREF="ng78905.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETENTTS()</B>
+ Activates the Transaction Tracking System (TTS)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETENTTS([&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETENTTS() returns .T. if the TTS has been activated successfully.  If
+     an error occurs (for example, insufficient rights), the function returns
+     .F..
+
+ <B>Description</B>
+
+     NOVELL NET ENABLE TRANSACTION TRACKING SYSTEM
+     NNETENTTS() allows you to activate the TTS on the file server if it has
+     been turned off with NNETDISTTS().  Console rights are required to
+     activate the TTS.
+
+ <B>Example</B>
+
+     Activate the TTS on file server TOOLS1:
+
+     NNETENTTS('TOOLS1')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng78100.html">NNETDISTTS()</A>
+<A HREF="ng78905.html">NNETISTTS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

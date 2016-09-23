@@ -1,0 +1,33 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng44515.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3dfc5.html">[^^Up^^]</A>
+<A HREF="ng44a92.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1106: not enough real memory to link</B>
+------------------------------------------------------------------------------
+
+ This message indicates that Blinker could not allocate enough real (DOS)
+ memory to continue the link.
+
+ Blinker has a link time virtual memory system that can use EMS (3.2 and
+ higher), XMS (2.0 and higher) memory (or disk space) when conventional DOS
+ memory is fully allocated. However, Blinker still requires a certain amount
+ of conventional DOS memory to complete the link cycle.
+
+ To make more memory available, either remove one or more TSRs currently
+ resident, run Blinker from outside a make utility or reduce the number of
+ buffers specified in the CONFIG.SYS. Reducing the number of SECTION INTO and
+ SEARCH commands will also reduce the memory needed at link time.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

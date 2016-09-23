@@ -1,0 +1,35 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng16852.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng1723b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Partial Polymorphism</B>
+
+  In most uses of delegation other than simple message forwarding, it is
+  likely that something short of full polymorphism between the delegator and
+  delegatee will be required. In these cases, message sends to SENDER() in
+  the delegatee class will be mixed with message sends to self, as
+  appropriate.
+
+  <B>Warning</B>
+
+  When writing such code, care should be taken to avoid the incorrect
+  invocation of methods which assume that they are being invoked via
+  delegation. The SENDER() function will only be valid if such methods are
+  in fact invoked via delegation. Invoking such methods in another way can
+  lead to endless recursion and other aberrant behavior. In future verions,
+  the SENDER() function may be changed to return NIL if it is invoked in an
+  incorrect context, so be aware of this.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

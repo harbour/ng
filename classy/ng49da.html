@@ -1,0 +1,111 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4170.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng271.html">[^^Up^^]</A>
+<A HREF="ng5663.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MESSAGE...[IS...] IN</B>
+
+ <B>Synopsis</B>
+
+         Control multiply inherited messages
+
+ <B>Syntax</B>
+
+         MESSAGE &lt;message name&gt; [IS &lt;original name&gt;]
+              IN &lt;ancestor class&gt;
+
+ <B>Arguments</B>
+
+         <B>&lt;message name&gt;</B> is the name of the message being declared.
+
+         <B>&lt;original name&gt;</B> is the name of a message defined in an
+         ancestor class which the declared message will be mapped to. This
+         argument should be omitted if its value is the same as
+         <B>&lt;message</B> <B>name&gt;</B>.
+
+         <B>&lt;ancestor class&gt;</B> is the name of the class which contains the
+         original message.
+
+ <B>Description</B>
+
+         This command allows the default precedence of multiply inherited
+         messages to be overridden. It allows a message to be defined, in a
+         multiply inherited class, which corresponds to a message in one of
+         the ancestor classes which would not otherwise be available.
+
+ <B>Example</B>
+
+         Assume that a class named BordTextWindow is multiply inherited
+         from two classes named BorderedWindow and TextWindow as follows:
+
+           CREATE CLASS BorderedTextWindow ;
+                 FROM TextWindow, BorderedWindow
+              // ...
+
+         By default, because it is listed first, methods inherited from
+         TextWindow will take precedence over methods of the same name
+         inherited from BorderedWindow. We can override the default
+         precedence as follows:
+
+           MESSAGE show IN BorderedWindow
+
+         Assuming TextWindow also has a method named show, the above
+         declaration will cause it to be overridden by the one inherited
+         from BorderedWindow. However, this does not necessarily solve all
+         problems caused by name conflicts. See the warning below for more
+         information.
+
+         In our example so far, special action (use of a scope resolution
+         message) would be required to access the show method inherited
+         from TextWindow. To resolve this, we could define an alternative
+         name for show in the TextWindow class:
+
+           MESSAGE show IN BorderedWindow     // as above
+           MESSAGE showText IS show IN TextWindow
+
+         This provides a convenient way to access both methods. Of course,
+         we could have achieved something similar the other way around:
+
+           MESSAGE showBorder IS show IN BorderedWindow
+
+         This relies on the fact the default show would be inherited from
+         TextWindow, and defines an alternative name (showBorder) for the
+         other show method, inherited from BorderedWindow.
+
+ <B>Warning</B>
+
+         In the first part of the example above, the show message was
+         defined so that it would invoke the show method defined in
+         BorderedWindow, instead of the one defined in TextWindow. However,
+         this can lead to a problem if the show message is used in any of
+         the methods defined in TextWindow, or other ancestor classes. When
+         these methods are invoked via an instance of BordTextWindow,
+         sending the show message will invoke the method defined in
+         BorderedWindow. This is unlikely to be the behavior expected by
+         the methods in TextWindow, and usually leads to serious problems.
+
+         For this reason, it is best to use the <B>MESSAGE...[IS...] IN</B>
+         command to redefine messages which are not used in the class in
+         which they are originally defined. See <B>Multiple Inheritance</B>
+         for more information.
+
+ <B>See Also</B>
+
+         <B>Multiple Inheritance</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1acb3.html">Multiple Inheritance</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

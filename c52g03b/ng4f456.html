@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4f111.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4f8e4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>open()</B>
+ Open a data store (table) in the workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE open(</B>
+     <B>              WORKAREAP wa,</B>
+     <B>              DBOPENINFOP dbOpenInfo</B>
+     <B>            )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>dbOpenInfo</B> is a pointer to a structure containing information about
+     the workarea and the data store to be opened.
+
+ <B>Description</B>
+
+     Opens the data store referenced by dbOpenInfo.
+
+ <B>Default Behavior</B>
+
+     The workarea open() method concludes the process of opening a database
+     file by performing the following tasks:
+
+     <B>.</B>  Sets up the wa-&gt;alias (checking for duplicate aliases or bad
+        alias names)
+
+     <B>.</B>  Links the fields to the symbol table
+
+     <B>.</B>  Adds the workarea to the list of workareas that are in use
+
+     <B>Note: </B> The workarea must not already be in use.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  open() assumes that the RDD has already opened the data store
+        and set up the wa-&gt;fields array prior to calling SUPEROPEN().
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40efb.html">DBOPENINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng4dd37.html">close()</A>
+<A HREF="ng4e184.html">create()</A>
+<A HREF="ng4f111.html">new()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng24768.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng25542.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIOVLCLR()                   Clear unused CA-Clipper Summer '87 overlays from memory</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Clear unused CA-Clipper Summer '87 overlays from memory</B></U>
+
+ <U>Syntax   : <B>BLIOVLCLR()</B></U>
+
+ <U>Return   : <B>Nothing</B></U>
+
+ This function is only effective with the BLINKER OVERLAY DYNAMIC method of
+ overlay allocation (CA-Clipper Summer '87 only). It performs no function
+ with the BLINKER OVERLAY FIXED method of overlay allocation.
+
+ This function is used to force the Blinker overlay manager to clear out or
+ discard all inactive overlay procedures from the overlay pool and return the
+ memory used by them to CA-Clipper.
+
+ This may be used in the main module of an application to ensure that
+ CA-Clipper has the maximum amount of dynamic memory available before
+ executing another overlay.
+
+ Once all inactive overlays are flushed, the overlay pool operating size is
+ reset to a maximum of the default size or the total size of the active
+ overlays. The default size when the application starts is the most recent of
+ the link time BLINKER OVERLAY OPSIZE &lt;size&gt; command or the /OOnn parameter
+ in the BLINKER environment variable.
+
+ Example:
+
+    <B>* Clear all inactive overlays</B>
+    <B>*</B>
+    <B>BLIOVLCLR()</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf618.html">BLINKER OVERLAY DYNAMIC</A>
+<A HREF="ngfeb9.html">BLINKER OVERLAY OPSIZE</A>
+<A HREF="ng2351d.html">BLIMEMPAK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

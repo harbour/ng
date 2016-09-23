@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng94144.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng94e69.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RECCOUNT()*</B>
+ Determine the number of records in the current database (.dbf) file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RECCOUNT()* | LASTREC() --&gt; nRecords</B>
+
+ <B>Returns</B>
+
+     RECCOUNT() returns the number of physical records in the current
+     database file as an integer numeric value.  Filtering commands such as
+     SET FILTER or SET DELETED have no affect on the return value.
+     RECCOUNT() returns zero if there is no database file open in the current
+     work area.
+
+ <B>Description</B>
+
+     RECCOUNT() is a database function that is a synonym for LASTREC().  By
+     default, RECCOUNT() operates on the currently selected work area.  It
+     will operate on an unselected work area if you specify it as part of an
+     aliased expression (see example below).  Note that RECCOUNT() is a
+     compatibility function.  LASTREC() should be used in its place.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates the relationship between COUNT and
+        RECCOUNT():
+
+        USE Sales NEW
+        ? RECCOUNT()                      // Result: 84
+        //
+        SET FILTER TO Salesman = "1001"
+        COUNT TO nRecords
+        ? nRecords                        // Result: 14
+        ? RECCOUNT()                      // Result: 84
+
+     <B>.</B>  This example uses an aliased expression to access the number
+        of records in an unselected work area:
+
+        USE Sales NEW
+        USE Customer NEW
+        ? RECCOUNT(), Sales-&gt;(RECCOUNT())
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc6adc.html">COUNT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

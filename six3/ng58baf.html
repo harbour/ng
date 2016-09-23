@@ -1,0 +1,30 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng58a1d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng561bb.html">[^^Up^^]</A>
+<A HREF="ng58d7f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SIX???/1026   Data Width Error</B>
+
+  <B>Problem:   </B>When building an index, the initial evaluation of the key
+             expression (on a blank record) produced a character value of zero
+             length.
+
+  <B>Solution:  </B>Make sure the key expression will produce a value of the same
+             length for all records.  Do not use functions such as TRIM() in
+             the key expression.  To restrict the length of the key values,
+             use the LEFT() or PADR() functions.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

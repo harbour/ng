@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4353d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng43e47.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>L2BIN()</B>
+ Convert a CA-Clipper numeric value to a 32-bit binary integer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>L2BIN(&lt;nExp&gt;) --&gt; cBinaryInteger</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nExp&gt;</B> is the numeric value to convert.  Decimal digits are
+     truncated.
+
+ <B>Returns</B>
+
+     L2BIN() returns a four-byte character string formatted as a 32-bit
+     binary integer.
+
+ <B>Description</B>
+
+     L2BIN() is a low-level file function used with FWRITE() to write
+     CA-Clipper numeric values to a binary file.  This function is like
+     I2BIN() which formats a CA-Clipper numeric to a 16-bit binary value.
+
+     L2BIN() is the inverse function of BIN2L().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a new binary file then writes a series of
+        numbers to the files using L2BIN() to convert the numeric value to
+        32-bit binary form:
+
+        #include "Fileio.ch"
+        //
+        LOCAL nNumber, nHandle
+        nHandle := FCREATE("MyFile", FC_NORMAL)
+        FOR nNumber := 1 TO 100
+           FWRITE(nHandle, L2BIN(nNumber) + CHR(0))
+        NEXT
+        FCLOSE(nHandle)
+
+ <B>Files:</B>  Library is EXTEND.LIB, source file is SOURCE\SAMPLE\EXAMPLEA.ASM.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngff4b.html">BIN2I()</A>
+<A HREF="ng10558.html">BIN2L()</A>
+<A HREF="ng10b1e.html">BIN2W()</A>
+<A HREF="ng1295d.html">CHR()</A>
+<A HREF="ng3cd4a.html">FWRITE()</A>
+<A HREF="ng3e9dd.html">I2BIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

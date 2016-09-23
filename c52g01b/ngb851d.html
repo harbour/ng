@@ -1,0 +1,121 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb7cbe.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb4a83.html">[^^Up^^]</A>
+<A HREF="ngb90dc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DO WHILE</B>
+ Execute a loop while a condition is true (.T.)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>[DO] WHILE &lt;lCondition&gt;</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>   [EXIT]</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>   [LOOP]</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>END[DO]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;lCondition&gt;</B> is the logical control expression for the DO WHILE
+     loop.
+
+     <B>EXIT</B> unconditionally branches control from within a DO WHILE or
+     FOR...NEXT structure to the statement immediately following the
+     corresponding ENDDO or NEXT statement.
+
+     <B>LOOP</B> branches control to the most recently executed DO WHILE or FOR
+     statement.
+
+ <B>Description</B>
+
+     DO WHILE...ENDDO is a control structure that executes a block of
+     statements repetitively, as long as &lt;lCondition&gt; evaluates to true (.T.).
+     When the condition evaluates to true (.T.), control passes into the
+     structure and proceeds until an EXIT, LOOP, or ENDDO is encountered.
+     ENDDO returns control to the DO WHILE statement and the process repeats
+     itself.  If an EXIT statement is encountered, control branches to the
+     nearest ENDDO or NEXT statement.  If a LOOP statement is encountered,
+     control branches to the nearest DO WHILE or FOR statement.  If the
+     condition evaluates to false (.F.), the DO WHILE construct terminates and
+     control passes to the statement immediately following the ENDDO.
+
+     Use EXIT to terminate a DO WHILE structure based on a condition other
+     than the DO WHILE condition.  LOOP, by contrast, prevents execution of
+     statements within a DO WHILE based on an intermediate condition, and
+     returns to the most recent DO WHILE statement.
+
+     DO WHILE constructs may be nested within any other control structures to
+     any depth.  The only requirement is that each control structure be
+     properly nested.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates a typical control structure for a
+        simple grouped report:
+
+        LOCAL cOldSalesman, nTotalAmount
+        USE Sales INDEX Salesman NEW
+        DO WHILE .NOT. EOF()
+           cOldSalesman := Sales-&gt;Salesman
+           nTotalAmount := 0
+           DO WHILE cOldSalesman = Sales-&gt;Salesman ;
+              .AND. (.NOT. EOF())
+              ? Sales-&gt;Salesman, Sales-&gt;Amount
+              nTotalAmount := nTotalAmount + Sales-&gt;Amount
+              SKIP
+           ENDDO
+           ? "Total: ", nTotalAmount, "for", cOldSalesman
+        ENDDO
+        CLOSE Sales
+
+     <B>.</B>  This code fragment demonstrates how LOOP can be used to
+        provide an intermediate processing condition:
+
+        DO WHILE &lt;lCondition&gt;
+           &lt;initial processing&gt;...
+           IF &lt;intermediate condition&gt;
+              LOOP
+           ENDIF
+           &lt;continued processing&gt;...
+        ENDDO
+
+     <B>.</B>  This example demonstrates the use of DO WHILE to emulate a
+        repeat until looping construct:
+
+        LOCAL lMore := .T.
+        DO WHILE lMore
+           &lt;statements&gt;...
+           lMore := (&lt;lCondition&gt;)
+        ENDDO
+
+     <B>.</B>  This example uses a DO WHILE loop to move sequentially through
+        a database file:
+
+        DO WHILE .NOT. EOF()
+           &lt;statements&gt;...
+           SKIP
+        ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb558d.html">BEGIN SEQUENCE</A>
+<A HREF="ng1d373.html">DBEVAL()</A>
+<A HREF="ngb7cbe.html">DO CASE</A>
+<A HREF="ngbb2ff.html">FOR</A>
+<A HREF="ngbe1da.html">IF</A>
+<A HREF="ng3ef99.html">IF()</A>
+<A HREF="ngc6fd6.html">RETURN</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

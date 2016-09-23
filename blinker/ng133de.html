@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1310a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng138ed.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CODEVIEW                      CodeView debugger support</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>CodeView debugger support</B></U>
+
+ <U>Syntax   : <B>CODEVIEW</B></U>
+
+ <U>Default  : <B>Disabled</B></U>
+
+ The CODEVIEW command globally and retroactively enables the processing of
+ CodeView debugging information, regardless of the position of the CODEVIEW
+ statement in the link script file. The CODEVIEW command is identical in
+ effect to a CVON command at the beginning of the link script.
+
+ Developers with large overlaid programs may see some performance degradation
+ of their overlaid code whilst running under the CodeView debugger if the
+ CODEVIEW command has been used. If performance is an issue under these
+ circumstances, it is recommended to use the CVON and CVOFF commands to
+ create CodeView areas which selectively enable debugging information for
+ specific files, modules or libraries.
+
+ The default version of CodeView information added to the .EXE file is 0 for
+ maximum compatibility with other debuggers. Later versions may be selected
+ using the CVVERSION command. (For more details, see the section on CVVERSION
+ in Chapter 9.)
+
+ Note: External overlays are required in order to use this command.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng138ed.html">CVOFF</A>
+<A HREF="ng13bfe.html">CVON</A>
+<A HREF="ng1420e.html">CVVERSION</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

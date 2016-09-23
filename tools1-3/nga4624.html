@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga42dd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga1476.html">[^^Up^^]</A>
+<A HREF="nga4a34.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SPOOLADD()</B>
+ Appends a file to the print queue.
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SPOOLADD(&lt;nFile&gt;) --&gt; lAppended</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nFile&gt;</B>  Designates a file to add to the print spool queue.
+
+ <B>Returns</B>
+
+     SPOOLADD() returns .T. when the file is successfully added to the spool
+     queue.
+
+ <B>Description</B>
+
+     SPOOLLADD() passes a new file to the spooler where data is printed in
+     the background.  If no data can be added because the file does not exist
+     or because the queue is full, the function returns to .F..
+
+ <B>Example</B>
+
+     Print to a file, then print it in the background:
+
+     SET PRINTER TO C:\TEST\PRINT.DAT         // Redirect print
+     SET DEVICE TO PRINT                      // Print Output
+     @....SAY....
+     @....SAY....
+     SET DEVICE TO SCREEN
+     SET PRINTER TO                           // Close output file
+
+     IF SPOOLACTIV()
+        SPOOLADD("C:\TEST\PRINT.DAT")         // .T., if correct
+     ELSE
+        *'normal' print
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga42dd.html">SPOOLACTIV()</A>
+<A HREF="nga4d7f.html">SPOOLDEL()</A>
+<A HREF="nga5598.html">SPOOLFLUSH()</A>
+<A HREF="nga4a34.html">SPOOLCOUNT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ngf499.html">[^^Up^^]</A>
+<A HREF="ng116bc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+     This chapter is a summary of VMM error messages and DOS/16M error
+     messages for the protected mode linker.  The messages are divided into
+     categories on the basis of the point in the program at which they occur
+     and the circumstances in which they occur.
+
+ <B>VMM Error Messages</B>
+
+     This section lists VMM error messages that can occur in the main program
+     or when starting and running a VMM-managed program.
+
+     <B>Loader Errors</B>
+
+     VMM displays a loader error message only if the error occurs in your
+     main program, not in a spawned program.  When a loader error occurs
+     while you are spawning a program, an error code is returned to the main
+     program during the spawn.  Error messages returned during the spawn
+     process are displayed with only the last three digits of the error
+     number.  The loader error messages are listed below.  Each message is
+     preceded by the words "VM error<B> </B>[number]:" and the error code. The
+     mnemonic appears in parentheses at the end of each error code
+     description.
+
+     <B>Startup and Runtime Messages</B>
+
+     This section lists the messages you may receive when starting and
+     running a VMM-managed program.  For each message there is a brief
+     explanation.  Each error message is preceded by a "VM error [number]:"
+     and the error code.  Some of these messages indicate problems in VMM; in
+     which case, call Computer Associates Technical Support.
+
+ <B>DOS/16M Error Messages</B>
+
+     This chapter lists DOS/16M error messages, with descriptions of the
+     circumstances in which the error is most likely to occur, and
+     suggestions for remedying the problem.  The chapter covers the
+     following:
+
+     <B>Kernel error messages (single- or double-digit error numbers)</B>
+
+     This section describes error messages from the DOS/16M kernel.  Kernel
+     error messages may occur as the result of a problem in either the
+     DOS/16M kernel or the application program.  If the message originates in
+     the kernel, it will be tagged as a DOS/16M error.  If the error occurred
+     in the application program, DOS/16M will use the name of the program
+     file in the header.  Messages that have a space immediately after the
+     open quote occur only at load time.  After your program is loaded, these
+     messages are discarded to save memory.  When a percent symbol (%)
+     appears in the error message text, the string it represents is in
+     parentheses after the error message text.
+
+     <B>CA-Clipper/Exospace messages (four-digit numbers)</B>
+
+     This section lists and describes CA-Clipper/Exospace messages.  The
+     first section lists error messages in numeric order.  The error level is
+     enclosed in parentheses after the error text.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

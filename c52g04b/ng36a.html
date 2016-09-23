@@ -1,0 +1,162 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng1d0.html">[^^Up^^]</A>
+<A HREF="ng11c4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CA-Clipper Compiler--(CLIPPER.EXE)</B>
+
+ <B>Overview</B>
+
+     Compiles one or more program files (.prg) containing procedures and
+     user-defined functions to form an object file (.OBJ).
+
+ <B>Syntax</B>
+
+     <B>CLIPPER [&lt;sourceFile&gt; | @&lt;scriptFile&gt;</B>
+     <B>   [&lt;option list&gt;]]</B>
+
+ <B>Command Line Arguments</B>
+
+     This is the command line syntax to invoke the CA-Clipper compiler.  If
+     issued without any arguments, a help screen is displayed.
+
+     <B>&lt;sourceFile&gt;</B> is the name of the program file (.prg) to compile to an
+     object file.
+
+     <B>&lt;scriptFile&gt;</B> is the name of an ASCII text file containing a list of
+     source files to compile into a single object file.  The default
+     extension for this file is (.CLP).
+
+     <B>&lt;option list&gt;</B> is a list of one or more options to control the course
+     of the compilation, all of which are described below.
+
+ <B>Compiler Options</B>
+
+     <B>/A</B>
+
+     Declares any variable included in a PRIVATE, PUBLIC, or PARAMETERS
+     statement as MEMVAR.
+
+     <B>/B</B>
+
+     Includes debugging information in the object file.
+
+     <B>/CREDIT</B>
+
+     Displays the CA-Clipper credits to the console.
+
+     <B>/D&lt;identifier&gt;[=&lt;text&gt;]</B>
+
+     Defines an identifier to the preprocessor with &lt;text&gt; assigned to the
+     &lt;identifier&gt; if specified.
+
+     <B>/ES</B>
+
+     Default exit severity level.  If warnings are encountered during
+     compilation, does not set DOS errorlevel upon exit.  Compatible with
+     CA-Clipper 5.0x.
+
+     <B>/ES0</B>
+
+     Same as above.
+
+     <B>/ES1</B>
+
+     If warnings are encountered during compilation, sets DOS levels upon
+     exit.
+
+     <B>/ES2</B>
+
+     If warnings are encountered during compilation, does not generate object
+     file (.OBJ) and sets DOS errorlevel upon exit.
+
+     <B>/I&lt;pathName&gt;</B>
+
+     Adds the specified directory to the front of the INCLUDE path list.
+     Multiple /I options may be specified in the same compiler session to
+     specify several header file search directories.
+
+     <B>/L</B>
+
+     Excludes the program source code line numbers from the object file.
+
+     <B>/M</B>
+
+     Compiles only the current program file (.prg) suppressing automatic
+     search for program files (.prg) referenced in a program file with the
+     DO, SET FORMAT, and SET PROCEDURE commands.
+
+     <B>/N</B>
+
+     Suppresses the automatic definition of a procedure with the same name as
+     the program file (.prg).
+
+     <B>/O&lt;objFile&gt;</B>
+
+     Defines the name and/or location of the output object file.
+
+     <B>/P</B>
+
+     Preprocesses the program file (.prg) and copying the result to an output
+     file with a (.ppo) extension.
+
+     <B>/Q</B>
+
+     Suppresses line numbers from displaying while compiling.
+
+     <B>/R[&lt;libFile&gt;]</B>
+
+     Embeds a library search request in the object file.  If /R is specified
+     without &lt;libFile&gt; name, the default requests for CLIPPER.LIB,
+     EXTEND.LIB, and DBFNTX.LIB are suppressed.  Multiple /R options may be
+     specified in the same compiler session to embed more than one library
+     request.
+
+     <B>/S</B>
+
+     Checks the syntax of the current (.prg) file and no object file is
+     generated.
+
+     <B>/T&lt;pathName&gt;</B>
+
+     Specifies a different directory for temporary files generated during
+     compilation.
+
+     <B>/U[&lt;userStandardHeaderFile&gt;]</B>
+
+     Identifies an alternate standard header file to preprocess in place of
+     the supplied STD.CH which is used automatically.
+
+     <B>/V</B>
+
+     Forces the compiler to assume all references to undeclared or unaliased
+     variable names are public or private variables.
+
+     <B>/W</B>
+
+     Generates warning messages for undeclared or unaliased (ambiguous)
+     variable references.
+
+     <B>/Z</B>
+
+     Suppresses shortcutting optimizations on the logical operators .AND. and
+     .OR.  This option is provided as an aid to isolating code that depends
+     on the behavior of older versions of CA-Clipper.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng959c.html">SET CLIPPERCMD</A>
+<A HREF="ng98c4.html">SET INCLUDE</A>
+<A HREF="ngadd5.html">SET TMP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

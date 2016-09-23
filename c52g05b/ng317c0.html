@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3132f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2f9e1.html">[^^Up^^]</A>
+<A HREF="ng31dbb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>5   Why do I get "memory overbooked" when compiling a large (.prg)?</B>
+--------------------------------------------------------------------------------
+
+     This message is generated because the program (.prg) files the Clipper
+     compiler was attempting to process required more memory than the
+     compiler had available.
+
+     This error can occur on programs which contain very large functions or
+     procedures (greater than 60K), especially when the compiler is running
+     with very little free memory available (for example, when using many
+     TSR utilities or executing the compiler from within a text editor).
+
+     The problem can also occur when attempting to compile a monolithic
+     application that cascades through many multiple (.prg) files through
+     the use of "DO &lt;prgFile&gt;," or when compiling many modules into the same
+     .OBJ using a .CLP list.
+
+     In all cases, either the program must be reorganized into smaller units
+     or the compiler must be given more memory to run in.
+
+     The preferred solution is to limit individual functions and procedures
+     to a reasonable size, group them into reasonably sized source files,
+     and compile the files individually using the /M compiler option.  The
+     resultant .OBJ files are then presented as a list to .RTLink.  This
+     results in better program structure and also gives you the option of
+     using the RMAKE utility to avoid unnecessary compilation.  For
+     information on compiling, linking, and using RMAKE, refer to your
+     Programming and Utilities Guide.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

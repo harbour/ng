@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng98ec.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="nga255.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER EXTMEM BLOCK          Specify extended memory allocation block size</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify the extended memory allocation block size</B></U>
+
+ <U>Syntax   : <B>BLINKER EXTMEM BLOCK &lt;nuSize&gt;</B></U>
+
+ <U>Default  : <B>256</B></U>
+
+ <U>Example  : <B># Allocate in 512KB blocks</B></U>
+            <B>BLINKER EXTMEM BLOCK 512</B>
+
+ This command specifies the memory block size (in KB) used by the extender
+ when allocating extended memory blocks. When running in protected mode, the
+ extender allocates memory from the host in blocks of the specified size and
+ manages these blocks itself.
+
+ When a DOS extended program requests memory, it is allocated memory from
+ these extender managed blocks, rather than directly from the host. Programs
+ which allocate large amounts of memory may benefit from a larger block size
+ than the 256 KB default.
+
+ Note also that the BLINKER environment variable setting /EBnnnn will
+ override this function.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga255.html">BLINKER EXTMEM LIMIT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

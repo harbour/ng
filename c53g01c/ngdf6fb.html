@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngdf216.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngdfd56.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET CENTURY</B>
+ Modify the date format to include or omit century digits
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET CENTURY on | OFF | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> allows input and display of the century digits for dates.
+
+     <B>OFF</B> suppresses the input and display of the century digits for
+     dates.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET CENTURY modifies the current date format as set by SET DATE.  SET
+     CENTURY ON changes the date format to contain four digits for the year.
+     With the date format set to four digits for the year, date values
+     display with a four-digit year, and dates of any century can be input.
+
+     SET CENTURY OFF changes the date format to contain only two digits for
+     the year.  With the date format set to only two digits for the year
+     (CENTURY OFF), the century digits of dates are not displayed and cannot
+     be input.
+
+     Note that only the display and input format of dates is affected; date
+     calculations maintain the century information regardless of the date
+     format.
+
+     CA-Clipper supports all dates in the range 01/01/0100 to 12/31/2999.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows the results of a simple SET CENTURY
+        command:
+
+        SET CENTURY OFF
+        ? DATE()                  // Result: 09/15/90
+        SET CENTURY ON
+        ? DATE()                  // Result: 09/15/1990
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1acdd.html">CTOD()</A>
+<A HREF="ng1baff.html">DATE()</A>
+<A HREF="ng3e298.html">DTOC()</A>
+<A HREF="nge26bd.html">SET DATE</A>
+<A HREF="nge5761.html">SET EPOCH</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

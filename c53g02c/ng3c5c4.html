@@ -1,0 +1,32 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3c45a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng3c8cd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1011    Read/write access in index page failed</B>
+
+     <B>Explanation:</B>  CA-Clipper has attempted to read or write to an index
+     page.  This error can occur if a the stack has become corrupted or there
+     is insufficient stack space.  This may be due to a corrupted or invalid
+     .EXE.
+
+     <B>Action:</B>  Try increasing the STACK or PROCEDURE DEPTH.  Check for
+     memory conflicts that could cause a corruption of the index buffer.  Try
+     disabling the EMS with the //E:0 in SET CLIPPER.  If using third-party
+     RDDs, try increasing the stack space.  If using structural indexes
+     (.CDX, .MDX), delete the index file and recreate.  Resolve all linker
+     warnings and errors.  Recompile all .OBJs and relink.  Check all third
+     party RDD version compatibility.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

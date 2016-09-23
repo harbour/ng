@@ -1,0 +1,109 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng11361.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng12b3a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLOBDIRECTGET()</B>
+ Retrieve data stored in a BLOB file without referencing a specific field
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>BLOBDIRECTGET(&lt;nPointer&gt;,   [&lt;nStart&gt;],   [&lt;nCount&gt;])</B>
+     <B>    --&gt; expBLOB</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nPointer&gt;</B> is a pointer to the BLOB data.  This pointer can be
+     obtained using BLOBDIRECTPUT(), BLOBDIRECTIMPORT(), or
+     DBFIELDINFO(DBS_BLOB_POINTER, &lt;nFieldPos&gt;).
+
+     <B>&lt;nStart&gt;</B> is the starting position in &lt;nPointer&gt;.  If &lt;nStart&gt; is
+     positive, the starting position is relative to the leftmost character in
+     &lt;nPointer&gt;.  If &lt;nStart&gt; is negative, it is relative to the rightmost
+     character in &lt;nPointer&gt;.  If &lt;nStart&gt; is omitted, it is assumed to be 1.
+
+     <B>&lt;nCount&gt;</B> is the number of bytes of data to retrieve beginning at
+     &lt;nStart&gt;.  If &lt;nCount&gt; is larger than the amount of data stored, excess
+     data is ignored.  If omitted, BLOBDIRECTGET() retrieves to the end of
+     the data.
+
+     <B>Note: </B> &lt;nStart&gt; and &lt;nCount&gt; apply to string data only.  They are
+     ignored for any other data types.
+
+ <B>Returns</B>
+
+     BLOBDIRECTGET() returns the data retrieved from the BLOB file.  The data
+     type of the return value depends on the actual data stored.  Use
+     VALTYPE() to determine the data type.
+
+ <B>Description</B>
+
+     BLOBDIRECTGET() retrieves data stored in a BLOB file without the need to
+     reference a particular field in the database file.  It is particularly
+     useful when accessing data that is larger than 64 KB (such as memo
+     fields created with the BLOBIMPORT() function).
+
+     By default, this function operates on the currently selected work area.
+     It can be made to operate on an unselected work area by specifying it
+     within an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates storing setup information in a BLOB
+        file, then selectively retrieving the stored information:
+
+        FUNCTION PutSettings(aColors,;
+                       aPaths, ;
+                       aPassWords)
+
+           LOCAL aSettings
+
+           RDDSETDEFAULT ( "DBFCDX" )
+           MEMOSETSUPER ( "DBFCDX" )
+
+           USE Setup NEW via "DBFMEMO"
+
+           aSettings := {}
+           AADD(aSettings, BLOBDIRECTPUT(0, aColors))
+           AADD(aSettings, BLOBDIRECTPUT(0, aPaths))
+           AADD(aSettings, BLOBDIRECTPUT(0, aPassWords))
+
+           BLOBROOTPUT(aSettings)
+
+           CLOSE
+
+        FUNCTION GETCOLORS()
+           LOCAL aSettings
+           LOCAL aColors
+
+           USE Setup NEW VIA "DBFMEMO"
+
+           aSettings := BLOBROOTGET()
+           aColors := BLOBDIRECTGET(aSettings[1])
+
+           CLOSE
+
+
+           RETURN aColors
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng139ca.html">BLOBDIRECTPUT()</A>
+<A HREF="ng14d61.html">BLOBGET()</A>
+<A HREF="ng1583f.html">BLOBIMPORT()</A>
+<A HREF="ng25343.html">DBFIELDINFO()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,93 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngcc64.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ngdbcc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Class Variables</B>
+
+  Class variables are declared using the <B>CLASS VAR</B> command.
+
+  The value of a class variable is shared by all instances of a class.
+  Changing the value of a class variable changes it for all objects in the
+  class.
+
+  The class variable values for a class are stored in its class object. The
+  value of a class variable can be accessed or changed by sending a message
+  to the appropriate class object.
+
+  Class variables are useful for maintaining information that applies to all
+  objects in a class. Common uses for class variables include:
+
+  <B>.</B>  maintaining a count of active instances, such as the number of active
+     windows in a Window class.
+
+  <B>.</B>  maintaining a reference to the currently active instance, such as the
+     currently active DBF object in a DBF class.
+
+  <B>.</B>  maintaining lists of instances for various purposes, such as a list of
+     active windows.
+
+  A class inherits its own copy of the class variables in its superclass. In
+  other words, the values of inherited class variables are not shared.
+  However, it is possible for a subclass to access a class variable belong
+  to a superclass - either by using the class function for the desired
+  superclass, or by using the <U>super</U> message.
+
+  For example, in a Window class which needs to keep track of which window
+  is currently selected, we might use a class variable called
+  <U>currSelected</U> for this purpose. In methods in the Window class, we
+  could then use code such as this:
+
+    IF self == ::class:currSelected
+
+  to test whether <U>self</U> is the currently selected window. The expression
+  <U>::class</U> sends the <U>class</U> message to <U>self</U>, which results in a
+  reference to <U>self</U>'s class object. The <U>currSelected</U> message is then
+  sent to the class object to obtain the value of the corresponding class
+  variable.
+
+  By using the <U>class</U> message to obtain a reference to the class object,
+  we ensure that subclasses of  this class will access their own copy of the
+  <U>currSelected</U> variable. In many cases, this is the desired behavior;
+  but depending on the structure of the class hierarchy, we may wish
+  subclasses of Window to share the same <U>currSelected</U> variable. We could
+  do this by rewriting the code as follows:
+
+    IF self == Window():currSelected
+
+  Using a class function such as <U>Window()</U> to access a class variable
+  will always result in the same class variable being accessed. Even if this
+  method was being executed for an instance of a subclass of Window, the
+  Window class variable <U>currSelected</U> is accessed.
+
+  However, this technique suffers from a serious disadvantage because
+  subclasses still have their own copy of the variables, even if they are
+  never used. Aside from the wasted storage, the potential exists for
+  inadvertently accessing the wrong variable, causing the program to behave
+  incorrectly.
+
+  A safer technique for implementing a variable whose value will be shared
+  by subclasses, is to use a file-wide STATIC variable in the appropriate
+  class, and provide methods to access and change the value of that variable
+  as necessary.
+
+  Class(y) provides yet another alternative in the form of the <B>SHARED</B>
+  clause of the <B>CLASS VAR</B> command. Specifying the <B>SHARED</B> clause when
+  declaring a class variable will cause that variable to be shared by
+  subclasses. See the <B>CLASS VAR</B> command for more details.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng195b.html">CLASS VAR</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

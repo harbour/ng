@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd0f1f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngce431.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>POKEWORD()</B>
+ Writes a 16-bit word to memory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>POKEWORD(&lt;nSegment|cHexSegment&gt;,&lt;nOffset|cHexOffset&gt;,</B>
+     <B>   &lt;nWord|cHexWord&gt;) --&gt; lSuccessful</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nSegment|cHex&gt;</B>  Designates the segment address where a word is
+     stored.  This value can be a decimal integer or hexadecimal string.  The
+     maximum is 65520 ("FFF0").
+
+     <B>&lt;nOffset|cHexOffset&gt; </B> Designates the offset address within the
+     segment specified by &lt;nSegment|cHexSegment&gt;.  This value can be a
+     decimal integer or hexadecimal string.  The maximum is 65534 ("FFFE").
+
+     <B>&lt;nWord|cHexWord&gt;</B>  Designates the word to be stored in memory.  This
+     value can be a decimal integer or  hexadecimal string.  The maximum is
+     65535 ("FFFF").
+
+ <B>Returns</B>
+
+     POKEWORD() returns .T. when the operation is successfully completed.  A
+     return value of .F. indicates an error.
+
+ <B>Description</B>
+
+     POKEWORD() writes a word to a desired memory area within the
+     conventional memory.  The segment address and offset are required.
+
+     <B>Warning!</B>  Be aware that this is not always safe.  If you
+     inadvertently manipulate the wrong memory location, there may be serious
+     consequences.  Use POKEWORD() ONLY when you have a thorough knowledge of
+     the system environment and there is no other solution than to directly
+     alter a memory location.
+
+ <B>Notes</B>
+
+     <B>.</B>  The function does not test whether the word is stored in
+        memory.
+
+     <B>.</B>  POKEWORD() stores the &lt;nWord|cHexWord&gt; word in memory in the
+        low-byte/high-byte sequence.
+
+ <B>Examples</B>
+
+     <B>.</B>  Poke a word using decimal parameters:
+
+        ? POKEWORD(32768, 1000, 65535)          // Can be dangerous!
+
+     <B>.</B>  Poke a word using hexadecimal parameters:
+
+        ? POKEWORD("F000", "8000", "FFFF")      // Impossible, ROM area
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd0914.html">PEEKWORD()</A>
+<A HREF="ngd0f1f.html">POKEBYTE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

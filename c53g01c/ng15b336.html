@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng15a315.html">[^^Up^^]</A>
+<A HREF="ng15bd47.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TBrowse</B>
+ Provide objects for browsing table-oriented data
+------------------------------------------------------------------------------
+ <B>Description</B>
+
+     A TBrowse object is a general purpose browsing mechanism for
+     table-oriented data.  TBrowse objects provide a sophisticated
+     architecture for acquiring, formatting, and displaying data.  Data
+     retrieval and file positioning are performed via user-supplied code
+     blocks, allowing a high degree of flexibility and interaction between
+     the browsing mechanism and the underlying data source.  The format of
+     individual data items can be precisely controlled via the TBColumn data
+     retrieval code blocks; overall display formatting and attributes can be
+     controlled by sending appropriate messages to the TBrowse object.
+
+     <B>Note: </B> TBrowse has a memory limit of 200 fields.
+
+     A TBrowse object relies on one or more TBColumn objects.  A TBColumn
+     object contains the information necessary to define a single column of
+     the browse table (see TBColumn class in this chapter).
+
+     During operation, a TBrowse object retrieves data by evaluating code
+     blocks.  The data is organized into rows and columns and displayed
+     within a specified rectangular region of the screen.  The TBrowse object
+     maintains an internal browse cursor.  The data item on which the browse
+     cursor rests is displayed in a highlighted color.  (The actual screen
+     cursor is also positioned to the first character of this data item.)
+
+     Initially, the browse cursor is placed on the data item at the top left
+     of the browse display.  Messages can then be sent to the TBrowse object
+     to navigate the displayed data, causing the browse cursor to move.
+     These messages are normally sent in response to user keystrokes.
+
+     New data is automatically retrieved as required by navigation requests.
+     When navigation proceeds past the edge of the visible rectangle, rows or
+     columns beyond that edge are automatically brought into view.  When new
+     rows are brought into view, the underlying data source is repositioned by
+     evaluating a code block.
+
+     <B>Note: </B> TBrowse objects do not clear the entire window before output
+     during redisplay operations.  Part of the window may still be cleared
+     when data from the existing display is scrolled.
+
+ <B>Examples</B>
+
+     For fully operational examples of a TBrowse object, refer to
+     "Introduction to TBrowse" in the Programming and Utilities Guide and to
+     TbDemo.prg located in \CLIP53\SOURCE\SAMPLE.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng18740.html">BROWSE()*</A>
+<A HREF="ng20e4d.html">DBEDIT()</A>
+<A HREF="ng9c7f1.html">SETCOLOR()</A>
+<A HREF="ng157b2e.html">TBColumn class</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

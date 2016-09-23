@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf1b8c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngf287f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDFOR() function</B>
+ Return the FOR expression of an Order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     ORDFOR(&lt;cOrderName&gt; | &lt;nOrder&gt;
+        [, &lt;cOrderBagName&gt;]) --&gt; cForExp
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrderName&gt;</B> is the name of the target Order, whose cForExp is
+     sought.
+
+     <B>&lt;nOrder&gt;</B> is an integer that identifies the position in the Order
+     List of the target Order whose cForExp is sought.
+
+     <B>&lt;cOrderBagName&gt;</B> is the name of an Order Bag containing one or more
+     Orders.  You may specify &lt;cOrderBagName&gt; as the filename with or without
+     the pathname or appropriate extension.  If you do not include the
+     extension as part of &lt;cOrderBagName&gt; CA-Clipper uses the default
+     extension of the current RDD.
+
+ <B>Returns</B>
+
+     ORDFOR() returns a character expression, cForExp, that represents the
+     FOR condition of the specified Order.  If the Order was not created
+     using the FOR clause the return value will be an empty string ("").  If
+     the database driver does not support the FOR condition, it may either
+     return an empty string ("") or raise an "unsupported function" error,
+     depending on the driver.
+
+ <B>Description</B>
+
+     ORDFOR() is an Order management function that returns the character
+     string, cForExp, that represents the logical FOR condition of the Order,
+     &lt;cOrderName&gt; or &lt;nOrder&gt;.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example retrieves the FOR condition from an Order:
+
+        USE Customer NEW
+        INDEX ON  Customer-&gt;Acct ;
+           TO  Customer          ;
+           FOR Customer-&gt;Acct &gt; "AZZZZZ"
+
+        ORDFOR( "Customer" )      // Returns: Customer-&gt;Acct &gt; "AZZZZZ"
+
+ <B>Status:</B>  New
+
+ <B>See also:</B>  INDEX, ORDKEY(), ORDCREATE(), ORDNAME(), ORDNUMBER()
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nged983.html">INDEX</A>
+<A HREF="ngf287f.html">ORDKEY()</A>
+<A HREF="ngf0b5a.html">ORDCREATE()</A>
+<A HREF="ngf3fd5.html">ORDNAME()</A>
+<A HREF="ngf47b2.html">ORDNUMBER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

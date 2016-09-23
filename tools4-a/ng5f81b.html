@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5f185.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5575e.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPJWAIT()</B>
+ Sets or queries the timeout for a print job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPJWAIT([&lt;cJob&gt;],[&lt;nNewTimeout&gt;],[&lt;cUser&gt;],</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nTimeout</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cJob&gt;</B>  Designates the selected print job definition.  The default
+     value designates the default job.
+
+     <B>&lt;nNewTimeout&gt;</B>  Designates an optional parameter that allows you to
+     set a timeout in seconds for &lt;cJob&gt;.  A value of 0 indicates a timeout
+     that does not end.
+
+     <B>&lt;cUser&gt;</B>  Designates the name of the user whose print job definition
+     is processed.  The default value designates the current user.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which the
+     operation is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPJWAIT() returns the timeout in seconds.  The value 0 indicates a
+     timeout that does not end.  If an error occurs, the function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT JOB WAIT
+     The timeout in a job definition specifies after how many seconds without
+     data output a job is automatically closed.  NNETPJWAIT() allows you to
+     set or query the timeout.  Do not pass a value for &lt;nNewTimeout&gt; to
+     query the number of seconds.  If &lt;cUser&gt; is not the current user, access
+     rights for the mail system of the user are required.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the timeout in the job definition MYJOB:
+
+        ? NNETPJWAIT('MYJOB')
+
+     <B>.</B>  Set the timeout in the job definition MYJOB to 20 seconds:
+
+        ? NNETPJWAIT('MYJOB', 20)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng57486.html">NNETPJCAP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

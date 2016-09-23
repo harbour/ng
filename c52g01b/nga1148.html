@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga0ae0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="nga1778.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET EPOCH</B>
+ Control the interpretation of dates with no century digits
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET EPOCH TO &lt;nYear&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;nYear&gt;</B> specifies the base year of a 100-year period in which all
+     dates containing only two year digits are assumed to fall.
+
+ <B>Description</B>
+
+     SET EPOCH is an environment command that determines the interpretation
+     of date strings containing only two year digits.  When such a string is
+     converted to a date value, its year digits are compared with the year
+     digits of &lt;nYear&gt;.  If the year digits in the date are greater than or
+     equal to the year digits of &lt;nYear&gt;, the date is assumed to fall within
+     the same century as &lt;nYear&gt;.  Otherwise, the date is assumed to fall in
+     the following century.
+
+     The default value for SET EPOCH is 1900, causing dates with no century
+     digits to be interpreted as falling within the twentieth century.
+
+     CA-Clipper supports all dates in the range 01/01/0100 to 12/31/2999.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows the effects of SET EPOCH:
+
+        SET DATE FORMAT TO "mm/dd/yyyy"
+        ? CTOD("05/27/1904")          // Result: 05/27/1904
+        ? CTOD("05/27/67")            // Result: 05/27/1967
+        ? CTOD("05/27/04")            // Result: 05/27/1904
+        //
+        SET EPOCH TO 1960
+        ? CTOD("05/27/1904")          // Result: 05/27/1904
+        ? CTOD("05/27/67")            // Result: 05/27/1967
+        ? CTOD("05/27/04")            // Result: 05/27/2004
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng14152.html">CTOD()</A>
+<A HREF="ng14f89.html">DATE()</A>
+<A HREF="ng2e785.html">DTOC()</A>
+<A HREF="ng2ec97.html">DTOS()</A>
+<A HREF="ng9b693.html">SET CENTURY</A>
+<A HREF="ng9e636.html">SET DATE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

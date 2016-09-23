@@ -1,0 +1,87 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Optimizable Expressions:</B>
+
+  An optimizable expression is any expression found within the FOR clause
+  of a supported command/function that takes on the following form:
+
+      <B>&lt; index key &gt; &lt; relational operator &gt; &lt; constant value &gt;</B>
+
+  An &lt; index key &gt; may be any key of the open indexes in the currently
+  selected work area.  Valid relational operators are "=, ==, !=, #, &lt;&gt;,
+  &lt;, &gt;, &lt;=, &gt;=, $".  The &lt; constant value &gt; may be any expression that
+  evaluates to a constant value.  This includes literal values such as
+  "100.00", or any memory variable, field, or user defined function.
+
+  Multiple optimizable expressions may be joined with the .AND. and .OR.
+  logical operators to form complex optimizable expressions.  All component
+  expressions in a FOR clause need not be index key expressions. A FOR clause
+  will still benifit from partial optimization if it contains both indexed
+  and non-indexed expressions.
+
+  <B>EXAMPLES:</B>
+
+  If the following tags and keys were active...
+
+      <B>INDEX or TAG          INDEX KEY</B>
+      <B>------------          ---------</B>
+      <B>SALARY                Salary</B>
+      <B>NAME                  Last+First</B>
+      <B>DATE                  Date</B>
+      <B>STATE                 State</B>
+
+  ...then the following would be fully optimizable expressions:
+
+    <B>.</B>  Salary &gt; 25000 .AND. Salary &lt; 30000
+
+    <B>.</B>  Last = "Hewson"
+
+    <B>.</B>  Salary &gt; 25000 .AND. Last = "A" .AND. State = "CA"
+
+  Expressions that contain at least one indexed expression are still
+  partially optimized.  Note the non-indexed fields.
+
+    <B>.</B>  State = "FL" .AND. <U>Age = 21</U>
+
+    <B>.</B>  Salary &gt; 25000 .AND. Last = "A" .AND. State = "CA" .AND. <U>Zip = "92656"</U>
+
+  If an expression does not contain any optimizable components, the operation
+  will simply default to what Clipper would have done in the first place!
+
+  The following are the instances when optimization will not take place.
+
+     <B>.</B> No database in use.
+     <B>.</B> Not a SIx Driver workarea.
+     <B>.</B> No index(es) in use.
+     <B>.</B> Database contains over 524 million records.
+     <B>.</B> No matching index keys found.
+     <B>.</B> Not enough memory.
+     <B>.</B> FILTER/FOR condition contains LOCAL or STATIC variables.
+     <B>.</B> Not a logical condition.
+     <B>.</B> FILTER/FOR condition contains an extended expression.
+     <B>.</B> Matching key found, but in RYO, UNIQUE, or CONDITIONAL
+           index that the order is not currently set to.
+     <B>.</B> Mach SIx was not linked in (properly).
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng14b57.html">m6_IsOptimize()</A>
+<A HREF="ng8a825.html">Smart Translations</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

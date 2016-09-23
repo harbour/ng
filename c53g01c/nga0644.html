@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga0031.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="nga0a7f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SPACE()</B>
+ Return a string of spaces
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SPACE(&lt;nCount&gt;) --&gt; cSpaces</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nCount&gt;</B> is the number of spaces to be returned, up to a maximum of
+     65,535 (64 K).
+
+ <B>Returns</B>
+
+     SPACE() returns a character string.  If &lt;nCount&gt; is zero, SPACE()
+     returns a null string ("").
+
+ <B>Description</B>
+
+     SPACE() is a character function that returns a specified number of
+     spaces.  It is the same as REPLICATE("", &lt;nCount&gt;).  SPACE() can
+     initialize a character variable before associating it with a GET.
+     SPACE() can also pad strings with leading or trailing spaces.  Note,
+     however, that the PADC(), PADL(), and PADR() functions are more
+     effective for this purpose.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses SPACE() to initialize a variable for data
+        input:
+
+        USE Customer NEW
+        MEMVAR-&gt;Name = SPACE(LEN(Customer-&gt;Name))
+        @ 10,10 SAY "Customer Name" GET MEMVAR-&gt;Name
+        READ
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8c0ed.html">PAD()</A>
+<A HREF="ng95934.html">REPLICATE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

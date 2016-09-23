@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2e7e3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2f04f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosGetSegBase()               Get base address of segment selector.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get the base address of a segment selector.</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosGetSegBase(SEL selector, PULONG baseaddr);</B></U>
+
+ <U>selector   <B>Unsigned value representing a valid selector number.</B></U>
+
+ <U>baseaddr   <B>Pointer to a long integer to receive the returned selector base</B></U>
+            <B>address.</B>
+
+ This function returns the linear base address of the selector parameter.
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>#define VID_BUF 0xB800</B>
+    <B>#define VID_SIZE 0x8000l</B>
+    <B>void main (void)</B>
+    <B>{</B>
+    <B>SEL         video_buffer;</B>
+    <B>ULONG       screen_address ;</B>
+    <B>/* get selector that corresponds to the screen buffer */</B>
+    <B>if (DosMapRealSeg(VID_BUF,VID_SIZE,&amp;video_buffer) != 0)</B>
+    <B>   {</B>
+    <B>   printf("Unable to map screen segment\n");</B>
+    <B>   exit(255);</B>
+    <B>}</B>
+    <B>printf("Selector for video buffer %04X\n",video_buffer);</B>
+    <B>if (DosGetSegBase(video_buffer, &amp;screen_address) == 0)</B>
+    <B>   printf("Screen base address : %08X\n",screen_address);</B>
+    <B>}</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

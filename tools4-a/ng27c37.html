@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2780a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng272ab.html">[^^Up^^]</A>
+<A HREF="ng281fb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETFAKDEP()</B>
+ Determines the relative directory depth under a fake root
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETFAKDEP([&lt;cDrive&gt;]) --&gt; nDepth</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cDrive&gt;</B>  Designates a drive (A to .Z) or a search drive (S1 to
+     .S16) that has been mapped to a network directory as fake root.  When
+     called the parameter, the function uses the default drive.
+
+ <B>Returns</B>
+
+     NNETFAKDEP() returns the relative depth under the fake root directory.
+     If the specified drive has not been mapped as fake root, NNETFAKDEP()
+     returns -1.  If &lt;cDrive&gt; does not exist, the return value is -2.
+
+ <B>Description</B>
+
+     NOVELL NET FAKE DEPTH
+     If a network drive has been mapped as a so-called fake root, it becomes
+     the apparent root of the allocated drive.  After a directory change,
+     NNETFAKDEP() returns the number of directories under the fake root.
+     Depth 0 is assigned to the root directory.  Additionally, NNETFAKDEP()
+     allows you to determine if a drive has been mapped as a fake root
+     (return value =&gt; 0) or a normal drive (return value &lt; 0).
+
+ <B>Note</B>
+
+     <B>.</B>  Fake roots require shell version 3.01 or higher.
+
+ <B>Example</B>
+
+     Map drive M: as a fake root, then change the directory, and query the
+     relative directory depth:
+
+     NNETMAP('M','SYS:PAUL',.T.)
+     DIRCHANGE('M:\DATA')
+     ? NNETFAKDEP('M')                        // Returns: 1
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2780a.html">NNETDELFAK()</A>
+<A HREF="ng281fb.html">NNETMAP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

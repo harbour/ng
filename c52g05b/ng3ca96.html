@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3c8fe.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b69f.html">[^^Up^^]</A>
+<A HREF="ng3d252.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>8   References</B>
+--------------------------------------------------------------------------------
+
+     It is important to distinguish between the different meanings of
+     the word "reference."  In Clipper, there are two distinct kinds of
+     references:
+
+     1. <B>An object reference (an OREF):</B>  This is a special internal
+        quantity that identifies the location of a character, array, or
+        code block value in virtual memory.  Because these kinds of
+        values can be very large, a VALUE cannot directly contain them.
+        Instead, the VALUE contains an OREF that allows the data to be
+        located when needed.  Whenever necessary, the system performs a
+        de-referencing operation in order to convert an OREF into an
+        actual memory address.
+
+     2. <B>A variable reference (a VREF):</B>  Like an OREF, a VREF is a
+        special internal quantity.  Instead of referring to a piece of
+        data, however, a VREF refers to a Clipper variable.  A VREF is
+        created whenever a variable is passed by reference in a function
+        call or DO...WITH statement.  VREFs are special in that they
+        only exist on the Eval Stack, and only as parameters during a
+        function call.  A VREF cannot be assigned to a variable or
+        stored in an array.
+
+        -----------------------------------------------------------------
+        <B>. Notes</B>
+
+        <B>.</B>  A bug in Clipper 5.0/5.01 allows a VREF to be assigned
+           to a variable in certain cases.  This behavior is
+           unintentional and will be eliminated in future releases.
+
+        <B>.</B>  When dealing with C, the terminology of references
+           becomes somewhat murky.  This is because C programmers often
+           use the words reference and pointer interchangeably.  Where
+           Clipper is involved, however, the two words have very
+           distinct meanings.  A reference is one of the special
+           quantities discussed above.  A pointer is an actual memory
+           address or a C variable containing such an address.
+        -----------------------------------------------------------------
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

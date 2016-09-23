@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng833e7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng840a3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SCREENSTR()</B>
+ Reads a string, including attributes, from the screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SCREENSTR ([&lt;nRow&gt;], [&lt;nColumn&gt;], [&lt;nCharCount&gt;])</B>
+     <B>    --&gt; cCharacterstring</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nRow&gt;</B>  Designates the first line to read.  The default is the
+     cursor line.
+
+     <B>&lt;nColumn&gt;</B>  Designates the first column to read.  The default is the
+     cursor column.
+
+     <B>&lt;nCharCount&gt;</B>  Designates how many characters to read.  The default
+     is to the end of the window or screen area.
+
+ <B>Returns</B>
+
+     SCREENSTR() returns the character string that contains all of the bytes
+     read from the screen.
+
+ <B>Description</B>
+
+     SCREENSTR() returns a specified portion of the screen or window
+     contents.  &lt;nRow&gt; specifies the first line, and &lt;nColumn&gt; the first
+     column to read from.  &lt;nCharCount&gt; designates the number of characters
+     to read, if you do not want the entire screen or window content.
+
+ <B>Notes</B>
+
+     <B>.</B>  The returned character string contains all the attribute
+        bytes.  For the entire screen, a variable that is 25 lines by 80
+        columns, is a total of 4000 characters.
+
+     <B>.</B>  If &lt;nRow&gt; or &lt;nColumn&gt; are not specified, then the function
+        automatically uses the corresponding coordinates of the current
+        cursor position.  The function does not change the cursor position.
+
+ <B>Examples</B>
+
+     <B>.</B>  Read all characters with their accompanying attributes from
+        the cursor position to the end of the screen:
+
+        cVar: = SCREENSTR()
+
+     <B>.</B>  Show all characters and attributes from the cursor position in
+        line 24:
+
+        cVar: = SCREENSTR(24)
+
+     <B>.</B>  The last 10 characters and attributes in line 24:
+
+        cVar: = SCREENSTR(24, 70)
+
+     <B>.</B>  The last 10 characters (without attributes) in line 24:
+
+        cVar: = CHARODD(SCREENSTR(24, 70))
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng87000.html">STRSCREEN()</A>
+<A HREF="ng46327.html">CHARODD()</A>
+<A HREF="ng44634.html">CHAREVEN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

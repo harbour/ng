@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng986f7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng97123.html">[^^Up^^]</A>
+<A HREF="ng991a2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPFUNCS()</B>
+ Determines the function name for a device
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPFUNCS(&lt;cDevice&gt;,[&lt;cServer&gt;,&lt;nConId&gt;]) --&gt; aFuncs</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDevice&gt;</B>  Designates the name for the device for which the
+     functions are determined.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server for which the
+     device definitions are used.  Your workstation must be attached to
+     &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPFUNCS() returns a one-dimensional array that contains the names of
+     the functions defined for &lt;cDevice&gt;.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT FUNCTIONS
+     Netware allows you to manage printer and form information in a database
+     (NET$PRN.DAT).  For each device, functions are defined to put the device
+     into specific modes.  NNETPFUNCS() returns a list of functions defined
+     for &lt;cDevice&gt;.  This allows you to link the printer control to the
+     Netware printer management within your application.
+
+ <B>Example</B>
+
+     Determine and display the functions for device HPLJ:
+
+     aFuncs = NNETPFUNCS('HPLJ')
+     FOR i = 1 TO LEN(aFuncs)
+     ? aFuncs[i]
+     NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng986f7.html">NNETPFUNCO()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

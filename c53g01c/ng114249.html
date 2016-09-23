@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng113e1d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng10fe9c.html">[^^Up^^]</A>
+<A HREF="ng1149c5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>+</B>
+ Addition, unary positive, concatenation         (Math, Character)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>&lt;nNumber1&gt; + &lt;nNumber2&gt;           (addition)</B>
+     <B>&lt;dDate&gt;    + &lt;nNumber&gt;            (addition)</B>
+     <B>&lt;cString1&gt; + &lt;cString2&gt;           (concatenation)</B>
+
+ <B>Type</B>
+
+     Character, date, memo, numeric
+
+ <B>Operands</B>
+
+     <B>&lt;nNumber1&gt;</B> is a numeric value to increment by <B>&lt;nNumber2&gt;</B>.
+
+     <B>&lt;dDate&gt;</B> is a date value to increment by <B>&lt;nNumber&gt;</B> days.
+
+     <B>&lt;cString2&gt;</B> is a character string to join to the end of
+     <B>&lt;cString1&gt;</B>.
+
+ <B>Description</B>
+
+     The (+) operator performs a number of different operations depending on
+     the data types of the operands:
+
+     <B>.  Unary positive sign (numeric):</B> A numeric expression prefaced
+        with the plus (+) operator performs no operation on the operand
+        except to enforce a higher level of precedence than other numeric
+        operations (except the unary minus).
+
+     <B>.  Binary addition sign (numeric, date):</B> If both operands are
+        numeric, &lt;nNumber2&gt; is added to &lt;nNumber1&gt; and the result is returned
+        as a numeric value.  If either operand is date data type and the
+        other operand numeric data type, the &lt;nNumber&gt; is added as days to
+        the &lt;dDate&gt; and a date value is returned.
+
+     <B>.  Concatenation (character, memo):</B> If both operands are
+        character, &lt;cString2&gt; (the right operand) is concatenated to
+        &lt;cString1&gt; (the left operand) returning a character string.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate the various forms of the + operator:
+
+        // Binary addition (numeric)
+        ? 1 + 1                           // Result: 2
+        ? 1 + 0                           // Result: 1
+        ? 0 + 1                           // Result: 1
+
+        // Binary addition (date)
+        ? CTOD("12/12/88") + 12         // Result: 12/24/88
+        ? 12 + CTOD("12/12/88")         // Result: 12/24/88
+
+        // Concatenation (character)
+        ? "Hi " + "there"               // Result: Hi there
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng11078f.html">%</A>
+<A HREF="ng113abb.html">*</A>
+<A HREF="ng113e1d.html">**</A>
+<A HREF="ng1153e9.html">-</A>
+<A HREF="ng118655.html">/</A>
+<A HREF="ng11b607.html">= (compound)</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1f978.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng2022b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETDISLOG()</B>
+ Disables a file server for logins
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETDISLOG([&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server that is used.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETDISLOG() returns .T., if the file server has been successfully
+     disabled for logins.  If an error occurs (for example, insufficient
+     access rights), the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET DISABLE LOGIN
+     NNETDISLOG() allows you to disable a file server for further logins of
+     new users.  For example, you should use this function if you want to
+     execute a data backup.  Console rights are required to disable a file
+     server for logins with NNETDISLOG().
+
+ <B>Example</B>
+
+     Disable the default server for further logins:
+
+     IF NNETDISLOG()
+        ? 'Server disabled for logins!'
+     ELSE
+        ? 'Error!
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2022b.html">NNETENLOG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

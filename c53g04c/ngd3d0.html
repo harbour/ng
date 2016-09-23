@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd163.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng9eb2.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET TMP</B>
+ Specifies the location for creating temporary files
+-------------------------------------------------------------------------------
+
+    <B>SET TMP=&lt;pathName&gt;</B>
+
+ <B>Arguments</B>
+
+    <B>&lt;pathName&gt;</B> is the name of the directory where temporary files are
+    created.
+
+ <B>Description</B>
+
+    The TMP environment variable specifies a single directory where both
+    CLIPPER.EXE and BLINKER.EXE write temporary work files.  If this variable
+    is not specified, temporary files are created in the current directory.
+    The /T compiler option can be used to override the TMP setting for the
+    current compiler session.
+
+    In the process of some operations, such as sorting and indexing,
+    CA-Clipper creates temporary files.  These files are created either in
+    the current directory or in the directory specified by the environment
+    variable TMP.
+
+ <B>Examples</B>
+
+    To assign a TMP variable, place a command line like the following in
+    the user's AUTOEXEC.BAT file:
+
+    SET TMP=D:\TEMP
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng35d.html">Compiler</A>
+<A HREF="ng2e97.html">Real Mode Linker</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

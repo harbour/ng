@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngcba.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng271.html">[^^Up^^]</A>
+<A HREF="ng195b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CLASS METHOD</B>
+
+ <B>Synopsis</B>
+
+         Declare class method(s)
+
+ <B>Syntax</B>
+
+         CLASS METHOD &lt;method name list&gt;
+
+ <B>Arguments</B>
+
+         <B>&lt;method name list&gt;</B> is a list of names of methods to be
+         declared. The names are separated by commas. Each method declared
+         should be defined later in the same module using the <B>METHOD</B>
+         <B>definition</B> command.
+
+ <B>Description</B>
+
+         Declares one or more class methods, and corresponding messages
+         with the same names.
+
+         A class method applies to an entire class, rather than to a single
+         instance of a class. Inside a class method, the self variable
+         refers to the class object via which the method was invoked.
+         <B>Class variables</B> are thus directly accessible inside class
+         methods, by sending messages to self.
+
+         See the section on <B>Class Methods</B> for more information.
+
+ <B>Notes</B>
+
+         If a message and its method cannot have the same name for some
+         reason, the <B>CLASS MESSAGE...METHOD</B> command should be used
+         instead.
+
+         If a class uses class variables, it is often necessary to
+         initialize them when that class is created. To assist with this,
+         if a class defines a class method called initClass, the method
+         will be invoked automatically when the class is first created.
+         This allows one-time initialization of class variables. The
+         initClass method should be declared as follows:
+
+           CLASS METHOD initClass
+
+         and defined after the class specification using the <B>METHOD</B>
+         <B>definition</B> command. See the <B>Class Initialization</B> section
+         for more information.
+
+ <B>See Also</B>
+
+         <B>CLASS MESSAGE...METHOD</B>, <B>Class Messages</B>, <B>Class Methods</B>,
+         <B>Class Variables</B>, <B>Class Initialization</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngcba.html">CLASS MESSAGE...METHOD</A>
+<A HREF="ngcc64.html">Class Messages</A>
+<A HREF="ngdbcc.html">Class Methods</A>
+<A HREF="ngce4f.html">Class Variables</A>
+<A HREF="nge069.html">Class Initialization</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

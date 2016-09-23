@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng68813.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng68f99.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gPalSet()</B>
+ Set the current color palette
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>ERRCODE _gPalSet(</B>
+     <B>                  LLG_LPPALETTE lpPaletteSet</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>lpPaletteSet</B> is a pointer to an LLG_PALETTE structure that you must
+     allocate and initialize prior to calling this function.  _gPalSet() uses
+     the members of this structure to define the current color palette.
+
+ <B>Returns</B>
+
+     SUCCESS if successful; otherwise, an error code.
+
+ <B>Description</B>
+
+     This function is used to set an entire palette.  To use it, you must
+     first set up an array of LLG_RGB structures--one for each color in the
+     palette.  The palette can consist of 16, 256, 32 K, 64 K, or 16 M
+     colors, depending on the video mode specified using _gModeSet().
+
+     Then, you define an LLG_PALETTE structure that points to the LLG_RGB
+     structure array and defines a few additional palette parameters, and
+     pass a pointer to this structure to _gPalSet().
+
+     <B>Note: </B> To retrieve information about an existing palette, call
+     _gPalGet().
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng68813.html">_gPalGet()</A>
+<A HREF="ng6c48b.html">LLG_PALETTE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

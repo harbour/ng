@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9b48.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="nga47c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlLen()</B>               Get the length of a RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlLen(rl) -&gt; nLength
+
+<B>Arguments</B>
+
+    rl is the RecordList for which the length is to be determined.
+
+<B>Returns</B>
+
+    rlLen() returns the length of the RecordList.
+
+<B>Description</B>
+
+    rlLen() returns the length of the RecordList (i.e., the maximum number
+    of records which can be stored in the RecordList).
+
+<B>Example</B>
+
+    rl := rlNew(50)
+<B>    ? rlLen(rl)             &amp;&amp; Will return 50</B>
+    ? rlCount(rl)           &amp;&amp; Will return 0 (no recs in RecordList)
+    rlDestroy(rl)
+
+<B>Example</B>
+
+    use demo
+    rl := rlNew()
+<B>    ? rlLen(rl)             &amp;&amp; Will return number of recs in database</B>
+    ? recCount()            &amp;&amp; Same as above
+    rlDestroy(rl)
+
+<B>See Also</B>
+
+    rlCount()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga47c.html">rlOptLevel()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

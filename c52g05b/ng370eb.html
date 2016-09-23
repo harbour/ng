@@ -1,0 +1,40 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng36700.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng346a0.html">[^^Up^^]</A>
+<A HREF="ng37634.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>7   Data File Buffering</B>
+------------------------------------------------------------------------------------------
+
+     The Clipper 5.0 database drivers use virtual memory segments to contain
+     database and index file buffers.  This allows the VMM to manage these
+     buffers on a competitive basis with other uses of memory.  As with
+     dynamic overlay segments, the VMM will swap buffer segments into EMM
+     but not to the disk swap file.  If a VM segment containing a disk
+     buffer is to be removed from memory altogether, it is written back to
+     the appropriate data file.
+
+     The file buffering system allocates buffer management tables in fixed
+     memory (see Fixed Memory Allocator below).  The actual amount used
+     depends on the combined total of real memory and EMM available at
+     startup.  The tables use 14 bytes per 1K of real or Expanded memory
+     (the tables never exceed 8K, however).  Because these tables are
+     allocated in fixed memory, they have an effect on the amount of swap
+     space available to the VMM.  In some low-memory situations, reducing
+     the amount of available EMM may help to avoid <B>swap space exhausted</B>
+     errors. (Note: reducing EMM availability may seriously degrade VMM
+     performance in very low memory situations due to increased disk
+     swapping--see Use of LIM 3.2 Expanded Memory above.)
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

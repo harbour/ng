@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5f418.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5fa55.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>openMemFile()</B>
+ Open a memo file in the specified work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE openMemFile(</B>
+     <B>                           AREAP wa,</B>
+     <B>                           LPDBOPENINFO lpdboi</B>
+     <B>                         )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpdboi</B> is a pointer to a structure containing information about the
+     work area and the table to be opened.
+
+ <B>Description</B>
+
+     The openMemFile() method opens a memo file in the work area referenced
+     by wa.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  openMemFile() isolates the code necessary to open the memo
+        file.  It is normally called by open() when the database has an
+        associated memo file.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4346c.html">DBOPENINFO</A>
+<A HREF="ng5ee39.html">closeMemFile()</A>
+<A HREF="ng5f0e2.html">createMemFile()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

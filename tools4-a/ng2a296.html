@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng29ba9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng272ab.html">[^^Up^^]</A>
+<A HREF="ng2a76f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETNXTFRE()</B>
+ Returns the next available drive designator
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETNXTFRE([&lt;lRevers&gt;]) --&gt; cDrive</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lRevers&gt;</B> Designates whether the search is performed in ascending
+     order, starting from drive designator "A", or in descending order,
+     starting from drive designator "Z".  The default value (.F.) designates
+     that the search is performed in ascending order.
+
+ <B>Returns</B>
+
+     NNETNXTFRE() returns the designator of the determined drive.  If no
+     further drive designator is available, the function returns an empty
+     string ("").
+
+ <B>Description</B>
+
+     NOVELL NET NEXT FREE
+     NNETNXTFRE() is used mainly in conjunction with the function NNETMAP().
+     NNETNEXTFRE() allows you to determine the next available drive
+     designator before a drive mapping.  For example, you can avoid deleting
+     existing mappings.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the next available drive designator, starting from
+        "A":
+
+        ? NNETNXTFRE()                  // Returns:  K
+
+     <B>.</B>  Determine the next available drive designator, starting from
+        "Z":
+
+        ? NNETNXTFRE(.T.)               // Returns:  Y
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng281fb.html">NNETMAP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

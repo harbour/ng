@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng63550.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng63ea6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ISLOWER()</B>
+ Determine if the leftmost character is a lowercase letter
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ISLOWER(&lt;cString&gt;) --&gt; lBoolean</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string to be examined.
+
+ <B>Returns</B>
+
+     ISLOWER() returns true (.T.) if the first character of the character
+     string is a lowercase letter; otherwise, it returns false (.F.).
+
+ <B>Description</B>
+
+     ISLOWER() is a character function that determines whether the first
+     character of a character string is lowercase.  It is the inverse of
+     ISUPPER() which determines whether a character begins with an uppercase
+     character.
+
+     Both ISLOWER() and ISUPPER() relate to the LOWER() and UPPER() functions
+     which actually convert lowercase characters to uppercase, and vice
+     versa.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples demonstrate various results of ISLOWER():
+
+        ? ISLOWER("aBcDe")         // Result: .T.
+        ? ISLOWER("AbcDe")         // Result: .F.
+        ? ISLOWER("1abcd")         // Result: .F.
+        ? ISLOWER("abcd")            // Result: .T.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng62d60.html">ISALPHA()</A>
+<A HREF="ng63550.html">ISDIGIT()</A>
+<A HREF="ng6436c.html">ISUPPER()</A>
+<A HREF="ng6741f.html">LOWER()</A>
+<A HREF="nga73ff.html">UPPER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

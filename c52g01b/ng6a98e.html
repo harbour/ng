@@ -1,0 +1,103 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6a58e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng6b445.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TONE()</B>
+ Sound a speaker tone for a specified frequency and duration
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TONE(&lt;nFrequency&gt;, &lt;nDuration&gt;) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nFrequency&gt;</B> is a positive numeric value indicating the frequency of
+     the tone to sound.
+
+     <B>&lt;nDuration&gt;</B> is a positive numeric value indicating the duration of
+     the tone measured in increments of 1/18 of a second.  For example, an
+     &lt;nDuration&gt; value of 18 represents one second.
+
+     For both arguments, noninteger values are truncated--not rounded--to
+     their integer portion.
+
+ <B>Returns</B>
+
+     TONE() always returns NIL.
+
+ <B>Description</B>
+
+     TONE() is a sound function that indicates various program states to the
+     user.  These can be error states, boundary conditions, or the end of a
+     time-consuming process.  For example, an error state would sound an
+     error tone before alerting the user with a message or interactive dialog
+     box.  A boundary condition might indicate that the user is attempting to
+     cursor past the top or bottom of a column in a TBrowse object.  A batch
+     process also might indicate its completion with a sound to alert the
+     user, in case the user has turned away from the screen.
+
+     TONE() works by sounding the speaker at the specified frequency for the
+     specified duration.  The duration is measured in increments of 1/18 of a
+     second.  The frequency is measured in hertz (cycles per second).
+     Frequencies of less than 20 are inaudible.  The table below shows the
+     frequencies of standard musical notes.
+
+     <B>Note: </B> TONE() works only on IBM PC and 100% compatible computers
+
+     <B>Table of Musical Notes</B>
+     ------------------------------------------------------------------------
+     <B>Pitch   Frequency    Pitch     Frequency</B>
+     ------------------------------------------------------------------------
+     C       130.80       mid C     261.70
+     C#      138.60       C#        277.20
+     D       146.80       D         293.70
+     D#      155.60       D#        311.10
+     E       164.80       E         329.60
+     F       174.60       F         349.20
+     F#      185.00       F#        370.00
+     G       196.00       G         392.00
+     G#      207.70       G#        415.30
+     A       220.00       A         440.00
+     A#      233.10       A#        466.20
+     B       246.90       B         493.90
+                          C         523.30
+     ------------------------------------------------------------------------
+
+ <B>Examples</B>
+
+     <B>.</B>  This example is a beep function that indicates that a batch
+        operation has completed:
+
+        FUNCTION DoneBeep
+           TONE(300, 1)
+           TONE(100, 1)
+           TONE(300, 1)
+           TONE(100, 1)
+           RETURN NIL
+
+     <B>.</B>  This example is a tone sequence that indicates invalid
+        keystrokes or boundary conditions:
+
+        FUNCTION ErrorBeep
+           TONE(100, 3)
+           RETURN NIL
+
+ <B>Files:</B>  Library is EXTEND.LIB, source file is SOURCE\SAMPLE\EXAMPLEA.ASM.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1295d.html">CHR()</A>
+<A HREF="ng9b1ae.html">SET BELL</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

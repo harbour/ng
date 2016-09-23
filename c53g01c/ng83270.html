@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng82b83.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng83941.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDKEY()</B>
+ Return the key expression of an order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDKEY(&lt;cOrderName&gt; | &lt;nOrder&gt;</B>
+     <B>   [, &lt;cOrderBagName&gt;]) --&gt; cExpKey</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrderName&gt;</B> is the name of an order, a logical ordering of a
+     database.
+
+     <B>&lt;nOrder&gt;</B> is an integer that identifies the position in the order
+     list of the target order whose cExpKey is sought.
+
+     <B>&lt;cOrderBagName&gt;</B> is the name of a disk file containing one or more
+     orders.  You may specify &lt;cOrderBagName&gt; as the file name with or
+     without the path name or appropriate extension.  If you do not include
+     the extension as part of &lt;cOrderBagName&gt;, CA-Clipper uses the default
+     extension of the current RDD.
+
+ <B>Returns</B>
+
+     Returns a character string, cExpKey.
+
+ <B>Description</B>
+
+     ORDKEY() is an order management function that returns a character
+     expression, cExpKey, that represents the key expression of the specified
+     order.
+
+     You may specify the order by name or with a number that represents its
+     position in the order list.  Using the order name is the preferred
+     method.
+
+     The active RDD determines the order capacity of an order bag.  The
+     default DBFNTX and the DBFNDX drivers only support single-order bags,
+     while other RDDs may support multiple-order bags (e.g., the DBFCDX and
+     DBFMDX drivers).
+
+     <B>Note:</B> ORDKEY(0) works as ORDKEY(INDEXORD()).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example retrieves the index expression from an order:
+
+        USE Customer NEW
+        INDEX ON  Customer-&gt;Acct   ;
+           TO  Customer      ;
+           FOR Customer-&gt;Acct &gt; "AZZZZZ"
+
+        ORDKEY("Customer")      // Returns: Customer-&gt;Acct
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng824b9.html">ORDFOR()</A>
+<A HREF="ng83270.html">ORDKEY()</A>
+<A HREF="ng8829c.html">ORDNAME()</A>
+<A HREF="ng88aaf.html">ORDNUMBER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

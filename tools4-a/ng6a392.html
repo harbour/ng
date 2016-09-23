@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng69d77.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng6a8da.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSJTXT()</B>
+ Checks to see if an active job is a text job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSJTXT(&lt;cPServer&gt;,&lt;nPrinter&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; lText</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;nPrinter&gt;</B>  Designates the number of the printer on &lt;cPServer&gt;.
+     Values between 0 and 15 are possible.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSJTXT() returns .T. if the active job of &lt;nPrinter&gt; on &lt;cPServer&gt;
+     is a text job.  A return of .F. indicates a binary job.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER JOB TEXT
+     NNETPSJTXT() allows you to determine whether the active job of
+     &lt;nPrinter&gt; on &lt;cPServer&gt; is a text or binary job.
+
+ <B>Example</B>
+
+     Determine the job type of the active job of printer 0 on PSERVER:
+
+     IF NNETPSJTXT('PSERVER',0)
+        ? 'Text job!'
+     ELSEIF NNETPSERR()=0
+        ? 'Binary job!'
+     ELSE
+        ? 'Error!'
+     ENDIF
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,183 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngdf6fb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge1367.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET COLOR*</B>
+ Define screen colors
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET COLOR | COLOUR TO [[&lt;standard&gt;]</B>
+     <B>   [,&lt;enhanced&gt;] [,&lt;border&gt;] [,&lt;background&gt;]</B>
+     <B>   [,&lt;unselected&gt;]] | (&lt;cColorString&gt;)</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;standard&gt;</B> is the color that paints all console, full-screen, and
+     interface commands and functions when displaying to the screen.  This
+     includes commands such as @...PROMPT, @...SAY, and ?; as well as
+     functions such as ACHOICE(), DBEDIT(), and MEMOEDIT().
+
+     <B>&lt;enhanced&gt;</B> is the color that paints highlighted displays.  This
+     includes GETs with INTENSITY ON, the MENU TO, DBEDIT(), and ACHOICE()
+     selection highlight.
+
+     <B>&lt;border&gt;</B> is the color that paints the area around the screen that
+     cannot be written to.
+
+     <B>&lt;background&gt;</B> is not currently supported by any machines for which
+     Computer Associates provides drivers.  This setting is supplied for
+     compatibility purposes only.
+
+     <B>&lt;unselected&gt;</B> is a color pair that provides input focus by displaying
+     the current GET in the enhanced color while other GETs are displayed in
+     this color.
+
+     <B>&lt;cColorString&gt;</B> is a character string enclosed in parentheses
+     containing the color settings.  This facility lets you specify the color
+     settings as an expression in place of a literal string or macro
+     variable.
+
+     SET COLOR TO with no argument restores the default colors to W/N, N/W,
+     N, N, N/W.
+
+ <B>Description</B>
+
+     SET COLOR, a command synonym for the SETCOLOR() function, defines colors
+     for subsequent screen painting activity.  Each SET COLOR command
+     specifies a list of color settings for the five types of screen painting
+     activity.  Each setting is a foreground and background color pair
+     separated by the slash (/) character.  Foreground defines the color of
+     characters displayed on the screen.  Background defines the color
+     displayed behind the character.  Spaces and nondisplay characters
+     display as background only.
+
+     In addition to color, a foreground setting can have an attribute, high
+     intensity or blinking.  With a monochrome display, high intensity
+     enhances brightness of painted text.  With a color display, high
+     intensity changes the hue of the specified color making it a different
+     color.  For example, N displays foreground text as black where N+
+     displays the same text as gray.  High intensity is denoted by +.  The
+     blinking attribute causes the foreground text to flash on and off at a
+     rapid interval.  Blinking is denoted with *.  An attribute character can
+     occur anywhere in a setting, but is always applied to the foreground
+     color regardless where it occurs.
+
+     Each color can be specified using either a letter or a number, but
+     numbers and letters cannot be mixed within a setting.  Note that numbers
+     are supplied for compatibility purposes and are not recommended.
+
+     All settings are optional.  If a setting is skipped, its previous value
+     is retained with only new values set.  Skipping a foreground or
+     background color within a setting sets the color to black.
+
+     The following colors are supported:
+
+     <B>Color Table</B>
+     ------------------------------------------------------------------------
+     <B>Color          Letter    Number  Monochrome</B>
+     ------------------------------------------------------------------------
+     Black          N, Space  0       Black
+     Blue           B         1       Underline
+     Green          G         2       White
+     Cyan           BG        3       White
+     Red            R         4       White
+     Magenta        RB        5       White
+     Brown          GR        6       White
+     White          W         7       White
+     Gray           N+        8       Black
+     Bright Blue    B+        9       Bright Underline
+     Bright Green   G+        10      Bright White
+     Bright Cyan    BG+       11      Bright White
+     Bright Red     R+        12      Bright White
+     Bright Magenta RB+       13      Bright White
+     Yellow         GR+       14      Bright White
+     Bright White   W+        15      Bright White
+     Black          U                 Underline
+     Inverse Video  I                 Inverse Video
+     Blank          X                 Blank
+     ------------------------------------------------------------------------
+
+     SET COLOR is a compatibility command and is not recommended.  It is
+     superseded by the SETCOLOR() function which can return the current color
+     as well as set a new color.
+
+ <B>Notes</B>
+
+     <B>.  Monochrome monitors:</B>  Color is not supported on monochrome
+        monitors.  CA-Clipper, however, supports the monochrome attributes
+        inverse video (I) and underlining (U).
+
+     <B>.  Screen drivers:</B> SET COLOR TO, using numbers, may not be
+        supported by screen drivers other than the default screen driver.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses the unselected setting to make the current
+        GET red on white while the rest are black on white:
+
+        cColor:= "W/N,R/W,,,N/W"
+        SET COLOR TO (cColor)
+        cOne := cTwo := SPACE(10)
+        @ 1, 1 SAY "Enter One: " GET cOne
+        @ 2, 1 SAY "Enter Two: " GET cTwo
+        READ
+
+     <B>.</B>  In this example a user-defined function gets a password from
+        the user using the blank (X) enhanced setting to hide the password as
+        the user types:
+
+        IF !DialogPassWord(12, 13, "W+/N", "FUNSUN", 3)
+           ? "Sorry, your password failed"
+           QUIT
+        ENDIF
+
+        FUNCTION DialogPassWord( nRow, nCol, ;
+               cStandard, cPassword, nTries )
+           LOCAL nCount := 1, cColor := SETCOLOR()
+           SET COLOR TO (cStandard + ", X")      // Blank input
+           //
+           DO WHILE nCount &lt; nTries
+              cUserEntry:= SPACE(6)
+              @ nRow, nCol SAY  "Enter password: " GET ;
+                       cUserEntry
+              READ
+              //
+              IF LASTKEY() == 27
+                 SET COLOR TO (cColor)
+                 RETURN .F.
+
+              ELSEIF cUserEntry == cPassword
+                 SET COLOR TO (cColor)
+                 RETURN .T.
+              ELSE
+                 nCount++
+              ENDIF
+           ENDDO
+           //
+           SET COLOR TO (cColor)
+           RETURN .F.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ng631a4.html">ISCOLOR()</A>
+<A HREF="ng9c7f1.html">SETCOLOR()</A>
+<A HREF="ng9ba5f.html">SETBLINK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

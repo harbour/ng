@@ -1,0 +1,88 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng86199.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng87327.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDKEYVAL()</B>
+ Get the key value of the current record from the controlling order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDKEYVAL() --&gt; uKeyValue</B>
+
+ <B>Returns</B>
+
+     ORDKEYVAL() returns the current record's key value.  The data type of
+     the return value is the same as that of the key expression used to
+     create the order.  Use VALTYPE() to determine the data type.
+
+     ORDKEYVAL() returns NIL if:
+
+     <B>.</B>  There is no controlling order
+
+     <B>.</B>  The record pointer is at the end of file (EOF() returns true
+        (.T.))
+
+     <B>.</B>  There is no key defined for this record (for example, you have
+        positioned the record pointer to a record that does not meet the
+        order's for condition or that lies outside of its specified scope)
+
+ <B>Description</B>
+
+     The key value is retrieved from the controlling order, not the database
+     file.  This makes the retrieval faster because no time is spent reading
+     in the actual record.
+
+     <B>Tip:  </B>ORDKEYVAL() is fast, but if you are going to use the value
+     more than once, it is faster to store the result in a local variable.
+     Then use the local variable rather than calling ORDKEYVAL() repeatedly
+     for the same record.
+
+     By default, this function operates on the currently selected work area.
+     It will operate on an unselected work area if you specify it as part of
+     an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example displays the values for all keys in an order
+        without ever reading the individual records into memory:
+
+        FUNCTION DISPLAYKEYS()
+           LOCAL cKey, cFirst, cLast
+
+           USE Customer
+           // Assuming both LastName and FirstName are
+           // 20 characters
+           INDEX ON LastName + FirstName TO LastFir
+
+           DO WHILE !Customer-&gt;EOF()
+              cKey := Customer-&gt;ORDKEYVAL()          // Get key
+                                                     // value
+              cLast := LEFT(cKey, 20)                // Get last
+                                                     // name
+              cFirst := RIGHT(cKey, 20)              // Get first
+                                                     // name
+              ? cLast, cFirst
+              Customer-&gt;DBSKIP()
+           ENDDO
+
+           CLOSE
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8915c.html">ORDSCOPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

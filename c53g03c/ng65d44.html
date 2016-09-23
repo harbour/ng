@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng65937.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng6621f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gExclSet()</B>
+ Set a specified screen region as an exclusion area
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>ERRCODE _gExclSet(</B>
+     <B>                   LLG_LPRECT lpExclSet,</B>
+     <B>                   BOOL bIsGraphic</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>lpExclSet</B> is a pointer to an LLG_RECT structure that you must
+     allocate and initialize prior to calling this function.  _gExclSet()
+     uses the members of this structure to set an exclusion area.
+
+     <B>bIsGraphic</B> is a flag that you specify as true (.T.) if the
+     coordinates specified in lpExclSet are pixel-based and false (.F.) if
+     they are text-based.
+
+ <B>Returns</B>
+
+     SUCCESS if successful; otherwise, an error code.
+
+ <B>Description</B>
+
+     This function is used to prevent output from being displayed in a
+     defined region of the screen, such as when you have multiple, cascading
+     windows and do not want to write to an area that is currently covered by
+     another window.
+
+     <B>Note: </B> To retrieve information about an existing exclusion area
+     without changing it, call _gExclGet().
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6555c.html">_gExclCountGet()</A>
+<A HREF="ng6573a.html">_gExclErase()</A>
+<A HREF="ng65937.html">_gExclGet()</A>
+<A HREF="ng6c9c3.html">LLG_RECT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

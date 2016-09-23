@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng90f26.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng89afa.html">[^^Up^^]</A>
+<A HREF="ng91adb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DISKSTAT()</B>
+ Determines the status of a drive.
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DISKSTAT([&lt;cDrive&gt;]) --&gt; nStatus</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cDrive&gt;</B>  Designates the drive designator (A, B, C, etc.) of the
+     drive for which the status of the last operation is determined.  The
+     default is the current disk drive.
+
+ <B>Returns</B>
+
+     DISKSTAT() returns the status of the floppy or hard disk operation as a
+     number.  The bits have the following meanings:
+
+     <B>Table 7-7:  Drive Status Coding</B>
+     ------------------------------------------------------------------------
+     <B>Bit     Symb. constants     Definition</B>
+     ------------------------------------------------------------------------
+     1       DST_INVALID         Unknown command
+     2       DST_READONLY        Address marker not found
+     3       DST_SECTOR          Sector not found
+     4       DST_DMA             DMA overflow
+     5       DST_CRC             CRC error
+     6       DST_CONTROLLER      Controller error
+     7       DST_SEEK            Seek operation failure
+     8       DST_TIMEOUT         Timeout error
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     When DOS returns a "block device error" message  (See ERRORORG()) and
+     DISKSTAT() to determine a more detailed cause of the error).
+
+ <B>Note</B>
+
+     <B>.</B>  This function passes the system status to a CA-Clipper
+        application.  The system saves a status value for all floppy and hard
+        disk operations.  When you reaccess a floppy disk drive from within
+        your program, the previous disk operation status is lost.  The same
+        applies to hard disk status.
+
+ <B>Example</B>
+
+     Determine if the system was unable to find an address marker:
+
+     IF ERRORORG() == DST_READONLY
+        DiskError  :=  DISKSTAT("A")
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngba031.html">ERRORBASE()</A>
+<A HREF="ngba5b1.html">ERRORCODE()</A>
+<A HREF="ngbaf45.html">ERRORORG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

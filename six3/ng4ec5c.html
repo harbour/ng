@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4df76.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng4f3c5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SET INDEX:</B>
+
+  Syntax
+
+  <B>SET INDEX TO [&lt;xcIndex list&gt;] [ADDITIVE]</B>
+
+  Arguments
+
+     &lt;xcIndex list&gt; is a list of up to 15 index (.CDX, .IDX, .NSX, or .NTX)
+     filenames, separated by commas.  Any reference to an index filename that
+     results in either a null string ("") or spaces is ignored.  Each index
+     file can be specified as a literal filename or as a character expression
+     enclosed in parentheses.
+
+     If an extension is not specified, the SIx Driver's SIXCDX flavor will
+     first look for an .IDX file and, if one is not found, it will then look
+     for a .CDX file.  The SIXNSX flavor looks for .NSX extensions by
+     default.  SIXNTX, as with Clipper's DBFNTX driver, looks for .NTXs.
+
+     The ADDITIVE clause tells the SIx Driver not to close any previously
+     opened indexes before opening the new index.
+
+     SET INDEX TO without an argument closes all indexes open in the current
+     work area with the exception of a structural .CDX/.NSX.  Structural
+     index files cannot be closed without closing their database file as
+     well.  See the <B>"Commonly Asked Questions"</B> section for more on structural
+     .CDX/.NSX index file behavior.
+
+
+ Description
+
+     When using the SIx Driver, SET INDEX closes all currently open index
+     files (<B>except structural .CDX/.NSX's</B>), unless you have used the ADDITIVE
+     clause, and then opens the specified index files in the current work
+     area.  If the ADDITIVE clause was used, no previously opened indexes are
+     closed before opening the new index.
+
+
+ Examples
+
+     USE TEST VIA "SIXCDX"
+     <B>SET INDEX TO one, two, three</B>  // Opens ONE.IDX, TWO.IDX, and THREE.IDX
+     .
+     .  // Do some stuff...
+     .
+     <B>SET INDEX TO four ADDITIVE</B>    // Opens FOUR.IDX <B>without</B> closing the
+                                   // other three indexes first.
+     SET ORDER TO 2                // Selects TWO.IDX
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng517e3.html">SET TAG / ORDER</A>
+<A HREF="ng517e3.html">SET TAG / ORDER</A>
+<A HREF="ng47c93.html">INDEX</A>
+<A HREF="ng535ee.html">SUBINDEX</A>
+<A HREF="ng1cc0f.html">OrdSetFocus()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

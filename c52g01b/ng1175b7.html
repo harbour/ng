@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng11724d.html">[^^Up^^]</A>
+<A HREF="ng117fa8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Obsolete Language Items</B>
+------------------------------------------------------------------------------
+
+ In the Reference guide, the asterisk symbol is used to indicate
+ items in the language that are obsolete or that exist for compatibility
+ with previous releases of CA-Clipper.  As you begin to incorporate
+ new product features into your existing applications, it would be
+ advisable to review your code to determine any obsolete items that you
+ might be using.  This table lists each obsolete language item with its
+ recommended replacement and should be helpful to you in updating your
+ programs.
+
+ <B>Warning:</B>  In the future, this table will be the only documentation
+ for obsolete items because they will be removed from the Reference guide.
+ Furthermore, obsolete items are not in keeping with the current
+ CA-Clipper programming philosophy, and we strongly discourage their use
+ as they may not be supported in future releases of CA-Clipper.
+
+ <B>Obsolete Language Items</B>
+-------------------------------------------------------------------------------
+ <B>Obsolete</B>              | <B>Recommended</B>
+                       |
+ ADIR() function       | DIRECTORY() function
+ AFIELDS() function    | DBSTRUCT() function
+ CALL command          | Extend API
+ CANCEL command        | QUIT command
+ CLEAR ALL command     | CLOSE or RELEASE command
+ DBEDIT() function     | TBrowse class
+ DBF() function        | ALIAS() function
+ DECLARE statement     | PRIVATE statement
+ DIR command           | DIRECTORY() function
+ DO statement          | Use function-calling syntax
+ EXTERNAL statement    | REQUEST statement
+ FIND command          | SEEK command
+ FKLABEL() function    | Use constant value Fn where n ranges from one to 40
+ FKMAX() function      | Use constant value of 40
+ MOD() function        | Modulus operator (%)
+ NOTE command          | C-style comment indicators, /*...*/ and //
+ READKEY() function    | LASTKEY() function
+ RECCOUNT() function   | LASTREC() function
+ RESTORE SCREEN command| RESTSCREEN() function
+ SAVE SCREEN command   | SAVESCREEN() function
+ SET COLOR command     | SETCOLOR() function
+ SET EXACT command     | Not recommended
+ SET EXCLUSIVE command | USE command with EXCLUSIVE and SHARED clauses
+ SET FORMAT command    | Not recommended
+ SET PROCEDURE command | Compiler script files (.clp)
+ SET UNIQUE command    | INDEX command with UNIQUE clause
+ STORE command         | Inline assignment operator (:=)
+ TEXT command          | ? or @...SAY command
+ WAIT command          | @...GET...READ command or INKEY() function
+ WORD() function       | Extend API
+-------------------------------------------------------------------------------
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

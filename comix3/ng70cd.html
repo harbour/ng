@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6d03.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng7822.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmReFilter()</B>          Get/set smart filter setting
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmSmartFilter( [lNew] ) -&gt; lPrev
+
+<B>Arguments</B>
+
+    lNew is an optional parameter.  If provided and .T., smart filtering
+    will be done.  If .F., then smart filtering will not be done.
+
+    By default, this flag is .T. (i.e., smart filtering is done).
+
+<B>Returns</B>
+
+    cmSmartFilter() returns the previous setting of the smart filter flag.
+
+<B>Description</B>
+
+    By default ClipMore employs a technique known as smart filtering.  This
+    means that ClipMore "remembers" whether or not a record meets the
+    filter condition.  Once ClipMore retrieves a record and finds it does
+    not meet the condition, it never again gets that record.  (Technically
+    speaking, it removes the record from the Filter RecordList).
+
+    In almost all cases, this is desirable behavior and gives the best
+    possible performance (even in cases where the condition is completely
+    unoptimizable).  However, in some cases involving complex relations,
+    this behavior is not desirable.
+
+    cmSmartFilter() provides control over or not ClipMore uses smart
+    filtering.
+
+    <B>TIP:  Do not use this function or turn smart filtering off unless you</B>
+          <B>know you need to.</B>
+
+<B>Example</B>
+
+    use demo
+
+    cmFilter("age = 30")
+
+        /*  By default, ClipMore will use smart filtering.  This means that
+            even though the condition above was unoptimizable, the Browse
+            will still be much faster, since we only retrieve a non-matching
+            record once!
+         */
+    browse()
+
+    lSave := cmSmartFilter(.f.)         &amp;&amp; Turn smart filtering off
+    cmFilter("age = 30")
+
+        /*  This time, ClipMore won't use smart filtering since we turned it
+            off.  ClipMore will continue to retrieve records, even if they
+            didn't match the first time we retrieved them.
+         */
+    browse()
+
+<B>See Also</B>
+
+    None.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

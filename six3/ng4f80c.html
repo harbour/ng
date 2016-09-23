@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4f3c5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng4ffee.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SET OPTIMIZE:</B>
+
+  Syntax:
+
+  <B>SET OPTIMIZE ON/OFF/&lt;lExp&gt;</B>
+
+  <B>ON</B> sets automatic optimization of Mach SIx supported commands.  This
+  is the default.
+
+  <B>OFF</B> overrides automatic optimization and defaults to standard
+  Clipper processing.
+
+  <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in parentheses.
+  A value of true (.T.) is the same as ON, and a value of false (.F.) is
+  the same as OFF.
+
+  <B>Description:</B>
+
+  The SET OPTIMIZE command is used to disable automatic optimization of all
+  Mach SIx supported commands.  This command is useful for comparing
+  your applications query performance with and without Mach SIx.  You can
+  also turn off optimization for selected commands by specifying the
+  NOOPTIMIZE clause in the syntax for the command.
+
+  <B>---------------------------------| EXAMPLE |--------------------------------</B>
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates the SET OPTIMIZE command.                                 *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX.CH"
+
+  Local nCount, nStart, nTime
+
+  USE Account VIA "SIXCDX"
+
+  SET INDEX TO State       //  State could be a tag in a .CDX
+
+  ? "Example of SET OPTIMIZE command."
+  ?
+
+  //..........................set order to 0 for optimal query performance
+  SET ORDER TO 0
+
+  //.......................................turn off automatic optimization
+  <B>SET OPTIMIZE OFF</B>
+
+  nStart := seconds()
+  COUNT TO nCount FOR State = "CA"
+  nTime  := seconds() - nStart
+
+  ? "Whoah that was slow!"
+  ? "Time to count   = " + alltrim( str( nTime ) )
+  ? "Records counted = " + alltrim( str( nCount ) )
+
+  //....................................re-activate Mach SIx optimization
+  <B>SET OPTIMIZE ON</B>
+
+  nStart := seconds()
+  COUNT TO nCount FOR State = "CA"
+  nTime  := seconds() - nStart
+
+  ? "Poof!"
+  ? "Time to count   = " + alltrim( str( nTime ) )
+  ? "Records counted = " + alltrim( str( nCount ) )
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

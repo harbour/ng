@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9125b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng91ce6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>READFORMAT()</B>
+ Return and optionally, set the code block that implements a format (.fmt)
+ file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>READFORMAT([&lt;bFormat&gt;]) --&gt; bCurrentFormat</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;bFormat&gt;</B> is the name of the code block, if any, to use for
+     implementing a format file.  If no argument is specified, the function
+     simply returns the current code block without setting a new one.
+
+ <B>Returns</B>
+
+     READFORMAT() returns the current format file as a code block.  If no
+     format file has been set, READFORMAT() returns NIL.
+
+ <B>Description</B>
+
+     READFORMAT() is a Get system function that accesses the current format
+     file in its internal code block representation.  It lets you manipulate
+     the format file code block from outside of the Get system's source code.
+
+     To set a format file, use SET FORMAT (see the SET FORMAT entry ) or
+     READFORMAT().
+
+     READFORMAT() is intended primarily for creating new READ layers.  The
+     code block that READFORMAT() returns, when evaluated, executes the code
+     that is in the format file from which it was created.
+
+ <B>Files</B>   Library is CLIPPER.LIB, source file is Getsys.prg.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng92b38.html">READKILL()</A>
+<A HREF="ng93d44.html">READUPDATED()</A>
+<A HREF="nge8536.html">SET FORMAT*</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

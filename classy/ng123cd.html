@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng11e15.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng1272d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Deferred Methods</B>
+
+  A deferred method is a method which is declared in a particular class, but
+  only defined later in a subclass of that class. Declaring a method as
+  deferred documents the fact that a class expects the specified method to
+  be reimplemented by a subclass, and will cause a meaningful error to be
+  generated if an attempt is made to invoke a deferred method that has not
+  been redefined.
+
+  A deferred method is declared in a class specification as follows:
+
+    MESSAGE &lt;message name&gt; IS DEFERRED
+
+  A method declared as <B>DEFERRED</B> must not be defined in the same module
+  as it is declared. Any such definition will be ignored. Rather, it should
+  be both declared (as a normal method) and defined in subclasses of the
+  class in which it is declared as deferred.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng49da.html">MESSAGE...[IS...] IN</A>
+<A HREF="ng1272d.html">Null Methods</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1683d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng17459.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LIBRARY                       Specify one or more program libraries</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify one or more program libraries</B></U>
+
+ <U>Syntax   : <B>LIBRARY [d:][path]&lt;libname&gt;</B></U>
+            <B>[, [d:][path]&lt;libname&gt; ...]</B>
+
+ <U>Default  : <B>Compiler specified default libraries</B></U>
+
+ <U>Example  : <B>LIB C:\LIBS\Mylib1, Mylib2, D:\OTHER\Mylib3</B></U>
+
+ The LIBRARY command is used to specify to the linker the names of one or
+ more program library files required by the program. The default file
+ extension of .LIB is assumed, and need not be specified. If more than one
+ library is specified in a single LIBRARY command, each library name should
+ be separated by a comma.
+
+ Library files are processed differently from FILE commands in that a LIBRARY
+ command causes only modules which are required by the program to be
+ included. i.e. modules are included from a library if a public definition in
+ the library module resolves an external reference. Object files named in
+ FILE commands are included regardless of whether they are required or not.
+
+ The LIBRARY command may be used for both root and overlaid libraries. If the
+ library is to be overlaid, the LIBRARY command should be placed within a
+ BEGINAREA / ENDAREA sequence.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng155ee.html">DEFLIB</A>
+<A HREF="ng1683d.html">FILE</A>
+<A HREF="ng1957e.html">NODEFLIB</A>
+<A HREF="ng1b4e8.html">SEARCH</A>
+<A HREF="ng18254.html">MODULE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

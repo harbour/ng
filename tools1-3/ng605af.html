@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5fc48.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng60f06.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TOKENNEXT()</B>
+ Provides an incremental tokenizer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TOKENNEXT(&lt;idTokenInitVar&gt;) --&gt; cToken</B>
+
+ <B>Argument</B>
+
+     <B>&lt;idTokenInitVar&gt;</B>  Designates the name of the character string
+     previously initialized using TOKENINIT().  This is the only way to
+     access this string once it has been stored by the Virtual Memory Manager
+     (VMM).
+
+ <B>Returns</B>
+
+     TOKENNEXT() returns the next token from the string variable designated
+     by TOKENINIT().  If there are no more tokens, a null string is returned.
+
+ <B>Description</B>
+
+     In conjunction with TOKENINIT(), this function provides a speed
+     optimized variation of the normal TOKEN() function.  The increase in
+     speed is achieved in two ways.
+
+     TOKENINIT() exchanges all delimiting characters for the first delimiter
+     in the list.  This means the entire delimiter list does not have to be
+     searched every time.  The second advantage is that TOKENNEXT() does not
+     always begin its search for the token that is extracted at the beginning
+     of the string.
+
+     The TOKENAT() function allows you to determine the position of
+     TOKENNEXT().
+
+     Although the address of the string that is processed and the internal
+     counter have already been determined or initialized by TOKENINIT(),
+     CA-Clipper Tools still needs the variable name.  The function does work
+     without this parameter, but only as long as the initialized character
+     sequence has not been stored to VMM.  You should enter the variable name
+     in each case because there is no explicit control over this!  If there
+     is no access to the variable, a runtime error occurs.
+
+ <B>Notes</B>
+
+     <B>.</B>  When you use TOKENINIT() or TOKENNEXT(), you cannot use the
+        TOKENSEP() function.  The required information can be determined
+        using TOKENAT() in conjunction with the original string (status
+        before TOKENINIT()).
+
+     <B>.</B>  To determine the delimiter position before the last token, set
+        TOKENAT() to -1.  To determine the delimiter position after the last
+        token, set TOKENAT to .T..
+
+ <B>Example</B>
+
+     Break down a string:
+
+     cDelim   :=  "!?.,-"
+     cString   :=  "A.B-C,D!E??"
+
+     TOKENINIT(@cString, cDelim)      // "A!B!C!D!E!!"
+
+     DO WHILE .NOT. TOKENEND()
+        cWord  :=  TOKENNEXT(cString)
+        ? cWord
+     ENDDO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng59912.html">RESTTOKEN()</A>
+<A HREF="ng59e4f.html">SAVETOKEN()</A>
+<A HREF="ng5eb38.html">TOKENINIT()</A>
+<A HREF="ng5e076.html">TOKENAT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

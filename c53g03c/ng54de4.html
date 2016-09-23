@@ -1,0 +1,69 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng54aa4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng552df.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>open()</B>
+ Open a data store (table) in the work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE open(</B>
+     <B>               AREAP wa,</B>
+     <B>               LPDBOPENINFO lpdbOpenInfo</B>
+     <B>             )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpdbOpenInfo</B> is a pointer to a structure containing information
+     about the work area and the data store to be opened.
+
+ <B>Description</B>
+
+     The open() method opens the data store referenced by lpdbOpenInfo.
+
+ <B>Default Behavior</B>
+
+     The work area open() method concludes the process of opening a database
+     file by performing the following tasks:
+
+     <B>.</B>  Sets up the wa-&gt;atomAlias (checking for duplicate aliases or
+        bad alias names)
+
+     <B>.</B>  Links the fields to the symbol table
+
+     <B>.</B>  Adds the work area to the list of work areas that are in use
+
+     <B>Note: </B> The work area must not already be in use.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  open() assumes that the RDD has already opened the data store
+        and set up the wa-&gt;lpFields array prior to calling SUPER_OPEN().
+
+     <B>.</B>  If a memo file involved, open() should call openMemFile().
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4346c.html">DBOPENINFO</A>
+<A HREF="ng533d0.html">close()</A>
+<A HREF="ng538ab.html">create()</A>
+<A HREF="ng5f724.html">openMemFile()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

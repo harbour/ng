@@ -1,0 +1,32 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng37634.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng346a0.html">[^^Up^^]</A>
+<A HREF="ng37ae3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>9   Fixed Memory Allocator</B>
+------------------------------------------------------------------------------------------
+
+     Clipper 5.0 subsystems use virtual memory to contain code or data that
+     needs to be dynamically managed.  Some allocations are not appropriate
+     for VM (e.g., system tables which must remain in the same location
+     throughout execution).  A C-style fixed memory allocator is included
+     for this purpose.
+
+     The fixed memory system allocates one or more VM segments and
+     permanently locks them in real memory.  Space within these segments is
+     then parceled out as needed.  Since fixed segments are never unlocked,
+     the VMM locates them at the low end of the swap space to prevent them
+     from interfering with other operations.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

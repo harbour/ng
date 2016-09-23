@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng65847.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng639de.html">[^^Up^^]</A>
+<A HREF="ng661af.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Conditional and Scoped Indexes:</B>
+
+  The SIx Driver can be used to create indexes with a built-in FOR clause.
+  Think about it - fully maintainable conditional indexes!  The condition
+  can be any expression, including a User-Defined Function (UDF).  As the
+  database is updated, only records that match the index condition are added
+  to the index, and records that satisfied the condition before but don't
+  any longer are automatically removed.  Clean and simple.
+
+  Indexes can also be given a temporary scope after they've been created.
+  The SIx Driver's SET SCOPE commands and functions let you set high and low
+  key limits so that you see only the range of records that you want.  The
+  index scoping feature is similar to SET FILTER, except it work on indexes
+  and is MUCH faster!
+
+    <U>NOTE: In cases where a SCOPE cannot be used, our Mach SIx query</U>
+    <U>      optimizer can be used to optimize SET FILTER.  In many cases,</U>
+    <U>      a SET FILTER under Mach SIx may be nearly as fast as a SCOPE.</U>
+
+  Also, you can set a scope for each index or tag, and the scope remains
+  active as long as the index in open.  One limitation that index scopes
+  have is that the specified values must be constant values.  If an expres-
+  sion or UDF is supplied as the value, then the value of the expression or
+  return value from the UDF is used for the value.  This eliminates the
+  slow-down from constant re-evaluation of a filter expression.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng47c93.html">INDEX</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

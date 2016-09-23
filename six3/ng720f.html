@@ -1,0 +1,118 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6ce1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng80ce.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Index():</B>
+
+  Purpose:  Creates and populates a new HiPer-SEEK index.
+
+   Syntax:  hs_Index( &lt;cFile&gt;, &lt;cExpr&gt;, [nKeySize], [nOpenMode], [nBufSize],;
+                      [lCase] , [nFiltSet] )
+
+    Where:  &lt;cIndex&gt; is the name of the HiPer-SEEK index file (including
+              path, if desired) to be created.
+
+            &lt;cExpr&gt; is the expression to be indexed on.
+
+            [nKeySize] is the optional size of the index record to build. If
+              not specified, it defaults to 2 (32 byte index record).  Valid
+              values are:
+
+                      1 = 16 byte index record
+                      2 = 32 byte index record
+                      3 = 64 byte index record
+
+            [nOpenMode] is the optional mode in which the HiPer-SEEK index
+              file is opened.  Note that this pertains to the mode the index
+              will be left in after creation.  During creation, the index is
+              always built in READ-WRITE + EXCLUSIVE mode.  The default
+              value is 1.  Valid values are:
+
+                      0 = READ-WRITE + SHARED
+                      1 = READ-WRITE + EXCLUSIVE
+                      2 = READ-ONLY + SHARED
+                      3 = READ-ONLY + EXCLUSIVE
+
+            [nBufSize] is an optional size of the HiPer-SEEK buffer in
+              kilobytes.  The default is 8.
+
+            [lCase] is an optional logical value indicating whether or not
+              subsequent searches into this index should be case-sensitive
+              or not.  If .T., then case is NOT significant and lower-case
+              values will match both upper and lower-case key values.  If
+              the value is .F., then upper-case values will NOT match lower-
+              case index entries.  The default value is .T. (not case
+              sensitive).
+
+            [nFiltSet] is an optional numeric value indicating the "filter
+              set" to be used for indexing and searching.  A filter set is a
+              translation of characters the source to the index.  There are
+              two sets.  Filter set 1, the recommended choice, will mask off
+              the high-order bit and treat all non-printing characters as
+              spaces.  Filter set 2 does not eliminate any characters.  For
+              most text purposes, filter set 1 is recommended since it
+              eliminates carriage returns, line feeds, etc, from becoming
+              part of the index.  The default value is 1.
+
+  Returns:  An integer HiPer-SEEK index handle (0 through 63) if successful,
+            else returns a negative integer indicating an error (see below).
+            The hs_Create(), hs_Index(), and hs_Open() functions return a
+            'HANDLE' to the calling program.  You must save the handle
+            returned by these functions for use with the remaining HiPer-SEEK
+            functions.  The value of a HiPer-SEEK handle is only meaningful
+            to other HiPer-SEEK func- tions. Although you may inspect the
+            value of the handle, its value is arbitrary and of no
+            significance except to other HiPer- SEEK functions. Under no
+            circumstances should your application ever change the value of a
+            HiPer-SEEK handle.
+
+  Errors Returned:
+
+      -2 (MEMERR) System was unable to allocate the memory requested.  Try
+         again with a smaller value of &lt;nVal&gt;.
+      -5 (BADREAD) System generated a read error while reading the index file
+         header.  This error is associated with trying to open a file that is
+         already open.
+      -6 (BADWRITE) Error while attempting write during buffer flush.
+     -10 (OPENERR)  Open failure.  System was unable to open the file
+         specified by &lt;cExpr&gt;. Insure that the file does exist and it is not
+         read protected.
+     -16 (BADPARMS)  Invalid parameters were passed to the function.
+     -17 (NOMOREHANDLES) Ran out of HiPer-SEEK handles.
+     -20 (LOCKFAILED) Unable to lock file.
+     -21 (NOMORELOCKS) Lock table exhausted.
+     -22 (CANNOTUNLOCK) Unable to unlock file.
+
+  Example:
+
+    LOCAL cExpr := "test-&gt;FIRST + test-&gt;LAST + test-&gt;STREET + test-&gt;CITY"
+    LOCAL h := 0
+
+    USE test EXCL
+
+    // Build HiPer-SEEK index using 64 byte index record, READ-WRITE + SHARED
+    // mode, using a 16k buffer.
+
+    h := <B>hs_Index( "TEST.HSX", cExpr, 3, 1, 16 )</B>
+
+    hs_Close( h )
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng460a.html">hs_Create()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

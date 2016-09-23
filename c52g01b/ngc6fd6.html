@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc6799.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb4a83.html">[^^Up^^]</A>
+<A HREF="ngc78ff.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RETURN</B>
+ Terminate a procedure, user-defined function, or program
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RETURN [&lt;exp&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp&gt;</B> is an expression of any type that evaluates to the return
+     value for user-defined functions.  If a user-defined function terminates
+     without executing a RETURN statement, the return value is NIL.
+
+ <B>Description</B>
+
+     RETURN terminates a procedure, user-defined function, or program by
+     returning control to either the calling procedure or user-defined
+     function.  When RETURN executes in the highest level procedure, control
+     passes to the operating system.  All private variables created and local
+     variables declared in the current procedure or user-defined function are
+     released when control returns to the calling procedure.
+
+     There can be more than one RETURN in a procedure or user-defined
+     function.  A procedure or user-defined function need not, however, end
+     with a RETURN.  Since user-defined functions must return values, each
+     must contain at least one RETURN statement with an argument.
+
+     <B>Note: </B> A procedure or user-defined function definition is terminated
+     by a PROCEDURE statement, a FUNCTION statement, or end of file but not
+     by a RETURN statement
+
+ <B>Notes</B>
+
+     <B>.  Arrays:</B> Since array is a data type like any other data type,
+        instances of array type are really values like character strings, and
+        therefore, can be RETURNed from a user-defined function.
+
+     <B>.  RETURN TO MASTER:</B> CA-Clipper does not support RETURN TO MASTER
+        or any other form of RETURN specifying the level of the call to
+        return to.  You can, however, simulate these operations with BEGIN
+        SEQUENCE...END.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate the general form of the RETURN
+        statement in a procedure and in a user-defined function:
+
+        PROCEDURE &lt;idProcedure&gt;
+           //
+           &lt;statements&gt;...
+           //
+           RETURN
+
+        FUNCTION &lt;idFunction&gt;
+           //
+           &lt;statements&gt;...
+           //
+           RETURN &lt;expReturn&gt;
+
+     <B>.</B>  This example returns an array, created in a user-defined
+        function, to a calling procedure or user-defined function:
+
+        FUNCTION PassArrayBack
+           PRIVATE aArray[10][10]
+           aArray[1][1] = "myString"
+           RETURN aArray
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb558d.html">BEGIN SEQUENCE</A>
+<A HREF="ngbbed3.html">FUNCTION</A>
+<A HREF="ngc34a3.html">PROCEDURE</A>
+<A HREF="ngc587f.html">PUBLIC</A>
+<A HREF="ng9115b.html">QUIT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

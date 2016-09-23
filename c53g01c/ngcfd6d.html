@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngcf693.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngd087b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>JOIN </B>
+ Create a new database file by merging records/fields from two work areas
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>JOIN WITH &lt;xcAlias&gt; TO &lt;xcDatabase&gt;</B>
+     <B>   FOR &lt;lCondition&gt; [FIELDS &lt;idField list&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>WITH &lt;xcAlias&gt;</B> is the name of the work area to merge with records
+     from the current work area.  You can specify it either as a literal
+     alias or as a character expression enclosed in parentheses.
+
+     <B>TO &lt;xcDatabase&gt;</B> is the name of the target database file specified
+     either as a literal filename or as a character expression enclosed in
+     parentheses.
+
+     <B>FOR &lt;lCondition&gt;</B> selects only records meeting the specified
+     condition.
+
+     <B>FIELDS &lt;idField list&gt;</B> is the projection of fields from both work
+     areas into the new database file.  To specify any fields in the
+     secondary work area, reference them with the alias.  If the FIELDS
+     clause is not specified, all fields from the primary work area are
+     included in the target database file.
+
+ <B>Description</B>
+
+     JOIN creates a new database file by merging selected records and fields
+     from two work areas based on a general condition.  JOIN works by making
+     a complete pass through the secondary work area for each record in the
+     primary work area, evaluating the condition for each record in the
+     secondary work area.  When the &lt;lCondition&gt; is true (.T.), a new record
+     is created in the target database file using the FIELDS specified from
+     both work areas.
+
+     If SET DELETED is OFF, deleted records in both source files (i.e., the
+     two files being JOINed) are processed.  However, their deleted status is
+     not retained in the target &lt;xcDatabase&gt;.  No record in the target file
+     is marked for deletion regardless of its deleted status in either of the
+     source files.
+
+     If SET DELETED is ON, no deleted records are processed in either of the
+     source files.  Thus, deleted records do not become part of the target
+     &lt;xcDatabase&gt;.  Similarly, filtered records are not processed and do not
+     become part of the target file.
+
+     <B>Warning! </B> The number of records processed will be the LASTREC() of
+     the primary work area multiplied by the LASTREC() of the secondary work
+     area.  For example, if you have two database files with 100 records
+     each, the number of records JOIN processes is the equivalent of
+     sequentially processing a single database file of 10,000 records.
+     Therefore, use this command carefully.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example joins Customer.dbf to Invoices.dbf to produce
+        Purchases.dbf:
+
+        USE Invoices NEW
+        USE Customers NEW
+        JOIN WITH Invoices TO Purchases;
+           FOR Last = Invoices-&gt;Last;
+           FIELDS First, Last, Invoices-&gt;Number, ;
+              Invoices-&gt;Amount
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngef11d.html">SET RELATION</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

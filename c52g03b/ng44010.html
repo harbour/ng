@@ -1,0 +1,82 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng43a82.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng446f0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBTRANSINFO</B>
+ Define a global transfer of data items from one workarea to another
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   struct _WORKAREA_ far * dest;</B>
+     <B>   DBSCOPEINFO  scope;</B>
+     <B></B>
+     <B>   USHORT       flags;</B>
+     <B></B>
+     <B>   USHORT       itemCount;</B>
+     <B>   DBTRANSITEMP items;</B>
+     <B>} DBTRANSINFO;</B>
+     <B></B>
+     <B>typedef DBTRANSINFO far * DBTRANSINFOP;</B>
+
+ <B>Elements</B>
+
+     <B>dest</B>
+
+        Contains a pointer to the destination workarea.
+
+     <B>scope</B>
+
+        Contains a data structure describing the limits of the scope of the
+        transfer (see DBSCOPEINFO).
+
+     <B>flags</B>
+
+        Contains literal constants specifying transfer attributes.  The flag
+        values are defined in Rdd.api and have the following meanings:
+
+        <B>DBTRANSINFO Transfer Flag Values</B>
+        ---------------------------------------------------------------------
+        <B>Constant       Meaning</B>
+        ---------------------------------------------------------------------
+        DBTF_MATCH     Both this workarea and the destination workarea have
+                       identical row structures (i.e., all fields match)
+        DBTF_PUTREC    The RDD has the ability to transfer an entire row
+        ---------------------------------------------------------------------
+
+     <B>itemCount</B>
+
+        Contains a numeric value specifying the number of items in the items
+        array, below.  (This is usually the number of fields to be
+        transferred).
+
+     <B>items</B>
+
+        An array of character data type values, assumed to be the items to
+        transfer to the destination workarea.  items is usually a list of
+        field mappings from the source to the destination (see DBTRANSITEM).
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   DBSORTINFO, trans(), transRec()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng43712.html">DBSORTINFO</A>
+<A HREF="ng50d66.html">trans()</A>
+<A HREF="ng513b9.html">transRec()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

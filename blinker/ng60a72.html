@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng606ac.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5dbad.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>4.3 New error messages</B>
+------------------------------------------------------------------------------
+
+ <B>1016 : ignoring duplicate import for symbol &lt;symbol&gt;</B>
+
+ This message indicates that a duplicate import definition for the specified
+ symbol has been encountered but ignored.
+
+ <B>1017 : ignoring duplicate definition for segment &lt;segment&gt;</B>
+
+ This message indicates that a duplicate segment definition for the specified
+ segment name has been encountered but ignored.
+
+ <B>1018 : unable to export symbol &lt;symbol&gt;</B>
+
+ This message indicates that an export definition for the specified symbol
+ has been encountered but the symbol does not exist in the program so the
+ export definition was ignored.
+
+ <B>1150: &lt;filename&gt; is a demo so cannot be linked with this Blinker</B>
+
+ This message indicates that the specified library is a special demonstration
+ library which can only be linked with a demonstration version of Blinker.
+ The demonstration version of Blinker should have been supplied along with
+ the demonstration library.
+
+ <B>1151: increase PACKDATA parameter to reduce SYMBOLs segments</B>
+
+ This message indicates that there were too many SYMBOLs segments in an
+ incrementally linked CA-Clipper program, so it is necessary to increase (or
+ add) the parameter to the PACKDATA link script file command.
+
+ <B>1152: too many exported name symbols</B>
+
+ This message indicates that the .EXE or .DLL file being created contains too
+ many exported name symbols to be placed in the .EXE header.
+
+ Either remove some EXPORT commands from the module definition file or remove
+ one or more import libraries from the link script file.
+
+ <B>1153: 4.0 requires a more recent version of BLXxxxnnn.LIB</B>
+
+ This message indicates that the indicated library is from an older version
+ of Blinker.
+
+ Check that the link script file and the LIB environment path point to the
+ latest version of the indicated library.
+
+ <B>1317: extender heap full</B>
+
+ This message indicates that the Blinker DOS extender heap has been
+ completely used up, and should not occur in normal operation.
+
+ It usually indicates that a large number of small allocations of memory have
+ been made directly via the extender API, which in turn is usually caused by
+ repeated allocation of a temporary buffer without it being freed each time.
+
+ Check the program for endless recursion or failure to free a temporary
+ memory allocation in a function which is called repeatedly.
+
+ <B>1318: divide by zero attempted at (nn) ssss:oooo</B>
+
+ This message indicates that the code in .EXE segment nn at address ssss:oooo
+ executed an integer divide instruction with a divisor of zero and a divide
+ by zero handler had not been installed.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

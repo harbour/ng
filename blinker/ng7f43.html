@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7af9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng85d5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER EXECUTABLE DUAL       Specify creation of dual mode executable.</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify the creation of a dual mode executable.</B></U>
+
+ <U>Syntax   : <B>BLINKER EXECUTABLE DUAL [&lt;minimum extended</B></U>
+            <B>memory&gt;]</B>
+
+ <U>Default  : <B>&lt;minimum extended memory&gt; is 512KB</B></U>
+
+ <U>Example  : <B># Run in protected mode if at least 2MB available</B></U>
+            <B>BLINKER EXECUTABLE DUAL 2048</B>
+
+ This command specifies that Blinker should produce a dual mode executable
+ that can be run in either real or protected mode. The optional parameter to
+ this command is the minimum amount of available extended memory required to
+ execute in protected mode.
+
+ At runtime, the program will be executed in REAL mode if any of the
+ following are true:
+
+    .  The CPU is less than an 80286
+    .  The CPU is an 80286 or better, but there is no DPMI, VCPI or XMS host.
+    .  The CPU is an 80286 or better, but the amount of available extended
+       memory is less than the specified minimum amount.
+
+ Otherwise the program will be executed in protected mode.
+
+ If no BEGINAREA and ENDAREA commands are used with BLINKER EXECUTABLE DUAL
+ then ALL overlaying will be disabled, which will create a non-overlaid
+ program which will run in both real or protected mode.
+
+ Note: Dual mode programs must be specifically written to work in both real
+ and protected mode. Use of this command does not imply that the program will
+ run successfully as a dual mode program, it simply sets the format of the
+ .EXE accordingly.
+
+ For a detailed description of the requirements of a dual mode program, see
+ Chapter 5 'Coding for Dual mode'.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

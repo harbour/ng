@@ -1,0 +1,87 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng42845.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng43712.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBSCOPEINFO</B>
+ References to all of the CA-Clipper Xbase-style scope clause expressions
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   ITEM bFor;</B>
+     <B>   ITEM cFor;</B>
+     <B>   ITEM bWhile;</B>
+     <B>   ITEM cWhile;</B>
+     <B>   ITEM nNext;</B>
+     <B>   ITEM nRecord;</B>
+     <B>   ITEM lRest;</B>
+     <B>} DBSCOPEINFO;</B>
+     <B></B>
+     <B>typedef DBSCOPEINFO far * DBSCOPEINFOP;</B>
+
+ <B>Elements</B>
+
+     <B>bFor / cFor</B>
+
+        Contain a code block and a character expression, respectively,
+        representing the conditional FOR clause.  FOR expressions are,
+        essentially, filters that hide rows (records) for which they evaluate
+        to FALSE.  The character value is provided for storage, while the
+        code block is provided as a parameter for the evalBlock() method.
+
+     <B>bWhile / cWhile</B>
+
+        Contain a code block and a character expression, respectively,
+        representing the conditional WHILE clause.  WHILE clauses permit
+        continuation of a process that steps through rows until its
+        expression evaluates to FALSE.  The character value is provided for
+        storage, while the code block is provided as a parameter for the
+        evalBlock() method.
+
+     <B>nNext</B>
+
+        Contains a numeric value representing the CA-Clipper-level NEXT nNext
+        scoping clause.  This permits continuation of a process for the NEXT
+        nNext rows, while obeying FOR and WHILE clauses.
+
+     <B>nRecord</B>
+
+        Contains a numeric value representing the CA-Clipper-level RECORD
+        nRecord scoping clause.  This permits continuation of a process for a
+        single record, while obeying FOR and WHILE clauses.
+
+     <B>lRest</B>
+
+        Contains a CA-Clipper-level boolean value that is set to TRUE if a
+        process should continue stepping through data from the current
+        workarea cursor position until logical end of file.
+
+     <B>Warning! </B> You should perform code block evaluations with great
+     caution.  Save any states that are likely to change as a result of
+     re-entrance, so you can restore them after the code evaluation.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   DBEVALINFO, DBTRANSINFO, WORKAREA, setLocate()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3eab9.html">DBEVALINFO</A>
+<A HREF="ng44010.html">DBTRANSINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng571a9.html">setLocate()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

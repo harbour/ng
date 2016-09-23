@@ -1,0 +1,282 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng692de.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng6c7b8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MEMOEDIT()</B>
+ Display or edit character strings and memo fields
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MEMOEDIT([&lt;cString&gt;],</B>
+     <B>   [&lt;nTop&gt;], [&lt;nLeft&gt;],</B>
+     <B>   [&lt;nBottom&gt;], [&lt;nRight&gt;],</B>
+     <B>   [&lt;lEditMode&gt;],</B>
+     <B>   [&lt;cUserFunction&gt;],</B>
+     <B>   [&lt;nLineLength&gt;],</B>
+     <B>   [&lt;nTabSize&gt;],</B>
+     <B>   [&lt;nTextBufferRow&gt;],</B>
+     <B>   [&lt;nTextBufferColumn&gt;],</B>
+     <B>   [&lt;nWindowRow&gt;],</B>
+     <B>   [&lt;nWindowColumn&gt;]) --&gt; cTextBuffer</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string or memo field to copy to the
+     MEMOEDIT() text buffer.  If not specified, the text buffer is empty.
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B>, and <B>&lt;nRight&gt;</B> are the
+     upper-left and lower-right window coordinates.  Row values can range
+     from zero to MAXROW(), and column positions can range from zero to
+     MAXCOL().  If not specified, the default coordinates are 0, 0, MAXROW(),
+     and MAXCOL().
+
+     <B>&lt;lEditMode&gt;</B> determines whether the text buffer can be edited or
+     merely displayed.  Specifying true (.T.) allows the user to make changes
+     to the text buffer, while specifying false (.F.) only allows the user to
+     browse the text buffer.  If not specified, the default value is true
+     (.T.).
+
+     <B>&lt;cUserFunction&gt;</B> is the name of a user-defined function that executes
+     when the user presses a key not recognized by MEMOEDIT() and when no
+     keys are pending in the keyboard buffer.  &lt;cUserFunction&gt; is specified
+     as a character value without parentheses or arguments.  Specifying false
+     (.F.) for this argument displays &lt;cString&gt; and causes MEMOEDIT() to
+     immediately terminate.  If this argument is specified, the automatic
+     behavior of MEMOEDIT() changes.  Refer to the discussion below.
+
+     <B>&lt;nLineLength&gt;</B> determines the length of lines displayed in the
+     MEMOEDIT() window.  If a line is greater than &lt;nLineLength&gt;, it is word
+     wrapped to the next line in the MEMOEDIT() window.  If &lt;nLineLength&gt; is
+     greater than the number of columns in the MEMOEDIT() window, the window
+     will scroll if the cursor moves past the window border.  If
+     &lt;nLineLength&gt; is not specified, the default line length is (&lt;nRight&gt; -
+     &lt;nLeft&gt;).
+
+     <B>&lt;nTabSize&gt;</B> determines the tab stops that will be used when the user
+     presses Tab.  If &lt;nTabSize&gt; is not specified, tab stops will be placed
+     at every four characters.
+
+     <B>&lt;nTextBufferRow&gt;</B> and <B>&lt;nTextBufferColumn&gt;</B> define the display
+     position of the cursor within the text buffer when MEMOEDIT() is
+     invoked.  &lt;nTextBufferRow&gt; begins with one (1) and &lt;nTextBufferColumn&gt;
+     begins with zero (0).  If these arguments are not specified, the cursor
+     is placed at row one (1) and column zero (0) of the MEMOEDIT() window.
+
+     <B>&lt;nWindowRow&gt;</B> and <B>&lt;nWindowColumn&gt;</B> define the initial position of
+     the cursor within the MEMOEDIT() window.  Row and column positions begin
+     with zero (0).  If these arguments are not specified, the initial window
+     position is row zero (0) and the current cursor column position.
+
+ <B>Returns</B>
+
+     MEMOEDIT() returns the text buffer if the user terminates editing with
+     Ctrl+W or a copy of &lt;cString&gt; if user terminates with Esc.
+
+ <B>Description</B>
+
+
+     MEMOEDIT() is a user interface and general purpose text editing function
+     that edits memo fields and long character strings.  Editing occurs
+     within a specified window region placed anywhere on the screen.  Like
+     the other user interface functions (ACHOICE() and DBEDIT()), MEMOEDIT()
+     supports a number of different modes and includes a user function that
+     allows key reconfiguration and other activities relevant to programming
+     the current text editing task.
+
+     <B>.  The text buffer:</B> When you invoke MEMOEDIT() and specify
+        &lt;cString&gt;, it is copied to the text buffer.  The user actually edits
+        the text buffer.  If the &lt;cString&gt; is not specified, the user is
+        presented with an empty text buffer to edit.
+
+        When the user exits MEMOEDIT() by pressing Ctrl+W, the contents of
+        the text buffer are returned.  If the user exits by pressing  Esc,
+        the text buffer is discarded and the original &lt;cString&gt; value is
+        returned.  In either case, the return value can then be assigned to a
+        variable or memo field, or passed as an argument to another function.
+
+     <B>.  Editing modes:</B> MEMOEDIT() supports two editing modes depending
+        on the value of &lt;lEditMode&gt;.  When &lt;lEditMode&gt; is true (.T.),
+        MEMOEDIT() enters edit mode and the user can change the contents of
+        the MEMOEDIT() text buffer.  When &lt;lEditMode&gt; is false (.F.),
+        MEMOEDIT() enters browse mode and the user can only navigate about
+        the text buffer but cannot edit or insert new text.  To make browsing
+        easier for the user, the scrolling is disabled so Up arrow and Down
+        arrow scroll the text buffer up or down one line within the
+        MEMOEDIT() window.
+
+     <B>.  Entering and editing text:</B> Within MEMOEDIT(), the user can
+        enter and edit text by positioning the cursor, adding, or deleting
+        characters.  To facilitate editing the text, there are a number of
+        different navigation and editing keys:
+
+        <B>MEMOEDIT() Navigation and Editing Keys</B>
+        ---------------------------------------------------------------------
+        <B>Key                      Action</B>
+        ---------------------------------------------------------------------
+        Up arrow/Ctrl+E          Move up one line
+        Down arrow/Ctrl+X        Move down one line
+        Left arrow/Ctrl+S        Move left one character
+        Right arrow/Ctrl+D       Move right one character
+        Ctrl+Left arrow/Ctrl+A   Move left one word
+        Ctrl+Right arrow/Ctrl+F  Move right one word
+        Home                     Move to beginning of current line
+        End                      Move to end of current line
+        Ctrl+Home                Move to beginning of current window
+        Ctrl+End                 Move to end of current window
+        PgUp                     Move to previous edit window
+        PgDn                     Move to next edit window
+        Ctrl+PgUp                Move to beginning of memo
+        Ctrl+PgDn                Move to end of memo
+        Return                   Move to beginning of next line
+        Delete                   Delete character at cursor
+        Backspace                Delete character to left of cursor
+        Tab                      Insert tab character or spaces
+        Printable characters     Insert character
+        Ctrl+Y                   Delete the current line
+        Ctrl+T                   Delete word right
+        Ctrl+B                   Reform paragraph
+        Ctrl+V/Ins               Toggle insert mode
+        Ctrl+W                   Finish editing with save
+        Esc                      Abort edit and return original
+        ---------------------------------------------------------------------
+
+        When the user is entering text, there are two text entry modes,
+        insert and overstrike.  When MEMOEDIT() is invoked, the default mode
+        is overstrike.  Edit mode changes in MEMOEDIT() when the user presses
+        Ins which toggles between the insert and overstrike.  It also changes
+        in a user function using READINSERT() or RETURNing 22.  In insert
+        mode, characters are entered into the text buffer at the current
+        cursor position and the remainder of the text moves to the right.
+        Insert mode is indicated in the scoreboard area.  In overstrike mode,
+        characters are entered at the current cursor position overwriting
+        existing characters while the rest of the text buffer remains in its
+        current position.
+
+        As the user enters text and the cursor reaches the edge of the
+        MEMOEDIT() window, the current line wraps to the next line in the
+        text buffer and a soft carriage return (CHR(141)) is inserted into
+        the text.  If the &lt;nLineLength&gt; argument is specified, text wraps
+        when the cursor position is the same as &lt;nLineLength&gt;.  If
+        &lt;nLineLength&gt; is greater than the width of the MEMOEDIT() window, the
+        window scrolls.  To explicitly start a new line or paragraph, the
+        user must press Return.
+
+     <B>.  The edit screen:</B> When MEMOEDIT() displays, it overwrites the
+        specified area of the screen and does not save the underlying screen.
+        Additionally, it does not display a border or a title.  To provide
+        these facilities, you must create a procedure or user-defined
+        function that performs these actions, and then calls MEMOEDIT().  See
+        the example below.
+
+     <B>.  The user function:</B> &lt;cUserFunction&gt;, a user-defined function
+        specified as an argument, handles key exceptions and reconfigures
+        special keys.  The user function is called at various times by
+        MEMOEDIT(), most often in response to keys it does not recognize.
+        Keys that instigate a key exception are all available control keys,
+        function keys, and Alt keys.  Since these keys are not processed by
+        MEMOEDIT(), they can be reconfigured.  Some of these keys have a
+        default action assigned to them.  In the user function, you perform
+        various actions depending on the current MEMOEDIT() mode, and then
+        RETURN a value telling MEMOEDIT() what to do next.
+
+        When the user function argument is specified, MEMOEDIT() defines two
+        classes of keys: nonconfigurable and key exceptions.  When a
+        nonconfigurable key is pressed, MEMOEDIT() executes it; otherwise, a
+        key exception is generated and the user function is called.  When
+        there are no keys left in the keyboard buffer for MEMOEDIT() to
+        process, the user function is called once again.
+
+        When MEMOEDIT() calls the user function, it automatically passes
+        three parameters indicating the MEMOEDIT() mode, the current text
+        buffer line, and the current text buffer column.  The mode indicates
+        the current state of MEMOEDIT() depending on the last key pressed or
+        the last action taken prior to executing the user function.  The
+        following modes are possible:
+
+        <B>MEMOEDIT() Modes</B>
+        ---------------------------------------------------------------------
+        <B>Mode    Memoedit.ch    Description</B>
+        ---------------------------------------------------------------------
+        0       ME_IDLE        Idle, all keys processed
+        1       ME_UNKEY       Unknown key, memo unaltered
+        2       ME_UNKEYX      Unknown key, memo altered
+        3       ME_INIT        Initialization mode
+        ---------------------------------------------------------------------
+
+        A mode value of 3 indicates that MEMOEDIT() is in initialization
+        mode.  When you specify &lt;cUserFunction&gt;, MEMOEDIT() makes a call to
+        the user function immediately after being invoked.  At this point,
+        you RETURN a request to set MEMOEDIT()'s various text formatting
+        modes: word wrap, scroll, or insert.  MEMOEDIT() calls the user
+        function repeatedly, remaining in the initialization mode until you
+        RETURN 0.  The text buffer is then displayed, and the user enters the
+        edit mode set by &lt;lEditMode&gt;.  Note that if word wrap is on when
+        MEMOEDIT() changes from initialization to edit mode, the entire text
+        buffer is formatted with &lt;nLineLength&gt;.  To prevent this initial
+        formatting, toggle word wrap off during initialization.  Note also
+        that the toggles for scroll and word wrap are not assigned to any
+        key, but can be assigned to a key from the user function.
+
+        Modes 1 and 2 indicate that MEMOEDIT() has fetched an unrecognizable
+        or configurable key from the keyboard buffer.  Configurable keys are
+        processed by RETURNing 0 to execute the MEMOEDIT() default action.
+        RETURNing a different value executes another key action, thereby
+        redefining the key.  If the key is an unrecognizable key, you can
+        define an action for it by RETURNing a value requesting a key action
+        or perform an action of your own definition.
+
+        Mode 0 indicates that MEMOEDIT() is now idle with no more keys to
+        process.  Whenever MEMOEDIT() becomes idle, it always make a call to
+        the user function.  At this point, you generally update line and
+        column number displays.
+
+        The other two parameters, current line and column, indicate the
+        current cursor position in the text buffer when the user function is
+        called.  The line parameter begins with position one (1), and column
+        begins with position zero (0).
+
+        When the mode is either 1, 2, or 3, you can return a value
+        instructing MEMOEDIT() what action to perform next.  The following
+        table summarizes the possible return values and their consequences:
+
+        <B>MEMOEDIT() User Function Return Values</B>
+        ---------------------------------------------------------------------
+        <B>Value   Memoedit.ch         Action</B>
+        ---------------------------------------------------------------------
+        0       ME_DEFAULT          Perform default action
+        1-31    ME_UNKEY            Process requested action corresponding to
+                                    key value
+        32      ME_IGNORE           Ignore unknown key
+        33      ME_DATA             Treat unknown key as data
+        34      ME_TOGGLEWRAP       Toggle word wrap mode
+        35      ME_TOGGLESCROLL     Toggle scroll mode
+        100     ME_WORDRIGHT        Perform word-right operation
+        101     ME_BOTTOMRIGHT      Perform bottom-right operation
+        ---------------------------------------------------------------------
+
+     <B>.  Header files:</B> To make the mode and request values easier to
+        remember and use, the header file Memoedit.ch is supplied in
+        \CLIP53\INCLUDE.  Additionally, Inkey.ch, which contains manifest
+        constants for all the INKEY() values, is also located in the same
+        directory.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5e17a.html">HARDCR()</A>
+<A HREF="ng64c89.html">LASTKEY()</A>
+<A HREF="ng6e303.html">MEMOLINE()</A>
+<A HREF="ng6efc7.html">MEMOREAD()</A>
+<A HREF="ng704fe.html">MEMOTRAN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

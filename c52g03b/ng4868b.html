@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng48150.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng489d5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>skipFilter()</B>
+ Reposition cursor respecting any filter setting
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE skipFilter(</B>
+     <B>                    WORKAREAP wa,</B>
+     <B>                    LONG count</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>count</B> is the number of rows to skip.
+
+ <B>Description</B>
+
+     Skips to the next visible record, obeying filter and scope conditions as
+     well as the deleted row settings.  skipFilter() is provided for skip()
+     optimization.
+
+ <B>Default Behavior</B>
+
+     Sets wa-&gt;bof and wa-&gt;eof as appropriate.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If your RDD supports relations, update relations with a
+        forceRel() prior to attempting relative movement.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng52cb2.html">forceRel()</A>
+<A HREF="ng48150.html">skip()</A>
+<A HREF="ng489d5.html">skipRaw()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

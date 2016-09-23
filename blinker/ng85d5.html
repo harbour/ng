@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7f43.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng8a50.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER EXECUTABLE EXTENDED   Specify linking of DOS extended executable</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify the linking of a DOS extended executable</B></U>
+
+ <U>Syntax   : <B>BLINKER EXECUTABLE EXTENDED [&lt;minimum extended</B></U>
+            <B>memory&gt;]</B>
+
+ <U>Default  : <B>Default for &lt;minimum extended memory&gt; is 512 Kb</B></U>
+
+ <U>Example  : <B># Create a DOS extended program that</B></U>
+            <B># requires 2 Mb extended memory</B>
+            <B>BLINKER EXECUTABLE EXTENDED 2048</B>
+
+ This command specifies that Blinker should produce a protected mode DOS
+ extended executable.
+
+ The executable generated will only run on an 80286 processor or above, with
+ a minimum of 1 Mb of available extended memory.
+
+ If BLINKER EXECUTABLE EXTENDED is specified then ALL link script commands to
+ do with overlaying are ignored, and a non-overlaid program is always
+ created.
+
+ Note: Protected mode programs must be specifically written to work in
+ protected mode. Use of this command does not imply that the program will run
+ successfully as a protected mode program, it simply sets the format of the
+ .EXE accordingly.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

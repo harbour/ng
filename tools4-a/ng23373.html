@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng22fc1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng236eb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSLIST()</B>
+ Returns a list of all the attached file servers
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSLIST() --&gt; cServerList</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Returns</B>
+
+     NNETSLIST() returns the names of all the attached servers.
+
+ <B>Description</B>
+
+     NOVELL NET SERVER LIST
+     This function allows you to determine the names of all the servers
+     attached through the station.  The character string that is returned
+     contains all the server names separated by a CR/LF.  Each of the servers
+     that are returned can be redirected as the default server using
+     NNETSETSRV().
+
+ <B>Example</B>
+
+     Determine the names of all attached servers:
+
+     cSList  :=  NNETSLIST()
+     TOKENINIT(@cSList, CHR(10)+CHR(13))
+     DO WHILE .NOT. TOKENEND()
+        cServer  :=  TOKENNEXT(cSList)
+        ? cServer
+     ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,92 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng647b2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng6569a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LASTKEY()</B>
+ Return the INKEY() value of the last key extracted from the keyboard buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LASTKEY() --&gt; nInkeyCode</B>
+
+ <B>Returns</B>
+
+     LASTKEY() returns an integer value from -39 to 386 for keyboard events
+     and integer values from 1001 to 1007 for mouse events.  This value
+     identifies either the key extracted from the keyboard buffer or the
+     mouse event that last occurred.  If the keyboard buffer is empty, and no
+     mouse events are taking place, LASTKEY() returns 0.  LASTKEY() returns
+     values for all ASCII characters, function, Alt+Function, Alt+Letter, and
+     Ctrl+Letter key combinations.
+
+ <B>Description</B>
+
+     LASTKEY() is a function that reports the INKEY() value of the last key
+     fetched from the keyboard buffer by the INKEY() function, or the next
+     mouse event, or a wait state such as ACCEPT, INPUT, READ, WAIT,
+     ACHOICE(), DBEDIT(), or MEMOEDIT().  The time LASTKEY() waits is based
+     on the operating system clock and is not related to the microprocessor
+     speed.  LASTKEY() retains its current value until another key is fetched
+     from the keyboard buffer.
+
+     LASTKEY() has a number of uses which include:
+
+     <B>.</B>  Determining the key that terminates a READ
+
+     <B>.</B>  Determining the key that exits the current Get object within a
+        user-defined function, invoked by a VALID clause
+
+     <B>.</B>  Identifying an exception key in the user function of
+        ACHOICE(), DBEDIT(), or MEMOEDIT()
+
+     LASTKEY() is also used with UPDATED() to determine if any Get object's
+     buffer was changed during a READ.
+
+     LASTKEY() is related to NEXTKEY() and READKEY().  NEXTKEY() reads the
+     current key pending in the keyboard buffer without removing it.  Use
+     NEXTKEY() instead of INKEY() when polling for a key.
+
+     For a complete list of INKEY() codes and Inkey.ch constants for each
+     key, refer to the Error Messages and Appendices Guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates a typical application of LASTKEY() to
+        test the key that exits a READ.  If the user exits with any key other
+        than Esc and a GET was changed, the specified database file is
+        updated:
+
+        #include "Inkey.ch"
+        //
+        USE Customer NEW
+        MEMVAR-&gt;balance = Customer-&gt;Balance
+        @ 10, 10 SAY "Current Balance" GET MEMVAR-&gt;balance
+        READ
+        //
+        IF (LASTKEY() != K_ESC) .AND. UPDATED()
+           REPLACE Customer-&gt;Balance WITH MEMVAR-&gt;balance
+
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB, header file is Inkey.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng194af.html">CHR()</A>
+<A HREF="ng61b6e.html">INKEY()</A>
+<A HREF="ngd087b.html">KEYBOARD</A>
+<A HREF="ng7bcb0.html">NEXTKEY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

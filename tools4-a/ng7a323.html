@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng79c18.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng773df.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETTTSSTA()</B>
+ Determines the transaction status after completion
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETTTSSTA(&lt;nTransNumber&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>    --&gt; lWritten</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTransNumber&gt;</B>  Designates a transaction number, which has been
+     returned by NNETTTSEND() at the end of a transaction.
+
+     <B>&lt;cServer&gt;</B> Designates the name of the file server that is used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETTTSSTA() returns .T. if a terminated transaction has been written
+     completely.  If the terminated transaction has not been written
+     completely, the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET TRANSACTION TRACKING SYSTEM STATUS
+     A few seconds after a transaction has been terminated by NNETTTSEND(),
+     Netware starts writing the transaction.  NNETTTSSTA() allows you to
+     determine if a transaction that has been completed successfully is
+     already written.  The first parameter that is passed contains the
+     transaction number that has been returned by NNETTTSEND().
+
+ <B>Note</B>
+
+     <B>.</B>  When you use the Transaction Tracking System (TTS), always
+        take into account that other stations might not be able to read files
+        attached by the transaction (see the Introduction to this chapter).
+
+ <B>Example</B>
+
+     Terminate the transaction, and wait until the transaction has been
+     written completely:
+
+     nTrans=NNETTTSEND()
+
+     WHILE !NNETTTSSTA(nTrans)
+     ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng79c18.html">NNETTTSEND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

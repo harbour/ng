@@ -1,0 +1,110 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5d43.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="ng7799.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCRTPRP()</B>
+ Creates a new bindery property
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCRTPRP(&lt;cObjName&gt;,[&lt;nObjType&gt;],&lt;cPropName&gt;</B>
+     <B>   [&lt;nFlag&gt;],[&lt;nSafe&gt;],[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>    --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cObjName&gt; </B> Designates the name of the object for which a new
+     property is created.
+
+     <B>&lt;nObjType&gt; </B> Designates a numeric value that indicates the object
+     type.  The header file CTNNET.CH contains symbolic constants for the
+     object types defined by Novell for use with the bindery functions of
+     CA-Clipper Tools.  The default value indicates the object type OBJ_USER.
+
+     <B>&lt;cPropName&gt; </B> Designates the name of the new property.  The name can
+     be up to 15 characters long.
+
+     <B>&lt;nFlag&gt; </B> Designates the value for the property flag.  With the
+     property flag, two property characteristics can be set.  With bit 1 you
+     can determine if the property is static (bit 1 = 0) or dynamic (bit
+     1=1).  Bit 2 specifies an item (bit 2 = 0) or a set (bit 2 = 1)
+     property.  The following table contains possible values for &lt;nFlag&gt;:
+
+     <B>Table 18.3:  Possible property flags</B>
+     ------------------------------------------------------------------------
+     <B>Value   Sym. Con.    Definition</B>
+     ------------------------------------------------------------------------
+     0       PRP_ITEM     Static item property
+     1                    Dynamic item property
+     2       PRP_SET      Static set property
+     3                    Dynamic set property
+     ------------------------------------------------------------------------
+
+     Symbolic constants can be found in the header file CTNNET.CH.  The
+     default value for &lt;nFlag&gt; is 0.
+
+     <B>&lt;nSafe&gt; </B> Designates the value for the property security.  For more
+     information, see the description of the function NNETCRTOBJ(). The
+     default value is 49 (31h).
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server for which the
+     bindery is accessed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETCRTPRP() returns .T. if the new property &lt;cPropName&gt; has been
+     created successfully.  If an error occurs, the Novell error code can be
+     queried with the NNETERROR() function.
+
+ <B>Description</B>
+
+     <B>Important!</B>  NNETCRTPRP() is a low level bindery function and should
+     be used only with extensive knowledge of the bindery concept and the
+     Novell API.
+
+     NOVELL NET CREATE PROPERTY
+     NNETCRTPRP() allows you to create a new property for a bindery object.
+     Sufficient bindery and object access rights are required.  The necessary
+     object access rights depend on the object security of the object that is
+     manipulated.  For efficiency reasons, user defined object types must be
+     passed in the high-low format.
+
+ <B>Examples</B>
+
+     <B>.</B>  The property GROUP_MEMBERS is added to the group DEV.  This
+        property is defined by Novell and must be created as set property:
+
+        #include "ctnnet.ch"
+
+        IF NNETCRTPRP('DEV',OBJ_GROUP,'GROUP_MEMBERS',PRP_SET)
+        ? 'Property created successfully!'
+        ELSE
+        ? 'Property could not be created!'
+        ENDIF
+
+     <B>.</B>  To add a group, use the NNETADDGRP() function in CA-Clipper
+        Tools.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5d43.html">NNETCRTOBJ()</A>
+<A HREF="ng8052.html">NNETDELPRP()</A>
+<A HREF="ng7b972.html">NNETERROR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

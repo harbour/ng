@@ -1,0 +1,88 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf589d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf6736.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TEXT*</B>
+ Display a literal block of text
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TEXT [TO PRINTER] [TO FILE &lt;xcFile&gt;]</B>
+     <B>   &lt;text&gt;...</B>
+     <B>ENDTEXT</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;text&gt;</B> is the block of literal characters to be displayed to the
+     screen.  Text is displayed exactly as formatted.
+
+     <B>TO PRINTER</B> echoes the display to the printer.
+
+     <B>TO FILE &lt;xcFile&gt;</B> echoes the display to the specified file.  &lt;xcFile&gt;
+     may be specified as a literal file name or as a character expression
+     enclosed in parentheses.  If no extension is specified, .txt is assumed.
+
+ <B>Description</B>
+
+     TEXT...ENDTEXT is a console command construct that displays a block of
+     text to the screen, optionally echoing output to the printer and/or a
+     text file.  To suppress output to the screen while printing or echoing
+     output to a file, SET CONSOLE OFF before the TEXT command line.
+
+     Text within the TEXT construct displays exactly as formatted, including
+     any indentation.  Hard carriage returns are output as new lines, soft
+     carriage returns as the character CHR(141).  Macro variables found
+     within TEXT...ENDTEXT are expanded.  However, macro expressions are not.
+
+     TEXT...ENDTEXT is a compatibility command and not recommended.
+     CA-Clipper has other facilities for text processing and output.  For
+     example, MEMOLINE() in combination with MLCOUNT() can word wrap long
+     strings according to a specified line length.  ? or @...SAY can display
+     formatted text extracted from a long string with MEMOLINE().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates how to use TEXT...ENDTEXT to print a
+        form letter:
+
+        USE Sales NEW
+        DO WHILE !EOF()
+           FormLetter()
+           SKIP
+        ENDDO
+        RETURN
+
+        FUNCTION FormLetter
+           LOCAL dDate := DTOC(DATE()), cSalesman := ;
+                    RTRIM(Salesman)
+           TEXT TO PRINTER
+           &amp;dDate.
+           Dear &amp;cSalesman.,
+           How are you!
+           ENDTEXT
+           EJECT
+           RETURN NIL
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngab504.html">?|??</A>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ng6e303.html">MEMOLINE()</A>
+<A HREF="ng7311a.html">MLCOUNT()</A>
+<A HREF="nge1808.html">SET CONSOLE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

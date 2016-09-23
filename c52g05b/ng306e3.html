@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2fd9f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2f9e1.html">[^^Up^^]</A>
+<A HREF="ng311d0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>2   How much memory do 5.0 applications require?</B>
+--------------------------------------------------------------------------------
+
+     The size of the executable (.EXE) file is only <B>indirectly</B> related
+     to the amount of free memory required to successfully run the
+     application.
+
+     The amount of memory needed to successfully run a particular
+     application depends primarily on its load size and fixed-memory
+     requirements.  A general rule of thumb is that an application will
+     require from 100K to 200K in addition to the load size reported by
+     .RTLink.  For large applications that use most of the features of
+     Clipper, the 100K figure is usually a bare minimum; execution may be
+     slow due to heavy swapping activity by the VMM unless Expanded Memory
+     is available.
+
+     The memory requirements of a Clipper 5.0 application can be roughly
+     divided into three categories:
+
+     <B>.  Load Size</B>
+
+        This is the memory needed to initially read the application's
+        executable image into memory.  The load size is determined at link
+        time; it is always the same for a given .EXE.  .RTLink displays the
+        load size in parentheses at the end of every link.  Example:
+        (203K).  Load size is affected only slightly by the amount of
+        compiled Clipper code in the application (this is because, by
+        default, all compiled Clipper code is dynamically overlayed, see
+        above).
+
+        However, load size is significantly affected by the amount of
+        non-Clipper (C and Assembler) code being used.  This includes
+        Clipper support code and third party library code.  Linking with a
+        pre-linked library (.PLL) can unnecessarily increase load size if
+        your application is not actually using all of the code in the .PLL.
+
+        For information on statically overlaying C and assembler code and
+        building various configurations of pre-linked libraries refer to
+        Chapter 4 of your Programming and Utilities Guide.
+
+     <B>.  Fixed-Memory Allocations</B>
+
+        Fixed-memory is the memory allocated for system tables and other
+        non-virtualized data.  Memory allocated by C or Assembler functions
+        (for example, Summer '87 versions of third party libraries or
+        overlay managers) is usually fixed memory.  The fixed-memory
+        requirement depends on which features of the system are being used.
+        For most Clipper applications it ranges from 16K to 64K.  Third
+        party libraries or overlay managers which allocate fixed memory may
+        increase this requirement, as may certain Clipper programming
+        practices.
+
+     <B>.  Swap Space</B>
+
+        Swap space is the memory used by the Virtual Memory Manager (VMM) to
+        <B>swap</B> virtualized data in and out of main memory.  By default,
+        the VMM uses all available memory as swap space; fixed allocations
+        decrease the amount of swap space available.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

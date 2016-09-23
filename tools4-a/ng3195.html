@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="ng3a10.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Introduction</B>
+
+     Each Netware file server maintains a database of users and resources
+     available on the network.  This special-purpose database is called the
+     bindery.  The bindery contains objects uniquely specified by an object
+     name and an object type.  Possible object types are: users, user groups,
+     print queues, or print servers.  Each object has associated with it a
+     number of properties that can be addressed with names and contain
+     information about the object.  For example, the property GROUPS_I'M_IN
+     contains a list of user groups of which a user is a member.
+
+     The functions of this chapter allow a low level access to the bindery.
+     This provides you with maximum flexibility for programming within
+     Novell.  The low level functions allow the creation of your own bindery
+     objects as well as the development of bindery analyzers.
+
+     However, even though the bindery concept has a high security level,
+     incorrect use of the low level bindery functions can be very dangerous
+     if you have supervisor or equivalent access rights.  The network could
+     be brought to a standstill.  You should use these functions only with
+     extensive knowledge of the bindery concept, the Novell API, and bindery
+     management.  For example, you must know the terms object, item, and set
+     property.
+
+     For frequent, complex purposes that require bindery access, like adding
+     a user to a group, CA-Clipper Tools provides high level functions that
+     can be used without a problem.  These functions are based on the low
+     level functions and are available in CA-Clipper source code.
+
+     Netware internally uses a high low sequence to store numeric values,
+     which is contrary to the standard format of the 80x86 processor family
+     (low high sequence).  For efficiency reasons, the Netware functions of
+     CA-Clipper Tools expect numeric values that are passed to Netware
+     (object types or object IDs) in the high low sequence.  However, this
+     will not affect the practical work with the CA-Clipper Tools because
+     symbolic constants are defined in the high-low format in the header file
+     CTNNET.CH for the most important object types.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

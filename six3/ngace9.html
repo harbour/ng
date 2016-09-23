@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga481.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ngb3f9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Undelete():</B>
+
+  Purpose:  Assuming that the index record &lt;nVal&gt; has been previously
+            deleted by hs_Delete(), this function unmarks the record as
+            being deleted. It is assumed that there has been no change to
+            the string which was originally used as indexing text.
+
+   Syntax:  hs_Undelete( &lt;hIndex&gt;, &lt;nVal&gt; )
+
+    Where:  &lt;hIndex&gt; is an integer handle of a HiPer-SEEK index file.
+
+            &lt;nVal&gt; is a integer representing the record number to be
+              undeleted.
+
+  Returns:  1 if successful or a negative integer indicating an error.
+
+  Errors Returned:
+
+      -4 (BADSEEK) Error while attempting seek during buffer flushing.
+      -5 (BADREAD) System generated a read error while reading.
+      -6 (BADWRITE) Error while attempting write during buffer flush.
+      -7 (RECBOUND) &lt;nVal&gt; is not valid. It is either too low or
+         greater than the total number of records indexed.
+      -9 (NOTDELETED)  Specified record number is not marked as
+         deleted.
+     -16 (BADPARMS) Invalid parameters were passed to the function.
+
+  Comments:
+
+    1.  It is the responsibility of the user to insure that for any
+    undeleted record that the string originally used to create the index
+    entry (&lt;cExpr&gt; argument in either hs_Add() or hs_Replace()) has not
+    changed during the time the record has been deleted.  Otherwise,
+    hs_Next() will find all records containing the old, rather than new
+    value. If the contents of the string has changed, use hs_Replace()
+    instead.
+
+  Example:
+
+    USE test EXCL
+    h := hs_Open( "NAMES.HSX", 16, 1 )
+    DO WHILE !eof()
+      IF deleted()
+        RECALL
+        IF hs_Ifdel( h, RecNo() ) == 1
+          IF <B>hs_Undelete( h, RecNo() )</B> &lt; 1
+            ? "HiPer-SEEK undelete error: " + LTrim( Str( recno() ))
+          ENDIF
+        ENDIF
+      ENDIF
+      SKIP
+    ENDDO
+    hs_Close( h )
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5e0e.html">hs_Delete()</A>
+<A HREF="ng6ce1.html">hs_IfDel()</A>
+<A HREF="ng9e41.html">hs_Replace()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

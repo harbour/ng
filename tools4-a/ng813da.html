@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng81036.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng818ee.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>IPXERROR()</B>
+ Determines the error code of the last IPX/SPX call
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>IPXERROR() --&gt; nErrorCode</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Returns</B>
+
+     IPXERROR() returns the error code of the previous IPX/SPX call by a
+     CA-Clipper Tools function.  There is a table containing the error codes
+     in Appendix D.
+
+ <B>Description</B>
+
+     IPXERROR() allows you to locate the source of an error that occurred
+     during the execution of a CA-Clipper Tools function for IPX/SPX
+     communication (for example IPXOPEN() or SPXESTBCON()).  If the IPX/SPX
+     call has been terminated without an error, IPXERROR() returns 0.
+
+     IPXERROR() returns an error code that is the direct result of an IPX/SPX
+     call.  If the IPX/SPX call initiates the interrupt controlled receiving
+     of a packet, the error code cannot return any information about the
+     success or failure of the receiving process.  You can use the
+     PPCRECERR() and PPCSNDERR() functions to determine this information.
+
+ <B>Example</B>
+
+     Open the socket.  If an error occurs, determine the reason for the
+     error:
+
+     IF OPENSOCK(20000)=0                           // Error?
+        IF IPXERROR()=254
+           ? 'Local socket table full!'
+        ENDIF
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8f4fe.html">PPCRECERR()</A>
+<A HREF="ng912b4.html">PPCSNDERR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngce09.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ngdc96.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_EvalPartial():</B>
+
+  Purpose:  Used to process a codeblock against all records set in a specified
+            filter.
+
+   Syntax:  m6_EvalPartial( &lt;nHandle&gt;, &lt;bEvalBlock&gt; )
+
+    Where:  &lt;nHandle&gt;     --  Is a handle to a previously allocated
+                              filter.
+
+            &lt;bEvalBlock&gt;  --  Is a codeblock that will be evaluated against
+                              each record set in the filter.  The codeblock
+                              must evaluate to a logical value.
+
+  Returns:  The number of indexed records processed.
+
+     Note:  This function visits all records in the specified filter and
+            evaluates the specified codeblock.  If the codeblock evaluates
+            to .F. the record is removed from the filter, otherwise it remains
+            and processing continues with the next record until all records
+            have been visited.
+
+            *Always free RYO filters that are no longer being used.*
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         USE Customer via "SIXCDX"
+
+         SET INDEX TO State
+
+         //...............create a RYO filter based on a query condition
+         nHandle := m6_NewFilter( 'State = "CA" .and. Age = 25' )
+
+         //.............................get information about the filter
+         aInfo := m6_FiltInfo( nHandle )
+
+         //...............................is filter partially optimizable?
+         if  aInfo[ INFO_OPTLVL ] == OPT_PARTIAL
+
+             //................create code block from non-indexed expression
+             bNonOpt := &amp;("{||"+ aInfo[ INFO_NONEXPR ] +"}" )
+
+             ? "Records to process ="
+             ?? aInfo[ INFO_COUNT ]
+
+             //...............evaluate filter against non-indexed expression
+             <B>m6_EvalPartial( nHandle, bNonOpt )</B>
+
+         endif
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng159ed.html">m6_NewFilter()</A>
+<A HREF="ngf867.html">m6_FiltInfo()</A>
+<A HREF="ngce09.html">m6_Error()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

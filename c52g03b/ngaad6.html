@@ -1,0 +1,109 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga533.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng96fc.html">[^^Up^^]</A>
+<A HREF="ngb251.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_evalPutParam()</B>
+ Place a parameter in an EVALINFO structure
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "item.api"</B>
+     <B>BOOL _evalPutParam(</B>
+     <B>                    EVALINFOP evalInfoP,</B>
+     <B>                    ITEM itemParam</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>evalInfoP</B> is the structure to which you want to add the parameter.
+
+     <B>itemParam</B> is the parameter to add to the structure.
+
+ <B>Returns</B>
+
+     TRUE if operation was successful.
+
+ <B>Description</B>
+
+     The _evalPutParam() function allows you to place parameters in an
+     EVALINFO structure one at a time.  Parameters are placed in the order
+     that they are passed (i.e., the first call to _evalPutParam() places the
+     first parameter, the second call places the second parameter, and so
+     on...).
+
+     <B>Note: </B> If a particular evaluation does not require parameters, there
+     is no need to call this function at all, simply call _evalNew() then
+     _evalLaunch().
+
+     <B>Warning! </B> Parameters in an EVALINFO structure should not be released
+     (via _itemRelease() or _evalRelease()) until the evaluation is performed
+     or the EVALINFO structure is no longer needed.
+
+ <B>Examples</B>
+
+     /*
+     * USERDO()
+     * --------
+     */
+
+     CLIPPER userDO( void )
+     {
+        EVALINFO info;
+        USHORT   uiParam;
+        ITEM     retP;
+
+        /* Get evaluation expression */
+
+        if ( PCOUNT &lt; 1 )
+        {
+           _ret();
+        return;
+        }
+        else
+        {
+           _evalNew( &amp;info, _itemParam( 1 ) );
+        }
+
+        /* Get parameters */
+
+        for ( uiParam=2; uiParam &lt;= PCOUNT; uiParam++ )
+        {
+           _evalPutParam( &amp;info, _itemParam(uiParam) );
+        }
+
+        /* Launch evaluation information */
+
+        retP = _evalLaunch( &amp;info );
+
+        /* Release ITEMs associated w/eval info */
+
+        _evalRelease( &amp;info );
+
+        _itemReturn ( retP );
+        _itemRelease( retP );
+
+        return;
+     }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Item.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9d59.html">_evalLaunch()</A>
+<A HREF="nga533.html">_evalNew()</A>
+<A HREF="ngb251.html">_evalRelease()</A>
+<A HREF="ng1446f.html">_itemRelease()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

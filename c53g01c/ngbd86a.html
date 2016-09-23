@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbd1f2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngbde29.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>APPEND BLANK</B>
+ Add a new record to the current database file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>APPEND BLANK</B>
+
+ <B>Description</B>
+
+     APPEND BLANK is a database command that adds a new record to the end of
+     the current database file and then makes it the current record.  The new
+     field values are initialized to the empty values for each data type:
+     character fields are assigned with spaces; numeric fields are assigned
+     zero; logical fields are assigned false (.F.); date fields are assigned
+     CTOD(""); and memo fields are left empty.
+
+     If operating under a network with the current database file shared,
+     APPEND BLANK attempts to add and then lock a new record.  If another
+     user has locked the database file with FLOCK() or locked LASTREC() + 1
+     with RLOCK(), NETERR() returns true (.T.).  Note that a newly APPENDed
+     record remains locked until you lock another record or perform an
+     UNLOCK.  APPEND BLANK does not release an FLOCK() set by the current
+     user.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example attempts to add a record to a shared database
+        file and uses NETERR() to test whether the operation succeeded:
+
+        USE Sales SHARED NEW
+        .
+        . &lt;statements&gt;
+        .
+        APPEND BLANK
+        IF !NETERR()
+           &lt;update empty record&gt;...
+        ELSE
+           ? "Append operation failed"
+           BREAK
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbde29.html">APPEND FROM</A>
+<A HREF="ng480be.html">FLOCK()</A>
+<A HREF="ng7afc4.html">NETERR()</A>
+<A HREF="ng96d06.html">RLOCK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

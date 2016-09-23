@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6ffa0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6dbf4.html">[^^Up^^]</A>
+<A HREF="ng716e8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>HiPer-SEEK Searches:</B>
+
+  Searches are done by three functions: hs_Set(), hs_Next() and
+  hs_Verify().  hs_Set() receives the handle (identifier) for the
+  appropriate index file and the character string(s) to be searched for.
+  hs_Set() prepares the index file for a search and will return a 1 if
+  successful.
+
+  hs_Next() is then called and will return a number representing the first
+  index record containing all the signatures of the search string(s). It
+  will return the number of the next matching index record each time it is
+  called until no more are found. A return value of zero indicates no
+  further records match. The return of a negative number indicates an error
+  condition. This is true of all HiPer-SEEK functions.
+
+  A program will usually take each return for hs_Next() and verify that the
+  search string does in fact occur in that record. This verification can
+  take place as each hs_Next() return is made or these returns can be
+  stored and the verification done as a batch operation.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

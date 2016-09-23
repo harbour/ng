@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8e4c3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng8f431.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PROW()</B>
+ Return the current row position of the printhead
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PROW() --&gt; nRow</B>
+
+ <B>Returns</B>
+
+     PROW() returns an integer numeric value that represents the number of
+     the current line sent to the printer.  The beginning row position is
+     zero.
+
+ <B>Description</B>
+
+     PROW() is a printer function that reports the row position of the
+     printhead after the last print operation.  PROW() is updated only if
+     either SET DEVICE TO PRINTER or SET PRINTER ON is in effect.  PROW() is
+     like ROW() except that it relates to the printer rather than the screen.
+     PROW() is updated in the following ways:
+
+     <B>.</B>  Application startup sets PROW() to zero
+
+     <B>.</B>  EJECT resets PROW() to zero
+
+     <B>.</B>  A print operation sets PROW() to the last row print position
+
+     <B>.</B>  SETPRC() sets PROW() to the specified row position
+
+     PROW() used with PCOL() prints a value to a new row relative to the last
+     row printed.  If the printhead is positioned to a new row with a control
+     code, a line feed (CHR(10)), or form feed (CHR(12)), PROW() is not
+     updated and, therefore, will not return the expected value.  To prevent
+     this discrepancy, reset PROW() to the correct value with SETPRC() after
+     sending any of these characters to the printer.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses PROW() and SETPRC() to create a simple one-
+        across label program that prints with @...SAY instead of ?:
+
+        USE Customer INDEX CustName NEW
+        SET DEVICE TO PRINTER
+        SETPRC(2, 0)
+        DO WHILE !EOF()
+           @ PROW(), 3 SAY CustName
+           @ PROW() + 1, 3 SAY RTRIM(City) + ",;
+                  " + RTRIM(State) + ZipCode
+           @ PROW() + 1, 3 SAY Phone PICTURE "@R ;
+                 (999) 999-9999"
+           SETPRC(2, 0)
+           SKIP
+        ENDDO
+        SET DEVICE TO SCREEN
+        CLOSE
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngab504.html">?|??</A>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ngcb296.html">EJECT</A>
+<A HREF="ng8c995.html">PCOL()</A>
+<A HREF="ng8f431.html">QOUT()</A>
+<A HREF="ng97e75.html">ROW()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

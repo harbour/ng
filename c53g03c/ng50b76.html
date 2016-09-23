@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng505f9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng50efd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>putRec()</B>
+ Replace the current row (record)
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE putRec(</B>
+     <B>                  AREAP wa,</B>
+     <B>                  BYTEP buffer</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>buffer</B> is the buffer at the work area cursor.
+
+ <B>Description</B>
+
+     putRec() replaces the current row's data buffer with the contents of
+     buffer.  This method is most notably used to transfer data between two
+     similar work areas.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  It is assumed that buffer points to the buffer at the work area
+        cursor.  putRec() should call goHot() prior to flushing the buffer
+        contents to disk.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4f10f.html">flush()</A>
+<A HREF="ng505f9.html">goHot()</A>
+<A HREF="ng57370.html">transRec()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

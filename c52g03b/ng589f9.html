@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng583c2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>evalBlock()</B>
+ Evaluate a code block
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE evalBlock(</B>
+     <B>                   WORKAREAP wa,</B>
+     <B>                   ITEM block</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>block</B> is the code block to be evaluated.
+
+ <B>Description</B>
+
+     Evaluates a specified code block.
+
+ <B>Default Behavior</B>
+
+     Evaluates the block specified by the Item block, placing the resultant
+     Item in wa-&gt;result.  The returned error code indicates success or
+     failure.
+
+     <B>Warning! </B> If block is not a code block, a BASE/1004 "No exported
+     method" error is generated.
+
+     <B>Warning! </B> The Item in wa-&gt;result must be deallocated later.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  You should save any global state necessary to your driver that
+        might be modified by the evaluated code block (i.e., any CA-Clipper
+        code), by calling SUPEREVALBLOCK().  Restore the state after
+        implementing the evalBlock() method.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

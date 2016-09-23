@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng38a9b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng39adb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DIRMAKE()</B>
+ Create a directory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DIRMAKE(&lt;cNewDir&gt;) --&gt; nSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cNewDir&gt;</B> is the name of the directory to be created, including an
+     optional drive.  If you do not specify a drive, the current one is used.
+
+ <B>Returns</B>
+
+     DIRMAKE() returns 0 if successful; -1 if there is an argument error.
+     Otherwise, DIRMAKE() returns the DOS error code.
+
+ <B>Description</B>
+
+     DIRMAKE() creates a specified directory.  Note that first you must have
+     sufficient rights to create a directory.  To create nested
+     subdirectories, you must create each subdirectory separately, starting
+     from the top-level directory that you want to create (see example
+     below.)
+
+ <B>Examples</B>
+
+     <B>.</B>  This example assumes that C:\TEST exists and uses DIRMAKE()
+        twice to create a nested subdirectory under it:
+
+        DIRMAKE("c:\test\one")    // Create top-most one
+        nResult := DIRMAKE("c:\test\one\two")
+        IF nResult != 0
+           ? "Cannot make directory, DOS error ", nResult
+           BREAK
+        ENDIF
+
+       You may also use something like this:
+
+        DIRMAKE( ".\test" )
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3861e.html">DIRCHANGE()</A>
+<A HREF="ng39adb.html">DIRREMOVE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

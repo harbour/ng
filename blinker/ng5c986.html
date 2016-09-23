@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5b84a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5b482.html">[^^Up^^]</A>
+<A HREF="ng5cfda.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NuMega Soft-Ice/W</B>
+------------------------------------------------------------------------------
+
+ <B>Overview</B>
+
+ Blinker 3.2 includes full support for the Soft-Ice/W debugger for real,
+ protected, dual and Windows programs on a SINGLE MACHINE. Soft-Ice/W
+ actually loads and runs Windows and sits at the lowest system level, so it
+ can debug anything at the source level, including VxDs and DOS protected
+ mode programs.
+
+ To use Soft-Ice/W with DOS real mode or protected mode programs simply open
+ a DOS box, link for CODEVIEW with CVV 5, run WLDR xxxx.SYM (A SYM file is
+ not actually needed) to load the symbols, source files etc and then run the
+ program xxxx.EXE directly or WLDR xxxx.EXE. Do not use WLDR xxxx with no
+ extension as there seems to be a problem loading DOS extended programs at
+ the same time as their symbols.
+
+ To enable the interception of the INT 3 debugging interrupt by Soft-Ice/W
+ use the command 'I3HERE ON' at the Soft-Ice/W command line (pop up
+ Soft-Ice/W using Ctrl D), or by including it in the INIT line in the
+ Soft-Ice/W initialisation file WINICE.DAT.
+
+ Soft-Ice/W will then pop up when it encounters an INT 3 in the code, when a
+ Control D is pressed, or it can be forced to pop up at the very start of the
+ program by setting the value /DI3 in the BLINKER environment variable as
+ described in the previous section. Soft-Ice/W will then pop up on a far JMP
+ to the very first line of the actual program, which can be stepped into with
+ F8. As noted above, for high level languages the command 'G MAIN' will take
+ you to start of the main program.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

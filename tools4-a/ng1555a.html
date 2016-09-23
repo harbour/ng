@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng14a82.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng15ba6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCRTGRP()</B>
+ Creates a new group
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCRTGRP(&lt;cName&gt;,[&lt;cFullName&gt;],[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cName&gt; </B> Designates the name of the new group.
+
+     <B>&lt;cFullName&gt; </B> Designates the full name of &lt;cName&gt;.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server where the new
+     group is created.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETCRTGRP() returns .T. if the group has been created successfully.
+
+ <B>Description</B>
+
+     NOVELL NET CREATE GROUP
+     NNETCRTGRP() allows you to create a new user group.  With the parameter
+     &lt;cFullName&gt;, a full name can be assigned to the group.  With the
+     parameters &lt;cServer&gt; or &lt;nConId&gt; ,a new group can be created on any
+     attached file server.  The connection ID of the server can be determined
+     with NNETATTACH() or NNETLOGIN().
+
+     The group's access rights can be set with the function NNETTRUST().
+
+     Supervisior rights are required to establish a new group.
+
+ <B>Note</B>
+
+     <B>.</B>  NNETCRTGRP() is a high level-function based on the low level
+        functions for bindery access.  The CA-Clipper source code can be
+        found on the product disks.
+
+ <B>Example</B>
+
+     Create the group DEV with full name DEVELOPMENT:
+
+     IF NNETCRTGRP('DEV','DEVELOPMENT')
+     ? 'Group created successfully!'
+     ELSE
+     ? 'Group could not be created!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng13625.html">NNETADDGRP()</A>
+<A HREF="ng7799.html">NNETDELOBJ()</A>
+<A HREF="ng369a3.html">NNETTRUST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

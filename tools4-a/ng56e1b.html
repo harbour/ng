@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng567a8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5575e.html">[^^Up^^]</A>
+<A HREF="ng57486.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPJBNAM()</B>
+ Sets or queries the banner name of a print job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPJBNAM([&lt;cJob&gt;],[&lt;cNewName&gt;],[&lt;cUser&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; cName</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cJob&gt;</B>  Designates the selected print job definition.  The default
+     value designates a default job.
+
+     <B>&lt;cNewName&gt;</B>  Designates a new banner name that is set for &lt;cJob&gt;.
+     The banner name can be up to 12 characters long.
+
+     <B>&lt;cUser&gt;</B>  Designates the name of the user whose print job definition
+     is processed.  The default value designates the current user.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which the
+     operation is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPJBNAM() returns the user name that is printed on the banner page of
+     &lt;cJob&gt;.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT JOB BANNER NAME
+     The banner page of a job contains the user name of the job owner and the
+     name of the printed file.  NNETPJBNAM() allows you to set or determine
+     the name of the printed file.  If &lt;cUser&gt; is not the current user,
+     access rights for the mail system of the user are required.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the file name for the banner page in the job
+        definition MYJOB:
+
+        ? NNETPJBNAM('MYJOB')
+
+     <B>.</B>  Set the file name for the banner page in the job definition
+        MYJOB to LST:
+
+        ? NNETPJBAN('MYJOB', 'LST')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng44402.html">NNETJBNAME()</A>
+<A HREF="ng567a8.html">NNETPJBAN()</A>
+<A HREF="ng5f185.html">NNETPJUSR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

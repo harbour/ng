@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3690b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng36e3a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPDISMSG()                   Enable or disable displaying of message after swap</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Enable or disable displaying of message after swap</B></U>
+
+ <U>Syntax   : <B>lValue = SWPDISMSG(lFlag)</B></U>
+
+ <U>Return   : <B>The previous setting</B></U>
+
+ <U>Default  : <B>Disabled</B></U>
+
+ Enable or disable the display of a 'Press any key to continue' message prior
+ to reloading the parent process. The kernel will display the message and
+ wait for a keystroke prior to reloading the parent if the setting is TRUE,
+ otherwise no action will be taken.
+
+ Example:
+
+    <B>* Display message and wait for keystroke after</B>
+    <B>* the DIR command has executed</B>
+    <B>SWPDISMSG(.T.)</B>
+    <B>SWPRUNCMD("DIR",0,"","")</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3836e.html">SWPGETKEY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

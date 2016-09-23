@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7decd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng7ec29.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NTOCOLOR()</B>
+ Converts a numeric value into a color value in the NN/NN or CC/CC form
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NTOCOLOR(&lt;nAttr&gt;, [&lt;lColorCode&gt;]) --&gt; cAttr</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nAttr&gt;</B>   Designates the value for the combined numeric color
+     attributes.
+
+     <B>&lt;lColorCode&gt;</B>  If designated as .F. or if the parameter is omitted,
+     NTOCOLOR() returns a string with a numeric color code.  When designated
+     as .T., NTOCOLOR() returns a string with the CA-Clipper alpha color
+     coding.
+
+ <B>Returns</B>
+
+     NTOCOLOR() returns the designated color attribute in the NN/NN or CC/CC
+     form.
+
+ <B>Description</B>
+
+     NTOCOLOR() converts a color attribute returned from another function in
+     numeric form, into the alphanumeric data format.  Use this attribute in
+     conjunction with the CA-Clipper SET COLOR TO command.
+
+ <B>Notes</B>
+
+     <B>.</B>  NTOCOLOR() returns a null string if the specified attributes
+        are invalid or unavailable attributes.  Acceptable values are in the
+        range of 0 and 255.
+
+     <B>.</B>  You cannot specify color attributes in letter format (e.g.,
+        "B/W") .
+
+ <B>Examples</B>
+
+     <B>.</B>  Normal display (white on black):
+
+        ? NTOCOLOR(7)                 // 07/00
+        ? NTOCOLOR(7, .T.)            // W/N
+
+     <B>.</B>  Display red on white.  The numeric form 116 yields "04/07":
+
+        ? NTOCOLOR(116)               // 04/07
+        ? NTOCOLOR(116)               // R/W
+
+     <B>.</B>  An invalid parameter returns a null string:
+
+        ? NTOCOLOR(380)               // ""
+        ? NTOCOLOR(-1)                // ""
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng74859.html">COLORTON()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

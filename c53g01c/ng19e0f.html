@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng19a13.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng1a4a9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COL()</B>
+ Return the screen cursor column position
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>COL() --&gt; nCol</B>
+
+ <B>Returns</B>
+
+     COL() returns an integer numeric value.  The range of the return value
+     is zero to MAXCOL().
+
+ <B>Description</B>
+
+     COL() is a screen function that returns the current column position of
+     the cursor.  The value of COL() changes whenever the cursor position
+     changes on the screen.  Both console and full-screen commands can change
+     the cursor position.  In addition, COL() is automatically set to zero
+     whenever a CLEAR, CLEAR SCREEN, or CLS command is executed.
+
+     Use COL() to position the cursor to a column relative to the current
+     column.  It is generally used in combination with ROW() and all
+     variations of the @ command.  In particular, use COL() and ROW() to
+     create screen position-independent procedures or functions that pass the
+     upper-left row and column as parameters.
+
+     If DEVICE is SET TO PRINTER, all the output of @...SAY commands is
+     directed to the printer and PROW() and PCOL() are updated instead of
+     ROW() and COL().  Use these functions when you need to determine the
+     position of the printhead.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example displays a Customer name beginning at column 10.
+        The customer's account status is then displayed to the right of the
+        last character of the customer name using COL():
+
+     USE Sales NEW
+
+        CLS
+        @ 1, 10 SAY "Customer Name: " + TRIM(Customer)
+        @ ROW(), COL() + 1 SAY "Account status: " + Status
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngaca2c.html">@...CLEAR</A>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ngc1244.html">CLEAR</A>
+<A HREF="ng6891e.html">MAXCOL()</A>
+<A HREF="ng8c995.html">PCOL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

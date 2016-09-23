@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng276d7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng27f68.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_File2BLOB():</B>
+
+  Syntax:   Sx_File2BLOB( &lt;cFileName&gt;, &lt;cFldName&gt; [,&lt;nActionCode&gt;] )
+
+        cFileName = The name of the file to be stored in the memo file.
+
+         cFldName = The name of the memo field to store the file in.
+
+      nActionCode = Optional numeric code indicating an action to be taken
+                    on the file as it is stored to the database.  The
+                    default is no action (The file is stored as-is).
+
+                    These action code values are defined as manifest
+                    constants in the SIXCDX.CH file as follows:
+
+                      BLOB_FILECOMPRESS  = Compress the file
+                      BLOB_FILEENCRYPT   = Encrypt the file
+
+                    NOTE:  Although these constants preprocess into numeric
+                           values, you should not use the numeric values in
+                           your source code.  Instead, you should use the
+                           constants, as defined above.  This will insure
+                           compatibility with all future releases of the
+                           SIx Driver.
+
+  Returns:   Logical.  TRUE (.T.) if successful, FALSE (.F.) if not.
+
+  Description:   Sx_File2BLOB() will store a file of any type (ASCII or
+                 binary) into an .FPT/.SMT memo field.  The file to be stored
+                 can be of any size.  The file can also be optionally
+                 compressed or encrypted as it's stored in the memo field.
+
+                 The term "BLOB" is an acronym for <B>B</B>inary <B>L</B>arge <B>OB</B>ject,
+                 which means basically any type of binary data, not just
+                 plain ASCII text that would normally be associated with
+                 memo fields.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Examples:
+
+    USE test VIA "SIXCDX"  // Open TEST.DBF and TEST.FPT
+
+    // Read the IMAGE.PCX file into the NOTES field, with compression
+    <B>Sx_File2BLOB( "IMAGE.PCX", "NOTES", BLOB_FILECOMPRESS )</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng20e35.html">Sx_BLOB2File()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

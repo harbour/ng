@@ -1,0 +1,105 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngba8f5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb4a83.html">[^^Up^^]</A>
+<A HREF="ngbbed3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FOR</B>
+ Execute a block of statements a specified number of times
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FOR &lt;idCounter&gt; := &lt;nStart&gt; TO &lt;nEnd&gt;</B>
+     <B>   [STEP &lt;nIncrement&gt;]</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>   [EXIT]</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>   [LOOP]</B>
+     <B>NEXT</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idCounter&gt;</B> is the name of the loop control or counter variable.  If
+     the specified &lt;idCounter&gt; is not visible or does not exist, a private
+     variable is created.
+
+     <B>&lt;nStart&gt;</B> is the initial value assigned to &lt;idCounter&gt;.  If
+     &lt;nIncrement&gt; is negative, &lt;nStart&gt; must be less than &lt;nEnd&gt;.
+
+     <B>TO &lt;nEnd&gt;</B> defines the final value of &lt;idCounter&gt;.  If &lt;nIncrement&gt;
+     is negative, &lt;nStart&gt; must be greater than &lt;nEnd&gt;; otherwise, &lt;nStart&gt;
+     must be less than &lt;nEnd&gt;.
+
+     <B>STEP &lt;nIncrement&gt;</B> defines the amount &lt;idCounter&gt; is changed for each
+     iteration of the loop.  &lt;nIncrement&gt; can be either positive or negative.
+     If the STEP clause is not specified, &lt;idCounter&gt; is incremented by one
+     for each iteration of the loop.
+
+     <B>EXIT</B> unconditionally branches control from within a FOR...NEXT
+     construct to the statement immediately following the nearest NEXT
+     statement.
+
+     <B>LOOP</B> branches control to the most recently executed FOR or DO WHILE
+     statement.
+
+ <B>Description</B>
+
+     FOR...NEXT is a control structure that executes a block of statements a
+     specified number of times.  The control structure loops from the initial
+     value of &lt;idCounter&gt; to the boundary specified by &lt;nEnd&gt;, moving through
+     the range of values of the control variable for an increment specified
+     by &lt;nIncrement&gt;.  All expressions in the FOR statement are reevaluated
+     for each iteration of the loop.  The &lt;nStart&gt; and &lt;nEnd&gt; expressions,
+     therefore, can be changed as the control structure operates.
+
+     A FOR loop operates until &lt;idCounter&gt; is greater than &lt;nEnd&gt; or an EXIT
+     statement is encountered.  Control then branches to the statement
+     following the corresponding NEXT statement.  If a LOOP statement is
+     encountered, control branches back to the current FOR statement.
+
+     If &lt;nIncrement&gt; is a negative value, &lt;idCounter&gt; is decremented rather
+     than incremented.  The FOR loop, however, continues until &lt;idCounter&gt; is
+     less than &lt;nEnd&gt;.  This means that &lt;nEnd&gt; must be less than &lt;nStart&gt;
+     when the FOR loop begins.
+
+     FOR loops are useful for traversing arrays where &lt;idCounter&gt; is used as
+     the array subscript.  See the example below.
+
+     FOR...NEXT constructs may be nested within any other control structures
+     to any depth.  The only requirement is that each control structure is
+     properly nested.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example traverses an array in ascending order:
+
+        nLenArray := LEN(aArray)
+        FOR i := 1 TO nLenArray
+           &lt;statements&gt;...
+        NEXT
+
+     <B>.</B>  To traverse an array in descending order:
+
+        nLenArray := LEN(aArray)
+        FOR i := nLenArray TO 1 STEP -1
+           &lt;statements&gt;...
+        NEXT
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng912c.html">AEVAL()</A>
+<A HREF="ngb558d.html">BEGIN SEQUENCE</A>
+<A HREF="ngb7cbe.html">DO CASE</A>
+<A HREF="ngb851d.html">DO WHILE</A>
+<A HREF="ngbe1da.html">IF</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

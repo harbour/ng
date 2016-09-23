@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng66490.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng67418.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SOUNDEX()</B>
+ Convert a character string to soundex form
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SOUNDEX(&lt;cString&gt;) --&gt; cSoundexString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string to convert.
+
+ <B>Returns</B>
+
+     SOUNDEX() returns a four-digit character string in the form A999.
+
+ <B>Description</B>
+
+     SOUNDEX() is a character function that indexes and searches for
+     sound-alike or phonetic matches.  It is used in applications where the
+     precise spelling of character keys is not known or where there is a high
+     probability of misspelled names.  Misspelling is common in real-time
+     transaction systems where the data entry operator is receiving
+     information over the telephone.  SOUNDEX() works by bringing
+     sound-alikes together under the same key value.  Note, however, the
+     soundex method is not absolute.  Keys that are quite different can
+     result in the same soundex value.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example builds an index using SOUNDEX() to create the key
+        values.  It then searches for a value found in the Salesman field:
+
+        USE Sales
+        INDEX ON SOUNDEX(Salesman) TO Salesman
+        SEEK SOUNDEX("Smith")
+        ? FOUND(), Salesman            // Result: .T. Smith
+
+     <B>.</B>  Here, a search is made for the same key as above but with a
+        different spelling:
+
+        SEEK SOUNDEX("Smythe")
+        ? FOUND(), Salesman            // Result: .T. Smith
+
+ <B>Files:</B>  Library is EXTEND.LIB, source file is SOURCE\SAMPLE\SOUNDEX.C.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng895a7.html">INDEX</A>
+<A HREF="ng8edb9.html">LOCATE</A>
+<A HREF="ng994cb.html">SEEK</A>
+<A HREF="ngaa868.html">SET SOFTSEEK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

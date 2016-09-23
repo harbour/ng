@@ -1,0 +1,107 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6eab3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6dbf4.html">[^^Up^^]</A>
+<A HREF="ng712d2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>HiPer-SEEK Index Creation:</B>
+
+  hs_Create() creates the index file header and establishes certain
+  features of the index file including the file path/name, the size of a
+  memory buffer, the size of the index records, case sensitivity and the
+  selection of a filter. It does not make any entries. Index records must
+  be added using hs_Add().  HiPer-SEEK index files may be given any legal
+  name but are usually given the extension .HSX.
+
+  The .HSX creation process will normally consist of creating, adding and
+  then closing. Closing and then reopening the .HSX file allows the memory
+  buffer to be resized and the open mode to be set to shareable.  Create is
+  always done exclusively.
+
+  A memory buffer is used for hs_Create(), hs_Filter(), and hs_Open().
+  These three functions are the only ones requiring memory.  With
+  hs_Create() and hs_Open(), the allocated memory is released by
+  hs_Close().  The hs_Filter() function releases the allocated memory
+  automatially as soon as it returns. In general, the more space allocated,
+  the better the performance.  This is especially true if the entire .HSX
+  index file can fit into the memory buffer.  The buffer size can be
+  changed each time hs_Create(), hs_Filter(), or hs_Open() is called.
+  Buffer sizes from 5K to 20K are usually the most reasonable.  If the .HSX
+  file is opened sharable, the memory buffer is automatically set to 1K.
+  Both hs_Create() and hs_Open() return a handle that is used to identify
+  the particular index file.
+
+  <B>HiPer-SEEK Index Key Sizes:</B>
+
+  The size of the index keys is also established by hs_Create(). The
+  choices are 16, 32 or 64 bytes. This size factor is the amount of space
+  used by each index record within the .HSX index file. The key size is a
+  critical factor in determining HiPer-SEEK performance. A ratio of text
+  record size to index record size greater than 50 to 1 will usually result
+  in excessive aliases.  The trade off is between file size and alias rate.
+
+  Choosing the next larger size index key will double the size of the .HSX
+  index file. Because the index file must be read to complete a search,
+  larger keys increase the time it takes for the best case search.
+  Excessive aliases are very costly in processing time required to verify
+  aliases.
+
+  With a key size of 64 bytes, the 50 to 1 rule generally limits text
+  record size to 3200 characters. This is not an absolute. The nature of
+  the text itself and the length of search strings also play very important
+  roles in overall performance. It is usually worthwhile to experiment and
+  test different index sizes with real data.
+
+  <B>Case Sensitivity:</B>
+
+  Case sensitivity is determined when the index is created. When upper and
+  lower case are distinguished within the index file, the number of
+  signatures are effectively doubled. It is recommended that, unless
+  absolutely necessary, upper and lower case should the treated the same.
+  It is possible to add case sensitivity to the verification process and
+  allow the user to specify if a particular search is to be case specific.
+  The use of a filter is also specified at create time.  This filter is a
+  translation of characters from the source text records to the index.
+  Most applications will use the filter to mask off the high-order bit and
+  treat all non-printing characters -- such as line-feeds and tabs -- as
+  spaces.  Some non-English character sets which use the high- order bit
+  require that the filter not be used.
+
+  <B>Adding Keys:</B>
+
+  As we said, hs_Create() does not add records to the .HSX index. It only
+  creates the structure and sets the various options of the index file.
+  hs_Add() is called to add each index record to the file. It receives a
+  handle and a character string and returns a number representing the index
+  record number. The first addition to an index file will return 1, the
+  second, 2 and so on. It will be up to the application to know what blocks
+  of text these index record numbers represent. Using the examples given
+  above, they can represent physical record numbers of a structured file,
+  line numbers or offsets within a file or even entire files.
+
+  Additions are always made to the end of the index file. If a source text
+  record is edited, hs_Replace() is used to update the appropriate index
+  record. Both hs_Add() and hs_Replace() perform a single index record
+  operation so that the index file can be quickly and easily maintained.
+  There is usually no need to rebuild the entire index when changes to the
+  source text are made.
+
+  There are some occasions when the .HSX index file should be rebuilt.  The
+  hs_KeyCount() function can be used to compare the number of index records
+  to the number of source text blocks to test if the one to one
+  relationship between text records and index records is corrupted. If so
+  the .HSX file should be rebuilt.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

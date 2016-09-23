@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5c1f9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5ca21.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>orderListRebuild()</B>
+ Rebuild all orders in the specified work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE orderListRebuild(</B>
+     <B>                                 AREAP wa</B>
+     <B>                            )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     orderListRebuild() causes all orders in use by wa to be rebuilt.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Prior to a orderListRebuild() call, the work area buffer
+        should be written to disk with a call to SELF_GOCOLD().
+
+     <B>.</B>  In a shared or read-only work area, care should be taken to
+        observe network etiquette.
+
+     <B>.</B>  orderListRebuild() should build the orders from scratch
+        without depending on any calculated information already available in
+        order to ensure maximum integrity of data.
+
+     <B>.</B>  Once orderListRebuild() is complete, the rebuilt order
+        should be in control and a SELF_GOTOP() should be issued to remain
+        consistent with the CA-Clipper DML.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng50136.html">goCold()</A>
+<A HREF="ng4b135.html">goTop()</A>
+<A HREF="ng5ae78.html">orderCreate()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

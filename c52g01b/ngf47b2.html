@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf3fd5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngf4ea5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDNUMBER() function</B>
+ Return the position of an Order in the current Order List
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     ORDNUMBER(&lt;cOrderName&gt;
+        [, &lt;cOrderBagName&gt;]) --&gt; nOrderNo
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrderName&gt;</B> the name of the specific Order whose position in the
+     Order List is sought.
+
+     <B>&lt;cOrderBagName&gt;</B> is the name of a disk file containing one or more
+     Orders.  You may specify &lt;cOrderBagName&gt; as the filename with or without
+     the pathname or appropriate extension.  If you do not include the
+     extension as part of &lt;cOrderBagName&gt; CA-Clipper uses the default
+     extension of the current RDD.
+
+ <B>Returns</B>
+
+     Returns nOrderNo, an integer that represents the position of the
+     specified Order in the Order List.
+
+ <B>Description</B>
+
+     ORDNUMBER() is an Order management function that lets you determine the
+     position in the current Order List of the specified Order.  ORDNUMBER()
+     searches the Order List in the current work area and returns the
+     position of the first Order that matches &lt;cOrderName&gt;.    If
+     &lt;cOrderBagName&gt; is the name of an Order Bag newly emptied into the
+     current Order List, only those orders in the Order List that have been
+     emptied from &lt;cOrderBagName&gt; are searched.
+
+     If &lt;cOrderName&gt; is not found ORDNUMBER() raises a recoverable runtime
+     error.
+
+     The active RDD determines the Order capacity of an Order Bag.  The
+     default DBFNTX driver only supports single-Order Bags, while other RDDs
+     may support multiple-Order Bags (e.g., the DBFCDX and DBPX drivers).
+
+ <B>Examples</B>
+
+     USE Customer VIA "DBFNTX" NEW
+     SET INDEX TO CuAcct, CuName, CuZip
+     ORDNUMBER( "CuName" )            // Returns: 2
+
+ <B>Status:</B>  New
+
+ <B>See also:</B>  INDEXORD()
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng408dd.html">INDEXORD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3261e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng26a91.html">[^^Up^^]</A>
+<A HREF="ng33cbf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COM_READ()</B>
+ Reads characters from the receiving buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>COM_READ(&lt;nComPort&gt;,[&lt;nLength&gt;],[&lt;lNoDelete&gt;])</B>
+     <B>   --&gt; cCharacterstring</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nComPort&gt;</B>  Designates the port (1 to 4) that is read.
+
+     <B>&lt;nLength&gt;</B>  Designates the number of the characters in the buffer
+     that are read.  The default value reads all characters.
+
+     <B>&lt;lNoDelete&gt; </B> Designates whether or not characters are removed from
+     the buffer as they are read.  The default setting removes all characters
+     from the buffer as they are read.  However, if the parameter is .T., the
+     characters remain in the buffer as long as it is not full.
+
+ <B>Returns</B>
+
+     The returned string contains the corresponding characters from the
+     receiving buffer.
+
+ <B>Description</B>
+
+     All characters arriving at the serial port are stored in the appropriate
+     buffer under interrupt control.  It is possible to determine the number
+     of characters in the buffer and to read one, several, or all of the
+     characters.  If the &lt;nLength&gt; parameter is not specified, then all the
+     characters in the buffer are read.
+
+ <B>Note</B>
+
+     <B>.</B>  Remember that you can receive additional characters between
+        calling COM_COUNT() and COM_READ().
+
+ <B>Example</B>
+
+     Wait until at least 10 characters have been received:
+
+     DO WHILE COM_COUNT(1) &lt; 10             // Wait until 10
+                                            // characters in buffer
+        *...
+     ENDDO
+
+     cInput := COM_READ(1, 10)              // Read in 10 characters
+     ? cInput                               // Display characters
+                                            // that are read
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2a35f.html">COM_COUNT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

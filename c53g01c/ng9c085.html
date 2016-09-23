@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9ba5f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng9c7f1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETCANCEL()</B>
+ Toggle Alt+C and Ctrl+Break as program termination keys
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETCANCEL([&lt;lToggle&gt;]) --&gt; lCurrentSetting</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;lToggle&gt;</B> changes the availability of Alt+C and Ctrl+Break as
+     termination keys.  Specifying true (.T.) allows either of these keys to
+     terminate an application and false (.F.) disables both keys.  The
+     default is true (.T.).
+
+ <B>Returns</B>
+
+     SETCANCEL() returns the current setting as a logical value.
+
+ <B>Description</B>
+
+     SETCANCEL() is a keyboard function that toggles the state of the
+     termination keys, Alt+C and Ctrl+Break, and reports the current state of
+     SETCANCEL().  Use SETCANCEL() when you want to suppress a user's ability
+     to terminate a program without using the specified method.
+
+     Note that if Alt+C or Ctrl+Break is redefined with SET KEY, the SET KEY
+     definition takes precedence even if SETCANCEL() returns true (.T.).
+
+     <B>Warning! </B> When SETCANCEL() has been set to false (.F.), the user
+     cannot terminate a runaway program unless you provide an alternative
+     escape mechanism.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example provides an escape route from a wait state with
+        SETCANCEL() set off:
+
+        #define K_ALTC   302
+        //
+        SETCANCEL(.F.)              // Disable termination keys
+        SET KEY K_ALTC TO AltC      // Redefine Alt-C
+        .
+        . &lt;statements&gt;
+        .
+        RETURN
+
+        FUNCTION AltC
+           LOCAL cScreen, nChoice, cLastColor := ;
+                 SETCOLOR("W/B, N/G")
+           //
+           SAVE SCREEN TO cScreen
+           @ 6, 20 CLEAR TO 9, 58
+           @ 6, 20 TO 9, 58 DOUBLE
+           @ 7, 26 SAY "Alt-C: Do you want to quit?"
+           @ 8, 35 PROMPT " Yes "
+           @ 8, 41 PROMPT " No "
+           MENU TO nChoice
+           SETCOLOR(cLastColor)
+           RESTORE SCREEN FROM cScreen
+           //
+           IF nChoice = 1
+              QUIT
+           ENDIF
+           //
+           RETURN NIL
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge5d91.html">SET ESCAPE</A>
+<A HREF="ngea03c.html">SET KEY</A>
+<A HREF="ng9e528.html">SETKEY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3e5cc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3f509.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_UnLock():</B>
+
+  Syntax:   Sx_UnLock([&lt;nRecNo | aRecArray&gt;])
+
+            nRecNo    = Record number of a single record to unlock
+            aRecArray = Array of record numbers of records to unlock
+
+  Returns:  NIL
+
+  Description:  Unlocks one or more records in a shared database.
+
+  Example:
+
+
+    #include "SIXCDX.CH"
+
+    LOCAL aRec := { 5, 20, 57, 100, 324 }  // Array of records to lock
+    LOCAL nCount
+
+    USE test SHARED                        // Open TEST.DBF
+    Sx_RLock( aRec )                       // Lock all five records
+
+    //...( Do some stuff with those five records )...
+
+    // Make sure they're all locked
+    aRec := Sx_GetLocks()                  // Get array of locked records
+    FOR nCount := 1 TO Len( aRec )         // Cycle through array
+      ? aRec[ nCount ]                     //  displaying each record number
+    NEXT
+
+    <B>Sx_UnLock( 57 )</B>                        // Unlock just record number 57
+    Sx_RLock( 500 )                        // Lock record 500
+    Sx_RLock( {75,80,90} )                 // Lock records 75, 80, and 90
+
+    <B>Sx_UnLock( {5,100,324} )</B>               // Unlock records 5, 100, and 324
+    UNLOCK                                 // Unlock all locked records
+
+
+  Notes:    If no parameters are passed then all locked records are
+            unlocked.  If the database if FLOCKed then the FLOCK is
+            released.
+
+            UNLOCK and UNLOCK ALL both unlock all records locked by the
+            current user, as well as releasing an FLOCK.  UNLOCK is
+            equivalent to Sx_UnLock() with no parameters.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng290d2.html">Sx_GetLocks()</A>
+<A HREF="ng2b953.html">Sx_IsLocked()</A>
+<A HREF="ng342f2.html">Sx_RLock()</A>
+<A HREF="ng3572b.html">Sx_ROXUnLock()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,95 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng85b3e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng86b29.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDKEYNO()</B>
+ Get the logical record number of the current record
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDKEYNO([&lt;cOrder&gt; | &lt;nPosition&gt;],</B>
+     <B>   [&lt;cIndexFile&gt;]) --&gt; nKeyNo</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrder&gt; | &lt;nPosition&gt;</B> is the name of the order or a number
+     representing its position in the order list.  Using the order name is
+     the preferred method since the position may be difficult to determine
+     using multiple-order index files.  If omitted or NIL, the controlling
+     order is assumed.
+
+     Specifying an invalid order will raise a runtime error.
+
+     <B>&lt;cIndexFile&gt;</B> is the name of an index file, including an optional
+     drive and directory (no extension should be specified).  Use this
+     argument with &lt;cOrder&gt; to remove ambiguity when there are two or more
+     orders with the same name in different index files.
+
+     If &lt;cIndexFile&gt; is not open by the current process, a runtime error is
+     raised.
+
+ <B>Returns</B>
+
+     ORDKEYNO() returns the relative position of the current record in the
+     specified order as a numeric value.  ORDKEYNO() respects the scope and
+     for condition of the order by returning zero if the record pointer is
+     positioned on an invalid record or if EOF() is true (.T.).
+
+ <B>Description</B>
+
+     ORDKEYNO() returns the logical record number of a key in an order.  This
+     is in contrast to the physical record number (returned using the RECNO()
+     function), which is the relative position of the record in the physical
+     database file.
+
+     <B>Tip:  </B>This function can be useful for displaying scroll bars and
+     messages, such as "Record 9 of 123," when viewing records in a browser.
+
+     By default, this function operates on the currently selected work area.
+     It will operate on an unselected work area if you specify it as part of
+     an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows the difference between physical and logical
+        record number:
+
+        USE Customer            // Assuming 1000 records
+        SET INDEX TO First      // Make records in first order
+
+
+        GO TOP                  // Position the data pointer at
+                                // the first record
+
+        ? ORDKEYNO()            // Result: 1
+
+        DBSKIP(10)
+        ? ORDKEYNO()            // Result: 11
+        ? RECNO()               // Result: Physical record number
+
+        DBGOBOTTOM()
+        ? ORDKEYNO()            // Result: 1000
+        ? RECNO()               // Result: Physical record number
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng84567.html">ORDKEYCOUNT()</A>
+<A HREF="ng85b3e.html">ORDKEYGOTO()</A>
+<A HREF="ng8915c.html">ORDSCOPE()</A>
+<A HREF="ng94e69.html">RECNO()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

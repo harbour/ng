@@ -1,0 +1,96 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng99b4e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng9b1ae.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET ALTERNATE</B>
+ Echo console output to a text file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET ALTERNATE TO [&lt;xcFile&gt; [ADDITIVE]]</B>
+     <B>SET ALTERNATE on | OFF | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;xcFile&gt;</B> opens a standard ASCII text file for output with a
+     default extension of (.txt).  The filename may optionally include an
+     extension, drive letter, and/or path.  You may specify &lt;xcFile&gt; either
+     as a literal filename or as a character expression enclosed in
+     parentheses.  Note that if a file with the same name exists, it is
+     overwritten.
+
+     <B>ADDITIVE</B> causes the specified alternate file to appended to instead
+     of overwritten.  If not specified, the specified alternate file is
+     truncated before new information is written to it.
+
+     <B>ON</B> causes console output to be written to the open text file.
+
+     <B>OFF</B> discontinues writing console output to the text file without
+     closing the file.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET ALTERNATE is a console command that lets you write the output of
+     console commands to a text file.  Commands such as LIST, REPORT FORM,
+     LABEL FORM, and ? that display to the screen without reference to row
+     and column position are console commands.  Most of these commands have a
+     TO FILE clause that performs the same function as SET ALTERNATE.
+     Full-screen commands such as @...SAY cannot be echoed to a disk file
+     using SET ALTERNATE.  Instead you can use SET PRINTER TO &lt;xcFile&gt; with
+     SET DEVICE TO PRINTER to accomplish this.
+
+     SET ALTERNATE has two basic forms.  The TO &lt;xcFile&gt; form creates a DOS
+     text file with a default extension of (.txt) and overwrites any other
+     file with the same name.  Alternate files are not related to work areas
+     with only one file open at a time.  To close an alternate file, use
+     CLOSE ALTERNATE, CLOSE ALL, or SET ALTERNATE TO with no argument.
+
+     The on|OFF form controls the writing of console output to the current
+     alternate file.  SET ALTERNATE ON begins the echoing of output to the
+     alternate file.  SET ALTERNATE OFF suppresses output to the alternate
+     file but does not close it.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates an alternate file and writes the results
+        of the ? command to the file for each record in the Customer database
+        file:
+
+        SET ALTERNATE TO Listfile
+        SET ALTERNATE ON
+
+        USE Customer NEW
+        DO WHILE !EOF()
+           ? Customer-&gt;Lastname, Customer-&gt;City
+           SKIP
+        ENDDO
+        SET ALTERNATE OFF
+        CLOSE ALTERNATE
+        CLOSE Customer
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7fa4e.html">CLOSE</A>
+<A HREF="ng3911e.html">FOPEN()</A>
+<A HREF="ng3cd4a.html">FWRITE()</A>
+<A HREF="ng9d794.html">SET CONSOLE</A>
+<A HREF="nga7dcb.html">SET PRINTER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

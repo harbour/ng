@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng39ced.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3a698.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_SlimFast():</B>
+
+  Syntax:  Sx_SlimFast(cExpression)
+
+           cExpression = Any character string or expression
+
+  Returns:   &lt;char&gt; Slimmed-down expression or string
+
+  Description:    This is a utility function that takes a character string
+                  as a parameter.  The string is converted to upper-case
+                  (except for anything in quotes), and all extraneous blanks
+                  are removed.
+
+                  <B>NOTE: This does not remove ALL spaces from the string.</B>
+                  <B>      However, it converts all multiple spaces into a</B>
+                  <B>      single space.</B>
+
+                  One good usage for this function would be to take a user-
+                  supplied expression (such as a query or filter expression)
+                  and clean it up for storing or use in a function.
+
+                  For example:
+
+                    <B>Sx_SlimFast("for   tmp-&gt;name    &lt;=  'John Smith'")</B>
+
+                  would return:
+
+                    <B>FOR TMP-&gt;NAME &lt;= 'John Smith'</B>
+
+  Example:
+
+    /*
+        This program accepts an expression in quotes from the command
+        line and displays the clean version.
+
+        Compile: CLIPPER &lt;prg&gt; /n
+    */
+
+    #include "SIXCDX.CH"
+
+    FUNC Main(cExpression)
+
+      IF (cExpression == NIL)
+        ? "USAGE: SLIMFAST &lt;expression&gt;"
+        ? "      where &lt;expression&gt; is any FOR-type expression, such as:"
+        ? '        "FOR lastname == ' + "'" + 'Smith"'
+        ?
+        QUIT
+      ENDIF
+      ? "Here it is:", <B>Sx_SlimFast( cExpression )</B>
+
+    Return(NIL)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng28744.html">Sx_FNameParser()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

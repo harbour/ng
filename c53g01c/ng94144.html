@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng93d44.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng948d4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>READVAR()</B>
+ Return the current GET/MENU variable name
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>READVAR() --&gt; cVarName</B>
+
+ <B>Returns</B>
+
+     READVAR() returns the name of the variable associated with the current
+     Get object or the variable being assigned by the current MENU TO command
+     as an uppercase character string.
+
+ <B>Description</B>
+
+     READVAR() is an environment function that primarily implements context-
+     sensitive help for Get objects and lightbar menus.  READVAR() only works
+     during a READ or MENU TO command.  If used during any other wait states,
+     such as ACCEPT, INPUT, WAIT, ACHOICE(), DBEDIT(), or MEMOEDIT(), it
+     returns a null string ("").  Access it within a SET KEY procedure, or
+     within a user-defined function invoked from a WHEN or VALID clause of a
+     Get object.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example implements a simple help system for Get objects
+        using a database file to store the help text.  When the user presses
+        F1, the help database file is searched using READVAR() as the key
+        value.  If there is help text available, it is displayed in a window:
+
+        #include "Inkey.ch"
+        //
+        SET KEY K_F1 TO HelpLookup
+        cString = SPACE(10)
+        @ 5, 5 SAY "Enter:" GET cString
+        READ
+        RETURN
+
+        FUNCTION HelpLookup
+           USE Help INDEX Help NEW
+           SEEK READVAR()
+           IF FOUND()
+              DisplayHelp(Help-&gt;Topic)
+           ELSE
+              DisplayHelp("No help for " + READVAR())
+           ENDIF
+           CLOSE Help
+           RETURN NIL
+
+        FUNCTION DisplayHelp( cTopic )
+           LOCAL cScreen := SAVESCREEN(5,5,15,70),;
+                  cColor := SETCOLOR("BG+/B")
+           //
+           SET CURSOR OFF
+           @ 5, 5 CLEAR TO 15, 70
+           @ 5, 5 TO 15, 70 DOUBLE
+           @ 5, 30 SAY " Help for " + READVAR() + " "
+           MEMOEDIT(cTopic, 6, 7, 14, 68, .F.)
+           //
+           RESTSCREEN(5, 5, 15, 70, cScreen)
+           SETCOLOR(cColor)
+           SET CURSOR ON
+           //
+           RETURN NIL
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngd3103.html">MENU TO</A>
+<A HREF="ngd4eb5.html">READ</A>
+<A HREF="ngea03c.html">SET KEY</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

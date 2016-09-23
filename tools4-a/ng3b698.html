@@ -1,0 +1,93 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3b2cf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng39198.html">[^^Up^^]</A>
+<A HREF="ng3c222.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETMSGOPN()</B>
+ Initializes the interrupt-controlled broadcast system
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETMSGOPN([&lt;nNumber&gt;]) --&gt; lStatus</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nNumber&gt;</B>  Designates the maximum number of broadcast messages that
+     are accepted by the receiving buffer.  Values from 1 to 1000 are
+     allowed.  Values outside of this range are corrected automatically.  The
+     default value for &lt;nNumber&gt; is 1.
+
+ <B>Returns</B>
+
+     NNETMSGOPEN() returns .T. if the broadcast system has been initialized
+     successfully.  If an error occurs (for example, insufficient fixed heap
+     memory to create the buffer), the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET MESSAGE BUFFER OPEN
+     Netware allows you to send broadcast messages between workstations.  For
+     example, broadcast messages can be created with the Novell utility SEND
+     or with the CA-Clipper Tools function NNETSND().  The broadcast system
+     is also used by Netware servers to send system messages.  Incoming
+     messages are displayed on line 24 of the screen; these messages block
+     the system until they are confirmed with &lt;Ctrl&gt; &lt;Return&gt;.  These
+     incoming messages can be suppressed with CASTOFF or with the CA-Clipper
+     Tools function NNETBRDCST().  In contrast, NNETMSGOPN(), in conjunction
+     with the NNETSND() functions, allows communication between applications.
+
+     NNETMSGOPN() opens a buffer that can accept up to &lt;nNumber&gt; broadcast
+     messages and installs an interrupt handler.  After the message system
+     has been installed, incoming messages are no longer displayed on the
+     screen; these messages are stored in the internal message buffer.  The
+     messages can then be read from the buffer in the sequence of their
+     arrival with NNETMSGRD().
+
+     The broadcast system can simulate a key code when a message is received.
+     If the receiving buffer is full, no additional messages are accepted.
+     Do not suppress the receiving of messages when using the broadcast
+     system!  Messages are already suppressed on the file server instead of
+     the workstation.
+
+ <B>Notes</B>
+
+     <B>Important!</B>  NNETMSGOPN() works with the interrupt system.  Before
+     you leave your CA-Clipper application, NNETMSGOPN() must be uninstalled
+     with the function NNETMSGCLO().  Changed interrupt vectors can, sooner
+     or later, lead to a system crash.  When working with the extended
+     drivers module, interrupt vectors are reset automatically.
+
+     <B>.</B>  It is not possible to use the message system with former
+        versions of the Novell shell.  The latest version is available free
+        of charge from Novell through CompuServe.
+
+ <B>Example</B>
+
+     Install the broadcast system with a buffer for up to 10 messages:
+
+     IF NNETMSGOPN(10)
+     ? 'Broadcast system installed successfully!'
+     ELSE
+     ? 'Installation failed!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng39922.html">NNETBRDCST()</A>
+<A HREF="ng3aa17.html">NNETMSGCLO()</A>
+<A HREF="ng3b2cf.html">NNETMSGKEY()</A>
+<A HREF="ng3c222.html">NNETMSGRD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

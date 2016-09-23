@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng115fd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng1215c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_FiltSave():</B>
+
+  Purpose:  Saves filter to a specified file.
+
+   Syntax:  m6_FiltSave( &lt;nHandle&gt;, &lt;cFileName&gt; )
+
+    Where:  &lt;nHandle&gt;     --  Is any valid handle to a filter.
+
+            &lt;cFileName&gt;   --  File name to store the filter in.
+
+  Returns:  Logical value:  .T. means the operation was successful,  .F.
+            indicates it failed.  In the case of a .F. value call m6_Error()
+            to retrieve the reason for the error.
+
+     Note:  This function is useful when you want to archive the status
+            of a filter for future filter operations.
+
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         //..............................................open customer file
+         USE Customer via "SIXCDX"
+
+         //.......................................open indexes to query on
+         SET INDEX TO State, Age
+
+         //......................................................set filter
+         SET FILTER TO State="CA"
+
+         //...................................get handle to workarea filter
+         nHandle := m6_GetAreaFilter()
+
+         //......................................save filter for posterity
+         <B>m6_FiltSave( nHandle, "Save.flt")</B>
+
+         //......................re-open Customer but without any indexes
+         USE Customer
+
+         //...........................................restore the filter
+         nHandle := m6_FiltRestore( "Save.flt")
+
+         //..................................SET FILTER TO my RYO filter
+         m6_SetAreaFilter( nHandle )
+
+         //........Browse records.  Only records in "CA" will be visible
+         Browse()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng115fd.html">m6_FiltRestore()</A>
+<A HREF="ng13b9a.html">m6_GetAreaFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

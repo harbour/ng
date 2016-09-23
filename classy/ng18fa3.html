@@ -1,0 +1,179 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng181aa.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng1acb3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Metaclasses</B>
+
+  Class(y) v2.4 treats classes as real objects in every sense. They have a
+  class of their own - the predefined class called <U>Class</U>, or a subclass
+  thereof.
+
+  The Class class is used to create new classes, as can be seen in the v2.4
+  headers. The information used to create a class remains in existence in
+  the class object for each class, so classes can be queried at runtime as
+  to their structure.
+
+  <B>Important Note</B>
+
+  The operation of metaclasses is not an issue with which most programmers
+  need be concerned. Metaclasses are necessary to create a consistent,
+  object-oriented, open architecture which allows Class(y) to be cleanly
+  enhanced, extended and integrated with other object-oriented system-level
+  products. However, for most ordinary programming tasks, metaclasses are
+  not required.
+
+  For those who are interested, the architecture of the metaclass system
+  will be briefly discussed.
+
+  <B>Warning!</B>
+
+  This subject can be quite confusing, even to experts, and the description
+  given here is far from being comprehensive. Again, it is not necessary to
+  understand the metaclass architecture to use Class(y) v2.4.
+
+  Any simple class is created as an instance of the Class class. Instances
+  of the Class class contain variables such as <U>name</U>, <U>superClass</U>, and
+  <U>messages</U>. The contents of these variables describe a particular class.
+
+  Sending the <U>class</U> message to an object will return the class object
+  for that class. Examining these objects in the debugger can be
+  instructive.
+
+  If a class has class variables, then its class object must contain those
+  variables. For example, if a Window class contains a class variable called
+  <U>activeList</U>, the variable is stored in Window's class object, not in
+  its instances. The class object also contains the variables mentioned
+  above, such as <U>name</U> and <U>superClass</U>.
+
+  Such a class object - one containing an additional variable such as
+  <U>activeList</U> - is obviously not just an instance of the Class class. It
+  must have a class of its own, which we call a metaclass, because it is the
+  class of a class.
+
+  A metaclass, like any other class, is an instance of the Class class. But
+  what sets it apart from ordinary classes is that its <U>superClass</U> field
+  refers to the Class class, or to another metaclass. In other words, all
+  metaclasses ultimately inherit from the Class class. This ensures that
+  instances of a metaclass have the same basic structure as described by the
+  Class class, in addition to any other variables or methods which they may
+  define.
+
+  In the Window example, the Window metaclass would contain just a few
+  entries in its <U>messages</U> array, including an entry defining the
+  <U>activeList</U> variable. Instances of the Window metaclass will therefore
+  contain such a variable, in addition to the variables which they inherit
+  from their superclass, which as mentioned above, is Class.
+
+  The diagram below illustrates this. The boxes are somewhat similar to the
+  display provided by the debugger when looking at a class object. The
+  predefined Object class is shown, since all classes ultimately inherit
+  from it. The Class class is shown, since all classes are instances of it
+  or one of its subclasses. A Rectangle class is shown as a direct instance
+  of the Class class. The Rectangle class has no class variables of its own,
+  so it can be a direct instance of Class.
+
+  The Window class inherits from the Rectangle class. Since Window has a
+  class variable of its own, <U>activeList</U>, it needs a metaclass to
+  describe its structure. The Window metaclass is shown inheriting from the
+  Class class. The Window class is an instance of the Window metaclass.
+  Since the class described by the Window metaclass is a subclass of Class
+  because the superclass field refers to Class - the Window class inherits
+  all of the methods and instance variables defined in Class, as well as the
+  variable <U>activeList</U>, defined in the Window metaclass.
+
+  Each box below is a Class(y) object. The boxes also happen to be class
+  objects, since they are all instances of the Class class or one of its
+  subclasses (even the Class class object is an instance of the Class class,
+  an interesting and necessary circular relationship).
+
+  In the diagram below, the header of each box specifies the class
+  represented by that box. In each box's left-hand column, the names of the
+  class object's variables are listed. In the right hand column,
+  corresponding to each variable, is the value of that variable. Overall, it
+  is somewhat similar to the kind of display you see in the debugger.
+
+  The heavy arrows point from a subclass to its superclass. The light arrows
+  point from an object to its class, ie. to the class it is an instance of.
+
+  <B>Class/Metaclass Relationships</B>
+
+    +------------------------------+
+    | Object class                 |
+    |------------------------------|
+    | name       | "Object"        |
+    | superClass | NIL             |
+    | vars       | {}              |
+    | methods    | { "NEW",        |
+    |            |   "CLASSH",     |
+    |            |   "CLASS",      |
+    |            |   "CLASSNAME" } |&lt;--------------------------+
+    +------------------------------+                           |
+                |  .                                           |superclass
+     instance of|  |                                           |
+                |  |subclass of                                |
+                .  |                                           |
+    +------------------------------+              +--------------------------+
+    | Class class                  |              | Rectangle class          |
+    |------------------------------|  instance of |--------------------------|
+    | name       | "Class"         |&lt;-------------| name       | "Rectangle" |
+    | superClass | Object          |              | superClass | Object      |
+    | vars       | { "NAME",       |              | vars       | { "TOP",    |
+    |            |   "SUPERCLASS", |-------+      |            |   "LEFT",   |
+    |            |   "VARS"        | inst  |      |            |   "BOTTOM", |
+    |            |   "METHODS" }   |       |      |            |   "RIGHT" } |
+    | methods    | { "NEW", ... }  |&lt;------+      | methods    | { "NEW",    |
+    +------------------------------+              |            |   "DRAW" }  |
+                .  .                              +--------------------------+
+                |  |                                           .
+     instance of|  |subclass of                                |
+                |  |                                           |subclass of
+                |  |                                           |
+    +---------------------------------+           +--------------------------+
+    | Window class class (metaclass)  |           | Window class             |
+    |---------------------------------|  instance |--------------------------|
+    | name       | "Window class"     |&lt;----------| name       | "Window"    |
+    | superClass | Class              |     of    | superClass | Rectangle   |
+    | vars       | { "ACTIVELIST" }   |           | vars       | { "BUF" }   |
+    | methods    | {}                 |           | methods    | { "NEW",    |
+    +---------------------------------+           |            |   "OPEN",   |
+                                                  |            |   "CLOSE" } |
+                                                  | activeList | NIL         |
+                                                  +--------------------------+
+
+  To complete the picture, sample individual instances of the Rectangle and
+  Window classes are shown below.
+
+  <B>Sample Instances</B>
+
+        +--------------------+         +-----------------+
+        | Rectangle instance |         | Window instance |
+        |--------------------|         |-----------------|
+        | top    | 5         |         | top    | 7      |
+        | left   | 5         |         | left   | 4      |
+        | bottom | 10        |         | bottom | 18     |
+        | right  | 34        |         | right  | 25     |
+        +--------------------+         | buf    | "...." |
+                                       +-----------------+
+
+  <B>Point of Interest</B>
+
+  The arrows in the first diagram indicate that Object is an instance of
+  Class, even though Class is a subclass of Object. This important 'chicken-
+  and-egg' relationship is set up by Class(y) on initialization. Another
+  aspect of this relationship is the instance arrow which points from the
+  Class class back to itself. The Class class object is itself an instance
+  of the Class class.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

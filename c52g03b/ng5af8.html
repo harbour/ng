@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng557b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng242.html">[^^Up^^]</A>
+<A HREF="ng5edf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_retl()</B>
+ Post a logical return value
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "extend.api"</B>
+     <B>void _retl(</B>
+     <B>            int iLogical</B>
+     <B>          )</B>
+
+ <B>Arguments</B>
+
+     <B>iLogical</B> is an int type that represents the logical value to be
+     returned.  A value of zero is interpreted as false (.F.).  Any other
+     value is interpreted as true (.T.).
+
+ <B>Returns</B>
+
+     _retl() has no return value.
+
+ <B>Description</B>
+
+     _retl() posts a logical value into CA-Clipper's return value area.  When
+     your Extend routine returns control to the calling CA-Clipper program,
+     the posted value becomes the CA-Clipper return value of your Extend
+     routine.
+
+ <B>Examples</B>
+
+     <B>.</B>  From C:
+
+        _retl(1);
+
+     <B>.</B>  From Assembly language:
+
+        EXTRN __retl:FAR
+              mov   ax, 1
+              push  ax
+              call  __retl
+              add   sp, 2               ; reset stack pointer
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Extend.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng30f3.html">_parl()</A>
+<A HREF="ng8165.html">_storl()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

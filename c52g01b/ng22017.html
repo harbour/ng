@@ -1,0 +1,96 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng217a5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng22ad5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBSEEK()</B>
+ Move to the record having the specified key value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBSEEK(&lt;expKey&gt;, [&lt;lSoftSeek&gt;]) --&gt; lFound</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;expKey&gt;</B> is a value of any type that specifies the key value
+     associated with the desired record.
+
+     <B>&lt;lSoftSeek&gt;</B> is an optional logical value that specifies whether a
+     soft seek is to be performed.  This determines how the work area is
+     positioned if the specified key value is not found (see below).  If
+     &lt;lSoftSeek&gt; is omitted, the current global _SET_SOFTSEEK setting is
+     used.
+
+ <B>Returns</B>
+
+     DBSEEK() returns true (.T.) if the specified key value was found;
+     otherwise, it returns false (.F.).
+
+ <B>Description</B>
+
+     DBSEEK() moves to the first logical record whose key value is equal to
+     &lt;expKey&gt;.  If such a record is found, it becomes the current record and
+     DBSEEK() returns true (.T.).  Otherwise, DBSEEK() returns false (.F.)
+     and the positioning of the work area is as follows: for a normal (not
+     soft) seek, the work area is positioned to LASTREC() + 1 and EOF()
+     returns true (.T.); for a soft seek, the work area is positioned to the
+     first record whose key value is greater than the specified key value.
+     If no such record exists, the work area is positioned to LASTREC() + 1
+     and EOF() returns true (.T.).
+
+     For a work area with no active indexes, DBSEEK() has no effect.
+
+     DBSEEK() performs the same function as the standard SEEK command.  For
+     more information, refer to the SEEK command.
+
+ <B>Notes</B>
+
+     <B>.  Logical records:</B> DBSEEK() operates on logical records.
+        Records are considered in indexed order.  If a filter is set, only
+        records which meet the filter condition are considered.
+
+     <B>.  Controlling order:</B> If the work area has more than one active
+        index, the operation is performed using the controlling order as set
+        by DBSETORDER() or the SET ORDER command.  For more information,
+        refer to the SET ORDER command.
+
+     <B>.  Network environment:</B> For a shared file on a network, moving to
+        a different record may cause updates to the current record to become
+        visible to other processes.  For more information, refer to the
+        Network Programming chapter in the Programming and Utilities guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, DBSEEK() moves the pointer to the record in
+        the database, Employee, in which the value in FIELD .cName. matches
+        the entered value of cName:
+
+        ACCEPT "Employee name: " TO cName
+        IF ( Employee-&gt;(DBSEEK(cName)) )
+           Employee-&gt;(ViewRecord())
+        ELSE
+           ? "Not found"
+        END
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1f0b1.html">DBGOBOTTOM()</A>
+<A HREF="ng1fdfa.html">DBGOTOP()</A>
+<A HREF="ng25d80.html">DBSKIP()</A>
+<A HREF="ng2fa9c.html">EOF()</A>
+<A HREF="ng39f03.html">FOUND()</A>
+<A HREF="ng994cb.html">SEEK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

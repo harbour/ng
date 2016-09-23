@@ -1,0 +1,47 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng125ce9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng124407.html">[^^Up^^]</A>
+<A HREF="ng126317.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>Block                                          (Assignable)</B>
+
+        Contains a code block that associates the Get object with a variable.
+        The code block takes an optional argument that should assign the
+        value of the argument to the variable.  If the argument is omitted,
+        the code block should return the current value of the variable.
+
+        If the Get variable is an array element, Get:Block always returns the
+        base of the array.  The subscript(s) in the expression are stored
+        internally.  Thus, in the case of GETs on array elements, you cannot
+        assign or retrieve the value of the array element by executing
+        Get:Block.  Setting and getting may be done on array element GET
+        variables (and simple GET variables as well) by use of the VarGet()
+        and VarPut() methods, defined below.
+
+        <B>Note: </B> Use of the VarGet and VarPut messages--instead of directly
+        evaluating the variable block in the get--is the preferred method of
+        accessing the Get variable.
+
+
+        oGet       := GetNew()
+        oGet:Row   := 10
+        oGet:Col   := 10
+        oGet:Block := {|x| IF(x == NIL, cVar, cVar := x)}
+
+        // or you can use this Get/Set block
+        oGet:Block := {|x| IF( pcount() &gt; 0, cVar := x, cVar)}
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

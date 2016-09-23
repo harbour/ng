@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng160f9b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng15a315.html">[^^Up^^]</A>
+<A HREF="ng1620c9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>setstyle(&lt;nStyle&gt;, [&lt;lSetting&gt;]) --&gt; self</B>
+
+        TBrowse:setStyle() maintains a dictionary within a TBrowse object.
+        This dictionary, which is simply an array, contains a set of logical
+        values that determine behaviors associated with a TBrowse object.
+        &lt;nStyle&gt; refers to the element in the dictionary that contains the
+        style.  &lt;lSetting&gt; indicates whether the style should be permitted or
+        denied.  Set to true (.T.) to allow the behavior to occur; otherwise,
+        set to false (.F.) to prohibit it.  CA-Clipper reserves the first
+        four elements of the dictionary for predefined styles.
+
+        You may add custom styles to a TBrowse object by specifying any
+        unused element of the dictionary.  A maximum of 4096 definitions is
+        available.  When adding new styles to the dictionary, use the
+        TBR_CUSTOM constant to ensure that the new styles will not interfere
+        with the predefined ones.  This guarantees that if more predefined
+        styles are added in future releases of CA-Clipper, the positions of
+        your styles in the dictionary will be adjusted automatically.
+
+        Styles are not utilized by the TBrowse object.  The style dictionary
+        is merely a convenient method of associating behaviors with a browse.
+        The functions that query and implement these behaviors are external
+        to the object.  An example of this can be found in BrowSys.prg in the
+        clip53\samples subdirectory.
+
+        <B>TBrowse Styles</B>
+        ---------------------------------------------------------------------
+        <B>Number  TBrowse.ch     Meaning</B>
+        ---------------------------------------------------------------------
+        1       TBR_APPEND     Can the user add new information?
+        2       TBR_MODIFY     Can the user modify the data in the browse's
+                               cells?
+        3       TBR_MOVE       Can the user move the column to another
+                               position in the browse?
+        4       TBR_SIZE       Can the user modify the width of the column?
+        5       TBR_CUSTOM     First available element for custom styles.
+        ---------------------------------------------------------------------
+
+        Tbrowse.ch contains manifest constants for TBrowse:setStyle().
+
+        <B>Note: </B> TBR_MOVE and TBR_SIZE are not implemented in CA-Clipper
+        5.3.  They are reserved for future usage.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng10baa.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3cf.html">[^^Up^^]</A>
+<A HREF="ng121a1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>170 NEW: Linker</B>
+--------------------------------------------------------------------------------
+
+     Clipper 5.0 has a new linker, .RTLink for Clipper, which is
+     designed to make it easier to create large programs without the
+     headache of creating overlays as was required by PLINK-86.  In
+     particular, the following are the areas of improvement that .RTLink
+     for Clipper represents:
+
+     1.  <B>Dynamic overlays:</B>  All Clipper-compiled code is
+         automatically overlayed.  Dynamic overlays can be either
+         internal or external.  That is, they can be either bound into
+         the executable (.EXE) file or placed in a separate overlay
+         (.OVL) file.
+
+     2.  <B>Incremental linking of Clipper-compiled code:</B>  For very
+         large Clipper-generated object files, .RTLink will link only
+         procedures and user-defined functions that have changed since
+         the last link.  Note, for small modules the actual speed of
+         linking might be slower.
+
+     3.  <B>Pre-linking of existing libraries and object files:</B> .RTLink
+         will create pre-linked portions of libraries and object files to
+         a .PLL file.  Use this feature to speed linking or if you want
+         more than one .EXE file to share the same library code, thereby
+         saving disk space.
+
+         Note that the installation program generates BASE50.PLL
+         containing most of CLIPPER.LIB.  Using this pre-linked library
+         will make linking of programs at development-time many times
+         faster than without it.  Assuming the \BIN directory is in your
+         path, typical linking syntax is:
+
+         C&gt;RTLINK FI &lt;objList&gt; /PLL:BASE50
+
+     4.  <B>Static overlaying of C and Assembler code:</B>  Static
+         overlaying is still supported for C and Assembler in the same
+         way it was with PLINK-86.
+
+     5.  <B>Common syntax compatibility:</B>  .RTLink supports both
+         Microsoft Link (positional) and PLINK-86 (freeformat)
+         compatible syntax.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

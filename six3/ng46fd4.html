@@ -1,0 +1,101 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng468c3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng47c93.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>DISPLAY:</B>
+
+  Syntax:
+
+  <B>DISPLAY &lt;exp list&gt; [TO PRINTER] [TO FILE &lt;xcFile&gt;] </B>
+  <B>        [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;] </B>
+  <B>        [OFF] [NOOPTIMIZE]</B>
+
+  <B>&lt;exp list&gt;</B> is the list of values to display for each record processed.
+
+  <B>TO PRINTER</B> echoes output to the printer.
+
+  <B>TO FILE</B> echoes output to &lt;xcFile&gt; which can be specified either as a
+  literal filename or as a character expression enclosed in parentheses.
+  If an extension is not specified, (.txt) is added.
+
+  <B>&lt;scope&gt;</B> is the portion of the current database file to DISPLAY. The
+  default is the current record, or NEXT 1.  If a condition is specified,
+  the scope becomes ALL.  Mach SIx will only optimize a scope of ALL.
+
+  <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the condition
+  from the current record until the condition fails.  Mach SIx does not
+  support the WHILE scope.
+
+  <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to DISPLAY
+  within the given scope.  Mach SIx will optimize any FOR condition that
+  contains one or more active index keys.
+
+  <B>OFF</B> suppresses the display of the record number.
+
+  <B>NOOPTIMIZE</B>, preempts optimization and forces default Clipper processing.
+
+  <B>Description:</B>
+
+  DISPLAY is a database command that sequentially accesses records in the
+  current work area sending the results of the &lt;exp list&gt; to the console
+  in a tabular format with each column separated by a space.  The command
+  does not display column headers or pause at pre-determined intervals.
+  DISPLAY is identical to LIST with the exception that its default scope
+  is NEXT 1 rather than ALL.
+
+  When invoked, output is sent to the screen and optionally to the printer
+  and/or a file.  To suppress output to the screen while printing or echoing
+  output to a file, SET CONSOLE OFF before the DISPLAY command-line.
+
+  The DISPLAY command may be optimized by specifying one or more active index
+  keys in the FOR condition.  Note that Mach SIx will only optimize a DISPLAY
+  with a FOR condition and a scope of ALL.  WHILE conditions and alternate
+  scopes cannot be optimized by Mach SIx.
+
+  <B>Notes:</B>
+
+  Interrupting output: The Clipper guide suggests using a test for INKEY() in
+  the FOR condition in order to interrupt the display processing.  Because of
+  the way Mach SIx parses and evaluates the FOR condition this technique is
+  not recommended and might produce unexpected results.
+
+  Printer margin: Since DISPLAY is a console command, it honors the current
+  SET MARGIN for output echoed to the printer.
+
+  <B>---------------------------------| EXAMPLE |--------------------------------</B>
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates an optimized DISPLAY command                              *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX.CH"
+
+  USE Account VIA "SIXCDX"  // Structural index ACCOUNT.CDX opened
+                            // automatically
+  CLEAR SCREEN
+  ? "Example of an optimized DISPLAY command."
+  ?
+
+  // Fully optimized display of records for accounts in Florida.
+  // Optimized using STATE index.
+  <B>DISPLAY AcctNo, Last, First, Balance FOR State = "FL"</B>
+  CLOSE ALL
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng494a8.html">LIST</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

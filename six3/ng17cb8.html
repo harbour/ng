@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng178d1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng17fd1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>OrdBagExt():</B>
+
+  Syntax:   OrdBagExt()
+
+  Returns:  A character string representing the DEFAULT index file extension
+            for the currently active index driver.
+
+  Description:
+
+     OrdBagExt() is an Order management function that returns a character
+     expression that is the default Order Bag extension of the current or
+     aliased work area.  cBagExt is determined by the RDD active in the
+     current work area.
+
+     OrdBagExt() supersedes IndexExt() and is preferred.
+
+  Example:
+
+     USE test VIA "SIXNSX"
+     ? <B>OrdBagExt()</B>      // Returns .NSX
+
+     USE test VIA "SIXCDX"
+     ? <B>OrdBagExt()</B>      // Returns .IDX
+
+     USE test VIA "SIXNTX"
+     ? <B>OrdBagExt()</B>      // Returns .NTX
+
+     USE test VIA "DBFCDX"
+     ? <B>OrdBagExt()</B>      // Returns .CDX
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng17fd1.html">OrdBagName()</A>
+<A HREF="ng2aa8b.html">Sx_IndexName()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

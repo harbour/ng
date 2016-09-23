@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5fa30.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng6065a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>INDEXEXT()</B>
+ Return the default index extension based on the database driver currently
+ linked
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>INDEXEXT() --&gt; cExtension</B>
+
+ <B>Returns</B>
+
+     Unless you have linked another database driver, INDEXEXT() returns
+     ".ntx" to indicate that the default CA-Clipper driver is in effect.  If
+     the dBASE III PLUS compatible database driver is linked, the function
+     returns ".ndx".
+
+ <B>Description</B>
+
+     INDEXEXT() returns the default index file extension by determining which
+     database driver is currently linked. Note that it is preferable to use
+     ORDBAGEXT() than INDEXEXT().
+
+ <B>Notes</B>
+
+     <B>.</B>     INDEXEXT() returns the default index extension of the
+        driver loaded, not the actual index file extension.  If no driver is
+        loaded, ".ntx" is returned.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, INDEXEXT() creates an existence test for the
+        Customer index file independent of the database driver linked into
+        the current program:
+
+        USE Customer NEW
+        //
+        IF .NOT. FILE("Customer" + INDEXEXT())
+           INDEX ON CustName TO Customer
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6065a.html">INDEXKEY()</A>
+<A HREF="ng6147b.html">INDEXORD()</A>
+<A HREF="ng7c7bd.html">ORDBAGEXT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

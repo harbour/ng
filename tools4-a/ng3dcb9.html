@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3d3e6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng39198.html">[^^Up^^]</A>
+<A HREF="ng3e858.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSNDGRP()</B>
+ Sends a message to all group members
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSNDGRP(&lt;cName&gt;,&lt;cMessage&gt;,[&lt;lNoSender&gt;],</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cName&gt;</B>  Designates the name of the group that has members to which
+     the message is sent.
+
+     <B>&lt;cMessage&gt;</B>  Designates the message that is sent to the members of
+     &lt;cName&gt;.  The message can be up to 55 characters long (including
+     information about the sender) and can contain only characters that have
+     an ASCII value between 32 and 127.
+
+     <B>&lt;lNoSender&gt;</B>  Designates an optional parameter that allows you to
+     suppress the sender information (from ...) when designated as (.T.).
+     When this parameter is designated .F., the sender information is
+     generated automatically.  The default value is .F..
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server through which the
+     message is sent.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETSNDGRP() returns the number of workstations to which the message
+     &lt;cMessage&gt; was successfully sent.  The function returns 0 if no member
+     of &lt;cName&gt; is currently logged in or ready to receive messages..
+
+ <B>Description</B>
+
+     NOVELL NET SEND GROUP
+     NNETSNDGRP() allows you to send a message of up to 55 characters to all
+     the users of a group.  The function can be compared with the Novell
+     utility SEND.  The group &lt;cName&gt; must exist either on the default server
+     or on the server specified by &lt;cServer&gt;|&lt;nConId&gt; because the sending of
+     messages is processed through a file server.  The message is sent to all
+     workstations on which a member of &lt;cName&gt; is logged in and the message
+     receipt is not disabled (castoff).  The message is displayed on line 24
+     of the screen and must be confirmed with &lt;Ctrl&gt;&lt;Return&gt;.  The message
+     system of CA-Clipper Tools (NNETMSGOPN()) allows the interrupt
+     controlled receipt of messages in the background.  The incoming messages
+     can be processed within the application and the computer is not
+     interrupted in critical moments.
+
+     If the parameter &lt;lNoSender&gt; is set to .F. or if no parameter is set,
+     the message contains information about the sender.   This information
+     consists of the word "from", the name of the sender, and the connection
+     ID.  By passing &lt;lNoSender&gt; with .T., the sender inforation can be
+     suppressed.  With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the message can
+     be sent on any attached file server.  The connection ID of a server is
+     returned by NNETATTACH() or NNETLOGIN().
+
+ <B>Example</B>
+
+     Send a message to all members of the group TOOLS:
+
+     nNumber= NNETSNDGRP('TOOLS','Data backup in 5 minutes!')
+     ? 'Message has been sent to '+NTOC(nNumber)+' stations!'
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3b698.html">NNETMSGOPN()</A>
+<A HREF="ng3c9df.html">NNETSNDALL()</A>
+<A HREF="ng3d3e6.html">NNETSNDCON()</A>
+<A HREF="ng3e858.html">NNETSNDLOG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

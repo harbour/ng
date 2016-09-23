@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Picture Codes</B>
+------------------------------------------------------------------------------
+
+ <B>Say Picture Functions</B>
+-------------------------------------------------------------------------------
+ B  Display numbers left-justified    | X  Display DB after negative numbers
+ C  Display CR after positive numbers | Z  Display zeros as blanks
+ D  Display date in SET DATE format   | (  Enclose negative numbers in parens
+ E  Display date in British format    | !  Convert alpha characters to upper
+ R  Insert non-template characters    |
+-------------------------------------------------------------------------------
+
+ <B>Say Picture Template Symbols</B>
+-------------------------------------------------------------------------------
+ A  Display digits for any data type  | !  Convert alpha character to upper
+ N   "                                | $  Display dollar sign instead of
+ X   "                                |    leading space in a numeric
+ 9   "                                | *  Display asterisk instead of
+ #   "                                |    leading space in a numeric
+ L  Display logicals as "T" or "F"    | .  Specify a decimal point position
+ Y  Display logicals as "Y" or "N"    | ,  Specify a comma position
+--------------------------------------------------------------------------------
+
+<B> Get Picture Functions</B>
+--------------------------------------------------------------------------------
+ A     C     Allow only alpha characters
+ B     N     Display numbers left-justified
+ C     N     Display CR after positive numbers
+ D     D,N   Display dates in SET DATE format
+ E     D,N   Display dates with day and month inverted
+             independent of the current DATE SETting,
+             numerics with comma and period reverse
+ K     All   Delete default text if first key is not a cursor key
+ R     C     Insert non-template characters in the display but do not
+             save in the Get variable
+ S&lt;n&gt;  C     Allows horizontal scrolling within a Get.  &lt;n&gt; is an integer
+             that specifies the width of the region
+ X     N     Display DB after negative numbers
+ Z     N     Display zero as blanks
+ (     N     Display negative numbers in parentheses with leading spaces
+ )     N     Display negative numbers in parentheses without leading spaces
+ !     C     Convert alphabetic character to upper case
+--------------------------------------------------------------------------------
+
+<B> Get Picture Template Symbols </B>
+--------------------------------------------------------------------------------
+ A    Allow only alphabetic characters
+ N    Allow only alphabetic and numeric characters
+ X    Allow any character
+ 9    Allow digits for any data type including sign for numerics
+ #    Allow digits, signs and spaces for any data type
+ L    Allow only T, F, Y or N
+ Y    Allow only Y or N
+ !    Convert alphabetic character to upper case
+ $    Display a dollar sign in place of a leading space in a numeric
+ *    Display an asterisk in place of a leading space in a numeric
+ .    Display a decimal point
+ ,    Display a comma
+--------------------------------------------------------------------------------
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

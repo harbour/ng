@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1df26.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng1ec28.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBCOMMITALL()</B>
+ Flush pending updates in all work areas
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBCOMMITALL() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DBCOMMITALL() always returns NIL.
+
+ <B>Description</B>
+
+     DBCOMMITALL() causes all pending updates to all work areas to be written
+     to disk.  It is equivalent to calling DBCOMMIT() for every occupied work
+     area.
+
+     For more information, refer to DBCOMMIT() and the COMMIT command.
+
+ <B>Notes</B>
+
+     <B>.</B>  DBCOMMITALL() uses DOS interrupt 21h function 68h to perform
+        the solid-disk write.  It is up to the network operating system to
+        properly implement this request.  Check with the network vendor to
+        see if this is supported.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example writes all pending updates to disk:
+
+        cLast := "Winston"
+        //
+        DBUSEAREA( .T., "DBFNTX", "Sales", "Sales", .T. )
+        DBSETINDEX( "SALEFNAM" )
+        DBSETINDEX( "SALELNAM" )
+        //
+
+        DBUSEAREA( .T., "DBFNTX", "Colls", "Colls", .T. )
+        DBSETINDEX( "COLLFNAM" )
+        DBSETINDEX( "COLLLNAM" )
+
+        DBSELECTAREA( "Sales" )      // select "Sales" work area
+
+        IF ( Sales-&gt;(DBSEEK(cLast)) )
+           IF Sales-&gt;( DELETED() ) .AND. Sales( RLOCK() )
+              Sales-&gt;( DBRECALL() )
+              ? "Deleted record has been recalled."
+           ENDIF
+        ELSE
+           ? "Not found"
+        ENDIF
+        //
+        // processing done, write updates to disk and close
+        DBCOMMITALL()
+        DBCLOSEALL()
+        QUIT
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc26c8.html">CLOSE</A>
+<A HREF="ngc2cd8.html">COMMIT</A>
+<A HREF="ng1d51e.html">DBCLOSEALL()</A>
+<A HREF="ng1df26.html">DBCOMMIT()</A>
+<A HREF="ng34c65.html">DBUNLOCK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

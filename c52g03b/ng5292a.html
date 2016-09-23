@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng52461.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng52cb2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>clearRel()</B>
+ Clear all relations in the current workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE clearRel(</B>
+     <B>                  WORKAREAP wa</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     Clears all relations currently in use by a specified workarea.
+
+ <B>Default Behavior</B>
+
+     clearRel() removes all relations from wa-&gt;relations.  clearRel() walks
+     the relation list and releases the memory used by each relation
+     structure (DBRELINFO) in wa-&gt;relations.  For each relation killed,
+     childEnd() is called to notify the child of its parent's abandonment.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If this method is replaced, be certain to properly deallocate
+        Items and memory used by DBRELINFO.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42845.html">DBRELINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng51ae4.html">childEnd()</A>
+<A HREF="ng53ef2.html">setRel()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

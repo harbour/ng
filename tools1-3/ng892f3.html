@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng88e4f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>VIDEOTYPE()</B>
+ Returns bit-coded information about available video modes
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>VIDEOTYPE() --&gt; nVideoBitMode</B>
+
+ <B>Returns</B>
+
+     VIDEOTYPE() returns a value that reveals the bit codes for available
+     video modes.
+
+ <B>Description</B>
+
+     This function returns bit-coded information about which video modes are
+     available.  If needed, you can set more bits.  A HERCULES adapter is
+     also a monochrome adapter; and a VGA card can emulate many different
+     modes.  The following codes are used:
+
+     <B>Table 6-6: Coding of Screen Modes</B>
+     ------------------------------------------------------------------------
+     <B>Bit     Definition</B>
+     ------------------------------------------------------------------------
+     1       Monochrome adapter
+     2       CGA adapter
+     3       HERCULES adapter
+     4       MCGA adapter
+     5       PGA adapter
+     6       EGA adapter
+     7       GA adapter
+     ------------------------------------------------------------------------
+
+     Since different cards imitate several modes, the following values are
+     usually returned:
+
+     <B>Table 6-7: Grouping of Screen Modes</B>
+     ------------------------------------------------------------------------
+     <B>Value   Symb. constants     Definition</B>
+     ------------------------------------------------------------------------
+     1       VCARD_MONOCHROME    Monochrome adapter
+     2       VCARD_CGA           CGA adapter
+     5       VCARD_HERCULES      HERCULES, also emulates monochrome
+     10      VCARD_MCGA          MCGA, also emulates CGA
+     19      VCARD_PGA           PGA, also emulates CGA and monochrome
+     55      VCARD_EGA           EGA, emulates all those previously
+                                 mentioned, except MCGA
+     127     VCARD_VGA           VGA, emulates all those previously mentioned
+     ------------------------------------------------------------------------
+
+ <B>Note</B>
+
+     <B>.</B>  The information presented here assumes absolute hardware
+        compatibility.
+
+ <B>Examples</B>
+
+     <B>.</B>  Is it a VGA card?
+
+        IF ISBIT(VIDEOTYPE(), 7)
+           *...
+        ENDIF
+
+     <B>.</B>  Is CGA mode available?
+
+        IF ISBIT(VIDEOTYPE(), 2)
+           *...
+        ENDIF
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngec06c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngecab0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBSETINDEX() function*</B>
+ Empty Orders from an Order Bag into the Order List
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     DBSETINDEX(<B>&lt;cOrderBagName&gt;</B>) --&gt; NIL
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrderBagName&gt;</B> is the name of a disk file containing one or more
+     Orders.  You may specify &lt;cOrderBagName&gt; as the filename with or without
+     the pathname or extension.  If you do not include the extension as part
+     of &lt;cOrderBagName&gt;, CA-Clipper uses the default extension of the current
+     RDD.
+
+ <B>Returns</B>
+
+     DBSETINDEX() always returns NIL.
+
+ <B>Description</B>
+
+     DBSETINDEX() is a database function that adds the contents of an Order
+     Bag into the Order List of the current work area.  Any Orders already
+     associated with the work area continue to be active.  If the newly
+     opened Order Bag is the only Order associated with the work area, it
+     becomes the controlling Order; otherwise, the controlling Order remains
+     unchanged.  If the Order Bag contains more than one Order, and there are
+     no other Orders associated with the work area, the first Order in the
+     new Order Bag becomes the controlling Order.
+
+     DBSETINDEX() is a compatibility command and therefore not recommended.
+     It is superseded by the ORDLISTADD() function.
+
+ <B>Examples</B>
+
+     USE Customer NEW
+     DBSETINDEX( "Cust01" )        // Open the index Cust01
+                                   // in the current work area
+     DBSETINDEX( "Cust02" )        // Open the index Cust02
+                                   // leaving Cust01 open
+
+ <B>Status:</B>  Enhanced
+
+ <B>See also:</B>  ORDLISTADD()
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf2f55.html">ORDLISTADD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,117 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng10d6f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng12129.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLOBDIRECTEXPORT()</B>
+ Export the contents of a binary large object (BLOB) pointer to a file
+------------------------------------------------------------------------------
+     <B>Note: </B> A BLOB file (.dbv or .fpt) is used for storing memo field
+     information as an alternative to the standard .dbt file mechanism
+     supported by some RDDs.  It is a more powerful and efficient mechanism
+     for storing and retrieving large amounts of data than using .dbt files.
+     CA-Clipper supplies the DBFCDX driver, which uses the BLOB file storage
+     mechanism by default, and the DBFMEMO driver, which you can use as a
+     driver with a named super RDD (see MEMOSETSUPER()).  Refer to the RDD
+     Features in the "Replaceable Database Driver Architecture" chapter of
+     the Drivers Guide for further information on using this
+     driver.BLOB:definitionBLOB:drivers supporting
+
+ <B>Syntax</B>
+
+     <B>BLOBDirectExport(&lt;nPointer&gt;, &lt;cTargetFile&gt;, [&lt;nMode&gt;])</B>
+     <B>   --&gt; lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nPointer&gt;</B> is a pointer to the BLOB data.  This pointer can be
+     obtained using BLOBDIRECTPUT(), BLOBDIRECTEXPORT(), or
+     DBFIELDINFO(DBS_BLOB_POINTER, &lt;nFieldPos&gt;).
+
+     <B>&lt;cTargetFile&gt;</B> is the name of the target file where the BLOB data
+     will be written, including an optional drive, directory, and extension.
+     See SETDEFAULT() and SETPATH() for file searching and creation rules.
+     No default extension is assumed.
+
+     If &lt;cTargetFile&gt; does not exist, it is created.  If it exists, this
+     function attempts to open the file in exclusive mode and, if successful,
+     the file is written to without warning or error.  If access is denied
+     because another process is using the file, for example, NETERR() is set
+     to true (.T.).  Concurrency control:and BLOBDIRECTEXPORT()
+
+     <B>&lt;nMode&gt;</B> is a constant defining the copy mode, as shown in the table
+     below:
+
+     <B>Copy Mode Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant                 Description</B>
+     ------------------------------------------------------------------------
+     BLOB_EXPORT_APPEND       Appends to the file
+     BLOB_EXPORT_OVERWRITE    Overwrites the file (this is the default)
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     BLOBDIRECTEXPORT() returns true (.T.) if successful; otherwise, it
+     returns false (.F.).
+
+ <B>Description</B>
+
+     By default, BLOBDIRECTEXPORT() operates on the currently selected work
+     area.  It can be made to operate on an unselected work area by
+     specifying it within an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example extracts an array of pointers from the BLOB
+        file's root area, then uses one of the pointers to export a picture
+        to a file:
+
+        FUNCTION PUTPIX()
+           LOCAL cPixFile
+           LOCAL nPointer
+           LOCAL aBLOBPtrs
+
+
+           cPixFile := "picture.gif"
+
+           // Customer database with a picture of
+           // each customer stored in a field called Pix
+           USE Customer NEW VIA "DBFCDX"
+
+           // Assumes that the program previously
+           // stored an array of direct BLOB pointers
+           // into the root area of the BLOB file.
+           // The picture that we want is assumed to
+           // be the second array element.
+           aBLOBPtrs := BLOBROOTGET()
+           nPointer := aBLOBPtrs[2]
+
+           // Export picture pointed to by nPointer to a file
+           IF !BLOBDirectExport(nPointer, cPixFile, ;
+              BLOB_EXPORT_OVERWRITE)
+                 Alert("Export of picture " + cPixFile + ";
+                    failed!")
+           ELSE
+              // Code for displaying picture would go here
+           ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng12b3a.html">BLOBDIRECTIMP()</A>
+<A HREF="ng1439e.html">BLOBEXPORT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

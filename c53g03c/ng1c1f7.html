@@ -1,0 +1,130 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1ba64.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng13657.html">[^^Up^^]</A>
+<A HREF="ng1cd05.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_itemPutCL()</B>
+ Place a character value into an item, ignoring null terminators
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "item.api"</B>
+     <B>ITEM _itemPutCL(</B>
+     <B>                 ITEM itmChar,</B>
+     <B>                 BYTEP fpChars,</B>
+     <B>                 USHORT uiLen</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>itmChar</B> is the item into which you want to place the string.  If
+     itmChar is NULL, _itemPutCL() will create a new item.
+
+     <B>fpChars</B> is the zero-terminated string to place into the item.
+
+     <B>uiLen</B> is the number of bytes to place into the item.
+
+ <B>Returns</B>
+
+     A new item reference containing the string passed.
+
+ <B>Description</B>
+
+     The _itemPutCL() function is used to associate any string with an item,
+     ignoring embedded nulls.  Any previous value in itmChar will be
+     destroyed.
+
+     The data located at fpChars is copied into a new space associated with
+     the item that is returned.  It is the programmer's responsibility to
+     free the allocation of fpChars in whatever manner it was allocated.
+
+     <B>Note: </B> _itemPutCL() must copy the intended string from your buffer
+     at fpChars.  If fpChars is unusually large, _itemPutCL() may cause a VM
+     failure due to insufficient real memory to accomplish a large copy.
+     Typically, this error would manifest itself as an internal error 5302.
+
+     <B>Caution! </B> Do not assume that the address in itmChar will be the
+     same address returned by _itemPutCL().
+
+ <B>Examples</B>
+
+     /*
+     *
+     * BootSector( [nDrive] ) -&gt; cBootSecBuff
+     *
+     * Read the boot sector from drive nDrive,
+     * if there is no drive specified, BootSector()
+     * reads drive A.
+     *
+     * (0=A, 1=B, 2=C, etc...)
+     *
+     * Warning: Does not check for errors.
+     *          Needs dos.h &amp; LLIBCA
+     */
+
+     CLIPPER BootSector( void )
+     {
+        ITEM   itmDriveN, itmBuff;
+        BYTEP  bufferP;
+        HANDLE vmBuffer;
+        USHORT uiDriveN = 0;            // Default: A
+        USHORT uiLen = 1024;
+
+        union  REGS  preCallRx, postCallRx;
+        struct SREGS theSegs;
+
+        if ( PCOUNT &gt; 0 )
+        {
+           itmDriveN = _itemParam( 1 );
+
+           if ( _itemType( itmDriveN ) | NUMERIC )
+              uiDriveN = (USHORT) _itemGetNL( itmDriveN );
+
+           _itemRelease( itmDriveN );
+        }
+
+        vmBuffer = _xvalloc( uiLen );
+        bufferP  = _xvlock( vmBuffer );
+
+        segread( &amp;theSegs );
+
+        theSegs.es     = FP_SEG( bufferP );
+        preCallRx.x.bx = FP_OFF( bufferP );
+        preCallRx.x.ax = 0x0201;            // BIOS 02 / 1 sector
+        preCallRx.x.cx = 1;                 // Track 0, Sector 1
+        preCallRx.x.dx = uiDriveN;          // Side 0, Drive uiDriveN
+
+        int86x( 0x13, &amp;preCallRx, &amp;postCallRx, &amp;theSegs );
+
+        if ( postCallRx.x.cflag )
+           ERRMSG( "\r\nERROR on read!" );
+
+        itmBuff = _itemPutCL( NULL, bufferP, uiLen );
+
+        _xvunlock( vmBuffer );
+        _xvfree( vmBuffer );
+
+        _itemRelease( _itemReturn( itmBuff ) );
+
+        return;
+     }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Item.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng186f9.html">_itemGetC()</A>
+<A HREF="ng1ba64.html">_itemPutC()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

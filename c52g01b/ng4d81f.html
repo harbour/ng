@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4cb68.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng4df99.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MEMOREAD()</B>
+ Return the contents of a disk file as a character string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MEMOREAD(&lt;cFile&gt;) --&gt; cString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFile&gt;</B> is the name of the file to read from disk.  It must include
+     an extension if there is one, and can optionally include a path.
+
+ <B>Returns</B>
+
+     MEMOREAD() returns the contents of a text file as a character string.
+     The maximum file size that can be read is 65,535 characters (64K)--the
+     maximum size of a character string.  If &lt;cFile&gt; cannot be found,
+     MEMOREAD() returns a null string ("").
+
+ <B>Description</B>
+
+     MEMOREAD() is a memo function that reads a disk file into memory where
+     it can be manipulated as a character string or assigned to a memo field.
+     MEMOREAD() is used with MEMOEDIT() and MEMOWRIT() to edit an imported
+     disk file then write it back to disk.  MEMOREAD() searches for &lt;cFile&gt;
+     beginning with the current DOS directory.  If the file is not found,
+     MEMOREAD() searches the DOS path.  MEMOREAD() does not use the
+     CA-Clipper DEFAULT or PATH to search for &lt;cFile&gt;.
+
+     In a network environment, MEMOREAD() attempts to open the specified file
+     shared and read-only.  If the file is opened exclusive by another
+     process, MEMOREAD() returns a null string ("").
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses MEMOREAD() to assign the contents of a text
+        file to the Notes memo field and to a character variable:
+
+        REPLACE Notes WITH MEMOREAD("Temp.txt")
+        cString = MEMOREAD("Temp.txt")
+
+     <B>.</B>  This example defines a function that edits a disk file:
+
+        FUNCTION Editor( cFile )
+           LOCAL cString
+           IF (cString := MEMOREAD(cFile)) == ""
+              ? "Error reading " + cFile
+              RETURN .F.
+           ELSE
+              MEMOWRIT(cFile, MEMOEDIT(cString))
+              RETURN .T.
+           ENDIF
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng47e75.html">MEMOEDIT()</A>
+<A HREF="ng4ecff.html">MEMOWRIT()</A>
+<A HREF="ng94bb4.html">REPLACE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

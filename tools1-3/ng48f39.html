@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng483b0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng49307.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHARREM()</B>
+ Removes particular characters from a string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CHARREM(&lt;cDelCharacterstring&gt;,&lt;cString&gt;) --&gt; cString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDelCharacterstring&gt;</B>  Designates the characters that are removed
+     from &lt;cString&gt;.
+
+     <B>&lt;cString&gt;</B>  Designates the string that is processed.
+
+ <B>Returns</B>
+
+     The processed &lt;cString&gt; is returned.
+
+ <B>Description</B>
+
+     With this function you can remove particular characters from any
+     position in &lt;cString&gt;.  It is possible to ensure that the character
+     string does not contain these characters later.
+
+ <B>Note</B>
+
+     <B>.</B>  No changes occur if you pass invalid or incorrect parameters.
+
+ <B>Examples</B>
+
+     <B>.</B>  Remove the blanks from a string:
+
+        ? CHARREM(" ", " 1  2   ")     // "12"
+
+     <B>.</B>  Remove the number "3" and the letter "y":
+
+        ? CHARREM("3y", "xyz123")      // "xz12"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng46d97.html">CHARONLY()</A>
+<A HREF="ng46771.html">CHARONE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

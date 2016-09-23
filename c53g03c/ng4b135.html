@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4aa2c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4b4dd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>goTop()</B>
+ Position cursor at the first logical identity (record)
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE goTop(</B>
+     <B>                  AREAP wa</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     goTop() repositions the work area cursor for wa to the first logical data item.
+     This method emulates the CA-Clipper GOTO TOP command.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  When positioning to the first logical data item, goTop()
+        should respect any active scopes or filters.
+
+     <B>.</B>  If an order is attached to your implementation of work area,
+        you must use the top data item based on the correct row order and
+        respect any scoping or filtering.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4a677.html">goBottom()</A>
+<A HREF="ng4a086.html">go()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,114 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng743cd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6dbf4.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>HiPer-SEEK Tips:</B>
+  <B>----------------</B>
+
+
+  <B>Indexing and Filtering:</B>
+
+  Application developers may get into trouble with HiPer-SEEK if they
+  forget that in order to produce an accurate HiPer-SEEK index, the records
+  of the primary .DBF that will be searched must be passed to hs_Add() in
+  their natural order. This means that when a HiPer-SEEK index is created
+  SET DELETED should be OFF and, assuming that there are active Clipper
+  indexes, that SET ORDER TO should be 0. Likewise, there should be no
+  active filter conditions when a HiPer-SEEK index is generated.
+
+  To work correctly HiPer-SEEK must create an index record for each record
+  in the primary database file. HiPer-SEEK does not store .DBF record
+  numbers, rather the values returned by hs_Add() and hs_Next() are derived
+  from the position of the index record in the index file.
+
+  Once the HiPer-SEEK index is completed, an application can restore
+  Clipper indexes, turn DELETED ON, and establish FILTERS.
+
+  With Clipper indexes restored, records can be appended to the primary
+  database and to the HiPer-SEEK index without trouble, because appended
+  records are always added to the end of the .DBF and the HiPer-SEEK index
+  file.  Consequently, the HiPer-SEEK index order will be maintained. Once
+  again, it is a good idea to always test the values returned by hs_Add()
+  against the current .DBF record number. A difference can indicate a
+  problem.
+
+
+  <B>Packing .DBFs:</B>
+
+  Whenever an application packs .DBF files, HiPer-SEEK indexes that
+  reference the packed .DBFs must be regenerated. Just as Clipper has to
+  regenerate its indexes to account for eliminated records, HiPer-SEEK must
+  do the same.  There must always be a one-to-one, top-to-bottom
+  relationship between the records in the primary .DBF and the records in
+  the HiPer-SEEK index.
+
+
+  <B>Reusing Records:</B>
+
+  Rather than delete records and pack .DBF files, some developers try to
+  save time and minimize maintenance by instituting a system by which they
+  mark the record in such a way that the .DBF's index moves the record
+  either to the end or the beginning of the file where it can be reclaimed
+  for future use.
+
+  Developers who use this technique should not have a problem with
+  HiPer-SEEK provided that they perform a hs_Replace() if their delete mark
+  involves the text that has been indexed and that they check against
+  accidentally verifying their deleted records during a search.
+
+
+  <B>Large Memos and Text Files:</B>
+
+  Among HiPer-SEEK's strengths is its ability to index and search
+  arbitrarily long sections of text. Anxious to exploit this capability,
+  some developers may use HiPer-SEEK to index large (4000 bytes+) memo
+  fields.  As implemented the library works as it should, but performance
+  can suffer due to an increased number of aliases (invalid hits) returned
+  by the HiPer-SEEK system.  Nevertheless, even in these conditions,
+  HiPer-SEEK performance remains superior to that of other searching
+  schemes.
+
+  If a developer is faced with this situation, the best advice, at least
+  for now, is to consider how these big blocks of text might be broken down
+  into smaller and more manageable chunks. For example, index on paragraphs
+  instead of pages or on whole documents. The user interface may be more of
+  a challenge to implement, but the payoff in ease-of-use will be well
+  worth the effort.  Anything that can be done to reduce the ratio of
+  source string length to index size will help; perhaps indexing on only
+  the first few thousand characters of each memo field, or creating
+  separate indexes for data fields and memo fields. Also, remember that the
+  more unique (usually longer) the search (target) string is, the fewer
+  aliases returned and the faster the search can be completed.
+
+
+  <B>Embedded CHR(0):</B>
+
+  Because HiPer-SEEK is written primarily in C and because its string
+  handling routines follow the C convention of treating ASCII 0 as the
+  end-of- string character, embedded CHR(0)s have undesirable affects on
+  the accuracy of HiPer-SEEK indexes.
+
+  If an application runs into this problem, the solution is to replace the
+  CHR(0)s with another character before passing the string to HiPer-SEEK
+  for indexing. Any character will do, though one above ASCII 127 is
+  recommended.  If the application needs to use the character in searches,
+  be sure to set the HiPer-SEEK filter to 2 when creating the index.
+  Because HiPer-SEEK filter 1 strips the eighth bit, the information
+  contained in these odd characters will be lost when the index record is
+  created.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

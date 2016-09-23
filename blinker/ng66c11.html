@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Linking for protected mode</B>
+------------------------------------------------------------------------------
+
+
+ <B>Overview</B>
+
+ When converting a program to protected mode or dual mode the modifications
+ to the link script file are minimal. Typically only two extra commands must
+ be added to the link file, one to specify that the program is to be DOS
+ extended and the other to include the Blinker library for the compiler being
+ used.
+
+ Simply adding the command BLINKER EXECUTABLE EXTENDED (BLI EXE EXT) causes
+ Blinker to create a DOS extended program. Similarly, adding the command
+ BLINKER EXECUTABLE DUAL (BLI EXE DUA) causes Blinker to create a dual mode
+ program.
+
+ When linking DOS extended or dual mode programs it is always necessary to
+ include an additional Blinker library for the appropriate compiler. This
+ library contains replacement .OBJs for any compiler library .OBJs which are
+ not protected mode compatible.
+
+ The Blinker libraries all have names of the form BLXcccnn, where ccc
+ indicates the vendor and compiler, and nn indicates the compiler version
+ number. They are all compiled as large model and so should only be used with
+ large model programs.
+
+ The appropriate compiler library must always be SEARCHed just before the
+ standard compiler library or the script file containing the compiler
+ library.
+
+ For example, with Microsoft Visual C++:
+
+    <B>SEARCH BLXMVC10      # Blinker library</B>
+    <B>LIB LLIBCE           # MSVC library</B>
+
+ or with CA-Clipper 5.2:
+
+    <B>SEARCH BLXCLP52      # Blinker library</B>
+    <B>LIB CLIPPER          # CA-Clipper library</B>
+
+ or:
+
+    <B>SEARCH BLXCLP52      # Blinker library</B>
+    <B>@CL520MID            # Script containing CA-Clipper library</B>
+
+ If the compiler library is not explicitly mentioned then place the SEARCH of
+ the Blinker library as the last library in the link file.
+
+ When using third-party libraries please ensure that they are protected mode
+ or dual mode compatible before attempting to use them in a DOS extended
+ program. Blinkinc cannot guarantee that any particular library is either
+ overlayable or protected mode compatible or both. Please refer to the file
+ 3RDPARTY.DOC for up-to-date details on compatibility issues which we are
+ aware of.
+
+ The third party libraries should typically be placed before the SEARCH of
+ the Blinker library unless otherwise documented in the third party product.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

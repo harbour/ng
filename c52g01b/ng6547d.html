@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng64ce8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng65ce8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETKEY()</B>
+ Assign an action block to a key
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETKEY(&lt;nInkeyCode&gt;, [&lt;bAction&gt;]) --&gt; bCurrentAction</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nInkeyCode&gt;</B> is the INKEY() value of the key to be associated or
+     queried.
+
+     <B>&lt;bAction&gt;</B> specifies a code block that is automatically executed
+     whenever the specified key is pressed during a wait state.
+
+ <B>Returns</B>
+
+     SETKEY() returns the action block currently associated with the
+     specified key, or NIL if the specified key is not currently associated
+     with a block.
+
+ <B>Description</B>
+
+     SETKEY() is a keyboard function that sets or queries the automatic
+     action associated with a particular key during a wait state.  A wait
+     state is any mode that extracts keys from the keyboard except for
+     INKEY(), but including ACHOICE(), DBEDIT(), MEMOEDIT(), ACCEPT, INPUT,
+     READ and WAIT.  Up to 32 keys may be assigned at any one time.  At
+     startup, the system automatically assigns the F1 key to execute a
+     procedure or user-defined function named Help.
+
+     When an assigned key is pressed during a wait state, the EVAL() function
+     evaluates the associated &lt;bAction&gt; and the parameters, PROCNAME(),
+     PROCLINE(), and READVAR().  It is, however, not necessary to list
+     arguments when specifying &lt;bAction&gt; if you do not plan to use them
+     within the action block.
+
+     SETKEY() is like the SET KEY command which associates a procedure
+     invocation with a key.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment associates an action block with a key,
+        then, after getting a key using INKEY(), executes it with the EVAL()
+        function:
+
+        #include "Inkey.ch"
+        SETKEY(K_DN, {|cProc, nLine, cVar| MyProc(cProc, ;
+                          nLine, cVar)})
+        .
+        . &lt;statements&gt;
+        .
+        DO WHILE .T.
+           nKey := INKEY(0)
+           DO CASE
+           CASE (bAction := SETKEY(nKey)) != NIL
+              EVAL(bAction, PROCNAME(), PROCLINE(), READVAR())
+           CASE nKey = K_PGUP
+              Previous()
+           CASE nKey = K_PGDN
+              Next()
+           CASE nKey = K_ESC
+              EXIT
+           ENDCASE
+        ENDDO
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header is Inkey.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng31d53.html">EVAL()</A>
+<A HREF="ng40fd0.html">INKEY()</A>
+<A HREF="nga5556.html">SET KEY</A>
+<A HREF="ngf8bf1.html">Inkey codes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

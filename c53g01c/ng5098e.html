@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5048e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng512fb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GETENV()</B>
+ Retrieve the contents of a DOS environment variable
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GETENV(&lt;cEnvironmentVariable&gt;) --&gt; cString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cEnvironmentVariable&gt;</B> is the name of the DOS environment variable.
+     When specifying this argument, you can use any combination of uppercase
+     and lowercase letters; GETENV() is not case-sensitive.
+
+ <B>Returns</B>
+
+     GETENV() returns the contents of the specified DOS environment variable
+     as a character string.  If the variable cannot be found, GETENV()
+     returns a null string ("").
+
+ <B>Description</B>
+
+     GETENV() is an environment function that lets you retrieve information
+     from the DOS environment into an application program.  Typically, this
+     is configuration information, including path names, that gives the
+     location of files (database, index, label, or reports).  This function
+     is particularly useful for network environments.
+
+ <B>Notes</B>
+
+     <B>.  Empty return value:</B> If you are certain that an environment
+        variable exists and yet GETENV() always returns a null string (""),
+        be sure there are no spaces between the environment variable name and
+        the first character of the string assigned to it in the DOS SET
+        command.
+
+     <B>.  Compatibility:</B> In previous releases of CA-Clipper, the
+        function was called GETE().  This abbreviated form of GETENV() is
+        still operational.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example retrieves the current DOS PATH setting, making it
+        the current CA-Clipper PATH:
+
+        cPath := GETENV("PATH")
+        SET PATH TO (cPath)
+
+     <B>.</B>  This example uses environment variables to configure the
+        specific locations of files.  When you set up a system, define
+        environment variables that contain the location of various file types
+        as well as the CLIPPER environment variable (see "The Runtime
+        Environment" chapter in the Programming and Utilities Guide), like
+        this:
+
+        C&gt;SET LOC_DBF=&lt;database file path&gt;
+        C&gt;SET LOC_NTX=&lt;index file path&gt;
+        C&gt;SET LOC_RPT=&lt;report file path&gt;
+
+        In the configuration section of your application program, assign the
+        contents of the environment variables to variables.  Then when you
+        access a file, preface the reference with the path variable as
+        follows:
+
+        cDdfDirectory := GETENV("LOC_DBF")
+        USE (cDdfDirectory + "Invoices")
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

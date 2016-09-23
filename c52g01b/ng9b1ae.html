@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9a6b6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng9b693.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET BELL</B>
+ Toggle automatic sounding of the bell during full-screen operations
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET BELL on | OFF | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> enables the BELL.
+
+     <B>OFF</B> disables the BELL.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET BELL is an environment command that toggles the sound of the bell.
+     If SET BELL is ON, the bell sounds in the following situations:
+
+     <B>.</B>  The user enters a character at the last position in a GET.
+
+     <B>.</B>  The user attempts to enter invalid data into a GET.  The data
+        is validated by the data type of the GET variable, the PICTURE
+        template, and by the RANGE clause.  Violating a VALID condition does
+        not sound the bell, regardless of the SET BELL status.
+
+     To sound the bell explicitly, you can use either ?? CHR(7) or the TONE()
+     function.  TONE() is perhaps more useful since you can vary both the
+     pitch and duration of the sound.
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng73148.html">@...GET</A>
+<A HREF="ng1295d.html">CHR()</A>
+<A HREF="ng9d2f4.html">SET CONFIRM</A>
+<A HREF="ng6a98e.html">TONE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

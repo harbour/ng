@@ -1,0 +1,98 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng29f22.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng2b2bb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DIRECTORY()</B>
+ Create an array of directory and file information
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DIRECTORY(&lt;cDirSpec&gt;, [&lt;cAttributes&gt;]) --&gt; aDirectory</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDirSpec&gt;</B> identifies the drive, directory and file specification
+     for the directory search.  Wildcards are allowed in the file
+     specification.  If &lt;cDirSpec&gt; is omitted, the default value is *.*.
+
+     <B>&lt;cAttributes&gt;</B> specifies inclusion of files with special attributes
+     in the returned information.  &lt;cAttributes&gt; is a string containing one
+     or more of the following characters:
+
+     <B>DIRECTORY() Attributes</B>
+     ------------------------------------------------------------------------
+     <B>Attribute    Meaning</B>
+     ------------------------------------------------------------------------
+     H            Include hidden files
+     S            Include system files
+     D            Include directories
+     V            Search for the DOS volume label and exclude all other files
+     ------------------------------------------------------------------------
+
+     Normal files are always included in the search, unless you specify V.
+
+ <B>Returns</B>
+
+     DIRECTORY() returns an array of subarrays, with each subarray containing
+     information about each file matching &lt;cDirSpec&gt;.  The subarray has the
+     following structure:
+
+     <B>DIRECTORY() Subarray Structure</B>
+     ------------------------------------------------------------------------
+     <B>Position     Metasymbol     Directry.ch</B>
+     ------------------------------------------------------------------------
+     1            cName          F_NAME
+     2            cSize          F_SIZE
+     3            dDate          F_DATE
+     4            cTime          F_TIME
+     5            cAttributes    F_ATT
+     ------------------------------------------------------------------------
+
+     If no files are found matching &lt;cDirSpec&gt; or if &lt;cDirSpec&gt; is an illegal
+     path or file specification, DIRECTORY() returns an empty ({}) array.
+
+ <B>Description</B>
+
+     DIRECTORY() is an environment function that returns information about
+     files in the current or specified directory.  It is similar to ADIR(),
+     but returns a single array instead of adding values to a series of
+     existing arrays passed by reference.
+
+     Use DIRECTORY() to perform actions on groups of files.  In combination
+     with AEVAL(), you can define a block that can be applied to all files
+     matching the specified &lt;cDirSpec&gt;.
+
+     The header file, Directry.ch, in \CLIPPER5\INCLUDE subdirectory contains
+     #defines for the subarray subscripts so references to each file subarray
+     is more readable.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates an array of information about files in
+        the current directory and then lists the names of the files using
+        AEVAL() and QOUT():
+
+        #include "Directry.ch"
+        //
+        aDirectory := DIRECTORY("*.*", "D")
+        AEVAL( aDirectory, {|aFile| QOUT(aFile[F_NAME])} )
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Directry.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng912c.html">AEVAL()</A>
+<A HREF="ng149d9.html">CURDIR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

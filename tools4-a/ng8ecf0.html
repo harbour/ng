@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8e251.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng8f101.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCRECCNT()</B>
+ Determines the number of characters in a communication receiving buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCRECCNT(&lt;nHandle&gt;) --&gt; nBytes</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication receiving buffer.
+
+ <B>Returns</B>
+
+     PPCRECCNT() returns the number of characters in the specified
+     communication receiving buffer.  If an error occurs (for example, if the
+     handle is invalid), the function returns -1.
+
+ <B>Description</B>
+
+     PPCRECCNT() determines the number of characters in the receiving buffer
+     of a specified communication buffer, independently of the protocol used
+     (IPX, SPX, NetBIOS datagram or NetBIOS session).  It allows you to check
+     to see if new data has been received since the most recent readout.
+
+ <B>Example</B>
+
+     Read the buffer if it contains characters:
+
+     nCharacter=PPCRECCNT(nHandle)
+     IF nCharacter&gt;0
+        cData=PPCREAD(nHandle)
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8e251.html">PPCREAD()</A>
+<A HREF="ng90e95.html">PPCSNDCNT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

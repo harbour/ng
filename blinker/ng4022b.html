@@ -1,0 +1,145 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng3dfc5.html">[^^Up^^]</A>
+<A HREF="ng41a66.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Error message overview</B>
+------------------------------------------------------------------------------
+
+ The following sections contain a complete list of the Blinker error messages
+ with a description of each error and reasons for their occurrence.
+
+ The errors are divided into the following classes:
+
+    .  10xx - Link time warning messages
+    .  11xx - Link time fatal messages
+    .  12xx - DOS real mode runtime messages
+    .  13xx - DOS protected mode runtime messages
+
+ <B>DOS Errorlevel</B>
+
+ Link time warning messages are for information only, and do not set the DOS
+ ERRORLEVEL, so the execution of Blinker and any MAKE utilities being used
+ will continue unaffected. These warning messages may be disabled altogether
+ using the BLINKER MESSAGE NOWARNING command.
+
+ Link time fatal messages and runtime messages, on the other hand, are of a
+ more serious nature. They cause immediate termination of program execution,
+ and set the DOS ERRORLEVEL to 1.
+
+ <B>Blinker's Error Handler</B>
+
+ At runtime when a program linked with Blinker encounters an error condition,
+ it passes an error number to the Blinker error handler module. This routine
+ supplies the text for the message which is to be displayed. The error
+ handler is automatically included by Blinker in the .EXE in the course of
+ linking.
+
+ The source for the Blinker error handler has been supplied on the Blinker
+ distribution diskette in a number of languages, so the text of the Blinker
+ error messages can be modified.
+
+ If you modify the Blinker error handler, you must then compile it and link
+ it as a FILE into the root of the program. If you do not modify it, there is
+ no need to compile it or include it in the link script. It will be
+ automatically included into the .EXE by Blinker.
+
+ Care should be taken when overlaying the error handler in the case of the
+ potential error 1201: "cannot find overlay file in the current path". This
+ can cause an endless loop when the Blinker overlay manager cannot find an
+ overlay file, tries to load the error handler, cannot find the overlay file
+ containing the Blinker error handler, and again tries to load the error
+ handler.
+
+ The developer may wish to handle this particular error in a different way to
+ avoid this problem, or may just ensure that the overlay file can be found,
+ e.g. by making it an internal overlay.
+
+ <B>Note for CA-Clipper:</B>
+
+ The error handler sets up the appropriate error message for the error number
+ returned by the function BLIERRNUM(), in some cases using the function
+ BLIERRPRM() to obtain the name of the offending item. In the case of
+ CA-Clipper Summer '87 it then calls MISC_ERROR with a procedure name of
+ BLINKER, a line number which is the error number, and the appropriate error
+ message. In the case of CA-Clipper 5.x it creates a new error object which
+ is passed as the argument to the CA-Clipper default error handler block.
+
+ <B>Approaches to Debugging</B>
+
+ Usually link time errors are well identified and the approach to their
+ resolution is given in the individual error message descriptions in the
+ following section. Some additional techniques for discerning link time
+ problems include using:
+
+    .  The VERBOSE link script command, to see what Blinker is doing when an
+       error occurs.
+    .  The MAP command, to see how an .EXE has been constructed.
+    .  The ECHO command, to output your own messages from within the link
+       script.
+    .  The command(s) BLINKER LINK EMS/XMS OFF, which disable the use of
+       non-conventional memory at link time.
+
+ Runtime error conditions which arise from the linking process can be more
+ difficult to diagnose and resolve.
+
+ The two most common link time mistakes which can lead to runtime errors are:
+ (1) overlaying something which should not be overlaid, and (2) including the
+ wrong module of two or more like-named modules. Both of these can lead to a
+ variety of runtime symptoms which include, but are not limited to,
+ corruption of variables or memory, inappropriate characters displayed to the
+ terminal, a memory manager exception, and system lockups.
+
+ When encountering any such problems which do not appear to be attributable
+ to the code itself or to other factors in the environment, the following
+ steps are suggested in analyzing the linker's role in the problem.
+
+ 1. Ensure that the program stack is sufficiently large using the STACK or
+ BLINKER PROCEDURE DEPTH commands.
+
+ 2. Verify that everything in the overlay area is reliably overlayable by (a)
+ checking Blinker's 3RDPARTY.DOC file, (b) checking the documentation for
+ each third party product for their recommended method for dynamic
+ overlaying, and (c) if the problem is reproducible, removing all suspected
+ files and libraries from the overlay area and testing the program after each
+ is systematically reinserted.
+
+ 3. Check for duplicate modules using the BLINKER MESSAGE DUPLICATES command.
+ See Chapter 9 for the definition of this command. Usually this situation can
+ be resolved by altering the order of the libraries and, if necessary, using
+ the MODULE FROM command.
+
+ 4. Test for non-conventional memory conflicts, using BLINKMEM.EXE, which is
+ included with Blinker, and disable Blinker's runtime use of nonconventional
+ memory either in the link script or via the BLINKER environment variable.
+
+ 5. Perform a worst-case test of Blinker's overlaying process by using the
+ MURPHY link-script command. For details on using this command, please see
+ the appropriate section in Chapter 5, 7 and 9.
+
+ 6. Attempt to isolate a small portion of the program which produces the
+ error.
+
+ 7. Attempt to test the program with another linker. If the problem does not
+ occur, retry Blinker with the same overlays and order of libraries as the
+ other linker.
+
+ 8. Contact Blinker technical support. The technical bulletin section on our
+ BBS and our FastFax retrieval system have our latest technical reports.
+ Please refer to these before sending a BBS message or calling our technical
+ support line. Also, review this manual for additional information,
+ particularly the details in Chapters 3, 4, 7, and 9. If you should call,
+ please have your Blinker serial number and link script files at hand.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

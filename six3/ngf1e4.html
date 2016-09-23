@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngecf2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ngf867.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_FiltDropRec():</B>
+
+  Purpose:  Drop a record from a filter.
+
+   Syntax:  m6_FiltDropRec( &lt;nHandle&gt;, &lt;nRecord&gt; )
+
+    Where:  &lt;nHandle&gt;     --  Is a handle to a previously allocated
+                              filter.
+
+            &lt;nRecord&gt;     --  Record to drop from the filter
+
+  Returns:  Logical value:  .T. means the operation was successful,  .F.
+            indicates it failed.  In the case of a .F. value call m6_Error()
+            to retrieve the reason for the error.
+
+     Note:  You do not need to own a filter to drop records from it.  What
+            you do need is a valid handle to the filter, which can be
+            obtained via m6_NewFilter() or m6_GetAreaFilter().
+
+            *Always free RYO filters that are no longer being used.*
+
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         //..............................................use customer file
+         USE Customer via "SIXCDX"
+
+         //..............................................create RYO filter
+         nHandle := m6_NewFilter()
+
+         //......................................add records to the filter
+         ? m6_FiltAddRec( nHandle,  5 )  // .T.
+         ? m6_FiltAddRec( nHandle, 10 )  // .T.
+
+         //..SET FILTER TO my RYO filter ( Note: System now owns the filter )
+         m6_SetAreaFilter( nHandle )
+
+         //...........Browse records, only records 5 and 10 will be visible
+         Browse()
+
+         //...................................Drop record 5 from the filter
+         ? <B>m6_FiltDropRec( nHandle, 5 )</B>  //  .T.
+
+         //..............................Now only record 10 will be visible
+         Browse()
+
+         //.Free filter via SET FILTER TO ( System will release the filter )
+         SET FILTER TO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngdc96.html">m6_FiltAddRec()</A>
+<A HREF="nge23b.html">m6_FiltChgRec()</A>
+<A HREF="ng159ed.html">m6_NewFilter()</A>
+<A HREF="ng13b9a.html">m6_GetAreaFilter()</A>
+<A HREF="ngce09.html">m6_Error()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

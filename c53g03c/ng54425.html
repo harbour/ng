@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng53cfb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng54aa4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>info()</B>
+ Retrieve information about the current driver
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE info(</B>
+     <B>               LPAREA wa,</B>
+     <B>               USHORT uiInfoType,</B>
+     <B>               ITEM itmInfo</B>
+     <B>             )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>uiInfoType</B> is a value that determines the type of information to be
+     provided.
+
+     <B>itmInfo</B> is a CA-Clipper item which contains the information that
+     corresponds to uiInfoType.
+
+ <B>Description</B>
+
+     info() obtains the information about the current work area.
+
+ <B>Default Behavior</B>
+
+     The info() method is used to implement the CA-Clipper DBINFO() function
+     and is called any time information about the work area is needed to
+     perform an operation.  It returns items of data in response to some
+     basic questions concerning the driver's functionality.  Those questions
+     are defined by the value passed in uiInfoType.  Some suggested values
+     for uiInfoType (constants with "DBI_" prefix) and their associated
+     meanings are provided in the header file Rdd.api.
+
+     <B>Warning!  itmInfo</B> must be a valid item.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If your implementation of info() cannot determine the return
+        value based on the value of uiInfoType, you should allow the work area
+        default implementation to attempt it by calling SUPER_INFO().
+
+     <B>.</B>  DBI_USER is a constant (defined in Rdd.api) that returns the
+        minimum value that third-party developers can use for defining new
+        uiInfoType parameters.  Values less than DBI_USER are reserved by
+        CA-Clipper.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng56941.html">sysName()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

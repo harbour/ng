@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng60702.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5ea96.html">[^^Up^^]</A>
+<A HREF="ng61033.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SIx Driver Memo Files:</B>
+
+  The SIx Driver's SIXCDX flavor uses <B>FoxPro-compatible memo files (.FPT's)</B>
+  for storing data for memo fields.  The SIx Driver's SIXNSX flavor uses a
+  different memo file format which uses an .SMT extension.  Both SIx Driver
+  memo file formats use a default block size of 64 bytes.  This block size
+  can be changed to any multiple of 16 from 16 to 1024 bytes.
+
+  SIx Driver memo files can be used to store any type of data.  While the
+  standard Clipper/dBASE III+ .DBT memo uses an end-of-file marker (ASCII 26)
+  to mark the end of a memo entry, .FPT and .SMT memo files store the length
+  of the entry.  This not only eliminates the problems normally encountered
+  with storing binary data in a memo field, but also speeds up memo field
+  access since the data doesn't have to be scanned to determine the length.
+
+  You can also store Clipper <B>arrays</B> (even multi-dimentional ones) in an
+  FPT/SMT memo field.  it's as easy as:
+
+     /*---( Assume TEST.DBF has a MEMO field called NOTES.SMT )---*/
+     <B>USE bogus VIA "SIXNSX"</B>
+     <B>aFiles := Directory()       // Store File Directory array to aFiles</B>
+     <B>? ValType( test-&gt;NOTES )    // Returns: "M"</B>
+     <B>test-&gt;NOTES := aFiles       // Store array in NOTES memo field</B>
+     <B>? ValType( test-&gt;NOTES )    // Returns: "A"</B>
+
+  And getting the array back out of the memo field is just as easy...
+
+     <B>aMyArray := test-&gt;NOTES     // POOF!!!  You've got it!</B>
+
+
+  The SIx Driver can optionally support normal <B>Clipper memo files (.DBT's)</B>
+  instead of .FPT's.  To enable .DBT support add <B>DBT.OBJ</B> as a file to your
+  link command or link script.  For example, using the SIXNSX flavor:
+
+    EXOSPACE FI myapp,myfuncs,sixnsx,<B>dbt LIB six3,clipper</B>
+
+  or
+
+    BLINKER FI myapp,myfuncs,sixnsx,<B>dbt LIB six3,clipper</B>
+
+  or
+
+    WL32 myapp myfuncs sixnsx <B>dbt,,, six3 clipper</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng76298.html">DBT.OBJ</A>
+<A HREF="ng854ea.html">How do I convert my .DBT's to .FPT/.SMT's?</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

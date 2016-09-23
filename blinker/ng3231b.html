@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng31c45.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng328ee.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosReallocHuge()              Resize extended memory block of up to 16 MB.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Resize an extended memory block of up to 16 MB.</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosReallocHuge( USHORT segcount,</B></U>
+            <B>USHORT lastsize, SEL selector);</B>
+
+ <U>segcount   <B>New count of full 64kb segments to allocate.</B></U>
+
+ <U>lastsize   <B>Size of last segment in bytes.</B></U>
+
+ <U>selector   <B>Selector originally returned by DosAllocHuge() when the memory</B></U>
+            <B>block was initially allocated.</B>
+
+ <U>Return   : <B>None</B></U>
+
+ DosReallocHuge() changes the size of a memory block originally allocated
+ with DosAllocHuge().
+
+ Huge blocks can never be resized to a size larger than (segmax+1) 64 Kb
+ blocks as specified in the original call to DosAllocHuge().
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main (void)</B>
+    <B>{</B>
+    <B>SEL         selector;</B>
+    <B>/* Allocate a 1MB block (16*64kb) */</B>
+    <B>/* allowing for expansion to 2MB (32*64kb) */</B>
+    <B>if (DosAllocHuge(16,0,&amp;selector,32,0) != 0)</B>
+    <B>   {</B>
+    <B>   printf("DosAllocHuge() failed\n");</B>
+    <B>   exit(255);</B>
+    <B>   }</B>
+    <B>/* Attempt to reallocate block to 1.5MB (24*64kb) */</B>
+    <B>if (DosReallocHuge(24,0,selector) != 0)</B>
+    <B>   {</B>
+    <B>   printf("DosReallocHuge() failed\n");</B>
+    <B>   exit(254);</B>
+    <B>   }</B>
+    <B>printf("Block successfully expanded to 1.5MB\n");</B>
+    <B>DosFreeSeg(selector);</B>
+    <B>}</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

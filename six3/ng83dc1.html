@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng83c46.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng84302.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>What does SUBINDEX do?:</B>
+
+  The SUBINDEX command is used to create sub-indexes.  Sub-indexes are
+  indexes that are built based upon another index, usually a conditional
+  index.  Instead of plowing through the entire database, a sub-index
+  includes only the records that are contained in the index upon which it
+  is based.  This adds up to substantial time savings when all you want is
+  to re-arrange the records in a conditional index.
+
+    <B>NOTE: Sub-indexes do NOT inherit the condition from the original index.</B>
+
+  A similar effect can be had when using the <B>USECURRENT</B> keyword with the
+  SORT command.  When used in this way only the records that are contained
+  in the current index are included in the sorted file.
+
+  For example, if you had an exiting conditional index (FOR STATE == "CA")
+  ordered by customer name (LAST), and you wanted to reorder it by CITY,
+  building a sub-index would be quicker than building a whole new conditional
+  index.
+
+   // If you had a database opened with the conditional CA_NAMES index active
+   <B>USE test VIA "SIXNSX</B>
+   <B>INDEX ON last TO ca_names FOR state=="CA"</B>
+
+   // This would be slower...
+   <B>INDEX ON city TO ca_cities FOR state=="CA"</B>
+
+   // Than this...
+   <B>SUBINDEX ON city TO ca_cities FOR state=="CA"</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng535ee.html">SUBINDEX</A>
+<A HREF="ng53177.html">SORT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

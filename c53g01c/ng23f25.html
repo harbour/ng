@@ -1,0 +1,139 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng20e4d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng2502e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBEVAL()</B>
+ Evaluate a code block for each record matching a scope and condition
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBEVAL(&lt;bBlock&gt;,</B>
+     <B>   [&lt;bForCondition&gt;],</B>
+     <B>   [&lt;bWhileCondition&gt;],</B>
+     <B>   [&lt;nNextRecords&gt;],</B>
+     <B>   [&lt;nRecord&gt;],</B>
+     <B>   [&lt;lRest&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;bBlock&gt;</B> is a code block to execute for each record processed.
+
+     <B>&lt;bForCondition&gt;</B> is an optional condition specified as a code block
+     that is evaluated for each record in the scope.  It provides the same
+     functionality as the FOR clause of record processing commands.
+
+     <B>&lt;bWhileCondition&gt;</B> is an optional condition specified as a code block
+     that is evaluated for each record from the current record until the
+     condition returns false (.F.).  It provides the same functionality as
+     the WHILE clause of record processing commands.
+
+     <B>&lt;nNextRecords&gt;</B> is an optional number that specifies the number of
+     records to process starting with the current record.  It is the same as
+     the NEXT clause.
+
+     <B>&lt;nRecord&gt;</B> is an optional record number to process.  If this argument
+     is specified, &lt;bBlock&gt; will be evaluated for the specified record.  This
+     argument is the same as the RECORD clause.
+
+     <B>&lt;lRest&gt;</B> is an optional logical value that determines whether the
+     scope of DBEVAL() is all records, or, starting with the current record,
+     all records to the end of file.  This argument corresponds to the REST
+     and ALL clauses of record processing commands.  If true (.T.) , the
+     scope is REST; otherwise, the scope is ALL records.  If &lt;lRest&gt; is not
+     specified the scope defaults to ALL.
+
+ <B>Returns</B>
+
+     DBEVAL() always returns NIL.
+
+ <B>Description</B>
+
+     DBEVAL() is a database function that evaluates a single block for each
+     record within the current work area that matches a specified scope
+     and/or condition.  On each iteration, DBEVAL() evaluates the specified
+     block.  All records within the scope or matching the condition are
+     processed until the end of file is reached.
+
+     By default, DBEVAL() operates on the currently selected work area.  It
+     will operate on an unselected work area if you specify it as part of an
+     aliased expression.
+
+     DBEVAL() is similar to AEVAL() which applies a block to each element in
+     an array.  Like AEVAL(), DBEVAL() can be used as a primitive for the
+     construction of user-defined commands that process database files.  In
+     fact, many of the standard CA-Clipper database processing commands are
+     created using DBEVAL().
+
+     Refer to the Code Blocks section in the "Basic Concepts" chapter of the
+     Programming and Utilities Guide for more information on the syntax and
+     theory of code blocks; and refer also to the Database System section in
+     the same chapter for information on record scoping and conditions.  Also
+     refer to the CA-Clipper standard header file, Std.ch, found in
+     \CLIP53\INCLUDE for examples of CA-Clipper database command definitions
+     that use DBEVAL().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses DBEVAL() to implement Count(), a user-
+        defined function that counts the number of records in a work area
+        matching a specified scope.  The scope is passed as an array to
+        Count().  To make the example more interesting, there is a user-
+        defined command to create the scope array, thereby allowing you to
+        specify the scope in a familiar form.  Additionally, there is a set
+        of manifest constants that define the attributes of the scope object.
+
+        // Scope command definition
+        #command CREATE SCOPE &lt;aScope&gt; [FOR &lt;for&gt;] ;
+           [WHILE &lt;while&gt;] [NEXT &lt;next&gt;] [RECORD &lt;rec&gt;] ;
+           [&lt;rest:REST&gt;] [ALL];
+        =&gt;;
+           &lt;aScope&gt; := { &lt;{for}&gt;, &lt;{while}&gt;, &lt;next&gt;, ;
+              &lt;rec&gt;, &lt;.rest.&gt; }
+        //
+
+        // Scope attribute constants
+        #define FOR_COND      1
+        #define WHILE_COND    2
+        #define NEXT_SCOPE    3
+        #define REC_SCOPE     4
+        #define REST_SCOPE    5
+        //
+        // Create a scope and count records using it
+        LOCAL mySet, myCount
+        USE Customer NEW
+        CREATE SCOPE mySet FOR Customer = "Smith" WHILE ;
+                  Zip &gt; "90000"
+        myCount := Count( mySet )
+        RETURN
+
+        FUNCTION Count( aScope )
+           LOCAL nCount := 0
+           DBEVAL( {|| nCount++},;
+              aScope[ FOR_COND ],;
+              aScope[ WHILE_COND ],;
+              aScope[ NEXT_SCOPE ],;
+              aScope[ REC_SCOPE ],;
+              aScope[ REST_SCOPE ];
+           )
+           RETURN nCount
+
+ <B>Files</B>   Library is CLIPPER.LIB
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9170.html">AEVAL()</A>
+<A HREF="ng418f5.html">EVAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

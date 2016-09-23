@@ -1,0 +1,102 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng47c93.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng4a0bf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>LIST:</B>
+
+  Syntax:
+
+  <B>LIST &lt;exp list&gt; [TO PRINTER] [TO FILE &lt;xcFile&gt;]</B>
+  <B>     [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;] </B>
+  <B>     [OFF] [NOOPTIMIZE]</B>
+
+  <B>&lt;exp list&gt;</B> is the list of expressions to be evaluated and displayed
+  for each record processed.
+
+  <B>TO PRINTER</B> echoes output to the printer.
+
+  <B>TO FILE &lt;xcFile&gt;</B> echoes output to the specified filename and can be
+  specified either as a literal filename or as a character expression
+  enclosed in parentheses.  If an extension is not specified, (.TXT) is
+  added.
+
+  <B>&lt;scope&gt;</B> is the portion of the current database file to LIST.  The default
+  is ALL records.  The scope must be ALL to be optimized by Mach SIx.
+
+  <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the condition from
+  the current record until the condition fails.  Mach SIx does not support the
+  WHILE condition.
+
+  <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to LIST within
+  the given scope.  Mach SIx will optimize any FOR condition that contains one
+  or more active index keys.
+
+  <B>OFF</B> suppresses the display of record numbers.
+
+  <B>NOOPTIMIZE</B>, preempts optimization and forces default Clipper processing.
+
+  <B>Description:</B>
+
+  LIST is a console command that sequentially accesses records in the
+  current work area, displaying the results of one or more expressions for
+  each record accessed.  The output is in tabular format with each column
+  separated by a space.  LIST is identical to DISPLAY with the exception that
+  its default scope is ALL rather than NEXT 1.
+
+  When invoked, output is sent to the screen and optionally to the printer
+  and/or a file.  To suppress output to the screen while printing or echoing
+  output to a file, SET CONSOLE OFF before the LIST invocation.
+
+  The LIST command may be optimized by specifying one or more active index
+  keys in the FOR condition.  Note that Mach SIx will only optimize a LIST
+  with a FOR condition and a scope of ALL.  WHILE conditions and alternate
+  scopes cannot be optimized by Mach SIx.
+
+  <B>Notes:</B>
+
+  <B>Interrupting LIST:</B>  The Clipper guide suggests using a test for INKEY() in
+  the FOR condition in order to interrupt LIST processing.  Because of the
+  way Mach SIx parses and evaluates the FOR condition this technique is not
+  recommended and might produce unexpected results.
+
+  <B>Printer margin:</B> LIST honors the current SET MARGIN for output echoed to
+  the printer.
+
+
+  <B>---------------------------------| EXAMPLE |--------------------------------</B>
+
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates optimized LIST command                                    *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX.CH"
+
+  USE Account VIA "SIXCDX"  // Structural index ACCOUNT.CDX opened
+                            // automatically
+  CLEAR SCREEN
+  ? "Example of optimized LIST command."
+  ?
+
+  // Fully optimized display of records for accounts in Florida
+  <B>LIST AcctNo, Last, First, Balance FOR State = "FL"</B>
+  CLOSE ALL
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng46fd4.html">DISPLAY</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

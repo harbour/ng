@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng67c35.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng68e99.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>STRTRAN()</B>
+ Search and replace characters within a character string or memo field
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>STRTRAN(&lt;cString&gt;, &lt;cSearch&gt;,</B>
+     <B>   [&lt;cReplace&gt;], [&lt;nStart&gt;], [&lt;nCount&gt;]) --&gt; cNewString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string or memo field to search.
+
+     <B>&lt;cSearch&gt;</B> is the sequence of characters to locate.
+
+     <B>&lt;cReplace&gt;</B> is the sequence of characters with which to replace
+     &lt;cSearch&gt;.  If this argument is not specified, the specified instances
+     of the search argument are replaced with a null string ("").
+
+     <B>&lt;nStart&gt;</B> is the first occurrence that will be replaced.  If this
+     argument is omitted, the default is one.
+
+     <B>&lt;nCount&gt;</B> is the number of occurrences to replace.  If this argument
+     is not specified, the default is all.
+
+ <B>Returns</B>
+
+     STRTRAN() returns a new character string with the specified instances of
+     &lt;cSearch&gt; replaced with &lt;cReplace&gt;.
+
+ <B>Description</B>
+
+     STRTRAN() is a character function that performs a standard substring
+     search within a character string.  When it finds a match, it replaces
+     the search string with the specified replacement string.  All instances
+     of &lt;cSearch&gt; are replaced unless &lt;nStart&gt; or &lt;nCount&gt; is specified.
+     Note that STRTRAN() replaces substrings and, therefore, does not account
+     for whole words.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses STRTRAN() to establish a postmodern analog
+        to a famous quotation:
+
+        cString:= "To compute, or not to compute?"
+        ? STRTRAN(cString, "compute", "be")
+        // Result: To be, or not to be?
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf688.html">AT()</A>
+<A HREF="ng3dee9.html">HARDCR()</A>
+<A HREF="ng4e55c.html">MEMOTRAN()</A>
+<A HREF="ng5876b.html">RAT()</A>
+<A HREF="ng68e99.html">STUFF()</A>
+<A HREF="ng69c3b.html">SUBSTR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

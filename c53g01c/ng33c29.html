@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng32e73.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng34415.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBSKIP()</B>
+ Move relative to the current record
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBSKIP([&lt;nRecords&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nRecords&gt;</B> is the number of logical records to move, relative to the
+     current record.  A positive value means to skip forward, and a negative
+     value means to skip backward.  If &lt;nRecords&gt; is omitted, a value of 1 is
+     assumed.
+
+ <B>Returns</B>
+
+     DBSKIP() always returns NIL.
+
+ <B>Description</B>
+
+     DBSKIP() moves either forward or backward relative to the current
+     record.  Attempting to skip forward beyond the last record positions the
+     work area to LASTREC() + 1 and EOF() returns true (.T.).  Attempting to
+     skip backward beyond the first record positions the work area to the
+     first record and BOF() returns true (.T.).
+
+     DBSKIP() performs the same function as the standard SKIP command.  For
+     more information, refer to the SKIP command.
+
+ <B>Notes</B>
+
+     <B>.  Logical records:</B> DBSKIP() operates on logical records.  If
+        there is an active index, records are considered in indexed order.
+        If a filter is set, only records which meet the filter condition are
+        considered.
+
+     <B>.  Controlling order:</B> If the work area has more than one active
+        index, the skip operation is performed using the controlling order as
+        set by DBSETORDER() or the SET ORDER command.  For more information,
+        refer to the SET ORDER command.
+
+     <B>.  Network environment:</B> For a shared file on a network, moving to
+        a different record may cause updates to the current record to become
+        visible to other processes.  For more information, refer to the
+        "Network Programming" chapter in the Programming and Utilities Guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates a typical use of the DBSKIP()
+        function:
+
+        DBGOTOP()
+
+        DO WHILE ( !EOF() )
+           ? FIELD-&gt;Name
+           DBSKIP()
+        ENDDO
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng17b80.html">BOF()</A>
+<A HREF="ng27c3e.html">DBGOBOTTOM()</A>
+<A HREF="ng289a1.html">DBGOTOP()</A>
+<A HREF="ng2ff8b.html">DBSEEK()</A>
+<A HREF="ng3f657.html">EOF()</A>
+<A HREF="ngf31ef.html">SKIP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

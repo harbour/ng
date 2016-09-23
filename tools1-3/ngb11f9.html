@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb0b40.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb0492.html">[^^Up^^]</A>
+<A HREF="ngb1c28.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CSETALL()</B>
+ Saves all ON/OFF switch settings
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CSETALL([&lt;cNewSwitchList&gt;]) --&gt; cOldSwitchList</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cNewSwitchList&gt;</B>  Designates in a specific format (shown in the
+     tables on the next page), which switches are to be on or off.
+
+ <B>Returns</B>
+
+     CSETALL() returns the current setting of all ON/OFF switches when no
+     parameter is specified.  When the parameter is specified, the function
+     returns the previous setting.
+
+ <B>Description</B>
+
+     This function allows you to query the current setting for all CA-Clipper
+     ON/OFF switches and change them.  Since you can save 21 different
+     switches, the function returns a 21-character string made with 0's and
+     1's, rather than logical values.  This function makes it easy to save
+     all the ON/OFF switches in a CA-Clipper error trap, and reset them when
+     you exit.  The following switches are contained in the character string
+     (in the order they occur in the returned string):
+
+     <B>Table 11-1: Clipper Switch Status</B>
+     ------------------------------------------------------------------------
+     <B>Byte    Function      Clipper Switch</B>
+     ------------------------------------------------------------------------
+     1       CSETALTE()     SET ALTERNATE
+     2       CSETBELL()     SET BELL
+     3       CSETCARR()     SET CARRY
+     4       CSETCENT()     SET CENTURY
+     5       CSETCONF()     SET CONFIRM
+     6       CSETCONS()     SET CONSOLE
+     7       CSETCURS()     SET CURSOR
+     8       CSETDELE()     SET DELETED
+     9       CSETDELI()     SET DELIMITERS
+     10      CSETDEVI()     SET DEVICE
+     11      CSETESCA()     SET ESCAPE
+     12      CSETEXAC()     SET EXACT
+     13      CSETEXCL()     SET EXCLUSIVE
+     14      CSETFIXE()     SET FIXED
+     ------------------------------------------------------------------------
+
+     <B>Table 11-2: Clipper Switch Status</B>
+     ------------------------------------------------------------------------
+     <B>Byte    Function       Clipper Switch</B>
+     ------------------------------------------------------------------------
+     15      READINSERT()   INSERT Mode
+     16      CSETINTE()     SET INTENSITY
+     17      CSETPRIN()     SET PRINT
+     18      CSETSCOR()     SET SCOREBOARD
+     19      CSETSOFT()     SET SOFTSEEK
+     20      CSETUNIQ()     SET UNIQUE
+     21      CSETWRAP()     SET WRAP
+     ------------------------------------------------------------------------
+
+ <B>Note</B>
+
+     <B>.</B>  If you specify an invalid parameter, the function returns a
+        null string and does not reset any switch.
+
+ <B>Example</B>
+
+     Display the current bell status:
+
+     cSwitches  :=  CSETALL()         // 010000000000000000000
+
+     IF SUBSTR(cSwitches, 2, 1) == "1"
+        ? " BELL is on!"
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb4f29.html">CSETxxxx()*</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd812.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ngeac0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ASIZE()</B>
+ Grow or shrink an array
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ASIZE(&lt;aTarget&gt;, &lt;nLength&gt;) --&gt; aTarget</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aTarget&gt;</B> is the array to grow or shrink.
+
+     <B>&lt;nLength&gt;</B> is the new size of the array.
+
+ <B>Returns</B>
+
+     ASIZE() returns a reference to the target array, &lt;aTarget&gt;.
+
+ <B>Description</B>
+
+     ASIZE() is an array function that changes the actual length of the
+     &lt;aTarget&gt; array.  The array is shortened or lengthened to match the
+     specified length.  If the array is shortened, elements at the end of the
+     array are lost.  If the array is lengthened, new elements are added to
+     the end of the array and assigned NIL.
+
+     ASIZE() is similar to AADD() which adds a single new element to the end
+     of an array and optionally assigns a new value at the same time.  Note
+     that ASIZE() is different from AINS() and ADEL(), which do not actually
+     change the array's length.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples demonstrate adding new elements and deleting
+        existing elements:
+
+        aArray := { 1 }          // Result: aArray is { 1 }
+        ASIZE(aArray, 3)         // Result: aArray is { 1, NIL, NIL }
+        ASIZE(aArray, 1)         // Result: aArray is { 1 }
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng392a.html">AADD()</A>
+<A HREF="ng7f92.html">ADEL()</A>
+<A HREF="nga78a.html">AFILL()</A>
+<A HREF="ngae9a.html">AINS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

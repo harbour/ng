@@ -1,0 +1,44 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1a73a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng19942.html">[^^Up^^]</A>
+<A HREF="ng1acb4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>ClipMore seems to be including DELETED records!  Why?</B>
+
+For performance reasons, cmFilter() always assumes that SET DELETED is OFF.
+In other words, ClipMore ignores the SET DELETED setting.
+
+Records that are deleted will be included in the Filter RecordList.  When
+the deleted record is actually read, it will then be determined that it is
+deleted and will drop out of the RecordList.
+
+This can result in some perplexing key counts.  Consider the following:
+
+    use demo
+    index on last to last
+    index on first to first
+    set index to last, first
+
+    cmfilter("last = 'Smith' .and. first = 'Amy'")
+    ? cmKeyCount()      &amp;&amp; returns 29 (which includes one deleted record)
+
+Then you do a TBrowse and the deleted record is read, it is eliminated from
+the RecordList, so cmKeyCount() goes to 28.
+
+To get around this, explicitly add ".and. !deleted()" to your condition.
+
+    cmfilter("&lt;condition&gt; .and. !deleted()")
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

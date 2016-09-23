@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng57b63.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng583c2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>compile()</B>
+ Compile a character expression
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE compile(</B>
+     <B>                 WORKAREAP wa,</B>
+     <B>                 BYTEP cExpr</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>cExpr</B> is the character expression to be compiled.
+
+ <B>Description</B>
+
+     Compiles a CA-Clipper expression passed as a character string into a
+     code block.
+
+ <B>Default Behavior</B>
+
+     The compile() macro compiles the character expression cExpr, a null-
+     terminated string.
+
+     The returned ERRCODE indicates success or failure.  An Item to the
+     resulting code block is placed in wa-&gt;result.
+
+     <B>Warning! </B> If the expression in cExpr is NULL or larger than the
+     legal limit for macro-compiled expressions (in the RDD system, this
+     limit is 256 characters), a runtime error is generated.
+
+     <B>Warning! </B> The wa-&gt;Item in result must be deallocated later.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  One common reason to subclass the compile() method is to save
+        the Item held in wa-&gt;result in case it is needed for some other
+        process.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

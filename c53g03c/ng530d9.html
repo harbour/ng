@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng52c65.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng533d0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>alias()</B>
+ Obtain the alias of the work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE alias(</B>
+     <B>                  AREAP wa,</B>
+     <B>                  BYTEP alias</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>alias</B> is a pointer to a buffer that is assigned the alias name.
+
+ <B>Description</B>
+
+     alias() provides the alias name of the work area.
+
+ <B>Default Behavior</B>
+
+     Places the name of the work area from wa-&gt;atomAlias into alias as a
+     null-terminated string.
+
+ <B>Implementation Notes</B>
+
+     <B>Warning!</B>  You must allocate at least 11 bytes to the character
+     buffer referenced by alias prior to calling this function.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng54de4.html">open()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

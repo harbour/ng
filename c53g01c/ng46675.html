@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng460ca.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng46c9b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FIELDPUT()</B>
+ Set the value of a field variable using the ordinal position of the field in
+ the database structure
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FIELDPUT(&lt;nField&gt;, &lt;expAssign&gt;) --&gt; ValueAssigned</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nField&gt;</B> is the ordinal position of the field in the current
+     database file.
+
+     <B>&lt;expAssign&gt;</B> is the value to assign to the given field.  The data
+     type of this expression must match the data type of the designated field
+     variable.
+
+ <B>Returns</B>
+
+     FIELDPUT() returns the value assigned to the designated field.  If
+     &lt;nField&gt; does not correspond to the position of any field in the current
+     database file, FIELDPUT() returns NIL.
+
+ <B>Description</B>
+
+     FIELDPUT() is a database function that assigns &lt;expAssign&gt; to the field
+     at ordinal position &lt;nField&gt; in the current work area.  This function
+     allows you to set the value of a field using its position within the
+     database file structure rather than its field name.  Within generic
+     database service functions this allows, among other things, the setting
+     of field values without use of the macro operator.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example compares FIELDPUT() to functionally equivalent
+        code that uses the macro operator to set the value of a field:
+
+        // Using macro operator
+        FName := FIELD(nField)           // Get field name
+        FIELD-&gt;&amp;FName := FVal            // Set field value
+        // Using FIELDPUT()
+        FIELDPUT(nField, FVal)           // Set field value
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng452cb.html">FIELDGET()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

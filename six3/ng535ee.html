@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng53177.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng53a59.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SUBINDEX:</B>
+
+  This command syntax is primarily the same as that for INDEX ON, behaving
+  as if you've used the the SUBINDEX keyword.  This command will use an
+  existing SCOPE / FILTER condition or index order when creating a new index.
+
+    <U>NOTE:  In prior releases of the SIx Driver, a FILTER condition was</U>
+    <U>       respected when creating a new index.  This behavior can now</U>
+    <U>       only be achieved if you use the</U> <B>FILTERON</B> <U>keyword.</U>
+
+  Examples:
+
+     USE TEST VIA "SIXCDX"            // Open DBF
+     SET INDEX TO STATE               // Select Index (IDX)
+     SET SCOPE TO "CA"                // Look at just "CA"
+     <B>SUBINDEX ON test-&gt;LAST TO temp</B>   // Create subindex
+
+   <U>Or:</U>
+
+     USE TEST VIA "SIXCDX"                     // Open DBF
+     SET FILTER TO STATE == "CA"               // Look at just "CA"
+     <B>SUBINDEX ON test-&gt;LAST TO temp FILTERON</B>   // Create subindex
+
+
+  <B>CAUTION:</B> Do NOT attempt to create a new index or tag of the same name
+  as the current index or tag.  For example, this must never happen:
+
+     <B>USE datafile</B>
+     <B>SET INDEX TO myindex</B>
+     <B>SUBINDEX ON field1 TO myindex</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng47c93.html">INDEX</A>
+<A HREF="ng18534.html">OrdCondSet()</A>
+<A HREF="ng19728.html">OrdCreate()</A>
+<A HREF="ng661af.html">Sub-Indexes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

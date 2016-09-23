@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9e528.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng9f30f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETMODE()</B>
+ Change display mode to a specified number of rows and columns
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETMODE(&lt;nRows&gt;, &lt;nCols&gt;) --&gt; lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nRows&gt;</B> is the number of rows in the desired display mode.
+
+     <B>&lt;nCols&gt;</B> is the number of columns in the desired display mode.
+
+ <B>Returns</B>
+
+     SETMODE() returns true (.T.) if the mode change was successful;
+     otherwise, it returns false (.F.).
+
+ <B>Description</B>
+
+     SETMODE() is an environment function that attempts to change the mode of
+     the display hardware to match the number of rows and columns specified.
+     The change in screen size is reflected in the values returned by
+     MAXROW() and MAXCOL().
+
+     <B>Note:</B>  In LLG_VIDEO_TXT mode, and when a VESA driver is present, it
+     is possible to use the following values :
+     25,80 | 43,80 | 50,80 | 60,80 | 25,132 | 43,132 | 50,132 | 60,132
+
+ <B>Examples</B>
+
+     <B>.</B>  This example switches to a 43-line display mode:
+
+        IF SETMODE(43, 80)
+           ? "43-line mode successfully set"
+        ELSE
+           ? "43-line mode not available"
+        ENDIF
+
+     <B>.</B>  This example switches the video mode to regular text mode with
+        60 rows and 132 columns:
+
+        // Switch to text mode
+        SET VIDEOMODE( LLG_VIDEO_TXT )
+        // Set the video mode to the largest number of characters
+        SETMODE( 60,132 )
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf2963.html">SET VIDEOMODE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

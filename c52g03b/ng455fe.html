@@ -1,0 +1,169 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng44a18.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4635a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>WORKAREA</B>
+ Information to administrate the workarea
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct _WORKAREA_</B>
+     <B>{</B>
+     <B>   struct _DBFUNCTABLE_ far * ftable;</B>
+     <B></B>
+     <B>   USHORT area;</B>
+     <B>   FARP   alias;</B>
+     <B></B>
+     <B>   USHORT fieldExtent;</B>
+     <B>   USHORT fieldCount;</B>
+     <B>   FIELDP fields;</B>
+     <B></B>
+     <B>   ITEM result;</B>
+     <B></B>
+     <B>   BOOL top;</B>
+     <B>   BOOL bottom;</B>
+     <B>   BOOL bof;</B>
+     <B>   BOOL eof;</B>
+     <B>   BOOL found;</B>
+     <B></B>
+     <B>   DBSCOPEINFO  locate;</B>
+     <B>   DBFILTERINFO filter;</B>
+     <B></B>
+     <B>   DBRELINFOP relations;</B>
+     <B>   USHORT     parents;</B>
+     <B></B>
+     <B>   HANDLE heap;</B>
+     <B>   USHORT heapSize;</B>
+     <B></B>
+     <B>   USHORT rddID;</B>
+     <B></B>
+     <B>} WORKAREA;</B>
+     <B></B>
+     <B>typedef WORKAREA far * WORKAREAP;</B>
+
+ <B>Elements</B>
+
+     <B>ftable</B>
+
+        Contains a pointer to the virtual method table for this workarea (see
+        DBFUNCTABLE).
+
+     <B>area</B>
+
+        Contains a numeric value representing the number assigned to this
+        workarea.  This number is analogous to the value returned by the
+        CA-Clipper SELECT() function.
+
+     <B>alias</B>
+
+        Contains a character data type value representing the CA-Clipper
+        ALIAS of the workarea.
+
+     <B>fieldExtent</B>
+
+        Contains a numeric value specifying the total number of columns
+        allocated for the workarea.  Columns are allocated by a call to
+        setFieldExtent().
+
+     <B>fieldCount</B>
+
+        Contains a numeric value specifying the total number of columns
+        currently in use by the workarea.  fieldCount is incremented with
+        each call to addField().
+
+     <B>fields</B>
+
+        Contains a pointer to an array of FIELD items.  fields defines all
+        the fields used by this workarea including type, length, and name
+        (see FIELD).
+
+     <B>result</B>
+
+        Contains an Item that is used on occasion by the CA-Clipper runtime
+        system and may be used by the RDD developer as an all purpose result
+        holder for an operation.
+
+     <B>top</B>
+
+        Contains a boolean value that is set to TRUE if the record pointer is
+        on the first logical record.
+
+     <B>bottom</B>
+
+        Contains a boolean value that is set to TRUE if the record pointer is
+        on the last logical record.
+
+     <B>bof</B>
+
+        Contains a boolean value that is set to TRUE if logical beginning-of-
+        file is reached.
+
+     <B>eof</B>
+
+        Contains a boolean value that is set to TRUE if logical end-of-file
+        is reached.
+
+     <B>found</B>
+
+        Contains a boolean value that is set to TRUE when a seek() operation
+        successfully locates a key value.
+
+     <B>locate</B>
+
+        Contains a data structure specifying the scoping condition used by
+        the CA-Clipper LOCATE command (see DBSCOPEINFO).
+
+     <B>filter</B>
+
+        Contains a data structure specifying the filter condition to use for
+        the workarea (see DBFILTERINFO).
+
+     <B>relations</B>
+
+        Contains information about relations currently in use by the workarea
+        (see DBRELINFO).
+
+     <B>parents</B>
+
+        Contains a numeric value specifying the number of parent workareas
+        currently in effect for this workarea.
+
+     <B>heap</B>
+
+        Contains a virtual memory handle that can be used by the RDD
+        developer to allocate a VM heap and make use of the VM heap
+        suballocation routines available through the Virtual Memory API.
+
+     <B>heapSize</B>
+
+        Contains a numeric value indicating the size of the heap, above.
+
+     <B>rddID</B>
+
+        Reserved.
+
+     <B>Note: </B> In addition to being used by the data structures indicated
+     below, the WORKAREA structure is used by all methods in the RDD API.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   DBRELINFO, DBTRANSINFO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42845.html">DBRELINFO</A>
+<A HREF="ng44010.html">DBTRANSINFO</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

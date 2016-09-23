@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng212d5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng228fd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETLOGOUT()</B>
+ Log out a user of one or all file servers
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETLOGOUT(&lt;cServer&gt;|&lt;nConId&gt;|&lt;lAll&gt;,[&lt;lConnect&gt;])</B>
+     <B>    --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which a user is
+     logged out.
+
+     <B>&lt;nConId&gt;</B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+     <B>&lt;lAll&gt;</B>  Allows a log out from all file servers if designated .T..
+
+     <B>&lt;lAttach&gt;</B>  Designates whether or not the file server remains
+     attached.  If a user logs out on a file server, the workstation and the
+     server are detached.  If the parameter &lt;lAttach&gt; is designated .T., the
+     workstation remains attached to &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETLOGOUT() returns .T. if the log out has been successful.  If an
+     error occurs (for example if the server name or the connection ID are
+     invalid), the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET LOGOUT
+     NNETLOGOUT() allows you to log out a user on one or all file servers.
+
+     To log out on a server, the server can be specified either by its name
+     or its connection ID.  The connection ID of a server is returned by
+     NNETATTACH() or NNETLOGIN().  To log out a user on all servers, the
+     parameter &lt;lAll&gt; must be designated .T..
+
+     Usually if you log out on a file server, the workstation connection is
+     terminated (detached).  However ,if you want to remain attached to the
+     related file server, you can pass the parameter &lt;lAttach&gt; with .T..
+
+     To be able to perform a successful log in, at least one file server must
+     be attached.  Therefore, when you use the function NNETLOGOUT(), the
+     default server always remains attached and is independent of the
+     parameter &lt;lAttach&gt;.
+
+     NNETLOGOUT() can also be used to terminate a connection between a
+     workstation and a file server (detach) when no user is logged in.
+
+     <B>Important!</B>  When you call NNETLOGOUT(), all drive mappings for the
+     specified server or all servers are terminated.  Files on related server
+     volumes cannot be accessed, which can lead to data loss.  Before you use
+     NNETLOGOUT(), make sure that all files on the network drives have been
+     closed properly.
+
+ <B>Note</B>
+
+     <B>.</B>  The server name &lt;cServer&gt; must be passed in uppercase letters.
+
+ <B>Examples</B>
+
+     <B>.</B>  Close all databases, and then log out on all file servers:
+
+        CLOSE DATABASES
+        NNETLOGOUT(.T.)
+
+     <B>.</B>  After you call NNETLOGOUT(), the default server is still
+        attached.
+
+     <B>.</B>  Log out on server NANGERTOOLS2:
+
+        NNETLOGOUT('NANGERTOOLS2')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng212d5.html">NNETLOGIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

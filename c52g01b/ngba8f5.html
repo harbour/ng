@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngba014.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb4a83.html">[^^Up^^]</A>
+<A HREF="ngbb2ff.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FIELD</B>
+ Declare database field names
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FIELD &lt;idField list&gt; [IN &lt;idAlias&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idField list&gt;</B> is a list of names to declare as fields to the
+     compiler.
+
+     <B>IN &lt;idAlias&gt;</B> specifies an alias to assume when there are unaliased
+     references to the names specified in the &lt;idField list&gt;.  Unaliased
+     references to variables in &lt;idField list&gt; are treated as if they are
+     preceded by the special field alias (FIELD-&gt;).
+
+ <B>Description</B>
+
+     The FIELD statement declares the names of database fields to the
+     compiler, and optionally supplies an implicit alias for each name.  This
+     allows the compiler to resolve references to variables with no explicit
+     alias--by implicitly assuming the specified &lt;idAlias&gt;.  Only explicit,
+     unaliased references to the specified fields in the &lt;idField list&gt; are
+     affected.  The FIELD statement, like all declarations, has no effect on
+     references made within macro expressions or variables.
+
+     The FIELD statement neither opens a database file nor verifies the
+     existence of the specified fields.  It is useful primarily to ensure
+     correct references to fields whose accessibility is known at runtime.
+     Attempting to access the fields when the associated database is not in
+     USE will cause an error.
+
+     The scope of the FIELD declaration is the procedure or function in which
+     it occurs, or the entire program (.prg) file if the declaration precedes
+     all PROCEDURE or FUNCTION declarations and the /N compiler option is
+     specified.
+
+     FIELD statements like other declarations must precede any executable
+     statements in the procedure or function definition, or the program
+     (.prg) file if the declaration has filewide scope.
+
+     FIELD used with the /W compiler option performs compile-time checking
+     for undeclared variables.
+
+     For more information on variable declarations and scoping, refer to the
+     Variables section in the Basic Concepts chapter of the Programming and
+     Utilities guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This user-defined function includes statements to declare
+        database field names in both the current and Employee work areas:
+
+        FUNCTION DisplayRecord
+           FIELD CustNo, OrderNo, Salesman
+           FIELD EmpName, EmpCode IN Employee
+           USE Employee NEW
+           USE Orders NEW
+           //
+           ? CustNo             // Refers to Orders-&gt;CustNo
+           ? EmpName            // Refers to Employee-&gt;EmpName
+           //
+           CLOSE Orders
+           CLOSE Employee
+           RETURN NIL
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbbed3.html">FUNCTION</A>
+<A HREF="ngbfbea.html">LOCAL</A>
+<A HREF="ngc101e.html">MEMVAR</A>
+<A HREF="ngc34a3.html">PROCEDURE</A>
+<A HREF="ngc78ff.html">STATIC</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

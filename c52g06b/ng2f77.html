@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Sample Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2e2d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1b6.html">[^^Up^^]</A>
+<A HREF="ng3614.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Fileio.prg</B>
+ Binary file manipulation
+--------------------------------------------------------------------------------
+
+     <B>FGets( &lt;nHandle&gt;, &lt;nLines&gt;, &lt;nLineLength&gt;, &lt;cDelimiter&gt; ) --&gt; cBuffer</B>
+
+     Read one or more lines from a text file.
+
+     <B>FPuts( &lt;nHandle&gt;, &lt;cString&gt;, &lt;nLength&gt; ) --&gt; nBytes</B>
+
+     Write a line to a text file.
+
+     <B>DirEval( &lt;cMask&gt;, &lt;bAction&gt; ) --&gt; aArray</B>
+
+     Apply a code block to each file matching a skeleton.
+
+     <B>FileTop( &lt;nHandle&gt; ) --&gt; nPos</B>
+
+     Position the file pointer to the first byte in a binary file and return
+     the new file position (i.e., 0).
+
+     <B>FileBottom( &lt;nHandle&gt; ) --&gt; nPos</B>
+
+     Position the file pointer to the last byte in a binary file and return
+     the new file position.
+
+     <B>FilePos( &lt;nHandle&gt; ) --&gt; nPos</B>
+
+     Report the current position of the file pointer in a binary file.
+
+     <B>FileSize( &lt;nHandle&gt; ) --&gt; nBytes</B>
+
+     Return the size of a binary file.
+
+     <B>FReadLn( &lt;nHandle&gt;, [&lt;nLines&gt;], [&lt;nLineLength&gt;],</B>
+        <B>[&lt;cDelimiter&gt;] ) --&gt; cBuffer</B>
+
+     Read one or more lines from a text file.
+
+     <B>FileEval( &lt;nHandle&gt;, [&lt;nLineLength&gt;], [&lt;cDelim&gt;], &lt;bBlock&gt;,</B>
+        <B>[&lt;bForCondition&gt;], [&lt;bWhileCondition&gt;],</B>
+        <B>[&lt;nNextLines&gt;], [&lt;nLine&gt;], [&lt;lRest&gt;] ) --&gt; NIL</B>
+
+     Apply a code block to lines in a binary file using DBEVAL() as a model.
+     If the intent is to modify the file, the output must be written to a
+     temporary file and copied over the original when done.
+
+     <B>FEof( &lt;nHandle&gt; ) --&gt; lBoundary</B>
+
+     Determine if the current file pointer position is the last byte in the
+     file.
+
+     <B>FWriteLn( &lt;nHandle&gt;, &lt;cString&gt;, &lt;nLength&gt; ) --&gt; nBytes</B>
+
+     Write a line to a text file at the current file pointer position. Check
+     FERROR() for the error.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

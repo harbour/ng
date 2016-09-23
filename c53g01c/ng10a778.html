@@ -1,0 +1,227 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng10989f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngfbcd2.html">[^^Up^^]</A>
+<A HREF="ng10cb5c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PROCEDURE</B>
+ Declare a procedure name and formal parameters
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>[STATIC] PROCEDURE &lt;idProcedure&gt; [(&lt;idParam list&gt;)]</B>
+     <B>   [FIELD &lt;idField list&gt; [IN &lt;idAlias&gt;]</B>
+     <B>   [LOCAL &lt;identifier&gt; [[:= &lt;initializer&gt;], ... ]]</B>
+     <B>   [MEMVAR &lt;identifier list&gt;]</B>
+     <B>   [STATIC &lt;identifier&gt; [[:= &lt;initializer&gt;], ... ]]</B>
+     <B>   .</B>
+     <B>   . &lt;executable statements&gt;</B>
+     <B>   .</B>
+     <B>   [RETURN]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idProcedure&gt;</B> is the name of the procedure to be declared.
+     Procedure names can be any length, but only the first 10 characters are
+     significant.  Names can contain any combination of characters, numbers,
+     or underscores, but leading underscores are reserved.
+
+     <B>&lt;idParam list&gt;</B> is the declaration of one or more parameter
+     variables.  Variables specified in this list are declared local.
+
+     <B>STATIC PROCEDURE</B> declares a procedure that can be called only by
+     procedures and user-defined functions declared in the same program
+     (.prg) file.
+
+     <B>FIELD</B> declares a list of identifiers, &lt;idField list&gt;, to use as
+     field names whenever encountered.  If the IN clause is specified,
+     referring to the declared name, &lt;idAlias&gt; is a reference to the
+     appropriate work area of the specified database.
+
+     <B>LOCAL</B> declares and optionally initializes a list of variables or
+     arrays whose visibility and lifetime is the current procedure.
+
+     <B>&lt;identifier&gt;, &lt;identifier list&gt;</B> is a label or labels used as
+     variable or array names.  If the &lt;identifier&gt; is followed by square
+     brackets ([ ]), it is created as an array.  If the &lt;identifier&gt; is an
+     array, the syntax for specifying the number of elements for each
+     dimension can be array[&lt;nElements&gt;, &lt;nElements2&gt;,...] or
+     array[&lt;nElements&gt;][&lt;nElements2&gt;]...  The maximum number of elements per
+     dimension is 4096.  The maximum number of dimensions per array is
+     limited only by available memory.
+
+     <B>&lt;initializer&gt;</B> is the value to which an optional inline assignment
+     sets the &lt;identifier&gt; variable--essentially, the assignment operator,
+     (:=) --followed by any valid CA-Clipper expression, including a literal
+     array.  If no &lt;initializer&gt; is specified, variables are initialized to
+     NIL.  In the case of arrays, all element are initialized to NIL.
+
+     <B>MEMVAR</B> declares a list of identifiers, &lt;identifier list&gt;, to use as
+     private or public memory variables or arrays whenever encountered.
+
+     <B>STATIC</B> declares and, optionally, initializes a list of variables or
+     arrays whose visibility is the current procedure and whose lifetime is
+     the duration of the program.
+
+     <B>RETURN</B> passes control back to the calling procedure or user-defined
+     function.  If a RETURN is not specified, control passes back to the
+     calling routine when the procedure definitions ends.  In all cases, the
+     compiler terminates the procedure definition when it encounters another
+     PROCEDURE statement, FUNCTION statement, or end of file character.
+
+ <B>Description</B>
+
+     The PROCEDURE statement declares a procedure and an optional list of
+     local variables to receive parameters passed from a calling routine.  A
+     procedure is a subprogram comprised of a set of declarations and
+     statements executed whenever you refer to &lt;idProcedure&gt;, followed by an
+     open and close parentheses pair or with the DO statement.  A procedure
+     definition begins with a PROCEDURE statement and ends with the next
+     PROCEDURE statement, FUNCTION statement, or end of file.
+
+     Procedures that encapsulate computational blocks of code provide
+     readability and modularity, isolate change, and help manage complexity.
+
+     A procedure in CA-Clipper is the same as a user-defined function, with
+     the exception that it always returns NIL.  Each procedure must begin
+     with a PROCEDURE statement and may, optionally, contain a RETURN
+     statement to return control to the calling procedure or user-defined
+     function.  A RETURN statement, however, is not required.  Procedure
+     declarations cannot be nested within other procedure definitions.
+
+     The visibility of procedure names falls into two classes.  Procedures
+     that are visible anywhere in a program are referred to as public
+     procedures and declared with a PROCEDURE statement.  Procedures that are
+     visible only within the current program (.prg) file are referred to as
+     static procedures and declared with a STATIC PROCEDURE statement.
+     Static procedures have filewide scope.
+
+     Static procedures are quite useful for a number of reasons.  First, they
+     limit visibility of a procedure name thereby restricting access to the
+     procedure.  Because of this, subsystems defined within a single program
+     (.prg) file can provide an access protocol with a series of public
+     procedures and conceal the implementation details of the subsystem
+     within static procedures and functions.  Second, since the static
+     procedure references are resolved at compile time, they preempt
+     references to public procedures and functions which are resolved at link
+     time.  This ensures that, within a program file, a reference to a static
+     procedure executes that procedure if there is a name conflict with a
+     public procedure or function.
+
+     For more information on procedures, variable declarations, and parameter
+     passing, refer to the "Basic Concepts" chapter in the Programming and
+     Utilities Guide.
+
+ <B>Notes</B>
+
+     <B>.  Calling a procedure: </B> There are two ways to call a procedure
+        in CA-Clipper.  The first and preferred way is the function-calling
+        convention.  Here you call the procedure as you would a CA-Clipper
+        function on a line by itself:
+
+        &lt;idProcedure&gt;([&lt;argument list&gt;])
+
+        The second and obsolete way is the command-calling convention using
+        the DO...WITH command.  The two methods of calling procedures differ
+        only in the default method of passing parameters.  The function-
+        calling convention passes variables by value as a default, whereas
+        the command-calling convention passes them by reference as a default.
+
+        A procedure can also be called as an aliased expression if it is
+        prefaced with an alias and invoked using the function-calling
+        convention, like this:
+
+        &lt;idAlias&gt; -&gt;(&lt;idProcedure&gt;(&lt;argument list&gt;))
+
+        When called as an aliased expression, the work area associated with
+        &lt;idAlias&gt; is selected, the procedure is executed, and then the
+        original work area is reselected.  Like an expression or function, an
+        aliased procedure can be specified on a line by itself.
+
+        A procedure in CA-Clipper may call itself recursively.  This means
+        you can call a procedure in the same procedure definition.
+
+     <B>.  Parameters: </B> Procedures like user-defined functions can
+        receive parameters passed from a calling procedure, user-defined
+        function, or the DOS command line.  A parameter is a place for a
+        value or reference.  In CA-Clipper there are two ways to receive
+        parameters:  a list of local variable names can be declared as a part
+        of the PROCEDURE declaration (referred to as formal parameters), or a
+        list of private variables can be specified in a separate PARAMETERS
+        statement.  Note that you cannot mix a declaration of formal
+        parameters with a PARAMETERS statement.  Attempting this will cause a
+        fatal compiler error.
+
+        Procedures receive parameters in the order passed.  In CA-Clipper the
+        number of parameters need not match the number of arguments passed.
+        Arguments can be skipped or left off the end of the argument list.  A
+        parameter not receiving a value or reference is initialized to NIL.
+        If arguments are specified, PCOUNT() returns the position of the last
+        argument passed.
+
+        Parameters specified in a procedure can receive arguments passed by
+        value or by reference.  The default method for expressions and
+        variables depends on the calling convention.  With the
+        function-calling convention, the default passing method for
+        expressions and variables is by value.  This includes variables
+        containing references to arrays and objects.  With the command-
+        calling convention, the default method for passing variables is by
+        reference except for field variables, which are always passed by
+        value.  Whenever a field variable is passed, it must be specified
+        enclosed in parentheses unless declared with the FIELD statement.
+        Failure to do so will generate a runtime error.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows a skeleton of a typical CA-Clipper
+        procedure that uses lexical variables:
+
+        PROCEDURE Skeleton( cName, cClassRoom, nBones, ;
+                                nJoints )
+           LOCAL nCrossBones, aOnHand := {"skull", ;
+                                         "metacarpals"}
+           STATIC nCounter := 0
+           .
+           . &lt;executable statements&gt;
+           .
+           RETURN
+
+     <B>.</B>  This example determines whether an argument was skipped by
+        comparing the parameter to NIL:
+
+        PROCEDURE MyProc( param1, param2, param3 )
+           IF param2 != NIL
+              param2 := "default value"
+           ENDIF
+           .
+           . &lt;statements&gt;
+           .
+           RETURN
+
+     <B>.</B>  This example invokes the procedure, UpdateAmount(), as an
+        aliased expression:
+
+        USE Invoices NEW
+        USE Customer NEW
+        Invoices-&gt;(UpdateAmount(Amount + Amount * nInterest))
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng10316b.html">FUNCTION</A>
+<A HREF="ng106eaa.html">LOCAL</A>
+<A HREF="ng108d37.html">PARAMETERS</A>
+<A HREF="ng8d555.html">PCOUNT()</A>
+<A HREF="ng10e2d2.html">RETURN</A>
+<A HREF="ng10ec05.html">STATIC</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

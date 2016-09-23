@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2efd0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2980a.html">[^^Up^^]</A>
+<A HREF="ng30341.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_fsRead()</B>
+ Read a file
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "filesys.api"</B>
+     <B>USHORT _fsRead(</B>
+     <B>                     FHANDLE hFileHandle,</B>
+     <B>                     BYTEP fpBuff,</B>
+     <B>                     USHORT uiCount</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>hFileHandle</B> is a valid DOS reference to the file to be read.
+
+     <B>fpBuff</B> is a pointer to an allocated memory buffer.
+
+     <B>uiCount</B> is the number of bytes to be read from the file.
+
+ <B>Returns</B>
+
+     _fsRead() returns the number of bytes read from the file.
+
+ <B>Description</B>
+
+     _fsRead() reads characters from the file specified by hFileHandle into
+     the buffer area specified by fpBuff.  It reads from the file starting at
+     the current DOS file pointer position, advancing the file pointer by the
+     number of bytes read.  If the return value is not equal to the uiCount
+     specified, use _fsError() to determine the nature of the read error.
+
+     This function is equivalent to the CA-Clipper FREAD() function.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following code fragment illustrates the use of _fsRead().
+        Note that error handling should be performed at each step.  Refer to
+        the "Error System API Reference" chapter of this guide for details on
+        communicating with the CA-Clipper Error system:
+
+        #include "filesys.api"
+
+        FHANDLE hFile;
+        BYTEP fpBuff[15];
+
+        hFile = _fsOpen( "Foo", FO_READWRITE | FO_EXCLUSIVE );
+
+        // Check for an open error before using the file
+        if (! _fsError() )
+        {
+           // Seek to EOF
+           _fsSeek( hFile, 0, FS_END );
+
+           _fsRead( hFile, fpBuff, 15 );
+
+           _fsClose( hFile );
+        }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Filesys.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2a328.html">_fsClose()</A>
+<A HREF="ng2abaa.html">_fsCreate()</A>
+<A HREF="ng2bee3.html">_fsError()</A>
+<A HREF="ng2efd0.html">_fsOpen()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

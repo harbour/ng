@@ -1,0 +1,108 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3195.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="ng4725.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETADDSET()</B>
+ Adds a bindery object to a set property
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETADDSET(&lt;cObjName&gt;,[&lt;nType&gt;],&lt;cPropName&gt;,&lt;cMember&gt;,</B>
+     <B>   [&lt;cMemberType&gt;],[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cObjName&gt; </B> Designates the name of the bindery object that is
+     processed.
+
+     <B>&lt;nType&gt; </B> Designates a numeric value that indicates the type of
+     &lt;cObjName&gt;.  The header file CTNNET.CH contains symbolic constants for
+     the object types defined by Novell for use with the bindery functions of
+     CA-Clipper Tools.  The default value indicates the object type OBJ_USER.
+
+     <B>&lt;cPropName&gt; </B> Designates the name of the set property of &lt;cObjName&gt;.
+
+     <B>&lt;cMember&gt; </B> Designates the name of the bindery object that is stored
+     in the property &lt;cPropName&gt; of the bindery object &lt;cObjName&gt;.
+
+     <B>&lt;cMemberType&gt; </B> Designates a numeric value that indicates the type of
+     &lt;cMember&gt;.  The default value indicates the object type OBJ_USER.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server that contains the
+     bindery that is accessed.  Your workstation must be attached to
+     &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETADDSET() returns .T. if the bindery object has been added
+     successfully.  If an error occurs, the Novell error code can be queried
+     with the NNETERROR() function.
+
+ <B>Description</B>
+
+     <B>Important!</B>  NNETADDSET() is a low level bindery function and should
+     be used only with extensive knowledge of the bindery concept and the
+     Novell API.
+
+     NOVELL NET ADD BINDERY OBJECT TO SET
+     Internally, Novell Netware differentiates between two possible property
+     types: item and set property.  The function NNETADDSET() allows the
+     storage of information to a set property.  Set properties contain a list
+     of references to other bindery objects.  For example, the GROUP_MEMBERS
+     property contains a list of users that are members of a user group.
+
+     The parameters &lt;cObjName&gt; and &lt;nType&gt; describe the object that is
+     processed.  &lt;cPropName&gt; is the name of the property.  The property must
+     have been created before (for example, with the NNETCRTPRP() function).
+     &lt;cMember&gt; and &lt;cMemberType&gt; specify the bindery object that is added to
+     &lt;cPropName&gt;.  By passing the parameters &lt;cServer&gt; or &lt;nConId&gt;, it is
+     possible to access the bindery of any connected file server.  The
+     connection ID of a server can be determined with the functions
+     NNETATTACH() or NNETLOGIN().
+
+     Prerequisites for a successful call of NNETADDSET() are sufficient
+     bindery and property access rights.  The necessary property access
+     rights depend on the property security of the property that is
+     manipulated.  For efficiency reasons, user defined object types must be
+     passed in the high-low format.
+
+ <B>Examples</B>
+
+     <B>.</B>  Add user MIKE to the MARKET group :
+
+        #include "ctnnet.ch"
+
+        IF NNETADDSET('MARKET',OBJ_GROUP,'GROUP_MEMBERS','MIKE')
+        ? 'User added successfully!'
+        ELSE
+        ? 'No user added!'
+        ENDIF
+
+     <B>.</B>  To add a user to a group, it is also necessary to add the
+        group to two user properties.  Use NNETADDGRP() when adding a user to
+        a group.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng13625.html">NNETADDGRP()</A>
+<A HREF="ng6abb.html">NNETCRTPRP()</A>
+<A HREF="ng8961.html">NNETDELSET()</A>
+<A HREF="ng1161d.html">NNETWRTITM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

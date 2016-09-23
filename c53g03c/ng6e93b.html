@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6e5b2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6d7d4.html">[^^Up^^]</A>
+<A HREF="ng6ec3b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ExoIsPM()</B>
+ Determines if the CPU is running in protected mode
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>int ExoIsPM(void)</B>
+
+ <B>Returns</B>
+
+     This function returns nonzero (true (.T.)) if the CPU is executing in
+     protected mode, otherwise it returns 0.
+
+ <B>Description</B>
+
+     Use this function to determine whether the processor is running in
+     protected mode.
+
+ <B>Examples</B>
+
+     This program fragment prints a message telling whether or not the CPU is
+     in protected mode.
+
+     If (ExoIsPM())
+       printf("cpu is in protected mode");
+     else
+       printf("cpu not in protected mode");
+
+ <B>Files</B>   Library is EXOSPACE.LIB, header file is Exospace.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6e243.html">ExoIsDPMI()</A>
+<A HREF="ng6e5b2.html">ExoIsExoSpace()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

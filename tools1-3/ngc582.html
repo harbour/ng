@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbd41.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4610.html">[^^Up^^]</A>
+<A HREF="ngcd91.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>WROW()</B>
+ Returns the position of the top row of the active window
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>WROW([&lt;lAfterWCENTER&gt;]) --&gt; nRow</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lAfterWCENTER&gt;</B>  Designates an optional parameter.  If this
+     parameter is .T., the function returns what the postion of the top row
+     of a window would be after a call of WCENTER().  (This function does not
+     call WCENTER().)  The default value (.F.) returns the current position.
+
+ <B>Returns</B>
+
+     WROW() returns the row of the currently selected window, relative to the
+     physical screen.
+
+ <B>Description</B>
+
+     WROW() determines the current position of the top row of the currently
+     selected window.  This allows you to save a window position for a window
+     that was moved previously using the cursor keys or WMOVE().  You can
+     later reopen the window at exactly this position.
+
+     If you used invalid parameters with WMOVE() to move a window, WROW()
+     lets you determine the current window position.  WROW() is particularly
+     helpful since WMOVE() automatically adapts to the invalid parameters.
+     WROW() can also be helpful after you use the WCENTER() function.  The
+     new coordinates can be determined using WROW() and WCOL().
+
+     Additionally, with the specification of the optional parameter, you can
+     determine the position of a window after a call of WCENTER() without
+     actually calling WCENTER().
+
+ <B>Note</B>
+
+     <B>.</B>  The value returned can be negative.  If so, the first row is
+        outside of the visible area.
+
+ <B>Example</B>
+
+     This program can determine the position of the window at all times:
+
+     nTop   :=  10
+     nLeft   :=  15
+     WOPEN(nTop, nLeft, nTop + 10, nLeft +40)
+
+        * Someone moved the window!
+
+     nTop    :=  WROW()                 // Save the current position
+     nLeft   := WCOL()                  // of the upper left corner
+     WCLOSE()                           // Close the window
+
+        * Other program sections
+
+     WOPEN(nTop, nLeft, nTop + 10, nLeft + 40)   // Open with old
+                                                 // values
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbd41.html">WOPEN()</A>
+<A HREF="ngcd91.html">WSELECT()</A>
+<A HREF="ng7d00.html">WCOL()</A>
+<A HREF="ngb0a0.html">WMODE()</A>
+<A HREF="nga66d.html">WLASTCOL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

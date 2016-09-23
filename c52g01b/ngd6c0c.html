@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd6694.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngc8ba2.html">[^^Up^^]</A>
+<A HREF="ngd71c5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>&gt;=</B>
+ Greater than or equal--binary                   (Relational)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>&lt;exp1&gt; &gt;= &lt;exp2&gt;</B>
+
+ <B>Type</B>
+
+     Character, date, logical, memo, numeric
+
+ <B>Operands</B>
+
+     <B>&lt;exp1&gt;</B> and <B>&lt;exp2&gt;</B> are expressions of any data type to be
+     compared.
+
+ <B>Description</B>
+
+     The &gt;= (greater than or equal to) is a binary operator that compares two
+     values of the same data type and returns true (.T.) if &lt;exp1&gt; is greater
+     than or equal to &lt;exp2&gt;.
+
+     <B>.  Character:</B> The comparison is based on the underlying ASCII
+        code.  ASCII codes for alphabetic characters are ascending (e.g., the
+        code for "A" is 65 and the code for "Z" is 90).
+
+     <B>.  Date:</B> Dates are compared according to the underlying date
+        value.
+
+     <B>.  Logical:</B> True (.T.) is greater than false (.F.).
+
+     <B>.  Memo:</B> Treated the same as character.
+
+     <B>.  Numeric:</B> Compared based on magnitude.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate how the greater than or equal
+        operator (&gt;=) behaves with different data types:
+
+        // Character
+        ? "Z" &gt;= "A"             // Result: .T.
+        ? "ZA" &gt;= "A"            // Result: .T.
+        ? "Z" &gt;= "AZ"            // Result: .T.
+
+        // Date
+        ? CTOD("12/12/88") &gt;= ;
+           CTOD("12/11/88")      // Result: .T.
+
+
+        // Logical
+        ? .T. &gt;= .F.             // Result: .T.
+
+        // Numeric
+        ? 2 &gt;= 1                 // Result: .T.
+        ? 1 &gt;= 2                 // Result: .F.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc9157.html">$</A>
+<A HREF="ngd2827.html"><</A>
+<A HREF="ngd2d97.html"><=</A>
+<A HREF="ngd334a.html"><></A>
+<A HREF="ngd5481.html">= (equality)</A>
+<A HREF="ngd5de0.html">==</A>
+<A HREF="ngd6694.html">></A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

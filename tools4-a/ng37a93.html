@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng369a3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng38118.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETUSRFRE()</B>
+ Determines the server disk space still available to a user
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETUSRFRE([&lt;cUser&gt;]) --&gt; nByte</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cUser&gt;</B>  Designates the object name, which must be of the type,
+     user.  The default value designates the logged in user.
+
+ <B>Returns</B>
+
+     NNETUSRFRE() returns the disk space that an object (user) can still
+     occupy on the default server.
+
+ <B>Description</B>
+
+     NOVELL NET USER'S FREE SPACE
+     Available free disk capacity on the file server can be limited relative
+     to an object in newer Novell versions; for example, user JIM can only
+     occupy 10 MB.  With NNETUSRFRE(), you can determine how much disk
+     capacity an individual user still has available.  If the &lt;cUser&gt;
+     parameter is not specified, the function returns the space available for
+     the login name.
+
+ <B>Notes</B>
+
+     <B>.</B>  Console privileges are required in order to determine this
+        information for other users; however, the user's own free capacity
+        can be determined without additional rights.
+
+     <B>.</B>  The value returned for free available space does not guarantee
+        that it is actually available on the file server hard disk.  This can
+        be done using NNETVOLFRE().
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine your individual disk space still available:
+
+        ? NNETUSRFRE()
+
+     <B>.</B>  Determine the free capacity for user JIM.  This function
+        requires console privileges at least:
+
+        IF NNETCOPRIV()
+           ? NNETUSRFRE("JIM")      // e.g. 2000 kB
+        ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng14651.html">NNETCOPRIV()</A>
+<A HREF="ng1b9d6.html">NNETSPRVSR()</A>
+<A HREF="ng38118.html">NNETVOLFRE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

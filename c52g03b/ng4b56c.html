@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4b0b9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4ba36.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>goCold()</B>
+ Perform write to data store of workarea memory
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE goCold(</B>
+     <B>                WORKAREAP wa</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     Forces the RDD to ensure that any data contained in memory matches that
+     stored in the data store (usually a disk).
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  The concept of hot and cold refers to the current state of
+        information in memory as it relates to information on disk.  If the
+        information in memory, has changed since last written to disk, it is
+        considered hot.  A cold workarea's memory is in sync with its disk-
+        based counterpart.
+
+        In any implementation of goCold(), you should determine whether the
+        buffer holding the current cursor's data has been written to.  If so,
+        it is hot and must be turned cold by flushing or writing it to disk.
+
+     <B>.</B>  wa should remain cold until it is marked hot by goHot().
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng49445.html">append()</A>
+<A HREF="ng4a8b4.html">flush()</A>
+<A HREF="ng4ba36.html">goHot()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,130 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4c93a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng4dc21.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GBMPDISP()</B>
+ Display a bitmap (.BMP) file on screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GBMPDISP(&lt;aBmpArray&gt; | &lt;cFile&gt;, &lt;nX&gt;, &lt;nY&gt;, [&lt;nTransColor&gt;]</B>
+     <B>   --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aBmpArray&gt;</B> defines the pointer created with GBMPLOAD().
+
+     -OR-
+
+     <B>&lt;cFile&gt;</B> defines the .BMP file to be displayed.
+
+     <B>&lt;nX&gt;</B> is the position of the starting point on the X-axis (column).
+
+     <B>&lt;nY&gt;</B> is the position of the starting point on the Y-axis (line).
+
+     <B>&lt;nTransColor&gt;</B> is the color to be excluded.
+
+     If &lt;nColor&gt; is set, all colors in the image are displayed except
+     &lt;nColor&gt;.
+
+ <B>Returns</B>
+
+     GBMPDISP() always returns NIL.
+
+ <B>Description</B>
+
+     GBMPDISP() displays a bitmap (.BMP) or icon (.ICO) file previously
+     loaded into memory or display a BMP directly from disk.  This function
+     can be used only if you have set the screen to a graphic mode using SET
+     VIDEOMODE.  GBMPDISP() respects the constraints defined by GSETCLIP().
+
+     <B>Warning!</B>  The current color palette is used when you display a .BMP.
+     Be aware that if you allow users to modify the color palette, the colors
+     used in creating your .BMP may be changed because of the current palette
+     components.
+
+ <B>Notes</B>
+
+     It is possible to create visual effects on top of a .BMP, such as a
+     button that appears to be depressed when the user clicks on it.  This
+     can be done by superimposing a rectangle in XOR mode:
+
+     #include "Llibg.ch"
+     LOCAL aMyButton
+     SET VIDEOMODE TO LLG_VIDEO_VGA_640_480_16
+     // Load the BMP
+     aMyButton := gBmpload ("MyButton.BMP")
+
+
+        // Display the BMP, always in SET mode
+     gBmpDisp (aMyButton,100,200)
+
+     .
+     .   // Your code
+     .
+
+     IF mState()[LLM_STATE_LEFT] == LLM_BUTTON_DOWN
+
+        // When the mouse button is pressed, we superimpose a BMP
+
+        gRect( 100,;
+                 200,;
+                 100 + aMyButton[LLG_BMP_X],;
+                 200 + aMyButton[LLG_BMP_Y],;
+                 LLG_FILL,;
+                 8,;
+                 LLG_MODE_XOR)
+
+     ENDIF
+
+        // As long as the button is down...
+     DO WHILE mState()[LLM_STATE_LEFT] == LLM_BUTTON_DOWN
+     .
+     .   // Your code
+     .
+     ENDDO
+
+        // When the mouse button is released we reload
+        // the BMP to restore the original look
+
+        gRect(100,;
+               200,;
+               100 + aMyButton[LLG_BMP_X],;
+                200 + aMyButton[LLG_BMP_Y],;
+               LLG_FILL,;
+                8,;
+              LLG_MODE_XOR)
+
+ <B>Examples</B>
+
+     <B>.</B>  This example displays buttons previously stored in aIcons
+        using gBmpLoad():
+
+        gBmpDisp(aIcons,100,200)
+
+     <B>.</B>  This example loads and displays a background without using a
+        variable.  In this case, the area occupied in VMM when the array is
+        loaded, is freed by CA-Clipper once the display ends.
+
+        gBmpDisp(gBmpLoad("MyDesk.BMP") , 0 , 0 )
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4dc21.html">GBMPLOAD()</A>
+<A HREF="ng5c311.html">GSETPAL()</A>
+<A HREF="ng5cee0.html">GWRITEAT()</A>
+<A HREF="ngf2963.html">SET VIDEOMODE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

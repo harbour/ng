@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1113c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng96fc.html">[^^Up^^]</A>
+<A HREF="ng122c1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_itemPutC()</B>
+ Place a zero-terminated character value into an Item
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "item.api"</B>
+     <B>ITEM _itemPutC(</B>
+     <B>                ITEM itemChar,</B>
+     <B>                BYTEP fpChars</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>itemChar</B> is the Item into which you want to place the string.  If
+     itemChar is NULL, _itemPutC() will create a new Item.
+
+     <B>fpChars</B> is the zero-terminated string to place into the Item.
+
+ <B>Returns</B>
+
+     A new Item reference containing the zero-terminated string passed.
+
+ <B>Description</B>
+
+     The _itemPutC() function is used to associate a zero-terminated string
+     with an Item.  Any previous value in itemChar will be destroyed.
+
+     The data located at fpChars is copied into a new space associated with
+     the Item that is returned.  It is the programmer's responsibility to
+     free the allocation of fpChars in whatever manner it was allocated.
+
+     <B>Note: </B> _itemPutC() must copy the intended string from your buffer at
+     fpChars.  If fpChars is unusually large, _itemPutC() may cause a VM
+     failure due to insufficient real memory to accomplish a large copy.
+     Typically, this error would manifest itself as an internal error 5302.
+
+     <B>Caution! </B> Do not assume that the address in itemChar will be the
+     same address returned by _itemPutC().
+
+ <B>Examples</B>
+
+     /*
+     *  YesNo( lExpr ) -&gt; cValue
+     *
+     *  Given a logical expression, returns the
+     *  string "Yes" if true, and "No " if false.
+     *
+     */
+
+     CLIPPER YesNo( void )
+     {
+        ITEM itemParam, itemCRet;
+
+        // Warning: DGROUP!
+
+        itemCRet = _itemPutC( NULL, "No " );
+
+        if (PCOUNT &gt; 0)
+        {
+           itemParam = _itemParam( 1 );
+           if (_itemGetL( itemParam ))
+              itemCRet = _itemPutC( itemCRet, "Yes");
+
+           _itemRelease( itemParam );
+        }
+
+        _itemRelease( _itemReturn( itemCRet ) );
+        return;
+     }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Item.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge7a7.html">_itemGetC()</A>
+<A HREF="ng122c1.html">_itemPutCL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

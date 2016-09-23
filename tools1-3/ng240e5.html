@@ -1,0 +1,141 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng22ffc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng250b1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TRAPINPUT()</B>
+ Allows supervision of CA-Clipper input commands
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TRAPINPUT(&lt;cProcedure&gt;,[&lt;lParameter&gt;]) --&gt; cOldProcedure</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cProcedure&gt;</B>  Designates the name of the procedure that is called
+     during active CA-Clipper input commands.
+
+     <B>&lt;lParameter&gt;</B>  Designates whether a parameter is passed internally to
+     the specified trap procedure.  If this logical parameter is .T., then no
+     parameter is passed internally to the specified trap procedure.  This
+     allows you to significantly improve performance.
+
+     ()  If this function is called without a parameter, the previously set
+     trap is uninstalled.
+
+ <B>Returns</B>
+
+     This function returns the name of the previously set trap procedure.  If
+     no trap was set, TRAPINPUT() returns a null string.
+
+ <B>Description</B>
+
+     This function is different from a CA-Clipper key trap.  When one of the
+     CA-Clipper input commands is active, the specified trap procedure is
+     always called when CA-Clipper attempts to retrieve the keyboard input.
+     This function is completely independent of whether or not there really
+     has been a keyboard input.  Additionally, the ensuing inputs are not
+     influenced in any way, but are passed to the CA-Clipper command
+     unchanged.
+
+     <B>The Procedure Call</B>
+     Three parameters are transmitted by the called procedure, as with
+     CA-Clipper trap procedures.  These parameters are the procedure name,
+     the line number, and the variable name.  All three parameters are
+     transmitted unless the &lt;lParameter&gt; option is .T.
+
+     <B>Important! </B> In contrast to CA-Clipper key traps, these internal
+     input commands do not have the option to ignore the interruption because
+     no internal input routine is reentrant.  You cannot, under any
+     circumstances, use the same input command in the called procedure.  This
+     applies the GET/READ, PROMPT, ACCEPT, and any similar input
+     instructions.  You can easily use INPUTMODE(.T.) to determine which
+     input command is currently active when you call a procedure.
+
+ <B>Notes</B>
+
+     <B>.</B>  In contrast to CA-Clipper SET KEY TO traps, recursions are
+        automatically avoided.
+
+     <B>.</B>  If the designated procedure does not exist, then the function
+        uninstalls itself and does not produce a runtime error.  If a warning
+        regarding a missing procedure is required during linking, use the
+        EXTERNAL &lt;procedure&gt; statement.
+
+ <B>Example</B>
+
+     The following example shows a MEMOEDIT() extension to a very simple
+     communications program.  This is only intended to demonstrate a possible
+     application.  This solution is unsuitable for a full fledged
+     communications program because at some point the memory available to
+     MEMOEDIT() would be insufficient.
+
+     The main purpose of the example is to show how using TRAPINPUT() can
+     convert characters from the serial port into keyboard input for a
+     CA-Clipper application.  Each time the CA-Clipper program looks for
+     keyboard input, the characters in the serial port input buffer are added
+     to the available keyboard buffer.  Please notice that the example uses
+     KEYSEND().
+
+     To complete this example, all local keyboard input is transmitted
+     through the TRAPANYKEY() procedure over the serial port.  The other
+     terminal is expecting an echo of these characters.  Alt-C remains
+     functional in this example.  The application can also be changed to take
+     into account other control keys.
+
+     CLEAR
+
+     nPort := 1
+
+     COM_OPEN(nPort, 1000)
+     CON_DTR(2, .T.)
+     COM_INIT(nPort, 1200, "N", 8 , 1)
+
+     TRAPINPUT("Trap1")
+     TRAPINPUT("Trap2")
+
+
+     cTextVar := SPACE(5000)
+     cTextVar := MEMOEDIT(cTextVar)
+
+     COM_CLOSE(nPort)
+
+     RETURN
+
+     PROCEDURE Trap1(a, b, c)
+
+        IF COM_COUNT(nPort) &gt; 0
+           KEYSEND(CHARMIX(COM_READ(nPort), CHR(0), .T.)
+        ENDIF
+
+        RETURN
+
+     PROCEDURE Trap2(nKey)
+
+        IF nKey &lt;= 255
+           COM_SEND(nPort, CHR(nKey))
+        ELSE
+           KEYSEND(I2BIN(nKey), .T.)
+        ENDIF
+
+        RETURN
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22ffc.html">TRAPANYKEY()</A>
+<A HREF="ng250b1.html">TRAPSHIFT()</A>
+<A HREF="ng17795.html">INPUTMODE()</A>
+<A HREF="ng18643.html">KEYSEND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

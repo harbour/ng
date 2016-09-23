@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng44341.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng452cb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FIELDBLOCK()</B>
+ Return a set-get code block for a given field
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FIELDBLOCK(&lt;cFieldName&gt;) --&gt; bFieldBlock</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFieldName&gt;</B> is the name of the field to which the set-get block
+     will refer.
+
+ <B>Returns</B>
+
+     FIELDBLOCK() returns a code block that, when evaluated, sets (assigns)
+     or gets (retrieves) the value of the given field.  If &lt;cFieldName&gt; does
+     not exist in the specified work area, FIELDBLOCK() returns an empty
+     block.
+
+ <B>Description</B>
+
+     FIELDBLOCK() is a database function that builds a code block.  When
+     executed with an argument, the code block created by this function
+     assigns the value of the argument to &lt;cFieldName&gt;.  When executed
+     without an argument, the code block retrieves the value of &lt;cFieldName&gt;.
+
+     Note that the specified field variable may not exist when the code block
+     is created, but must exist before the code block is executed.
+
+ <B>Notes</B>
+
+     <B>.  Work area:</B> The code block returned by FIELDBLOCK() sets or
+        gets the value of the specified field in whatever work area is
+        current when the block is run.  For example, given work areas 1 and
+        2, both containing field FName:
+
+     SELECT 1
+        FName:= "Kate"
+        SELECT 2
+
+        FName := "Cindy"
+        bFName := FIELDBLOCK("FName")
+        SELECT 1
+        ? EVAL(bFName)               // Result: "Kate"
+        SELECT 2
+        ? EVAL(bFName)               // Result: "Cindy"
+
+        The function FIELDWBLOCK() provides a set-get block for a field in a
+        specific work area.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example compares FIELDBLOCK() to a code block created
+        using the macro operator.  Note that using FIELDBLOCK() avoids the
+        speed and size overhead of the macro operator:
+
+        // Set-Get block defined using macro operator
+        bSetGet := &amp;( "{ |setVal| IF( setVal == NIL,;
+                        FName, FName := setVal ) }" )
+        // Set-Get block defined using FIELDBLOCK()
+
+        // bSetGet created here is the functional
+        // equivalent of bSetGet above
+        bSetGet := FIELDBLOCK("FName")
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng46c9b.html">FIELDWBLOCK()</A>
+<A HREF="ng712a6.html">MEMVARBLOCK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

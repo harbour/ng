@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7b949.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng7c53c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NEXTKEY()</B>
+ Read the pending key in the keyboard buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NEXTKEY() --&gt; nInkeyCode</B>
+
+ <B>Returns</B>
+
+     NEXTKEY() returns an integer numeric value ranging from -39 to 386 for
+     keyboard events and integer values from 1001 to 1007 for mouse events.
+     This value identifies either the key extracted from the keyboard buffer
+     or the mouse event that last occurred.  If the keyboard buffer is empty
+     and no mouse events are taking place, NEXTKEY() returns zero.  If SET
+     TYPEAHEAD is zero, NEXTKEY() always returns zero.
+
+ <B>Description</B>
+
+     NEXTKEY() is a function that reads the keystroke pending in the keyboard
+     buffer or the next mouse event without removing it.  The value returned
+     is the INKEY() code of the key pressed--the same value as returned by
+     INKEY() and LASTKEY().  NEXTKEY() returns values for all ASCII
+     characters as well as function, Alt+function, Ctrl+function, Alt+letter,
+     and Ctrl+letter key combinations.
+
+     NEXTKEY() is like the INKEY() function but differs in one fundamental
+     respect.  INKEY() removes the pending key from the keyboard buffer and
+     updates LASTKEY() with the value of the key.  by contrast NEXTKEY()
+     reads, but does not remove the key from the keyboard buffer, and does
+     not update LASTKEY().
+
+     Since NEXTKEY() does not remove the key from the keyboard buffer, it can
+     be used to poll the keyboard, and then pass control to a routine that
+     uses a wait state or INKEY() to actually fetch the key from the buffer.
+
+     For a complete list of INKEY() codes and Inkey.ch constants, refer to
+     the "CA-Clipper Inkey Codes Appendix" in the Error Messages and
+     Appendices Guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example places an Esc key in the keyboard buffer, and
+        then shows the differences between INKEY(), LASTKEY(), and NEXTKEY():
+
+        #include "Inkey.ch"
+        //
+        CLEAR TYPEAHEAD
+        KEYBOARD CHR(K_ESC)
+        //
+        ? NEXTKEY(), LASTKEY()            // Result: 27 0
+        ? INKEY(), LASTKEY()              // Result: 27 27
+        ? NEXTKEY()                       // Result: 0
+
+ <B>Files</B>   Library is EXTEND.LIB, header file is Inkey.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd087b.html">KEYBOARD</A>
+<A HREF="ngf1c3d.html">SET TYPEAHEAD</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

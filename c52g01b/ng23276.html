@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng22ad5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng236f1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBSETDRIVER()</B>
+ Return the default database driver and optionally set a new driver
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBSETDRIVER([&lt;cDriver&gt;]) --&gt; cCurrentDriver</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDriver&gt;</B> is an optional character value that specifies the name of
+     the database driver that should be used to activate and manage new work
+     areas when no driver is explicitly specified.
+
+ <B>Returns</B>
+
+     DBSETDRIVER() returns the name of the current default driver.
+
+ <B>Description</B>
+
+     DBSETDRIVER() sets the database driver to be used when activating new
+     work areas without specifying a driver.  If the specified driver is not
+     available to the application, the call has no effect.  DBSETDRIVER()
+     returns the name of the current default driver, if any.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example makes the "DBFNDX" driver the default driver.  If
+        the driver is unavailable, a message is issued:
+
+        DBSETDRIVER("DBFNDX")
+        IF ( DBSETDRIVER() &lt;&gt; "DBFNDX" )
+           ? "DBFNDX driver not available"
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng278a8.html">DBUSEAREA()</A>
+<A HREF="ngb1e6f.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

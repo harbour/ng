@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng52b2c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng53898.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>POSCHAR()</B>
+ Replaces an individual character at a particular position within a character
+ string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>POSCHAR(&lt;cString&gt;,&lt;cCharacter|nCharacter&gt;,</B>
+     <B>   [&lt;nPosition&gt;]) --&gt; cString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B>  [@]  Designates the character string within which the
+     individual character &lt;cCharacter|nCharacter&gt; is substituted.
+
+     <B>&lt;cCharacter|nCharacter&gt;</B>  Designates an individual character or a
+     numeric ASCII value from 0 to 255.
+
+     <B>&lt;nPosition&gt;</B>  Designates the position at which the character is
+     substituted.  The default value is the last position in &lt;cString&gt;.
+
+ <B>Returns</B>
+
+     The string returned is the &lt;cString&gt; with a &lt;cCharacter|nCharacter&gt;
+     character in the selected position.
+
+ <B>Description</B>
+
+     POSCHAR() allows you to replace an individual character within a string
+     without having to split the string.  Since this character is only
+     substituted at the designated position within &lt;cString&gt;, the string that
+     is modified can be passed by reference.
+
+ <B>Note</B>
+
+     <B>.</B>  The value returned by this function can be suppressed by
+        implementing CSETREF() to save space in working memory.
+
+ <B>Examples</B>
+
+     <B>.</B>  Substitute a character at position 3:
+
+        ? POSCHAR("ABCDEF", "X", 3)   // "ABXDEF"
+
+     <B>.</B>  Substitute a character in the last position:
+
+        ? POSCHAR("ABCDEF", "X")      // "ABCDEX"
+
+     <B>.</B>  Pass the string by reference:
+
+        CSETREF(.T.)                  // Suppress return value
+        cVar  := "ABCDEF"
+        POSCHAR(cVar, "X")
+        ? cVar                        // "ABCDEX"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4de80.html">CSETREF()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

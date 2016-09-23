@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga6c66.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="nga7a8d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>UPPER()</B>
+ Convert lowercase characters to uppercase
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>UPPER(&lt;cString&gt;) --&gt; cUpperString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string to be converted.
+
+ <B>Returns</B>
+
+     UPPER() returns a copy of &lt;cString&gt; with all alphabetical characters
+     converted to uppercase.  All other characters remain the same as in the
+     original string.
+
+ <B>Description</B>
+
+     UPPER() is a character function that converts lowercase and mixed case
+     strings to uppercase.  It is related to LOWER() which converts uppercase
+     and mixed case strings to lowercase.  UPPER() is related to the
+     ISUPPER() and ISLOWER() functions which determine whether a string
+     begins with an uppercase or lowercase letter.
+
+     UPPER() is generally used to format character strings for display
+     purposes.  It can, however, be used to normalize strings for case-
+     independent comparison or INDEXing purposes.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate the effects of UPPER():
+
+        ? UPPER("a string")           // Result: A STRING
+        ? UPPER("123 char = &lt;&gt;")      // Result: 123 CHAR = &lt;&gt;
+
+     <B>.</B>  This example uses UPPER() as part of a case-independent
+        condition:
+
+        USE Customer INDEX CustName NEW
+        LIST CustName FOR "KATE" $ UPPER(Customer)
+
+     <B>.</B>  UPPER() is also useful for creating case-independent index key
+        expressions:
+
+        USE Customer NEW
+        INDEX ON UPPER(Last) TO CustLast
+
+     <B>.</B>  Later, use the same expression to look up Customers:
+
+        MEMVAR-&gt;Last = SPACE(15)
+        @ 10, 10 GET MEMVAR-&gt;Last
+        READ
+
+        SEEK UPPER(MEMVAR-&gt;Last)
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

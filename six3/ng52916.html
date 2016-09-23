@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng51ea9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng53177.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SET TYPECHECK:</B>
+
+  Syntax:
+
+  <B>SET TYPECHECK ON/OFF/&lt;lExp&gt;</B>
+
+  <B>ON</B> forces the entire query expression of a pending optimizable command
+     or function to be tested for syntactical and data type correctness.
+     This is the default.
+
+  <B>OFF</B> overrides the default type checking.
+
+  &lt;xlToggle&gt; is a logical expression that must be enclosed in parentheses.
+  A value of true (.T.) is the same as ON, and a value of false (.F.) is
+  the same as OFF.
+
+  <B>Description:</B>
+
+  The SET TYPECHECK command is used to toggle ON or OFF the forced
+  validation of query conditions before an optimizable command or
+  function is processed.   Type checking is always enforced with
+  m6_IsOptimize() and cannot be disabled.  Any errors detected by MachSIx
+  in the query condition will be reported through the m6_Error()
+  function.
+
+  <B>Performance Tip: </B>
+
+  SET TYPECHECK OFF if you always call m6_IsOptimize() to validate a query
+  before executing an optimizable command or function.  This will
+  increase performance by eliminating the redundancy of type checking the
+  query condition twice.
+
+  ---------------------------------| EXAMPLE |--------------------------------
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates the SET TYPECHECK command                                 *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX.CH"
+
+  Local nCount, cCond
+
+  USE Account VIA "SIXCDX"  // Assume structural index ACCOUNT.CDX opened
+                            // automatically and contains tags State and
+                            // Age
+  CLEAR SCREEN
+
+  ? "Example of SET TYPECHECK command."
+  ?
+
+  //..Set type checking off to eliminate validating the query condition twice
+  <B>SET TYPECHECK OFF</B>
+
+  //.........................................Store a query condition to cCond
+  cCond := "State='CA' .and. Age&gt;25 "
+
+  //......................Test optimization level, type checking occurs here
+  ? "m6_IsOptimize()="
+  ?? m6_IsOptimize( cCond )  // 2
+
+  //........Count records,  no type checking because of SET TYPECHECK is OFF
+  COUNT TO nCount FOR ( cCond )
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngce09.html">m6_Error()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

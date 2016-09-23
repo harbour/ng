@@ -1,0 +1,38 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng181df.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf499.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Extended Memory Not Available</B>
+
+     CA-Clipper/Exospace uses extended memory, not expanded memory.  If you
+     can configure your memory either way and you are not running under an
+     expanded memory manager, be sure to configure the memory as extended
+     memory.
+
+     If you are using an expanded memory manager that follows the VCPI
+     protocol (such as EMM386, QEMM, or 386MAX), your CA-Clipper/Exospace
+     application allocates its memory from the VCPI host (unless you also
+     have an XMS manager).  Therefore, you do not have to configure it as
+     extended memory.
+
+     If you have a VCPI host and an XMS manager (such as HIMEM.SYS),
+     CA-Clipper/Exospace allocates memory from both the VCPI pool and the XMS
+     pool.
+
+     If you have another program that uses extended memory, see the
+     Troubleshooting section in the "CA-Clipper Protected Mode Linker--
+     EXOSPACE.EXE" chapter of the Programming and Utilities Guide.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

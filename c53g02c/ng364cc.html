@@ -1,0 +1,37 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng362bf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng36881.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBFNTX/1024  Append lock failed</B>
+
+     <B>Explanation:</B>  A new record could not be appended because a lock
+     could not be obtained for the new record.
+
+     <B>Action:</B>  For a shared work area, the APPEND BLANK command
+     automatically obtains a record lock for the newly appended record.  If
+     the record cannot be locked, the APPEND fails.  This generally occurs
+     because another process has obtained a file lock on the database (.dbf)
+     file.  Change the program to handle the lock contention.
+
+     <B>Note:</B>  The default CA-Clipper error handler (Errorsys.prg) handles
+     this error by setting the global NETERR() status to true (.T.) and
+     resuming execution.  Thus, the error only causes an error message or
+     alert when a custom error handler is used.  For an example of how to
+     handle this error condition, refer to Errorsys.prg.
+
+     <B>See Also:</B>  "Network Programming" chapter in the Programming and
+     Utilities Guide
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

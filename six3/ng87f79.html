@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng87f15.html">[^^Up^^]</A>
+<A HREF="ng88803.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Individual (.IDX/.NTX) Indexes:</B>
+
+
+  <U>SIXCDX .IDX Indexes:</U>
+
+  The SIx Driver (SIXCDX) individual index files (.IDX's) are FoxPro 2
+  compatible <B>compact</B> indexes.  This is the default index type when using
+  the SIx Driver's SIXCDX flavor.
+
+  SIx Driver .IDX key expressions will support any valid Clipper expression,
+  including User-Defined Functions (UDF's), though extra care must be taken
+  when using UDFs if compatibility with FoxPro 2 is anticipated.  Key expres-
+  sions can be up to 256 bytes long, with a maximum key length of 240 bytes.
+
+  Conditional indexes (indexes that only include records that satisfy a
+  filter expression) can be created with the SIx Driver.  These conditional
+  indexes are updated just like normal indexes, with records added to or
+  dropped from the index based on the filter expression.  Condition expres-
+  sions can be up to 256 bytes long and can be any valid Clipper expression
+  (including UDF's) that evaluates to a logical value (.T. or .F.).
+
+  <B>NOTES:</B>
+
+    Key expressions and conditional expressions cannot contain LOCAL or
+    STATIC variables, since these usually will not be in scope when the
+    index is opened or updated.  If you absolutely can't find a way around
+    using a variable in your key or conditional expression, then a PRIVATE
+    variable must be used.
+
+    Key expressions and conditional expressions are checked for validity
+    when an index is created as well as when it is opened.
+
+
+  <U>SIXNTX .NTX Indexes:</U>
+
+  The .NTX files files supported under the SIx Driver's SIXNTX flavor are
+  exactly the same format as standard Clipper (DBFNTX) indexes.  The same
+  rules that apply to this index format under DBFNTX also apply under the
+  SIXNTX driver.
+
+  The primary advantage of using SIXNTX over DBFNTX is:
+
+    <B>.</B> SIXNTX adds support for index SCOPEs, Data Enryption, Database Event
+      Triggers, and other features not found in DBFNTX.
+
+    <B>.</B> When needing to have .NTX support in the same application that also
+      uses SIXCDX and/or SIXNSX indexes, using SIXNTX instead of DBFNTX
+      will give you the lowest possible load size (most free memory).
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng88803.html">Compound (.CDX/.NSX) Indexes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng21071.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng206af.html">[^^Up^^]</A>
+<A HREF="ng21ac9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_errGetFlags()</B>
+ Get the values of the error type flags
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "error.api"</B>
+     <B>USHORT _errGetFlags(</B>
+     <B>                     ERRORP pError</B>
+     <B>                   )</B>
+
+ <B>Arguments</B>
+
+     <B>pError</B> is a pointer to the Error object from which the value is to
+     be retrieved.
+
+ <B>Returns</B>
+
+     _errGetFlags() returns the value of the error type flags.
+
+ <B>Description</B>
+
+     _errGetFlags() retrieves the current value of flags, which determines the
+     actions that are allowed for this error.  The value and meaning of the
+     error type flags defined in Error.api are as follows:
+
+     <B>Error flags Values</B>
+     ------------------------------------------------------------------------
+     <B>Constant     Value  Meaning</B>
+     ------------------------------------------------------------------------
+     EF_CANRETRY    1    Advises the CA-Clipper error handler routine that
+                         the failed operation can be retried.
+     EF_CANDEFAULT  4    Advises the CA-Clipper error handler routine that
+                         the failed operation can be safely ignored.
+     ------------------------------------------------------------------------
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment retrieves the contents of flags:
+
+        #include "error.api"
+           .
+           .
+           .
+           USHORT uiFlags;
+           uiFlags = _errGetFlags( pError );
+           .
+           .
+           .
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Error.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng253ae.html">_errPutFlags()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

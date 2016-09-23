@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng16cdd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng16770.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_xgrab()</B>
+ Allocate memory, generating an error if unsuccessful
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "fm.api"</B>
+     <B>void far * _xgrab(</B>
+     <B>                   unsigned int uiSize</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>uiSize</B> is the number of bytes to allocate.
+
+ <B>Returns</B>
+
+     _xgrab() returns a pointer to the allocated memory.
+
+ <B>Description</B>
+
+     _xgrab() lets a C or Assembly language function allocate memory from
+     CA-Clipper's fixed heap.  If the allocation request is unsuccessful,
+     CA-Clipper raises an unrecoverable internal error.  Thus, _xgrab()
+     always returns a valid pointer (never NULL).
+
+     Use _xfree() to free memory allocated with _xgrab() after use.
+
+     <B>Warning! </B> Fixed memory returned from _xgrab() is not cleared by the
+     system and is, therefore, in an uninitialized state.
+
+     <B>Note: </B> In Fm.api, _exmgrab() is #defined to _xgrab() to maintain
+     compatibility with Summer '87.
+
+ <B>Examples</B>
+
+     <B>.</B>  From C:
+
+        char *mem;
+        mem = (char)_xgrab(320);
+
+     <B>.</B>  From Assembly language:
+
+        EXTRN __xgrab:FAR
+              mov   ax, 320
+              push  ax
+              call  __xgrab            ; pointer in DX:AX
+              add   sp, 2              ; reset stack pointer
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Fm.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng16839.html">_xalloc()</A>
+<A HREF="ng16cdd.html">_xfree()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

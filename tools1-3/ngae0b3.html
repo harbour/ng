@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngadd15.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga5aad.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>WOM()</B>
+ Returns the week within a month.
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>WOM([&lt;dDate&gt;]) --&gt; nWeekOfMonth</B>
+
+ <B>Argument</B>
+
+     <B>&lt;dDate&gt;</B>  Designates a date for which you want to determine which
+     week of the month it lies in.  The default is the system date.
+
+ <B>Returns</B>
+
+     WOM() returns the number that reflects the week within a month in which
+     &lt;dDate&gt;lies.
+
+ <B>Description</B>
+
+     The WOM() function can returns the corresponding week of the month for
+     every valid date.
+
+ <B>Note</B>
+
+     <B>.</B>  When no date is specified, WOM() uses the system date.  An
+        empty date returns a result of 0.
+
+ <B>Example</B>
+
+     Compute a delivery date:
+
+     ? "We will deliver in week" + STR(WOM(dDate)) + " in; August!"
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

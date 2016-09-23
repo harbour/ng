@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng46ecf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4787d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>goTo()</B>
+ Position cursor at a specific physical identity (record)
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE goTo(</B>
+     <B>              WORKAREAP wa,</B>
+     <B>              ULONG row</B>
+     <B>            )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>row</B> is the row number of the new cursor position.
+
+ <B>Description</B>
+
+     Repositions the workarea cursor for wa to the physical row number row.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Since goTo() repositions the pointer to a physical row number,
+        you need not consider active scopes or filters.  If the row is not in
+        the physical range of rows available, you may generate an error or
+        position the pointer at the physical end of file.
+
+     <B>.</B>  In CA-Clipper, the idea of a phantom row is vital to the
+        performance of certain functions.  The goTo() method should permit
+        access to the phantom row.  The phantom row is defined as the last
+        row + 1 and is the position at which end of file is set to true  All
+        columns of the phantom row are empty.  A row value greater than the
+        last row in the table should position the pointer to the phantom row.
+        If you do not support the concept of the phantom row in your driver,
+        you must document that fact as an incompatibility of your driver with
+        the high-level CA-Clipper syntax.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng46ecf.html">goBottom()</A>
+<A HREF="ng4787d.html">goTop()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

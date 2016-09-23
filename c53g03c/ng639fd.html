@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng636d2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng63ee2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gBmpDisp()</B>
+ Display a bitmap or icon previously loaded with _gBmpLoad()
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>void _gBmpDisp(</B>
+     <B>                ITEM itmArrayBmp,</B>
+     <B>                int iXStart,</B>
+     <B>                int iYStart,</B>
+     <B>                DWORD dwTransColor</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>itmArrayBmp</B> is an array item returned by _gBmpLoad().
+
+     <B>iXStart</B> is the pixel-based X coordinate at which to begin the
+     display.
+
+     <B>iYStart</B> is the pixel-based Y coordinate at which to begin the
+     display.
+
+     <B>dwTransColor</B> is the outline color.  The range of valid values is
+     limited to the number of colors available in the selected video mode.
+     For example, in 16-color modes, valid values are between zero and 15,
+     and in 256-color modes, valid values are between zero and 255.  Note
+     that you can specify LLG_NO_COLOR for no color.
+
+ <B>Notes</B>
+
+     <B>.  Restrictions:</B>  You cannot use this function unless you have
+        set the screen to one of the graphic modes using _gModeSet().  This
+        function respects the screen clipping region as set by _gClipSet().
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng63ee2.html">_gBmpLoad()</A>
+<A HREF="ng644bc.html">_gClipSet()</A>
+<A HREF="ng68632.html">_gModeSet()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

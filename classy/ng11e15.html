@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng113d6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng123cd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>The Debugger's Command Window</B>
+
+  When using the Clipper debugger, it is often useful to use the command
+  window to evaluate expressions. Unfortunately, the expression evaluator in
+  the debugger relies on the Clipper macro subsystem to evaluate
+  expressions. For this reason, there are serious restrictions on the
+  complexity of expressions that can be evaluated. Here are some specific
+  restrictions that apply in the debugger's command window, along with
+  workarounds for them:
+
+  <B>.</B>  Understandably, preprocessor translation cannot be handled. The
+     Class(y) double-colon (<B>::</B>) operator for message sends to self thus
+     cannot be used. Instead, when debugging inside a method, the self
+     variable should be used directly, as in expressions such as
+     <U>? self:nTop.</U>
+
+  <B>.</B>  Only one message send can be handled in an expression. Expressions of
+     the form obj:msg1:msg2 will not evaluate. One workaround for this is
+     to use intermediate variables to store results, for example:
+
+      ? tmp := obj:var1
+      ? tmp:var2
+
+     This will result in a private variable named tmp being created. The
+     names of these intermediate variable should be chosen so as not to
+     conflict with variables in the application being debugged.
+
+  <B>.</B>  Complexity of expressions is limited in other ways. For example, the
+     expressions of the form obj:arr[n] will not evaluate. Again, the
+     workaround for this is to use intermediate variables.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

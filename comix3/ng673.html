@@ -1,0 +1,109 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4b7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng253.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>SET FILTER</B>           Rapidly isolate records meeting a condition
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    SET FILTER TO
+        [&lt;condition&gt;]
+        [NOOPTIMIZE]
+
+<B>Arguments</B>
+
+    &lt;condition&gt; is the condition which records must meet in order to be
+    visible.
+
+    NOOPTIMIZE is an optional parameter.  If specified, then optimization
+    will _not_ be used.  Instead, the SET FILTER TO will done as normal.
+
+<B>Description</B>
+
+    You must #include cm52.ch in order to use the ClipMore version of this
+    command.
+
+    ClipMore's SET FILTER TO behaves like the standard SET FILTER TO with
+    the difference that it is far faster.  It is a command implementation of
+    the cmFilter() function.
+
+    In cases where ClipMore cannot optimize the condition (such as using
+    local variables in the condition), you will either want to assign the
+    local's to private's, or use the NOOPTIMIZE clause to prevent
+    optimization from being used.
+
+    See cmFilter() for a more complete description of the process used to
+    implement and optimize SET FILTER TO.
+
+<B>Example</B>
+
+    *   Restrict to these people
+<B>    set filter to age &lt;= 25 .and. last = 'J'</B>
+
+    *   List in last name order
+    set order tag last
+    list age, last, first
+
+    *   List in first name order
+    set order tag first
+    list age, last, first
+
+<B>Example</B>
+
+    function localFilter()
+    local loSal := 50000
+    local hiSal := 75000
+
+    *   Use NOOPTIMIZE because you can't reference local's in a condition
+<B>    set filter to salary &gt;= loSal .and. salary &lt;= hiSal NOOPTIMIZE</B>
+
+    *   Do whatever operations
+    ...
+
+    *   Clear the filter condition
+<B>    set filter to</B>
+    return
+    
+<B>Example</B>
+
+    function privateFilter()
+    local loSal := 50000
+    local hiSal := 75000
+
+    *   Set up privates as "dummy" variables so ClipMore can optimize
+    private _loSal, _hiSal
+    _loSal := 50000
+    _hiSal := 75000
+
+    *   Allow to be optimized (since we're using privates)
+<B>    set filter to salary &gt;= _loSal .and. salary &lt;= _hiSal</B>
+
+    *   Do whatever operations
+    ...
+
+    *   Clear the filter condition
+<B>    set filter to</B>
+    return
+
+See Also
+
+    cmFilter()
+    
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng359b.html">cmFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

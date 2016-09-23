@@ -1,0 +1,154 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng59f75.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng5c311.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GSETEXCL()</B>
+ Define a screen region to be excluded from display
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GSETEXCL([&lt;nExclArea&gt;]|[&lt;nTop&gt;, &lt;nLeft&gt;, &lt;nBottom&gt;,</B>
+     <B>   &lt;nRight&gt;, &lt;nType&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nExclArea&gt; is a numeric value representing the exclusion area number.</B>
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B>, <B>&lt;nRight&gt;</B>, and <B>&lt;nType&gt;</B>
+     define the exclusion area coordinates.
+
+     <B>Coordinate Type Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant          Description</B>
+     ------------------------------------------------------------------------
+     LLM_COOR_TEXT     &lt;nTop&gt; which is the default, is the row line number.
+     LLM_COOR_GRAPH    &lt;nTop&gt; is the row in pixels.
+     ------------------------------------------------------------------------
+
+     <B>Note:</B>  Either zero, &lt;nExclArea&gt;, or all other parameters should be
+     specified.
+
+ <B>Returns</B>
+
+     If &lt;nExclArea&gt; is specified, an array of exclusion area coordinates for
+     &lt;nExclArea&gt; is returned.  GSETEXCL(LLG_EXCL_KILL_ALL) deletes all
+     previously defined exclusion areas.  If no arguments are specified,
+     GSETEXCL() returns the number of active exclusion areas.  If &lt;nTop&gt;,
+     &lt;nLeft&gt;, &lt;nBottom&gt;, &lt;nRight&gt;,and &lt;nType&gt; are specified, NIL is returned.
+
+ <B>Description</B>
+
+     This function is used to prevent output from being displayed in a
+     defined region of the screen.  The GSETEXCL() function is probably the
+     most complex function in CA-Clipper graphic mode.  If you have never
+     used the DISPBEGIN() and DISPEND() functions, please read CA-Clipper's
+     documentation for further explanation of these two functions.
+     Essentially, these functions are used to trap or "buffer" all screen
+     output.  DISPBEGIN() initiates the buffering and DISPEND() stops the
+     buffering and updates the screen.
+
+     GSETEXCL() is the opposite of GSETCLIP().  GSETEXCL() and GSETCLIP()
+     must never be used at the same time.  A call to GSETCLIP() will destroy
+     all previously defined exclusion areas.  CA-Clipper internally maintains
+     exclusion areas as if they were multiple inclusion areas.
+
+     To understand GSETEXCL(), imagine a cascading window system with three
+     windows, A, B and C:
+
+
+
+
+
+
+
+     Our goal is to display information in window A while it is covered by
+     windows B and C.
+
+     <B>.  Old text mode technique:</B>    Using CA-Clipper in text mode and
+        assuming you saved each window region prior to painting the window
+        boxes, you would probably do the following:
+
+        1.  Issue a DISPBEGIN() to activate video buffering.
+
+        2.  Pop off each screen by individually saving the current screens
+           and immediately restoring that window's previous background,
+           starting with window C, and then doing window B.  For example,
+
+           cNewScrC := SAVESCREEN(nTop, nLeft, nBottom, nRight)
+           RESTSCREEN(nTop, nLeft, nBottom, nRight,cOldScrC)
+           cNewScrB := SAVESCREEN(nTop, nLeft, nBottom, nRight)
+           RESTSCREEN(nTop, nLeft, nBottom, nRight,cOldScrB)
+
+        3.   At this point, window A is the only window visible and it is
+           easy to manipulate or paint information in window A.
+
+        4.   You would then save and redisplay window B and C, for example,
+
+           cOldScrC := SAVESCREEN(nTop, nLeft, nBottom, nRight)
+           RESTSCREEN(nTop, nLeft, nBottom, nRight,cNewScrC)
+           cOldScrB := SAVESCREEN(nTop, nLeft, nBottom, nRight)
+           RESTSCREEN(nTop, nLeft, nBottom, nRight,cNewScrB)
+
+        5.   Issue a DISPEND() because up to now the user has not seen any
+           screen activity since every screen output function has been
+           buffered!
+
+           By issuing a DISPEND(), ALL of the buffered data is instantly
+           flushed to the screen.  Essentially the user sees only the final
+           screen and not the intermediate screen activity along the way.
+           The user is not aware of the displaying and redisplaying of
+           windows B and C.  This provides a smooth visual effect.  This
+           buffering method is available in text mode because display orders
+           are fast, simple and the memory needed to save a full screen is
+           small (4KB).
+
+     <B>.  New graphic mode technique:</B>  The situation is totally
+        different in graphic mode.  DISPBEGIN() and DISPEND() are not enabled
+        in CA-Clipper graphic mode. CA-Clipper uses exclusion areas instead
+        of removing windows until we have the desired window current.  This
+        exclusion area concept is used in almost every graphical system,
+        including Microsoft Windows.  An exclusion area is simply a defined
+        screen region which is prevented from having data written to it.
+
+        In the example above, you would declare windows B and C as exclusion
+        areas. This prevents data from being written to these windows.
+        Therefore, when you modify information in window A, windows B and C
+        are not affected.  The above example using exclusion areas would be
+        as follows:
+
+        GSETEXCL(nTop, nLeft, nBottom, nRight) // Window B coordinates
+        GSETEXCL(nTop, nLeft, nBottom, nRight) // Window C coordinates
+        // Manipulate or paint information in window A.
+        GSETEXCL (LLG_EXCL_KILL_ALL)
+
+ <B>Notes</B>
+
+     You must reset the exclusion areas once the screen work is completed;
+     otherwise, the exclusion areas remain active.  This essentially prevents
+     any data from ever being written to those screen regions.  As you can
+     see, DISPBEGIN() and DISPEND() require a lot of work to manage a simple
+     cascade of windows, and the overhead in graphic mode renders the
+     technique unusable.  Exclusion zones do not consume memory, are faster,
+     and are simpler to use.
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3ac35.html">DISPBEGIN()</A>
+<A HREF="ng3cd72.html">DISPEND()</A>
+<A HREF="ng59f75.html">GSETCLIP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

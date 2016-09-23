@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngba99e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngbd1f2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>@...TO</B>
+ Draw a single- or double-line box
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>@ &lt;nTop&gt;, &lt;nLeft&gt;</B>
+     <B>   TO &lt;nBottom&gt;, &lt;nRight&gt; [DOUBLE] [COLOR &lt;cColorString&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B>, and <B>&lt;nRight&gt;</B> define the
+     coordinates of the box.  @...TO draws the box using row values from zero
+     to MAXROW() and column values from zero to MAXCOL(). &lt;nBottom&gt; and
+     &lt;nRight&gt; can be larger than the screen size, but output is clipped at
+     MAXROW() and MAXCOL().
+
+     <B>DOUBLE</B> draws the box with a double line.  If not specified, the box
+     is drawn with a single line.
+
+     <B>COLOR &lt;cColorString&gt;</B> defines the display color of the drawn box.  If
+     not specified, the box is drawn using the standard color setting of the
+     current system color as defined by SETCOLOR(). Note that &lt;cColorString&gt;
+     is a character expression containing the standard color setting.  If you
+     specify a literal color setting, enclose it within quote marks.
+
+ <B>Description</B>
+
+     @...TO draws a single- or double-line box on the screen.  If &lt;nTop&gt; and
+     &lt;nBottom&gt; are the same, a horizontal line is drawn. If &lt;nLeft&gt; and
+     &lt;nRight&gt; are the same, a vertical line is drawn.
+
+     After @...TO finishes drawing, the cursor is located in the upper-left
+     corner of the boxed region at &lt;nTop&gt; + 1 and &lt;nLeft&gt; + 1.  ROW() and
+     COL() are also updated to reflect the new cursor position.
+
+     @...TO is like @...BOX except that @...BOX lets you define the
+     characters of the box and supports a fill character.  @...TO, however,
+     is recommended for portability since it does not require the
+     specification of hardware-dependent graphics characters.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example erases a region of the screen, then draws a box
+        of the same size:
+
+        @ 10, 10 CLEAR TO 20, 40
+        @ 10, 10 TO 20, 40 DOUBLE COLOR "BG+/B"
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngac0a2.html">@...BOX</A>
+<A HREF="ngaca2c.html">@...CLEAR</A>
+<A HREF="ng3b4f1.html">DISPBOX()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

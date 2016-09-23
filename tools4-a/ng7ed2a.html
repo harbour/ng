@@ -1,0 +1,188 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng81036.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Introduction</B>
+
+ <B>Point-To-Point Communication</B>
+
+     The CA-Clipper Tools contain functions that allow direct communication
+     between workstations in Novell or NetBIOS compatible networks by
+     bypassing the file server.  This type of communication is called Point-
+     To-Point communication.
+
+     The data exchange between two workstations is interrupt controlled.
+     Incoming data is copied in the background to a receiving buffer and can
+     then be read with CA-Clipper Tools functions.  As soon as the receiving
+     buffer is full, incoming data is discarded.  Outgoing data is copied to
+     a sending buffer.  While the CA-Clipper application continues, data is
+     sent in the background from the sending buffer to the target address.
+     Interrupt controlled sending of data is necessary to avoid a long wait
+     when you send large datasets.  When you use IPX/SPX communication or one
+     of two possible NetBIOS communication variants, the data is broken up
+     into packets internally.  The packet size depends on the protocol used
+     (IPX: 546 bytes, SPX: 534 bytes, NetBIOS: 512 bytes).  The packets are
+     sent sequentially.
+
+     Normally, the packet structure of the transmitted data is transparent
+     and does not affect the handling of the data.  The receiving buffer of
+     the target workstation receives the data in the same way that the data
+     has been written to the sending buffer.  When you use IPX/SPX protocols
+     in addition to the data, a header that is included in each IPX or SPX
+     packet can be transmitted to the receiving buffer.   This header makes a
+     number of packet specific functions possible.  The tables 31.1 and 31.2
+     describe the structure of the IPX and SPX header.  The header positions
+     start with 1, corresponding to string functions.
+
+     The NetBIOS communication variants have no similar mechanism available.
+
+     <B>Table 31.1:  IPX Packet Header</B>
+     ------------------------------------------------------------------------
+     <B>Position     Length    Description</B>
+     ------------------------------------------------------------------------
+     1            2         Checksum
+     3            2         Packet length in bytes
+     5            1         Transmission control
+     6            1         Packet type (4=IPX)
+     7            4         Network number of target station
+     11           6         Station ID of target station
+     17           2         Target socket (High, Low format)
+     19           4         Network number of source station
+     23           6         Station ID of source station
+     29           2         Source socket (High,  Low format)
+     ------------------------------------------------------------------------
+
+     <B>Table 31.2:  SPX Packet Header</B>
+     ------------------------------------------------------------------------
+     <B>Position  Length  Description</B>
+     ------------------------------------------------------------------------
+     1         2       Check sum
+     3         2       Packet length in bytes
+     5         1       Transmission control
+     6         1       Packet type (5=SPX)
+     7         4       Network number of target station
+     11        6       Station ID of target station
+     17        2       Target socket (High, Low format)
+     19        4       Network number of source station
+     23        6       Stations ID of source station
+     29        2       Source socket (High, Low format)
+     31        1       Connection control
+     32        1       Datastream type
+     33        2       Connection number on source station (High, Low format)
+     35        2       Connection number on target station (High, Low format)
+     37        2       Sequence number (High, Low format)
+     39        2       Acknowledge number (High, Low format)
+     41        2       Allocation number (High, Low format)
+     ------------------------------------------------------------------------
+
+     When you install a communication buffer (a communication buffer can
+     contain a sending and a receiving buffer), you receive a communication
+     handle as a return value.  You should store this handle in a variable as
+     it is absolutely necessary for further operations with the communication
+     buffer.
+
+     The functions for Point-To-Point communication fall into two groups:
+     protocol specific functions and functions that can be used for any kind
+     of communication buffer.  Protocol specific functions are functions for
+     a connection setup: (IPXOPEN(), SPXESTBCON(), SPXLISTCON(), NBDOPEN(),
+     NBSCALL(), and NBSLISTCON()).  The name of a protocol specific function
+     always starts with three characters that describe the respective
+     protocol  (IPX, SPX, NBD: NetBIOS Datagram, NBS: NetBIOS Session).
+
+     Functions that write or read a buffer, or query the buffer status, are
+     not protocol specific and can be used for any kind of communication
+     buffer.  The names of these functions start with PPC (Point-To-Point
+     Communication).  For example, the function PPCWRITE() is used to write
+     data to a communication buffer.  The protocol specific process of the
+     data is regulated internally.
+
+ <B>IPX/SPX Communication</B>
+
+     Novell Netware (including Netware Lite) allows the direct use of the IPX
+     and SPX communication functions.  By loading the Novell NetBIOS emulator
+     (NETBIOS.EXE), you can also use NetBIOS communication functions in
+     Novell networks.  However, the use of the emulator compared to IPX/SPX
+     reduces the performance and the available memory.  Therefore, you should
+     use the IPX/SPX communication functions for applications running only in
+     Novell networks.
+
+     IPX (Internetwork Packet Exchange Protocol) is a rudimentary protocol
+     whose main advantage is that data can be sent to all waiting
+     workstations in an internal network with only one call.  However, IPX
+     has no suitable handshake mechanism available that guarantees a
+     successful delivery and a correct process of the sent data on the
+     destination workstation.  (Related mechanisms can be implemented with
+     the IPX functions of CA-Clipper Tools.  However, these mechanisms are
+     application specific and have no general validity.)
+
+     The SPX protocol (Sequenced Packet Exchange Protocol) only allows
+     communication between two workstations within an internal network.  SPX
+     has mechanisms available that guarantee the successful delivery of sent
+     data.
+
+     Unlike SPX, which can be seen as real Point-To-Point communication
+     protocol, the IPX communication is implemented as a pseudo Point-To-
+     Point communication.  When you use IPX, data for a specific workstation
+     can be received by any workstation.  However,  a destination address is
+     defined for interrupt controlled sending.  (This address can specify all
+     workstations within an internal network.)  The destination address is
+     not defined by the protocol, so it is not necessary to specify the
+     destination address each time you access the send buffer.  When you use
+     the SPX protocol, a connection between two workstations is established.
+
+     The IPX/SPX communication between two workstations is based on two
+     sockets on each side of the connection that can be opened and closed,
+     similar to files.  Sockets are represented by numeric values between 1
+     and 65535.  Some socket numbers are reserved either by the Netware
+     operating system or by Novell for third party vendors. The sockets
+     between 16384 and 20480 (4000h - 5000h) are the dynamic sockets, meaning
+     there are no reserved sockets in this range.  A collision with socket
+     numbers reserved by Netware can be avoided by using sockets out of that
+     range.
+
+ <B>NetBIOS Communication</B>
+
+     The NetBIOS communication functions can be used in all networks that are
+     based on NetBIOS specifications.  In CA-Clipper Tools, two kinds of
+     NetBIOS communication have been implemented: NetBIOS datagram and
+     NetBIOS session communication. The NetBIOS datagram communication can be
+     compared to the IPX communication; a successful delivery of sent data on
+     the destination workstation is not guaranteed by the protocol.  Like
+     IPX, the datagram connection can also be implemented as pseudo Point-To-
+     Point communication between two workstations.  Additionally, a
+     workstation can communicate with a group of workstations or with all
+     workstations in a network.
+
+     Like an SPX connection, a session connection is a fixed connection
+     between two workstations.  The dataflow between two workstations is
+     supervised internally by a protocol that guarantees the delivery of sent
+     data on the destination workstation.
+
+     For the communication with other workstations in a NetBIOS network,
+     NetBIOS names are used.  A NetBIOS name can be up to 15 characters long
+     and is case sensitive.  NetBIOS differentiates between two kinds of
+     names: station names that specify a workstation and are unique in a
+     network, and group names that can be assigned to any number of stations.
+     Each workstation contains a local name table with up to 20 NetBIOS
+     names.  A workstation can be addressed with each name in the name table.
+     Once you have defined single or group names, messages can be sent easily
+     to a station or a group of stations.
+
+     Because of the importance of NetBIOS names for the Point-To-Point
+     communication, CA-Clipper Tools not only includes functions for the
+     sending and receiving of data, but also functions for creating and
+     deleting NetBIOS names.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

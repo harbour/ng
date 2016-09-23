@@ -1,0 +1,42 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf370.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ngfa66.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER OVERLAY DYNAMIC       Specify CA-Clipper Summer '87 dynamic overlay allocation method</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify CA-Clipper Summer '87 dynamic overlay allocation method</B></U>
+
+ <U>Syntax   : <B>BLINKER OVERLAY DYNAMIC</B></U>
+
+ <U>Default  : <B>Enabled for CA-Clipper Summer '87</B></U>
+
+ This command is used to instruct Blinker to dynamically allocate memory for
+ overlays from the CA-Clipper free pool on an as-needed basis. This is the
+ default method of memory allocation for CA-Clipper Summer '87 overlaid
+ applications, and was the only method used by Blinker versions up to and
+ including Blinker 1.31.
+
+ This method has the benefit that the memory allocated to inactive overlays
+ can be returned to CA-Clipper using the BLIOVLCLR() function to clear out
+ inactive overlays. The disadvantage of this method is that it cannot make
+ use of UMBs or the EMS pageframe for running overlays, so can leave less
+ memory for the application under certain circumstances.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfa66.html">BLINKER OVERLAY FIXED</A>
+<A HREF="ng24fe8.html">BLIOVLCLR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng24a76.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng234ed.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Symbol Class</B> - Method
+ <B>exec()</B>
+------------------------------------------------------------------------------
+
+ <B>exec( &lt;parameter list&gt; )</B>
+
+    Executes the function referred to by the Symbol object receiving the
+    message.  If the executing application contains a function which has
+    the same name as the symbol referred to by the receiving Symbol object,
+    then that function will be executed with the specified parameters.
+    Otherwise, no action will be taken.  For example:
+
+        // create a symbol object referring to the <B>QOUT</B> symbol
+        LOCAL oSym := Symbol():new( "QOUT" )
+
+        ? "Now test the :exec() method"
+
+        oSym:exec( "This string is being printed by QOUT" )
+        oSym:exec( "which is being invoked by the :exec()" )
+        oSym:exec( "method in the Symbol class." )
+
+    This allows Symbol objects to be used for more than just sending
+    messages to objects.  If object-oriented data-driven systems are being
+    developed which make use of the Symbol class, the <B>exec()</B> method can
+    be useful to maintain consistency when dealing with functions as well
+    as methods.
+
+    <B>Note:</B>
+
+    At present, no error is generated if no function exists with the name
+    referred to by the Symbol object.  This may change in future versions.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng60d8e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng617a2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SELECT()</B>
+ Determine the work area number of a specified alias
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SELECT([&lt;cAlias&gt;]) --&gt; nWorkArea</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cAlias&gt;</B> is the target work area alias name.
+
+ <B>Returns</B>
+
+     SELECT() returns the work area of the specified alias as a integer
+     numeric value.
+
+ <B>Description</B>
+
+     SELECT() is a database function that determines the work area number of
+     an alias.  The number returned can range from zero to 250.  If &lt;cAlias&gt;
+     is not specified, the current work area number is returned.  If &lt;cAlias&gt;
+     is specified and the alias does not exist, SELECT() returns zero.
+
+     <B>Note: </B> The SELECT() function and SELECT command specified with an
+     extended expression argument look somewhat alike.  This shouldn't be a
+     problem since the SELECT() function is not very useful on a line by
+     itself
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses SELECT() to determine which work area
+        USE...NEW selected:
+
+        USE Sales NEW
+        SELECT 1
+        ? SELECT("Sales")            // Result: 4
+
+     <B>.</B>  To reselect the value returned from the SELECT() function, use
+        the SELECT command with the syntax, SELECT (&lt;idMemvar&gt;), like this:
+
+        USE Sales NEW
+        nWorkArea:= SELECT()
+        USE Customer NEW
+        SELECT (nWorkArea)
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbd59.html">ALIAS()</A>
+<A HREF="ng99b4e.html">SELECT</A>
+<A HREF="ngb1e6f.html">USE</A>
+<A HREF="ng6e0d6.html">USED()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

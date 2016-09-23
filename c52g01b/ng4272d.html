@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng42381.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng42bd1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ISDIGIT()</B>
+ Determine if leftmost character in a character string is a digit
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ISDIGIT(&lt;cString&gt;) --&gt; lBoolean</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string to examine.
+
+ <B>Returns</B>
+
+     ISDIGIT() returns true (.T.) if the first character of the character
+     string is a digit between zero and nine; otherwise, it returns false
+     (.F.).
+
+ <B>Description</B>
+
+     ISDIGIT() is a character function that determines whether the first
+     character in a string is a numeric digit between zero and nine.  If any
+     other character is the first character of the &lt;cString&gt;, ISDIGIT()
+     returns false (.F.).
+
+     ISDIGIT() is useful where you need to know if the current character
+     string is a number before converting it to a numeric value with the
+     VAL() function.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples demonstrate various results of ISDIGIT():
+
+        ? ISDIGIT("AbcDe")         // Result: .F.
+        ? ISDIGIT("1abcd")         // Result: .T.
+        ? ISDIGIT(".12345")        // Result: .F.
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng41f45.html">ISALPHA()</A>
+<A HREF="ng42bd1.html">ISLOWER()</A>
+<A HREF="ng4353d.html">ISUPPER()</A>
+<A HREF="ng46305.html">LOWER()</A>
+<A HREF="ng6da2d.html">UPPER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

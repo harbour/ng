@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng99438.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng9a2c7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SECONDS()</B>
+ Return the number of seconds elapsed since midnight
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SECONDS() --&gt; nSeconds</B>
+
+ <B>Returns</B>
+
+     SECONDS() returns the system time as a numeric value in the form
+     seconds.hundredths.  The numeric value returned is the number of seconds
+     elapsed since midnight, and is based on a twenty-four hour clock in a
+     range from 0 to 86399.
+
+ <B>Description</B>
+
+     SECONDS() is a time function that provides a simple method of
+     calculating elapsed time during program execution, based on the system
+     clock.  It is related to the TIME() function which returns the system
+     time as a string in the form hh:mm:ss.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example contrasts the value of TIME() with SECONDS():
+
+        ? TIME()               // Result: 10:00:00
+        ? SECONDS()            // Result: 36000.00
+
+     <B>.</B>  This example uses SECONDS() to track elapsed time in seconds:
+
+        LOCAL nStart, nElapsed
+        nStart:= SECONDS()
+        .
+        . &lt;statements&gt;
+        .
+        nElapsed:= SECONDS() - nStart
+        ? "Elapsed: " + LTRIM(STR(nElapsed)) + " seconds"
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga3808.html">TIME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

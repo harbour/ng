@@ -1,0 +1,128 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng61033.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5ea96.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>.INI Files:</B>
+
+  Each database in your application can have an associated .INI file, which
+  will provide various information to the Trigger System on how that partic-
+  ular database should be opened.  These files can also hold information, in
+  user-defined sections, which can be read from the .INI file into an array
+  by using Sx_INIheader().
+
+  An .INI file is just a plain ASCII text file that the developer would
+  create with their text editor.  The file must have the same base name as
+  its associated database file.  For example, TEST.INI would belong to
+  TEST.DBF, FOO.INI to FOO.DBF, and so on.
+
+  The format of an .INI files is nearly identical to that of the Windows (tm)
+  WIN.INI file.  Comment lines are preceded with a semicolon (;).  Each
+  section within the file must begin with a heading.  This header name may
+  be in upper, lower, or mixed case.  Each section heading must be on a
+  line by itself, surrounded by square brackets, like this:
+
+    <B>[USERINFO]</B>
+
+  On the lines following each header, the information for that section
+  should be placed in the following format:
+
+    <B>&lt;LeftValue&gt; = &lt;RightValue&gt;</B>
+
+  For example:
+
+    <B>; Data to identify a user name and ID</B>
+
+    <B>[USERINFO]                           </B>
+    <B>LASTNAME  = Scott                    </B>
+    <B>FIRSTNAME = Loren                    </B>
+    <B>ID_NUMBER = 12345                    </B>
+    <B>TOPSECRET = .T.                      </B>
+
+  This information could then be retrieved by using the Sx_INIheader()
+  function as such:
+
+    <B>aInfo := Sx_INIheader( "USERINFO" )</B>
+
+  In this case, the aInfo array would contain the following elements:
+
+    <B>aInfo[1,1] = "LASTNAME" </B>
+    <B>aInfo[1,2] = "Scott"    </B>
+    <B>aInfo[2,1] = "FIRSTNAME"</B>
+    <B>aInfo[2,2] = "Loren"    </B>
+    <B>aInfo[3,1] = "ID_NUMBER"</B>
+    <B>aInfo[3,2] = "12345"    </B>
+    <B>aInfo[4,1] = "TOPSECRET"</B>
+    <B>aInfo[4,2] = ".T."      </B>
+
+  Note that all of the information from the .INI file is read into the
+  array elements as character strings.  Any desired conversions to numeric,
+  logical, etc. values would need to be handled by the developer.
+
+  The only header name that cannot be used for user-defined section is
+  [SXKEYWORDS].  This is reserved for the SIx Driver's use.  By default,
+  the SIx Driver does _not_ read in the .INI file when the database is
+  opened.  In order to activate this behavior, you must first modify the
+  default trigger behavior of Sx_DefTrigger().  This function is contained
+  in SIXTRIG.PRG.
+
+  To enable the automatic use of an .INI file, the _sx_INIinit() function
+  needs to be called in the EVENT_PREUSE trigger handler.  With this
+  enabled, each time a .DBF file is used, a same-named .INI file would be
+  automatically opened prior to the database file actually being opened.
+  The contents of the reserved [SXKEYWORDS] section would be read in by the
+  SIx Driver and used as information regarding how the file should be
+  opened.  There are currently four key words that can be used in the
+  SXKEYWORDS section:  SHARED, READONLY, ALIAS, and TRIGGER
+
+  For example, the following SXKEYWORDS section would cause the database
+  file to be opened in SHARED / READONLY mode, using the ALIAS of "FOOBAR"
+  and using a custom trigger function called MyTrigger().
+
+    <B>[SXKEYWORDS]        </B>
+    <B>SHARED   = .T.      </B>
+    <B>READONLY = .T.      </B>
+    <B>ALIAS    = FOOBAR   </B>
+    <B>TRIGGER  = MYTRIGGER</B>
+
+  So, using the above settings in my TEST.INI file would allow you to
+  open TEST.DBF like this:
+
+    <B>USE test</B>
+
+  Instead of like this:
+
+    <B>USE test SHARED READONLY TRIGGER "MyTrigger"</B>
+
+
+  <B>Encrypting .INI Files:</B>
+
+  The .INI file can be encrypted from within your application using the
+  Sx_Encrypt() function or from DOS with the SIXINI.EXE utility.  Assuming
+  the same password code is active, the SIx Driver will automatically decrypt
+  it when it reads in the .INI file information.
+
+  <U>NOTE:  See the INIDEMO.PRG sample program for an example of using the</U>
+  <U>       Data Dictionary (.INI) System.</U>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng61033.html">The SXINIINFO Array</A>
+<A HREF="ng2b0ce.html">Sx_INIheader()</A>
+<A HREF="ng26347.html">Sx_Encrypt()</A>
+<A HREF="ng7b096.html">SIXINI.EXE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

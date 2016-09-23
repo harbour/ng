@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga15e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ngacaf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlOptLevel()            Get optimization level rlNewQuery() achieved</B>
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlOptLevel() -&gt; nOptLevel
+
+<B>Arguments</B>
+
+    None.
+
+<B>Returns</B>
+
+    A numeric result which is one of the following values:
+
+    2:  Fully Optimizable
+    1:  Partially Optimizable
+    0:  Not Optimizable
+
+<B>Description</B>
+
+    rlOptLevel() returns the level of optimization which was achieved by the
+    last call to rlNewQuery().  Since cmFilter() calls rlNewQuery(), this
+    function will also return the level of optimization achieved by the last
+    call to cmFilter().
+
+    The three levels of optimization possible are (see examples below for
+    more information):
+
+    <B>Fully Optimizable</B> which means that the condition was fully resolved
+    by looking at the indexes (i.e., all records meeting the condition were
+    determined solely by looking at the indexes).
+
+    <B>Partially Optimizable</B> which means that part of the condition was
+    resolved by looking at indexes, but part of the condition could not be
+    resolved.
+
+    <B>Not Optimizable</B> which means that no part of the condition could be
+    resolved by looking at indexes.
+
+<B>Example</B>
+
+    *   Assume that there is no structural index, so only indexes explicitly
+    *   brought into use are available for optimization
+    use demo
+
+    set index to age, last
+    rl := rlNewQuery("age = 30 .and. last = 'J'")
+    ? rlOptLevel()              &amp;&amp; Will return 2 (fully optimizable), since
+                                &amp;&amp; condition can be fully resolved just by
+                                &amp;&amp; looking at the indexes
+    rlDestroy(rl)
+
+    set index to age
+    rl := rlNewQuery("age = 30 .and. last = 'J'")
+    ? rlOptLevel()              &amp;&amp; Will return 1 (partially optimizable),
+                                &amp;&amp; since "age = 30" can be resolved using
+                                &amp;&amp; index on age, but "last = 'J'" can't be
+                                &amp;&amp; (no index)
+    rlDestroy(rl)
+
+    set index to
+    rl := rlNewQuery("age = 30 .and. last = 'J'")
+    ? rlOptLevel()              &amp;&amp; Will return 0 (not optimizable), since
+                                &amp;&amp; neither the age condition nor the last
+                                &amp;&amp; condition can be resolved by using
+                                &amp;&amp; indexes
+    rlDestroy(rl)
+
+<B>See Also</B>
+
+    rlNewQuery()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc16d.html">rlNewQuery()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

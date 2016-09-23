@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngac0a2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngacf16.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>@...CLEAR</B>
+ Clear a rectangular region of the screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>@ &lt;nTop&gt;, &lt;nLeft&gt; [CLEAR</B>
+     <B>   [TO &lt;nBottom&gt;, &lt;nRight&gt;]]</B>
+     <B>   [DOUBLE] [COLOR &lt;cColor&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B> and <B>&lt;nLeft&gt;</B> define the upper-left corner coordinate.
+
+     <B>TO &lt;nBottom&gt;</B>, <B>&lt;nRight&gt;</B> defines the lower-right corner
+     coordinates of the screen region to CLEAR.  If the TO clause is not
+     specified, these coordinates default to MAXROW() and MAXCOL().
+
+ <B>Description</B>
+
+     @...CLEAR erases a rectangular region of the screen by filling the
+     specified region with space characters using the current standard color
+     setting.  After @...CLEAR erases the designated region, the cursor is
+     located in the upper corner of the region at &lt;nTop&gt; + 1 and &lt;nLeft&gt; + 1.
+     ROW() and COL() are also updated to reflect the new cursor position.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example erases the screen from 10, 10 to 20, 40, painting
+        the region blue and then displaying a bright cyan box on blue:
+
+        SETCOLOR("BG+/B")
+        @ 10, 10 CLEAR TO 20, 40
+        @ 10, 10 TO 20, 40
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngac0a2.html">@...BOX</A>
+<A HREF="ngc1f1c.html">CLEAR SCREEN</A>
+<A HREF="ng99438.html">SCROLL()</A>
+<A HREF="ng9c7f1.html">SETCOLOR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

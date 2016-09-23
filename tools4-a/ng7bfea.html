@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7bc62.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7a98e.html">[^^Up^^]</A>
+<A HREF="ng7c309.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSDATE()</B>
+ Queries the Novell file server date
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSDATE() --&gt; dServerDate</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Returns</B>
+
+     NNETSDATE() returns the default file server date.
+
+ <B>Description</B>
+
+     NOVELL NETSERVER DATE
+     This function allows you to query the current default file server date.
+     This date is then available in the corresponding date format under
+     CA-Clipper.  This allows all applications to synchronize their dates
+     within a Novell network.
+
+ <B>Examples</B>
+
+     <B>.</B>  Query the default server date:
+
+        ? NNETSDATE()         // e.g. 04/01/91
+
+     <B>.</B>  Pass the date with an AT to the CMOS-RAM:
+
+        SETDATE(NNETSDATE(), ISAT())
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng7d133.html">NNETSTIME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

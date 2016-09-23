@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng42e9f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng43a82.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBSORTINFO</B>
+ Information needed to perform a physical sort on the workarea
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   DBTRANSINFO trans;</B>
+     <B></B>
+     <B>   DBSORTITEMP sortItems;</B>
+     <B>   USHORT      itemCount;</B>
+     <B></B>
+     <B>} DBSORTINFO;</B>
+     <B></B>
+     <B>typedef DBSORTINFO far * DBSORTINFOP;</B>
+
+ <B>Elements</B>
+
+     <B>trans</B>
+
+        Contains a data structure holding the destination workarea, field
+        transfer information, control and optimization flags, and scoping
+        information for the sort() method (see DBTRANSINFO).
+
+     <B>sortItems</B>
+
+        Contains an array of DBSORTITEM items (rows) which compose the key
+        values for the sort (see DBSORTITEM).
+
+     <B>itemCount</B>
+
+        Contains the number of DBSORTITEM items allocated to sortItems.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   sort()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng500fb.html">sort()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

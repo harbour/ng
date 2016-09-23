@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng169b6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng17443.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_SetFilter():</B>
+
+  Purpose:  Used to filter out records in a database that to do not match
+            a specific condition.
+
+   Syntax:  m6_SetFilter( &lt;bFilter&gt;, &lt;cFilter&gt;, &lt;lNoOptimize&gt; )
+
+    Where:  &lt;bFilter&gt;     = Code block containing filter condition
+            &lt;cFilter&gt;     = Filter text ( used by Mach SIx )
+            &lt;lNoOptimize&gt; = Toggles off automatic optimization
+
+    Note:   <B>SET ORDER TO 0.</B>  Because Mach SIx internally caches filtered
+            records in natural record order optimal filter performance will
+            be achieved with SET ORDER TO 0.
+
+  Returns:  NIL
+
+
+  Example:   #include "SIXCDX.CH"
+             #include "MACHSIX.CH"
+
+             #define OPTIMIZE_OFF  .T.
+
+             Use Accounts via "SIXCDX"
+
+             bFilter := {|| state == "CA" }
+             cFilter := 'state == "CA"'
+
+             //...............................................set the filter
+             <B>m6_SetFilter( bFilter, cFilter )</B>
+             go top
+
+             //..........................check the filter optimization level
+             ? m6_IsFilter()  // 2
+
+             //............................set filter with optimization off
+             <B>m6_SetFilter( bFilter, cFilter, OPTIMIZE_OFF )</B>
+
+             //.........................check the filter optimization level
+             ? m6_IsFilter()  // 0
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4df76.html">SET FILTER</A>
+<A HREF="ng166d4.html">m6_RefreshFilter</A>
+<A HREF="ng1402e.html">m6_IsFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,96 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3e858.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng39198.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSNDUSR()</B>
+ Sends a message to a user
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSNDUSR(&lt;cName&gt;,&lt;cMessage&gt;,[&lt;lNoSender&gt;],</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cName&gt;</B>  Designates the login name of the user to whom the message
+     is sent.
+
+     <B>&lt;cMessage&gt;</B>  Designates the message that is sent to &lt;cName&gt;.  The
+     message can be up to 55 characters long (including information about the
+     sender) and can contain only characters that have an ASCII value between
+     32 and 127.
+
+     <B>&lt;lNoSender&gt;</B>  Designates an optional parameter that allows you to
+     suppress the sender information (from ...) when designated as .T..  When
+     the parameter is designated .F., the sender information is generated
+     automatically.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server through which the
+     message is sent.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETSNDUSR() returns the number of workstations to which the message
+     &lt;cMessage&gt; has been sent successfully.  The function returns 0 if
+     &lt;cName&gt; is not logged in or not ready to receive messages.
+
+ <B>Description</B>
+
+     NOVELL NET SEND USER
+     NNETSNDUSR() allows you to send a message of up to 55 characters to a
+     user.  The function can be compared to the Novell utility SEND.  The
+     user &lt;cName&gt; must be logged in either on the default server or on the
+     server specified by &lt;cServer&gt;|&lt;nConId&gt; because the sending of messages
+     is processed through a file server.  The message is sent to all
+     workstations on which &lt;cName&gt; is logged in and the message receipt is
+     not disabled (castoff).  The message is displayed in line 24 of the
+     screen and must be confirmed with &lt;Ctrl&gt; &lt;Return&gt;.  The message system
+     of CA-Clipper Tools ( NNETMSGOPN()) allows the interrupt-controlled
+     receipt of messages in the background.  The incoming messages can be
+     processed within the application, and the computer is not interrupted in
+     critical moments.
+
+     If the parameter &lt;lNoSender&gt; is set to .F. or if no parameter is set,
+     the message contains the information about the sender.  This information
+     consists of the word "from", the name of the sender, and the connection
+     ID.  By passing &lt;lNoSender&gt; with .T., the sender information can be
+     suppressed.  With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the message can
+     be sent on any attached file server.  The connection ID of a server is
+     returned by NNETATTACH() or NNETLOGIN().
+
+ <B>Examples</B>
+
+     <B>.</B>  Send a message to user MIKE:
+
+        nNumber= NNETSNDUSR('MIKE','Good morning')
+        ? 'Message has been sent to '+NTOC(nNumber)+' stations!'
+
+     <B>.</B>  Send a message to the supervisor without the sender
+        information:
+
+        NNETSNDCON('SUPERVISOR','You fool!',.T.)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3b698.html">NNETMSGOPN()</A>
+<A HREF="ng3c9df.html">NNETSNDALL()</A>
+<A HREF="ng3d3e6.html">NNETSNDCON()</A>
+<A HREF="ng3dcb9.html">NNETSNDGRP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

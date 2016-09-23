@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng70cb6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng719e4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MEMVARBLOCK()</B>
+ Return a set-get code block for a given memory variable
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MEMVARBLOCK(&lt;cMemvarName&gt;) --&gt; bMemvarBlock</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cMemvarName&gt;</B> is the name of the variable referred to by the set-get
+     block, specified as a character string.
+
+ <B>Returns</B>
+
+     MEMVARBLOCK() returns a code block that when evaluated sets (assigns) or
+     gets (retrieves) the value of the given memory variable.  If
+     &lt;cMemvarName&gt; does not exist, MEMVARBLOCK() returns NIL.
+
+ <B>Description</B>
+
+     The code block created by MEMVARBLOCK() has two operations depending on
+     whether an argument is passed to the code block when it is evaluated.
+     If evaluated with an argument, it assigns the value of the argument to
+     &lt;cMemvarName&gt;.  If evaluated without an argument, the code block
+     retrieves the value of &lt;cMemvarName&gt;.
+
+ <B>Notes</B>
+
+     <B>.</B>  MEMVARBLOCK() creates set-get blocks only for variables whose
+        names are known at runtime.  MEMVARBLOCK(), therefore, cannot be used
+        to create set-get blocks for local or static variables.  The same
+        restriction applies to creating blocks using the macro operator (&amp;).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example compares MEMVARBLOCK() to a code block created
+        using the macro operator (&amp;).  Note that using MEMVARBLOCK() allows
+        you to avoid the speed and size overhead of the macro operator:
+
+        PRIVATE var := "This is a string"
+        //
+        // Set-Get block defined using macro operator
+        bSetGet := &amp;( "{ |setVal|;
+              IF( setVal == NIL, var, var := setVal ) }" )
+        // Set-Get block defined using MEMVARBLOCK()
+
+        // bSetGet created here is the functional
+        // equivalent of bSetGet above
+        bSetGet := MEMVARBLOCK("var")
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng44a89.html">FIELDBLOCK()</A>
+<A HREF="ng46c9b.html">FIELDWBLOCK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng65be3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng639de.html">[^^Up^^]</A>
+<A HREF="ng6663d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sub-Indexes:</B>
+
+  Sub-indexes are indexes that are built based upon another index, usually
+  a conditional index.  Instead of plowing through the entire database, a
+  sub-index includes only the records that are contained in the index upon
+  which it is based.  This adds up to substantial time savings when all you
+  want is to re-arrange the a conditional index.
+
+  Sub-indexes are created with the INDEX command using the <B>SUBINDEX</B> keyword
+  at the end of an <B>INDEX ON</B> command, or by just using the <B>SUBINDEX</B> command.
+  This tells the SIx Driver to use the current index to build the
+  new one.
+
+  Note that sub-indexes do NOT inherit the condition from the original index.
+
+  <B>NOTE: Sub-Indexes are considered non-updatable and are normally intended</B>
+  <B>      to be used as temporary indexes.  What this means is, if you change</B>
+  <B>      keys values in your database after creating or opening a SUBINDEX,</B>
+  <B>      the keys in the SUBINDEX will not change.  If you want to force a</B>
+  <B>      SUBINDEX to be updatable, you can do so by also making it a condi-</B>
+  <B>      tional index by using a FOR clause.</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng535ee.html">SUBINDEX</A>
+<A HREF="ng47c93.html">INDEX</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng18392.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng19116.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BROWSE()*</B>
+ Browse records within a window
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>BROWSE([&lt;nTop&gt;], [&lt;nLeft&gt;],</B>
+     <B>   [&lt;nBottom&gt;], [&lt;nRight&gt;]) lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B>, and <B>&lt;nRight&gt;</B> define the
+     window coordinates.  If not specified, the default window coordinates
+     are 1, 0 to MAXROW(), and MAXCOL().
+
+ <B>Returns</B>
+
+     BROWSE() returns false (.F.) if there is no database file in use;
+     otherwise, it returns true (.T.).
+
+ <B>Description</B>
+
+     BROWSE() is a user interface function that invokes a general purpose
+     table-oriented browser and editor for records in the current work area.
+     For a list of the navigation keys which are used by BROWSE(), refer to
+     the DBEDIT() function.  Note that Browse() is a compatibility function.
+     DBEDIT() should be used in its place.  For a more complicated BROWSE(),
+     TBROWSE() should be used.
+
+ <B>Notes</B>
+
+     <B>.  Status line:</B> BROWSE() supports a status line in the upper
+        right corner of the browse window indicating one of the following:
+
+        <B>BROWSE() Status Line Messages</B>
+        ---------------------------------------------------------------------
+        <B>Message   Meaning</B>
+        ---------------------------------------------------------------------
+        &lt;new&gt;     Append mode
+        &lt;bof&gt;     Top of file
+        &lt;delete&gt;  Current record is deleted
+        Record    Record number display
+        ---------------------------------------------------------------------
+
+     <B>.</B>  BROWSE() has the following three modes:
+
+        <B>-  Browsing:</B> This is the default mode of BROWSE().  Pressing any
+           DBEDIT() navigation key moves the highlight to a new column or
+           row.
+
+        <B>-  Field edit:</B> Pressing Return on any field enters field edit
+           using a GET.  Pressing Return terminates the edit mode, saving the
+           changes.  Esc terminates without saving changes.  Since the field
+           edit mode uses GET, all navigation and editing keys are READ keys.
+
+        <B>-  Append:</B> GOing BOTTOM with Ctrl+PgDn and then pressing Down
+           arrow enters append mode with the indicating message "&lt;new&gt;" on
+           the status line.  A new blank record is then inserted.  Pressing
+           Up arrow terminates the append mode, saving the new record if data
+           has been entered.  If no data has been entered, the new record is
+           not saved.
+
+ <B>Examples</B>
+
+     <B>.</B>  This is an example of browsing a file:
+
+        USE File1 NEW
+        BROWSE()
+
+ <B>Files</B>   Library is EXTEND.LIB, source file is SOURCE\SAMPLE\BROWSE.PRG
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng20e4d.html">DBEDIT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd0b7d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngc8ba2.html">[^^Up^^]</A>
+<A HREF="ngd1358.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>.OR.</B>
+ Logical OR--binary                              (Logical)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>&lt;lCondition1&gt; .OR. &lt;lCondition2&gt;</B>
+
+ <B>Type</B>
+
+     Logical
+
+ <B>Operands</B>
+
+     <B>&lt;lCondition1&gt;</B> and <B>&lt;lCondition2&gt;</B> are logical expressions.
+
+ <B>Description</B>
+
+     The .OR. operator is a binary logical operator that executes a logical
+     OR operation using the following modified Boolean rules:
+
+     <B>.</B>  Returns true (.T.) if either &lt;lCondition1&gt; or &lt;lCondition2&gt;
+        evaluate to true (.T.).
+
+     <B>.</B>  Returns false (.F.) if both &lt;lCondition1&gt; and &lt;lCondition2&gt;
+        evaluate to false (.F.).
+
+     <B>Warning! </B> In a departure from the Summer '87 and other dialect's
+     behavior, CA-Clipper shortcuts the evaluation of .OR. operands.  This
+     means that &lt;lCondition1&gt; and &lt;lCondition2&gt; are both evaluated only when
+     &lt;lCondition1&gt; evaluates to false (.F.).  If &lt;lCondition1&gt; evaluates to
+     true (.T.), the .OR. operation is true (.T.) and &lt;lCondition2&gt; is
+     therefore not evaluated.
+
+     For backward compatibility, shortcutting can be suppressed by compiling
+     with the /Z option.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows .OR. results using different operands:
+
+        ? .T. .OR. .T.            // Result: .T.   (shortcut)
+        ? .T. .OR. .F.            // Result: .T.   (shortcut)
+        ? .F. .OR. .T.            // Result: .T.
+        ? .F. .OR. .F.            // Result: .F.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd05f7.html">.AND.</A>
+<A HREF="ngd0b7d.html">.NOT.</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

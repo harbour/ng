@@ -1,0 +1,321 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng542b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d0.html">[^^Up^^]</A>
+<A HREF="ng8bfb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CA-Clipper Debugger--CLD.EXE</B>
+ Allows you to debug your source code while your executable file is running.
+------------------------------------------------------------------------------
+
+     <B>CLD [[/43 | /50 | /S] [@&lt;scriptFile&gt;]</B>
+     <B>   &lt;exeFile&gt; [&lt;argument list&gt;]]</B>
+
+ <B>Arguments</B>
+
+     If no command line arguments are specified, CLD displays a brief help
+     screen.
+
+     <B>/43 | /50 | /S</B> specifies the screen mode used by the debugger.  These
+     three options are mutually exclusive and, if more than one is specified,
+     CLD.EXE uses the last one that occurs on the command line.  The default
+     screen mode is 25 lines, with the debugger using the entire screen.
+
+     <B>/43</B> specifies 43-line mode and is available on EGA monitors only.
+
+     <B>/50</B> specifies 50-line mode and is available on EGA and VGA monitors
+     only.
+
+     <B>/S</B> is available on EGA and VGA monitors only.  This option splits
+     the screen between your application and the debugger, allowing you to
+     view the application and the debugger simultaneously.  On a VGA monitor
+     /S uses 50-line mode, and on an EGA monitor it uses 43-line mode. In
+     split screen mode, the top 25 lines of the screen are used by your
+     application, and the remaining lines are used for the debugger display.
+
+     <B>&lt;scriptFile&gt;</B> is the name of a script file with a default extension
+     of (.cld).  CLD searches for the specified &lt;scriptFile&gt; in the current
+     directory then searches the DOS PATH.  A script file is simply an ASCII
+     text file containing one or more debugger commands, with each command
+     appearing on a separate line.  When the debugger is invoked with a
+     script file, each command in the file is executed automatically after
+     the &lt;exeFile&gt; file is loaded.
+
+     In addition to any script file called for on the CLD command line, the
+     debugger automatically searches for a script file with the name
+     Init.cld.  If a file by this name is located in the current directory or
+     anywhere in the DOS PATH, the debugger executes it as a script file.  If
+     both Init.cld and a command line script file are present, Init.cld is
+     executed first followed by the command line script file.
+
+     <B>&lt;exeFile&gt;</B> is the name of the executable file (.EXE) you want to
+     debug.  CLD searches for the &lt;exeFile&gt; in the current directory only--
+     the DOS PATH is not searched.  The file must include line numbers and
+     debugging information.
+
+     <B>&lt;argument list&gt;</B> is the argument list for &lt;exeFile&gt;.  There must be a
+     space between &lt;argument list&gt; and &lt;exeFile&gt;.
+
+ <B>Menu Commands</B>
+
+     Listed below is a summary of debugger commands.
+
+     <B>?|?? &lt;exp&gt;</B>
+
+     Displays the value of an expression.
+
+     <B>BP [[At] &lt;lineNum&gt; [[In] &lt;idProgramFile&gt;]]]</B>
+     <B>BP [&lt;idFunction&gt; | &lt;idProcedure&gt;]</B>
+
+     Sets or removes a breakpoint at a specified program and line number or
+     at a particular function/procedure call.
+
+     <B>Callstack [on | Off]</B>
+
+     Toggles the display of the Callstack window.
+
+     <B>Delete All [BP | TP | WP]</B>
+     <B>Delete BP | TP | WP &lt;number&gt;</B>
+
+     Deletes breakpoints, watchpoints, and tracepoints, either individually
+     or as a whole.
+
+     <B>File DOS</B>
+
+     Loads a temporary copy of COMMAND.COM, allowing you to enter DOS
+     commands without leaving the current application.
+
+     <B>File Exit</B>
+
+     Terminates the debugger, closes all files, and returns to DOS.
+
+     <B>File Open &lt;idFileName&gt;</B>
+
+     Opens the specified file for viewing in the Code window.
+
+     <B>File Resume</B>
+
+     Returns from viewing a file to the program being debugged.
+
+     <B>Help [Keys | Windows | Menus | Commands]</B>
+
+     Activates the Help window.
+
+     <B>List BP | TP | WP</B>
+
+     Lists watchpoints, tracepoints, and breakpoints.
+
+     <B>Locate Case</B>
+
+     Toggles search case-sensitivity setting.
+
+     <B>Locate Find &lt;searchString&gt;</B>
+
+     Searches the current file for the specified string, obeying the Locate
+     Case setting.
+
+     <B>Locate Goto &lt;lineNum&gt;</B>
+
+     Moves the cursor to a specified line in the Code window.
+
+     <B>Locate Next</B>
+
+     Locates the next occurrence of the string specified by the last Locate
+     Find command, obeying the Locate Case setting.
+
+     <B>Locate Previous</B>
+
+     Locates the previous occurrence of the string specified by the last
+     Locate Find command, obeying the Locate Case setting.
+
+     <B>Monitor All</B>
+
+     Toggles the display of variables of all storage classes in the Monitor
+     window.
+
+     <B>Monitor Local</B>
+
+     Toggles the display of local variables in the Monitor window.
+
+     <B>Monitor Private</B>
+
+     Toggles the display of private variables in the Monitor window.
+
+     <B>Monitor Public</B>
+
+     Toggles the display of public variables in the Monitor window.
+
+     <B>Monitor Sort</B>
+
+     Controls the order in which variables are displayed in the Monitor
+     window.
+
+     <B>Monitor Static</B>
+
+     Toggles the display of static variables in the Monitor window.
+
+     <B>Num [On | off]</B>
+
+     Toggles the display of line numbers at the beginning of each line in the
+     Code window.
+
+     <B>Options Codeblock</B>
+
+     Controls the tracing of code blocks during single step mode.
+
+     <B>Options Color</B>
+
+     Opens the Set Colors window.
+
+     <B>Options Exchange</B>
+
+     Controls the display of program output while in animate mode.
+
+     <B>Options Line</B>
+
+     Toggles the display of line numbers at the beginning of each line in the
+     Code window.
+
+     <B>Options Menu</B>
+
+     Toggles the debugger menu bar display.
+
+     <B>Options Mono</B>
+
+     Switches the debugger display mode between color and monochrome.
+
+     <B>Options Path &lt;idPathList&gt;</B>
+
+     Defines the search path for source files.
+
+     <B>Options Preprocessed</B>
+
+     Toggles the display of preprocessed code in the Code window.
+
+     <B>Options Restore &lt;idScriptFile&gt;</B>
+
+     Reads commands from a script file.
+
+     <B>Options Save &lt;idScriptFile&gt;</B>
+
+     Saves the current debugger settings to a script file.
+
+     <B>Options Swap</B>
+
+     Controls the display of the application screen when input is required.
+
+     <B>Options Tab &lt;tabSize&gt;</B>
+
+     Sets the tab size for the Code window.
+
+     <B>Point Breakpoint</B>
+
+     Sets or removes a breakpoint at the current cursor position.
+
+     <B>Point Delete &lt;number&gt;</B>
+
+     Deletes a tracepoint or watchpoint setting.
+
+     <B>Point Tracepoint &lt;exp&gt;</B>
+
+     Specifies an expression as a tracepoint.
+
+     <B>Point Watchpoint &lt;exp&gt;</B>
+
+     Specifies an expression as a watchpoint.
+
+     <B>Run Animate</B>
+
+     Executes the application in animate mode.
+
+     <B>Run Go</B>
+
+     Executes the application in run mode.
+
+     <B>Run Next</B>
+
+     Executes the application until line zero of the next activation is
+     encountered.  This is equivalent to creating a tracepoint of "PROCLINE()
+     = 0".
+
+     <B>Run Restart</B>
+
+     Reloads the current application in preparation for reexecution.
+
+     <B>Run Speed &lt;delay&gt;</B>
+
+     Sets the step delay for animate mode.
+
+     <B>Run Step</B>
+
+     Executes the current program in single step mode.
+
+     <B>Run To</B>
+
+     Executes the current program up to the current cursor position.
+
+     <B>Run Trace</B>
+
+     Executes the current program in trace mode.
+
+     <B>View &lt;idFileName&gt;</B>
+
+     Opens the specified file for viewing in the Code window.
+
+     <B>View App</B>
+
+     Displays program output.
+
+     <B>View Callstack</B>
+
+     Toggles the display of the Callstack window.
+
+     <B>View Sets</B>
+
+     Displays the View Sets window.
+
+     <B>View Workareas</B>
+
+     Displays the View Workareas window.
+
+     <B>Window Iconize</B>
+
+     Toggles the active debugger window between icon and window display
+     modes.
+
+     <B>Window Move</B>
+
+     Moves the active debugger window.
+
+     <B>Window Next</B>
+
+     Selects the next debugger window.
+
+     <B>Window Prev</B>
+
+     Selects the previous debugger window.
+
+     <B>Window Size</B>
+
+     Changes the size of the active debugger window.
+
+     <B>Window Tile</B>
+
+     Restores the debugger windows to their default size and location.
+
+     <B>Window Zoom</B>
+
+     Toggles the active debugger window between window and full-screen
+     display modes.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

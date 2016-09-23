@@ -1,0 +1,36 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb2d4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng270.html">[^^Up^^]</A>
+<A HREF="ngb72f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>C2079   Circular #translate/#command</B>
+
+     <B>Explanation:</B>  You specified a #translate/#xtranslate or
+     #command/#xcommand directive in terms of itself.  A circular #translate
+     or #command cannot be resolved by the preprocessor and is, therefore,
+     not allowed.
+
+     When using #command and #translate, keep in mind that both directives
+     match four-character abbreviations for keywords.  This may cause an
+     unexpected match which could lead to this error.
+
+     <B>Action:</B>  Some suggestions to resolve the problem are:
+
+     1. Check to see if the problem is related to the four-letter rule using
+        either #translate or #command.  If it is, change the directive to
+        either #xtranslate or #xcommand as both require an exact match.
+
+     2. Remove the circular definition and recompile.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>With SET FILTER:</B>
+
+  SET FILTER is now fully optimizable by Mach SIx.  Now filtering records
+  on large database is as easy as SET FILTER TO.  It's really that easy!
+  You can now eliminate all those complicated TBrowse() skip blocks,
+  temporary indexes, and even scopes.  Yes even SCOPEs.  While scoping
+  will continue to be a powerful filter tool in the SIx Driver, Mach SIx
+  surpasses it's capability by allowing complicated filter conditions
+  that utilize multiple indexes.
+
+  Guidelines for an optimizable filter are the same as for the conditions
+  specified in a query command.  To be optimizable, the filter must contain
+  at least one active index key ( <B>See m6_IsOptimize()</B> ).  Remember, no
+  LOCALs, STATICs, or embedded extended expressions ( Clipper's macro
+  compiler can't process them ) can be used in the filter condition.  For a
+  discussion on how you can work around this limitation see <B>With</B>
+  <B>Locals/Statics</B> in the <B>USING</B> section of this guide.
+
+  Now you have two choices for optimizing commands with a query condition.
+  First you can set a filter for a condition then issue the particular
+  database command you want to optimize, or you can specify the query
+  condition as part of the FOR clause of that command.  To make it even
+  more complicated you could set a filter for one condition, then issue
+  optimizable command on top of the filter with its own specific query
+  condition.  It's all optimizable by Mach SIx.
+
+  We've also added a function m6_IsFilter() so you can check the
+  optimization level of the active filter condition.  <B>REFRESH FILTER</B>
+  gives you the control to specify when the filter should updated on
+  shared files thus eliminating the overhead of constantly maintaining
+  the filter while others do updates.
+
+  If you're like most, you abandoned SET FILTER long ago.  But now with
+  the power of Mach SIx the possibilities are endless!
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4df76.html">SET FILTER</A>
+<A HREF="ng1402e.html">m6_IsFilter()</A>
+<A HREF="ng4bc19.html">REFRESH FILTER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

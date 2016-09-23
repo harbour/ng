@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3e5c8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng31a91.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gtWriteCon()</B>
+ Perform a console style write to the screen
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "gt.api"</B>
+     <B>ERRCODE _gtWriteCon(</B>
+     <B>                     BYTEP fpStr,</B>
+     <B>                     USHORT uiLen</B>
+     <B>                   )</B>
+
+ <B>Arguments</B>
+
+     <B>fpStr</B> is the string to write.
+
+     <B>uiLen</B> is the length of the string.
+
+ <B>Returns</B>
+
+     _gtWriteCon() returns zero if successful.  Any other value indicates an
+     error.
+
+ <B>Description</B>
+
+     _gtWriteCon() writes a character string at the current cursor position
+     using "console" style output.  This includes processing control
+     characters, wrapping lines at the last column, and scrolling the screen
+     at the last row.  This is similar to the CA-Clipper QQOUT() console
+     function except that the output is always sent to the console.  The
+     internal row and column coordinates are updated so the CA-Clipper
+     functions, ROW() and COL(), will reflect the new cursor position.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this simple example, _gtWriteCon() displays the string
+        "Hello" on the screen:
+
+        _gtWriteCon( "Hello", 5 )
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Gt.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng381fe.html">_gtRepChar()</A>
+<A HREF="ng3e0f1.html">_gtWrite()</A>
+<A HREF="ng3e5c8.html">_gtWriteAt()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

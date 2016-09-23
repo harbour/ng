@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9ed70.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng9f6b8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETPOS()</B>
+ Move the cursor to a new position
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETPOS(&lt;nRow&gt;, &lt;nCol&gt;) --&gt; &lt;nRow&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nRow&gt;</B> and <B>&lt;nCol&gt;</B> define the new screen position of the cursor.
+     These values may range from 0, 0 to MAXROW(), MAXCOL().
+
+ <B>Returns</B>
+
+     SETPOS() always returns &lt;nRow&gt;
+
+ <B>Description</B>
+
+     SETPOS() is an environment function that moves the cursor to a new
+     position on the screen.  After the cursor is positioned, ROW() and COL()
+     are updated accordingly.  To control the shape and visibility of the
+     cursor, use the SETCURSOR() function.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example moves the cursor to a new position then displays
+        a string to the screen using a console command, ??:
+
+        SETPOS(1, 1)
+        ?? "Hello world"
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng97e75.html">ROW()</A>
+<A HREF="nge2189.html">SET CURSOR</A>
+<A HREF="ng9dd92.html">SETCURSOR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng14bea9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng148df2.html">[^^Up^^]</A>
+<A HREF="ng14c763.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>&lt;oPushButton&gt;:hitTest(&lt;nMouseRow&gt;, &lt;nMouseCol&gt;)</B>
+     <B>   --&gt; &lt;nHitStatus&gt;</B>
+
+        &lt;nMouseRow&gt; is a numeric value that indicates the current screen row
+        position of the mouse cursor.
+
+        &lt;nMouseCol&gt; is a numeric value that indicates the current screen
+        column position of the mouse cursor.
+
+        Returns a numeric value that indicates the relationship of the mouse
+        cursor with the push button.
+
+        <B>Applicable Hit Test Return Values</B>
+        ---------------------------------------------------------------------
+        <B>Value   Constant       Description</B>
+        ---------------------------------------------------------------------
+        0       HTNOWHERE      The mouse cursor is not within the region of
+                               the screen that the push button occupies
+        -1      HTTOPLEFT      The mouse cursor is on the top left corner of
+                               the push button's border
+        -2      HTTOP          The mouse cursor is on the push button's top
+                               border
+        -3      HTTOPRIGHT     The mouse cursor is on the top right corner of
+                               the push button's border
+        -4      HTRIGHT        The mouse cursor is on the push button's right
+                               border
+        -5      HTBOTTOMRIGHT  The mouse cursor is on the bottom right corner
+                               of the push button's border
+        -6      HTBOTTOM       The mouse cursor is on the push button's
+                               bottom border
+        -7      HTBOTTOMLEFT   The mouse cursor is on the bottom left corner
+                               of the push button's border
+        -8      HTLEFT         The mouse cursor is on the push button's left
+                               border
+        -2049   HTCLIENT       The mouse cursor is on the push button
+        ---------------------------------------------------------------------
+
+        Button.ch contains manifest constants for the PushButton:hitTest()
+        return value.
+
+        hitTest() is a method of the PushButton class that is used for
+        determining if the mouse cursor is within the region of the screen
+        that the push button occupies.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

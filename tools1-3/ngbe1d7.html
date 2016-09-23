@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbde72.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb7bb9.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SSETVERIFY()</B>
+ Sets and checks the DOS VERIFY switch
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SSETVERIFY([&lt;lNewSwitch&gt;]) --&gt; lOldSwitch</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lNewSwitch&gt;</B>  Designates the new setting for the DOS VERIFY switch.
+
+ <B>Returns</B>
+
+     SSETVERIFY() returns the current VERIFY setting when no parameter is
+     specified; otherwise, it returns the previous setting.
+
+ <B>Description</B>
+
+     Normally, DOS does not check to see if copied data arrives at the target
+     error free.  The DOS VERIFY switch determines whether to check written
+     data.  Of course, verification takes time.  To be safe, make critical
+     copies with the switch set to on (.T.).
+
+ <B>Note</B>
+
+     <B>.</B>  You can also use VERIFY= &lt;ON|OFF&gt; to set VERIFY in DOS.
+
+ <B>Example</B>
+
+     Activate VERIFY and save old status:
+
+     lOld_Verify:= SSETVERIFY(.T.)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb9607.html">ENVPARAM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

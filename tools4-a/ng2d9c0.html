@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2c843.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng2e29d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETDSKUSE()</B>
+ Determines the server disk capacity occupied by a user
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETDSKUSE([&lt;cUser&gt;],[&lt;nVol&gt;|&lt;cVol&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;])   --&gt; nKByte</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cUser&gt;</B>  Designates the name of the user whose disk capacity is
+     determined.  The default value designates the logged in user.
+
+     <B>&lt;nVol&gt;</B>  Designates the volume number.  Under Novell, volume numbers
+     start with 0.  This parameter is only important if the specified file
+     server runs under Netware 3.x.
+
+     <B>&lt;cVol&gt;</B>  Designates the volume name.  A server name is not allowed.
+     This parameter is only important if the specified file server runs under
+     Netware 3.x.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server where the used
+     disk capacity is determined.  Your workstation must be attached to
+     &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETDSKUSE() returns the disk capacity in kByte on the specified file
+     server or volume occupied by &lt;cUser&gt;.
+
+ <B>Description</B>
+
+     NOVELL NET DISK SPACE IN USE
+     NNETDSKUSE() allows you to determine the disk capacity on a file server
+     occupied by a user.  Under Netware 2.x and Netware 3.x, the function
+     returns the total of the used disk capacity over all volumes on the
+     specified file server when it is called without the parameter
+     &lt;nVol&gt;|&lt;cVol&gt;.  Under  Netware 3.x, it is possible to determine the
+     capacity for a specific volume by passing the volume number &lt;nVol&gt; or
+     the volume name &lt;cVol&gt;.  With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the
+     occupied capacity on any attached file server can be determined.  The
+     connection ID of a server is returned by NNETATTACH() or NNETLOGIN().
+
+ <B>Example</B>
+
+     Determine the total occupied disk capacity for user MIKE under Netware
+     3.x for all volumes.  Also determine the total occupied disk capacity
+     for user MIKE for any Netware version:
+
+     IF NNETVER()&gt;'2'
+     FOR i = 0 TO NNETVOLNUM()
+     ? NNETVOLNAM(i),NNETDSKUSE('MIKE',i)
+     NEXT i
+     ? '======================'
+     ENDIF
+     ? 'Total: ',NNETDSKUSE('MIKE')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng37a93.html">NNETUSRFRE()</A>
+<A HREF="ng3897d.html">NNETVOLNAM()</A>
+<A HREF="ng38d25.html">NNETVOLNUM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

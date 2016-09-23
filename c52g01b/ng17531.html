@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng16fff.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng17c35.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBCOMMIT()</B>
+ Flush pending updates
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBCOMMIT() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DBCOMMIT() always returns NIL.
+
+ <B>Description</B>
+
+     DBCOMMIT() causes all updates to the current work area to be written to
+     disk.  All updated database and index buffers are written to DOS and a
+     DOS COMMIT request is issued for the database (.dbf) file and any index
+     files associated with the work area.
+
+     DBCOMMIT() performs the same function as the standard COMMIT command
+     except that it operates only on the current work area.  For more
+     information, refer to the COMMIT command.
+
+ <B>Notes</B>
+
+     <B>.  Network environment:</B> DBCOMMIT() makes database updates visible
+        to other processes.  To insure data integrity, issue DBCOMMIT()
+        before an UNLOCK operation.  For more information, refer to the
+        Network Programming chapter in the Programming and Utilities guide.
+
+     <B>.</B>  DBCOMMIT() uses DOS interrupt 21h function 68h to perform the
+        solid-disk write.  It is up to the network operating system to
+        properly implement this request.  Check with the network vendor to
+        see if this is supported.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, COMMIT is used to force a write to disk after
+        a series of memory variables are assigned to field variables:
+
+        USE Sales EXCLUSIVE NEW
+        MEMVAR-&gt;Name := Sales-&gt;Name
+        MEMVAR-&gt;Amount := Sales-&gt;Amount
+        //
+        @ 10, 10 GET MEMVAR-&gt;Name
+        @ 11, 10 GET MEMVAR-&gt;Amount
+        READ
+        //
+        IF UPDATED()
+           APPEND BLANK
+           REPLACE Sales-&gt;Name WITH MEMVAR-&gt;Name
+           REPLACE Sales-&gt;Amount WITH MEMVAR-&gt;Amount
+           Sales-&gt;( DBCOMMIT() )
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7fa4e.html">CLOSE</A>
+<A HREF="ng80057.html">COMMIT</A>
+<A HREF="ng16b29.html">DBCLOSEALL()</A>
+<A HREF="ng17c35.html">DBCOMMITALL()</A>
+<A HREF="ng26db7.html">DBUNLOCK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

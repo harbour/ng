@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd3103.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngd44c1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NOTE*</B>
+ Place a single-line comment in a program file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NOTE [&lt;commentText&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;commentText&gt;</B> is a string of characters placed after the comment
+     indicator.
+
+ <B>Description</B>
+
+     NOTE is command synonym for the single-line comment indicator (*).  All
+     characters after NOTE are ignored until the CA-Clipper compiler
+     encounters an end of line (carriage return/line feed).  This means a
+     single-line comment cannot be continued with the semicolon (;) onto a
+     new line.
+
+     If you need a multi-line or inline comment, begin the comment block with
+     a slash-asterisk (/*) symbol and end the comment block with an
+     asterisk-slash (*/) symbol.  If you need to comment out a block of code,
+     use the conditional compilation directives #ifdef...#endif instead of
+     multiline comments.  This is important since nested comments are
+     illegal.
+
+     NOTE is a compatibility command and therefore not recommended.  It is
+     superseded by the C-style comment symbols slash-asterisk (/*) and
+     asterisk-slash (*/), as well as the double-slash (//).  It is also
+     superseded by the dBASE-style comment symbols, asterisk (*) and the
+     double-ampersand (&amp;&amp;).
+
+     For a complete discussion on comment indicators, refer to the "Basic
+     Concepts" chapter in the Programming and Utilities Guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples show the various comment symbols supported by
+        CA-Clipper:
+
+        // This is a comment
+        /* This is a comment */
+        * This is a comment
+        &amp;&amp; This is a comment
+        NOTE This is a comment
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

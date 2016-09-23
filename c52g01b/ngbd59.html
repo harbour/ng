@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb4f8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ngc28a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ALIAS()</B>
+ Return a specified work area alias
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ALIAS([&lt;nWorkArea&gt;]) --&gt; cAlias</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nWorkArea&gt;</B> is any work area number.
+
+ <B>Returns</B>
+
+     ALIAS() returns the alias of the specified work area as a character
+     string.  If &lt;nWorkArea&gt; is not specified, the alias of the current work
+     area is returned.  If there is no database file in USE for the specified
+     work area, ALIAS() returns a null string ("").
+
+ <B>Description</B>
+
+     ALIAS() is a database function that determines the alias of a specified
+     work area.  An alias is the name assigned to a work area when a database
+     file is USEd.  The actual name assigned is either the name of the
+     database file, or a name explicitly assigned with the ALIAS clause of
+     the USE command.
+
+     ALIAS() is the inverse of the SELECT() function.  ALIAS() returns the
+     alias name given the work area number, and SELECT() returns the work
+     area number given the alias name.
+
+     <B>.</B>  This example returns the name of the previously selected work
+        area:
+
+        USE File1 NEW ALIAS Test1
+        nOldArea := SELECT()
+        USE File2 NEW ALIAS Test2
+        ? ALIAS( nOldArea )            // Returns Test1
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng99b4e.html">SELECT</A>
+<A HREF="ng61227.html">SELECT()</A>
+<A HREF="ngb1e6f.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

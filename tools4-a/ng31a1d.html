@@ -1,0 +1,99 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng30b91.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng325c1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPURGE()</B>
+ Removes the files that are marked for deletion from the server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPURGE(&lt;cFile&gt;,[&lt;lAll&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFile&gt;</B>  Designates the file that is deleted, but depends on the
+     Netware version that is used.
+
+     Under Netware 3.x, &lt;cFile&gt; designates the file that is deleted.  The
+     file name can contain a path, but the path must be unique.  Wildcard
+     characters are not allowed.
+
+     Under Netware 2.x, the operating system permits a definite purging of
+     files only for the entire file server.  If NNETPURGE() determines that
+     the server is running under Netware 2.x after a server change is implied
+     by &lt;cFile&gt;, the file specification in &lt;cFile&gt; is no longer taken into
+     account.  All the files on the related server that are marked for
+     deletion are purged.
+
+     <B>&lt;lAll&gt;</B>  Designates the files that are deleted.  &lt;lAll&gt; is only taken
+     into account if the function is called on a Netware 2.x server.  If the
+     parameter is designated .F., all the marked files of the current user
+     are deleted.  If the parameter is designated .T., all the files of the
+     related file server that are marked for deletion are deleted.  The
+     default value is .F..
+
+ <B>Returns</B>
+
+     NNETPURGE() returns .T. if the function has been completed successfully.
+
+ <B>Description</B>
+
+     NOVELL NET PURGE
+     NNETPURGE() allows you to physically delete all the files that are
+     marked for deletion on a server disk.  (These files can no longer be
+     restored with the Novell utility SALVAGE).  The function is supported
+     differently by Netware 2.x and 3.x.  Under Netware 3.x, files can be
+     purged individually.  Under Netware 2.x, all the files of the current
+     user (&lt;lAll&gt;=.F.) or all the files that are marked for deletion
+     (&lt;lAll&gt;=.T.) are removed.  Console operator rights are required to purge
+     all the files that are marked for deletion.  You should query the
+     Netware version with NNETVER() before calling NNETPURGE() to avoid a
+     purging of all files marked for deletion.
+
+ <B>Note</B>
+
+     <B>.</B>  For compatibility reasons the previous version of the
+        NNETPURGE() function is still supported (NNETPURGE() --&gt;
+        lSuccessful).  A call in this form is only valid for Netware 2.x
+        servers.  With console operator rights, NNETPURGE() purges of all of
+        the files that are marked for deletion.
+
+ <B>Examples</B>
+
+     <B>.</B>  Delete and purge the file CONFID.DBF:
+
+        NNETMAP('L','FSERVER386/SYS:DATA')
+
+        ERASE L:CONFID.DBF
+
+        IF NNETVER('FSERVER386') &gt; '2'
+           NNETPURGE('L:CONFID.DBF')
+        ENDIF
+
+     <B>.</B>  Purge all the files that are marked for deletion for the
+        current user on FSERVER286 (2.x server):
+
+        NNETPURGE('FSERVER286/SYS:')
+
+        The definition of the volume SYS: is necessary to identify FSERVER286
+        as server name.  If FSERVER286 contains more volumes, all the volumes
+        are purged.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng35151.html">NNETSALVAG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

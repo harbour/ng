@@ -1,0 +1,198 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng35d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d0.html">[^^Up^^]</A>
+<A HREF="ng2e97.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CA-Clipper Protected Mode Linker--EXOSPACE.EXE</B>
+ Combines objects files (.OBJ) with library files (.LIB) to form a protected-
+ mode executable file (.EXE).
+------------------------------------------------------------------------------
+
+     <B>EXOSPACE [@&lt;lnkFile&gt;] [&lt;command list&gt;]</B>
+
+ <B>Arguments</B>
+
+     If you specify no arguments, CA-Clipper/Exospace displays a brief help
+     screen.
+
+     <B>&lt;lnkFile&gt;</B> is the name of an ASCII text file called a script file
+     from which the linker takes some or all of its input.  If you specify
+     the file without an extension, .LNK is assumed.  You can optionally
+     specify a drive designator and/or a path reference for the script file.
+
+     You can use script files to automate linker sessions that you tend to
+     repeat and sessions that are too long to enter from the command line--
+     the DOS command line limit of 128 characters may be too restrictive for
+     some linker sessions, necessitating the use of a script file.
+
+     The only rule governing the format of a script file is that it contain
+     valid linker commands.  You need not place the commands one to a line.
+     The new line character, like a space or a Tab, is considered to be white
+     space.  Therefore, if a command will not fit on one line, continue it on
+     a new line by pressing Enter--no continuation character is necessary.
+
+     The # character designates a comment.  When encountered, the rest of the
+     line is ignored.
+
+     You can nest script files using the @&lt;lnkFile&gt; syntax within a script
+     file.  The named script file is read and executed by CA-Clipper/Exospace
+     in its entirety.  When it terminates, control returns to the current
+     script file.
+
+     <B>&lt;command list&gt;</B> is a list of linker commands separated by spaces.
+     Linker commands on the command line either override or augment the same
+     commands in a script file.  For example, a FILE command on the command
+     line adds to any FILE commands in the script file, while an OUTPUT
+     command overrides any OUTPUT commands in the script file.  See Linker
+     Commands below for details on the syntax and behavior of specific
+     commands.
+
+     To invoke the linker, you must specify at least one FILE command to tell
+     CA-Clipper/Exospace which object files you want to link.  You can
+     specify this command either on the command line or in a script file.  If
+     you attempt to invoke CA-Clipper/Exospace with command line arguments
+     and do not specify a FILE command, the linker session will result in an
+     error.
+
+ <B>Linker Commands</B>
+
+     This section provides a brief description of all the CA-Clipper/Exospace
+     commands.  You can specify commands on the CA-Clipper/Exospace command
+     line or in a script file.  The commands are not case-sensitive, and you
+     can specify them in whatever order you want.  The only command that is
+     required to link is the FILE command--all others are optional.
+
+     <B>EXOSPACE CLIPPER 501</B>
+
+     Specifies that you are linking a CA-Clipper 5.01 or 5.01a application.
+
+     <B>EXOSPACE ENVIRONMENT CLIPPER &lt;envName&gt;</B>
+
+     Specifies the environment variable to use for application runtime
+     configuration.
+
+     <B>EXOSPACE ENVIRONMENT OVERRIDE</B>
+
+     Causes runtime configuration environment settings to override .EXE
+     defaults.
+
+     <B>EXOSPACE EXECUTABLE CLIPPER &lt;settings&gt;</B>
+
+     Hard-codes default runtime configuration settings in the .EXE.  See SET
+     CLIPPER for details about available settings and syntax.  In addition to
+     the settings listed there, the following additional settings are
+     available for controlling the CA-Clipper/Exospace protected-mode VM
+     system:
+
+     LOWMEM:&lt;nKBytes&gt;--Sets the amount of low DOS memory to reserve for
+     allocation by third-party libraries for interrupt routines.  The default
+     is 0.  Ignore this unless your third-party library documentation
+     specifically recommends that you set it.
+
+     MAXMEM:&lt;nKBytes&gt;--Sets the maximum amount of physical memory to use
+     before swapping to disk.  The default is 8096 KB, which is ample for
+     most applications. In a task switching environment, you may want to
+     lower this value.
+
+     MINMEM:&lt;nKBytes&gt;--Sets the minimum amount of physical memory that must
+     be available to run the program.  If there is not enough memory
+     available, an error message is generated and the application returns to
+     DOS.  The default is 1024 KB, which is the recommended minimum.
+
+     VMSIZE:&lt;nKBytes&gt;--Sets the amount of virtual memory the VM system should
+     provide.  The default is 8096 KB, which is ample for most applications.
+
+     <B>EXOSPACE EXECUTABLE NODELETE</B>
+
+     Creates an .EXE even if errors occur during linking.
+
+     <B>EXOSPACE PACKAGE &lt;package list&gt;</B>
+
+     Causes specified protected-mode support packages to be included in the
+     .EXE.  The following packages are available--use one or more in a comma-
+     separated list:
+
+     8514--Specifies the IBM 8514 Display Adapter.  Allows direct calls from
+     protected mode, with no mode switching.
+
+     DOS25--Specifies the Absolute Disk Read/Write compatibility package.
+     Services INT 25h and 26h.
+
+     INT10--Specifies the Video BIOS compatibility package. Services INT 10h.
+
+     IPX--Specifies the IPX/SPX compatibility package for Novell Networks.
+     Services INT 7Ah.
+
+     IPXCT--Specifies the compatibility package for CA-Clipper Tools.
+
+     NET5C--Specifies the NETBIOS compatibility package.  Replaces
+     NETBIOS?.OBJ.  Services INT 5Ch.
+
+     NOVM--Disables the CA-Clipper/Exospace VM system.  The resulting
+     application will run only on systems that have sufficient RAM to contain
+     the application's entire .EXE and all its data.
+
+     <B>EXOSPACE PROCEDURE DEPTH &lt;maxDepth&gt;</B>
+
+     Sets the stack size of an application in terms of maximum procedure call
+     depth.
+
+     <B>FILE &lt;objFile list&gt;</B>
+
+     Specifies one or more object files to be linked in a comma-separated
+     list.
+
+     <B>LIBRARY &lt;libFile list&gt;</B>
+
+     Specifies one or more library files to search during linking in a comma-
+     separated list.
+
+     <B>MAP [=&lt;mapFile&gt;] [&lt;mapOption list&gt;]</B>
+
+     Causes a map to be generated.  By default, the map file will have the
+     same name as the resulting .EXE file.  The available map options are as
+     follows--use one or more in a comma-separated list:
+
+     A--Public symbols sorted by address
+
+     N--Public symbols sorted by name
+
+     S--Segments with assigned addresses
+
+     <B>MODULE &lt;moduleName&gt; FROM &lt;libName&gt;</B>
+
+     Searches for named module in specified library only.
+
+     <B>NODEFLIB | NODEFAULTLIBRARYSEARCH</B>
+
+     Does not search default libraries.
+
+     <B>OUTPUT &lt;exeFile&gt;</B>
+
+     Specifies the name of the executable file to be generated.  If not
+     specified, the first filename encountered on the CA-Clipper/Exospace
+     command line (either object or script) is used, but with an .EXE
+     extension.
+
+     <B>STACK &lt;sizeBytes&gt;</B>
+
+     Sets the stack size of an application in decimal bytes.  The value you
+     specify can be any positive number up to 65,535.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga092.html">SET CLIPPER</A>
+<A HREF="ngcbba.html">SET LIB</A>
+<A HREF="ngce53.html">SET OBJ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

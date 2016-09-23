@@ -1,0 +1,191 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb129a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ngb3cfd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>USE</B>
+ Open an existing (.dbf) and its associated files
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>USE [&lt;xcDatabase&gt;</B>
+     <B>   [INDEX &lt;xcIndex list&gt;]</B>
+     <B>   [ALIAS &lt;xcAlias&gt;] [EXCLUSIVE | SHARED]</B>
+     <B>   [NEW] [READONLY]</B>
+     <B>   [VIA &lt;cDriver&gt;]]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcDatabase&gt;</B> is the name of the database file to open and may be
+     specified either as a literal filename or as a character expression
+     enclosed in parentheses.
+
+
+     <B>INDEX &lt;xcIndex list&gt;</B> specifies the names of 1 to 15 index files to
+     open in the current work area.  Specify each index as a literal filename
+     or as a character expression enclosed in parentheses.  The first index
+     in the list becomes the controlling index.  If you specify an &lt;xcIndex&gt;
+     as an expression and the value returned is spaces or NIL, it is ignored.
+
+     <B>ALIAS &lt;xcAlias&gt;</B> specifies the name to associate with the work area
+     when the database file is opened.  You may specify the alias name as a
+     literal name or as a character expression enclosed in parentheses.  A
+     valid &lt;xcAlias&gt; may be any legal identifier (i.e., it must begin with an
+     alphabetic character and may contain numeric or alphabetic characters
+     and the underscore).  Within a single application, CA-Clipper  will not
+     accept duplicate aliases.  If this clause is omitted, the alias defaults
+     to the database filename.
+
+     <B>EXCLUSIVE</B> opens the database file for nonshared use in a network
+     environment.  All other users are denied access until the database file
+     is CLOSEd.
+
+     <B>SHARED</B> opens the database file for shared use in a network
+     environment.  Specifying this clause overrides the current EXCLUSIVE
+     setting.
+
+     <B>NEW</B> opens &lt;xcDatabase&gt; in the next available work area making it the
+     current work area.  If this clause is not specified, &lt;xcDatabase&gt; is
+     opened in the current work area.
+
+     <B>READONLY</B> opens &lt;xcDatabase&gt; with a read-only attribute.  This lets
+     you open database files marked read-only.  If you cannot open the
+     &lt;xcDatabase&gt; this way, a runtime error is generated.  If this clause is
+     not specified, &lt;xcDatabase&gt; is opened read-write.
+
+     <B>VIA &lt;cDriver&gt;</B> specifies the replaceable database driver (RDD) with
+     which to process the current work area.  &lt;cDriver&gt; is name of the RDD
+     specified as a character expression.  If &lt;cDriver&gt; is specified as a
+     literal value, it must be enclosed in quotes.
+
+     If the VIA clause is omitted, the DBFNTX driver is used by default.
+     Note that if the specified driver is not linked, an unrecoverable error
+     occurs.
+
+     In no arguments are specified, the database file open in the current
+     work area is closed.
+
+ <B>Description</B>
+
+     USE opens an existing database (.dbf) file, its associated memo (.dbt)
+     file, and optionally associated index (.ntx or .ndx) file(s) in the
+     current or the next available work area.  In CA-Clipper, there are 250
+     work areas with a maximum of 255 total files open in DOS 3.3 and above.
+     Before USE opens a database file and its associated files, it closes any
+     active files already open in the work area.  When a database file is
+     first opened, the record pointer is positioned at the first logical
+     record in the file (record one if there is no index file specified).
+
+     In a network environment, you may open database files as EXCLUSIVE or
+     SHARED.  EXCLUSIVE precludes the USE of the database file by other users
+     until the file is closed.  SHARED allows other users to USE the database
+     file for concurrent access.  If the database file is SHARED,
+     responsibility for data integrity falls upon the application program.
+     In CA-Clipper, FLOCK() and RLOCK() are the two basic means of denying
+     other users access to a particular work area or record.  If a USE is
+     specified and neither EXCLUSIVE nor SHARED are specified, the database
+     file is opened according to the current EXCLUSIVE setting.  In
+     CA-Clipper, all USE commands should explicitly specify how the database
+     file is to be opened, EXCLUSIVE or SHARED.  The implicit open mode
+     specified by SET EXCLUSIVE is supplied for compatibility purposes only
+     and not recommended.
+
+     Opening a database file in a network environment requires some special
+     handling to be successful.  First, attempt to USE the database file
+     without specifying the INDEX list.  Then, test for the success of the
+     operation using NETERR().  If NETERR() returns false (.F.), the open
+     operation succeeded and you can SET INDEX TO the index list.  A USE will
+     fail in a network environment if another user has EXCLUSIVE USE of the
+     database file.  Refer to the Network Programming chapter in the
+     Programming and Utilities guide for more information on opening files in
+     a network environment.
+
+     You can open index files with USE or SET INDEX.  The first index in the
+     list of indexes defines the current ordering of records when they are
+     accessed.  This index is referred to as the controlling index.  You can
+     change the current controlling index without closing any files by using
+     the SET ORDER command.
+
+     To close a database and its associated files in the current work area,
+     specify USE or CLOSE with no arguments.  To close database files in all
+     work areas, use CLOSE DATABASEs.  To close index files in the current
+     work area without closing the database file, use CLOSE INDEX or SET
+     INDEX TO with no arguments.
+
+     Refer to the Database System section of the Basic Concepts chapter in
+     the Programming and Utilities guide for more information about the
+     CA-Clipper database paradigm.
+
+ <B>Notes</B>
+
+     <B>.  Setting the maximum open files:</B> Control of the number of file
+        handles available to a CA-Clipper application is controlled by a
+        combination of the CONFIG.SYS FILES command, and the F parameter of
+        the CLIPPER environment variable.  The F parameter specifies the
+        maximum number of files that can be open at any one time within the
+        current CA-Clipper program.  CA-Clipper determines the number of
+        files that can be opened using the smaller of the two parameters.
+        For example, if the FILES command is set to 120 and the F parameter
+        is set to 50, the maximum number of files that can be opened is 50.
+
+        The file limit is controlled by the operating system.  Under DOS
+        versions less than 3.3, the maximum number of files that can be
+        opened at one time is 20 files.  In DOS versions 3.3 and greater, the
+        maximum limit is 255 files.
+
+     <B>.  Opening the same database file in more than one work area:</B>
+        Although opening a database file in more than one work area is
+        possible in a network environment, this practice is strongly
+        discouraged.  If done, each file must be opened with a different
+        alias, otherwise a runtime error will occur.
+
+     <B>.  Opening two database files with the same names, in different</B>
+        <B>directories:</B> Although opening two database files with the same
+        names, in different directories is possible, the database files MUST
+        have unique alias names, otherwise a runtime error will occur.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example opens a shared database file with associated
+        index files in a network environment.  If NETERR() returns false
+        (.F.), indicating the USE was successful, the indexes are opened:
+
+        USE Accounts SHARED NEW
+        IF !NETERR()
+           SET INDEX TO AcctNames, AcctZip
+        ELSE
+           ? "File open failed"
+           BREAK
+        ENDIF
+
+     <B>.</B>  This example opens a database file with several indexes
+        specified as extended expressions.  Note how the array of index names
+        is created as a constant array:
+
+        xcDatabase = "MyDbf"
+        xcIndex = {"MyIndex1", "MyIndex2", "MyIndex3"}
+        USE (xcDatabase) INDEX (xcIndex[1]), ;
+              (xcIndex[2]), (xcIndex[3])
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7fa4e.html">CLOSE</A>
+<A HREF="ng5287d.html">NETERR()</A>
+<A HREF="ng99b4e.html">SELECT</A>
+<A HREF="nga475d.html">SET INDEX</A>
+<A HREF="ng6e0d6.html">USED()</A>
+<A HREF="ng278a8.html">DBUSEAREA()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

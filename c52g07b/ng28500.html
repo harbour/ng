@@ -1,0 +1,112 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng28367.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng27ce3.html">[^^Up^^]</A>
+<A HREF="ng2954f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Overview of the DBPX RDD</B>
+------------------------------------------------------------------------------
+
+     The DBPX driver lets you create and maintain (.db), (.px), (.x??), and
+     (.y??) files with features different from those supplied with the
+     original DBFNTX driver and compatible with files created under Paradox
+     3.5. The new features are supplied in the form of several syntactical
+     additions to database and indexing commands and functions.  Specifically
+     you can:
+
+     <B>.</B>  Create tables that recognize the standard CA-Clipper data
+        types as well as Currency ($) and Short (S) numbers between -32,767
+        to +32,767
+
+     <B>.</B>  Create equally efficient keyed and unkeyed tables
+
+     <B>.</B>  Create, select, and activate secondary indexes on Paradox
+        tables
+
+     The DBPX driver provides simple, seamless access to the Paradox database
+     system.  The CA-Clipper application programmer who intends to access
+     Paradox tables with the "VIA" clause need only include the RDD header
+     file at compile time and make the appropriate libraries available at
+     link time.
+
+     Paradox stores data in tables (known to Xbase developers as data files
+     (.db)'s), consisting of fields and records.  Unlike Xbase databases, a
+     Paradox database refers to a group of files that are related to each
+     other in some way, rather than to one file.
+
+     Also, Paradox employs the concept of companion files, known as objects,
+     that are related to the table.  Some examples of object files are report
+     forms, indexes, and data entry forms.  A table and its accompanying
+     objects are referred to as a family.
+
+     It is easy to identify objects belonging to a particular family since
+     they all have the same base filename and are distinguished by their
+     extensions as shown in the table below.
+
+     <B>Paradox File Descriptions</B>
+     ------------------------------------------------------------------------
+     <B>Extension      Object</B>
+     ------------------------------------------------------------------------
+     .DB            Table
+     .PX            Primary Index
+     .X?? or Y??    Secondary Index
+     .F or F??      Data Entry Forms
+     .R or R??      Report Formats
+     .G or G??      Graph Specifications
+     .SET           Image Settings
+     .VAL           Field Validity Specifications
+     ------------------------------------------------------------------------
+
+     The DBPX driver only deals with the table and index files (.db, .px,
+     .x?? and y??) so only these files are discussed here.
+
+     Though Paradox tables are limited to 8 character filenames, each table
+     can contain an unlimited number of records in files up to 256M in size.
+     Paradox records in nonkeyed tables can be up to 4000 bytes each while
+     keyed tables have a 1350 byte limitation.  Each record can contain up to
+     255 fields of up to 255 characters each.
+
+     There are some field naming restrictions you must observe.  Field names
+     may:
+
+     <B>.</B>  Although the Paradox file structure allows fields to be up to
+        25 characters long, since CA-Clipper symbols can only be 10
+        characters, DBPX truncates the field name to 10 characters.
+
+     <B>.</B>  The Paradox file structure allows embedded spaces in field
+        names.  Since this is illegal in CA-Clipper, the DBPX driver converts
+        spaces into underscores (_).
+
+     <B>.</B>  Not be duplicated in the same table.
+
+     Also, most Paradox data types directly match data types in standard
+     Xbase data files, with these differences:
+
+     <B>.</B>  Paradox tables support both the Numeric (N) data type as well
+        as a more specific Currency ($) data type.  Both the N and $ data
+        types can have 15 significant digits.  Numeric types that exceed this
+        length are rounded and stored as scientific notation.  Also, DBPX
+        supports the Short (S) data type to represent numbers between -32,767
+        and +32,767.
+
+     <B>.</B>  The Alphanumeric field type allows all ASCII characters except
+        embedded nulls (ASCII 0).  The Alphanumeric type is identical to the
+        Character (C) data type in Xbase.  Paradox limits this field type to
+        255 characters.
+
+     <B>.</B>  Paradox also supports a Date (D) field type, stored as a long
+        integer.  It can contain any value between January 1, 100 A.D. and
+        December 31, 9999.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

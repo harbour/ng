@@ -1,0 +1,133 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4dc21.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng4f75d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GELLIPSE()</B>
+ Draw an ellipse or circle
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GELLIPSE(&lt;nXc&gt;,&lt;nYc&gt;,&lt;nRadiusX&gt;,&lt;nRadiusY&gt;,[&lt;nDegStart&gt;]</B>
+     <B>   [&lt;nDegEnd&gt;], [&lt;nStyle&gt;], [&lt;nColor&gt;], [&lt;nMode&gt;],</B>
+     <B>   [&lt;nOutLineColor&gt;], [&lt;nHeight3D&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nXc&gt;</B>, <B>&lt;nYc&gt;</B>, <B>&lt;nRadiusX&gt;</B>, and <B>&lt;nRadiusY&gt;</B> define the
+     ellipse center point coordinates in pixels.
+
+     <B>Note:</B>  If &lt;nRadiusX&gt; and &lt;nRadiusY&gt; have the same value, the result
+     will be a circle.
+
+     <B>&lt;nDegStart&gt;</B> is the value of the starting angle in degrees.  The
+     default value is 0.
+
+     <B>&lt;nDegEnd&gt;</B> is the value of the final angle in degrees.  The default
+     value is 360.
+
+     <B>Note:</B>  Changing the values of &lt;nDegStart&gt; and &lt;nDegEnd&gt; allows you
+     to draw arcs of a circle or ellipse and sections of a "pie chart."
+
+     <B>&lt;nStyle&gt;</B> defines the style of the ellipse using one of the constants
+     listed in the table below:
+
+     <B>Ellipse Style Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant     Description</B>
+     ------------------------------------------------------------------------
+     LLG_FILL     The ellipse is displayed first and then filled with the
+                  color and mode specified below
+     LLG_FRAME    Display of the ellipse is restricted to its contour in the
+                  color and mode specified below
+     ------------------------------------------------------------------------
+
+     <B>&lt;nColor&gt;</B> is a numeric value representing the display color.  If this
+     parameter is missing, the last color specified in a call to a CA-Clipper
+     function is used.  The value range is limited to the number of colors
+     available in the selected video mode.  In 16-color modes, valid values
+     are between 0 and 15.  In 256-color modes, valid values are between 0
+     and 255.
+
+     <B>&lt;nMode&gt;</B> is a numeric value that represents the display mode.  The
+     following are valid &lt;nMode&gt; values:
+
+     <B>Display Mode Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Description</B>
+     ------------------------------------------------------------------------
+     LLG_MODE_SET   Display in SET mode (ignores any pixels present under the
+                    line displayed).  This is the most common display mode.
+     LLG_MODE_AND   Display in AND mode (executes an AND on pixels present
+                    under the line at display time and on the display color).
+     LLG_MODE_OR    Display in OR mode (executes an OR on pixels present
+                    under the line at display time and on the display color).
+     LLG_MODE_XOR   Display in XOR mode (executes an XOR on pixels present
+                    under the line at display time and on the display color).
+                    See note.
+     ------------------------------------------------------------------------
+
+     <B>Note:</B>  This method allows you to move objects around on the screen
+     without damaging the background.  To retrieve the initial background,
+     just repeat the call for display in XOR mode.  If the display mode
+     parameter is missing, the last mode specified in a call to a CA-Clipper
+     function is used.
+
+     <B>&lt;nOutLineColor&gt;</B> is a numeric value representing the outline color.
+     If this parameter is missing, the last color specified in a call to a
+     CA-Clipper function is used.  The value range is limited to the number
+     of colors available in the selected video mode.  In 16-color modes,
+     valid values are between 0 and 15.  In 256-color modes, valid values are
+     between 0 and 255.
+
+     <B>&lt;nHeight3D&gt;</B> is a numeric value representing the height of the 3-D
+     effect in pixels.
+
+ <B>Returns</B>
+
+     GELLIPSE() always returns NIL.
+
+ <B>Description</B>
+
+     GELLIPSE() draws an ellipse or circle.  This function can be used only
+     if you have set the screen to a graphic mode using SET VIDEOMODE.  This
+     function respects the constraints defined by GSETCLIP().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example displays an ellipse in a region limited by
+        clipping:
+
+        // Switch to graphic mode
+
+        SET VIDEOMODE TO LLG_VIDEO_VGA_640_480_16
+        // Restrict the display region to one portion of the screen
+        GSETCLIP(100,100,300,300)
+        // Draw a quarter section of an ellipse
+        GELLIPSE(200, 200, 160, 230, 045,;
+
+           135, LLG_FILL, 12, LLG_MODE_SET)
+        QUIT                            // End of application
+
+ <B>Files</B>   Library is LLIBG.LLB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng55637.html">GLINE()</A>
+<A HREF="ng57ff6.html">GPOLYGON()</A>
+<A HREF="ng59216.html">GRECT()</A>
+<A HREF="ng5cee0.html">GWRITEAT()</A>
+<A HREF="ng4d165.html">GBMPDISP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

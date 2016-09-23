@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng42c7d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng436be.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETDELQ()</B>
+ Deletes a print queue
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETDELQ(&lt;cQueue&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is deleted.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server where &lt;cQueue&gt; is
+     established.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETDELQ() returns .T. if the queue (&lt;cQueue&gt;) has been deleted
+     successfully.  If an error occurs, the Novell error code can be queried
+     with the NNETERROR() function.
+
+ <B>Description</B>
+
+     NOVELL NET DELETE QUEUE
+     NNETDELQ() allows you to delete an entire queue.  After a queue has been
+     deleted with NNETDELQ(), all jobs of &lt;cQueue&gt; are canceled, all job
+     files are deleted, and all queue directories are removed.  Supervisor
+     rights are required to delete a queue.
+
+ <B>Example</B>
+
+     Delete the queue LINEPRINTER on the default server:
+
+     IF NNETDELQ('LINEPRINTER')
+     ? 'Queue has been deleted successfully!'
+     ELSE
+     ? 'Queue could not be deleted!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42c7d.html">NNETCRTQ()</A>
+<A HREF="ng4605f.html">NNETJDEL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

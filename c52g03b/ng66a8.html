@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng630c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng242.html">[^^Up^^]</A>
+<A HREF="ng6a7f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_retnl()</B>
+ Post a numeric return value using a long
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "extend.api"</B>
+     <B>void _retnl(</B>
+     <B>             long lNumber</B>
+     <B>           )</B>
+
+ <B>Arguments</B>
+
+     <B>lNumber</B> is a numeric expression of type long.
+
+ <B>Returns</B>
+
+     _retnl() has no return value.
+
+ <B>Description</B>
+
+     _retnl() posts a numeric value into CA-Clipper's return value area.
+     When your Extend routine returns control to the calling CA-Clipper
+     program, the posted value becomes the CA-Clipper return value of your
+     Extend routine.
+
+ <B>Examples</B>
+
+     <B>.</B>  From C:
+
+        _retnl(1234567689L);
+
+     <B>.</B>  From Assembly language:
+
+        EXTRN __retni:FAR
+              mov   dx, 1883
+              mov   ax, 52501
+              push  dx                  ; push hi-order first
+              push  ax
+              call  __retnl
+              add   sp, 4               ; reset stack pointer
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Extend.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4069.html">_parnl()</A>
+<A HREF="ng5edf.html">_retnd()</A>
+<A HREF="ng630c.html">_retni()</A>
+<A HREF="ng919d.html">_stornl()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

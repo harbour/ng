@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng18fa3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng1b370.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Multiple Inheritance</B>
+
+  The CREATE CLASS command can be used to create multiply inherited classes,
+  as follows:
+
+    CREATE CLASS &lt;className&gt; ;
+       FROM &lt;parentClass1&gt;, &lt;parentClass2&gt; [, ...]
+
+  To implement multiple inheritance correctly, Class(y) examines the
+  ancestor classes of a multiply inherited class, and determines a single
+  path through the ancestor tree. This affects which messages take
+  precedence in the final class. It allows <B>repeated inheritance</B>, in
+  which the same class occurs repeatedly in the ancestor tree. Class(y)
+  treats repeatedly inherited classes as a single class. A diagram should
+  help to explain this:
+
+            Object
+             |
+             Box
+             |
+           Window
+          /     \
+    TextWindow   BorderedWindow
+           \    /
+         BordTextWindow
+
+  The class BordTextWindow is multiply inherited from TextWindow and
+  BorderedWindow. Assume that the BordTextWindow class was created with the
+  following statement:
+
+    CREATE CLASS BordTextWindow FROM TextWindow, BorderedWindow
+
+  Class(y) will search for messages in the classes in the following
+  sequence:
+
+    BordTextWindow, TextWindow, BorderedWindow, Window, Box, Object
+
+  Although the Window class is inherited from both branches of the tree, it
+  is treated as a single class, ie. you do not end up with two sets of
+  Window instance variables in the resulting class.
+
+  The algorithm for determining a single path through the inheritance tree
+  uses two rules (see Booch pg. 113):
+
+  <B>.</B>  A class always has precedence over its superclass; ie. a superclass is
+     never searched before any of its subclasses present in the ancestor
+     tree of a multiply inherited class.
+
+  <B>.</B>  Each class sets the precedence order of its direct superclasses.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

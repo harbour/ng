@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngeae7b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngeb81b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET MEMOBLOCK</B>
+ Change the block size for memo files
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET MEMOBLOCK TO &lt;nSize&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nSize&gt;</B> is the memo file block size.  The initial memo file block
+     size depends on the RDD.  For most drivers that support the .dbt memo
+     file format, it is 512 bytes.  However, if you are using BLOB files
+     (.dbv memo file format) via inheritance from the DBFMEMO driver, the
+     default is 1.
+
+ <B>Description</B>
+
+     SET MEMOBLOCK is functionally equivalent to calling
+     DBINFO(DBI_MEMOBLOCKSIZE, &lt;nSize&gt;).  Refer to this function for more
+     information.  SET MEMOBLOCK sets the block size for the memo file
+     associated with the database.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example illustrates the SET MEMOBLOCK command:
+
+        USE Inventor NEW
+        SET MEMOBLOCK TO 256
+        ? DBINFO(DBI_MEMOBLOCKSIZE)         // Result: 256
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng28fbc.html">DBINFO()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

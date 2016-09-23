@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf8d7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng1019e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ATAIL()</B>
+ Return the highest numbered element of an array
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ATAIL(&lt;aArray&gt;) --&gt; Element</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aArray&gt;</B> is the array.
+
+ <B>Returns</B>
+
+     ATAIL() returns either a value or a reference to an array or object.
+     The array is not changed.
+
+ <B>Description</B>
+
+     ATAIL() is an array function that returns the highest numbered element
+     of an array.  It can be used in applications as shorthand for
+     &lt;aArray&gt;[LEN(&lt;aArray&gt;)] when you need to obtain the last element of an
+     array.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example creates a literal array and returns that
+        last element of the array:
+
+        aArray := {"a", "b", "c", "d"}
+        ? ATAIL(aArray)                     // Result: d
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng663e8.html">LEN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

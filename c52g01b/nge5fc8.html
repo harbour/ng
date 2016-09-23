@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge5b61.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge36fa.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>READUPDATED()</B>
+ Return, and optionally set, whether any Get changed during a READ
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>READUPDATED([&lt;lChanged&gt;]) --&gt; lCurrentSetting</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;lChanged&gt;</B> sets the READUPDATED() flag...A value of true (.T.)
+     indicates that data has changed, and a value of false (.F.) indicates
+     that no change has occurred.
+
+ <B>Returns</B>
+
+     READUPDATED() returns the current setting as a logical value.
+
+ <B>Description</B>
+
+     READUPDATED() is a Get system function intended primarily for creating
+     new READ Layers.  It is identical in functionality to UPDATED() (see the
+     UPDATED() entry in the Reference guide), except that it allows the
+     UPDATED() flag to be set.
+
+     READUPDATED() enables you to manipulate the UPDATED() flag from outside
+     of the Get system source code.
+
+ <B>Files:</B>  Library is CLIPPER.LIB, source file is Getsys.prg.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge5654.html">READFORMAT()</A>
+<A HREF="nge5b61.html">READKILL()</A>
+<A HREF="ng6d294.html">UPDATED()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

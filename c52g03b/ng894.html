@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng242.html">[^^Up^^]</A>
+<A HREF="ngf03.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_parc()</B>
+ Retrieve a character parameter
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "extend.api"</B>
+     <B>char * _parc(</B>
+     <B>              int iParamNum</B>
+     <B>              [, int iArrayIndex]</B>
+     <B>            )</B>
+
+ <B>Arguments</B>
+
+     <B>iParamNum</B> is the one-based ordinal position of the parameter in the
+     parameter list.
+
+     <B>iArrayIndex</B> is an array index that specifies a particular element if
+     the iParamNum parameter is an array.
+
+ <B>Returns</B>
+
+     _parc() returns a far pointer to a series of bytes that represent the
+     character value.
+
+ <B>Description</B>
+
+     _parc() retrieves a character value passed as a parameter from
+     CA-Clipper.
+
+     The pointer returned by _parc() may or may not point to the actual
+     character value passed from CA-Clipper.  In some cases, the pointer will
+     point to a copy of the actual value.  In other cases, it will point to
+     an internal value that is shared by more than one CA-Clipper variable.
+
+     The pointer returned from _parc() should not directly modify the
+     character value, since this can produce unpredictable results.  To
+     modify a character value, use _retc() returning a modified copy of the
+     value or passing the associated CA-Clipper parameter by reference, then
+     use _storc() to modify it.
+
+ <B>Examples</B>
+
+     <B>.</B>  From C:
+
+        char *str;
+        str = _parc(1);
+
+     <B>.</B>  From Assembly language:
+
+        EXTRN __parc:FAR
+              mov   ax, 1
+              push  ax
+              call  __parc            ; pointer returned in DX:AX
+              add   sp, 2             ; reset stack pointer
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Extend.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf03.html">_parclen()</A>
+<A HREF="ng48d8.html">_retc()</A>
+<A HREF="ng4488.html">_ret()</A>
+<A HREF="ng6a7f.html">_storc()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

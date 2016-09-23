@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd5f3e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngd1d84.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SAVESETKEY()</B>
+ Saves SET KEY..TO settings in an array
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SAVESETKEY() --&gt; aSavedTraps</B>
+
+ <B>Returns</B>
+
+     SAVESETKEY() returns an array within which information for the current
+     SET KEY..TO settings are saved.
+
+ <B>Description</B>
+
+     SAVE SET KEY..TO SETTINGS
+     SAVESETKEY() saves the current SET KEY..TO settings in an array.  This
+     makes it possible to redefine function keys already assigned, and to
+     later restore the old settings with RESTSETKEY().
+
+ <B>Note</B>
+
+     <B>.</B>  The array you create is valid only for the current program
+        run.  Therefore, is not useful to save this data in the file.
+
+ <B>Examples</B>
+
+     A key trap definition for the F1 key is changed within a nested input:
+
+       CLEAR
+        SET KEY 28 TO HELP1         // First def. for F1
+        cFirstname := SPACE(10)
+        cLastname  := SPACE(10)
+        @ 10, 10 GET cFirstname
+        @ 11, 10 GET cLastname
+        READ
+
+     PROCEDURE HELP1 ( A, B, C)
+        WOPEN(4, 4, 20, 76)         // Open window^n   WBOX()
+        // Window borders
+        aOldKey := SAVESETKEY()     // Save SET KEY def.
+        aOldGet := SAVEGETS()       // Save GET def.
+        SET KEY 28 TO HELP2         // New def. F1
+        cHelp1 := SPACE(10)         // New GET
+        cHelp2 := SPACE(10)         // ...e.g. help index
+        @ 10, 10 GET cFirstname
+        @ 11, 10 GET cLastname
+        READ
+        RESTGETS(aOldGet)            // Recreate old GET
+        RESTSETKEY(aOldKey)          // Return .T. if OK
+        WCLOSE()                     // Close window
+        RETURN
+
+     PROCEDURE HELP2 ( A, B, C)      // 2nd help procedure
+        * e.g. a second help environment - key layout etc.
+        RETURN
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd58d8.html">RESTSETKEY()</A>
+<A HREF="ngd5f3e.html">SAVEGETS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

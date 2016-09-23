@@ -1,0 +1,37 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7fe8b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng803f4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>How do I make the SIx Driver the default driver?:</B>
+
+  You can make the SIx Driver the default RDD (database driver) for your
+  application by including either <B>SIXCDX.OBJ</B>, <B>SIXNSX.OBJ</B>, <B>SIXMDX.OBJ</B>, or
+  <B>SIXNTX.OBJ</B> in your link command or link script, depending on which flavor
+  of the SIx Driver you're using.
+
+  Linking one of these .OBJ's into your application causes the SIx Driver
+  to replace DBFNTX.  All database commands and functions will automatically
+  use the specified SIx Driver flavor.
+
+  If you want both the SIx Driver and DBFNTX available in your application,
+  then don't link with <B>SIXCDX.OBJ</B>, <B>SIXNSX.OBJ</B>, <B>SIXMDX.OBJ</B>, or <B>SIXNTX.OBJ</B>.
+  Instead, use <B>RDDSetDefault()</B> to set the default driver.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7e974.html">How Do I Specify An RDD?</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,102 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7f92.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng912c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ADIR()*</B>
+ Fill a series of arrays with directory information
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ADIR([&lt;cFilespec&gt;],</B>
+     <B>   [&lt;aFilenames&gt;],</B>
+     <B>   [&lt;aSizes&gt;],</B>
+     <B>   [&lt;aDates&gt;],</B>
+     <B>   [&lt;aTimes&gt;],</B>
+     <B>   [&lt;aAttributes&gt;]) --&gt; nFiles</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFilespec&gt;</B> is the path specification of files to include in the
+     scan of the DEFAULT directory.  It is a standard file specification that
+     can include the wildcard characters * and ?, as well as a drive and path
+     reference.  If omitted, the default specification is *.*.
+
+     <B>&lt;aFilenames&gt;</B> is the array to fill with the filenames matching
+     &lt;cFilespec&gt;.  Each element contains the filename and extension as a
+     character string in all uppercase letters.
+
+     <B>&lt;aSizes&gt;</B> is the array to fill with the sizes of the corresponding
+     files in the &lt;aFilenames&gt; array.  Each element is numeric data type.
+
+     <B>&lt;aDates&gt;</B> is the array to fill with the dates of the corresponding
+     files in the &lt;aFilenames&gt; array.  Each element is a date data type.
+
+     <B>&lt;aTimes&gt;</B> is the array to fill with the times of the corresponding
+     files in the &lt;aFilenames&gt; array.  Each element filled contains a
+     character string of the form: hh:mm:ss.
+
+     <B>&lt;aAttributes&gt;</B> is the array to fill with attributes of the
+     corresponding files in the &lt;aFilenames&gt; array.  Each element is a
+     character string.  If &lt;aAttributes&gt; is specified, hidden, system, and
+     directory files are included as well as normal files.  If &lt;aAttributes&gt;
+     is not specified only normal files are included.
+
+ <B>Returns</B>
+
+     ADIR() returns the number of files matching the directory skeleton
+     described in &lt;cFilespec&gt;.
+
+ <B>Description</B>
+
+     ADIR() is an array function that performs two basic operations.  First,
+     it returns the number of files matching the file specification.  Second,
+     it fills a series of arrays with filenames, sizes, dates, times, and
+     attributes.
+
+     ADIR() is a compatibility function and therefore not recommended.  It is
+     superseded by the DIRECTORY() function which returns all file
+     information in a multidimensional array.
+
+ <B>Notes</B>
+
+     <B>.  Directories:</B> If you specify the &lt;aAttributes&gt; argument and
+        &lt;cFilespec&gt; is *.*, directories will be included in &lt;aFilenames&gt;.  In
+        the &lt;aAttributes&gt; array, directories are indicated with an attribute
+        value of "D."  If ADIR() is executed within a subdirectory, the first
+        two entries of the &lt;aFilenames&gt; array are "." and "..", the parent
+        and current directory aliases.  The date and time of last update are
+        reported for directories, but the size of a directory is always zero.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates an array to hold the names of all (.txt)
+        files in the current DEFAULT directory, then uses AEVAL() to list
+        them to the console:
+
+        LOCAL aFiles[ADIR("*.TXT")]
+        ADIR("*.TXT", aFiles)
+        AEVAL(aFiles, { |element| QOUT(element) })
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng45a7.html">ACHOICE()</A>
+<A HREF="ng912c.html">AEVAL()</A>
+<A HREF="ngd812.html">ASCAN()</A>
+<A HREF="ngeac0.html">ASORT()</A>
+<A HREF="ng2a764.html">DIRECTORY()</A>
+<A HREF="ng452d7.html">LEN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

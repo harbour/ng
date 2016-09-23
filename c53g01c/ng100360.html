@@ -1,0 +1,131 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngff79f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngfbcd2.html">[^^Up^^]</A>
+<A HREF="ng101299.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>EXIT PROCEDURE</B>
+ Declare an exit procedure
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>EXIT PROCEDURE &lt;idProcedure&gt;</B>
+     <B>   [FIELD &lt;idField list&gt; [IN &lt;idAlias&gt;]]</B>
+     <B>   [LOCAL &lt;identifier&gt; [[:= &lt;initializer&gt;]]]</B>
+     <B>   [MEMVAR &lt;identifer list&gt;]</B>
+     <B>   .</B>
+     <B>   . &lt;executable statements&gt;</B>
+     <B>   .</B>
+     <B>   [RETURN]</B>
+
+ <B>Arguments</B>
+
+     <B>EXIT PROCEDURE</B> declares a procedure that will be executed on program
+     termination.
+
+     <B>&lt;idProcedure&gt;</B> is the name of the exit procedure to declare. Exit
+     procedure names can be any length, but only the first 10 characters are
+     significant.  Names may not begin with an underscore but can contain any
+     combination of characters, numbers, or underscores.
+
+     <B>FIELD</B> declares a list of identifiers to use as field names whenever
+     encountered.  If the IN clause is specified, referring to the declared
+     name includes an implicit reference to the specified alias.
+
+     <B>LOCAL</B> declares and optionally initializes a list of variables or
+     arrays whose visibility and lifetime is the current procedure.
+
+     <B>MEMVAR</B> declares a list of identifiers to use as private or public
+     memory variables or arrays whenever encountered.
+
+     <B>RETURN</B> passes control to the next exit procedure or to the operating
+     system, if no other exit procedures are pending.
+
+ <B>Description</B>
+
+     The EXIT PROCEDURE statement declares a procedure that will be executed
+     upon program termination.  EXIT procedures are called after the last
+     executable statement in a CA-Clipper application has completed.  EXIT
+     PROCEDUREs can be used to perform common housekeeping tasks such as
+     saving configuration settings to a file, closing a log file, or
+     concluding a communications session.
+
+     The visibility of exit procedures is restricted to the system;
+     therefore, it is not possible to call an EXIT PROCEDURE from a procedure
+     or user-defined function.  Exit procedures do not receive parameters.
+
+     Once the last executable statement has completed, control passes from
+     one EXIT PROCEDURE to the next until all procedures in the exit list
+     have been called.  Control then passes to the operating system.
+
+     The ANNOUNCE statement declares a module identifier for a source (.prg)
+     file.  Once declared, EXIT PROCEDUREs are referenced with this module
+     identifier.  An application may use any number of exit procedures by
+     explicitly REQUESTing their module identifiers.
+
+     The EXIT PROCEDUREs requested for an application are collectively
+     referred to as the exit list.  There is no mandatory execution order of
+     procedures in the exit list; however, if an EXIT PROCEDURE is declared
+     in the same source (.prg) file as the application's primary routine
+     (root), it is guaranteed to be the first exit procedure called.
+
+     Termination of a given CA-Clipper application can be attributed to any
+     of the following:
+
+     <B>.</B>  RETURNing from the primary (root) routine
+
+     <B>.</B>  the QUIT command
+
+     <B>.</B>  issuing a BREAK without an enclosing BEGIN SEQUENCE...END
+
+     <B>.</B>  unrecoverable error
+
+     Execution of an EXIT PROCEDURE cannot be guaranteed when the system
+     encounters an unrecoverable error.  If an error is raised during an exit
+     procedure, the system returns to DOS.  Pending exit procedures are not
+     called.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates construction of a simple timing
+        mechanism using INIT and EXIT PROCEDUREs:
+
+        // prints the amount of time required to read,
+        // sort, and display a list of file names.
+
+        ANNOUNCE MySystem
+
+        STATIC nStart
+
+        PROCEDURE Main()
+           AEVAL( ASORT( DIRECTORY( "*.*" ) ),;
+              { | aFileInfo | QOUT( aFileInfo[ 1 ] ) } )
+           RETURN
+
+        INIT PROCEDURE MyInit()
+           nStart := SECONDS()
+           RETURN
+
+        EXIT PROCEDURE MyExit()
+           ?
+           ? "Elapsed Time: "
+           ?? SECONDS() - nStart
+           RETURN
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfc240.html">ANNOUNCE</A>
+<A HREF="ng10da82.html">REQUEST</A>
+<A HREF="ng105d62.html">INIT PROCEDURE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng69586.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng639de.html">[^^Up^^]</A>
+<A HREF="ng69f21.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Database Event Triggers:</B>
+
+  The SIx Driver's Event Trigger system allows you to attach a "trigger" to
+  various database operations, or "events".  This allows you to control all
+  aspects of certain events from one location in your program.
+
+  The events currently aupporting triggers are:
+
+   PREUSE       - A USE command has just been issued; Table not yet opened.
+   POSTUSE      - A table has just been opened.
+   UPDATE       - An index file is about to be checked for updating.
+   APPEND       - A new record is about to be appended to the table.
+   DELETE       - A record is being marked for deletion.
+   RECALL       - A record is being recalled.
+   PACK         - The database is to be PACKed.
+   ZAP          - The database is to be ZAPped.
+   PUT          - A value is being stored into a field.
+   GET          - A value is being retrieved from a field.
+   PRECLOSE     - A CLOSE command has just been issued; Table not yet closed.
+   POSTCLOSE    - A table has just been closed.
+   PREMEMOPACK  - A MEMOPACK command has just been issued; Not yet packed.
+   POSTMEMOPACK - A memo file has just been PACKed.
+
+
+  Triggers can be used to:
+
+    <B>.</B> Delete child records from related tables if the parent record is
+      deleted.
+
+    <B>.</B> Check for the existence of index files and create them or select
+      an order.
+
+    <B>.</B> Limit a user's ability to modify record data.
+
+    <B>.</B> Warn the user before executing a DELETE, PACK, ZAP, etc...
+
+    <B>.</B> And pretty much anything else you can think of attaching to an event.
+
+
+  <U>NOTE:  See the TRIGDEMO.PRG sample program for an example of using</U>
+  <U>       Database Event Triggers.</U>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng24704.html">Sx_DefTrigger()</A>
+<A HREF="ng386d6.html">Sx_SetTrigger()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

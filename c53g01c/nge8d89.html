@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge8536.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge93ab.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET FUNCTION</B>
+ Assign a character string to a function key
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET FUNCTION &lt;nFunctionKey&gt; TO &lt;cString&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nFunctionKey&gt;</B> is the number of the function key to receive the
+     assignment.
+
+     <B>TO &lt;cString&gt;</B> specifies the character string to assign to
+     &lt;nFunctionKey&gt;.
+
+ <B>Description</B>
+
+     SET FUNCTION assigns a character string to a function key numbered
+     between 1 and 40 inclusive.  When the user presses the assigned function
+     key, &lt;cString&gt; is stuffed into the keyboard buffer.  &lt;cString&gt; can
+     include control characters, such as a Ctrl+C or Ctrl+S to perform
+     navigation or editing actions in a wait state.
+
+     <B>List of Function Key Mappings</B>
+     ------------------------------------------------------------------------
+     <B>Function Key      Actual Key</B>
+     ------------------------------------------------------------------------
+     1 - 10            F1 - F10
+     11 - 20           Shift+F1 - Shift+F10
+     21 - 30           Ctrl+F1 - Ctrl+F10
+     31 - 40           Alt+F1 - Alt+F10
+     ------------------------------------------------------------------------
+
+     <B>Warning! </B> In CA-Clipper, SET FUNCTION is preprocessed into SET KEY
+     and KEYBOARD commands.  This means that SET FUNCTION has the effect of
+     clearing any SET KEY for the same key number and vice versa.  This is
+     incompatible with previous releases, which maintained separate lists of
+     SET FUNCTION keys and SET KEY keys.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd087b.html">KEYBOARD</A>
+<A HREF="ngea03c.html">SET KEY</A>
+<A HREF="ng9e528.html">SETKEY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

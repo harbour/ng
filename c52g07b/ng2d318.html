@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2d0e8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c81b.html">[^^Up^^]</A>
+<A HREF="ng2daf4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>The Alternate Terminal Driver Architecture</B>
+------------------------------------------------------------------------------
+
+     In CA-Clipper, communication with I/O devices is controlled by a
+     multilayered terminal system.  At the lowest level is the terminal
+     driver which controls screen and keyboard activity.  It consists of a
+     screen and keyboard driver that communicates directly with the I/O
+     device (operating system or hardware).  It is the device specific part
+     of the CA-Clipper  terminal system.
+
+     There is, then, a higher level system that communicates with terminal
+     drivers.  This system is known as the General Terminal (GT) system and
+     provides general services that create CA-Clipper screen and keyboard
+     commands and functions.  The following figure demonstrates:
+
+                   +-----------------------------------------+
+                   | CA-Clipper screen and keyboard commands |
+                   |              and functions              |
+                   |-----------------------------------------|
+                   |        General Terminal (GT.OBJ)        |
+                   ------------------------------------------|
+                   |             Terminal Driver             |
+                   |-----------------------------------------|
+                   |          Screen   |   Keyboard          |
+                   +-----------------------------------------+
+
+     The default terminal driver, designed for IBM PC and 100% compatibles,
+     is supplied as a library file (TERMINAL.LIB) installed into your
+     \CLIPPER5\LIB directory.  This driver links into each program
+     automatically if you specify no alternative terminal driver provided
+     that you do not use the /R option when you compile.  An alternate
+     terminal driver is supplied as a separate library (.LIB) file that links
+     into an application program in place of the default terminal driver if
+     you specify it on the link line.
+
+     All alternate terminal drivers work through the General Terminal layer
+     as supplied in the file GT.OBJ.  The CA-Clipper installation program
+     installs this file in the \CLIPPER5\OBJ subdirectory on the drive that
+     you specify, so you need not install the driver manually.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng160ea3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng15a315.html">[^^Up^^]</A>
+<A HREF="ng16183e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>setKey(&lt;nKey&gt; [, &lt;bBlock&gt;]) --&gt; bPrevious</B>
+
+        Gets and optionally sets the code block indicated by &lt;bBlock&gt; that is
+        associated with the Inkey value specified by &lt;nKey&gt;.  When replacing
+        an existing keypress/code block definition, it returns the previous
+        code block; otherwise, it returns the current one.
+
+        <B>TBrowse:SetKey() Default Keypress/Code Block Definitions</B>
+        ---------------------------------------------------------------------
+        <B>Inkey Value    Associated Code Block</B>
+        ---------------------------------------------------------------------
+        K_DOWN         { | oTB, nKey | oTB:Down(), TBR_CONTINUE }
+        K_END          { | oTB, nKey | oTB:End(), TBR_CONTINUE }
+        K_CTRL_PGDN    { | oTB, nKey | oTB:GoBottom(), TBR_CONTINUE }
+        K_CTRL_PGUP    { | oTB, nKey | oTB:GoTop(), TBR_CONTINUE }
+        K_HOME         { | oTB, nKey | oTB:Home(), TBR_CONTINUE }
+        K_LEFT         { | oTB, nKey | oTB:Left(), TBR_CONTINUE }
+        K_PGDN         { | oTB, nKey | oTB:PageDown(), TBR_CONTINUE }
+        K_PGUP         { | oTB, nKey | oTB:PageUp(), TBR_CONTINUE }
+        K_CTRL_END     { | oTB, nKey | oTB:PanEnd(), TBR_CONTINUE }
+        K_CTRL_HOME    { | oTB, nKey | oTB:PanHome(), TBR_CONTINUE }
+        K_CTRL_LEFT    { | oTB, nKey | oTB:PanLeft(), TBR_CONTINUE }
+        K_CTRL_RIGHT   { | oTB, nKey | oTB:PanRight(), TBR_CONTINUE }
+        K_RIGHT        { | oTB, nKey | oTB:Right(), TBR_CONTINUE }
+        K_UP           { | oTB, nKey | oTB:Up(), TBR_CONTINUE }
+        K_ESC          { | oTB, nKey | TBR_EXIT}
+        K_LBUTTONDOWN  { | oTB, nKey | tbMouse(oTB, MROW(), MCOL()) }
+        ---------------------------------------------------------------------
+
+        Key handlers may be queried, added, replaced, and removed from the
+        dictionary.  For example:
+
+        oTB:SetKey(K_ESC, { | oTB, nKey | TBR_EXIT })
+
+        A default key handler may be declared by specifying a value of 0 for
+        &lt;nKey&gt;.  Its associated code block will be evaluated each time
+        TBrowse:ApplyKey() is called with a key value that is not contained
+        in the dictionary.  For example:
+
+        oTB:SetKey(0, { | oTB, nKey | DefTBProc(oTB, nKey) }
+
+        The example above calls a function named DefTBProc() when nKey is not
+        contained in the dictionary.
+
+        To remove a keypress/code block definition, specify NIL for &lt;bBlock&gt;.
+        For example:
+
+        oTB:SetKey(0, NIL }
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

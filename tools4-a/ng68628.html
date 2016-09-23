@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng680f6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng68cde.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSJNO()</B>
+ Determines the number of an active job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSJNO(&lt;cPServer&gt;,&lt;nPrinter&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; nJob</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;nPrinter&gt;</B>  Designates the number of the printer on &lt;cPServer&gt;.
+     Values between 0 and 15 are possible.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSJNO() returns the job number of the active job of &lt;nPrinter&gt;.  If
+     an error occurs (for example, no active job), the function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER JOB NUMBER
+     Internally, Netware uses job numbers to manage jobs within a queue.  The
+     job number of an active job of &lt;nPrinter&gt; can be determined with
+     NNETPSJNO().  The job number and queue name can be used to determine
+     additional job information using the NNETJXXX() functions.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the job number of the active job of printer 0 on
+        PSERVER:
+
+        IF (nJob:=NNETPSJNO('PSERVER',0))&gt;=0
+           ? 'Job number:',nJob
+        ELSE
+           ? 'No job active or other error!'
+        ENDIF
+
+     <B>.</B>  Determine the owner of the active job:
+
+        nJob=NNETPSJNO('PSERVER',0)
+        cQueue=NNETPSJQ('PSERVER',0)
+        ? 'Owner: ',NNETJOWNER(cQueue,nJob)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng49eec.html">NNETJLIST()</A>
+<A HREF="ng692ae.html">NNETPSJQ()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

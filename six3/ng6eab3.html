@@ -1,0 +1,107 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6dd81.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6dbf4.html">[^^Up^^]</A>
+<A HREF="ng6ffa0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Using HiPer-SEEK:</B>
+
+  The HiPer-SEEK for Clipper system has been designed to offer the
+  developer great flexibility and provide an inexpensive solution for the
+  great majority of text search problems. The HiPer-SEEK functions are used
+  to create, maintain and search one or more HiPer-SEEK index files. In the
+  demonstration programs, these index files are given the extension .HSX
+  and this document will refer to HiPer-SEEK index files as .HSX files.
+
+  HiPer-SEEK indexes contain fixed length keys (index records) which track
+  the contents of text records. A text record may consist of any arbitrary
+  block of text. In the case of a .DBF (Clipper) format file, a text record
+  would usually consist of the concatenation of selected fields from a data
+  record. A text record might also be a line or paragraph from a text file
+  or even an entire file.  For example, a correspondence
+  management/tracking system made up of many individual WordPerfect files
+  might be structured so that each file is a text record. In all cases,
+  there will be one index record for each and every text record. This one
+  to one relationship is critical to the proper operation of a HiPer-SEEK
+  system.
+
+  An .HSX file is created by hs_Create(). hs_Create() builds the .HSX file
+  header and establishes the index's attributes. It does not add records to
+  the file. This is done by hs_Add().
+
+  The contents of each text record are passed to HiPer-SEEK, a key is built
+  according to the parameters of hs_Create() and an index record is added
+  to the .HSX file using hs_Add().  These index records are given numbers
+  (beginning with 1) which are returned by hs_Add().  Index record numbers
+  are not database record numbers. They are created by HiPer-SEEK and are
+  incremented by one as each record is added.
+
+  Again using the example of a .DBF file, if the records are read and
+  passed to HiPer-SEEK in natural order (that is, not in an index order),
+  the database record numbers will be the same as the index record numbers.
+  If each text record is a line of text, each index record number will
+  correspond to a line number.  HiPer-SEEK is not aware of the origin of
+  the text strings it receives. It merely receives a string, constructs an
+  index key, adds that key to the .HSX file, increments its internal
+  counter and returns the value of the counter.  It is the responsibility
+  of the application to manage the text records. HiPer-SEEK will manage the
+  index records.
+
+  The .HSX file is initially built like other types of indexes.
+  Maintenance operations such as adds, replaces, deletes and undeletes are
+  performed on individual index records. The .HSX file will not have to be
+  rebuilt unless the data on which it is based is significantly altered. An
+  example of this is when a .DBF file is PACKED. A PACK will remove all
+  data records that have been marked for deletion. The .HSX file must be
+  rebuilt if any .DBF records were removed because the one to one
+  relationship between data records (text records) and index records would
+  have been destroyed.  Similarly, if files in a document database or lines
+  of a text file were erased, the related .HSX indexes should be rebuilt.
+
+  Searches are performed by passing the string or strings being searched
+  for (search string) to HiPer-SEEK along with the identifier of the
+  appropriate .HSX file. The .HSX file is searched and the index record
+  numbers of those records containing matches are returned. The text record
+  related to each returned index record number is then inspected to verify
+  that a match has actually been found. This verification process is
+  necessary because HiPer-SEEK will sometimes return aliases. See
+  hs_Verify().
+
+  An .HSX index is not an inversion or compression of the original textual
+  data. Its keys track the occurrence of text signatures. It identifies
+  matches as those index records containing all the signatures or
+  attributes of the search string(s). It is possible that differing strings
+  will resolve to the same signature. We refer to these as aliases. It is
+  important to note that while an .HSX index search may mistakenly identify
+  a record as containing a match, it will never fail to find a record that
+  does match. The speed of the index search allows for verification as well
+  as other post search operations and still provide exceptionally rapid
+  results.
+
+  As mentioned above, the HiPer-SEEK system has been built to provide fast
+  text searches in a wide variety of applications. There are limits
+  however.  It will be less useful in two extreme situations. The first is
+  where text records are very small. The smallest .HSX index key is 16
+  bytes. When individual text records are also that small the index file
+  overhead can be 100% or more. The other extreme is where individual text
+  records are very large. The largest choice for an .HSX index key is 64
+  bytes. It is easy to imagine that indexing 64 kilobytes of text with a
+  single 64 byte key is not practical.  Additionally, because HiPer-SEEK
+  identifies matches on a text record level, there would still be
+  significant work left to find the string(s) within the 64K block of text
+  that HiPer-SEEK identifies as containing a match. See the <B>Index</B>
+  <B>Creation</B> section for more on record vs. key size.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

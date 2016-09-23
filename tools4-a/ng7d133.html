@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7c9cc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7a98e.html">[^^Up^^]</A>
+<A HREF="ng7d4d3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSTIME()</B>
+ Queries the time on a Novell file server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSTIME() --&gt; cServerTime</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Returns</B>
+
+     NNETSTIME() returns the default file server clock time in the format
+     "HH:MM:SS".
+
+ <B>Description</B>
+
+     NOVELL NET SERVER TIME
+     With NNETSTIME(), you can determine the clock time on the default file
+     server.  The time, which is returned in the format "HH:MM:SS", can be
+     passed with SETTIME() to DOS and with ATs to the CMOS-RAM.  In this way,
+     all applications within a network can be synchronized with regard to the
+     clock time.
+
+ <B>Examples</B>
+
+     <B>.</B>  Query the clock time of the default file server:
+
+        ? NNETSTIME()                     // e.g. "10:28:30"
+
+     <B>.</B>  Pass the clock time with an AT to CMOS-RAM:
+
+        SETTIME(NNETSTIME(), ISAT())
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng7bfea.html">NNETSDATE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

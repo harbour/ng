@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7d5d2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng7e5df.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CANCEL*</B>
+ Terminate program processing
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CANCEL* | QUIT</B>
+
+ <B>Description</B>
+
+     CANCEL and QUIT both terminate the current program, closing all open
+     files, and returning control to the operating system.  You can use
+     either command from anywhere in a CA-Clipper program system.  A RETURN
+     executed at the highest level procedure, performs the same action.
+
+ <B>Notes</B>
+
+     <B>.  Return code:</B> When a CA-Clipper program terminates, the return
+        code is set to 1 if the process ends with a fatal error.  If the
+        process ends normally, the return code is set to 0 or the last
+        ERRORLEVEL() set in the program.
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3133f.html">ERRORLEVEL()</A>
+<A HREF="ng9115b.html">QUIT</A>
+<A HREF="ngc6fd6.html">RETURN</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

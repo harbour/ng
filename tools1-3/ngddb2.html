@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd756.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4610.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>WSTEP()</B>
+ Determines the step width of interactive window movement
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>WSTEP(&lt;nVertical&gt;,&lt;nHorizontal&gt;) --&gt; nResult</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nVertical&gt;</B>  Designates the number of rows the window steps when
+     moved interactively.
+
+     <B>&lt;nHorizontal&gt;</B>  Designates the number of columns the window steps
+     when moved interactively.
+
+ <B>Returns</B>
+
+     If an error occurs, WSTEP() returns -1.   If no errors occur, it returns
+     0.
+
+ <B>Description</B>
+
+     WSTEP() allows you to set the number of steps a window moves with each
+     key stroke.
+
+     <B>Exact Positioning</B>
+
+     Normally, in the case of a step size greater than (1,1), you would not
+     be able to select every screen position.  However, unique interactive
+     mode behavior lets you select every screen position anyway!  Pressing
+     two opposing arrow keys, one immediately after the other, causes a step
+     size of 1 to become effective for that axis.  This step size allows
+     precise positioning of the window!
+
+ <B>Note</B>
+
+     <B>.</B>  This function only operates when all windows are closed.  The
+        preset values are 2 rows for the vertical steps and 5 columns for the
+        horizontal steps.  The maximum values are 6 rows for the vertical
+        steps and 20 rows for the horizontal steps.  If a step value exceeds
+        the maximum value, then the step value is set to the maximum correct
+        value.
+
+ <B>Example</B>
+
+     When you use the cursor keys, the selected window is moved 1 row
+     vertically and 3 rows horizontally:
+
+     WSTEP(1, 3)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng61aa.html">WACLOSE()</A>
+<A HREF="ngd227.html">WSETMOVE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

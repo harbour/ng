@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1b0e2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng1bdb3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSPRVSR()</B>
+ Determines if the logged in user has supervisor rights
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSPRVSR() --&gt; lSupervisorMode</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Returns</B>
+
+     NNETSPRVSR() returns .T. when the station that is queried has supervisor
+     rights on the default file server.
+
+ <B>Description</B>
+
+     NOVELL NET SUPERVISOR
+     Supervisor rights are the highest level rights within a network.  These
+     rights allow a supervisor, or someone with the same security
+     equivalence, access to all Netware functions.  For example, this
+     function allows you to test to see if the account under which the
+     station has been logged in has those rights.
+
+ <B>Note</B>
+
+     <B>.</B>  Supervisor rights contain console privileges, existing in
+        Netware 2.1/ELS II and up.
+
+ <B>Example</B>
+
+     Test to see if you have supervisor rights:
+
+     ? NNETSPRVSR()                     // .T., when yes
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng14651.html">NNETCOPRIV()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

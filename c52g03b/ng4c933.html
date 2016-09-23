@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4c336.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4cde1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>recall()</B>
+ Undelete the current row (record)
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE recall(</B>
+     <B>                WORKAREAP wa</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     Recalls the row marked for deletion at the workarea cursor position.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Assuming that your RDD supports virtual deletes, recall()
+        should bring the deleted record at the current workarea cursor
+        position back from its deleted status (i.e. remove the deleted flag).
+        If your RDD does not support virtual deletes, you should generate a
+        "not supported" error.
+
+     <B>.</B>  A recall() usually involves a write to the data store.  This
+        means that shared and read-only access must be considered, and a call
+        to goHot() is in Order before performing the recall.
+
+     <B>.</B>  If your RDD supports relations, update them with a forceRel()
+        prior to attempting relative movement.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng49820.html">delete()</A>
+<A HREF="ng49c83.html">deleted()</A>
+<A HREF="ng4f8e4.html">pack()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

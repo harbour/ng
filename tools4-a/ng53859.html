@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5340d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng54122.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETREMQOP()</B>
+ Removes a queue operator
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETREMQOP(&lt;cQueue&gt;,&lt;cOperator&gt;|&lt;aOperators&gt;,</B>
+     <B>   [&lt;cServer&gt;|   &lt;nConId&gt;]) --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates a print queue on the default server or on
+     &lt;cServer&gt;|&lt;nConId&gt;.
+
+     <B>&lt;cOperator&gt;</B>  Designates the name of a user that is removed from the
+     operator list of &lt;cQueue&gt;.
+
+     <B>&lt;aOperators&gt;</B>  Designates a number of elements of the type string.
+     Each element designates the name of a user that is removed from the
+     operator list of &lt;cQueue&gt;.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETREMQOP() returns the number of operators that are successfully
+     removed from the operator list of &lt;cQueue&gt;.  The value 0 indicates that
+     no operator has been deleted.
+
+ <B>Description</B>
+
+     NOVELL NET REMOVE QUEUE OPERATOR
+     NNETREMQOP() allows you to remove one or more users from the operator
+     list of a print queue.  To remove one operator, the user name must be
+     passed in &lt;cOperator&gt;.  By passing an array containing the user names as
+     elements (&lt;aOperators&gt;), more operators can be deleted.  With the
+     parameters &lt;cServer&gt; or &lt;nConId&gt;, the operator list of any attached
+     server can be modified.  The connection ID of a server can be determined
+     with NNETATTACH() or NNETLOGIN().
+
+     Supervisor rights of the requesting user on the related file server are
+     required to remove users from an operator list.
+
+ <B>Note</B>
+
+     <B>.</B>  NNETREMQOP() is a high level function based on the low level
+        functions of the bindery access.  The CA-Clipper source code can be
+        found on the product disks.
+
+ <B>Examples</B>
+
+     <B>.</B>  Remove user MICK from the operator list of the queue
+        LINEPRINTER:
+
+        IF NNETREMQOP('LINEPRINTER','MICK')&gt;0
+              ? 'Operator removed successfully!'
+        ELSE
+              ? 'Error!'
+        ENDIF
+
+     <B>.</B>  Remove JIM, PETER, and MIKE from the operator list of the
+        queue LINEPRINTER:
+
+        NNETREMQOP('LINEPRINTER',{'JIM','PETER','MIKE'})
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40b40.html">NNETADDQOP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

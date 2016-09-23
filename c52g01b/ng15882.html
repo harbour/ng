@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1534a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng15f35.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBAPPEND()</B>
+ Add a new record
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBAPPEND() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DBAPPEND() always returns NIL.
+
+ <B>Description</B>
+
+     DBAPPEND() adds a new record to the database (.dbf) file associated with
+     the current work area.  If successfully added, each field in the record
+     is set to the empty value for its data type and the new record becomes
+     the current record.
+
+     DBAPPEND() performs the same function as the standard APPEND BLANK
+     command.  For more information, refer to the APPEND BLANK command.
+
+ <B>Notes</B>
+
+     <B>.  Logical records:</B> DBAPPEND() does not respect logical
+        visibility.  That is, if the record is successfully added, it becomes
+        the current record regardless of any index or filter condition.
+
+     <B>.  Network environment:</B> For a shared database on a network,
+        DBAPPEND() automatically places a record lock on the new record.  If
+        the record cannot be locked, it is not added and a recoverable runtime
+        error occurs.  The default CA-Clipper error handler handles this error
+        by setting the system NETERR() status to true (.T.) and continuing
+        execution.  For more information, refer to the Network Programming
+        chapter in the Programming and Utilities guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example appends a blank record, checks for a
+        network error and updates the data:
+
+        DBUSEAREA( .T., "DBFNTX", "Sales", "Sales", .T. )
+        .
+        . &lt;statements&gt;
+        .
+        DBAPPEND()
+
+        IF !NETERR()
+           Sales-&gt;FirstName := cFirst
+           Sales-&gt;LastName := cLast
+        ELSE
+           ? "Append operation failed"
+           BREAK
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7af04.html">APPEND BLANK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng67f13.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng6891e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MAX() </B>
+ Return the larger of two numeric or date values
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MAX(&lt;nExp1&gt;, &lt;nExp2&gt;) --&gt; nLarger</B>
+     <B>MAX(&lt;dExp1&gt;, &lt;dExp2&gt;) --&gt; dLarger</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nExp1&gt;</B> and <B>&lt;nExp2&gt;</B> are the numeric values to be compared.
+
+     <B>&lt;dExp1&gt;</B> and <B>&lt;dExp2&gt;</B> are the date values to be compared.
+
+ <B>Returns</B>
+
+     MAX() returns the larger of the two arguments.  The value returned is
+     the same type as the arguments.
+
+ <B>Description</B>
+
+     MAX() is a numeric and date function that ensures the value of an
+     expression is larger than a specified minimum.  The inverse of MAX() is
+     MIN(), which returns the lesser of two numeric or date values.
+
+ <B>Examples</B>
+
+     <B>.</B>  In these examples MAX() returns the greater of two numeric
+        values:
+
+        ? MAX(1, 2)                     // Result: 2
+        ? MAX(2, 1)                     // Result: 2
+
+     <B>.</B>  In these examples MAX() compares date values:
+
+        ? DATE()                           // Result: 09/01/90
+        ? MAX(DATE(), DATE() + 30)         // Result: 10/01/90
+        ? MAX(DATE(), CTOD(""))            // Result: 09/01/90
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng72cbb.html">MIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

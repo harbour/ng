@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng34b81.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosVMAvail()                  Get amount of available virtual memory</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get the amount of available virtual memory</B></U>
+
+ <U>Syntax   : <B>USHORT DosVMAvail(PULONG bytes);</B></U>
+
+ <U>bytes      <B>Pointer to a long integer to receive number of bytes of available</B></U>
+            <B>virtual memory.</B>
+
+ <U>Return   : <B>The total available virtual memory in bytes.</B></U>
+
+ DosVMAvail() returns the approximate number of bytes of virtual memory
+ available to the protected mode program.
+
+ Example:
+
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>ULONG       vmfree, xmfree, rmfree;</B>
+    <B>if (DosVMAvail(&amp;vmfree) == 0)</B>
+    <B>   printf("There are %08X bytes free virtual memory\n",</B>
+    <B>      vmfree);</B>
+    <B>if (DosMemAvail(&amp;xmfree) == 0)</B>
+    <B>   printf("There are %08X bytes free extended memory\n",</B>
+    <B>      xmfree);</B>
+    <B>if (DosRealAvail(&amp;rmfree) == 0)</B>
+    <B>   printf("There are %08X bytes free real memory\n",</B>
+    <B>      rmfree);</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng309f1.html">DosMemAvail()</A>
+<A HREF="ng30dc6.html">DosRealAvail()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng45ca7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng46fd4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>DELETE TAG:</B>
+
+  Syntax:
+
+  <B>DELETE TAG &lt;tagname1&gt; [OF &lt;cdxname1&gt;] [,&lt;tagname2&gt; [OF &lt;cdxname2&gt;]]...</B>
+  <B>DELETE TAG ALL [OF &lt;cdxname&gt;]</B>
+
+  <B>&lt;tagname&gt;</B> specifies the name of the tag to delete.
+
+  <B>OF &lt;cdxname&gt;</B> specifies which .CDX file contains the specified tag.
+  This is used to eliminate any conflicts between two .CDX's that may
+  each have a tag of the same name.  If &lt;cdxname&gt; is not specified, then
+  the open indexes are searched, starting with the structural (production)
+  .CDX (if one exists).
+
+  If the specified tag is the only tag in the .CDX file, then the .CDX
+  file is deleted.
+
+  <B>DELETE TAG ALL</B> deletes the current or specified .CDX file.
+
+  Note that the DELETE TAG command works only with .CDX files.  This
+  command has no effect on .IDX files.
+
+    NOTE:  This command is NOT supported under SIXNTX.
+
+    NOTE:  Be sure that an order is actually set when using
+               DELETE TAG ALL. For instance, this will not work:
+
+               USE test VIA "SIXNSX"       // TEST.NSX auto opens
+               DELETE TAG ALL              // Nothing happens
+
+               Instead, do this:
+
+               USE test VIA "SIXNSX"       // TEST.NSX auto opens
+               SET ORDER TO 1              // make sure an order is set
+               DELETE TAG ALL              // tags are killed.
+
+  Example:
+
+    #include "SIXCDX.CH"
+    USE TEST VIA "SIXCDX"
+
+    INDEX ON last  TAG last         // Create LAST tag
+    INDEX ON age   TAG age          // Create AGE tag
+    INDEX ON state TAG state        // Create STATE tag
+    ? Sx_TagCount()                 // Returns 3
+
+    <B>DELETE TAG age</B>                  // Delete the AGE tag
+    ? Sx_TagCount()                 // Returns 2
+
+    <B>DELETE TAG ALL</B>                  // Delete ALL tags (erases TEST.CDX)
+    ? Sx_TagCount()                 // Returns 0
+
+
+  <U>NOTE:  For DELETE TAG ALL to work properly a tag must be currently</U>
+  <U>       active.  In other words, you must not have ORDER set to 0.</U>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng31ca5.html">Sx_KillTag()</A>
+<A HREF="ng435.html">Sx_OrdDestroy()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

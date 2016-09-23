@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc2300.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngc2cd8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CLOSE</B>
+ Close a specific set of files
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CLOSE [&lt;idAlias&gt; | ALL | ALTERNATE | DATABASES |</B>
+     <B>   FORMAT | INDEXES]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idAlias&gt;</B> specifies the work area where all files are to be closed.
+
+     <B>ALL</B> closes alternate, database, and index files in all work areas,
+     releasing all active filters, relations, and format definitions.
+
+     <B>ALTERNATE</B> closes the currently open alternate file, performing the
+     same action as SET ALTERNATE TO with no argument.
+
+     <B>DATABASES</B> closes all open databases, memo and associated index files
+     in all work areas, and releases all active filters and relations.  It
+     does not, however, have any effect on the active format.
+
+     <B>FORMAT</B> releases the current format, performing the same action as
+     SET FORMAT TO with no argument.
+
+     <B>INDEXES</B> closes all index files open in the current work area.
+
+ <B>Description</B>
+
+     CLOSE is a general purpose command that closes various types of
+     CA-Clipper files depending on the specified option.  CLOSE with no
+     option closes the current database and associated files, the same as USE
+     with no arguments.
+
+     In CA-Clipper, a number of other commands also close files including:
+
+     <B>.</B>  QUIT
+
+     <B>.</B>  CANCEL*
+
+     <B>.</B>  RETURN from the highest level procedure
+
+     <B>.</B>  CLEAR ALL*
+
+     <B>.</B>  USE with no argument
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd4acc.html">QUIT</A>
+<A HREF="ng10e2d2.html">RETURN</A>
+<A HREF="ngde71b.html">SET ALTERNATE</A>
+<A HREF="nge93ab.html">SET INDEX</A>
+<A HREF="ngf8dbc.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1ff6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng2810.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmDestroyFilter()</B>     Destroy a saved filter without restoring it
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmDestroyFilter() -&gt; NIL
+
+<B>Arguments</B>
+
+    None.
+
+<B>Returns</B>
+
+    NIL.
+
+<B>Description</B>
+
+    cmDestroyFilter() allows you to discard a saved filter which has
+    previously been constructed by cmSaveFilter().
+
+    All saved filters constructed by cmSaveFilter() must be either restored
+    (using cmRestFilter()), or destroyed (using this function).
+
+<B>Example</B>
+
+    use demo index age
+    cmFilter("age = 30")                &amp;&amp; Restrict to the 30's
+    saveFilt := cmSaveFilter()          &amp;&amp; Save the filter
+    cmFilter("age = 31")                &amp;&amp; Set up a new filter
+    ? dbFilter()                        &amp;&amp; "age = 31"
+    list age                            &amp;&amp; All the 31's
+
+    *   Ask user if we want to restore the previous fitler
+    goBack := .f.
+    @ 0, 0 say "Go back? " get goBack
+    read
+
+    *   If we want to go back
+    if (goBack)
+        cmRestFilter(saveFilt)          &amp;&amp; Restore the previous filter
+        ? dbFilter()                    &amp;&amp; "age = 30"
+        list age                        &amp;&amp; Will now be all the 30's
+    else
+<B>        cmDestroyFilter(saveFilt)       &amp;&amp; Just discard the saved filter</B>
+    endif
+
+<B>See Also</B>
+
+    cmRestFilter(), cmSaveFilter()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5d8a.html">cmRestFilter()</A>
+<A HREF="ng6419.html">cmSaveFilter</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

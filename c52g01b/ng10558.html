@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngff4b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng10b1e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BIN2L()</B>
+ Convert a 32-bit signed integer to a numeric value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>BIN2L(&lt;cSignedInt&gt;) --&gt; nNumber</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSignedInt&gt;</B> is a character string in the form of a 32-bit signed
+     integer number--least significant byte first.  Only the first four
+     characters are used by the function; all others are ignored.
+
+ <B>Returns</B>
+
+     BIN2L() returns an integer numeric value.
+
+ <B>Description</B>
+
+     BIN2L() is a low-level file function that is used with FREAD() to
+     convert a four-byte character string formatted as a signed integer to a
+     CA-Clipper numeric data type.  This is most useful when you are reading
+     foreign file types and want to read numeric data in its native format.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example opens a database file using low-level file
+        functions and reads the number of records (bytes 4-7).  The result is
+        the same as with LASTREC():
+
+        #include "Fileio.ch"
+        //
+        nHandle := FOPEN("Sales.dbf", FO_READ)
+        // Note:  Sales.dbf contains 84 records
+        //
+        // Point to byte 4
+        FSEEK(nHandle, 4, FS_SET)
+        //
+        // Read the number of records
+        cRecords := SPACE(4)
+        FREAD(nHandle, @cRecords, 4)
+        //
+        ? LTRIM(STR(BIN2L(cRecords)))         // Result: 84
+        FCLOSE(nHandle)
+
+ <B>Files:</B>  Library is EXTEND.LIB, source file is SOURCE\SAMPLE\EXAMPLEA.ASM.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngff4b.html">BIN2I()</A>
+<A HREF="ng10b1e.html">BIN2W()</A>
+<A HREF="ng3a91a.html">FREAD()</A>
+<A HREF="ng3b241.html">FREADSTR()</A>
+<A HREF="ng3e9dd.html">I2BIN()</A>
+<A HREF="ng4397b.html">L2BIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

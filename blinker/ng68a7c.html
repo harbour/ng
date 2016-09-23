@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Example of a .DEF file</B>
+------------------------------------------------------------------------------
+
+
+ <B>A typical module definition file</B>
+
+    <B>NAME              MYPROG</B>
+    <B>DESCRIPTION       `Myprog Version 1.00'</B>
+    <B>EXETYPE           WINDOWS</B>
+    <B>STUB              `WINSTUB.EXE'</B>
+    <B>CODE              PRELOAD MOVEABLE DISCARDABLE</B>
+    <B>DATA              PRELOAD MOVEABLE MULTIPLE</B>
+    <B>HEAPSIZE          1024</B>
+    <B>STACKSIZE         8192</B>
+
+ NAME sets a name for the program. It is usually the same name as the
+ executable file.
+
+ DESCRIPTION allows a descriptive character string to be embedded in the
+ program.
+
+ EXETYPE specifies which operating system the program will be running under.
+
+ STUB adds a DOS stub named `WINSTUB.EXE' to the beginning of the program.
+
+ CODE sets the default attributes of code segments. PRELOAD indicates that
+ the segment is loaded when the program starts. MOVEABLE determines whether a
+ segment can be moved in memory. DISCARDABLE determines whether a code
+ segment can be discarded from memory to fill a different memory request.
+
+ DATA sets the default attributes of data segments. PRELOAD and MOVEABLE are
+ as defined above.
+
+ MULTIPLE specifies that DGROUP is copied for each instance of the program.
+
+ <B>To make a Windows .EXE four steps are required:</B>
+
+ Compile the source code for Windows, as directed in your compiler manual.
+
+ Run the resource compiler to create any resources required, as directed in
+ your compiler manual.
+
+ Run Blinker against the link script file and optional module definition
+ file.
+
+ Run the resource compiler to add the resources to the end of the .EXE file.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

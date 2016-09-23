@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6abb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="ng8052.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETDELOBJ()</B>
+ Deletes a bindery object
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETDELOBJ(&lt;cName&gt;,[&lt;nType&gt;],[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>    --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cName&gt;</B> Designates the name of the bindery object that is deleted.
+
+     <B>&lt;nType&gt; </B> Designates a numeric value that indicates the type of
+     &lt;cName&gt;.  The header file CTNNET.CH contains symbolic constants for the
+     object types defined by Novell for use with the bindery functions of
+     CA-Clipper Tools.  The default value indicates the object type OBJ_USER.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server for which the
+     bindery is accessed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETDELTOBJ() returns .T. if the object &lt;cName&gt; has been deleted
+     successfully.  If an error occurs, the Novell error code can be queried
+     with the NNETERROR() function.
+
+ <B>Description</B>
+
+     <B>Important!</B>  NNETDELOBJ() is a low level bindery function and should
+     be used only with extensive knowledge of the bindery concept and the
+     Novell API.
+
+     NOVELL NET DELETE BINDERY OBJECT
+     NNETDELOBJ() allows you to delete bindery objects.  Users and user
+     groups can be deleted.  With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the
+     bindery of any attached server can be accessed.  The connection ID of a
+     server can be determined with NNETATTACH() or NNETLOGIN().
+
+     Supervisor rights are required to delete a bindery object.  For
+     efficiency reasons, user defined object types must be passed in the high-
+     low format.
+
+ <B>Note</B>
+
+     <B>.</B>  CA-Clipper Tools has no high level function available to
+        delete users or user groups.  Use NNETDELOBJ().
+
+ <B>Examples</B>
+
+     <B>.</B>  Delete user GUEST:
+
+        IF NNETDELOBJ('GUEST')
+        ? 'User has been deleted successfully!'
+        ELSE
+        ? 'User could not be deleted!'
+        ENDIF
+
+     <B>.</B>  Delete group DEV:
+
+        #include "ctnnet.ch"
+
+        IF NNETDELOBJ('DEV',OBJ_GROUP)
+        ? 'Group has been deleted successfully!'
+        ELSE
+        ? 'Group could not be deleted!'
+        ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5d43.html">NNETCRTOBJ()</A>
+<A HREF="ng8052.html">NNETDELPRP()</A>
+<A HREF="ng7b972.html">NNETERROR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

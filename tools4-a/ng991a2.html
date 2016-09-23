@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng98c8c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng97123.html">[^^Up^^]</A>
+<A HREF="ng996ef.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPFWDTH()</B>
+ Determines the form width of a form definition
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPFWDTH(&lt;cForm&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nLength</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cForm&gt;</B>  Designates the name of the form for which the form width
+     (characters per line) is determined.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server for which the form
+     definitions are to be used.  Your workstation must be attached to
+     &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPFWDTH() returns the number of characters per line for &lt;cForm&gt;.  If
+     an error occurs (for example, if &lt;cForm&gt; is not found), the function
+     returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT FORM WIDTH
+     Netware allows you to manage printer and form information in a database
+     (NET$PRN.DAT).  The CA-Clipper Tools functions allow you to access this
+     database and use the information in your application.  With
+     NNETPFWDTH(), you can determine the number of characters per line for
+     &lt;cForm&gt;.  The number of lines has an informative character only and is
+     not evaluated by Netware.
+
+ <B>Example</B>
+
+     Query the number of characters for the form INVOICE:
+
+     ? NNETPFWDTH('INVOICE')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng97968.html">NNETPFLEN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,199 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2ae2e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng29720.html">[^^Up^^]</A>
+<A HREF="ng2ce09.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_fsExtOpen()</B>
+ Extended file open
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "filesys.api"</B>
+     <B>FHANDLE _fsExtOpen(</B>
+     <B>                    BYTEP fpFilename,</B>
+     <B>                    BYTEP fpDefExt,</B>
+     <B>                    USHORT uiFlags,</B>
+     <B>                    BYTEP fpPaths,</B>
+     <B>                    ERRORP pError</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>fpFilename</B> is the name of the file to open specified as a null-
+     terminated string.  It may include the path and file extension.
+
+     <B>fpDefExt</B> is the default extension to use which must include the (.)
+     extension separator.
+
+     <B>uiFlags</B> are the open mode flags, which may consist of both extended
+     open mode and normal open mode flags.
+
+     <B>fpPaths</B> are the paths to be searched when opening fpFilename.
+
+     <B>pError</B> is a pointer to an error object created via the _errNew()
+     function (see The Error API Function Reference chapter of this guide).
+
+ <B>Returns</B>
+
+     _fsExtOpen() returns a DOS handle to the newly created file or FS_ERROR
+     if an error occurs.
+
+ <B>Description</B>
+
+     This function opens the file specified by fpFilename.  If fpFilename
+     does not include a file extension, the default extension fpDefExt, if
+     supplied, will be used.
+
+     Note:  If an extension is supplied, it must contain the (.) extension
+     separator (i.e., ".txt").
+
+     The value of the specified uiFlags determines the mode in which the file
+     is opened.  In addition to the open mode flags shown in the _fsOpen()
+     entry, uiFlags also accommodates the extended mode flags shown in the
+     table below.  To specify multiple flags, combine them with the bitwise
+     OR operator (e.g., FXO_DEFAULT | FO_EXCLUSIVE | FO_INHERITED).
+
+     <B>Extended Mode Flags</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Flag      Description</B>
+     ------------------------------------------------------------------------
+     FXO_TRUNCATE   0x0100    Create (truncate file if it exists)
+     FXO_APPEND     0x0200    Create (append to file if it exists)
+     FXO_FORCEEXT   0x0800    Force default extension
+     FXO_DEFAULTS   0x1000    Use SET command defaults
+     FXO_DEVICERAW  0x2000    Open devices in raw mode
+     ------------------------------------------------------------------------
+
+     FXO_TRUNCATE creates the file fpFilename unless it already exists.  If
+     it already exists, it is truncated to zero-length.
+
+     FXO_APPEND opens fpFilename, if it exists, otherwise it creates
+     fpFilename.  If the file is successfully opened, and the file is not
+     empty, the file pointer is positioned to the last data byte in the file.
+     This file positioning only applies to files, not devices.
+
+     <B>Note: </B> Files created by either FXO_TRUNCATE or FXO_APPEND are
+     created using the FC_NORMAL attribute (see _fsCreate()).
+
+     If fpFilename includes a path, no other path is ever tried.  If
+     fpFilename does not include a path, the file will be searched for based
+     on the following rules:
+
+     FXO_DEFAULTS, if specified when opening a file, causes _fsExtOpen() to
+     search the paths specified by SET DEFAULT and SET PATH.  Paths specified
+     by the fpPaths argument are ignored.
+
+     If specified when creating a file, FXO_DEFAULTS causes _fsExtOpen() to
+     create the file in the path specified by SET DEFAULT.
+
+     If FXO_DEFAULTS is not specified, _fsExtOpen() uses the fpPaths argument
+     (if not NULL) as a search path for opening files.  For creating files,
+     the fpFilename is created using the current drive/directory.
+
+     FXO_FORCEEXT causes the fpDefExt argument (if not NULL) to be used as
+     the file extension, even if fpFilename includes an extension.  Otherwise
+     the extension specified by fpDefExt is used only if fpFilename does not
+     include an extension.
+
+     FXO_DEVICERAW sets the device referenced by fpFilename to raw (binary)
+     mode.  This allows low-order or high-order characters to be passed to
+     devices.  This flag affects only devices--it has no effect on files.
+
+     The pointer pError, if not NULL, must point to a properly created error
+     object.  The error object's filename member, if not NULL, must contain a
+     buffer of at least 80 bytes.  If pError is not NULL, _fsExtOpen will
+     assign values to the error object as follows:
+
+     If _fsExtOpen() is successful, the fully qualified .file specification
+     (i.e., including the drive, path, filename, and extension) will be
+     copied into the buffer pointed to by the error object's filename.
+
+     If _fsExtOpen() is not successful, the file name that it attempted to
+     open will be copied into the buffer pointed to by the error object's
+     filename.  The filename may or may not be fully qualified depending on
+     the path determination rules above.  Also osCode will be set to the
+     appropriate DOS error number and genCode will be set to EG_CREATE if the
+     operation was an FXO_TRUNCATE, or EG_OPEN if the operation was an
+     FXO_APPEND.
+
+     <B>Warning! </B> Failure to provide a buffer of at least 80 bytes of memory
+     will result in a memory overwrite, which will likely cause major system
+     problems.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example illustrates _fsExtOpen().  Screen output
+        is performed using the GT subsystem.  See The General Terminal API
+        Reference chapter of this guide for more information:
+
+        #include "filesys.api"
+        #include "error.api"
+
+        #define FILE_LEN 80
+
+        CLIPPER TEST( void )
+        {
+           USHORT  uiFlags;
+           BYTE    buff[FILE_LEN];
+           FHANDLE hFileHandle;
+           ERRORP  pError;
+           ERRCODE uiError = 0;  // Initialize to 0 (no error)
+
+           pError = _errNew();
+           _errPutFileName( pError, buff );
+
+           /*
+               uiFlags:    access          = FO_READWRITE
+                           sharing         = FO_EXCLUSIVE
+                           inheritance     = FO_PRIVATE
+                           extended        = FXO_DEFAULTS
+           */
+
+           uiFlags = FO_READWRITE | FO_EXCLUSIVE | FO_PRIVATE |
+
+                     FXO_DEFAULTS;
+
+           hFileHandle = _fsExtOpen(
+                      "TEST",  /* Filename will use default extension */
+                      ".TXT",  /* Default extension to use            */
+                      uiFlags, /* Open mode flags shown above         */
+                      NULL,    /* Path: ignored with FXO_DEFAULTS     */
+                      pError   /* Full file spec returned             */
+                       );
+
+           if (hFileHandle == FS_ERROR)
+           {
+               uiError = _errLaunch( pError );
+           }
+
+           else
+           {
+               _gtWriteCon( "Opened file: ", 13 );  /* Display status */
+               _gtWriteCon( buff, strlen( buff ) ); /* using GT API   */
+               _gtWriteCon( "\r\n", 2 );
+               _retni( hFileHandle );
+           }
+
+           _errRelease( pError );
+           _errPost( uiError );
+        }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Filesys.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2a198.html">_fsCreate()</A>
+<A HREF="ng2d62a.html">_fsOpen()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

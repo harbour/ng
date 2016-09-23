@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng25d97.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng26a02.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIOVLSIZ()                   Get current size of overlay pool memory.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get current size of overlay pool memory.</B></U>
+
+ <U>Syntax   : <B>nlValue = BLIOVLSIZ()</B></U>
+
+ <U>Return   : <B>Overlay Pool Current Size</B></U>
+
+ This function returns the size of the overlay area as it was actually
+ allocated when the program started running. The default size is the most
+ recent of the value set at link time with the BLINKER OVERLAY OPSIZE nnn
+ command and the /OOnnn setting of the BLINKER environment variable at
+ runtime. This size may be modified in one of two ways:
+
+ If the BLINKER OVERLAY PAGEFRAME ON command was used at link time, or the
+ /OP1 setting in the BLINKER environment variable is set at runtime, then if
+ an EMS pageframe is available and the default OPSIZE is less than 64kb then
+ the size of the overlay area will be expanded to use as much of the
+ pageframe as possible. This new size will then be the size returned by the
+ BLIOVLSIZ() function.
+
+ If the use of the pageframe is not possible or has been disabled, and
+ provided the use of UMBs has not been disabled through the use of the
+ BLINKER OVERLAY UMB OFF command at link time or the /OU0 setting of the
+ BLINKER environment variable at runtime, then Blinker will attempt to
+ allocate a UMB at least as large as the default OPSIZE. If this is
+ successful then the size of the overlay area will be expanded to use as much
+ of the UMB as possible. This new size will then be the size returned by the
+ BLIOVLSIZ() function.
+
+ If neither of these methods is possible, or both have been disabled, then
+ the size allocated will be the default OPSIZE.
+
+ CA-Clipper Summer '87 DYNAMIC method note:
+
+ When using the BLINKER OVERLAY DYNAMIC method of overlay allocation, this
+ value reflects the exact amount of memory being used by Blinker for overlays
+ at the current time. At the start of an application this will be zero, and
+ the value will increase until it reaches the operating size set by BLINKER
+ OVERLAY OPSIZE &lt;size&gt; and returned by BLIOVLOPS().
+
+ Once it has reached this size it will stabilize for the rest of the
+ application until a call to BLIOVLCLR(). When a call to BLIOVLCLR() is made,
+ all inactive overlays are discarded and the memory is returned to
+ CA-Clipper, so the current size will decrease to the size of just the active
+ overlays. In the best case of BLIOVLCLR() being called from the root then
+ BLIOVLSIZ() should actually return to zero.
+
+ Example:
+
+    <B>* Get the current overlay pool size.</B>
+    <B>*</B>
+    <B>? "The current overlay pool size is"</B>
+    <B>?? BLIOVLSIZ(), " bytes"</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfeb9.html">BLINKER OVERLAY OPSIZE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

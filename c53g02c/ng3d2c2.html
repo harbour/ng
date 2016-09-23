@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3d15b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng3d913.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1210    Data and Index files out of sync</B>
+
+     <B>Explanation:</B>  Database (.dbf) and index (.ntx) files are not
+     synchronized, or there is a stack corruption or access problem related
+     to the RDD loaded.
+
+     <B>Action:</B>  Some suggestions to resolve the problem are:
+
+     1. If the cause of this problem is that the database is being updated
+        through a utility external to the application, simply recreate the
+        index (.ntx) file and restart the application.
+
+     2. If the database was not updated outside of the application, check the
+        code for the application to ensure that all indexes are open when
+        updates are being done.  Correct the code, recreate the index files
+        (.ntx), and restart the application.
+
+     3. Check that ALL index key expressions are a constant length. Usage of
+        LTRIM(), RTRIM(), TRIM(), ALLTRIM(), STR(), and DTOC() can all
+        produce expressions that are not a constant length.  The TRIM()
+        functions should all be padded out to a constant width using PADR().
+
+     4. Use all three arguments to STR().
+
+     5. Use DTOS() instead of DTOC() in index key expressions.  DTOC() is
+        dependent upon the SET DATE FORMAT.
+
+     <B>Note:</B>  This error is applicable to the third party replaceable
+     database drivers  (RDDs), and may not be applicable to CA-Clipper RDDs.
+     This may mean the stack was corrupted, preventing the application from
+     accessing the RDD's index expression.  Increase the STACK or PROCEDURE
+     DEPTH.  Look for missing or incorrectly ordered .LIBraries, or loading a
+     mismatched RDD.
+
+     <B>See Also:</B>  Errors 1010, 1020, and DBFNTX/1210 in this chapter.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

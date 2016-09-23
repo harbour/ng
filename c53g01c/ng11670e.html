@@ -1,0 +1,160 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng115d26.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng10fe9c.html">[^^Up^^]</A>
+<A HREF="ng1178f5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>-&gt;</B>
+ Alias assignment--binary                        (Special)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>&lt;idAlias&gt;-&gt;&lt;idField&gt;</B>
+     <B>&lt;idAlias&gt;-&gt;(&lt;exp&gt;)</B>
+     <B>(&lt;nWorkArea&gt;)-&gt;&lt;idField&gt;</B>
+     <B>(&lt;nWorkArea&gt;)-&gt;(&lt;exp&gt;)</B>
+     <B>FIELD-&gt;&lt;idVar&gt;</B>
+     <B>MEMVAR-&gt;&lt;idVar&gt;</B>
+
+ <B>Operands</B>
+
+     <B>&lt;idAlias&gt;</B> is the name of the unselected work area to access and must
+     refer to a work area with a database file in USE.
+
+     <B>&lt;nWorkArea&gt;</B> is the number of the unselected work area to access.
+
+     <B>&lt;idField&gt;</B> is the name of a field in the specified work area.
+
+     <B>&lt;exp&gt;</B> is an expression of any data type to be executed in the
+     specified work area.  If an expression more complicated than a single
+     field reference is used as the second operand, the expression must be
+     enclosed in parentheses ( ).
+
+     <B>&lt;idVar&gt;</B> is any valid CA-Clipper identifier.  Depending on whether
+     you specify FIELD or MEMVAR, the identifier will be forced to a database
+     field or memory variable (public or private) reference.
+
+ <B>Description</B>
+
+ When used with an &lt;idAlias&gt; as the first operand, the alias operator
+
+     (-&gt;) accesses field information or evaluates an expression in the
+     indicated work area.  The alias operator implicitly SELECTs the
+     &lt;idAlias&gt; before evaluating the &lt;idField&gt; or &lt;exp&gt; operand.  When the
+     evaluation is complete, the original work area is SELECTed again.  An
+     alias reference can be in an expression or on a line by itself:
+
+     ? Customer-&gt;Name
+     Customer-&gt;(UpdateTransaction())
+
+     Using the alias operator lets you:
+
+     <B>.</B>  Access information from unselected work areas within
+        expressions
+
+     <B>.</B>  Access environmental information from unselected work areas
+
+     <B>.</B>  Access information from unselected work areas in modes such as
+        REPORT and LABEL FORMs
+
+     <B>.</B>  Write more compact code
+
+     In addition to allowing expression and field evaluation in unselected
+     work areas, the alias operator makes an explicit reference to a field or
+     variable using either the FIELD or the MEMVAR keyword aliases.  MEMVAR
+     forces &lt;idVar&gt; to refer to a memory variable name, and FIELD forces it
+     to reference a database field.  These special alias identifiers allow
+     you to avoid ambiguity when there are conflicts between field and memory
+     variable names.  Remember that a reference to a variable identifier not
+     prefaced with an alias defaults to a field if there are both field and
+     memory variables with the same name.  To override this, use the (/V)
+     option when compiling.
+
+     In addition to specifying the alias as an identifier, you can access the
+     target work area using an expression that returns the work area number
+     if the expression is enclosed by parentheses.  This lets you use work
+     area numbers as handles, which is useful for passing references to work
+     areas without using macros, aliases, names, etc.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example accesses database and work area information in an
+        unselected work area:
+
+        USE Customer NEW
+        USE Invoices NEW
+        ? Customer-&gt;CustName                  // Result: Bill Smith
+        ? Customer-&gt;(RECNO())                 // Result: 1
+        ? Customer-&gt;(FOUND())                 // Result: .F.
+        ? Customer-&gt;(City + ", " + State + ;
+           "  " + Zip)                        // Result: ShadowVille,
+                                              //         CA  90415
+
+     <B>.</B>  This example uses a user-defined function (MySeek()) as an
+        operand of the alias operator for a common operation that normally
+        requires many more statements:
+
+        IF Invoices-&gt;(MySeek(CustNum))
+           &lt;process customer&gt;...
+        ELSE
+           &lt;process no find&gt;...
+        ENDIF
+        RETURN
+
+        FUNCTION MySeek( cSearch )
+           SEEK cSearch
+        RETURN (FOUND())
+
+        <B>Note:</B>  This example is just an illustration of the alias operator
+        with a user-defined function.  CA-Clipper's DBSEEK() could be used
+        instead of MySeek().
+
+     <B>.</B>  This example explicitly references field and memory variables
+        with the same name:
+
+        USE Customer NEW
+        MEMVAR-&gt;CustName = "Bill Smith"      // Create a memvar
+                                             // CustName
+        LOCATE FOR MEMVAR-&gt;CustName = FIELD-&gt;CustName
+
+     <B>.</B>  This example uses an expression as a work area handle to
+        create a work area-independent database operation:
+
+        cTable1 := "C:Myfile.dbf"
+        cTable2 := "D:Myfile.dbf"
+        USE (cTable1) NEW
+        hArea1 = SELECT()
+        USE (cTable2) NEW
+        hArea2 = SELECT()
+        DoStuff( hArea1, hArea2 )
+
+        FUNCTION DoStuff( hArea1, hArea2 )
+           LOCAL nCount, nSave
+           nSave := SELECT()
+           SELECT (hArea1)
+           FOR nCount := 1 TO FCOUNT()
+              FIELDPUT( nCount, ( hArea2 )-&gt; ;
+                 ( FIELDGET( nCount )))
+           NEXT
+           SELECT (nSave)
+           RETURN NIL
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng101b88.html">FIELD</A>
+<A HREF="ng45816.html">FIELDNAME()</A>
+<A HREF="ng460ca.html">FIELDPOS()</A>
+<A HREF="ng452cb.html">FIELDGET()</A>
+<A HREF="ngddba5.html">SELECT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

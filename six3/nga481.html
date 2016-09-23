@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9e41.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ngace9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Set():</B>
+
+  Purpose:  Used in conjunction with hs_Next(), this is the first function
+            called when performing a find operation.  The function takes the
+            handle of a HiPer-SEEK index file as well as the text to be
+            searched for as input.  hs_Set() does not perform the search.
+            It only sets up the parameters.
+
+   Syntax:  hs_Set( &lt;hIndex&gt;, &lt;cExpr&gt; )
+
+    Where:  &lt;hIndex&gt; is an integer handle of a HiPer-SEEK index file.
+
+            &lt;cExpr&gt; is a string containing the search criteria. Each sub-
+              string to be searched for should be separated by blanks (it is
+              not necessary to pad the front and back of the string with
+              blanks). For example, the string "ed cat" would match all
+              records in the index containing both "ed" and "cat" within
+              them. Since it is a sub-string match, both "ed has a cat" and
+              "The catalog was spray painted" would be valid matches. The
+              order of the substrings in the search criteria is not
+              important. For a successful match, all substrings in the
+              search criteria must be present in the original indexed string.
+
+  Returns:  1 if successful or a negative integer indicating an error.
+
+  Errors Returned:
+
+      -4 (BADSEEK) Error while attempting seek during buffer flushing.
+      -6 (BADWRITE) Error while attempting write during buffer flush.
+     -13 (NORECS) There are no records currently indexed. A search of the
+         index (hs_Next()) would be fruitless.
+     -16 (BADPARMS) Invalid parameters were passed to the function.
+     -18 (BADHANDLE) Invalid handle was passed to the function.
+
+  Comments:
+
+    1.  It is acceptable to make other HiPer-SEEK calls between hs_Set() and
+    hs_Next() and/or between hs_Next() calls. However, remember that if a
+    record is edited and saved (hs_Replace()ed) it may not still be a
+    qualified member of the verified hits. If a search is to be abandoned
+    midstream, other HiPer-SEEK calls may be made without first completing
+    the search.
+
+  Example:
+
+    USE test EXCL
+
+    h := hs_Open( "LOOKUP.HSX", 4, 1 )
+    <B>hs_Set( h, "Thompson" )</B>
+    nRec := hs_Next( h )
+
+    ? "The first record conaining 'Thompson' is #" + LTrim( Str( nRec ))
+
+    hs_Close( h )
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng83cf.html">hs_Next()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

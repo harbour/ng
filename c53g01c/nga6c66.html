@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga5f08.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="nga73ff.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>UPDATED()</B>
+ Determine whether a GET changed during a READ
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>UPDATED() --&gt; lChange</B>
+
+ <B>Returns</B>
+
+     UPDATED() returns true (.T.) if data in a GET is added or changed;
+     otherwise, it returns false (.F.).
+
+ <B>Description</B>
+
+     UPDATED() determines whether characters were successfully entered into a
+     GET from the keyboard during the most current READ.  Each time READ
+     executes, UPDATED() is set to false (.F.).  Then, any change to a GET
+     entered from the keyboard sets UPDATED() to true (.T.) after the user
+     successfully exits the GET.  If the user presses Esc before exiting the
+     first GET edited, UPDATED() remains false (.F.).  Once UPDATED() is set
+     to true (.T.), it retains this value until the next READ is executed.
+
+     Within a SET KEY or VALID procedure, you can change the current GET
+     variable using the KEYBOARD command or by assigning a new value with one
+     of the many assignment operators.  Changing the variable with KEYBOARD
+     is the same as if the user had entered the change directly from the
+     keyboard, and UPDATED() is set accordingly.  However, since UPDATED()
+     reflects only those changes made from the keyboard, an assignment to the
+     GET variable does not affect UPDATED().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example assigns field values from Customer.dbf to
+        variables and edits them.  If the user changes any of the values, the
+        field variables for the current record are updated with the new
+        values:
+
+        USE Customer NEW
+        CLEAR
+        MEMVAR-&gt;Customer = Customer-&gt;Customer
+        MEMVAR-&gt;Address = Customer-&gt;Address
+        @ 1, 1 SAY "Name:" GET MEMVAR-&gt;Customer
+        @ 2, 1 SAY "Address:" GET MEMVAR-&gt;Address
+        READ
+        //
+        IF UPDATED()
+           Customer-&gt;Customer := MEMVAR-&gt;Customer
+           Customer-&gt;Address := MEMVAR-&gt;Address
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngd4eb5.html">READ</A>
+<A HREF="ngea03c.html">SET KEY</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6573a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng65d44.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gExclGet()</B>
+ Retrieve an exclusion area
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>ERRCODE _gExclGet(</B>
+     <B>                   LLG_LPRECT lpExclGet,</B>
+     <B>                   int iZoneNum</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>lpExclGet</B> is a pointer to a LLG_RECT structure that you must
+     allocate prior to calling this function.  _gExclGet() writes information
+     regarding the specified exclusion area to this structure.
+
+     <B>Note: </B> The members of lpExclGet are always pixel-based, regardless
+     of the status of the bIsGraphic parameter when you created the exclusion
+     area with _gExclSet().
+
+     <B>iZoneNum</B> is the number of the exclusion area, beginning with one
+     (1), that you want to query.  The numbers are assigned based on the
+     order in which they are added with _gSetExcl().
+
+ <B>Returns</B>
+
+     SUCCESS if successful; otherwise, an error code.
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6555c.html">_gExclCountGet()</A>
+<A HREF="ng65d44.html">_gExclSet()</A>
+<A HREF="ng6c9c3.html">LLG_RECT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

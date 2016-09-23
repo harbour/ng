@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1da67.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng1e669.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>RDD_Name():</B>
+
+  Syntax:   RDD_Name( &lt;nRDD&gt; )
+
+              nRDD = Number of database driver
+
+  Returns:      Name of the database driver corresponding to specified driver
+                number.
+
+  Description:  This function returns the name of an RDD specified by a
+                number from 1 to the value returned by RDD_Count().  The
+                number corresponds to the driver's position in the driver
+                table.  The driver table contains the database drivers in
+                the order in which they are linked.
+
+  NOTE:  RDD_Name() can be used to determine which drivers have been
+         linked into an application.
+
+
+  Example:
+
+    #include "SIXCDX.CH"        // Forces SIXCDX to be linked in
+
+    REQUEST SIXNSX              // Forces SIXNSX to be linked in
+    REQUEST SIXNTX              // Forces SIXNTX to be linked in
+
+    LOCAL aRDDInfo, nCnt, nRDDCnt := RDD_Count()
+
+    FOR nCnt := 1 TO nRDDCnt
+      aRDDInfo := RDD_Info( <B>RDD_Name( nCnt )</B>)   // Fill aRDDInfo array
+
+      ? "RDD Name.............: " + aRDDInfo[ 1 ]
+      ? "Loaded?..............: " + iif( aRDDInfo[ 2 ], "Yes", "No" )
+      ? "Table File Extension.: " + aRDDInfo[ 3 ]
+      ? "Index File Extension.: " + aRDDInfo[ 4 ]
+      ? "Secondary Index Ext..: " + aRDDInfo[ 5 ]
+      ? "Memo File Extension..: " + aRDDInfo[ 6 ]
+      ?
+    NEXT
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1d5eb.html">RDD_Count()</A>
+<A HREF="ng1da67.html">RDD_Info()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

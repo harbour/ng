@@ -1,0 +1,88 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngca54.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ngd643.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_Error():</B>
+
+  Purpose:  Used to check if an error occurred during the last command or
+            function executed.  Error codes 2000 through 2027 indicate
+            why an expression was not optimizable by Mach SIx. See below
+            for a complete list of error codes.
+
+   Syntax:  m6_Error()
+
+  Returns:  Error code for last command/function.  A value of 0 indicates
+            no error occurred.  The following is a list of the possible
+            error codes:
+
+            2001    No database in use
+            2003    Driver not supported
+            2005    No index(es) in use
+            2007    Database contains over 524 million records
+            2009    No matching index expression(s) found
+            2011    Indeterminate
+            2013    Missing quote ( [, ], ', " )
+            2015    Missing parenthesis
+            2017    Syntax error
+            2019    Data type error
+            2021    No filter active
+            2023    Deferred stack overflow
+            2025    Low memory
+            2027    Automatic optimization off
+            2029    Invalid filter join type
+            2031    Can't join filters of different lengths
+            2033    Non-optimizable .OR.'ed condition
+            2035    High/Low parameters of m6_AddScoped() reversed
+            2101    Maximum number of Clipper array elements(4096) exceeded
+            2103    Unknown operator
+            2105    Stack overflow
+            2107    Stack underflow
+            2109    Unknown map type
+            2207    Bad filter handle
+            2209    Record number out of filter range
+            2219    Internal compile error
+            2221    Internal evaluation error
+
+  Example:
+
+       #include "SIXCDX.CH"
+       #include "MACHSIX.CH"
+
+       ? m6_IsOptimize( "age = 25" )                       //......0
+       ? <B>m6_Error()</B>                                        //...2001
+
+       USE Names VIA "SIXCDX"
+
+       //..........................................No indexes in use
+       ? m6_IsOptimize( "age = 25" )                       //......0
+       ? <B>m6_Error()</B>                                        //...2005
+
+       SET INDEX TO City, Name
+
+       //...............................No matching index expression
+       ? m6_IsOptimize( "age = 25" )                       //......0
+       ? <B>m6_Error()</B>                                        //...2009
+
+       //..............................................Missing quote
+       ? m6_IsOptimize( "state = 'CA" )                    //......0
+       ? <B>m6_Error()</B>                                        //...2013
+
+       //...............................................Syntax error
+       ? m6_IsOptimize( "state = 'CA' .AND" )              //......0
+       ? <B>m6_Error()</B>                                        //...2017
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

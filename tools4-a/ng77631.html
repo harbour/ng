@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng773df.html">[^^Up^^]</A>
+<A HREF="ng78100.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Introduction</B>
+
+ <B>Novell Transaction Tracking System (TTS)</B>
+
+     This chapter provides functions for the use of the TTS within a
+     CA-Clipper application.  The use of the TTS within a CA-Clipper
+     application requires more than start and termination or cancellation of
+     a transaction with the related CA-Clipper Tools functions.  With regard
+     to the architecture, the application must be oriented to the specifics
+     of TTS.  The TTS takes into consideration only files managed on a server
+     volume.
+
+     Transaction tracking occurs only on the files that have been marked as
+     transactional.  The transactional bit is an extended file attribute that
+     can be set with the Novell utility FLAG.EXE or with the related
+     CA-Clipper Tools function NNETEXTATT().  All files related to a .DBF
+     file, (.NTX, .DBT) must also be marked as transactional.
+
+     The time between the start and the termination or cancellation of a
+     transaction should be as short as possible.  Avoid direct entries into
+     database fields.  Use memory variables for data input and then update
+     the database within a transaction.
+
+     The reason for minimizing the transaction time is a characteristic of
+     the Netware operating system that cannot be influenced by the
+     application.  When data in a file is modified, Netware physically locks
+     the affected file area.  In contrast to a logical locking with RLOCK(),
+     the affected data cannot be read as long as the transaction is
+     incomplete.  If the transaction has been terminated successfully, the
+     database record is updated.  If the transaction has been interrupted,
+     the record is reset to the previous value.  A successful read access by
+     another workstation could lead to fatal logical errors.  The physical
+     lock is removed automatically after the transaction has been completed
+     or canceled.  If a workstation tries to access a physically locked area,
+     CA-Clipper causes an ACCESS DENIED error message and evaluates the error
+     block.  Normally, this results in a branch into the error recovery
+     routine.  An error message box is displayed, and the user can cause a
+     repetition of the operation that failed.  The error message text can be
+     adapted to the running transaction.  However, the problem is that from
+     the beginning the application is not able to determine whether the
+     ACCESS DENIED error results from a running transaction or another error
+     source.  Therefore, an application using the TTS should have a mechanism
+     available that allows it to determine if a transaction is active for a
+     specified group of files or not.  Using Netware semaphores, for example,
+     allows you to check to see if a transaction is active, either during the
+     error recovery or before a file is accessed.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

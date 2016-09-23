@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng43ea1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng44ae1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHAREVEN()</B>
+ Returns characters in the even positions of a string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CHAREVEN(&lt;cString&gt;) --&gt; cString</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cString&gt;</B>  Designates the character string from which all even
+     characters are returned.
+
+ <B>Returns</B>
+
+     CHAREVEN() returns a string containing all the even characters of
+     &lt;cString&gt;.
+
+ <B>Description</B>
+
+     CHAREVEN() assembles all even characters within a string into a new
+     character string.  This allows you to process variables consisting of
+     the characters and attributes of a video screen's contents very simply.
+     This function can be implemented in conjunction with functions from the
+     video section.  You can return the attributes from a screen string, with
+     all the characters removed.
+
+ <B>Note</B>
+
+     <B>.</B>  The first position in a string is 1, and therefore is not
+        even.
+
+ <B>Examples</B>
+
+     <B>.</B>  Assemble all even characters:
+
+        ? CHAREVEN("1234a")              // "24"
+
+     <B>.</B>  Return the expanded text to "normal":
+
+        ? CHAREVEN(" H e l l o")         // "Hello"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4547c.html">CHARMIX()</A>
+<A HREF="ng46327.html">CHARODD()</A>
+<A HREF="ng82c06.html">SCREENMIX()</A>
+<A HREF="ng8392c.html">SCREENSTR()</A>
+<A HREF="ng87000.html">STRSCREEN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

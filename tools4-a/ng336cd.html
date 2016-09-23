@@ -1,0 +1,119 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng32b57.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng343e6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETRIGHTS()</B>
+ Tests for access rights to a Novell file server directory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETRIGHTS(&lt;cPath&gt;) --&gt; nBitMap</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cPath&gt;</B>  Designates the complete path, including the drive
+     designation for the directory that is tested.
+
+ <B>Returns</B>
+
+     NNETRIGHTS() returns a value between 0 and 255 that corresponds to a bit
+     map for the related directory rights.  A right is present when the
+     designated bit is set at 1.
+
+     <B>Table 23.14:  Access Right Coding</B>
+     ------------------------------------------------------------------------
+     <B>Bit     Definition     Description</B>
+     ------------------------------------------------------------------------
+     1       READ           Read from files
+     2       WRITE          Write to files
+     3       OPEN           Open files
+     4       CREATE         Create new files
+     5       DELETE         Delete files
+     6       PARENTAL       Create subdirectories
+     7       SEARCH         Search for files in directories
+     8       MODIFY         Change file names or attributes
+     ------------------------------------------------------------------------
+
+     Beginning with NETWARE386 version 3.0, the numeric range for the access
+     rights coding has been extended from 1 bit up to 9 bits.  Additionally,
+     the meaning of the individual bits has been changed according to the
+     following table.
+
+     <B>Table 23.15:  Access Right Coding</B>
+     ------------------------------------------------------------------------
+     <B>Bit     Definition     Description</B>
+     ------------------------------------------------------------------------
+     1       READ           Read from files
+     2       WRITE          Write to files
+     3       RESERVED
+     4       CREATE         Create new files
+     5       ERASE          Delete files
+     6       ACCESS CONTROL Trustee rights can be changed
+     7       FILE SCAN      Search for files in directories
+     8       MODIFY         Change file names or attributes
+     9       SUPERVISORY    All rights / can assign access rights
+     ------------------------------------------------------------------------
+
+     With an invalid parameter, the function returns 0 (which equates to no
+     rights).
+
+ <B>Description</B>
+
+     This function determines the access rights to a directory of a Novell
+     file server.  The parameter must always relate the complete path to the
+     root directory and must include the drive designation.  The construction
+     of this type of absolute path can be done with the aid of functions like
+     DIRNAME(), DISKNAME(), and TRUENAME().
+
+     You can determine if a Novell network is active and if a drive is
+     resident on a file server with the NETDISK() and NNETWORK() functions.
+
+ <B>Note</B>
+
+     <B>.</B>  This function always returns a value of 511 for a local drive
+        and displays full rights to the designated directory.
+
+ <B>Examples</B>
+
+     <B>.</B>  Display the rights to the CA-Clipper directory on drive J:
+
+        ? NNETRIGHTS("J:\CLIPPER")                // Returns numeric
+                                                  // value
+
+     <B>.</B>  Test for a particular right:
+
+        ? ISBIT(NNETRIGHTS("J:\CLIPPER"), 6)      // Allowed to create
+                                                  // a directory
+
+     <B>.</B>  Display the rights in the current directory:
+
+        ? NNETRIGHTS(DISKNAME() + ":" + DIRNAME())
+
+     <B>.</B>  Rights depend on the version:
+
+        cDrive := "J:"
+        IF NNETVER(cDrive) &lt; "3.00"
+           ? BITTOC(NNETRIGHTS(cDrive+"\CLIPPER"), "MSPDCOWR", .T.)
+        ELSE
+           ? BITTOC(NNETRIGHTS(cDrive+"\CLIPPER"), "SMFAEC WR", .T.)
+        ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf97.html">NETDISK()</A>
+<A HREF="ng7d991.html">NNETWORK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

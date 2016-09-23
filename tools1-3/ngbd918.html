@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbd694.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb7bb9.html">[^^Up^^]</A>
+<A HREF="ngbde72.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PCTYPE()</B>
+ Returns the type of computer in use
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PCTYPE() --&gt; nPCType</B>
+
+ <B>Returns</B>
+
+     PCTYPE() returns a numeric code to identify the type of computer.
+
+ <B>Description</B>
+
+     This function differentiates between the different types of PC's.  The
+     function determines the type of computer installed in the application
+     The following codes apply:
+
+     <B>Table 12-5: Computer Type Coding</B>
+     ------------------------------------------------------------------------
+     <B>Value     Symb. constants   PC-Type</B>
+     ------------------------------------------------------------------------
+     255       PC_NORMAL         Normal PC
+     254       PC_XT             PC-XT (w/hard disk)
+     253       PC_JUNIOR         PC jr
+     240       PC_MODEL30        Model 30
+     251       PC_XT_2           XT/2
+     249       PC_LAPTOP         Laptop
+     252       PC_AT             AT/XT-286/Model 50/Model  60
+     248       PC_MODEL80        Model 80
+     45        PC_COMPAQP        COMPAQ Portable
+     154       PC_COMPAQ         COMPAQ Portable Plus
+     ------------------------------------------------------------------------
+
+ <B>Notes</B>
+
+     <B>.</B>  386 and 486 computers are often coded as AT's.
+
+     <B>.</B>  The values correspond to IBM BIOS codes.  An incompatible BIOS
+        might return a different value.
+
+ <B>Example</B>
+
+     What type of computer is installed?
+
+     ? PCTYPE()         // 252  an AT!
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb8dc5.html">CPUTYPE()</A>
+<A HREF="ngc75b9.html">SPEED()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

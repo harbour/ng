@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Short Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngfb937.html">[^^Up^^]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<A HREF="ng15b336.html"> TBrowse -- Overview</A>
+------------------------------------------------------------------------------
+ <B>Class Functions</B>
+
+<A HREF="ng15bd47.html"> TBrowseDB()      Create a new TBrowse object for browsing a database file</A>
+<A HREF="ng15bf9b.html"> TBrowseNew()     Create a new TBrowse object</A>
+------------------------------------------------------------------------------
+ <B>Exported Instance Variables</B>
+
+<A HREF="ng15c134.html"> autoLite         Logical value to control highlighting</A>
+<A HREF="ng15c232.html"> border           Character value defining characters drawn around object</A>
+<A HREF="ng15c462.html"> cargo            User-definable variable</A>
+<A HREF="ng15c544.html"> colCount         Number of browse columns</A>
+<A HREF="ng15c601.html"> colorSpec        Color table for the TBrowse display</A>
+<A HREF="ng15c7eb.html"> colPos           Current cursor column position</A>
+<A HREF="ng15c8c9.html"> colSep           Column separator character</A>
+<A HREF="ng15c9bc.html"> footSep          Footing separator character</A>
+<A HREF="ng15ca9f.html"> freeze           Number of columns to freeze</A>
+<A HREF="ng15cb9b.html"> goBottomBlock    Code block executed by TBrowse:goBottom()</A>
+<A HREF="ng15cd27.html"> goTopBlock       Code block executed by TBrowse:goTop()</A>
+<A HREF="ng15ceb1.html"> headSep          Heading separator character</A>
+<A HREF="ng15cf94.html"> hitBottom        Indicates the end of available data</A>
+<A HREF="ng15d144.html"> hitTop           Indicates the beginning of available data</A>
+<A HREF="ng15d2f8.html"> leftVisible      Indicates position of leftmost unfrozen column in display</A>
+<A HREF="ng15d3e8.html"> mColPos          Numeric value indicating mouse position</A>
+<A HREF="ng15d4c6.html"> message          Character string displayed on status bar</A>
+<A HREF="ng15d649.html"> mRowPos          Numeric value indicating the data row of the mouse position</A>
+<A HREF="ng15d781.html"> nBottom          Bottom row number for the TBrowse display</A>
+<A HREF="ng15d811.html"> nLeft            Leftmost column for the TBrowse display</A>
+<A HREF="ng15d8a4.html"> nRight           Rightmost column for the TBrowse display</A>
+<A HREF="ng15d939.html"> nTop             Top row number for the TBrowse display</A>
+<A HREF="ng15d9c3.html"> rightVisible     Indicates position of rightmost unfrozen column in display</A>
+<A HREF="ng15dac0.html"> rowCount         Number of visible data rows in the TBrowse display</A>
+<A HREF="ng15dbba.html"> rowPos           Current cursor row position</A>
+<A HREF="ng15dcf2.html"> skipBlock        Code block used to reposition data source</A>
+<A HREF="ng15e0c5.html"> stable           Indicates if the TBrowse object is stable</A>
+------------------------------------------------------------------------------
+ <B>Exported Methods</B>
+
+ <B>Cursor Movement Methods</B>
+<A HREF="ng15e354.html"> down()           Moves the cursor down one row</A>
+<A HREF="ng15e4b3.html"> end()            Moves the cursor to the rightmost visible data column</A>
+<A HREF="ng15e52e.html"> goBottom()       Repositions the data source to the bottom of file</A>
+<A HREF="ng15e688.html"> goTop()          Repositions the data source to the top of file</A>
+<A HREF="ng15e7e0.html"> home()           Moves the cursor to the leftmost visible data column</A>
+<A HREF="ng15e85c.html"> left()           Moves the cursor left one column</A>
+<A HREF="ng15e957.html"> pageDown()       Repositions the data source downward</A>
+<A HREF="ng15eb24.html"> pageUp()         Repositions the data source upward</A>
+<A HREF="ng15ecde.html"> panEnd()         Moves the cursor to the rightmost data column</A>
+<A HREF="ng15ed84.html"> panHome()        Moves the cursor to the leftmost visible data column</A>
+<A HREF="ng15ee2a.html"> panLeft()        Pans left without changing the cursor position</A>
+<A HREF="ng15ef5e.html"> panRight()       Pans right without changing the cursor position</A>
+<A HREF="ng15f098.html"> right()          Moves the cursor right one column</A>
+<A HREF="ng15f182.html"> up()             Moves the cursor up one row</A>
+
+ <B>Miscellaneous Methods</B>
+<A HREF="ng15f2e6.html"> addColumn()      Adds a TBColumn object to the TBrowse object</A>
+<A HREF="ng15f383.html"> applyKey()       Evaluates the code block</A>
+<A HREF="ng15fa29.html"> colorRect()      Alters the color of a rectangular group of cells</A>
+<A HREF="ng15fde8.html"> colWidth()       Returns the display width of a particular column</A>
+<A HREF="ng15fed2.html"> configure()      Reconfigures the internal settings of the TBrowse object</A>
+<A HREF="ng15ffe9.html"> deHilite()       Dehighlights the current cell</A>
+<A HREF="ng1600d4.html"> delColumn()      Delete a column object from a browse</A>
+<A HREF="ng1601c6.html"> forceStable()    Performs a full stabilization</A>
+<A HREF="ng160292.html"> getColumn()      Gets a specific TBColumn object</A>
+<A HREF="ng160309.html"> hilite()         Highlights the current cell</A>
+<A HREF="ng1603ee.html"> hitTest()        Indicates position of mouse cursor relative to TBrowse</A>
+<A HREF="ng160a64.html"> insColumn()      Insert a column object in a browse</A>
+<A HREF="ng160b48.html"> invalidate()     Forces redraw during next stabilization</A>
+<A HREF="ng160d30.html"> refreshAll()     Causes all data to be refreshed during the next stabilize</A>
+<A HREF="ng160de5.html"> refreshCurrent() Causes current row to be refreshed on next stabilize</A>
+<A HREF="ng160ea3.html"> setColumn()      Replaces one TBColumn object with another</A>
+<A HREF="ng160f9b.html"> setKey()         Gets/sets a code block associated with an INKEY() value</A>
+<A HREF="ng16183e.html"> setstyle()       Maintains a dictionary within an object</A>
+<A HREF="ng1620c9.html"> stabilize()      Performs incremental stabilization</A>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

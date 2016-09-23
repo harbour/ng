@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng917eb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng923e1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>READINSERT()</B>
+ Toggle the current insert mode for READ and MEMOEDIT()
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>READINSERT([&lt;lToggle&gt;]) --&gt; lCurrentMode</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;lToggle&gt;</B> toggles the insert mode on or off.  True (.T.) turns
+     insert on, while false (.F.) turns insert off.  The default is false
+     (.F.) or the last user-selected mode in READ or MEMOEDIT().
+
+ <B>Returns</B>
+
+     READINSERT() returns the current insert mode state as a logical value.
+
+ <B>Description</B>
+
+     READINSERT() is an environment function that reports the current state
+     of the insert mode for READ and MEMOEDIT() and, optionally, sets the
+     insert mode on or off depending on the value of &lt;lToggle&gt;.  When
+     READINSERT() returns false (.F.) and the user enters characters into a
+     Get object's buffer during a READ or a MEMOEDIT(), characters are
+     overwritten.  When READINSERT() returns true (.T.), entered characters
+     are inserted instead.  The insert mode is a global setting belonging to
+     the system and not to any specific object.
+
+     You can execute READINSERT() prior to or during a READ or MEMOEDIT().
+     If used with READ, READINSERT() can be invoked within a WHEN or VALID
+     clause of @...GET or within a SET KEY procedure.  If used with
+     MEMOEDIT(), it can be invoked with the user function as well as a SET
+     KEY procedure.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example sets the insert mode prior to entering MEMOEDIT()
+        and resets the mode when MEMOEDIT() terminates:
+
+        USE Sales NEW
+
+        // Turn on insert mode
+        lInsMode = READINSERT(.T.)
+        Sales-&gt;Notes := MEMOEDIT(Sales-&gt;Notes)
+        //
+        // Restore previous insert mode
+        READINSERT(lInsMode)
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd4eb5.html">READ</A>
+<A HREF="ng9125b.html">READEXIT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

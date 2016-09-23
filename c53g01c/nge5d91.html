@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge5761.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge6148.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET ESCAPE</B>
+ Toggle Esc as a READ exit key
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET ESCAPE ON | off | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> enables Esc as a READ exit key.
+
+     <B>OFF</B> disables Esc as a READ exit key.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     If SET ESCAPE is ON, Esc terminates the current READ.  Any changes made
+     to the current Get object are lost, and validation with RANGE or VALID
+     is bypassed.  When SET ESCAPE is OFF and the user presses Esc, the key
+     press is ignored.  With SET KEY, however, you can reassign Esc for
+     special handling, regardless of the status of SET ESCAPE.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd4eb5.html">READ</A>
+<A HREF="ng9125b.html">READEXIT()</A>
+<A HREF="ng9c085.html">SETCANCEL()</A>
+<A HREF="ngea03c.html">SET KEY</A>
+<A HREF="ng9e528.html">SETKEY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

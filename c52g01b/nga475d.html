@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga413b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="nga506b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET INDEX</B>
+ Open index file(s) in the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET INDEX TO [&lt;xcIndex list&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;xcIndex list&gt;</B> is a list of up to 15 index (.ntx or .ndx)
+     filenames, separated by commas.  Any reference to an index filename that
+     results in either a null string ("") or spaces is ignored.  You can
+     specify each index file as a literal filename or as a character
+     expression enclosed in parentheses.  If you specify no extension, a
+     default extension is supplied by the current database driver.  (.ntx) is
+     the extension supplied by the CA-Clipper driver, and (.ndx) is the
+     extension supplied by the dBASE III PLUS driver.
+
+     SET INDEX TO without an argument closes all indexes open in the current
+     work area.
+
+ <B>Description</B>
+
+     SET INDEX closes all currently open index files then opens the specified
+     index files in the current work area.  When more than one index file is
+     opened, the first index becomes the controlling index.  The record
+     pointer is initially positioned at the first logical record in the
+     index.  During database file processing, all open indexes are updated
+     whenever a key value is appended or changed.  To change the controlling
+     index without issuing another SET INDEX command, use SET ORDER.  To add
+     indexes without closing the currently opened indexes, use DBSETINDEX().
+
+     SET INDEX is used primarily to open index files in a network environment
+     instead of the INDEX clause of the USE command.  Generally, USE the
+     &lt;xcDatabase&gt; then test to determine whether the USE succeeded.  If it
+     did succeed, open the associated indexes with SET INDEX.  See the
+     example below.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example opens index files using extended expressions.
+        Note how each index filename is specified by a separate variable:
+
+        xcIndex1:= "Name"
+        xcIndex2:= "Account"
+        SET INDEX TO (xcIndex1), (xcIndex2)
+
+     <B>.</B>  This example demonstrates using SET INDEX in a network
+        environment to open indexes:
+
+        USE Sales SHARED
+        IF !NETERR()
+           SET INDEX TO Sales, Territory
+        ELSE
+           ? "USE failed"
+           BREAK
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7fa4e.html">CLOSE</A>
+<A HREF="ng24195.html">DBSETINDEX()</A>
+<A HREF="ng895a7.html">INDEX</A>
+<A HREF="ng93235.html">REINDEX</A>
+<A HREF="nga6e00.html">SET ORDER</A>
+<A HREF="ngb1e6f.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

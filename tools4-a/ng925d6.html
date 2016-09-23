@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng922ab.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng929cb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCSNDTOT()</B>
+ Determines the total number of packets that have been sent
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCSNDTOT(&lt;nHandle&gt;) --&gt; nPackets</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication sending buffer.
+
+ <B>Returns</B>
+
+     PPCSNDTOT() returns the number of packets that have been sent since the
+     sending buffer has been open.  If an error occurs (for example, if the
+     handle is invalid), the function returns -1.
+
+ <B>Description</B>
+
+     PPCSNDTOT() determines the total number of sent packets, independently
+     of the protocol used (IPX, SPX, NetBIOS datagram, or NetBIOS session).
+     The value also contains faulty packets.  If a value of 65535 packets has
+     been exceeded, the count starts again at 0.
+
+ <B>Example</B>
+
+     Display the communication sending buffer report:
+
+     ? 'Total of sent packets :',PPCSNDTOT(nHandle)
+     ? 'Faulty thereof        :',PPCSNDFAIL(nHandle)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng917d7.html">PPCSNDFAIL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

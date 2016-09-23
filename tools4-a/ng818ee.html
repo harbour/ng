@@ -1,0 +1,183 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng813da.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng835f3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>IPXOPEN()</B>
+ Opens the IPX sending and receiving buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>IPXOPEN(&lt;nSourceSocket&gt;,[&lt;nRecBuffer&gt;],</B>
+     <B>   [[&lt;nSendBuffer&gt;],[&lt;cTargetAddr&gt;]],</B>
+     <B>   [&lt;nTargetSocket&gt;],[&lt;nPacket&gt;],[&lt;lHeader&gt;])</B>
+     <B>    --&gt; nHandle</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nSourceSocket&gt;</B>  Designates the number of the communication's source
+     socket.
+
+     <B>&lt;nRecBuffer&gt;</B>  Designates the selected size of the receiving buffer.
+     If no value is passed for &lt;nRecBuffer&gt;, no receiving buffer is
+     established.  The minimum size of the receiving buffer is &lt;nPacket&gt;.  If
+     the value for &lt;nRecBuffer&gt; is too small, it is changed automatically by
+     IPXOPEN().  The maximum size of the receiving buffer is 64 KByte.
+
+     <B>&lt;nSendBuffer&gt;</B>  Designates the selected size of the sending buffer.
+     If no value is passed for &lt;nSendBuffer&gt;, no sending buffer is
+     established.  The minimum size of the sending buffer is &lt;nPacket&gt;.  If
+     the value for &lt;nSendBuffer&gt; is too small, it is changed automatically by
+     IPXOPEN().  The maximum size of the sending buffer is 64 KByte.
+
+     <B>&lt;cTargetAddr&gt;</B>  Designates the target address for the sending
+     operations.  The target address is a 20-character string that represents
+     a 10-character hexadecimal byte sequence.  The leading eight characters
+     of &lt;cTargetAddr&gt; specify the network number of the target.  The
+     following 12 characters contain the station ID of the target station
+     (node address).  &lt;cTargetAddr&gt; is mandatory to establish a sending
+     buffer.
+
+     <B>&lt;nTargetSocket&gt;</B>  Designates the number of the communication's target
+     socket.  The default value is &lt;nSourceSocket&gt;.
+
+     <B>&lt;nPacket&gt;</B>  Designates the packet size in bytes of the data that is
+     sent.  The packet size can be between 1 and 546 bytes.  Values outside
+     this range are changed automatically.  The default value is 546 Bytes.
+
+     <B>&lt;lHeader&gt;</B>  Designates whether the data and the header (.T.), or the
+     data (.F.) alone, are transmitted to the receiving buffer.
+
+ <B>Returns</B>
+
+     If an operation is successful, IPXOPEN() returns a communication handle.
+     The return value contains a numeric value that is greater than 0.  You
+     should store the handle in a variable because all further operations
+     that refer to an established buffer require a communication handle.  If
+     an error occurs, the function returns 0.
+
+ <B>Description</B>
+
+     IPXOPEN() allows you to establish a communication buffer for an IPX
+     communication with other workstations in the network.  The communication
+     buffer can contain a sending and receiving buffer through which data is
+     processed.
+
+     &lt;nSourceSocket&gt; is the socket address of the process that transmits the
+     data (see the Introduction to this chapter).  The socket can be opened
+     with the function OPENSOCK() before the call of IPXOPEN().  If
+     &lt;nSourceSocket&gt; has not been opened, it is automatically opened by
+     IPXOPEN().  If &lt;nSourceSocket&gt; is passed with 0, IPXOPEN() opens an
+     available socket.
+
+     The parameters &lt;nRecBuffer&gt; and &lt;nSendBuffer&gt; determine the size of the
+     receiving and sending buffers.  The buffers are automatically designed
+     for one IPX packet.  Each buffer can be up to 64 KByte.  However, the
+     size of the buffer that is allocated by IPXOPEN() depends on the
+     application and the configuration of the computer used.
+
+     The parameter &lt;cTargetAddr&gt; is mandatory to establish a sending buffer.
+     All following sending operations are addressed to &lt;cTargetAddr&gt;.
+     Remember that an IPX communication is implemented as a pseudo Point-To-
+     Point communication.  Data is received by any station addressed to the
+     current workstation but is sent only to a defined target address.  The
+     target address must be passed as a 20- character string (for example,
+     "4921750400001B025A99"), where two characters represent one byte in
+     hexadecimal code.
+
+     If the current workstation is logged in to a Netware server, the
+     destination's network address can be determined with NNETADR() , using
+     the user name.  However, the target workstation must be logged in.
+     Under Netware Lite, the leading eight characters of &lt;cTargetAddr&gt; must
+     be passed with 0.  A character string consisting of
+     "FFFFFFFFFFFFFFFFFFFF" specifies all stations within an internal network
+     as the target address (broadcast packages).
+
+     &lt;nTargetSocket&gt; allows you to determine the communication's target
+     socket.  The default value is &lt;nSourceSocket&gt;.
+
+     &lt;nPacket&gt; determines the maximum size of the data range of the IPX
+     packets that are sent or received.  The maximum value (and the default
+     value) is 564 bytes.  The value of &lt;nPacket&gt; is also valid for sending
+     data.
+
+     With &lt;lHeader&gt; you can determine if the header (30 bytes) of an IPX
+     packet is transmitted to the receiving buffer.  The header can contain
+     important information about the received packet.  For a description
+     about the header structure, see the Introduction to this chapter.
+
+     If the buffer has been established successfully, IPXOPEN() returns an
+     integer value that is greater than 0, called a communication handle.  If
+     a value has been passed for &lt;nRecBuffer&gt;, IPXOPEN() initiates an
+     interrupt controlled receiving mechanism that receives incoming packets
+     in the background and then copies to an receiving buffer.  The data can
+     then be read with the PPCREAD() function within a CA-Clipper
+     application.  If the receiving buffer is full, incoming data is
+     discarded without notifying the sender.  Data should be removed from the
+     receiving buffer and processed as soon as possible.  You should either
+     read the contents of the buffer periodically (polling) or supervise the
+     buffer on an event-oriented basis: for example, with the function
+     PPCKEY().
+
+ <B>Notes</B>
+
+     <B>.</B>  IPX is a protocol that is not based on a connection.  There is
+        no guarantee or verification of a successful delivery to the target
+        workstation.  The implementation of specific protocols with the aid
+        of CA-Clipper Tools functions can be necessary.  (For your
+        information: Netware usually uses IPX communication, and Netware Lite
+        exclusively uses IPX communication, which is now available under
+        CA-Clipper with the IPXOPEN() function.)
+
+     <B>.</B>  Several communication buffers can be established for one
+        source socket.  However, you cannot know when you establish the
+        communication buffers how the data will be distributed to the
+        receiving buffers.
+
+     <B>.</B>  Network addresses can be determined under Netware with
+        "USERLIST /A", and under Netware Lite with "NET ULIST".
+
+ <B>Examples</B>
+
+     <B>.</B>  Open the 5 KByte IPX receiving buffer for socket 20000:
+
+        nHandle=IPXOPEN(20000,5120)
+        IF nHandle=0
+           ? 'Buffer could not be established!'
+        ENDIF
+
+     <B>.</B>  Open the 2 KByte IPX sending buffer for socket 20000.  The
+        target address is "4921750400001B025A99":
+
+        nHandle=IPXOPEN(20000,,2048,"4921750400001B025A99")
+
+     <B>.</B>  Open the 1 KByte IPX sending and receiving buffer for socket
+        20000.  The target address is the first workstation where user MIKE
+        is currently logged in:
+
+        nHandle=IPXOPEN(20000,1024,1024,NNETADR("MIKE"))
+
+     <B>.</B>  For this example, the current workstation must be logged into
+        a file server.  As NNETADR() is based on Netware-API, this call
+        cannot be used under Netware Lite.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1dd35.html">NNETADR()</A>
+<A HREF="ng8c1de.html">PPCCANCEL()</A>
+<A HREF="ng8e251.html">PPCREAD()</A>
+<A HREF="ng929cb.html">PPCWRITE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

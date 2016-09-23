@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf748b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf81d9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>UNLOCK</B>
+ Release file/record locks set by the current user
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>UNLOCK [ALL]</B>
+
+ <B>Arguments</B>
+
+     <B>ALL</B> releases all current locks in all work areas.  If not specified,
+     only the lock in the current work area is released.
+
+ <B>Description</B>
+
+     UNLOCK is a network command that releases file or record locks set by
+     the current user.  Use it when you want to release the current lock
+     without setting a new lock.  Both FLOCK() and RLOCK() release the
+     current lock before setting a new one.
+
+     After an UNLOCK, an update to a shared database file and associated
+     index and memo files becomes visible to DOS and other applications, but
+     is not guaranteed to appear on disk until you perform a COMMIT or close
+     the file.
+
+     Refer to the "Network Programming" chapter in the Programming and
+     Utilities Guide for more information on the principles of locking and
+     update visibility.
+
+ <B>Notes</B>
+
+     <B>.  SET RELATION:</B> UNLOCK does not automatically release a record
+        lock along a RELATION chain unless you UNLOCK ALL.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example attempts an update operation that requires a
+        record lock.  If the RLOCK() is successful, the record is updated
+        with a user-defined function and the RLOCK() is released with UNLOCK:
+
+        USE Sales INDEX Salesman SHARED NEW
+        IF RLOCK()
+           UpdateRecord()
+           UNLOCK
+        ELSE
+           ? "Record update failed"
+           BREAK
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng34c65.html">DBUNLOCK()</A>
+<A HREF="ng351a3.html">DBUNLOCKALL()</A>
+<A HREF="ng480be.html">FLOCK()</A>
+<A HREF="ng96d06.html">RLOCK()</A>
+<A HREF="ngef11d.html">SET RELATION</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

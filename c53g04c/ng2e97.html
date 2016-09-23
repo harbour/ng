@@ -1,0 +1,317 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng13e1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d0.html">[^^Up^^]</A>
+<A HREF="ng542b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CA-Clipper Real Mode Linker--BLINKER.EXE</B>
+ Features high-speed linking, dynamic overlaying, caching of overlay,
+ compression of the symbol table, and "burning" the CLIPPER environment
+ variable
+------------------------------------------------------------------------------
+
+ <B>Blinker Commands</B>
+
+     Script file(s) are specified on the command line and default to an
+     extension of .LNK.  They may be nested, and more than one may be used on
+     the command line, for example:
+
+     <B>BLINKER @Defaults @Other LIB Mylib VERBOSE</B>
+
+     This command line instructs Blinker to read the script file DEFAULTS.LNK
+     followed by the script file OTHER.LNK.  It also instructs Blinker to use
+     the library MYLIB.LIB and to display a VERBOSE listing of the .OBJ files
+     being processed.  The full names of the commands, or any unique
+     abbreviation of the words which comprise the commands, may be used
+     although it is recommended that at least three letters be used for
+     clarity.  For example, the command BLINKER OVERLAY OPSIZE 40 can be
+     abbreviated to BLI OVE OPS 40.
+
+     Most Blinker commands may be specified in any order, at any point in the
+     link script file.  Typically the first FILE statement should specify the
+     .OBJ containing the main program procedure.
+
+     <B># ...</B>
+
+     Indicates text as a script file comment.  Any line in the script file
+     beginning with the character # is treated as a comment and is ignored by
+     Blinker.  If the # ... character occurs within a line, the rest of the
+     line is ignored.
+
+     <B>// ...</B>
+
+     Indicates text as a script file comment.  Any line in the script file
+     containing the characters // is treated as a comment and is ignored by
+     Blinker.  If the // ... characters occur within a line, the rest of the
+     line is ignored.
+
+     <B>@&lt;scriptname&gt;</B>
+
+     Specify the name of a script file.  Blinker supports nested script files
+     of any size to a depth of 5 levels.  The processing of nested script
+     files is similar to a program function call.
+
+     <B>BEGINAREA</B>
+
+     Specifies the start of a dynamic overlay area to the linker.  Each
+     BEGINAREA should have a corresponding ENDAREA to indicate the end of the
+     overlay area.
+
+     <B>BLINKER CACHE EMS &lt;nuMax[%]&gt;</B>
+     <B>   [, &lt;nuMinLeave[%]&gt;]</B>
+
+     Specifies the amount of EMS (LIM version 4.0 and higher) memory to be
+     used for the overlay cache.  Two numeric parameters are used to specify
+     the amount of EMS memory to be allocated and the amount to be left for
+     program use.  Both parameters may be specified as either a number of KB,
+     or as a percentage of the total available EMS.
+
+     <B>BLINKER CACHE XMS &lt;nuMax[%]&gt;</B>
+     <B>   [, &lt;nuMinLeave[%]&gt;]</B>
+
+     Specifies the amount of XMS (version 2.0 and higher) memory to be used
+     for the overlay cache.  Two numeric parameters are used to specify the
+     amount of XMS memory to be allocated and the amount to be left for
+     program use.  Both parameters may be specified as either a number of KB,
+     or as a percentage of the total available XMS.
+
+     <B>BLINKER CLIPPER PAGE ON | OFF</B>
+
+     Enables/Disables automatic CA-Clipper 5.3 code paging.
+
+     <B>BLINKER ENVIRONMENT CLIPPER &lt;cName&gt;</B>
+
+     Changes the name of the CA-Clipper environment variable from the default
+     setting of "CLIPPER" to any string of up to 16 characters, and thus
+     avoids the remote site settings for the CLIPPER environment variable.
+
+     <B>BLINKER ENVIRONMENT NAME &lt;cName&gt;</B>
+
+     Specifies the name of the environment variable for Blinker runtime
+     options.  By default, if the argument is not specified, the default
+     setting is BLINKER.
+
+     <B>BLINKER ENVIRONMENT OVERRIDE</B>
+
+     Commands Blinker to allow the CA-Clipper environment variables set using
+     the BLINKER EXECUTABLE CLIPPER command to be overridden at application
+     run time by the settings of the CLIPPER environment variable.  When
+     doing this, you may want to consider renaming your CLIPPER environment
+     variable with the command BLINKER ENVIRONMENT CLIPPER.
+
+     <B>BLINKER EXECUTABLE CLIPPER &lt;cEnvironmentstring&gt;</B>
+
+     Burns default values for the CA-Clipper runtime environment variables
+     into the executable file.  Those settings set using the BLINKER
+     EXECUTABLE CLIPPER command take precedence over those set with the SET
+     CLIPPER command.
+
+     <B>BLINKER EXECUTABLE NODELETE</B>
+
+     Creates .EXE regardless of unresolved externals, although the resulting
+     .EXE is not guaranteed to operate correctly.
+
+     <B>BLINKER LINK EMS ON | OFF</B>
+
+     Controls whether or not EMS memory is used at link time by the virtual
+     memory system within Blinker.
+
+     <B>BLINKER LINK PAGEFRAME ON | OFF</B>
+
+     Controls the use of the EMS pageframe by Blinker at link time by the
+     virtual memory system within Blinker.
+
+     <B>BLINKER LINK XMS ON | OFF</B>
+
+     Controls whether or not XMS memory is used at link time by the virtual
+     memory system within Blinker.
+
+     <B>BLINKER MESSAGE DUPLICATES</B>
+
+     Causes Blinker to generate the 1004 link-time warning message for all
+     duplicate symbols within libraries encountered at link time.
+
+     <B>BLINKER MESSAGE NOBLINK</B>
+
+     Disables the blinking eyes which are displayed while Blinker is running.
+
+     <B>BLINKER MESSAGE NOWARNING</B>
+
+     Suppresses the display of Blinker link-time warning messages 1001 to
+     1100.
+
+     <B>BLINKER MESSAGE WINK [LEFT]</B>
+
+     Enables single eye winking during linking.  If no parameter is entered,
+     the right eye will wink (from Blinker.s point of view, i.e., from inside
+     the screen looking out).  The parameter LEFT causes the left eye to
+     wink.
+
+     <B>BLINKER OVERLAY OPSIZE &lt;nuSize&gt;</B>
+
+     Requests a size for the overlay pool at run time in KB.  It can be set
+     to any value between 12KB and 128KB.  The default operating size is
+     40KB.
+
+     <B>BLINKER OVERLAY PAGEFRAME ON | OFF</B>
+
+     Allows the overlay manager to utilize the expanded memory pageframe for
+     the overlay pool (maximum size 64Kb), on machines equipped with LIM EMS
+     (3.2 or higher) expanded memory boards or emulators.
+
+     <B>BLINKER OVERLAY THRESHOLD &lt;nuLimit&gt;</B>
+
+     Sets the threshold size below which code specified to be overlaid will
+     be moved back to the root section of the program.
+
+     <B>BLINKER OVERLAY UMB ON | OFF</B>
+
+     Used in conjunction with a suitable XMS driver it allows the Blinker
+     overlay manager to execute overlays in upper memory blocks above 640KB.
+
+     <B>BLINKER PROCEDURE DEPTH &lt;nuDepth&gt;</B>
+
+     Specifies maximum depth of CA-Clipper procedure nesting.  This depth is
+     the number of procedure calls that are executed before a procedure
+     return.
+
+     <B>DEFINE &lt;symbol&gt;[, &lt;symbol&gt; ...]</B>
+
+     Specifies symbols to be excluded at link time and points them to a dummy
+     routine in the overlay manager.
+
+     <B>DEFLIB</B>
+
+     Uses default library search records to locate and link libraries which
+     are specified within an object module.
+
+     <B>ECHO [ON | OFF |] [&lt;cString&gt;]</B>
+
+     ECHO ON &lt;cString&gt; turns on echoing of the script file to the screen,
+     with the first line displayed being &lt;cString&gt; if it is specified.  ECHO
+     OFF turns off echoing to the screen of the script file and ignores the
+     rest of the line.
+
+     <B>ENDAREA</B>
+
+     Specifies the end of an overlay area to the linker, as described in the
+     BEGINAREA section.
+
+     <B>EXTDICTIONARY</B>
+
+     Specifies that Blinker should use the extended dictionary that is
+     appended to library files by some librarian utility programs.
+
+     <B>FILE [d:][path]&lt;filename&gt;</B>
+     <B>   [, [d:][path]&lt;filename&gt; ...]</B>
+
+     Specifies to the linker the names of one or more .OBJ files to be
+     included in the output file at that point.
+
+     <B>LIBRARY [d:][path]&lt;libname&gt;</B>
+     <B>   [, [d:][path]&lt;libname&gt; ...]</B>
+
+     Specifies one or more program libraries required by the program.
+
+     <B>MAP [=[d:][path]&lt;filename&gt;] [S][,A]</B>
+
+     Requests a segment map of the executable.
+
+     <B>MIXCASE</B>
+
+     Causes Blinker to treat all publics and externals as case sensitive at
+     link time, rather than converting them to UPPERCASE.
+
+     <B>MODULE &lt;module&gt; [,&lt;module&gt; ...]</B>
+     <B>   [FROM &lt;libname&gt;]</B>
+
+     Specifies placement of individual library modules regardless of whether
+     the originating libraries or object modules are specified within an
+     overlay area or not.
+
+     <B>MURPHY</B>
+
+     Causes the overlay manager to attempt to force any inadvertent overlay
+     errors (programming errors) to manifest themselves during testing or
+     debugging.
+
+     <B>NOBELL</B>
+
+     Suppresses the beep upon completion of link.
+
+     <B>NODEFLIB</B>
+
+     Ignores default library search records which are encountered within
+     object modules.
+
+     <B>NOEXTDICTIONARY</B>
+
+     Disables processing of extended library dictionaries.
+
+     <B>NOTABLEOFCONTENTS</B>
+
+     Disables processing of library table of contents.
+
+     <B>OUTPUT [drive:][path]&lt;filename&gt;</B>
+
+     Specifies the name of the output executable file to be created by the
+     linker.
+
+     <B>READONLY</B>
+
+     Specifies executable file will be set to read-only status.
+
+     <B>SEARCH [d:][path]&lt;libname&gt;</B>
+     <B>   [, [d:][path]&lt;libname&gt; ...]</B>
+
+     Prioritizes all symbols in the specified libraries.
+
+     <B>SECTION INTO &lt;ovlname&gt;</B>
+     <B>   [FILE [d:][path]&lt;filename&gt;</B>
+     <B>   [, [d:][path]&lt;filename&gt;...] ]</B>
+
+     Specifies files to be placed in an external overlay.
+
+     <B>STACK &lt;nuSize&gt;</B>
+
+     Specifies to Blinker in HEXADECIMAL the stack size in bytes required by
+     the program .EXE file.
+
+     <B>UPPERCASE</B>
+
+     Specifies to the linker that all symbols should be converted to
+     uppercase before being added to the symbol table.
+
+     <B>VERBOSE [0 | 1 | 2]</B>
+
+     Displays status information during linking.
+
+     <B>WORKFILE [d:][path]&lt;filename&gt;</B>
+
+     Specifies drive, path, and file name of the temporary WORKFILE to use at
+     link time if one is required.
+
+ <B>Linker Function</B>
+
+     <B>nuValue := BLIVERNUM()</B>
+
+     Returns the Blinker version number as an integer containing the version
+     number of Blinker used to link the program.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga092.html">SET CLIPPER</A>
+<A HREF="ngcbba.html">SET LIB</A>
+<A HREF="ngce53.html">SET OBJ</A>
+<A HREF="ngd3d0.html">SET TMP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

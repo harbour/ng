@@ -1,0 +1,122 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng53a59.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng554d4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>TOTAL:</B>
+
+  Syntax:
+
+  <B>TOTAL ON &lt;expKey&gt; [FIELDS &lt;idField list&gt;] TO &lt;xcDatabase&gt; </B>
+  <B>         [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]</B>
+  <B>         [NOOPTIMIZE]</B>
+
+  <B>ON &lt;expKey&gt;</B> defines the group of records that produce a new record in
+  the target database file.  To make the summarizing operation accurate,
+  the source database file should be INDEXed or SORTed on this expression.
+
+  <B>FIELDS &lt;idField list&gt;</B> specifies the list of numeric fields to TOTAL.
+  If the FIELDS clause is not specified, no numeric fields are totalled.
+  Instead each numeric field in the target file contains the value for
+  the first record matching the key expression.
+
+  <B>TO &lt;xcDatabase&gt;</B> is the name of the target file to copy the summarized
+  records to.  This argument may be specified either as a literal filename
+  or as a character expression enclosed in parentheses. Unless otherwise
+  specified, TOTAL assumes a (.DBF) extension.
+
+  <B>&lt;scope&gt;</B> is the portion of the current database file to TOTAL.  The
+  default is ALL records.  Mach SIx only supports the ALL scope.
+
+  <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the condition
+  from the current record until the condition fails.  Mach SIx does not
+  support the WHILE condition.
+
+  <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to TOTAL
+  within the given scope.  Mach SIx will optimize any condition that
+  contains one or more active index keys.
+
+  <B>NOOPTIMIZE</B>, preempts optimization and forces default Clipper processing.
+
+  <B>Description:</B>
+
+  TOTAL is a database command that sequentially processes the current
+  database file summarizing records by the specified key value and copying
+  them to a new database file.  TOTAL works by first copying the structure
+  of the current database file to &lt;xcDatabase&gt; except for memo fields.  It
+  then sequentially scans the current database file within the specified
+  scope of records.  As each record with a unique &lt;expKey&gt; value is
+  encountered, that record is copied to the new database file.  The values
+  of numeric fields specified in &lt;idField list&gt; from successive records with
+  the same &lt;expKey&gt; value are added to fields with the same names in
+  &lt;xcDatabase&gt;.  Summarization proceeds until a record with a new key value
+  is encountered.  The process is then repeated for this record.
+
+  Since TOTAL processes the source database file sequentially, it must be
+  INDEXed or SORTed in &lt;expKey&gt; order for the summarization to be correct.
+
+  To successfully TOTAL numeric fields, the source numeric fields must be
+  large enough to hold the largest total possible for that numeric field.
+  If not, a runtime error is generated.
+
+  The TOTAL command may be optimized by specifying one or more active index
+  keys in the FOR condition.  Note that Mach SIx will only optimize a TOTAL
+  with a FOR condition and a scope of ALL.  WHILE conditions and alternate
+  scopes cannot be optimized by Mach SIx.
+
+  <B>Notes:</B>
+
+  Deleted source records: Deleted source records are TOTALed unless SET
+  DELETED is ON.  The deleted status of records, however, is not copied
+  to the new database file.
+
+  <B>Performance Tip:</B>
+
+  When optimizing the TOTAL command Mach SIx must create a temporary index
+  file to sort the resulting collection of data in the controlling index
+  order.  To speed index creation, set the path for temporary files to local
+  hard disk or ram drive. The temporary file path may be set with either the
+  environment variable M6TEMP, or by calling the m6_SetTemp() function with
+  the path as the parameter.
+
+  <B>---------------------------------| EXAMPLE |--------------------------------</B>
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates an optimized TOTAL command                                *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX.CH"
+
+  USE Account VIA "SIXCDX"  // Structural index ACCOUNT.CDX opened
+                            // automatically
+  CLEAR SCREEN
+  ? "Example of an optimized TOTAL command."
+  ?
+  SET TAG TO Age
+
+  // To enhance performance, set temporary file path to a ram drive
+  m6_SetTemp("D:\")
+
+  // Fully optimized total on age of income and balance
+  <B>TOTAL TO Temp ON Age FIELDS Income, Balance</B>
+        FOR State="AK" .AND. City="Sicily"
+  CLOSE ALL
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng44b31.html">COUNT</A>
+<A HREF="ng53a59.html">SUM</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

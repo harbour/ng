@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngea03c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngeb435.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET MARGIN</B>
+ Set the page offset for all printed output
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET MARGIN TO [&lt;nPageOffset&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;nPageOffset&gt;</B> is a positive number that defines the number of
+     column positions to indent from the left side of the page for subsequent
+     printed output.  A negative value resets the MARGIN to zero.
+
+     SET MARGIN TO with no argument resets the page offset to zero, the
+     default value.
+
+ <B>Description</B>
+
+     SET MARGIN is valid for all output directed to the printer from console
+     commands and @...SAY.  With console output, the &lt;nPageOffset&gt; indent is
+     output whenever there is a new line.  With @...SAY, &lt;nPageOffset&gt; is
+     added to each column value.  SET MARGIN has no effect on screen output.
+
+     <B>Note: </B> Printing with @...SAY and PCOL() with a MARGIN SET in most
+     cases adds the MARGIN to each column position.  This happens because
+     PCOL() accurately reflects the print column position including the last
+     &lt;nPageOffset&gt; output.  The best approach is to avoid the use of SET
+     MARGIN with PCOL() for relative column addressing.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example sets a page offset of 5, and then prints a list
+        from Sales.dbf:
+
+        USE Sales NEW
+        SET MARGIN TO 5
+        LIST Branch, Salesman TO PRINTER
+        SET MARGIN TO
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ng8c995.html">PCOL()</A>
+<A HREF="nge50f8.html">SET DEVICE</A>
+<A HREF="nged8e1.html">SET PRINTER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

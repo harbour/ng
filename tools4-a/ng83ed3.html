@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng83bed.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng8442b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NBADDGROUP()</B>
+ Adds a NetBIOS group name to the local name table
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NBADDGROUP(&lt;cName&gt;) --&gt; nNamesum</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cName&gt;</B>  Designates the group name that is added to the local name
+     table.  The name can be up to 15 characters long and is case sensitive.
+
+ <B>Returns</B>
+
+     NBADDGROUP() returns the number that has been assigned to the group
+     name.  If an error occurs (for example, if the name table is full), the
+     function returns 0.
+
+ <B>Description</B>
+
+     NBADDGROUP() adds the group name &lt;cName&gt; to the local name table.  If
+     the name has been added successfully, the name can be passed as the
+     source name in the functions NBDOPEN(), NBSCALL(), or NBSLISTCON().  The
+     workstation can receive datagrams addressed to the group &lt;cName&gt; or
+     react to a connection request addressed to &lt;cName&gt;.
+
+     A group name can be used on any number of workstations.  However, if
+     &lt;cName&gt; is already used as the station name on a station, the call of
+     NBADDGROUP() fails and the function returns 0.
+
+ <B>Example</B>
+
+     Add the group name ACCOUNT to the local name table:
+
+     IF NBADDGROUP('ACCOUNT')&gt;0
+        ? 'Name has been added successfully!'
+     ELSE
+        ? 'Name could not be added!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8442b.html">NBADDNAME()</A>
+<A HREF="ng8498b.html">NBDELNAME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

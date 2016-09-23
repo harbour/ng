@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1fea0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng20944.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_AutoOpen():</B>
+
+  Syntax:   Sx_AutoOpen( [bMode] )
+
+            bMode = Optional logical value indicating the Auto Open mode to
+                    be used for structural .CDX and .NSX files.  By default,
+                    this is TRUE (.T.), and will automatically open a
+                    structural .CDX/.NSX file, if found, when its associate
+                    table is opened.  Setting this value to FALSE (.F.) will
+                    cause structural index files to not open automatically.
+
+  Returns:  Logical value indicating the current, or previous, mode.
+
+  Description:  Sx_AutoOpen() gives you control over the automatic opening
+                features of structural .CDX or .NSX indexes.  By default, if
+                TEST.DBF is opened VIA "SIXCDX", the SIx Driver looks for an
+                associated TEST.CDX file.  If one is found, it is also opened
+                automatically.  Passing a .F. value to this function will
+                require you to open all indexes explicitly.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+         f you share data with FoxPro applications, you should not
+         ircumvent the autoopen feature. The reason is that FoxPro
+         ocks (and likewise SIXCDX locks) are set differently depending
+         n whether or not there is a structural index. Thus, a Foxpro
+         pplication with an open DBF/CDX will not see the locks set by
+          SIXCDX application that has circumvented the AUTO OPEN...
+         nd visa-versa.
+
+  Examples:
+
+    ? <B>Sx_AutoOpen()</B>         // Returns .T. (Default)
+
+    USE test VIA "SIXCDX"   // Also opens TEST.CDX, if one exists
+
+    <B>Sx_AutoOpen(.F.)</B>        // Disable the Auto Open feature
+
+    USE test2 VIA "SIXCDX"  // Does not attempt to open TEST2.CDX
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3afa4.html">Sx_StrxCheck()</A>
+<A HREF="ng5b0be.html">SIX???/690</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

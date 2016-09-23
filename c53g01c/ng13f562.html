@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng13f2e6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng13b74b.html">[^^Up^^]</A>
+<A HREF="ng13fb20.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>&lt;oListBox&gt;:findText(&lt;cText&gt; [,&lt;nPosition&gt;]</B>
+     <B>   [,&lt;lCaseSensitive&gt;] [,&lt;lExact&gt;]) --&gt; nPosition</B>
+
+        <B>&lt;cText&gt;</B> is a character string that indicates the text that is
+        being searched for.
+
+        <B>&lt;nPosition&gt;</B> is an optional numeric value that indicates the
+        starting position in the list of the search.  The default is 1.
+
+        <B>&lt;lCaseSensitive&gt;</B> is an optional logical value that indicates
+        whether the search should be case sensitive.  Set &lt;lCaseSensitive&gt; to
+        true (.T.) to indicate that the search should be case sensitive;
+        otherwise, set &lt;lCaseSensitive&gt; to false (.F.).  The default is true
+        (.T.).
+
+        <B>&lt;lExact&gt;</B> is an optional logical value that indicates whether the
+        search enforces an exact comparison including length and trailing
+        characters.  A value of true (.T.) indicates that findText() searches
+        for an exact match; otherwise, a value of false (.F.) indicates that
+        it should not.  The default is the current setExact() setting.
+
+        Returns a numeric value that indicates the position in the list of
+        the first item from &lt;nPosition&gt; whose text matches &lt;cText&gt;, or 0 if
+        ListBox:findText() is unsuccessful.
+
+        findText() is a method of the ListBox class that is used for
+        determining whether an item is a member of a list and its position
+        within the list.  findText() always searches from &lt;nPosition&gt; to the
+        end of the list and, when necessary, continues from the beginning of
+        the list to &lt;nPosition&gt; - 1.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

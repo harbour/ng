@@ -1,0 +1,44 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf196.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ngfa10.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Constructor Messages </B>
+
+  Constructor messages are used to create new instances of a class. The
+  default constructor message, <U>new()</U>, is implemented by Class(y) and
+  inherited by all classes.
+
+  When a constructor message is sent to a class object, Class(y) creates a
+  new, empty object of that class and sends the <U>init()</U> message to it, to
+  initialize it. The <U>init</U> method is referred to as an initializer
+  method, and is discussed in the next section.
+
+  All arguments passed to the constructor are passed in turn to the <U>init</U>
+  method to allow it to initialize the object correctly.
+
+  When the initializer method returns, the constructor returns the new
+  object to the caller. It is thus not necessary for the initializer method
+  to return a value, although by convention, methods which do not return a
+  value return <U>self</U>.
+
+  It is possible to define constructors other than <U>new()</U>. This can be
+  useful when there is more than one way to initialize the objects of a
+  class. For more information, see the section <B>Alternate Constructors</B>.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfa10.html">Initializer Methods</A>
+<A HREF="ng15b61.html">Alternate Constructors</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

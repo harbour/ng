@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6241.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng6b2f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER EXECUTABLE ALIGNMENT  Specify alignment size for new .EXE file.</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify the alignment size for a new .EXE file.</B></U>
+
+ <U>Syntax   : <B>BLINKER EXECUTABLE ALIGNMENT &lt;filealign&gt;[,&lt;secalign&gt;]</B></U>
+
+ <U>Default  : <B>16 bit executables 64 CA-Clipper.</B></U>
+            <B>16 All other languages.</B>
+            <B>32 bit executables 512, 4096.</B>
+
+ <U>Example  : <B># Change alignment to 8 bytes for small .EXE</B></U>
+            <B>BLINKER EXECUTABLE ALIGNMENT 8</B>
+
+ This command specifies the alignment size, and therefore the maximum file
+ size, for the new .EXE format files used for DOS extended and Windows
+ programs.
+
+ Segments and resources within 16 bit new .EXE files are referenced by 16 bit
+ page numbers, which makes 65535 the maximum page number and 1 MB the default
+ maximum .EXE size.
+
+ Sections and resources within 32 bit portable .EXE files are aligned to the
+ file alignment setting in the .EXE file and to the section alignment setting
+ when they are loaded into memory.
+
+ The alignments can be any valid power of 2, but the larger the alignment
+ size the larger the wasted space.
+
+    Alignment      Maximum .EXE Size
+       8              512 Kb
+       16             1 Mb
+       32             2 Mb
+       64             4 Mb
+       128            8 Mb
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

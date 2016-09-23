@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng795e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4610.html">[^^Up^^]</A>
+<A HREF="ng83c7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>WCOL()</B>
+ Returns the position of the leftmost column of the active window
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>WCOL([&lt;lAfterWCENTER&gt;]) --&gt; nCol</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lAfterWCENTER&gt;</B>  Designates an optional parameter.  If this
+     parameter is .T., the function returns what the position of the leftmost
+     column of a window would be after a call of WCENTER().  (The function
+     does not call WCENTER())  The default value (.F.) returns the current
+     position.
+
+ <B>Returns</B>
+
+     WCOL() returns the coordinate relative to the leftmost column of the
+     selected window.
+
+ <B>Description</B>
+
+     This function allows you to determine the current position of the
+     leftmost column of the selected window.  This allows you to save a
+     window's position if the window was moved previously with the cursor
+     keys.  This way the window can later be reopened at exactly the same
+     position.
+
+     Additionally, by passing the optional parameter with a .T., you can
+     determine what the window position would be after a WCENTER() without
+     actually calling WCENTER().
+
+ <B>Note</B>
+
+     <B>.</B>  Values can be negative.  Negative values place the first
+        column outside of the visible range.
+
+ <B>Example</B>
+
+     This program saves the position of a window, then reopens it in that
+     position:
+
+     nTop  :=  10
+     nLeft :=  15
+     WOPEN(nTop, nLeft, nTop + 10, nLeft + 40)
+
+     * Someone moves the window!
+
+     nTop := WROW()                     // Save the current
+     nBottom := WCOL()                  // position of upper left
+     WCLOSE()                           // corner and close the window
+
+     * Other program sections
+
+     WOPEN(nTop, nLeft, nTop + 10, nLeft + 40)   // Open w/old values
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbd41.html">WOPEN()</A>
+<A HREF="ngcd91.html">WSELECT()</A>
+<A HREF="ngc582.html">WROW()</A>
+<A HREF="ngb0a0.html">WMODE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

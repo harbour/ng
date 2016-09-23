@@ -1,0 +1,47 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5b6c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2471.html">[^^Up^^]</A>
+<A HREF="ng78a5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CA-Clipper 5.2 Order Management</B>
+------------------------------------------------------------------------------
+
+     CA-Clipper includes a new Order Management System which provides a more
+     effective and flexible way of indexing data.  The main objective of the
+     new Order Management implementation is to raise the Xbase indexing
+     paradigm from a low level of abstraction (Xbase database specific) to a
+     higher, more robust, level.  This higher level of abstraction allows the
+     user to build new commands and functions.
+
+     Low level abstraction refers to manipulation of discrete elements in the
+     database architecture (i.e., field names and sizes, methods of handling
+     controlling indexes, etc.).
+
+     High level abstraction refers to manipulation of general elements in a
+     data source.  It lets us, for example, set a controlling Order without
+     explicitly addressing the character of the data file structure.  This
+     higher level of abstraction was achieved by reviewing all the processes
+     that indexes have in common.
+
+     The Order Management function set was generically named (i.e. non-dbf
+     specific) to provide a semantic that could encompass future RDD
+     implementations that may not be file-bound.  For example, an RDD could
+     easily be created that orders (indexes) on a memory array, or other data
+     structure, instead of a database.  Therefore, all Order Management
+     functions simply begin with ORD (for Order).  You will find the function
+     names to be self-explanatory (e.g., ORDCREATE() creates an Order, and
+     ORDDESTROY() destroys an Order).
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

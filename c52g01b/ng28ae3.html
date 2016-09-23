@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng284ba.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng29338.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DESCEND()</B>
+ Create a descending index key value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DESCEND(&lt;exp&gt;) --&gt; ValueInverted</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp&gt;</B> is any valid expression of character, date, logical, or
+     numeric type.  Memo type is treated in the same way as character type.
+
+ <B>Returns</B>
+
+     DESCEND() returns an inverted expression of the same data type as the
+     &lt;exp&gt;, except for dates which return a numeric value.  A DESCEND() of
+     CHR(0) always returns CHR(0).
+
+ <B>Description</B>
+
+     DESCEND() is a conversion function that returns the inverted form of the
+     specified expression to be used with INDEX to create descending order
+     indexes.  Specify that part of the index expression you want to be
+     descending as the DESCEND() argument.  To subsequently perform a lookup
+     with SEEK, specify DESCEND() in the search expression.
+
+ <B>Notes</B>
+
+     <B>.</B>  The preferred way to create a descending index is to use the
+        DESCENDing clause of the INDEX command.  Using DESCENDING is the same
+        as specifying the DESCEND() function, but without the performance
+        penalty during index updates.  If you create a DESCENDING index, you
+        won't need to use the DESCEND() function during a SEEK.  DESCENDING
+        is an attribute of the (.ntx) file, where it is stored and used for
+        REINDEXing purposes.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses DESCEND() in an INDEX expression to create a
+        descending order date index:
+
+        USE Sales NEW
+        INDEX ON DESCEND(OrdDate) TO SalesDate
+
+        Later, use DESCEND() to SEEK on the descending index:
+
+        SEEK DESCEND(dFindDate)
+
+     <B>.</B>  This example illustrates how to create a descending order
+        index using more than one data type.  Here, the key is created using
+        the concatenation of date and character fields after the appropriate
+        type conversion has taken place.  This example uses STR() instead of
+        DTOS() since DESCEND() of a date returns a numeric value:
+
+        USE Sales NEW
+        INDEX ON STR(DESCEND(SaleDate)) + Salesman TO LastSale
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng88520.html">FIND*</A>
+<A HREF="ng895a7.html">INDEX</A>
+<A HREF="ng994cb.html">SEEK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

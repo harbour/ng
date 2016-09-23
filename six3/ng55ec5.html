@@ -1,0 +1,42 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5594c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>WILDSEEKNEXT:</B>
+
+  The <B>WILDSEEKNEXT</B> command functions similarly to the <B>WILDSEEK</B> command
+  However, instead of searching from the top of the .DBF file, it searches
+  for a match starting from the current record pointer.
+
+  For example, to look at all of the people in your CUSTOMER database whose
+  names are either Smith or Smyth, you could do this:
+
+       USE CUSTOMER             // Open CUSTOMER.DBF
+       SET TAG TO LASTNAME      // Select LASTNAME Tag
+       WILDSEEK "Sm?th"         // or WILDSEEK "Sm*th"
+       WHILE found()            // Got at least one!
+         ? LAST + ", " + FIRST  // Display customer name
+         <B>WILDSEEKNEXT "Sm?th"</B>   // Look for next match
+       ENDDO
+
+    NOTE:  This command is NOT supported under SIXNTX.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5594c.html">WILDSEEK</A>
+<A HREF="ng408bf.html">Sx_WildSeek()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

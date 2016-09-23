@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng159ed.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng166d4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_RecCount():</B>
+
+  Purpose:  Returns the number of <B>indexed</B> records found in last query.  Can
+            be used with m6_dbEval() to create an odometer.
+
+   Syntax:  m6_RecCount()
+
+  Returns:  The number of <B>indexed</B> records found in last query.
+
+     Note:  The return value includes records marked for deletion.
+            Because of the dynamic nature of Mach SIx the exact of number
+            of records found in the query is not exactly known until the
+            query has actually completed.
+
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         USE Customer via "SIXCDX"
+
+         SET INDEX TO Name, Salary, State, Age
+
+         COUNT TO nCount FOR State = "CA" .or. Age = 25
+
+         ? <B>m6_RecCount()</B>                                       //...256
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngca54.html">m6_dbEval()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

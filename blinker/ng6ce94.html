@@ -1,0 +1,40 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6cd4c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng69344.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>STUB                          Add DOS stub to beginning of program file</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Add a DOS stub to the beginning of the program file</B></U>
+
+ <U>Syntax   : <B>STUB ['filename' | NONE]</B></U>
+
+ <U>Example  : <B>STUB 'MYSTUB.EXE'</B></U>
+
+ The stub added to the program will be called whenever the program is run
+ under DOS. Normally it will display a warning message and terminate
+ execution of the program.
+
+ A small stub program to do just this is automatically added to each Windows
+ .EXE created by Blinker when no STUB command has been specified.
+
+ The PATH environment variable will be searched if the specified file is not
+ in the current directory.
+
+ The keyword NONE causes the .EXE to be created without a stub program, thus
+ making a slightly smaller executable. However, if the .EXE is run from the
+ DOS prompt the system will most likely lock up, so this is not advised.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

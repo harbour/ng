@@ -1,0 +1,193 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga495.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng9390.html">[^^Up^^]</A>
+<A HREF="ngd9cb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COPY TO command</B>
+ Export records to a new (.dbf) or ASCII file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     COPY [FIELDS &lt;idField list&gt;] TO &lt;xcFile&gt;
+        [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]
+        [SDF | DELIMITED [WITH BLANK | &lt;xcDelimiter&gt;] <B>| </B>
+     <B>   [VIA &lt;xcDriver&gt;]</B>]
+
+ <B>Arguments</B>
+
+     <B>FIELDS &lt;idField list&gt;</B> specifies the list of fields to copy to the
+     target file.  The default is all fields.
+
+     <B>TO &lt;xcFile&gt;</B> specifies the name of the target file.  The filename can
+     be specified either as a literal filename or as a character expression
+     enclosed in parentheses.  If SDF or DELIMITED is specified, (.txt) is
+     the default extension.  Otherwise, (.dbf) is the default extension.
+
+     <B>&lt;scope&gt;</B> defines the portion of the current database file to COPY.
+     The default is ALL records.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to COPY
+     within the given scope.
+
+     <B>SDF</B> specifies the output file type as a System Data Format ASCII
+     text file.  Records and fields are fixed length.
+
+     <B>DELIMITED</B> specifies the output file type as a delimited ASCII text
+     file where character fields are enclosed in double quote marks (the
+     default delimiter).  Records and fields are variable length.
+
+     <B>DELIMITED WITH BLANK</B> identifies an ASCII text file in which fields
+     are separated by one space and character fields have no delimiters.
+
+     <B>DELIMITED WITH &lt;xcDelimiter&gt;</B> identifies a delimited ASCII text file
+     where character fields are enclosed using the specified delimiter.
+     &lt;xcDelimiter&gt; can be specified either as a literal character or as a
+     character expression enclosed in parentheses.
+
+     See the tables below for more information regarding the format
+     specifications for ASCII text files created using these arguments.
+
+     <B>VIA &lt;xcDriver&gt;</B> specifies the replaceable database driver (RDD) to
+     use to create the resulting copy.  &lt;cDriver&gt; is name of the RDD
+     specified as a character expression.  If &lt;cDriver&gt; is specified as a
+     literal value, it must be enclosed in quotes.
+
+     If the VIA clause is omitted, COPY TO uses the driver in the current
+     work area.  If you specify the VIA clause, you must REQUEST the
+     appropriate RDDs be linked into the application.
+
+     <B>Note: </B> If the DELIMITED WITH clause is specified on a COPY or APPEND
+     command, it must be the last clause specified.
+
+ <B>Description</B>
+
+     COPY TO is a database command that copies all or part of the current
+     database file to a new file.  Records contained in the active database
+     file are copied unless limited by a &lt;scope&gt;, a FOR|WHILE clause, or a
+     filter.
+
+     If DELETED is OFF, deleted records in the source file are copied to
+     &lt;xcFile&gt; where they retain their deleted status.  If DELETED is ON,
+     however, no deleted records are copied.  Similarly, if a FILTER has been
+     SET invisible records are not copied.
+
+     Records are copied in controlling index order if there is an index open
+     in the current work area and SET ORDER is not zero.  Otherwise, records
+     are copied in natural order.
+
+     In a network environment, CA-Clipper opens the target database file
+     EXCLUSIVEly before the COPY TO operation begins.  Refer to the Network
+     Programming chapter in the Programming and Utilities guide for more
+     information.
+
+     This table shows the format specifications for SDF text files.
+
+     <B>SDF Text File Format Specifications</B>
+     ------------------------------------------------------------------------
+     <B>File Element        Format</B>
+     ------------------------------------------------------------------------
+     Character fields    Padded with trailing blanks
+     Date fields         yyyymmdd
+     Logical fields      T or F
+     Memo fields         Ignored
+     Numeric fields      Padded with leading blanks for zeros
+     Field separator     None
+     Record separator    Carriage return/linefeed
+     End of file marker  1A hex or CHR(26)
+     ------------------------------------------------------------------------
+
+     This table shows the format specifications for DELIMITED and DELIMITED
+     WITH &lt;xcDelimiter&gt; ASCII text files.
+
+     <B>DELIMITED Text File Format Specifications</B>
+     ------------------------------------------------------------------------
+     <B>File Element        Format</B>
+     ------------------------------------------------------------------------
+     Character fields    Delimited, with trailing blanks truncated
+     Date fields         yyyymmdd
+     Logical fields      T or F
+     Memo fields         Ignored
+     Numeric fields      Leading zeros truncated
+     Field separator     Comma
+     Record separator    Carriage return/linefeed
+     End of file marker  1A hex or CHR(26)
+     ------------------------------------------------------------------------
+
+     This table shows the format specifications for DELIMITED WITH BLANK
+     ASCII text files.
+
+     <B>DELIMITED WITH BLANK Text File Format Specifications</B>
+     ------------------------------------------------------------------------
+     <B>File Element        Format</B>
+     ------------------------------------------------------------------------
+     Character fields    Not delimited, trailing blanks truncated
+     Date fields         yyyymmdd
+     Logical fields      T or F
+     Memo fields         Ignored
+     Numeric fields      Leading zeros truncated
+     Field separator     Single blank space
+     Record separator    Carriage return/linefeed
+     End of file marker  1A hex or CHR(26)
+     ------------------------------------------------------------------------
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates COPYing to another database file:
+
+        USE Sales NEW
+        COPY TO Temp
+
+     <B>.</B>  This example demonstrates the layout of an SDF file with four
+        fields, one for each data type:
+
+        USE Testdata NEW
+        COPY NEXT 1 TO Temp SDF
+        TYPE Temp.txt
+
+        Result:
+
+        Character     12.0019890801T
+
+     <B>.</B>  This example demonstrates the layout of a DELIMITED file:
+
+        COPY NEXT 1 TO Temp DELIMITED
+        TYPE Temp.txt
+
+        Result:
+
+        "Character",12.00,19890801,T
+
+     <B>.</B>  This example demonstrates the layout of a DELIMITED file WITH
+        a different delimiter:
+
+        COPY NEXT 1 TO Temp DELIMITED WITH '
+        TYPE Temp.txt
+
+        Result:
+
+        'Character',12.00,19890801,T
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+
+ <B>Status:</B>  Enhanced
+
+ <B>See also:</B>  APPEND FROM, COPY FILE, COPY STRUCTURE, SET DELETED
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga495.html">APPEND FROM</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

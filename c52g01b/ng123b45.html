@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1237ea.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng121572.html">[^^Up^^]</A>
+<A HREF="ng123f21.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>Severity                                       (Assignable)</B>
+
+        Contains a numeric value indicating the severity of the error
+        condition.  Four standard values are defined in Error.ch:
+
+        <B>Error:Severity Values</B>
+        ---------------------------------------------------------------------
+        <B>Error.ch            Meaning</B>
+        ---------------------------------------------------------------------
+        ES_WHOCARES         The condition does not represent a failure; the
+                            error is informational.
+        ES_WARNING          The condition does not prevent further operations,
+                            but may result in a more serious error later.
+        ES_ERROR            The condition prevents further operations without
+                            corrective action of some kind.
+        ES_CATASTROPHIC     The condition requires immediate termination of
+                            the application.
+        ---------------------------------------------------------------------
+
+        Note that the CA-Clipper runtime support code only generates errors
+        with severities of ES_WARNING or ES_ERROR.
+
+        oNewErr:Severity := ES_CATASTROPHIC
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

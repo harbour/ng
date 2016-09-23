@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng341b0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng34b81.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosUnlockSeg()                Unlock segment previously locked using DosLockSeg()</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Unlock a segment previously locked using DosLockSeg()</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosUnlockSeg(SEL selector);</B></U>
+
+ <U>selector   <B>A selector previously locked using DosLockSeg().</B></U>
+
+ <U>Return   : <B>None</B></U>
+
+ DosUnLockSeg() unlocks the memory associated with the selector parameter
+ allowing it to be swapped out to disk. This function should be used to
+ unlock hardware interrupt handlers when they are no longer active, and to
+ unlock any selector whose alias has been freed.
+
+ Example:
+
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void comminstall(void);</B>
+    <B>void commhandler(void);</B>
+    <B>void communinstall(void);</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>if (DosLockSeg(SELECTOROF(commhandler)) == 0)</B>
+    <B>   {</B>
+    <B>   printf("Serial interrupt handler locked in memory\n");</B>
+    <B>   comminstall(); /* Hook serial comms interrupt */</B>
+    <B>   ...</B>
+    <B>   communinstall(); /* Unhook comms interrupt */</B>
+    <B>   if (DosUnlockSeg(SELECTOROF(commhandler)) == 0)</B>
+    <B>      printf("Comms handler may now be swapped to disk\n");</B>
+    <B>   }</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2fcb1.html">DosLockSeg()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

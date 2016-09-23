@@ -1,0 +1,95 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2df1c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2980a.html">[^^Up^^]</A>
+<A HREF="ng2eae5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_fsLock()</B>
+ Lock or unlock a portion of a file
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "filesys.api"</B>
+     <B>BOOL _fsLock(</B>
+     <B>                  FHANDLE hFileHandle,</B>
+     <B>                  ULONG ulStart,</B>
+     <B>                  ULONG ulLength,</B>
+     <B>                  USHORT uiMode</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>hFileHandle</B> is a valid DOS reference to the file to be locked or
+     unlocked.
+
+     <B>ulStart</B> is the offset from the start of the file that specifies
+     the starting location of the portion of the file to be locked or
+     unlocked.
+
+     <B>ulLength</B> is the number of bytes to lock or unlock.
+
+     <B>uiMode</B> is a flag that specifies whether the file is to be locked or
+     unlocked.  The following constants are defined for uiMode:
+
+     <B>File Lock Flags</B>
+     ------------------------------------------------------------------------
+     <B>Constant      Flag      Description</B>
+     ------------------------------------------------------------------------
+     FL_LOCK       0x0000    Lock the region
+     FL_UNLOCK     0x0001    Unlock the region
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     _fsLock() returns a boolean value indicating success or failure of the
+     specified operation.
+
+ <B>Description</B>
+
+     This function locks or unlocks a region of the file whose handle is
+     specified by hFileHandle.  The region starts at offset ulStart and
+     continues for ulLength bytes.  The flag uiMode specifies whether the
+     area is to be locked or unlocked.  This function has no CA-Clipper
+     equivalent.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following code fragment illustrates the use of _fsLock()
+        to both lock and unlock a part of the file:
+
+        #include "filesys.api"
+
+        FHANDLE hFile;
+
+        hFile = _fsCreate( "Foo", FC_NORMAL );
+
+        // Check for an open error before using the file
+        if (! _fsError() )
+        {
+           if (_fsLock( hFile, 0, 1, FL_LOCK ) ) // Lock first byte
+           {
+              .
+              .
+              .
+              _fsLock( hFile, 0, 1, FL_UNLOCK ); // Unlock first byte
+           }
+           .
+           .
+           .
+              _fsClose( hFile );
+        }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Filesys.api.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

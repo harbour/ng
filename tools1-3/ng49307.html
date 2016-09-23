@@ -1,0 +1,111 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng48f39.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng4a038.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHARREPL()</B>
+ Replaces certain characters with others
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CHARREPL(&lt;cSearchFor&gt;,&lt;cString&gt;,   &lt;cReplaceExpression&gt;,</B>
+     <B>   [&lt;lMode&gt;]) --&gt; cString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSearchFor&gt;</B>  Designates a list of characters to search for in
+     &lt;cString&gt;.
+
+     <B>&lt;cString&gt;</B>  [@]  Designates the character string within which to
+     search for and replace the characters in &lt;cSearchFor&gt;.
+
+     <B>&lt;cReplaceExpression&gt;</B>  Designates the character list that replaces
+     characters in &lt;cString&gt;.
+
+     <B>&lt;lMode&gt;</B>  Designates whether multiple replacements are made.
+
+     <B>&lt;lMode&gt;</B>  Designates one pass of the &lt;cString&gt; (.T.) or multiple
+     replacements (.F.).  The default value is for .F..
+
+ <B>Returns</B>
+
+     The processed &lt;cString&gt; is returned.
+
+ <B>Description</B>
+
+     This function allows you to carry out very complex replacement
+     procedures.  Every character in the &lt;cSearchFor&gt; is searched for within
+     the &lt;cString&gt;.  If found, the character is replaced by the corresponding
+     character in the &lt;cReplaceExpression&gt;.
+
+     If &lt;lMode&gt; is not passed, characters are exchanged repeatedly as
+     required.  This means that the function goes through each individual
+     character in the found characters in sequence, and then searches the
+     entire &lt;cString&gt;, exchanging &lt;cSearchFor&gt; for corresponding characters
+     in &lt;cReplaceExpression&gt;.  When you use this technique, characters that
+     have already been replaced are exchanged again if the replacement
+     character also appears in the search list.
+
+     However, if the optional &lt;lMode&gt; parameter is specified, the function
+     proceeds differently.  It goes through each character in &lt;cString&gt; in
+     sequence, determining whether or not it should be replaced.  Characters
+     that have been replaced are not replaced again.
+
+     As a rule, if the same characters appear within &lt;cReplaceExpression&gt; and
+     &lt;cSearchFor&gt;, you must check very closely to determine which &lt;lMode&gt;
+     parameter should be used (see example).
+
+ <B>Notes</B>
+
+     <B>.</B>  If the &lt;cReplaceExpression&gt; sequence is shorter than
+        &lt;cSearchFor&gt;, the characters that do not have a corresponding
+        replacement in &lt;cReplaceExpression&gt; are replaced with the last
+        character of &lt;cReplaceExpression&gt; (see example).
+
+     <B>.</B>  The return value of this function can be suppressed by
+        implementing CSETREF() to save space in working memory.
+
+ <B>Examples</B>
+
+     <B>.</B>  The number "1" is replaced with the letter "a", the number "2"
+        with the letter "b", etc..  If the number "4" appeared in the
+        character string, it would be replaced with a "d":
+
+        ? CHARREPL("1234", "1x2y3z", "abcd")              // "axbycz"
+
+     <B>.</B>  The letters a-j are replaced with the numbers 0-9; for
+        example, an "f" is replaced with a "6":
+
+        ? CHARREPL("abcdefghij", "jhfdb", "1234567890")   // "08642"
+
+     <B>.</B>  The third parameter makes fewer characters available for the
+        exchange.  Therefore the letters f-j are replaced with the last
+        characters from "12345":
+
+        ? CHARREPL("abcdefghij", "jhfdb", "12345")        // "55542"
+
+     <B>.</B>  Here is an example of the difference between a specified
+        &lt;lMode&gt; parameter (.T.) and the default parameter (.F.):
+
+        ? CHARREPL("1234", "1234", "234A")                // "AAAA"
+        ? CHARREPL("1234", "1234", "234A", .T.)           // "234A"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng630d0.html">WORDREPL()</A>
+<A HREF="ng64523.html">WORDTOCHAR()</A>
+<A HREF="ng55d4c.html">POSREPL()</A>
+<A HREF="ng57038.html">RANGEREPL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

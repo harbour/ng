@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6aafb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6a0ba.html">[^^Up^^]</A>
+<A HREF="ng6b5cd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>VariField Coding Caveats:</B>
+
+  SIx 3.0's "V" fields represent a completely new technology in efficient
+  data storage.  With this new technology comes some new coding practices
+  that should be followed for best results.
+
+
+  <B>For @...SAY...GET screens, use a SCATTER/GATHER routine, padding</B>
+  <B>your SCATTER values:</B>
+
+  Instead of doing a GET directly into the field itself, you should use
+  the SCATTER/GATHER technique of reading all field values into temporary
+  field variables.  After the user finishes editing these temporary field
+  variables in the GETs, the temp variables are stored back to the
+  original database fields.
+
+  When using this technique, make sure to PAD() your SCATTER values to the
+  desired length when reading them from the database.  This will insure a
+  consistent length for values within the same field throughout the database
+  file.
+
+    <U>NOTE: See the VFDEMO.PRG sample program for an example of this.</U>
+
+
+  <B>Beware of existing code that relies on fixed field lengths!:</B>
+
+  If you convert an existing application's data files to use weakly-typed
+  "V" fields, make <B>sure</B> that none of your code depends on each field
+  (for different records) to be the same length.  Remember, the whole purpose
+  of "V" fields is to save space by storing the data more efficiently.  This
+  cuts out all of the fluff at the end of a character entry.
+
+  For example, if your database previously had a 50 byte CHARACTER field
+  called CODE, and now the CODE field is a "V" field of 0 significant bytes.
+  The following old code would no longer work as expected:
+
+    <B>// Process the CODE field (all 50 bytes of it) with Encode() UDF</B>
+    DO WHILE !eof()
+      FOR x := 1 TO <B>50</B>
+        Encode( SubStr( CODE, x, 1 ))
+      NEXT x
+      SKIP
+    ENDDO
+
+  The code could no longer <B>ass<U>u</B>me<B> that the field was 50 characters</B></U>
+  long.  It would instead need to
+
+    <B>// Process the CODE field (however long it is) with Encode() UDF</B>
+    DO WHILE !eof()
+      FOR x := 1 TO <B>Len(CODE)</B>
+        Encode( SubStr( CODE, x, 1 ))
+      NEXT x
+      SKIP
+    ENDDO
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6b5cd.html">The OTTO Utility</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

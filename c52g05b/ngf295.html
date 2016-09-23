@@ -1,0 +1,137 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf1a4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3cf.html">[^^Up^^]</A>
+<A HREF="ng1017f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>165 CHANGED: Arrays</B>
+--------------------------------------------------------------------------------
+
+     Arrays in Clipper 5.0 have been enhanced in a number of ways:
+
+     1.  <B>Array references:</B>  Arrays in Clipper 5.0 are handled
+         referentially, allowing multiple variables to refer to the same
+         array.  Arrays are automatically deallocated when all
+         references are eliminated.  For example:
+
+         aArray1     := { 1, 2, 3 }
+         aArray2     := aArray1
+         aArray1 [1] := 10
+
+         ? aArray2 [1]           // Result: 10
+
+     2.  <B>Nested arrays:</B>  Array elements may contain references to
+         other arrays, allowing you to create complex data structures.
+         For example:
+
+         LOCAL aArray1 [1], aArray2 [1]
+         //
+         aArray1 [1] := aArray2
+         aArray2 [1] := 10
+         //
+         ? aArray1 [1, 1]        // Result: 10
+
+     3.  <B>Multi-dimensional arrays:</B>  Clipper 5.0's support of nested
+         arrays allows you to create multi-dimensional arrays.  Elements
+         in multi-dimensional or nested arrays can be referenced using
+         either Pascal or C syntax, as shown in the following examples:
+
+         // Pascal syntax
+         LOCAL aArray [2, 2]
+         aArray [1, 1] := 10
+         aArray [1, 2] := 12
+
+         // C syntax
+         LOCAL aArray [2][2]
+         aArray [1][1] := 10
+         aArray [1][2] := 12
+
+     4.  <B>Creating arrays:</B>  Arrays in Summer '87 could only be created
+         using the DECLARE statement.  In Clipper 5.0, arrays can be
+         created in a number of ways:
+
+         <B>.</B>  Declaration statement
+
+            LOCAL aArray [2, 2]
+
+         <B>.</B>  ARRAY() function
+
+            ARRAY( 2, 2 )
+
+         <B>.</B>  Literal array
+
+            { 1, 2, {1, 2} }
+
+     5.  <B>Dynamic sizing:</B>  In Summer '87, the size of an array was
+         determined when the array was created by the DECLARE
+         statement.  In Clipper 5.0, the size of an array is completely
+         dynamic.  At any time after an array is created, elements can
+         be added or removed using the AADD() and ASIZE() functions.
+         For example:
+
+         // Create an array
+         aArray := { 1, 2 }      // Result: aArray is now {1, 2}
+
+         // Add an element and assign it a value
+         AADD( aArray, 3 )       // Result: aArray is now {1, 2, 3}
+
+         // Add an element
+         ASIZE( aArray, 4 )      // Result: aArray is now {1, 2, 3, NIL}
+
+         // Remove two elements
+         ASIZE( aArray, 2 )      // Result: aArray is now {1, 2}
+
+     6.  <B>Return values:</B>  In Summer '87, you could pass an array as
+         an argument to a procedure or a user-defined function, but you
+         could not return an array.  In Clipper 5.0, you can now return
+         an array from a user-defined function.  For example:
+
+         myArray := MakeArray()
+         ? myArray [1, 1]        // Result: 1
+
+         FUNCTION MakeArray
+            RETURN { {1, 2}, {1, 2} }
+
+     7.  <B>Literal arrays:</B>  In Clipper 5.0, an array can be specified
+         as a constant or literal value by enclosing a list of
+         expressions in curly ({}) braces:
+
+         aArray := { 1, 2, 3, 4 }
+
+         The list of expressions can evaluate to any data including
+         other arrays.
+
+     8.  <B>Empty arrays:</B>  In Summer '87, arrays had to have at least
+         one element.  Because Clipper 5.0 arrays can be sized
+         dynamically, you can create arrays with no elements.  These are
+         commonly referred to as empty arrays.  For example:
+
+         aArray := {}
+         ? LEN( aArray )         // Result: 0
+
+     9.  <B>New array functions:</B>  Adding to the list of array functions
+         supported in Summer '87, Clipper 5.0 adds the following
+         functions:
+
+         <B>Table: New Clipper 5.0 Array Functions</B>
+         -----------------------------------------------------------------
+         <B>Function       Action</B>
+         -----------------------------------------------------------------
+         AADD()         Add a new element to the end of an array
+         ACLONE()       Duplicate a nested or multi-dimensional array
+         AEVAL()        Execute a code block for each element in an array
+         ARRAY()        Create an uninitialized array of specified length
+         ASIZE()        Grow or shrink an array
+         -----------------------------------------------------------------
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

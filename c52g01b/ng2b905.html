@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2b2bb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng2c1bd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DISPBEGIN()</B>
+ Begin buffering screen output
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DISPBEGIN() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DISPBEGIN() always returns NIL.
+
+ <B>Description</B>
+
+     DISPBEGIN() is a screen function that informs the CA-Clipper display
+     output system that the application is about to perform a series of
+     display operations.
+
+     Use DISPBEGIN() with DISPEND() to allow the display output system to
+     buffer display updates.  Display output which occurs after DISPBEGIN()
+     but before DISPEND() is allowed to accumulate in internal buffers.  When
+     DISPEND() executes, any pending updates appear on the physical display.
+     This is useful in applications where complex screen displays are slow
+     and the appearance of performance is desired.
+
+     DISPBEGIN() and DISPEND() calls are optional.  They are not required for
+     normal output.
+
+ <B>Notes</B>
+
+     <B>.  Nested calls:</B> DISPBEGIN() calls are nested internally.  If
+        several DISPBEGIN() calls occur, buffering is allowed until a
+        corresponding number of DISPEND() calls occur.
+
+     <B>.  Guaranteed operations:</B> Display updates performed between
+        DISPBEGIN() and DISPEND() are not guaranteed to be buffered--some
+        updates may become visible before DISPEND() is called.  However, all
+        updates are guaranteed to be visible after the closing call to
+        DISPEND().
+
+     <B>.  Terminal operations:</B> Terminal input operations such as INKEY()
+        or READ should not be performed between DISPBEGIN() and DISPEND().
+        Doing this may cause input or display output to be lost.
+
+     <B>.  Incompatible operations:</B> Display output by other than the
+        CA-Clipper display functions (e.g., by add-on libraries or by DOS via
+        OUTSTD(), etc.) may not be compatible with DISPBEGIN() and DISPEND().
+        Output may be lost.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example buffers screen output, updates the screen, then
+        displays the buffered screen output:
+
+        DISPBEGIN()            // Start screen buffering
+        //
+        SETPOS(10, 10)
+        DISPOUT("A display update")
+        SETPOS(11, 10)
+        DISPOUT("Another display update")
+        //
+        DISPEND()              // Display buffered screen data
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2d22f.html">DISPEND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

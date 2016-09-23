@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2ab18.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2bc8a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosCreateDSAlias()            Create data selector corresponding to executable (code) selector.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Create a data selector corresponding to an executable (code)</B></U>
+            <B>selector.</B>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosCreateDSAlias( SEL codesel,</B></U>
+            <B>PSEL datasel);</B>
+
+ <U>codesel    <B>Code selector to be aliased.</B></U>
+
+ <U>datasel    <B>Pointer to an integer to receive the data selector (alias).</B></U>
+
+ <U>Return   : <B>Data selector corresponding to an executable code selector. The</B></U>
+            <B>returned selector has the same linear base address and limit as</B>
+            <B>the original code selector, but has a read / write code</B>
+            <B>attribute.</B>
+
+ Note: The original code selector should be locked in memory (using
+ DosLockSeg()) prior to creating the alias selector. This ensures that the
+ original selector will not be swapped out of memory, which could later cause
+ the linear base address of the segment to change when the segment is
+ subsequently reloaded from disk. This is necessary because alias selectors
+ do not track changes to the original selector. The original code selector
+ may be unlocked by calling DosUnlockSeg() after the alias selector has been
+ freed using DosFreeSelector().
+
+ This function allows code segments to be written to.
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>SEL      datasel</B>
+    <B>/* Lock the segment first */</B>
+    <B>DosLockSeg(SELECTOROF(test));</B>
+    <B>if (DosCreateDSAlias (SELECTOROF (test), &amp;datasel) != 0)</B>
+    <B>   {</B>
+    <B>   printf ("DosCreateDSAlias() failed\n");</B>
+    <B>   exit (255);</B>
+    <B>   }</B>
+    <B>printf ("Code selector for test() is %04X\n",   </B>
+    <B>   SELECTOROF (test));</B>
+    <B>printf ("Data selector is %04X\n",datasel);</B>
+    <B>DosFreeSelector(datasel);</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2ab18.html">DosCreateCSAlias()</A>
+<A HREF="ng2fcb1.html">DosLockSeg()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

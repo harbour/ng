@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2d66d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng2e26c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DOSERROR()</B>
+ Return the last DOS error number
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DOSERROR([&lt;nNewOsCode&gt;]) --&gt; nOsCode</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nNewOsCode&gt;,</B> if specified, alters the value returned by DOSERROR().
+     The value must be a numeric value that reflects a DOS error number.
+
+ <B>Returns</B>
+
+     DOSERROR() returns the DOS error number as an integer numeric value.
+
+ <B>Description</B>
+
+     DOSERROR() is an error function that returns the last DOS error code
+     associated with an activation of the runtime error block.  When a
+     runtime error occurs, the DOSERROR() function is set to the current DOS
+     error if the operation has an associated DOS error.  The function value
+     is retained until another runtime error occurs.  If the failed operation
+     has no associated DOS error, the DOSERROR() returns zero.  With
+     low-level file functions, FERROR() returns the same value as DOSERROR().
+
+     Through use of the optional &lt;nNewOsCode&gt;, you may customize to the
+     reporting activation, the returned value for any DOS error.
+
+     For a complete list of DOS error numbers and accompanying descriptions,
+     refer to the Error Messages and Appendices guide.
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3054f.html">ERRORBLOCK()</A>
+<A HREF="ng3477a.html">FERROR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

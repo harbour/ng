@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbfbea.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb4a83.html">[^^Up^^]</A>
+<A HREF="ngc1a63.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MEMVAR</B>
+ Declare private and public variable names
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MEMVAR &lt;idMemvar list&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idMemvar list&gt;</B> is a list of public and private variable names to
+     declare to the compiler.
+
+ <B>Description</B>
+
+     MEMVAR is a declaration statement that causes the compiler to resolve
+     references to variables specified without an explicit alias by
+     implicitly assuming the memory variable alias (MEMVAR-&gt;).  Only
+     explicit, unaliased references to the specified variables are affected.
+     MEMVAR, like all declaration statements, has no effect on references
+     made within macro expressions or variables.
+
+     The MEMVAR statement neither creates the variables nor verifies their
+     existence.  Its primary effect is to ensure correct references to
+     variables whose existence is known to be guaranteed at runtime.  At
+     runtime, the specified variables must be created using the PRIVATE,
+     PARAMETERS or PUBLIC statements.  This can occur in the procedure
+     containing the MEMVAR declaration or in a higher-level procedure.
+     Attempting to access the variables before they are created will cause an
+     error.
+
+     The scope of the MEMVAR declaration is the procedure or function in
+     which it occurs, or the entire source file if it precedes any PROCEDURE
+     or FUNCTION statements and the /N compiler option is used.  The /N
+     option suppresses automatic definition of a procedure with the same name
+     as the program (.prg) file.
+
+     Like other declaration statements, MEMVAR must precede any executable
+     statements including PARAMETERS, PUBLIC, and PRIVATE statements in a
+     procedure or function definition; or the program (.prg) file if the
+     declaration has filewide scope.
+
+     MEMVAR can be used in conjunction with the /W compiler option--which
+     generates warning messages for ambiguous variable references--to perform
+     compile-time checking for undeclared variables.
+
+     For more information on variable declarations and scoping, refer to the
+     Variables section in the Basic Concepts chapter of the Programming and
+     Utilities guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates the relationship between a private
+        and field variable with the same name.  The private variable is
+        declared with the MEMVAR statement:
+
+        FUNCTION Example
+           MEMVAR amount, address
+           PRIVATE amount := 100
+           USE Customer NEW
+           //
+           ? amount          // Refers to amount private variable
+           ? Customer-&gt;Amount
+                             // Refers to Amount field variable
+           //
+           RETURN NIL
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngba8f5.html">FIELD</A>
+<A HREF="ngbfbea.html">LOCAL</A>
+<A HREF="ngc25d0.html">PRIVATE</A>
+<A HREF="ngc587f.html">PUBLIC</A>
+<A HREF="ngc78ff.html">STATIC</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

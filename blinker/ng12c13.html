@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1238c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng1310a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER SEGMENT THRESHOLD     Modify default segment packing limit</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Modify the default segment packing limit</B></U>
+
+ <U>Syntax   : <B>BLINKER SEGMENT THRESHOLD &lt;nuLimit&gt;</B></U>
+
+ <U>Default  : <B>65500</B></U>
+
+ <U>Example  : <B># Pack segments to a limit of 16K</B></U>
+            <B>BLINKER SEGMENT THRESHOLD 16384</B>
+
+ When creating a new EXE format executable, ie DOS extended or Windows
+ programs, Blinker packs code and data segments in order to reduce the number
+ of segments present in the final executable. At runtime data and code are
+ loaded and discarded as complete segments, which can impact execution speed
+ when segment swapping occurs frequently. This command can be used to set the
+ maximum size (in bytes) of combined or packed segments, reducing the sizes
+ of the segments being swapped.
+
+ A decrease in the segment threshold will result in a corresponding increase
+ in the number of segments in the EXE file. The new EXE format has a maximum
+ limit of 254 segments, therefore, if the threshold is set too low, (causing
+ more than 254 segments to be required), Blinker will display link time error
+ message 1141 indicating that the new EXE segment limit has been exceeded.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

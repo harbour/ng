@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng202c9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng20e35.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_AutoShare():</B>
+
+  Syntax:   Sx_AutoShare( [nMode] )
+
+            nMode = Optional numeric value indicating the sharing mode to
+                    set.  Valid values are 0, 1, and 2.
+
+                    0 = No automatic sharing control is done.  This is the
+                        standard behavior for the DBFNTX driver.
+
+                    1 = This is the default mode used by The SIx Driver.  In
+                        this mode, The SIx Driver automatically determines at
+                        runtime if the application is running in a shared
+                        environment (on a network, or on a local drive with
+                        SHARE loaded).  If the application is not running in
+                        a shared environment, The SIx Driver will automatic-
+                        ally open all tables in EXCLUSIVE mode.
+
+                    2 = Forces all tables to be opened in EXCLUSIVE mode at
+                        all times.
+
+  Returns:  A numeric value indicating the current sharing mode or, if a
+            parameter was passed to the function, the previous setting.
+
+  Description:  Sx_AutoShare() gives you control over the automatic handling
+                of file sharing done by The SIx Driver.
+
+  Examples:
+
+    ? <B>Sx_AutoShare()</B>     // Returns 1 (Default)
+
+    // Set up for network testing in a stand-alone environment.
+    <B>Sx_AutoShare(0)</B>
+
+    // Set up to force all USE's to be done EXCLUSIVE
+    <B>Sx_AutoShare(2)</B>
+
+    USE test SHARE       // The SHARED keyword is ignored
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

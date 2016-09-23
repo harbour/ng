@@ -1,0 +1,168 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng11ae68.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng10fe9c.html">[^^Up^^]</A>
+<A HREF="ng11c7f6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>= (compound assign)</B>
+ Compound assignment--binary                     (Assignment)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>&lt;idVar&gt;  += &lt;cString&gt;         (concatenation)</B>
+     <B>&lt;idVar&gt;  += &lt;nNumber&gt;         (addition)</B>
+     <B>&lt;idVar&gt;  -= &lt;cString&gt;         (concatenation)</B>
+     <B>&lt;idVar&gt;  -= &lt;nNumber&gt;         (subtraction)</B>
+     <B>&lt;idVar&gt;  -= &lt;dDate&gt;           (subtraction)</B>
+     <B>&lt;idVar&gt;  *= &lt;nNumber&gt;         (multiplication)</B>
+     <B>&lt;idVar&gt;  /= &lt;nNumber&gt;         (division)</B>
+     <B>&lt;idVar&gt;  %= &lt;nNumber&gt;         (modulus)</B>
+     <B>&lt;idVar&gt;  ^= &lt;nNumber&gt;         (exponentiation)</B>
+
+ <B>Type</B>
+
+     Character, date, memo, numeric
+
+ <B>Operands</B>
+
+     <B>&lt;idVar&gt;</B> is a variable identifier of any storage class, including a
+     field variable.  The variable must be initialized to a value before
+     performing the operation.
+
+     If the reference to &lt;idVar&gt; is ambiguous (i.e., not declared at compile
+     time and not explicitly qualified with an alias), &lt;idVar&gt; is assumed to
+     be MEMVAR.  You can assign field variables by declaring the field
+     variable name in a FIELD statement or referring to the field name
+     prefaced by the FIELD-&gt; alias or the name of the work area.
+
+     <B>&lt;cString&gt;</B> is the character string used in the operation with
+     &lt;idVar&gt;.
+
+     <B>&lt;nNumber&gt;</B> is the numeric expression used in the operation with
+     &lt;idVar&gt;.
+
+     <B>&lt;dDate&gt;</B> is the date value used in the operation with &lt;idVar&gt;.
+
+ <B>Description</B>
+
+     In addition to the simple and inline assignment operators (= and :=),
+     there are a series of compound assignment operators that perform an
+     operation then assign a value.  They have the form:
+
+     &lt;idVar&gt; &lt;operator&gt;= &lt;exp&gt;
+
+     Each compound assignment expression is equivalent to the assignment
+     expression:
+
+     &lt;idVar&gt; := ( &lt;idVar&gt; &lt;operator&gt; &lt;exp&gt; )
+
+     For each data type that supports an operator, the compound assignment
+     operator performs the same operation before performing the assignment
+     operation.  The  following table details all of the compound operators:
+
+     <B>Compound Operators</B>
+     ------------------------------------------------------------------------
+     <B>Operator     Defined as     Operations</B>
+     ------------------------------------------------------------------------
+     a += b       a := (a + b)   concatenation, addition
+     a -= b       a := (a - b)   concatenation, subtraction
+     a *= b       a := (a * b)   multiplication
+     a /= b       a := (a / b)   division
+     a %= b       a := (a % b)   modulus
+     a ^= b       a := (a ^ b)   exponentiation
+     ------------------------------------------------------------------------
+
+     <B>Note: </B> The exponentiation operator (**) does not have a
+     corresponding compound assignment operator.  The exponentiation compound
+     assignment operator is ^=.
+
+     Since the compound assignment operators are based on the inline
+     assignment  operator (:=), the operation returns the result of its
+     operation as the value of the expression.  This means you can use these
+     operators within expressions just like the inline assignment operator
+     (:=).
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples use the compound addition and concatenation
+        assignment operator:
+
+        // Character (concatenation)
+        LOCAL cString := "Hello"
+        ? cString += " there"           // Result: "Hello there"
+
+        // Date (addition)
+        LOCAL dDate := CTOD("12/12/90")
+        dDate += 12                     // Result: 12/24/90
+
+        // Numeric (addition)
+        LOCAL nValue := 10
+        ? SQRT(nValue += 15)            // Result:  5.00
+        ? nValue                        // Result: 25.00
+
+     <B>.</B>  These examples use the compound subtraction and concatenation
+        assignment operator:
+
+        // Character (concatenation)
+        LOCAL cString := "Hello   "
+        ? cString -= "There"            // Result: HelloThere
+
+        // Date (subtraction)
+        LOCAL dDate := CTOD("12/24/90")
+        dDate -= 12                     // Result: 12/12/90
+
+        // Numeric (subtraction)
+        LOCAL nValue := 10
+        ? newValue := (nValue -= 5) ** 2       // Result: 25
+        ? nValue                               // Result:  5
+
+     <B>.</B>  This example uses the compound multiplication assignment
+        operator:
+
+        LOCAL nValue := 10
+        ? newValue := (nValue *= 5) + 100      // Result: 150
+        ? nValue                               // Result:  50
+
+     <B>.</B>  This example uses the compound division assignment operator:
+
+        LOCAL nValue := 10
+        ? newValue := (nValue /= 5) + 100      // Result: 102.00
+        ? nValue                               // Result:   2.00
+
+     <B>.</B>  This example uses the compound modulus assignment operator:
+
+     LOCAL nValue := 10
+        ? newValue := (nValue %= 4) * 100      // Result: 200.00
+
+        ? nValue                               // Result:   2.00
+
+     <B>.</B>  This example uses the compound exponentiation assignment
+        operator:
+
+        LOCAL nValue := 10
+        ? newValue := (nValue ^= 3) + 50       // Result: 1050.00
+        ? nValue                               // Result: 1000.00
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng11078f.html">%</A>
+<A HREF="ng113abb.html">*</A>
+<A HREF="ng113e1d.html">**</A>
+<A HREF="ng114249.html">+</A>
+<A HREF="ng1149c5.html">++</A>
+<A HREF="ng1153e9.html">-</A>
+<A HREF="ng115d26.html">--</A>
+<A HREF="ng118655.html">/</A>
+<A HREF="ng1191dc.html">:=</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng59420.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng59dd8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>relEval()</B>
+ Evaluate a block against the relation in specified work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE relEval(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     LPDBRELINFO lpdbRelInfo</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpdbRelInfo</B> is a pointer to a structure containing information on a
+     relation.
+
+ <B>Description</B>
+
+     relEval() performs a relational seek from the parent work area
+     referenced by wa to the child work area specified by lpdbRelInfo.
+
+ <B>Default Behavior</B>
+
+     Evaluates the block held in the structure pointed to by
+     lpdbRelInfo-&gt;itmCobExpr.  The expression resulting from the evaluation
+     is placed in wa-&gt;valResult and the return code indicates success or
+     failure.
+
+     <B>Note: </B> The selected work area is saved and restored.
+
+     <B>Warning!</B>  If the item held in <B>lpdbRelInfo-&gt;itmCobExpr</B> is not a
+     code block, a BASE/1004 "No exported method" error is generated.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If any global state necessary for the operation of your driver
+        could be modified by the code block in lpdbRelInfo-&gt;itmCobExpr (i.e.,
+        any CA-Clipper code), you should save that state, call
+        SUPER_RELEVAL() and then restore the state.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng45304.html">DBRELINFO</A>
+<A HREF="ng58f71.html">forceRel()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

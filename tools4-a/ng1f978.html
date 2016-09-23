@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1f223.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng1fdc2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCVSSRV()</B>
+ Determines the number of visible file servers in a network
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCVSSRV([&lt;cMask&gt;]) --&gt; nServer</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cMask&gt;</B>  Designates a search mask that can contain the wildcards "?"
+     and "*".  The default value ("*") indicates that all file servers are
+     taken into account.
+
+ <B>Returns</B>
+
+     NNETCVSSRV() returns the number of visible file servers that match the
+     search mask, &lt;cMask&gt;.  Without argument, the function returns the number
+     of all servers within a network.
+
+ <B>Description</B>
+
+     NOVELL NET COUNT VISIBLE SERVERS
+     With NNETCVSSRV() you can determine the number of all visible file
+     servers in a network without having to specify the server names
+     (NNETFSLST()).  For example, you can determine if all file servers in a
+     WAN are available or if some file servers are currently unavailable.
+
+ <B>Example</B>
+
+     Determine the number of all visible file servers:
+
+     ? NNETCVSSRV()                        // Returns: 6
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1ed86.html">NNETCCNSRV()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

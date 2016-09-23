@@ -1,0 +1,146 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng89ba9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng8b5d6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NBSLISTCON()</B>
+ Opens the NetBIOS session sending and receiving buffer and waits for
+ connection in the background
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NBSLISTCON(&lt;cSourceName&gt;,[&lt;nRecBuffer&gt;],</B>
+     <B>   [&lt;nSendBuffer&gt;],[&lt;cTargetName&gt;],[&lt;nPacket&gt;],</B>
+     <B>   [&lt;nRecTimeout&gt;],[&lt;nSendTimeout&gt;]) --&gt; nHandle</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSourceName&gt;</B>  Designates the NetBIOS name of the communication's
+     transmitting side.
+
+     <B>&lt;nRecBuffer&gt;</B>  Designates the selected size of the receiving buffer.
+     If no value is passed for &lt;nRecBuffer&gt;, no receiving buffer is
+     established.  The minimum size of the receiving buffer is  &lt;nPacket&gt;.
+     If the value for &lt;nRecBuffer&gt; is too small, it is changed automatically
+     by NBSLISTCON().  The maximum size of the receiving buffer is 64 KByte.
+
+     <B>&lt;nSendBuffer&gt;</B>  Designates the selected size of the sending buffer.
+     If no value is passed for &lt;nSendBuffer&gt;, no sending buffer is
+     established.  The minimum size of the sending buffer is &lt;nPacket&gt;.  If
+     the value for &lt;nSendBuffer&gt; is too small, it is changed automatically by
+     NBSLISTCON().  The maximum size of the sending buffer is 64 KByte.
+
+     <B>&lt;cTargetName&gt;</B>  Designates a NetBIOS name that specifies the target
+     station.  If a value is passed for &lt;cTargetName&gt;, NBSLISTCON() waits for
+     a connection request for this station.  The default value does not
+     specify a target name.
+
+     <B>&lt;nPacket&gt;</B>  Designates the packet size of the data that is sent in
+     bytes.  The default value is 512 Bytes.
+
+     <B>&lt;nRecTimeout&gt;</B>  Designates the timeout for the following receiving
+     operations in 1/2 seconds.  The default value (0) designates no timeout.
+
+     <B>&lt;nSendTimeout&gt;</B>  Designates the timeout for the following sending
+     operations in 1/2 seconds.  The default value (0) designates no timeout.
+
+ <B>Returns</B>
+
+     If an operation is successful, NBSLISTCON() returns a communication
+     handle.  The return value contains a numeric value that is greater than
+     0.  You should store the handle in a variable because all further
+     operations that refer to an established buffer require a communication
+     handle.  If an error occurs, the function returns 0.
+
+ <B>Description</B>
+
+     NBSLISTCON() establishes a communication buffer for an NetBIOS session
+     communication with other workstations in the network, and then waits for
+     a connection setup through any other station.  The communication buffer
+     can contain sending and receiving buffers through which the interrupt
+     controlled sending and receiving of data is processed.
+
+     &lt;nSourceName&gt; is the NetBIOS name of the process that transmits the data
+     (see the Introduction to this chapter).  The name can be added to the
+     local name table with the functions NBADDNAME() or NBADDGROUP() before
+     the call of NBSLISTCON().  If &lt;nSourceName&gt; has not been added to the
+     name table, it is added by NBSLISTCON() automatically.
+
+     The parameters &lt;nRecBuffer&gt; and &lt;nSendBuffer&gt; specify the size of the
+     receiving and sending buffers.  The buffers are automatically designed
+     for one NetBIOS packet.  Each buffer can be up to 64 KByte in size.
+     However, the size of the buffer that is allocated by NBSLISTCON()
+     depends on the application and the configuration of the computer used.
+
+     The parameter &lt;cTargetName&gt; is optional.  When a value is passed for
+     &lt;cTargetName&gt;, NBSLISTCON() waits for a connection request for
+     &lt;cTargetName&gt;.  Without &lt;cTargetName&gt;, NBSLISTCON() reacts to any
+     connection request.
+
+     &lt;nPacket&gt; determines the maximum size of the data range of the NetBIOS
+     packets to be sent or received.  The maximum and default value is 512
+     bytes.  Smaller packets can be sent without failure.  However, larger
+     packets are discarded.  The value of &lt;nPacket&gt; is also valid for use in
+     sending data.
+
+     The seconds for the timeout are not determined individually for each
+     sending and receiving operation.  The timeout is set when the session is
+     opened by passing the parameters &lt;nRecTimeout&gt; and &lt;nSendTimeout&gt;.  The
+     parameters can contain numeric values that specify the timeout in steps
+     of 1/2 second.
+
+     If all parameters have been passed correctly and the buffers have been
+     established successfully, NBSLISTCON() returns a communication handle.
+     A communication handle, however, does not indicate that a NetBIOS
+     session has already been set up.  After NBSLISTCON() has been executed,
+     a handler waits for a connection request in the background.  The
+     communication handler, returned by NBSLISTCON(), cannot be used for
+     sending and receiving before a connection has been established.  The
+     current connection status after a call of NBSLISTCON() can be queried
+     with PPCCONACT().  It is also possible to trigger a key trap with
+     PPCKEY().
+
+ <B>Note</B>
+
+     <B>.</B>  Unlike a NetBIOS datagram communication, a NetBIOS session
+        communication is connection-oriented.  A connection is established
+        between two stations.  As long as no error occurs, a successful
+        delivery of sent packets is guaranteed.
+
+ <B>Examples</B>
+
+     <B>.</B>  Wait for the setup of a NetBIOS session:
+
+        nHandle=NBSLISTCON("MICK",1000)
+        WHILE .NOT. PPCCONACT(nHandle)
+        ENDDO
+
+     <B>.</B>  After a NetBIOS session has been set up successfully, send key
+        code 255 to the keyboard buffer:
+
+        #include "ctppc.ch"
+
+        nHandle=NBSLISTCON("MICK",5000,1000)
+        PPCKEY(nHandle,255,PPC_CONESTB)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8849b.html">NBSCALL()</A>
+<A HREF="ng8c1de.html">PPCCANCEL()</A>
+<A HREF="ng8d688.html">PPCKEY()</A>
+<A HREF="ng8e251.html">PPCREAD()</A>
+<A HREF="ng929cb.html">PPCWRITE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng98c70.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng99b4e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SEEK</B>
+ Search an index for a specified key value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SEEK &lt;expSearch&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;expSearch&gt;</B> is an expression to match with an index key.
+
+ <B>Description</B>
+
+     SEEK is a database command that searches the controlling index starting
+     with the first key and proceeds until a match is found or there is a key
+     value greater than &lt;expSearch&gt;.  If there is a match, the record pointer
+     is positioned to the record number found in the index.  If SOFTSEEK is
+     OFF (the default) and SEEK does not find a match, the record pointer is
+     positioned to LASTREC() + 1, EOF() returns true (.T.), and FOUND()
+     returns false (.F.).  If SOFTSEEK is ON, the record pointer is
+     positioned to the record with the first key value greater than the
+     search argument and FOUND() returns false (.F.).  In this case, EOF()
+     only returns true (.T.) if there are no keys in the index greater than
+     the search argument.
+
+     SET EXACT has no effect on the operation of SEEK.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates the SEEK command:
+
+        USE Sales INDEX Branch NEW
+        SEEK "100"
+        ? FOUND(), EOF(), RECNO()      // Result: .T. .F. 1
+
+     <B>.</B>  This user-defined function performs an exact SEEK for an index
+        with a character key:
+
+        USE Invoice INDEX Invoice NEW
+        IF SeekExact("10001")
+           ? "Invoice on file"
+        ELSE
+
+           ? "Invoice not on file"
+        ENDIF
+        RETURN
+
+        FUNCTION SeekExact( cSearch )
+           SEEK PADR(cSearch, LEN(&amp;(INDEXKEY(0))))
+           RETURN (FOUND())
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2fa9c.html">EOF()</A>
+<A HREF="ng39f03.html">FOUND()</A>
+<A HREF="ngaa868.html">SET SOFTSEEK</A>
+<A HREF="ng22017.html">DBSEEK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbca2f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngbd86a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ACCEPT*</B>
+ Place keyboard input into a memory variable
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ACCEPT [&lt;expPrompt&gt;] TO &lt;idVar&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;expPrompt&gt;</B> is an optional prompt displayed before the input area.
+     The prompt can be an expression of any data type.
+
+     <B>&lt;idVar&gt;</B> is the variable that will hold input from the keyboard.  If
+     the specified &lt;idVar&gt; does not exist or is not visible, a private
+     variable is created.
+
+ <B>Description</B>
+
+     ACCEPT is a console command and wait state that takes input from the
+     keyboard and assigns it as a character string to the specified variable.
+     When ACCEPT is executed, it first performs a carriage return/linefeed,
+     displays the prompt, and then begins taking characters from the keyboard
+     at the first character position following the prompt.  You may input up
+     to 255 characters.  When input reaches the edge of the screen, as
+     defined by MAXCOL(), the cursor moves to the next line.
+
+     ACCEPT supports only two editing keys: Backspace and Return.  Esc is not
+     supported.  Backspace deletes the last character typed.  Return confirms
+     entry and is the only key that can terminate an ACCEPT.  If Return is
+     the only key pressed, ACCEPT assigns a null value ("") to &lt;idVar&gt;.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses ACCEPT to get keyboard input from the user:
+
+        LOCAL cVar
+        ACCEPT "Enter a value: " TO cVar
+        IF cVar == ""
+           ? "User pressed Return"
+        ELSE
+           ? "User input:", cVar
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ng61b6e.html">INKEY()</A>
+<A HREF="ngcf693.html">INPUT*</A>
+<A HREF="ngd087b.html">KEYBOARD</A>
+<A HREF="ngfacaa.html">WAIT*</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

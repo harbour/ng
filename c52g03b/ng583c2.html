@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng57f28.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng589f9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>error()</B>
+ Raise a runtime error
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE error(</B>
+     <B>               WORKAREAP wa,</B>
+     <B>               ERRORP error</B>
+     <B>             )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>error</B> is a pointer to an Error object (see The Error System API
+     Reference chapter for more information) containing information about
+     the runtime error to be generated.
+
+ <B>Description</B>
+
+     Raise a CA-Clipper runtime error.
+
+ <B>Default Behavior</B>
+
+     You can use this method to generate a CA-Clipper runtime error.  This
+     method creates a CA-Clipper-level error object and passes it to the
+     currently posted ERRORBLOCK().  The structure referred to by error
+     contains members that are copied into the CA-Clipper error object.
+
+     The return value of the CA-Clipper error system is mirrored in the
+     return value of the error() method.  error() returns E_BREAK, E_RETRY,
+     or E_DEFAULT, depending on the user's response to the available choices
+     as defined in the Error object.  Note that substitution return values
+     are not supported in this method.  (See the Error System API Reference
+     chapter for more information)
+
+     If a subsystem name is not specified (by a call to _errPutSubSystem()),
+     a value is retrieved from sysName().  If sysName() remains unimplemented
+     or yields an empty value, "???DRIVER" is used for the subsystem name.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Subclassing or replacing this method is not recommended.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng5099a.html">sysName()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

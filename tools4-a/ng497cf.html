@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng486b1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng49eec.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJFORM()</B>
+ Sets or determines the form name for a job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJFORM(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;cNewName&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; cName</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;cNewName&gt;</B>  Designates an optional parameter that contains a new
+     form name that is set for &lt;nJob&gt;.  The form name can be up to 15
+     characters long.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJFORM() returns the name of the form required for &lt;nJob&gt;.
+
+ <B>Description</B>
+
+     NOVELL NET JOB FORM
+     Before a job is serviced, the print server checks to see if the form
+     mounted in the printer matches the form specified in &lt;nJob&gt;.  If the
+     form in the printer differs from the specified form, the print server
+     waits for a form change.  NNETJFORM() allows you to set or determine the
+     form name for &lt;nJob&gt;.  To query the form name, do not pass a value for
+     &lt;cNewName&gt;.  A new form can be set with this parameter.  However, the
+     function does not check to see if &lt;cNewName&gt; exists.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the form name for the first job in the queue
+        LINEPRINTER:
+
+        nJob = BIN2I(LEFT(NNETJLIST('LINEPRINTER'), 2))
+        ? NNETJFORM('LINEPRINTER', nJob)
+
+     <B>.</B>  Set the form name for the first job in the queue LINEPRINTER
+        to INVOICE:
+
+        nJob = BIN2I(LEFT(NNETJLIST('LINEPRINTER'), 2))
+        ? NNETJFORM('LINEPRINTER', nJob, 'INVOICE')
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

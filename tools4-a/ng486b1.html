@@ -1,0 +1,136 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng47f2a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng497cf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJFLAGS()</B>
+ Reads and sets the job control flag
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJFLAGS(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;nNewFlags&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; nFlags</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;nNewFlags&gt;</B>  Designates an optional parameter that contains a bit-
+     coded value to change the control flags of &lt;nJob&gt; in &lt;cQueue&gt;.  The
+     definition of the bits can be seen in table below.  To set multiple
+     bits, the decimal values of the attributes must be added.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJFLAGS() returns a numeric value that contains the job flags.  The
+     flags correspond to a bit position within this value.
+
+     <B>Table 25.1:  Coding of Job Control Flags</B>
+     ------------------------------------------------------------------------
+     <B>Bit     Value     Definition</B>
+     ------------------------------------------------------------------------
+     4       8         Service autostart flag
+     5       16        Service restart flag.  When this flag is set, a job
+                       that is canceled by a job server remains in the queue.
+                       Otherwise, the job is deleted from the queue.
+     6       32        Entry open flag.  This bit indicates that a job has not
+                       been released by a user and therefore is not ready for
+                       servicing.
+     7       64        User hold flag.  The job remains in the queue without
+                       being serviced until the user or the queue operator
+                       clears this flag.
+     8       128       Operator hold flag.  The job remains in the queue
+                       without being serviced until a queue operator clears
+                       this flag.
+     ------------------------------------------------------------------------
+
+     If an error occurs (for example, if &lt;cQueue&gt; does not exist), the
+     function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET JOB FLAGS
+     Job control flags can provide important information about &lt;nJob&gt;.  The
+     required job is specified by its job number.  The job number has nothing
+     to do with the logical position of a job within a queue.  The job number
+     can be determined with NNETCAPJOB() or NNETJLIST().
+
+     With NNETJFLAGS() you can determine if a job is ready for processing or
+     if the user has not yet closed the job (entry open flag).  You can see
+     if a job is in waiting state (user or operator hold flag).  By passing
+     &lt;nNewFlags&gt;, one or more flags can be set or deleted.  For example, a
+     job can be set into a waiting state with the user hold flag.
+
+ <B>Notes</B>
+
+     <B>.</B>  The reading of the job control flags requires that the
+        requesting user has access to &lt;cQueue&gt; as a user or a queue operator.
+
+     <B>.</B>  Netware does not prevent a user who has created a job from
+        changing the operator hold flag.  Therefore, it does not make sense
+        to differentiate between a user and an operator hold flag when using
+        NNETJFLAGS().  A difference between these two flags can arise in an
+        application specific interpretation, like the one that is implemented
+        in the Novell utility PCONSOLE.
+
+     <B>.</B>  A job that is already in progress cannot be modified.
+
+ <B>Examples</B>
+
+     <B>.</B>  Check to see if job 1 in the queue LINEPRINTER has already
+        been closed by the user::
+
+        nJob=BIN2I(LEFT(NNETJLIST('LINEPRINTER'),2))
+        IF ISBIT(NNETJFLAGS('LINEPRINTER',nJob),6)
+        ? 'Job closed!'
+        ELSE
+        ? 'Job not ready!'
+        ENDIF
+
+     <B>.</B>  Start the capture mode for LPT1, send output in the queue
+        LINEPRINTER, and set the user hold flag:
+
+        NNETCAPSSF(1)
+        NNETCAPBEG(1)
+        NNETSETQ(1,'LINEPRINTER')
+        SET PRINTER ON
+        ? 'Hello'
+        nJob=NNETCAPJOB(1)
+        nOldFlags=NNETJFLAGS('LINEPRINTER',nJob)
+        nNewFlags=NUMAND(nOldFlags,64)
+        NNETJFLAGS('LINEPRINTER',nJob,nNewFlags)
+        NNETCAPFLU(1)
+
+     <B>.</B>  The new job is always created at the first output (? "Hello"),
+        not by calling NNETCAPBEG().  Therefore, NNETJFLAGS() must be called
+        after the first output.  If NNETJFLAGS() is not called after the
+        first output, NNETCAPJOB() returns the number of the previous capture
+        job and the job control flags are modified for the wrong job.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42436.html">NNETCAPJOB()</A>
+<A HREF="ng49eec.html">NNETJLIST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

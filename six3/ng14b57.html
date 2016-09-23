@@ -1,0 +1,125 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng14467.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng159ed.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_IsOptimize():</B>
+
+  Purpose:  Used to measure the optimizability of a FILTER/FOR condition.
+
+   Syntax:  m6_IsOptimize( &lt;cForExpr&gt; [, lIsCount] )
+
+    Where:  &lt;cForExpr&gt;  --  FILTER/FOR condition criteria to be evaluated.
+                            (Must be a character expression)
+
+            [lIsCount]  --  Optional.  Value of .T. specifies that the query
+                            condition should be tested against the stricter
+                            COUNT query requirements.  See Notes below for
+                            the differences.
+
+  Returns:  Measure of optimization.  Return values range from 0 - 2, with
+            two being fully optimizable.  Use the following constants
+            defined in "MACHSIX.CH" to interpret the return values:
+
+              <B>#define OPT_FULL      2  //..fully optimizable</B>
+              <B>#define OPT_PARTIAL   1  //..partially optimizable</B>
+              <B>#define OPT_NONE      0  //..not optimizable</B>
+
+
+    Notes:  Use m6_IsOptimize() to determine the optimizability of the
+            FILTER/FOR condition prior to executing an optimizable command.
+            An expression may be deemed not optimizable for any of the
+            following reasons:
+
+               <B>.  No database in use</B>
+               <B>.  No indexes in use</B>
+               <B>.  Database exceeds 524 million records</B>
+               <B>.  Error in query condition. Check m6_Error().</B>
+               <B>.  No matching indexes found in FILTER/FOR criteria</B>
+               <B>.  FOR criteria contains LOCAL or STATIC variables</B>
+               <B>.  Extended expression used in FILTER/FOR criteria</B>
+               <B>.  Workarea not using a supported RDD</B>
+               <B>.  Matching key found, but in RYO, UNIQUE, or CONDITIONAL</B>
+                  <B>index, other than the current index order.</B>
+
+            If a query is found to be not optimizable a reason code can be
+            retrieved with the m6_Error() function.
+
+            The difference between an optimization test for a COUNT query
+            and any other command only pertains to the full optimization
+            test.  In order for a COUNT query to be fully optimizable the
+            entire query condition must be satisfied in the indexes and no
+            database access required.  Therefore, not only must every
+            expression match up to an index key, but also deleted records
+            (if DELETE is ON) must be eliminated by an index built on
+            DELETED().  For more details about optimizing deleted records
+            see the discussion in <B>Performance Tips</B> in the <B>USING</B>
+            part of this guide.
+
+
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         LOCAL nSel := 0, dStart, dEnd, cFor
+
+         USE Names INDEX Name, Salary, State, Date
+
+         //..............................................fully optimizable
+         ? <B>m6_IsOptimize( 'last = "Hewson"')</B>                       //....2
+
+         //........ ....partially optimizable - at least one indexed field
+         ? <B>m6_IsOptimize( 'state = "CA" .and. zip = "92656" ')</B>    //.... 1
+
+         //........ ....partially optimizable - at least one indexed field
+         ? <B>m6_IsOptimize( 'empty(salary) .and. MyUdf()')</B>          //.... 1
+
+         //............................not optimizable - no indexed fields
+         ? <B>m6_IsOptimze('age = 21 .and. zip = "28105"')</B>           //.....0
+         ? m6_Error()                                                 //..2009
+
+         //............not optimizable - extended expression used for alias
+         nSel := select()
+         ? <B>m6_IsOptimze( '(nSel)-&gt;state = "CA" ')</B>                 //.....0
+         ? m6_Error()                                                 //..2019
+
+         //.....fully optimizable - state field follows alias for this area
+         ? <B>m6_IsOptimize( 'names-&gt;state = "CA" ')</B>                  //.....2
+
+         //...............................not optimizable - local variables
+         dStart := ctod("08/01/92")
+         dEnd   := ctod("08/31/92")
+         ? <B>m6_IsOptimize( 'date &gt;= dStart .and. date &lt;= dEnd ')</B>    //.....0
+         ? m6_Error()                                                 //..2019
+
+         //...............fully optimizable - locals expressed as constants
+         cFor := "date &gt;= ctod('"+ dtoc( dStart ) + "') .and. " +;
+                 "date &lt;= ctod('"+ dtoc( dEnd   ) + "')"
+         ? <B>m6_IsOptimize( cFor )</B>                                   //.....2
+
+
+         Function MyUdf()
+           .
+           .
+           .
+         Return ( .T. )
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngce09.html">m6_Error()</A>
+<A HREF="ng896a6.html">Performance Tips</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

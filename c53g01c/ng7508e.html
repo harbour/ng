@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7487c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng75593.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MONTH()</B>
+ Convert a date value to the number of the month
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MONTH(&lt;dDate&gt;) --&gt; nMonth</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;dDate&gt;</B> is the date value to be converted.
+
+ <B>Returns</B>
+
+     MONTH() returns an integer numeric value in the range of zero to 12.
+     Specifying a null date (CTOD("")) returns zero.
+
+ <B>Description</B>
+
+     MONTH() is a date conversion function that is useful when you require a
+     numeric month value during calculations for such things as periodic
+     reports.  MONTH() is a member of a group of functions that return
+     components of a date value as numeric values.  The group includes DAY()
+     and YEAR() to return the day and year values as numerics.  CMONTH() is a
+     related function that allows you to return the name of the month from a
+     date value.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples return the month of the system date:
+
+        ? DATE()                        // Result: 09/01/90
+        ? MONTH(DATE())                 // Result: 9
+        ? MONTH(DATE()) + 1             // Result: 10
+
+     <B>.</B>  This example demonstrates MONTH() acting on a null date:
+
+        #define NULL_DATE   (CTOD(""))
+        ? MONTH(NULL_DATE)              // Result: 0
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng19a13.html">CMONTH()</A>
+<A HREF="ng1bec1.html">DAY()</A>
+<A HREF="ng3dd7e.html">DOW()</A>
+<A HREF="nga91e1.html">YEAR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

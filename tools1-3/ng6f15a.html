@@ -1,0 +1,159 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng706a5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Introduction</B>
+
+ <B>Working With Video Functions</B>
+
+     This module discusses video functions that are either directly or
+     indirectly concerned with the screen.  Included are all functions that
+     deal with such screen adapters as CGA, EGA and Hercules.  Different
+     modes on various adapters are supported, such as a 40-column CGA, a 43-
+     line EGA, or a 50-line VGA.
+
+ <B>DSETWINDOW()</B>
+
+     Many of the functions in this chapter depend on setting the DSETWINDOW()
+     switch.  This switch determines if the screen output of external
+     programs, as well as DOS, are redirected to a window.
+     CA-Clipper Tools output functions are also valid as external.  If the
+     default setting in DSETWINDOW() is .T. or on, this rerouting is carried
+     out.  Some functions will then return inaccurate, or at the very least,
+     different results.  Examples of this are ISANSI() or NUMCOL()
+
+ <B>Attribute</B>
+
+     Many of the functions in this module work with color attributes
+     designated as parameters.  These arguments are carried out in three
+     different ways:
+
+     A numeric value, which corresponds to a combined color attribute
+     (e.g., 7).
+
+     A string in the "NN/NN" form, with two specified numeric values (e.g.,
+     "7/0").
+
+     A string in the "CC/CC" form, with two specified attributes are
+     designated in the form CA-Clipper requires (e.g., "W/N").
+
+     With many functions, the attribute returns a combined numeric value.
+     Attributes for the foreground and background are tied together this way.
+
+     Color attributes are constructed as follows:
+
+     Bit                8 7 6 5        4 3 2 1
+     Attribute          * R G B        + R G B
+           _ _ _ _ _ _  /   _ _ _ _ _ _
+
+           Background   /   Foreground
+
+     Each attribute consists of four bits, which represent a value in the
+     range of 0 to 15.  Therefore, there are a total of 16*16, or 256,
+     different values from 0 to 255.  These numeric values can be changed
+     into the "nn/nn" format, that can be used under CA-Clipper with the
+     NTOCOLOR function.  However, it is possible to directly influence this
+     combined attribute value.  The following examples show this and relate
+     back to the chapter on number and bit manipulation:
+
+     NUMOR( nattr, 128)    // Flashing on
+     NUMAND(nattr, 127)    // Flashing off
+     NUMXOR(nattr, 128)    // Change flashing
+     NUMOR(nattr,  8)      // High intensity on
+     NUMAND(nattr, 247)    // High intensity off
+     NUMXOR(nattr,  8)     // Switch high intensity
+
+ <B>Special Parameter Type</B>
+
+     With many functions, a parameter may be of the &lt;mIcCharacter|nCharacter&gt;
+     type (e.g., an individual character).  This can occur in two different
+     ways:
+
+     Numerically, as the ASCII code of the desired character (e.g., 7).
+
+     Alphanumeric as the character (e.g., ":").
+
+     Because of this, you must not use the CHR() function to change special
+     characters.
+
+ <B>CLEARA and CLEARB</B>
+
+     Some of the CA-Clipper Tools functions use a standard attribute and
+     character to  delete lines or screen areas.  This attribute is described
+     as CLEARA; the character as CLEARB.  You can query both CLEARA and
+     CLEARB with the corresponding functions.  At the same time, certain
+     preset values are in effect for CLEARA and CLEARB.  The attribute "W/N"
+     is the standard preset for CLEARA, while CHR(255) is the character used
+     for CLEARB.  If you use this character for CLEARB, it fills the
+     background with the corresponding color for every deletion on every
+     screen adapter.
+
+     Use the following functions to set standard values for CLEARA and
+     CLEARB:
+
+        GETCLEARA()
+        SETCLEARA()
+        GETCLEARB()
+        SETCLEARB()
+
+     If you use the SETCLEARx() functions in conjunction with the
+     corresponding parameters (&lt;Attribute&gt; or &lt;Character&gt;), the currently
+     existing default value is replaced by a parameter.
+
+ <B>Clipper Functions and Commands Which Delete</B>
+
+     If you use the CA-Clipper Extended Drivers, CHR(255) is used instead of
+     a space for all CA-Clipper functions and commands that delete the screen
+     in one way or another (see CLEARB).  A CHR(255) is helpful on many
+     screen adapters, since in contrast to a space, you can assign it a
+     color.  Then, the screen will not appear so fuzzy.
+
+     More precisely, the functions and commands concerned always use the
+     delete character set by SETCLEARB(), which uses CHR(255) as the default
+     setting.  If you want to use a space to clear in CA-Clipper or
+     CA-Clipper Tools, insert a SETCLEARB(32) into the program.
+
+     Re-implement a space for clear:
+
+        SETCLEARB(32)
+        CLEAR         // The affected Clipper command
+
+ <B>Video Modes</B>
+
+     Occasionally, there is some confusion about video modes.  You will not
+     be able to work in EGA mode just because your computer has an EGA
+     adapter built into it.  By the same token, you will not get either EGA
+     or VGA modes, if you do not work with graphics.
+
+ <B>EGA43 / VGA50 / VGA28, etc.</B>
+
+     In this section, the concern is not to just get a mode "hardwired"' into
+     a card, but for CA-Clipper Tools it is to generate corresponding fonts
+     and other settings.  For these reasons, the GETMODE() and GETSCRMODE()
+     functions generate their own values that are greater than 255.
+
+     For example, changes to the screen mode concerned with line count can be
+     combined with a 40-column mode:
+
+     CGA40()
+     EGA43()          // 43 lines and 40 columns
+
+ <B>Video Functions and Windows</B>
+
+     You cannot implement functions that change the base address for screen
+     memory while windows are open.  This includes all mode changes, as well
+     as SETPAGE and SETSCRSTR.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

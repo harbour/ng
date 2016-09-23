@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4fe5d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng50d90.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJTXT()</B>
+ Determines if the contents of a job file are interpreted as text or a binary
+ byte sequence
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJTXT(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;lNewMode&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; lMode</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;lNewMode&gt;</B>  Designates an optional parameter that indicates if
+     &lt;nJob&gt; contains text (.T.) or binary data (.F.).
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJTXT() returns .T. if &lt;nJob&gt; is a text job.  The value .F. indicates
+     a binary job or an error.  By calling the function NNETERROR(), you can
+     determine if the return value .F. is the result of an error.
+
+ <B>Description</B>
+
+     NOVELL NET JOB TEXT
+     The Queue Management System (QMS) differentiates between text and binary
+     jobs.  NNETJTXT() allows you to query or set the mode for &lt;nJob&gt;.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the mode for the second job in the queue
+        LINEPRINTER:
+
+        nJob=BIN2I(SUBSTR(NNETJLIST('LINEPRINTER'),3,2))
+        IF NNETJTXT('LINEPRINTER', nJob)
+        ? 'Text job'
+        ELSE
+        ? 'Binary job'
+        ENDIF
+
+     <B>.</B>  Define the second job of the queue LINEPRINTER as a text job:
+
+        nJob=BIN2I(SUBSTR(NNETJLIST('LINEPRINTER'),3,2))
+        NNETJTXT('LINEPRINTER', nJob, .T.)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4fe5d.html">NNETJTABS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

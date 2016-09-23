@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng520af.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng5292a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>childSync()</B>
+ Post a pending relational movement
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE childSync(</B>
+     <B>                   WORKAREAP wa,</B>
+     <B>                   DBRELINFOP dbRelInfo</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>dbRelInfo</B> is a pointer to a structure containing information on a
+     relation.
+
+ <B>Description</B>
+
+     Posts dbRelInfo as a pending relational movement indicating that the
+     child workarea referenced by wa has been affected by a parental
+     movement.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Note that grandchildren must have relative movements posted in
+        them after the child moves.  This means that any implementation of
+        this method should make a call to syncChildren() after doing its
+        business.
+
+     <B>.</B>  childSync() does not physically move the child's cursor.
+        childSync() should simply post notification that a relational
+        movement is pending.  It can later be resolved (if necessary) by
+        forceRel().
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42845.html">DBRELINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng5433d.html">syncChildren()</A>
+<A HREF="ng52cb2.html">forceRel()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

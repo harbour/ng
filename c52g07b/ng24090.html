@@ -1,0 +1,99 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2362b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng22190.html">[^^Up^^]</A>
+<A HREF="ng24f9e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>New Lock Offset</B>
+------------------------------------------------------------------------------
+
+     Problem:  Index locking, which is transparent to the developer, uses a
+     single-byte semaphore locking system.  This semaphore was placed at a
+     virtual offset (beyond the physical end of file) in the index file.  In
+     previous versions of CA-Clipper, this offset was located at one billion
+     (1,000,000,000) which was adequate at the time.  But many systems today
+     are capable of producing indexes that are large enough to cause the
+     actual data present at the lock offset to become physically locked.
+     This leads to problems when trying to read or write to the data at that
+     offset.
+
+     Solution:  The solution is to move the offset where locking occurs to a
+     location at a greater offset.  We have chosen FFFFFFFF hex, which is the
+     largest offset possible under the DOS operating system.  The problem
+     with this solution is that new applications using the index will be
+     locking this new byte while old applications using the same index will
+     lock the old position.  Clearly this would cause both applications to
+     fail because each could have a lock on the file at the same time.
+
+     To avoid this, the signature of the index (in the index header) is
+     modified to prevent pre-CA-Clipper 5.2 applications from being able to
+     open the index.  CA-Clipper 5.2 applications can detect the correct
+     offset to use by the flag in the header and will automatically use the
+     correct one.  In Figure 7-1 below, each bit represents a flag:
+
+        BIT     7   6   5   4   3   2   1   0
+        FLAG    R   R   R   O   P   I   I   C
+
+        R  <B>R</B>eserved
+        I  <B>I</B>ndex type - both bits set (NTX)
+        C  Index created with a <B>C</B>ondition, condition in header
+        T  Created as a <B>T</B>emporary index
+        O  New <B>O</B>ffset for exclusive (semaphore) lock
+
+        <B>Figure 7-1: Bit Field for the Signature Byte</B>
+        <B>            of a CA-Clipper 5.2 NTX File</B>
+
+ <B>Activation</B>
+
+     If CA-Clipper 5.2 automatically modified the signature in the header
+     when it created indexes, programs with automatic reindexing routines
+     would be creating indexes that appeared corrupt to pre-CA-Clipper 5.2
+     applications.  This has an obvious problem with backward compatibility.
+     Therefore, in order to create indexes with the new signature, the
+     developer must link in the module NTXLOCK2.OBJ with the full knowledge
+     that this will create indexes that older applications will not be able
+     to access.
+
+ <B>Header Changes</B>
+
+     The signature byte of a .NTX file is 6 for an unenhanced NTX index.  The
+     inclusion of the NTXLOCK2.OBJ will cause the signature to become 26 hex.
+     (6 hex ORed with 20 hex).  See Figure 7-1 for an illustration of all the
+     possible values for the signature byte.
+
+ <B>Error Handling</B>
+
+     CA-Clipper 5.2 applications will automatically recognize the signature
+     byte of the header, and depending on the signature value, will use the
+     correct index lock location.  Applications built with previous versions
+     of CA-Clipper, however, do not have the capability to detect the
+     optional new information in the signature byte.  Therefore, when an
+     order application tries to open a file that has been created with the
+     NTXLOCK2.OBJ linked in it will produce a Corruption Detected error.
+
+ <B>Compatibility</B>
+
+     The new locking location, if used, is not backward compatible with
+     applications compiled with previous versions of CA-Clipper.
+
+     Indexes created by applications built with a previous version of
+     CA-Clipper can be used by CA-Clipper 5.2 using the new location and will
+     not be modified unless the index is recreated in application.
+
+     Since older applications have no knowledge of the new index locking
+     scheme nor of the significance of the header signature, these
+     applications will assume the index is corrupt and will produce an Index
+     Corrupted error.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

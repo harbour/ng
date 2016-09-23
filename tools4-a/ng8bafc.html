@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8b5d6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng8c1de.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCBUFTYP()</B>
+ Determines the communication buffer type
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCBUFTYP(&lt;nHandle&gt;) --&gt; nBufferType</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication buffer.
+
+ <B>Returns</B>
+
+     PPCBUFTYP() returns a type code that indicates the protocol of the
+     specified communication buffer.  For all possible types (IPX, SPX,
+     NetBIOS Datagram, or NetBIOS session), the header file CTPPC.CH contains
+     symbolic constants according to the following table.
+
+     <B>Table 31.4:  Possible Return Values of PPCBUFTYP()</B>
+     ------------------------------------------------------------------------
+     <B>Value   Sym. Con.    Definition</B>
+     ------------------------------------------------------------------------
+     1       PPC_IPX      IPX
+     17      PPC_SPX      SPX
+     2       PPC_NBD      NetBIOS datagram
+     18      PPC_NBS      NetBIOS session
+     ------------------------------------------------------------------------
+
+     The numeric values might change in future versions, so you should use
+     symbolic constants.  If an error occurs (for example, if the handle is
+     invalid), the function returns -1.
+
+ <B>Description</B>
+
+     PPCBUFTYP() allows you to develop procedures that can work with any
+     communication buffer.  With PPCBUFTYP(), protocol specific calls can be
+     made, depending on the buffer type.
+
+ <B>Example</B>
+
+     Determine the destination's name within a session and thereby
+     differentiate between SPX and NetBIOS session buffers:
+
+     #include "ctppc.ch"
+
+     IF PPCBUFTYP(nHandle)=PPC_SPX
+        ? 'Destination name:',SPXCONTARG(nHandle)
+     ELSEIF PPCBUFTYP(nHandle)=PPC_NBS
+        ? 'Destination name:',NBSCONTARG(nHandle)
+     ELSE
+        ? 'Error: No session buffer!'
+     ENDIF
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

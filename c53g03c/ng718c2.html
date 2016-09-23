@@ -1,0 +1,117 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng70f8a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6d7d4.html">[^^Up^^]</A>
+<A HREF="ng72511.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_xalloclow()</B>
+ Allocates low DOS memory for use with real mode interrupts that must be
+ passed buffers within the first 1 MB
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>void *_xalloclow(unsigned int sizebytes)</B>
+
+ <B>Returns</B>
+
+     This function returns a protected mode pointer to the allocated memory.
+
+ <B>Description</B>
+
+     This function returns a protected mode pointer to the allocated memory.
+     Use this pointer to write to or read from the allocated buffer.  When
+     calling a real mode interrupt you must get a real mode pointer to the
+     allocated buffer with the ExoRealPtr() function and pass that address in
+     the EXOREGS structure of a ExoRMInterrupt() call.
+
+     You can allocate a 64K buffer by passing a size of 0.
+
+     You must use _xfreelow() to free memory allocated with this function.
+     Do not use xfree()!
+
+     It is suggested that you free the allocated low DOS memory as soon as
+     possible to keep down the amount of low DOS memory that may be allocated
+     at the same time not only by your functions but also by other C/ASM code
+     or by other third party libraries.
+
+     CA-Clipper/Exospace has added the LOWMEM parameter to the CLIPPER
+     environment variable to allow a developer to set aside low DOS memory
+     for allocation with _xalloclow().  The LOWMEM parameter does not have to
+     be specified in order for _xalloclow() to work; if there is no available
+     low DOS memory when _xalloclow() is called, CA-Clipper/Exospace will
+     free up low DOS memory it uses in order to meet the request.  At this
+     time because of the current design of CA-Clipper/Exospace's memory
+     allocation scheme we recommend that you ignore the LOWMEM parameter.
+     Future revisions or individual end-user needs may make the LOWMEM
+     parameter more necessary.
+
+ <B>Examples</B>
+
+     This example maps a fake root directory of a specified drive under
+     Novell NetWare.  The function below accepts a drive number (0=default,
+     1=A:, ...) and path for fake root; it returns zero on success and an
+     error code if the function failed.
+
+     int maproot(int drive, char *path)
+     {
+        int returnvalue = 0xFFFF;
+        int flags;
+        char *buffer;
+        char *realptr;
+        EXOREGS inoutregs;
+
+        /* allocate low memory buffer to store path */
+        if ((buffer = _xalloclow(strlen(path) + 1)) != NULL)
+        {
+
+
+            /* store path in low memory buffer */
+           strcpy(buffer, path);
+
+           /* get real mode pointer to low memory buffer */
+           if ((realptr = ExoRealPtr(buffer)) != NULL)
+           {
+
+              /* fill in EXOREGS structure */
+
+              inoutregs.ax = 0xE905;
+              inoutregs.bx = drive;
+              inoutregs.ds = FP_SEG(realptr);
+              inoutregs.dx = FP_OFF(realptr);
+
+              /* call the real mode interrupt */
+              flags = ExoRMInterrupt(0x21, &amp;inoutregs, &amp;inoutregs);
+
+              /* see if carry flag is set to indicate error */
+              if (flags &amp; 0x0001)
+                 /* return error code in al */
+                 returnvalue = (inoutregs.ax &amp; 0x00FF);
+              else
+                 /* return no error code */
+                 returnvalue = 0;
+     }
+
+           /* free low memory buffer */
+           _xfreelow(buffer);
+        }
+     }
+
+ <B>Files</B>   Library is EXOSPACE.LIB, header file is Exospace.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6f6b9.html">ExoRealPtr()</A>
+<A HREF="ng6fd72.html">ExoRMInterrupt()</A>
+<A HREF="ng72511.html">_xfreelow()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9655.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="nga9b4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETNUMMEM()</B>
+ Determines the number of members of a set property
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETNUMMEM(&lt;cObjName&gt;,[&lt;nType&gt;],&lt;cPropName&gt;,</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cObjName&gt; </B> Designates the name of the bindery object that is
+     processed.
+
+     <B>&lt;nType&gt; </B> Designates the object type of &lt;cObjName&gt;.  The header file
+     CTNNET.CH contains symbolic constants for a number of object types.
+     When you work with numeric values, take into account that, for
+     efficiency reasons, the function NNETNUMMEM() expects the object type in
+     the high-low format.  The default value indicates the object type
+     OBJ_USER.
+
+     <B>&lt;cPropName&gt; </B> Designates the name of the property for which the
+     members are counted.  &lt;cPropName&gt; must describe a set property.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server for which the
+     bindery is accessed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns </B>
+
+     NNETNUMMEM() returns the number of members of the property &lt;cPropName&gt;
+     of &lt;cObjName&gt;.  If an error occurs, the function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET COUNT MEMBERS
+     Internally, Novell Netware defines two possible property types: item and
+     set properties.  Unlike an item property that accepts any kind of data,
+     the set property contains references to other bindery objects.  These
+     bindery objects are the members of the set property.  This function
+     allows you to determine the total of members of a set property without
+     having to specify all the members explicitly.
+
+     The object type &lt;nType&gt; must be passed in the high-low format (see the
+     Introduction to this chapter).  For the object types, use the symbolic
+     constants of the header file CTNNET.CH.  With the parameters &lt;cServer&gt;
+     or &lt;nConId&gt;, the bindery of any attached server can be accessed.  The
+     connection ID of a server is returned by NNETATTACH() or NNETLOGIN().
+
+ <B>Example</B>
+
+     Determine the number of members of the group EVERYONE:
+
+     #include "ctnnet.ch"
+
+     ? NNETNUMMEM('EVERYONE',OBJ_GROUP,'GROUP_MEMBERS')
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

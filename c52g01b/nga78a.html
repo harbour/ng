@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9b63.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ngae9a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>AFILL()</B>
+ Fill an array with a specified value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>AFILL(&lt;aTarget&gt;, &lt;expValue&gt;,</B>
+     <B>   [&lt;nStart&gt;], [&lt;nCount&gt;]) --&gt; aTarget</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aTarget&gt;</B> is the array to fill.
+
+     <B>&lt;expValue&gt;</B> is the value to place in each array element.  It can be
+     an expression of any valid data type.
+
+     <B>&lt;nStart&gt;</B> is the position of the first element to fill.  If this
+     argument is omitted, the default value is one.
+
+     <B>&lt;nCount&gt;</B> is the number of elements to fill starting with element
+     &lt;nStart&gt;.  If this argument is omitted, elements are filled from the
+     starting element position to the end of the array.
+
+ <B>Returns</B>
+
+     AFILL() returns a reference to &lt;aTarget&gt;.
+
+ <B>Description</B>
+
+     AFILL() is an array function that fills the specified array with a
+     single value of any data type (including an array, code block, or NIL)
+     by assigning &lt;expValue&gt; to each array element in the specified range.
+
+     <B>Warning! </B> AFILL() cannot be used to fill multidimensional arrays.
+     CA-Clipper implements multidimensional arrays by nesting arrays within
+     other arrays.  Using AFILL() with a multidimensional array will
+     overwrite subarrays used for the other dimensions of the array.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example, creates a three-element array.  The array is
+        then filled with the logical value, (.F.).  Finally, elements in
+        positions two and three are assigned the new value of true (.T.):
+
+        LOCAL aLogic[3]
+        // Result: aLogic is { NIL, NIL, NIL }
+
+        AFILL(aLogic, .F.)
+        // Result: aLogic is { .F., .F., .F. }
+
+        AFILL(aLogic, .T., 2, 2)
+        // Result: aLogic is { .F., .T., .T. }
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng392a.html">AADD()</A>
+<A HREF="ng912c.html">AEVAL()</A>
+<A HREF="ng26569.html">DBSTRUCT()</A>
+<A HREF="ng2a764.html">DIRECTORY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

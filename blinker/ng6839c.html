@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Module Definition Files</B>
+------------------------------------------------------------------------------
+
+
+ <B>Overview</B>
+
+ In addition to a free-format link script file to specify the .OBJ and .LIB
+ files to be linked, Blinker uses a module definition file to provide extra
+ information on the characteristics of a Windows .EXE. Since the Windows .EXE
+ format is also used for DOS extended programs, many of the module definition
+ file commands can also be used with DOS extended programs.
+
+ The format and commands in module definition files are identical to those
+ used by Microsoft LINK, TLINK etc, with one or two additions to extend their
+ functionality.
+
+ Blinker supports module definition files through the use of the
+
+    <B>DEFFILE &lt;filename&gt;</B>
+
+ link script command, with the default file type being .DEF.
+
+ The DEFFILE command can be placed anywhere in the link script file, but it
+ is suggested that it be placed at the end to ensure that options specified
+ therein take priority over those in the link script file.
+
+ Alternatively, to avoid maintaining two separate files, .DEF file commands
+ may be included directly in the link script (.LNK) file between DEFBEGIN and
+ DEFEND commands:
+
+    <B>DEFBEGIN             // Begin .DEF commands</B>
+    <B>...</B>
+    <B>DEFEND               // End .DEF commands</B>
+
+ Again these may be placed anywhere in the link script file, but it is
+ suggested that they be placed at the end of the file.
+
+ Blinker looks for module definition files in the following order:
+
+    .  In the path specified with the file name
+    .  In the current directory
+    .  In the LIB environment variable paths
+
+ For further information on module definition files beyond what is provided
+ in this guide please see your compiler documentation.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

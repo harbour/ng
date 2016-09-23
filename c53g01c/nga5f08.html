@@ -1,0 +1,124 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga57a7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="nga6c66.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TYPE()</B>
+ Determine the type of an expression
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TYPE(&lt;cExp&gt;) --&gt; cType</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cExp&gt;</B> is a character expression whose type is to be determined.
+     &lt;cExp&gt; can be a field, with or without the alias, a private or public
+     variable, or an expression of any type.
+
+ <B>Returns</B>
+
+     TYPE() returns one of the following characters:
+
+     <B>TYPE() Return Values</B>
+     ------------------------------------------------------------------------
+     <B>Returns   Meaning</B>
+     ------------------------------------------------------------------------
+     A         Array
+     B         Block
+     C         Character
+     D         Date
+     L         Logical
+     M         Memo
+     N         Numeric
+     O         Object
+     U         NIL, local, or static
+     UE        Error syntactical
+     UI        Error indeterminate
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     TYPE() is a system function that returns the type of the specified
+     expression.  It can test expression validity as long as the expression
+     uses CLIPPER.LIB functions and does not reference local or static
+     variables, user-defined functions, or built-in functions supplied in
+     EXTEND.LIB.
+
+     TYPE() is like VALTYPE() but uses the macro operator (&amp;) to determine
+     the type of the argument.  This precludes the use of TYPE() to determine
+     the type of local and static variables.  VALTYPE(), by contrast,
+     evaluates an expression and determines the data type of the return
+     value.  This lets you determine the type of user-defined functions as
+     well as local and static variables.
+
+ <B>Notes</B>
+
+     <B>.  Array references: </B> References to private and public arrays
+        return "A."  References to array elements return the type of the
+        element.
+
+     <B>.  IF(): </B> To return the appropriate data type for an IF()
+        expression, TYPE() evaluates the condition, and then, returns the
+        type of the evaluated path.  If either the IF() condition or the
+        evaluated path are invalid, TYPE() returns "UE."
+
+     <B>.  Testing parameters: </B> TYPE() can only test the validity of
+        parameters received using the PARAMETERS statement.  Testing a
+        parameter declared as part of a FUNCTION or PROCEDURE declaration
+        always returns "U" because local parameters do not have a symbol in
+        the symbol table.  To determine whether an argument was skipped or
+        left off the end of the argument list, compare the parameter to NIL
+        or use VALTYPE().
+
+     <B>.  User-defined and EXTEND.LIB functions: </B> If a reference is made
+        anywhere in an expression to a function not found in CLIPPER.LIB (a
+        user-defined or EXTEND.LIB function), TYPE() returns "UI."  If the
+        user-defined function is not linked into the current program, TYPE()
+        returns "U."
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples demonstrate various results from invocations of
+        TYPE():
+
+        ? TYPE('SUBSTR("Hi There", 4, 5)')      // Result: C
+        ? TYPE("UDF()")                         // Result: UI
+        ? TYPE('IF(.T., "true", 12)')           // Result: C
+
+     <B>.</B>  This example shows two methods for testing for the existence
+        and type of declared parameters:
+
+        FUNCTION TestParams
+           PARAMETERS cParam1, nParam2
+           IF cParam1 = NIL
+              ? "First parameter was not passed"
+              cParam1 := "Default value"
+           ENDIF
+
+           IF TYPE('nParam2') == "U"
+              ? "Second parameter was not passed"
+           ENDIF
+           .
+           . &lt;statements&gt;
+           .
+           RETURN NIL
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga84cd.html">VALTYPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

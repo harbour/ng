@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng870de.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng88076.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>EJECT</B>
+ Advance the printhead to top of form
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>EJECT</B>
+
+ <B>Description</B>
+
+     EJECT is a printing command that sends a formfeed character (CHR(12)) to
+     the printer and sets the PCOL() and PROW() values to zero.  If you
+     address a printer row less than the last row position since an EJECT or
+     SETPRC() was executed, CA-Clipper automatically performs an EJECT.
+     Because of this, your printing logic must proceed sequentially from left
+     to right down the page.  If you need to reset the internal printer row
+     and column values to zero without sending a formfeed, use SETPRC().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example prints a simple list report and uses EJECT to
+        advance to a new page when the line counter reaches the maximum
+        number of lines to print per page:
+
+        LOCAL nLine := 99, nPage := 0
+        USE Sales NEW
+        SET PRINTER ON
+        SET CONSOLE OFF
+        DO WHILE !EOF()
+           IF nLine &gt; 55
+              EJECT
+              ? "Page " + LTRIM(STR(++nPage, 3))
+              ? "Date " + CTOD(DATE())
+              ?
+              ? "Salesman", "Amount"
+              ?
+              nLine := 6
+           ENDIF
+           ? Sales-&gt;Salesman, Sales-&gt;Amount
+           nLine++
+           SKIP
+        ENDDO
+        SET PRINTER OFF
+        SET CONSOLE ON
+        CLOSE
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9d794.html">SET CONSOLE</A>
+<A HREF="nga0ae0.html">SET DEVICE</A>
+<A HREF="nga7dcb.html">SET PRINTER</A>
+<A HREF="ng66490.html">SETPRC()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,154 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng764c0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng77f31.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FONTLOAD()</B>
+ Loads EGA/VGA fonts from another file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FONTLOAD(&lt;cFileName&gt;, &lt;nFontArea&gt;, [&lt;nOffset&gt;],</B>
+     <B>   [&lt;nCounter&gt;]) --&gt; nErrorCode</B>
+
+     <B>or</B>
+
+     <B>FONTLOAD (&lt;cFileName&gt;, &lt;nFontArea&gt;,</B>
+     <B>   [&lt;lOtherPixelHeight&gt;])--&gt; nErrorCode</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFileName&gt;</B>  Designates the name and path of the font file.
+
+     <B>&lt;nFontArea&gt;</B>  Designates the number of the specified font area.  For
+     EGA, the values 1 to 4 are allowed, or whatever values MAXFONT()
+     permits.  For VGA, the values 1 to 8 are allowed, or whatever MAXFONT()
+     permits.
+
+     <B>&lt;nOffset&gt;</B>  Designates from what character position the screen
+     adapter font table is overwritten.  The default value is 0.
+
+     <B>&lt;nCounter&gt;</B>  Designates how many characters to load from the new
+     font.  The default value is 256.
+
+     <B>&lt;lOtherPixelHeight&gt;</B>  Designates .T. to allow the function to modify
+     the pixel height.  This leads to a mode change and character count.
+     Please note that you must designate both &lt;nOffset&gt; and &lt;nCounter&gt; to
+     implement this parameter.
+
+ <B>Returns</B>
+
+     The function returns an error code which corresponds to the explanation
+     below:
+
+     <B>Table 6-1: Values returned for FONTLOAD()</B>
+     ------------------------------------------------------------------------
+     <B>Error Code   Explanation</B>
+     ------------------------------------------------------------------------
+      0           Font loaded successfully
+     -2           Impossible in current video mode
+     -3           Font file not found
+     -4           The &lt;lOtherPixelHeight&gt; mode is not possible (the Extended
+                  Drivers are not linked in)
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     FONTLOAD() allows you to load the font definitions from a file into the
+     font area of an EGA or VGA card.  Use FONTSELECT() to determine which
+     fonts serve as normal and high density for output.
+
+     You may already have some of these fonts on the CA-Clipper Tools disk,
+     and others can be created with the accompanying font editor.
+
+ <B>Technical Background</B>
+
+     The EGA and VGA cards permit you to modify a portion or all 256
+     characters of the character generator with software.  To do this, a
+     previously created pixel pattern for the character is loaded in the
+     corresponding position in a font area on the screen card.  Normally, an
+     EGA card has a maximum of four font areas and a VGA has eight, within
+     which you can redefine all 256 characters.  Use MAXFONT() to determine
+     the exact count of font areas.
+
+     Building fonts into a program requires unnecessary memory space.
+     Constructing fonts as a string within a program is also awkward.  With
+     the GETFONT() and SETFONT() functions, you can load a font from a screen
+     card into a string variable, or from such a variable, into a font area
+     on the card.  However, FONTLOAD() only allows you to load a font from a
+     file into a particular area of the screen card.  In both cases, use
+     ONTSELECT() to activate the loaded font.
+
+     On the CA-Clipper Tools sample disk, you will find a font editor to
+     construct new fonts in CA-Clipper source code.
+
+ <B>Variable Pixel Height</B>
+
+     In principle, EGA and VGA screen adapters provide the opportunity to
+     display fonts with 2 to 32 pixels per character (1 pixel/character only,
+     when there are 200 scan lines).  ROM fonts are only available for pixel
+     heights of 8, 14 and 16, which accounts for the great expansion of the
+     EGA 25-/43-line modes and VGA 25-/28-/50-line modes.  You must construct
+     individual fonts for all other pixel heights.  The CA-Clipper font
+     editor can make this easy.
+
+     When FONTLOAD() loads a font, it also computes the pixel height from the
+     font data length.  Since a font file always contains all 256 character
+     definitions, there is a formula:
+
+        Pixel height = LEN(Font-Data)/256
+
+     The &lt;lOtherPixelHeight&gt; parameter determines whether the fonts that do
+     not match the pixel height just set are accepted.  This must be
+     explicitly indicated, since the line count and screen mode will change.
+     For this reason, you must always link in the CTUS.LIB Extended Drivers
+     (see Table 6-1, returned value -4).
+
+ <B>Notes</B>
+
+     <B>.</B>  You cannot use FONTRESET() when a font is loaded for which
+        there is no associated ROM font (all pixel heights except 8, 14, 16).
+        Prior to a FONTRESET(), switch back to a permissible mode.
+
+     <B>.</B>  All previously successful FONTSELECT() settings are discarded
+        again during FONTLOAD().
+
+     <B>.</B>  If an EGA card does not span the entire memory range, then you
+        can reduce a maximum of four available font areas.  MAXFONT()
+        determines the number of available fonts.
+
+ <B>Examples</B>
+
+     <B>.</B>  Load all 256 characters of an EGA font in area 2:
+
+        ? FONTLOAD("\FONTS\OLDENG.014", 2)              // 0 OK&lt;
+        FONTSELECT(2)
+
+     <B>.</B>  Exchange the fonts for the upper 128 characters in area 3:
+
+        ? FONTLOAD("\FONTS\OLDENG.EGA", 3, 128, 128)    // 0 OK
+        FONTSELECT(3)                                   // Select
+
+     <B>.</B>  Load a 24-pixel font in the last font area:
+
+        ? FONTLOAD("\FONTS\PC.024", MAXFONT(), .T.)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng795e6.html">FONTSELECT()</A>
+<A HREF="ng77f31.html">FONTRESET()</A>
+<A HREF="ng7a40e.html">GETFONT()</A>
+<A HREF="ng84972.html">SETFONT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

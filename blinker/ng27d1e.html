@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng27801.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng28295.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLISTRFRG()                   Get CA-Clipper Summer '87 free pool fragmentation as string</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get CA-Clipper Summer '87 free pool fragmentation as a string</B></U>
+
+ <U>Syntax   : <B>cValue = BLISTRFRG([cString])</B></U>
+
+ <U>Return   : <B>Fragmentation as a string</B></U>
+
+ This function returns a string containing a summary of CA-Clipper Summer
+ '87's dynamic memory to show the degree of fragmentation. Each character
+ position represents up to 512 bytes, and adjacent equal characters represent
+ contiguous blocks larger than 512 bytes.
+
+ The optional parameter is a five character string in the form "ffuua" as
+ described below. The first two characters (ff) are used to represent free
+ blocks and the next two characters (uu) to represent used blocks, with the
+ final character (a) used to represent the next allocation point. The
+ returned string contains a map of both the near heap and the far heap (FREE
+ POOL), separated by a ',' character. The layout and meaning of the display
+ is detailed in the discussion of the function BLIDISFRG().
+
+ Example:
+
+    <B>* Get the string showing memory fragmentation</B>
+    <B>* Use 'f' for all free blocks, 'u' for all used</B>
+    <B>*</B>
+    <B>TMPSTRFRG = BLISTRFRG("ffuua")</B>
+    <B>? "The state of dynamic memory is currently"</B>
+    <B>? TMPSTRFRG</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng222fe.html">BLILSTFRG()</A>
+<A HREF="ng1f683.html">BLIDISFRG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

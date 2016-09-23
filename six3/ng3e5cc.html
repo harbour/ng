@@ -1,0 +1,95 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3df28.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3ef96.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_TurboArea():</B>
+
+  Syntax:  Sx_TurboArea( [&lt;lTurboRead&gt;] )
+
+           &lt;lTurboRead&gt; =  Logical.  If .T., index locking is turned off
+                          (TURBOREAD ON) for current work area.  If .F.,
+                          index locking is turned on (TURBOREAD OFF).
+
+                          If a NIL parameter is passed, then the current
+                          work area is set to the global TURBOREAD state.
+                          The global TURBOREAD status is set with the
+                          SET TURBOREAD command or the Sx_SetTurbo()
+                          function.
+
+  Returns:  &lt;Logical&gt;  .T. if TURBOREADs will be done for the current work
+                       area, .F. if not.  Note that if TURBOREAD has not
+                       been explicitly set to .T. or .F. for the current
+                       work area, then the global TURBOREAD setting will be
+                       returned.
+
+  Description:   Enables/Disables index locking for current work area.  When
+                 tables are opened SHARED (on a network or a local drive
+                 with SHARE.EXE loaded), Clipper locks all of the open index
+                 files in the current workarea for a fraction of a second
+                 each time the record pointer is moved.  This can cause
+                 unnecessary slowing when you are performing a read-only
+                 type of operation (i.e., Doing a SEEK, a COPY TO, or
+                 dumping a REPORT to the printer).  If nobody is doing
+                 updates on the database, why lock the indexes?
+
+  NOTE:  This function only controls the TURBOREAD setting for the <B>current</B>
+         workarea.  This function overrides the global SET TURBOREAD setting
+         in each work area where it is called.  If this function is not
+         called in a specific workarea, the setting of SET TURBOREAD will
+         remain active in that workarea.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    // Set global TURBOREAD OFF.  (OFF is the default anyway, but HEY!
+    // This is just an example!)
+    SET TURBOREAD OFF
+
+    // Open REPORTS.DBF to be used strictly for lookup queries
+    USE reports VIA "SIXCDX"
+
+    // Set local TURBOREAD ON
+    IF <B>Sx_TurboArea( .T. )</B>
+      Alert("TURBOREAD is ON")     // This should be displayed
+    ELSE
+      Alert("TURBOREAD is OFF")    // This should not
+    ENDIF
+
+    // Open CUSTOMER.DBF in another work area
+    USE customer NEW VIA "SIXCDX"
+
+    // Check this work area's TURBOREAD setting
+    IF <B>Sx_TurboArea()</B>
+      Alert("TURBOREAD is ON")     // This should not be displayed
+    ELSE
+      Alert("TURBOREAD is OFF")    // This one should
+    ENDIF
+
+    // Go back to the REPORTS.DBF work area, and set it to the global
+    // TURBOREAD setting, which happens to be OFF.
+    SELECT reports
+    <B>Sx_TurboArea( NIL )</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng39407.html">Sx_SetTurbo()</A>
+<A HREF="ng51ea9.html">SET TURBOREAD</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

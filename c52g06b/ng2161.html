@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Sample Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2084.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1b6.html">[^^Up^^]</A>
+<A HREF="ng2524.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Dict.prg</B>
+ Keyed dictionary utility
+--------------------------------------------------------------------------------
+
+     <B>DictNew() --&gt; aDictionary</B>
+
+     Creates and returns an empty dictionary.
+
+     <B>DictAt( &lt;aDictionary&gt;, &lt;cKey&gt; ) --&gt; xValue</B>
+
+     Returns the value associated with &lt;xKey&gt; in dictionary, NIL if &lt;cKey&gt; is
+     not present in dictionary.
+
+     <B>DictPut( &lt;aDictionary&gt;, &lt;cKey&gt;, &lt;xValue&gt; ) --&gt; xValue</B>
+
+     Associates &lt;cKey&gt; to &lt;xValue&gt; in &lt;aDictionary&gt;.
+
+     <B>DictPutPair( &lt;aDictionary&gt;, &lt;aPair&gt; ) --&gt; aPair</B>
+
+     Adds &lt;aPair&gt; to &lt;aDictionary&gt;.  &lt;aPair&gt; is a key/value pair: { &lt;cKey&gt;,
+     &lt;xValue&gt; }.
+
+     <B>DictRemove( &lt;aDictionary&gt;, &lt;cKey&gt; ) --&gt; aDictionary</B>
+
+     Removes the key/value pair for &lt;cKey&gt;.
+
+     <B>DictEval( &lt;aDictionary&gt;, &lt;bBlock&gt; ) --&gt; aDictionary</B>
+
+     Evaluates &lt;bBlock&gt; against each &lt;cKey&gt;/&lt;xValue&gt; pair in dictionary. Pair
+     is passed to block as { &lt;cKey&gt;, &lt;xValue&gt; }  (pair array indexes defined
+     in "dict.ch").
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2084.html">Dict.ch</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

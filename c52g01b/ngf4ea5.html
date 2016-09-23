@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf47b2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngf5675.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDSETFOCUS() function</B>
+ Set focus to an Order in an Order List
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     ORDSETFOCUS([&lt;cOrderName&gt; | &lt;nOrder&gt;]
+        [,&lt;cOrderBagName&gt;]) --&gt; cPrevOrderNameInFocus
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrderName&gt;</B> is the name of the selected Order, a logical ordering
+     of a database.  ORDSETFOCUS() ignores any invalid values of
+     &lt;cOrderName&gt;.
+
+     <B>&lt;nOrder&gt;</B> is a number representing the position in the Order List of
+     the selected Order.
+
+     <B>&lt;cOrderBagName&gt;</B> is the name of a disk file containing one or more
+     Orders.  You may specify &lt;cOrderBagName&gt; as the filename with or without
+     the pathname or appropriate extension.  If you do not include the
+     extension as part of &lt;cOrderBagName&gt; CA-Clipper uses the default
+     extension of the current RDD.
+
+ <B>Returns</B>
+
+     ORDSETFOCUS() returns the Order Name of the previous controlling Order.
+
+ <B>Description</B>
+
+     ORDSETFOCUS() is an Order management function that returns the Order
+     Name of the previous controlling Order and optionally sets the focus to
+     an new Order.
+
+     If you do not specify &lt;cOrderName&gt; or &lt;nOrder&gt;, the name of the
+     currently controlling order is returned and the controlling order
+     remains unchanged.
+
+     All Orders in an Order List are properly updated no matter what
+     &lt;cOrderName&gt; is the controlling Order.  After a change of controlling
+     Orders, the record pointer still points to the same record.
+
+     The active RDD determines the Order capacity of an Order Bag.  The
+     default DBFNTX driver only supports single-Order Bags, while other RDDs
+     may support multiple-Order Bags (e.g., the DBFCDX and DBPX drivers).
+
+     ORDSETFOCUS() supersedes INDEXORD().
+
+ <B>Examples</B>
+
+     USE Customer VIA "DBFNTX" NEW
+     SET INDEX TO CuAcct, CuName, CuZip
+     ? ORDSETFOCUS( "CuName" )        // Displays: "CuAcct"
+     ? ORDSETFOCUS()                  // Displays: "CuName"
+
+ <B>Status:</B>  New
+
+ <B>See also:</B>  SET INDEX, SET ORDER
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf76d8.html">SET INDEX</A>
+<A HREF="ngf7ef1.html">SET ORDER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

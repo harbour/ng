@@ -1,0 +1,113 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng45304.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng46495.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBSCOPEINFO</B>
+ References to all CA-Clipper Xbase-style scope clause expressions
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   ITEM itmCobFor;</B>
+     <B>   ITEM lpstrFor;</B>
+     <B>   ITEM itmCobWhile;</B>
+     <B>   ITEM lpstrWhile;</B>
+     <B>   ITEM lNext;</B>
+     <B>   ITEM itmRecID;</B>
+     <B>   ITEM fRest;</B>
+
+     <B>   BOOL fIgnoreFilter;</B>
+     <B>   BOOL fIncludeDeleted;</B>
+     <B>   BOOL fLast;</B>
+     <B>   BOOL fIgnoreDuplicates;</B>
+     <B>} DBSCOPEINFO;</B>
+     <B></B>
+     <B>typedef DBSCOPEINFO far * LPDBSCOPEINFO;</B>
+
+ <B>Elements</B>
+
+     <B>itmCobFor / lpstrFor</B>
+
+        Contain a code block and a character expression, respectively,
+        representing the conditional FOR clause.  FOR expressions are,
+        essentially, filters that hide rows (records) which evaluate
+        to FALSE.  The character value is provided for storage, while the
+        code block is provided as a parameter for the evalBlock() method.
+
+     <B>itmCobWhile / lpstrWhile</B>
+
+        Contain a code block and a character expression, respectively,
+        representing the conditional WHILE clause.  WHILE clauses permit
+        continuation of a process that steps through rows until its
+        expression evaluates to FALSE.  The character value is provided for
+        storage, while the code block is provided as a parameter for the
+        evalBlock() method.
+
+     <B>lNext</B>
+
+        Contains a numeric value representing the CA-Clipper-level NEXT lNext
+        scoping clause.  This permits continuation of a process for the NEXT
+        lNext rows, while obeying FOR and WHILE clauses.
+
+     <B>itmRecID</B>
+
+        Contains a numeric value representing the CA-Clipper-level RECORD
+        itmRecID scoping clause.  This permits continuation of a process for
+        a single record, while obeying FOR and WHILE clauses.
+
+     <B>fRest</B>
+
+        Contains a CA-Clipper-level boolean value that is set to TRUE if a
+        process should continue stepping through data from the current
+        work area cursor position until logical end of file.
+
+     <B>fIgnoreFilter</B>
+
+        Contains a CA-Clipper-level boolean value that is set to TRUE if a
+        process should ignore any filter condition imposed on the current
+        work area.
+
+     <B>fIncludeDeleted</B>
+
+        Contains a CA-Clipper-level boolean value that is set to TRUE if a
+        process should include deleted rows.
+
+     <B>fLast</B>
+
+        Contains a CA-Clipper-level boolean value that is set to TRUE if the
+        last record of the current scope is required.
+
+     <B>fIgnoreDuplicates</B>
+
+        Contains a CA-Clipper-level boolean value that is set to TRUE if a
+        process should ignore duplicate key values.
+
+     <B>Warning!</B>  You should perform code block evaluations with great
+     caution.  Save any states that are likely to change as a result of
+     re-entrance, so you can restore them after the code evaluation.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+ <B>Used By</B>    AREA, DBEVALINFO, DBTRANSINFO, setLocate()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng41e34.html">DBEVALINFO</A>
+<A HREF="ng46d91.html">DBTRANSINFO</A>
+<A HREF="ng5d9ad.html">setLocate()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

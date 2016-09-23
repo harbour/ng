@@ -1,0 +1,112 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng60891.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5ea96.html">[^^Up^^]</A>
+<A HREF="ng61c47.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>The SXINIINFO Array:</B>
+
+  The SIx Driver maintains a public array called SXINIINFO which contains
+  information on each workarea.  The SXINIINFO array contains 250 base
+  elements, one for each workarea.  In each of these workarea elements, one
+  or more two-dimensional arrays will be stored.  The first element of each
+  of these arrays will contain the name of a section heading as a character
+  string.  The second element of each array is a two-dimensional array
+  itself.  This array contains the actual information for this heading.  In
+  this array, element 1 contains the item name (LValue) while element 2
+  contains the value for that item.
+
+
+  The SXINIINFO array is laid out in the following manner:
+
+     WorkArea   Heading   LValue <U>*</U>   RValue <U>*</U>
+     --------   -------   --------   --------
+      1-250      1-&lt;n&gt;     1-&lt;n&gt;      1-&lt;n&gt;
+
+
+     (<U>*</U>) - The LValue/RValue elements only apply to Heading element two,
+           which is also an array.  Heading element one is not an array,
+           but is a character string containing the name for that heading.
+
+
+      <B>SXINIINFO[1][1] --&gt; Heading name</B>
+      <B>          . [2] --&gt; Two-Dim Array containing LValue/RValue data</B>
+      <B>          .  |</B>
+      <B>          .  +-&gt;[1][1] = First LValue Name</B>
+      <B>          .     [1][2] = First RValue Setting</B>
+      <B>          .     [2][1] = Second LValue Setting</B>
+      <B>          .     [2][2] = Second RValue Setting</B>
+      <B>          .      .  .</B>
+      <B>          .      .  .</B>
+      <B>          .      .  .</B>
+      <B>       [250]</B>
+      <B></B>
+
+  For example, assume there is a TEST.DBF file opened in workarea three.
+  Also assume that a TEST.INI file exists for TEST.DBF as follows:
+
+    <B>;------------------( TEST.INI )----------------------;</B>
+    <B>[SXKEYWORDS]                                          </B>
+    <B>SHARED   = .T.                                        </B>
+    <B>READONLY = .F.                                        </B>
+    <B>ALIAS    = FOOBAR                                     </B>
+    <B>TRIGGER  = MYTRIGGER                                  </B>
+
+    <B>[USERINFO]                                            </B>
+    <B>LASTNAME  = Scott                                     </B>
+    <B>FIRSTNAME = Loren                                     </B>
+    <B>ID_NUMBER = 12345                                     </B>
+    <B>TOPSECRET = .T.                                       </B>
+    <B>;----------------( EOF: TEST.INI )-------------------;</B>
+
+
+  To access the value of the ID_NUMBER element of the [USERINFO] section,
+  you would do this:
+
+    <B>? SXINIINFO[ 3, 2, 2, 3, 2 ]    // Returns "12345"</B>                    <B></B>
+
+    <B>             .  .  .  .  .                                              </B>
+    <B>             |  |  |  |  +-( RValue.  A 1 would return the LValue )     </B>
+    <B>             |  |  |  |                                                 </B>
+    <B>             |  |  |  +-( Third item from the [USERINFO] section )      </B>
+    <B>             |  |  |                                                    </B>
+    <B>             |  |  +-( Contents of [USERINFO].  A 1 returns "USERINFO" )</B>
+    <B>             |  |                                                       </B>
+    <B>             |  +-( Section heading, which is [USERINFO] in this case ) </B>
+    <B>             |                                                          </B>
+    <B>             +-( Workarea number 3 )                                    </B>
+
+
+  To display section heading names for workarea #1, you would do this:
+
+    <B>FOR x := 1 TO len( SXINIINFO[ 1 ] )</B>
+    <B>    ? SXINIINFO[ 1, x, 1 ]</B>
+    <B>NEXT</B>
+
+
+  <U>NOTE:  Although you CAN modify any of the elements in the SXINIINFO array,</U>
+  <U>       keep in mind that these changes will not be automatically written</U>
+  <U>       to the disk.  In other words, the .INI file will not be updated</U>
+  <U>       simply by altering an element of this array in memory.  To make</U>
+  <U>       permanent changes to SXINIINFO array elements, you should you your</U>
+  <U>       text editor to modify the .INI file directly.</U>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng61c47.html">.INI Files</A>
+<A HREF="ng2b0ce.html">Sx_INIheader()</A>
+<A HREF="ng2f9f.html">_sx_INIinit()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,87 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngaa485.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ngab10f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET SOFTSEEK</B>
+ Toggle relative SEEKing
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET SOFTSEEK on | OFF | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> causes the record pointer to be moved to the next record with a
+     higher key after a failed index search.
+
+     <B>OFF</B> causes the record pointer to be moved to EOF() after a failed
+     index search.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET SOFTSEEK enables relative seeking, a method of searching an index
+     and returning a record even if there is no match for a specified key.
+
+     When SOFTSEEK is ON and a match for a SEEK is not found, the record
+     pointer is set to the next record in the index with a higher key value
+     than the SEEK argument.  Records not visible because SET FILTER and/or
+     SET DELETED are skipped when searching for the next higher key value.
+     If there is no record with a higher key value, the record pointer is
+     positioned at LASTREC() + 1, EOF() returns true (.T.), and FOUND()
+     returns false (.F.).  FOUND() returns true (.T.) only if the record is
+     actually found.  It never returns true (.T.) for a relative find.
+
+     When SOFTSEEK is OFF and a SEEK is unsuccessful, the record pointer is
+     positioned at LASTREC() + 1, EOF() returns true (.T.), and FOUND()
+     returns false (.F.).
+
+ <B>Notes</B>
+
+     <B>.  SET RELATION:</B> SET RELATION ignores SOFTSEEK updating the
+        record pointer in all linked child work areas as if SOFTSEEK is OFF.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates the possible results of a SEEK with
+        SET SOFTSEEK ON:
+
+        SET SOFTSEEK ON
+        USE Salesman INDEX Salesman NEW
+        ACCEPT "Enter Salesman: " TO cSearch
+        SEEK cSearch
+        DO CASE
+        CASE FIELD-&gt;Salesman = cSearch
+           ? "Match found:", FOUND(), EOF(), FIELD-&gt;Salesman
+        CASE !EOF()
+           ? "Soft match found:", FOUND(), EOF(), ;
+                    FIELD-&gt;Salesman
+        OTHERWISE
+           ? "No key matches:", FOUND(), EOF(), FIELD-&gt;Salesman
+        ENDCASE
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng39f03.html">FOUND()</A>
+<A HREF="ng994cb.html">SEEK</A>
+<A HREF="nga475d.html">SET INDEX</A>
+<A HREF="nga6e00.html">SET ORDER</A>
+<A HREF="nga9600.html">SET RELATION</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

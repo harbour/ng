@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1d0ec.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng13657.html">[^^Up^^]</A>
+<A HREF="ng1db68.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_itemPutND()</B>
+ Places a double-precision number into an item
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "item.api"</B>
+     <B>ITEM _itemPutND(</B>
+     <B>                 ITEM itmNumber,</B>
+     <B>                 XDOUBLE dNum</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>itmNumber</B> is the item into which you want to place the number.  If
+     this item is NULL, _itemPutND() will create a new item.
+
+     <B>dNum</B> is the double-precision value to assign to the item.
+
+ <B>Returns</B>
+
+     A new double-precision value item reference containing the
+     double-precision value passed.
+
+ <B>Description</B>
+
+     The _itemPutND() function is used to place a numeric double-precision
+     value into an item.  You should use a double-precision value to represent
+     a number when you know that the number falls within the range of
+     1.7E+308 to 1.7E-308.
+
+     <B>Caution! </B> Do not assume that the address in itmNumber will be the
+     same address returned by _itemPutND().
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Item.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng19ba6.html">_itemGetND()</A>
+<A HREF="ng1db68.html">_itemPutNL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

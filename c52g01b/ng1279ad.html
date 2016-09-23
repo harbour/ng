@@ -1,0 +1,41 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng127884.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng124407.html">[^^Up^^]</A>
+<A HREF="ng127d36.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>PostBlock                                    (Assignable)</B>
+
+        Contains an optional code block that validates a newly entered value.
+        If present, the Get:PostBlock should contain an expression that
+        evaluates to true (.T.) for a legal value and false (.F.) for an
+        illegal value.  For Get objects created with the standard
+        @...GET...VALID command, Get:PostBlock is assigned the expression
+        specified in the VALID clause.
+
+        The Get object itself ignores this variable.  It is used by the
+        standard READ command to implement the VALID clause.
+
+        During postvalidation the Get:PostBlock is passed a reference to the
+        current Get object as an argument.
+
+        <B>Note: </B> This differs from the CA-Clipper 5.0 behavior where the
+        Get:PostBlock was passed the updated value of the Get variable,
+        and a logical value representing whether the Get object had been
+        edited.
+
+        oGet:PostBlock := {|x| x != 0.00 }
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

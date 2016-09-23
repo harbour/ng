@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge1367.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge2189.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET CONSOLE</B>
+ Toggle console display to the screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET CONSOLE ON | off | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> displays the output of console commands on the screen.
+
+     <B>OFF</B> suppresses the screen display of console commands.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET CONSOLE determines whether or not console commands send output to
+     the screen.  Console commands are commands that display to the screen
+     without reference to row and column position.  In addition to sending
+     output to the screen, console commands can simultaneously send output to
+     the printer and/or a DOS text file.  Output is sent to the printer using
+     the TO PRINTER clause common to many console commands, or with the SET
+     PRINTER ON command.  Output is sent to a file using the TO FILE clause,
+     SET ALTERNATE, or SET PRINTER TO.
+
+     With CONSOLE ON, console commands display to the screen.  With CONSOLE
+     OFF, the screen display of console commands is suppressed, but the
+     echoing of output to either a file or the printer is unaffected.  This
+     lets you send the output of console commands such as REPORT and LABEL
+     FORM to the printer without the screen display--a common occurrence.
+
+ <B>Notes</B>
+
+     <B>.  Keyboard input:</B> For console commands that accept input
+        (including ACCEPT, INPUT, and WAIT), SET CONSOLE affects the display
+        of the prompts as well as the input areas.  As a consequence, a SET
+        CONSOLE OFF before one of these commands will not only prevent you
+        from seeing what you type, but will also prevent the display of the
+        message prompt.
+
+     <B>.  Full-screen commands:</B> Full-screen commands such as @...SAY
+        display to the screen independent of the current CONSOLE SETting.
+        For this category of output commands, device control is performed
+        using SET DEVICE to control whether output goes to the screen or
+        printer, and SET PRINTER TO echo output to a file.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses REPORT FORM to output records to the printer
+        while suppressing output to the screen:
+
+        USE Sales NEW
+        SET CONSOLE OFF
+        REPORT FORM Sales TO PRINTER
+
+        SET CONSOLE ON
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge50f8.html">SET DEVICE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

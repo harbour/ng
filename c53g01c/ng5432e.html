@@ -1,0 +1,126 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5364b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng55344.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GFRAME()</B>
+ Draw a frame with a 3-D look
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GFRAME(&lt;nXStart&gt;, &lt;nYStart&gt;, &lt;nXEnd&gt;, &lt;nYEnd&gt;, &lt;nColorBack&gt;,</B>
+     <B>   &lt;nColorLight&gt;, &lt;nColorDark&gt;, &lt;nWidthUp&gt;, &lt;nWidthRight&gt;,</B>
+     <B>   &lt;nWidthDown&gt;, &lt;nWidthLeft&gt;, [&lt;nMode&gt;], [&lt;nStyle&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nXStart&gt;</B>, <B>&lt;nYStart&gt;</B>, <B>&lt;nXEnd&gt;</B>, and <B>&lt;nYEnd&gt;</B> define frame
+     coordinates in pixels.
+
+     <B>&lt;nColorBack&gt;</B> is a numeric value representing the display color of
+     the border background.
+
+     <B>&lt;nColorLight&gt;</B> is a numeric value representing the light display
+     color for borders.
+
+     <B>&lt;nColorDark&gt;</B> is a numeric value representing the dark display color
+     for borders.
+
+     The range of color values is limited to the number of colors available
+     in the selected video mode.  In 16-color modes, valid values are 0-15.
+     In 256-color modes, valid values are 0-255.
+
+     <B>&lt;nWidthUp&gt;</B> is a numeric value representing the thickness of the
+     frame borders.  The values &lt;nWidthRight&gt;, &lt;nXStart&gt;, &lt;nYStart&gt;, &lt;nXEnd&gt;,
+     &lt;nYEnd&gt; are the external dimensions &lt;nWidthDown&gt; of the frame, and the
+     width of the borders is measured &lt;nWidthLeft&gt; within the rectangle.
+
+     <B>&lt;nMode&gt;</B> represents the frame mode.  The following are valid &lt;nMode&gt;
+     values:
+
+     <B>Frame Mode Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Description</B>
+     ------------------------------------------------------------------------
+     LLG_MODE_SET   Display in SET mode (ignores any pixels present under the
+                    line displayed).  This is the most common display mode.
+     LLG_MODE_AND   Display in AND mode (executes an AND on pixels present
+                    under the line at display time and on the display color).
+     LLG_MODE_OR    Display in OR mode (executes an OR on pixels present
+                    under the line at display time and on the display color).
+     LLG_MODE_XOR   Display in XOR mode (executes an XOR on pixels present
+                    under the line at display time and on the display color).
+                    See note.
+     ------------------------------------------------------------------------
+
+     <B>&lt;nStyle&gt;</B> defines the style of the ellipse using one of the constants
+     listed in the table below:
+
+     <B>Style Mode Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant     Description</B>
+     ------------------------------------------------------------------------
+     LLG_FILL     Fills the frame with nColorBack.  This is the default.
+     LLG_FRAME    Displays the frame in 3-D without filling in the frame with
+                  nColorBack.
+     ------------------------------------------------------------------------
+
+     <B>Note:</B>  This method allows you to move objects around on the screen
+     without damaging the background.  To retrieve the initial background,
+     just repeat the call for display in XOR mode.  If the display mode
+     parameter is missing, the last mode specified in a call to a CA-Clipper
+     function is used.
+
+ <B>Returns</B>
+
+     GFRAME() always returns NIL.
+
+ <B>Description</B>
+
+     GFRAME() draws box frames with a 3-D look using three appropriately
+     selected colors.  For example, gray for the background, black for the
+     dark color and white for the light color.  This function can be used
+     only if you have set the screen to a graphic mode using GMODE().  This
+     function respects the constraints defined by GSETCLIP().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows how to display a series of frames with thin
+        borders (3 pixels):
+
+        Switch to graphic mode
+        SET VIDEOMODE TO LLG_VIDEO_VGA_640_480_16
+        // Buttons
+        GFRAME(0, 0, 53, 399, 7, 15, 8, 3, 3, 3, 3, LLG_MODE_SET)
+        // Coordinates
+        GFRAME(0, 400, 53, 456, 7, 15, 8, 3, 3, 3, 3, LLG_MODE_SET)
+        // Painting
+        GFRAME(54, 0, 639, 399, 7, 15, 8, 3, 3, 3, 3, LLG_MODE_SET)
+        // Palette
+        GFRAME(54, 400, 639, 456, 7, 15, 8, 3, 3, 3, 3, LLG_MODE_SET)
+        // Messages
+        GFRAME(0, 457, 639, 479, 7, 15, 8, 3, 3, 3, 3, LLG_MODE_SET)
+        QUIT                        // End of application
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3b4f1.html">DISPBOX()</A>
+<A HREF="ng4d165.html">GBMPDISP()</A>
+<A HREF="ng55637.html">GLINE()</A>
+<A HREF="ng59216.html">GRECT()</A>
+<A HREF="ng5cee0.html">GWRITEAT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

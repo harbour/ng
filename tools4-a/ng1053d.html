@@ -1,0 +1,130 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf542.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="ng1161d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSCNPRP()</B>
+ Scans a bindery object for a property
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSCNPRP(&lt;cObjName&gt;,&lt;nType&gt;,&lt;cPropMask&gt;,[@]&lt;nSeq&gt;,</B>
+     <B>   [@&lt;nFlag&gt;],[@&lt;nSafe&gt;],[@&lt;lValue&gt;],</B>
+     <B>   [&lt;cServer&gt;|   &lt;nConId&gt;]) --&gt; cPropName</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cObjName&gt; </B> Designates the name of the bindery object that is
+     processed.
+
+     <B>&lt;nType&gt; </B> Designates the object type of &lt;cObjName&gt;.  The header file
+     CTNNET.CH contains the symbolic constants for a number of object types.
+     When you work with numeric values, NNETSCNPRP() expects the object type
+     in the high-low format for efficiency reasons.
+
+     <B>&lt;cPropMask&gt; </B> Designates a search mask that is satisfied by the
+     properties that are searched.  &lt;cPropMask&gt; can contain the wildcard
+     characters "*" and "?".
+
+     <B>&lt;nSeq&gt; </B> Designates the sequence number (high-low format) of the last
+     property that was found.  To start the search with the first property,
+     &lt;nSeq&gt; must be designated -1.  If &lt;nSeq&gt; is passed by reference, the
+     variable contains the sequence number of the property found after the
+     function has been completed successfully.
+
+     <B>&lt;nFlag&gt; </B> Designates the property flag after the function has been
+     completed successfully.  This parameter must be passed by reference.
+     The following table contains the possible values for &lt;nFlag&gt;:
+
+     <B>Table 18.6:  Possible property flags</B>
+     ------------------------------------------------------------------------
+     <B>Value   Sym. Con.    Definition</B>
+     ------------------------------------------------------------------------
+     0       PRP_ITEM     Static item property
+     1                    Dynamic item property
+     2       PRP_SET      Static set property
+     3                    Dynamic set property
+     ------------------------------------------------------------------------
+
+     <B>&lt;nSafe&gt; </B> Designates the property security after the function has
+     been completed successfully.  This parameter must be passed by
+     reference.  The property security is an eight-bit number.  The four high-
+     order bits control the security level for the property's write access;
+     the four low-order bits control the property's read access.  A table for
+     access levels can be found with the NNETCRTOBJ() function.
+
+     <B>&lt;lValue&gt; </B> Designates a logical value that indicates if the property
+     has any values (.T.) or not (.F.).  This parameter must be passed by
+     reference.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server for which the
+     bindery is accessed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETSCNPRP() returns the name of the property that is found.  If no
+     property is found, the function returns an empty string.  If the
+     parameters &lt;nSeq&gt;, &lt;nFlag&gt;, and/or &lt;nSafe&gt; are passed by reference,
+     NNETSCNPRP() returns the sequence number, the property flag, property
+     security, and a flag for value existence (see the arguments).
+
+ <B>Description</B>
+
+     <B>Important!</B>  NNETSCNPRP() is a low level bindery function and should
+     be used only with extensive knowledge of the bindery concept and the
+     Novell API.
+
+     NOVELL NET SCAN PROPERTY
+     NNETSCNPRP() allows you to scan a bindery object (&lt;cObjName&gt; and
+     &lt;nType&gt;) for properties that satisfy a specified search mask
+     (&lt;cPropMask&gt;).  To find the first property that matches the passed
+     criterion, the parameter &lt;nSeq&gt; must be designated -1.  For a successive
+     search, the sequence number must be passed by reference in order to use
+     the sequence number of the found property at the next function call.
+     With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the bindery of any attached
+     file server can be accessed.  The connection ID of a server is returned
+     by NNETATTACH() or NNETLOGIN().
+
+ <B>Note</B>
+
+     <B>.</B>  The object type and sequence number are expected and/or
+        returned in the high-low format (see the Introduction to this
+        chapter).
+
+ <B>Example</B>
+
+     List all the properties of the bindery object SUPERVISOR:
+
+     #include "ctnnet.ch"
+
+     nSeq:=-1   // Start with 1st property
+     WHILE .T.
+     cName=NNETSCNPRP('SUPERVISOR',OBJ_USER,'*', @nSeq, ;
+     @nFlag,@nSafe,@lValue)
+     IF EMPTY(cName)
+     EXIT
+     ENDIF
+     ? cName,nSeq,nFlag,nSafe,lValue
+     ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6abb.html">NNETCRTPRP()</A>
+<A HREF="ngf542.html">NNETSCNBIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

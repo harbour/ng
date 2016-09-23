@@ -1,0 +1,42 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng57bca.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng561bb.html">[^^Up^^]</A>
+<A HREF="ng58122.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SIX???/1012   Corruption Detected</B>
+
+  <B>Problem:   </B>File corruption has been detected in the specified file.
+
+  <B>Solution:  </B>Make sure that the file type is correct for the operation.
+
+             A common cause of this error for new SIx Driver users is when
+             your application uses a .DBF file with a .DBT memo file.  If
+             you open these files VIA "SIXCDX" or "SIXNSX", you'll get this
+             error because the .DBT memo file format is not the default
+             memo format supported under these drivers.  To correct this
+             situation, you must do one of the following:
+
+               . Link in the DBT.OBJ file.  This makes the SIx Driver's
+                 SIXCDX and/or SIXNSX flavors use default to .DBT memos
+                 instead of their usual defauts of .FPT and .SMT respec-
+                 tively.
+
+               . Use the MEMOCONV.PRG sample program (located with your
+                 other SIx Driver sample programs) to convert your existing
+                 .DBF/.DBT combos into the proper .DBF/.FPT or .DBF/.SMT
+                 format required by your selected SIx Driver flavor.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

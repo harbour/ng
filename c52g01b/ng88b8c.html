@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng88520.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng895a7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GO</B>
+ Move the record pointer to a specific record
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GO[TO] &lt;nRecord&gt; | BOTTOM | TOP</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nRecord&gt;</B> specifies the target record number.
+
+     <B>BOTTOM</B> specifies the last logical record in the current work area.
+
+     <B>TOP</B> specifies the first logical record in the current work area.
+
+ <B>Description</B>
+
+     GO is a database command that positions the record pointer in the
+     current work area to a specified record.  You can specify the record by
+     number or as top or bottom of file.  If the new position is TOP and
+     there is an active index, the record pointer moves to the first record
+     in the index, otherwise it moves to record 1.  If the new position is
+     BOTTOM and there is an active index, the record pointer moves to the
+     last record in the index, otherwise it moves to LASTREC().
+
+     The GO &lt;nRecord&gt; form of the command is the same as the RECORD clause of
+     any database command that supports a scope.
+
+ <B>Notes</B>
+
+     <B>.  Accessing filtered records:</B> You can access records filtered by
+        SET DELETED ON or SET FILTER TO with GO &lt;nRecord&gt;.  If DELETED is ON
+        or there is an active FILTER, GO BOTTOM moves to the last logical
+        record that is not deleted and/or that matches the filter condition.
+        If DELETED is ON or there is an active FILTER, GO TOP moves to the
+        first logical record that is not deleted and/or that matches the
+        filter condition.
+
+     <B>.  Unique indexes:</B> You can access records not present in an index
+        created with SET UNIQUE ON or INDEX...UNIQUE with GO &lt;nRecord&gt;.
+
+     <B>.  Record out of range:</B> In CA-Clipper, a GO that positions the
+        pointer to a record out of range of the database file does not
+        generate a runtime error.  Instead, EOF() and BOF() are set to true
+        (.T.) and the record pointer is set to LASTREC() + 1.
+
+     <B>.  Refreshing database and index buffers:</B> In a network
+        environment, you can refresh database and index buffers without
+        moving the record pointer by using GO RECNO().  Refer to the Network
+        Programming chapter in the Programming and Utilities guide for more
+        information.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples show simple GO results:
+
+        USE Sales NEW
+        ? LASTREC()            // Result: 84
+        //
+        GO TOP
+        ? RECNO()              // Result: 1
+        //
+        GO BOTTOM
+        ? RECNO()              // Result: 84
+        //
+        GO 5
+        ? RECNO()              // Result: 5
+        //
+        GO 5 + 15
+        ? RECNO()              // Result: 20
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng44695.html">LASTREC()</A>
+<A HREF="ng5b9c1.html">RECNO()</A>
+<A HREF="nga2c64.html">SET FILTER</A>
+<A HREF="nga9600.html">SET RELATION</A>
+<A HREF="ngac2d7.html">SKIP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

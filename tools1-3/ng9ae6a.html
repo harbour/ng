@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9aa3f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng89afa.html">[^^Up^^]</A>
+<A HREF="ng9b4bb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FLOPPYTYPE()</B>
+ Determines the exact type of floppy drive
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FLOPPYTYPE([&lt;cDrive&gt;]) --&gt; nFloppyType</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cDrive&gt;</B>  Designates the drive (A, B, C, etc.) for which you want a
+     type determined.  The default is the current disk drive.
+
+ <B>Returns</B>
+
+     The function returns the exact type of the designated disk drive, coded
+     as follows:
+
+     <B>Table 7-18:  Coding of Drive Types</B>
+     ------------------------------------------------------------------------
+     <B>Code    Definition</B>
+     ------------------------------------------------------------------------
+      0      No floppy drive
+      1      360-kB drive
+      2      1.2-MB drive
+      3      720-kB drive
+      4      1.44-MB drive
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     This function gives you a numeric value that specifies exact type and
+     capacity of the selected floppy drive.  Whether or not the device is a
+     floppy drive, is determined beforehand by DRIVETYPE().
+
+ <B>Note</B>
+
+     <B>.</B>  The drive type is determined without actually accessing the
+        drive. Therefore, a disk does not have to be in the drive.
+
+ <B>Example</B>
+
+     Is the current disk drive a floppy and what type?
+
+     IF DRIVETYPE() = 1 .OR. DRIVETYPE() = 2
+        DO CASE
+        CASE FLOPPYTYPE() = 0
+        ? "No floppy drive!"
+        CASE FLOPPYTYPE() = 1
+        ? "360 kB drive"
+        CASE FLOPPYTYPE() = 2
+        ? "1.2 MB drive"
+        CASE FLOPPYTYPE() = 3
+        ? "720 kB drive"
+        CASE FLOPPYTYPE() = 4
+        ? "1.44 MB drive"
+        ENDCASE
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng91ea4.html">DISKTYPE()</A>
+<A HREF="ng92566.html">DRIVETYPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

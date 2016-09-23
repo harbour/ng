@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng543c9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng5594c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>USE:</B>
+
+  Syntax:
+
+  <B>USE &lt;(db)&gt;                           ;</B>
+  <B>[VIA &lt;rdd&gt;]                          ;</B>
+  <B>[ALIAS &lt;a&gt;]                          ;</B>
+  <B>[&lt;new: NEW&gt;]                         ;</B>
+  <B>[&lt;ex: EXCLUSIVE&gt;]                    ;</B>
+  <B>[&lt;sh: SHARED&gt;]                       ;</B>
+  <B>[&lt;ro: READONLY&gt;]                     ;</B>
+  <B>[INDEX &lt;(index1)&gt; [, &lt;(indexn)&gt;]]    ;</B>
+  <B>[TRIGGER &lt;trig&gt;]                     ;</B>
+  <B>[PASSWORD &lt;password&gt;]</B>
+
+  Generally, this command works the same way as it does in Clipper.  The
+  only difference being the <B>TRIGGER</B> and <B>PASSWORD</B> clauses.
+
+   <B>TRIGGER</B>  - Allows you to assign a custom trigger function to this table's
+              workarea.
+
+   <B>PASSWORD</B> - Set an encryption password to be used in opening this table.
+
+  Examples:
+
+    // Open TEST.DBF under SIXCDX using a trigger function called CustTrig()
+    <B>USE TEST VIA "SIXCDX" TRIGGER "CustTrig"</B>
+
+    // Open the encrypted TEST.DBF in EXCLUSIVE mode under SIXNSX using a
+    // password of "BartMan".
+    <B>USE TEST VIA "SIXNSX" PASSWORD "BartMan" EXCLUSIVE</B>
+
+    // Open the encrypted TEST.DBF under SIXCDX using a trigger function
+    // called MyTrig() and the password "BartMan"
+    <B>USE TEST VIA "SIXCDX" TRIGGER "MyTrig" PASSWORD "BartMan" NEW</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng386d6.html">Sx_SetTrigger()</A>
+<A HREF="ng36a01.html">Sx_SetPass()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

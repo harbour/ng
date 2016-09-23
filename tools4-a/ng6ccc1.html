@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6c3f6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng6d14d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSNPRN()</B>
+ Determines the number of print server printers
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSNPRN(&lt;cPServer&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nPrinter</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSNPRN() returns the number of printers defined for &lt;cPServer&gt;.  If
+     an error occurs, the function returns  -1.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER NUMBER OF PRINTERS
+     NNETPSNPRN() returns the number of printers defined for &lt;cPServer&gt;.  The
+     value returned includes printers that are directly connected and remote.
+
+ <B>Example</B>
+
+     Determine the number of printers on print server PSERVER:
+
+     ? NNETPSNMOD('PSERVER')
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

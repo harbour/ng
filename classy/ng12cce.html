@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng12c19.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng1346f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Inheriting From GET</B>
+
+  Inheriting from Clipper's GET class presents some special problems for
+  Class(y). When a GET object receives or loses focus, its internal
+  structure is rearranged by Clipper. This rearrangement does not take
+  subclasses into account, since Clipper 5.01 is not designed to support
+  inheritance. As a result, variables defined in subclasses of GET would be
+  deleted or otherwise corrupted, if Class(y) did not take special action to
+  prevent this.
+
+  Class(y) uses the cargo variable in each GET object to hold subclass
+  instance variables. The cargo variable thus cannot be used for other
+  purposes, unless it is redefined.
+
+  If a GET subclass or its client application wishes to make use of cargo,
+  the variable should be redefined in the first-level subclass of GET, as in
+  the following example:
+
+    CREATE CLASS MemoGet FROM Get
+       VAR cargo
+       // ...
+
+  The VAR cargo declaration in the MemoGet class redefines the cargo
+  variable so that it can be used by clients of MemoGet.
+
+  If your classes will be used by other people, it is best to redefine cargo
+  in this way, so that full compatibility with the published specification
+  for the GET class is maintained.
+
+  <B>Performance Note</B>
+
+  Because of the way in which inheritance from GET has been implemented,
+  access to instance variables in subclasses of GET is slower than it is for
+  other classes. In most cases, this is not noticeable. However, it can
+  become a problem with large or complex subclasses of GET. If that is the
+  case, a possible alternative to subclassing GET is to design a wrapper
+  class which contains a GET object as one of its instance variables, and
+  delegates all GET messages to that object. Of course, the performance gain
+  obtained by not subclassing GET may be cancelled by the overhead of
+  delegating all of GET's messages. The best solution depends on the
+  requirements of the application.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

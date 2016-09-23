@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1369.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4ed.html">[^^Up^^]</A>
+<A HREF="ng1c82.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NETPRINTER()</B>
+ Determines whether the current printer is a local or network printer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NETPRINTER() --&gt; lServerPrinter</B>
+
+ <B>Returns</B>
+
+     NETPRINTER() returns .T. when the printer installed using the CA-Clipper
+     SET PRINTER TO &lt;LPTn&gt; command has been redirected onto a network server.
+
+ <B>Description</B>
+
+     NETWORK PRINTER
+     This function allows you to determine if the printer installed using the
+     CA-Clipper SET PRINTER TO &lt;LPTn&gt; command is local or resides on a
+     network server.
+
+ <B>Note</B>
+
+     <B>.</B>  This function cannot be used in a Novell network, because
+        there the redirection occurs on a deeper level (INT 17h).  However,
+        you can use the NNETCAPACT() function in a Novell Network.
+
+ <B>Example</B>
+
+     Determine whether LPT1 and LPT2 are local or remote:
+
+     SET PRINTER TO LPT1
+     ? NETPRINTER()                        // .F., local printer
+     SET PRINTER TO LPT2
+     ? NETPRINTER()                        // .T., network printer
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1c82.html">NETREDIR()</A>
+<A HREF="ng7d991.html">NNETWORK()</A>
+<A HREF="ng24d80.html">NNETCAPACT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

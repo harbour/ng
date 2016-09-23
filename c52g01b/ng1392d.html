@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng13297.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng14152.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COLORSELECT()</B>
+ Activate attribute in current color settings
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>COLORSELECT(&lt;nColorIndex&gt;) --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     Always returns NIL.
+
+ <B>Arguments</B>
+
+     <B>&lt;nColorIndex&gt;</B> is a number corresponding to the oridnal positions in
+     the current list of color attributes, as set by SETCOLOR().
+
+ <B>Description</B>
+
+     COLORSELECT() activates the specified color pair from the current list
+     of color attributes (established by SETCOLOR()).  Manifest constants for
+     &lt;nColorIndex&gt; are defined in COLOR.CH:
+
+     <B>COLOR.CH constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant          Value</B>
+     ------------------------------------------------------------------------
+     CLR_STANDARD      0
+     CLR_ENHANCED      1
+     CLR_BORDER        2
+     CLR_BACKGROUND    3
+     CLR_UNSELECTED    4
+     ------------------------------------------------------------------------
+
+     COLORSELECT() does not alter the current SET Color setting.
+
+     This table describes the scope of the CA-Clipper color settings affected
+     by SETCOLOR():
+
+     <B>Color settings</B>
+     ------------------------------------------------------------------------
+     <B>Setting        Scope</B>
+     ------------------------------------------------------------------------
+     Standard       All screen output commands and functions
+     Enhanced       Gets and selection highlights
+     Border         Screen border (not supported on EGA and VGA monitors)
+     Background     Not supported
+     Unselected     Unselected Gets
+     ------------------------------------------------------------------------
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates use of COLORSELECT() with the
+        COLOR.CH manifest constants:
+
+        USE Sales NEW
+        ? SETCOLOR()                  // displays "W/B,N/B,W/N,W/N,W/N"
+                                      // in white on blue
+
+        COLORSELECT(CLR_ENHANCED)     // enhanced is active color pair
+        ? "I'm black and blue"        // displayed in black on blue
+        COLORSELECT(CLR_STANDARD)     // restore standard color
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Color.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6375d.html">SETCOLOR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,96 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd1d8f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngd3103.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LOCATE</B>
+ Search sequentially for a record matching a condition
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LOCATE [&lt;scope&gt;] FOR &lt;lCondition&gt;</B>
+     <B>   [WHILE &lt;lCondition&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;scope&gt;</B> is the portion of the current database file in which to
+     perform the LOCATE.  The default scope is ALL records.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the next record to LOCATE within the
+     given scope.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+ <B>Description</B>
+
+     LOCATE is a database command that searches for the first record in the
+     current work area that matches the specified conditions and scope.  When
+     you first execute a LOCATE, it searches from the beginning record of the
+     scope for the first matching record in the current work area.  It
+     terminates when a match is found or the end of the LOCATE scope is
+     reached.  If it is successful, the matching record becomes the current
+     record and FOUND() returns true (.T.).  If it is unsuccessful, FOUND()
+     returns false (.F.) and the positioning of the record pointer depends on
+     the controlling scope of the LOCATE.
+
+     Each work area can have its own LOCATE condition.  The condition remains
+     active until you execute another LOCATE command in that work area or the
+     application terminates.
+
+     LOCATE works with CONTINUE.  Once a LOCATE has been issued, you can
+     resume the search from the current record pointer position with
+     CONTINUE.  There are, however, some exceptions.  See note below.
+
+ <B>Notes</B>
+
+     <B>.  CONTINUE:</B> Both the &lt;scope&gt; and the WHILE condition apply only
+        to the initial LOCATE and are not operational for any subsequent
+        CONTINUE commands.  To continue a pending LOCATE with a scope or
+        WHILE condition, use SKIP then LOCATE REST WHILE &lt;lCondition&gt; instead
+        of CONTINUE.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples show typical LOCATEs:
+
+        USE Sales INDEX Salesman
+        LOCATE FOR Branch = "200"
+        ? FOUND(), EOF(), RECNO()         // Result: .T. .F. 5
+        LOCATE FOR Branch = "5000"
+        ? FOUND(), EOF(), RECNO()         // Result: .F. .T. 85
+
+     <B>.</B>  This example shows a LOCATE with a WHILE condition that is
+        continued by using LOCATE REST:
+
+        SEEK "Bill"
+        LOCATE FOR Branch = "200" WHILE Salesman = "Bill"
+        DO WHILE FOUND()
+           ? Branch, Salesman
+           SKIP
+           LOCATE REST FOR Branch = "200" WHILE ;
+                    Salesman = "Bill"
+        ENDDO
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc340a.html">CONTINUE</A>
+<A HREF="ng3f657.html">EOF()</A>
+<A HREF="ng49aff.html">FOUND()</A>
+<A HREF="ngdd095.html">SEEK</A>
+<A HREF="nge78b0.html">SET FILTER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

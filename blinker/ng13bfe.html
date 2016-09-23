@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng138ed.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng1420e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CVON                          Locally enable processing of CodeView information</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Locally enable the processing of CodeView information</B></U>
+
+ <U>Syntax   : <B>CVON</B></U>
+
+ <U>Default  : <B>Disabled</B></U>
+
+ The CVON command begins a CodeView area, and enables the processing of
+ CodeView information from the point the command is encountered in the script
+ until the next CVOFF command. The CodeView areas are used to limit the
+ amount of overlaid code for which CodeView debugging is enabled.
+
+ Due to the method used by Blinker to support debugging of dynamically
+ overlaid code under CodeView, large overlaid applications will execute
+ faster under the debugger if the amount of overlaid code containing
+ debugging information is limited using these commands.
+
+ Files, modules or libraries which are within a CodeView area will have all
+ of their symbolic information recorded in the executable for use by the
+ debugger. Files, modules or libraries which are not within a CodeView area
+ will only have their public symbols and module boundaries recorded.
+
+ Example :
+
+    <B>FILE a,b,c</B>
+    <B>SECTION INTO abc_xyz</B>
+    <B>BEGINAREA</B>
+    <B>   FILE d,e</B>
+    <B>   # Begin CodeView area for files f and g</B>
+    <B>   CVON</B>
+    <B>   FILE f,g</B>
+    <B>   # End CodeView area</B>
+    <B>   CVOFF</B>
+    <B>   LIB abc</B>
+    <B>   # Begin CodeView area for XYZ.LIB</B>
+    <B>   CVON</B>
+    <B>   LIB xyz</B>
+    <B>   # End CodeView area</B>
+    <B>   CVOFF</B>
+    <B>ENDAREA</B>
+    <B>LIB funclib</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng133de.html">CODEVIEW</A>
+<A HREF="ng138ed.html">CVOFF</A>
+<A HREF="ng1420e.html">CVVERSION</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

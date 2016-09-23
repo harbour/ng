@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng57777.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng57f28.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>unlock()</B>
+ Release network locks in the workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE unlock(</B>
+     <B>                WORKAREAP wa,</B>
+     <B>                ULONG record</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>record</B> is a numeric value that indicates the row to unlock.  record
+     is only meaningful if a lock on a record exists.
+
+ <B>Description</B>
+
+     Unlocks any network locks held on wa.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Your implementation should flush the data buffer by calling
+        SELFGOCOLD() prior to releasing any network locks.  record is
+        provided should your RDD support multiple row locks.  By convention a
+        record value of zero (0) indicates that all rows should be unlocked.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng409ca.html">DBLOCKINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng57777.html">lock()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

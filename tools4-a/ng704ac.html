@@ -1,0 +1,82 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6faab.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng70ce6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSQL()</B>
+ Determines the queues that are serviced by a print server printer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSQL(&lt;cPServer&gt;,&lt;nPrinter&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; aQueues</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;nPrinter&gt;</B>  Designates the number of the printer on &lt;cPServer&gt;.
+     Values between 0 and 15 are possible.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can therefore depend on the specified file
+     server.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSQL() returns an array with subarrays (two-dimensional array).
+     Each subarray contains information about a serviced queue.  For the
+     structure of the subarrays, see the following table:
+
+     <B>Table 27.12:  NNETPSQL() Subarray Structure</B>
+     ------------------------------------------------------------------------
+     <B>Position     Metasymbol     CTPS.CH      Definition</B>
+     ------------------------------------------------------------------------
+     1            cServer        QL_SERVER    File server
+     2            cQName         QL_NAME      Queue name
+     3            nPrior         QL_PRIOR     Queue priority
+     ------------------------------------------------------------------------
+
+     If an error occurs, the function returns an empty array.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER QUEUE LIST
+     NNETPSQL() returns a list of all print queues that are serviced by
+     &lt;nPrinter&gt; on &lt;cPServer&gt;.  The array also contains the name of queue's
+     file server because a print server can access several file servers.
+
+ <B>Example</B>
+
+     Determine the print queues for printer 0 on print server PSERVER, and
+     display the queue's file server and name:
+
+     #include "ctnet.ch"
+
+     aQs=NNETPSQL('PSERVER',0)
+     FOR i=1 TO LEN(aQs)
+        ? aQs[i,QL_SERVER],aQs[i,QL_NAME]
+     NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6f418.html">NNETPSPSQ()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

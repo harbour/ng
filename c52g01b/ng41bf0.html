@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng40fd0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng41f45.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>INT()</B>
+ Convert a numeric value to an integer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>INT(&lt;nExp&gt;) --&gt; nInteger</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nExp&gt;</B> is a numeric expression to convert to an integer.
+
+ <B>Returns</B>
+
+     INT() returns an integer numeric value.
+
+ <B>Description</B>
+
+     INT() is a numeric function that converts a numeric value to an integer
+     by truncating--not rounding--all digits to the right of the decimal
+     point.  INT() is useful in operations where the decimal portion of a
+     number is not needed.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples demonstrate the results of various invocations
+        of the INT() function:
+
+        ? INT(100.00)               // Result: 100
+        ? INT(.5)                   // Result: 0
+        ? INT(-100.75)              // Result: -100
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5e79b.html">ROUND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

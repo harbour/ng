@@ -1,0 +1,133 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge1372.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngd8973.html">[^^Up^^]</A>
+<A HREF="nge2aa5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>#include</B>
+ Include a file into the current source file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>#include "&lt;headerFileSpec&gt;"</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;headerFileSpec&gt;</B> specifies the name of another source file to
+     include in the current source file.  As indicated in the syntax, the
+     name must be enclosed in double quotation marks.
+
+     &lt;headerFileSpec&gt; may contain an explicit path and filename as well as a
+     file extension.  If, however, no path is specified, the preprocessor
+     searches the following places:
+
+     <B>.</B>  Source file directory
+
+     <B>.</B>  Directories supplied with the /I option
+
+     <B>.</B>  Directories specified in the INCLUDE environment variable
+
+     #include directives may be nested up to 15 levels deep--that is, a file
+     that has been included may contain #include directives, up to 15 levels.
+
+ <B>Description</B>
+
+     #include inserts the contents of the specified file in place of the
+     #include directive in the source file.  By convention, the file inserted
+     is referred to as a header file.  Header files should contain only
+     preprocessor directives and external declarations.  By convention
+     CA-Clipper header files have a (.ch) extension.
+
+     When deciding where to locate your header files, you have two basic
+     choices.  You can place them in the source file directory where they are
+     local to the current system.  Or, you can make them globally available
+     by placing them in the directory specified in the INCLUDE environment
+     variable.  A list of one or more directories can be specified.
+
+     Header files overcome the one major drawback of defining constants or
+     inline functions--the #define directive only affects the file in which
+     it is contained.  This means that every program which needs access to
+     these statements must have a list of directives at the top.  The
+     solution to this problem is to place #define statements in a separate
+     file and use the #include directive to tell the preprocessor to include
+     that file before compiling.
+
+     For example, suppose the file "Inkey.ch" contains a list of #define
+     directives assigning key values to constants.  Instead of including
+     these directives at the top of each program file (.prg) requiring access
+     to them, you can simply place the following line at the top of each
+     program file:
+
+     #include "Inkey.ch"
+
+     This causes the preprocessor to look for Inkey.ch and place all the
+     directives contained within it at the top of this program.
+
+     Another advantage of using the #include directive is that all the
+     #define statements are contained in one file.  If any modifications to
+     these statements are necessary, only the #include file need be altered;
+     the program itself remains untouched.
+
+     Note that the scope of definitions within an included header file is the
+     current program file unless the header file is included on the compiler
+     command line with the /U option.  In this case, the scope is all the
+     program files compiled in the current invocation of the compiler.
+
+ <B>Notes</B>
+
+     <B>.  Supplied header files:</B> CA-Clipper provides a number of header
+        files containing manifest constants for common operations.  Refer to
+        \CLIPPER5\INCLUDE for more information.
+
+     <B>.  STD.CH--the standard header file:</B> STD.CH is the standard
+        header file provided with CA-Clipper.  Its default location is
+        \CLIPPER5\INCLUDE.  STD.CH contains the definitions of all CA-Clipper
+        commands and the standard functions specified as pseudofunctions.  It
+        is strongly recommended that no changes be made to STD.CH.  If
+        changes are desired, it is advisable to copy STD.CH to a new name,
+        make the changes, and compile with /U.
+
+        This header file differs somewhat from a header file you might
+        #include in that everything defined in STD.CH, with #define,
+        #translate, or #command, has a scope of the entire compile rather
+        than the current source file.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses #include to insert Inkey.ch, a file of
+        common keyboard definitions, into a key exception handler called by
+        an interface function:
+
+        #include "Inkey.ch"
+
+        FUNCTION GetEvent()
+           LOCAL nKey, nResult
+           nKey = INKEY(0)
+           DO CASE
+           CASE nKey = K_F10
+              nResult := DoMenu("Browse")
+           CASE nKey = K_ESC
+              nResult := DoQuit()
+              .
+              . &lt;statements&gt;
+              .
+           CASE nKey = K_CTRL_RIGHT
+              nResult := DoNextRec()
+           ENDCASE
+           RETURN nResult
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd8bff.html">#command</A>
+<A HREF="ngde423.html">#define</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

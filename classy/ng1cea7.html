@@ -1,0 +1,113 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1c81c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng1dd17.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Scalar Classes</B>
+
+  Class(y) now treats standard Clipper data types as though they were
+  objects. Each data type corresponds to a class. The class names are the
+  same as those used in the <B>TYPE</B> clause of the <B>VAR</B> command, with the
+  addition of Nil - Array, Block, Character, Date, Integer, Logical, Nil,
+  and Numeric.
+
+  Strictly speaking, the term <B>scalar</B> refers to a value that has
+  magnitude but no other attributes. The term is stretched slightly here
+  when applied to character strings, code blocks and even dates. However,
+  with the exception of arrays, from a programming standpoint the built-in
+  data types are all scalar-like in that they consist of a single value. We
+  will therefore use the terms <B>scalar values</B> and <B>scalar classes</B> to
+  refer to Clipper data values and data types other than arrays.
+
+  The Array class is nevertheless dealt with here, since its definition
+  follows most of the rules for defining scalar classes.
+
+  Source code to the Array class is provided. Many of the methods defined in
+  the Array class are used by the Class(y) kernel. The Array class can be
+  extended and even subclassed, and other scalar classes can be user-
+  defined. More information can be found in the files CSYARRAY.PRG and
+  ARRSIZE.PRG. Default scalar classes other than Array are automatically
+  created by Class(y) if they are not supplied by the user.
+
+  To define one of these scalar classes, a command such as the following
+  should be used:
+
+    CREATE CLASS Character ;
+       FROM ScalarObject FUNCTION csyCharacter
+
+  All scalar classes except Array must inherit from the ScalarObject class,
+  as shown above.
+
+  Since some of the classnames used by Clipper, such as ARRAY, are also the
+  names of Clipper functions, a <B>FUNCTION</B> clause has been used above to
+  define a class with a name different from that of its class function. This
+  clause <U>must</U> be included when defining a scalar class, and the
+  specified function name must consist of the letters CSY prepended to the
+  one of the abovementioned scalar class names. It is this function name
+  that Class(y) uses to detect user-supplied scalar classes.
+
+  The scalar classes can clean up code quite a bit; for example, now, you
+  can have statements like:
+
+    IF obj:isKindOf( Window() )
+
+  instead of:
+
+    IF obj != NIL .AND. obj:isKindOf( Window() )
+
+  The reason is that the NIL class is a subclass of Object and supports the
+  isKindOf message, just like any other class. This sort of thing happens
+  quite often in most code, in one form or another.
+
+  Another example is using <U>eval</U>; you can now use:
+
+    block:eval(...)
+
+  instead of:
+
+    IF block != NIL
+       EVAL(block, ...)
+    END
+
+  This works because <U>eval</U> (and <U>exec</U>) have been defined in the Object
+  class as null methods; sending them to NIL will do nothing.
+
+  The <U>deepCopy</U> method in the Object class provides another example of
+  this. For each element of an array/object, it executes:
+
+    newObj[i] := self[i]:copy()
+
+  No matter what type of value is stored in self[i], the above code will
+  work, because even data such as numbers and strings will respond correctly
+  to the <U>copy</U> message (this behavior for scalar data is defined in the
+  ScalarObject class).
+
+  It is also straightforward to cause objects of all types, including
+  scalars, to respond to standard messages such as <U>size</U>. For example:
+
+    CREATE CLASS Date FROM ScalarObject FUNCTION csyDate
+    EXPORT:
+       METHOD size
+    END CLASS
+
+    METHOD size
+    RETURN 8
+
+  By default, Class(y) supports the <U>size</U> message when sent to arrays and
+  strings. Behavior of other scalar classes is user-definable.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1dd17.html">System Classes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc1bcf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngc2300.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CLEAR SCREEN</B>
+ Clear the screen and return the cursor home
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CLEAR [SCREEN] | CLS</B>
+
+ <B>Arguments</B>
+
+     <B>SCREEN</B> suppresses the automatic releasing of Get objects from the
+     current and visible GetList array when the screen is CLEARed.
+
+ <B>Description</B>
+
+     CLEAR is a full-screen command that erases the screen, releases pending
+     GETs, and positions the cursor at row and column zero.  If the SCREEN
+     clause is specified, Get objects are not released.
+
+     CLS is a synonym for CLEAR SCREEN.
+
+ <B>Notes</B>
+
+     <B>.  SET KEY and VALID:</B> If you are editing GETs, executing a CLEAR
+        within a SET KEY procedure or within a VALID user-defined function
+        will abort the active READ when control returns.  To clear the screen
+        without CLEARing GETs, use either the CLEAR SCREEN or CLS commands.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngaca2c.html">@...CLEAR</A>
+<A HREF="ngc16d9.html">CLEAR GETS</A>
+<A HREF="ng99438.html">SCROLL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

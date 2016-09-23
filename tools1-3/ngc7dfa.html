@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc7a9e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbe570.html">[^^Up^^]</A>
+<A HREF="ngc820b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TOOLVER()</B>
+ Queries the version number of the CA-Clipper Tools in use
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TOOLVER(&lt;lCheckDriver&gt;) --&gt; cVersion</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lCheckDriver&gt;</B>  When passed as .T., the function checks if the
+     Extended Drivers correspond to the library.  If not, the function
+     returns "0.00".
+
+ <B>Returns</B>
+
+     TOOLVER() returns CA-Clipper Tools as a string in the "n.nn" format; or
+     "0.00", if the Extended Drivers does not correspond to the library.
+
+ <B>Description</B>
+
+     This function determines the current CA-Clipper Tools version.  It also
+     allows you to check if the CT.LIB and the Extended Drivers CTUS.OBJ
+     agree.  This agreement is essential.  If they do not agree, the function
+     returns "0.00".
+
+ <B>Examples</B>
+
+     <B>.</B>  Query the CA-Clipper Tools version:
+
+        ? TOOLVER()               // e.g. "5.01"
+
+     <B>.</B>  Verify the driver version:
+
+        IF TOOLVER() &lt;&gt; TOOLVER(.T.)
+           ? "Wrong driver or driver not linked in..."
+        ENDIF
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

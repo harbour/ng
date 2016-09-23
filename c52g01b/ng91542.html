@@ -1,0 +1,169 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9115b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng92bb9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>READ</B>
+ Activate full-screen editing mode using Get objects
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>READ [SAVE]</B>
+
+ <B>Arguments</B>
+
+     <B>SAVE</B> retains the contents of the current GetList after the READ
+     terminates.  Later, you can edit the same Get objects by issuing another
+     READ.  If not specified, the current GetList is assigned an empty array
+     deleting all of the previous Get objects when the READ terminates.
+
+ <B>Description</B>
+
+     READ executes a full-screen editing mode using all Get objects created
+     and added to the current GetList since the most recent CLEAR, CLEAR
+     GETS, CLEAR ALL or READ commands.  If there is a format procedure
+     active, READ executes that procedure before entering the full-screen
+     editing mode.
+
+     Within a READ, the user can edit the buffer of each Get object as well
+     as move from one Get object to another.  Before the user can enter a Get
+     object, control passes to the associated WHEN &lt;lPreCondition&gt; if one has
+     been assigned to that Get object.  If &lt;lPreCondition&gt; returns true
+     (.T.), the user is allowed to edit the buffer of the Get object.
+     Otherwise control passes to the next Get object in the GetList.  Within
+     a GET buffer, the user can edit using the full complement of editing and
+     navigation keys.  See the tables below.
+
+     When the user presses a GET exit key, control passes to the associated
+     RANGE or VALID postcondition if one has been specified.  If either
+     condition returns true (.T.) editing of the Get object is terminated and
+     control passes to the next Get object.  Otherwise, control remains
+     within the current Get object until a valid value is entered or the user
+     presses the Esc key.
+
+     When the user successfully enters a value into a Get object, the
+     associated variable is assigned the value of the Get object's buffer.
+
+     The following tables list active keys within a READ:
+
+     <B>READ Navigation Keys</B>
+     ------------------------------------------------------------------------
+     <B>Key                                     Action</B>
+     ------------------------------------------------------------------------
+     Leftarrow, Ctrl-S                       Character left.  Does not move
+                                             cursor to previous GET
+     Rightarrow, Ctrl-D                      Character right.  Does not move
+                                             cursor to next GET
+     Ctrl-Leftarrow, Ctrl-A                  Word left
+     Ctrl-Rightarrow, Ctrl-F                 Word right
+     Uparrow, Shift-Tab, Ctrl-E              Previous GET
+     Dnarrow, Tab, Ctrl-X, Return, Ctrl-M    Next GET
+     Home                                    First character of GET
+     End                                     Last character of GET
+     Ctrl-Home                               Beginning of first GET
+     ------------------------------------------------------------------------
+
+     <B>READ Editing Keys</B>
+     ------------------------------------------------------------------------
+     <B>Key                 Action</B>
+     ------------------------------------------------------------------------
+     Del, Ctrl-G         Delete character at cursor position
+     Backspace, Ctrl-H   Destructive backspace
+     Ctrl-T              Delete word right
+     Ctrl-Y              Delete from cursor position to end of GET
+     Ctrl-U              Restore current GET to original value
+     ------------------------------------------------------------------------
+
+     <B>READ Toggle Keys</B>
+     ------------------------------------------------------------------------
+     <B>Key                 Action</B>
+     ------------------------------------------------------------------------
+     Ins, Ctrl-V         Toggle insert mode
+     ------------------------------------------------------------------------
+
+     <B>READ Exit Keys</B>
+     ------------------------------------------------------------------------
+     <B>Key                           Action</B>
+     ------------------------------------------------------------------------
+     Ctrl-W, Ctrl-C, PgUp, PgDn    Terminate READ saving current GET
+     Return, Ctrl-M                Terminate READ from last GET
+     Esc                           Terminate READ without saving current GET
+     Uparrow                       Terminate READ from first GET if
+                                   READEXIT()=.T.
+     Dnarrow                       Terminate READ from last GET if
+                                   READEXIT()=.T.
+     ------------------------------------------------------------------------
+
+ <B>Notes</B>
+
+     <B>.  Nested READs:</B> To perform a nested READ within a SET KEY,
+        VALID, or WHEN procedure or user-defined function, declare or create
+        a new GetList, perform a series of @...GET statements, then READ.
+        When the procedure terminates, the new GetList is released and the
+        previous GetList becomes visible again.  See the example below.
+
+     <B>.  Quick keys:</B> Pressing Home or End in quick succession goes to
+        the first or last nonblank character in a Get object's buffer.
+
+     <B>.  Terminating a READ:</B> A READ is terminated by executing a BREAK,
+        CLEAR, CLEAR GETS, or CLEAR ALL from within a SET KEY procedure or a
+        user-defined function initiated by VALID.
+
+     <B>.  UPDATED():</B> If any Get object buffer was changed during the
+        current READ, UPDATED() is set to true (.T.).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example defines several GETs then READs them:
+
+        CLEAR
+        cVar1 := cVar2 := cVar3 := SPACE(10)
+        @ 10, 10 SAY "Variable one:" GET cVar1 VALID ;
+              !EMPTY(cVar1)
+        @ 11, 10 SAY "Variable two:" GET cVar2 ;
+                 WHEN RTRIM(cVar1) !=  "One"
+        @ 12, 10 SAY "Variable three:" GET cVar3 VALID ;
+                 !EMPTY(cVar3)
+        READ
+
+     <B>.</B>  This example performs a nested READ within a SET KEY, WHEN, or
+        VALID procedure or user-defined function:
+
+        LOCAL cName := SPACE(10)
+        @ 10, 10 GET cName VALID SubForm( cName )
+        READ
+        RETURN
+
+        FUNCTION SubForm( cLookup )
+           LOCAL GetList := {}        // Create new GetList
+           USE Sales INDEX Salesman NEW
+           SEEK cLookup
+           IF FOUND()
+              @ 15, 10 GET Salesman   // Add Get objects to
+              @ 16, 10 GET Amount     // new GetList
+              READ                    // READ from new GetList
+           ENDIF
+           CLOSE Sales
+           RETURN .T.                 // Release new GetList
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng73148.html">@...GET</A>
+<A HREF="ng7ea66.html">CLEAR GETS</A>
+<A HREF="ng43e47.html">LASTKEY()</A>
+<A HREF="ng58dbb.html">READEXIT()</A>
+<A HREF="ng5a1a6.html">READMODAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

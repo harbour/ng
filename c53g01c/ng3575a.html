@@ -1,0 +1,99 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng351a3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng3638a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBUSEAREA()</B>
+ Use a database file in a work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBUSEAREA( [&lt;lNewArea&gt;], [&lt;cDriver&gt;], &lt;cName&gt;, [&lt;xcAlias&gt;],</B>
+     <B>  [&lt;lShared&gt;], [&lt;lReadonly&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;lNewArea&gt;</B> is an optional logical value.  A value of true (.T.)
+     selects the lowest numbered unoccupied work area as the current work
+     area before the use operation.  If &lt;lNewArea&gt; is false (.F.) or omitted,
+     the current work area is used; if the work area is occupied, it is
+     closed first.
+
+     <B>&lt;cDriver&gt;</B> is an optional character value.  If present, it specifies
+     the name of the database driver which will service the work area.  If
+     &lt;cDriver&gt; is omitted, the current default driver is used (see note
+     below).
+
+     <B>&lt;cName&gt;</B> specifies the name of the database (.dbf) file to be opened.
+
+     <B>&lt;xcAlias&gt;</B> is an optional character value.  If present, it specifies
+     the alias to be associated with the work area.  The alias must
+     constitute a valid CA-Clipper identifier.  A valid &lt;xcAlias&gt; may be any
+     legal identifier (i.e., it must begin with an alphabetic character and
+     may contain numeric or alphabetic characters and the underscore).
+     Within a single application, CA-Clipper will not accept duplicate
+     aliases.  If &lt;xcAlias&gt; is omitted, a default alias is constructed from
+     &lt;cName&gt;.
+
+     <B>&lt;lShared&gt;</B> is an optional logical value.  If present, it specifies
+     whether the database (.dbf) file should be accessible to other processes
+     on a network.  A value of true (.T.) specifies that other processes
+     should be allowed access; a value of false (.F.) specifies that the
+     current process is to have exclusive access.  If &lt;lShared&gt; is omitted,
+     the current global _SET_EXCLUSIVE setting determines whether shared
+     access is allowed.
+
+     <B>&lt;lReadonly&gt;</B> is an optional logical value that specifies whether
+     updates to the work area are prohibited.  A value of true (.T.)
+     prohibits updates; a value of false (.F.) permits updates.  A value of
+     true (.T.) also permits read-only access to the specified database
+     (.dbf) file.  If &lt;lReadonly&gt; is omitted, the default value is false
+     (.F.).
+
+ <B>Returns</B>
+
+     DBUSEAREA() always returns NIL.
+
+ <B>Description</B>
+
+     DBUSEAREA() associates the specified database (.dbf) file with the
+     current work area.  It performs the same function as the standard USE
+     command.  For more information, refer to the USE command.
+
+ <B>Notes</B>
+
+     <B>.  Current driver:</B> If no driver is specified in the call to
+        DBUSEAREA() the default driver is used.  If more than one driver is
+        available to the application, the default driver is the driver
+        specified in the most recent call to DBSETDRIVER().  If DBSETDRIVER()
+        has not been called, the DBFNTX driver is used. If the default driver
+        is undetermined, DBFNTX will be used.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example is a typical use of the DBUSEAREA() function:
+
+        DBUSEAREA(.T., "DBFNDX", "Employees")
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1d9f4.html">DBCLOSEAREA()</A>
+<A HREF="ng31343.html">DBSETDRIVER()</A>
+<A HREF="ng9a2c7.html">SELECT()</A>
+<A HREF="ng9a836.html">SET()</A>
+<A HREF="ngf8dbc.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

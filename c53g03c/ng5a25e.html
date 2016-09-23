@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng59dd8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5a6d4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>setRel()</B>
+ Set a relation in the parent file
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE setRel(</B>
+     <B>                  AREAP wa,</B>
+     <B>                  LPDBRELINFO lpdbRelInfo</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpdbRelInfo</B> is a pointer to a structure containing information on a
+     relation.
+
+ <B>Description</B>
+
+     setRel() adds lpdbRelInfo to the wa-&gt;lpdbRelations list.
+
+ <B>Default Behavior</B>
+
+     Sets a relation--as defined by lpdbRelInfo--in the parent file wa.  A
+     copy of the lpdbRelInfo structure is placed in the wa-&gt;lpdbRelations
+     list.
+
+     setRel() notifies the child of its additional parent by calling
+     childStart().
+
+     <B>Warning!</B>  The <B>lpdbRelInfo-&gt;lpaParent</B> pointer must be the same as
+     the work area pointer that is passed as the first argument.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If you replace this method in your RDD, locate the end of the
+        wa-&gt;lpdbRelations chain and mark the lpdbriNext element to point to
+        your new relation.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng45304.html">DBRELINFO</A>
+<A HREF="ng58332.html">childStart()</A>
+<A HREF="ng58bd3.html">clearRel()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

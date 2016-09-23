@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8392c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng844da.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETCLEARA()</B>
+ Changes the default attribute for screen clear
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETCLEARA([&lt;cClearAttr|nClearAttr&gt;]) --&gt; cNull</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cClearAttr|nClearAttr&gt;</B>  Designates the desired attribute for
+     CLEARA.  The default is white on black (7).
+
+ <B>Returns</B>
+
+     SETCLEARA() always returns a null string
+
+ <B>Description</B>
+
+     SETCLEAR(A)ttribute
+     SETCLEARA() allows you to set the current, standard attribute for screen-
+     oriented CA-Clipper Tools functions.  If this function is not called
+     within a program, the standard attribute of 7 (white on black) is used
+     by the clearing functions.
+
+ <B>Note</B>
+
+     <B>.</B>  You can specify the &lt;cClearAttr|nClearAttr&gt; parameter in
+        different ways (see Introduction to this chapter).
+
+ <B>Examples</B>
+
+     <B>.</B>  Use the standard attribute:
+
+        SETCLEARA()
+
+     <B>.</B>  Shown below are three ways to set the clear attribute:
+
+        SETCLEARA(19)
+        SETCLEARA("03/01")
+        SETCLEARA("B/GR")
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng79d64.html">GETCLEARA()</A>
+<A HREF="ng6f15a.html">Introduction</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

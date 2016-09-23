@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4d194.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4da46.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>setFieldExtent()</B>
+ Establish the extent of the array of fields for a workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE setFieldExtent(</B>
+     <B>                        WORKAREAP wa,</B>
+     <B>                        LONG extent</B>
+     <B>                      )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>extent</B> is the maximum number of fields that will be used by the
+     workarea.
+
+ <B>Description</B>
+
+     setFieldExtent establishes the maximum number of fields that the
+     workarea will contain.
+
+ <B>Default Behavior</B>
+
+     Assigns extent to wa-&gt;fieldExtent and allocates memory for extent number
+     of fields in wa-&gt;fields
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Most implementations should use the default behavior of
+        setFieldExtent.  However, if your RDD allows dynamic addition of
+        fields in the table, this method should set wa-&gt;fieldExtent to the
+        maximum number of fields allowed for the workarea (or provide for
+        resizing of the wa-&gt;fields) and allocate enough memory (in
+        wa-&gt;fields) to store wa-&gt;fieldExtent number of fields.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng48eee.html">addField()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

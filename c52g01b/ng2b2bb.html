@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2a764.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng2b905.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DISKSPACE()</B>
+ Return the space available on a specified disk
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DISKSPACE([&lt;nDrive&gt;]) --&gt; nBytes</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nDrive&gt;</B> is the number of the drive to query, where one is drive A,
+     two is B, three is C, etc.  The default is the current DOS drive if
+     &lt;nDrive&gt; is omitted or specified as zero.
+
+ <B>Returns</B>
+
+     DISKSPACE() returns the number of bytes of empty space on the specified
+     disk drive as an integer numeric value.
+
+ <B>Description</B>
+
+     DISKSPACE() is an environment function that determines the number of
+     available bytes remaining on the specified disk drive.  It is useful
+     when COPYing or SORTing to another drive to determine if there is enough
+     space available before initiating the operation.  You may also use
+     DISKSPACE() with RECSIZE() and RECCOUNT() to create a procedure to back
+     up database files.
+
+     DISKSPACE() ignores the SET DEFAULT drive setting.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example is a user-defined function that demonstrates the
+        use of DISKSPACE() to back up a database file to another drive:
+
+        FUNCTION BackUp( cTargetFile, cTargetDrive )
+           LOCAL nSpaceNeeded, nTargetDrive
+           //
+           nSpaceNeeded := INT((RECSIZE() * ;
+              LASTREC()) + HEADER() + 1)
+           nTargetDrive := ASC(UPPER(cTargetDrive)) - 64
+           //
+           IF DISKSPACE(nTargetDrive) &lt; nSpaceNeeded
+              RETURN .F.
+           ENDIF
+           COPY TO (cTargetDrive + ":" + cTargetFile)
+           //
+           RETURN .T.
+
+ <B>Files:</B>  Library is EXTEND.LIB, source file is EXAMPLEC.C.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng44695.html">LASTREC()</A>
+<A HREF="ng46d36.html">LUPDATE()</A>
+<A HREF="ng5c2d2.html">RECSIZE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

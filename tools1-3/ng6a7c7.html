@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng69fa9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng64deb.html">[^^Up^^]</A>
+<A HREF="ng6ac77.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NUMAND()</B>
+ Performs a 16-bit "AND" of a list of numbers
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NUMAND(&lt;nWORD1|cHexWORD1&gt;,&lt;nWORD2|cHexWORD2&gt;,</B>
+     <B>   [...&lt;nWORDn|&lt;cHexWORDn&gt;]) --&gt; nWORD-AND</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nWORD1|cHexWORD1&gt;, &lt;nWORD2|cHexWORD2&gt;, ...&lt;nWORDn|cHexWORDn&gt;</B>
+     Designates either decimal or hexadecimal number strings.
+
+ <B>Returns</B>
+
+     NUMAND() joins all designated parameters with the logical "AND" and
+     returns the result.
+
+ <B>Description</B>
+
+     This function makes it simple to test several bits in a number
+     simultaneously.  If bits are connected in an AND configuration, you can
+     mask out specific bits and the unneeded bits are reset to 0.  All the
+     numbers specified as parameters are then connected with AND.
+
+ <B>Note</B>
+
+     <B>.</B>  An invalid parameter returns a result of -1.
+
+ <B>Example</B>
+
+     Test an interface register:
+
+     The register contains:         00011101
+     The constant in binary:        00000111
+                                    ________
+     The result: (5)                00000101
+     nStatus  := COM_MSR()
+     IF NUMAND(nStatus, 7) = 5
+        ? "Bit 1 and Bit 2 are set!"
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6bde1.html">NUMNOT()</A>
+<A HREF="ng6c199.html">NUMOR()</A>
+<A HREF="ng6cd1d.html">NUMXOR()</A>
+<A HREF="ng6dcc1.html">SETBIT()</A>
+<A HREF="ng694ba.html">ISBIT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng50d90.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng5198c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETNQSRVS()</B>
+ Determines the number of print servers that service a print queue
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETNQSRVS(&lt;cQueue&gt;,[&lt;lAll&gt;],[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;lAll&gt;</B>  Designates whether all print servers that have access to
+     &lt;cQueue&gt; (.T.) or only the print servers that are currently logged in at
+     &lt;cQueue&gt; (.F.) are counted.  The default value is .F..
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETNQSRVS() returns the number of print servers currently logged in at
+     &lt;cQueue&gt; (&lt;lAll&gt; = .F.) or the number of print servers that have access
+     to &lt;cQueue&gt; (&lt;lAll&gt; = .T.).  If an error occurs (for example, if the
+     &lt;cQueue&gt; does not exist), the function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET NUMBER OF QUEUE SERVERS
+     NNETNQSRVS() allows you to determine if any print server has access to a
+     specified queue, if a print server is currently logged in at a queue, or
+     if the queue is "dead".
+
+ <B>Note</B>
+
+     <B>.</B>  This function requires that the requesting user have access to
+        the queue as a user or an operator.
+
+ <B>Example</B>
+
+     Set the queue LINEPRINT to LPT1 for the capture mode if it is serviced
+     by at least one print server:
+
+     IF NNETNQSRVS('LINEPRINT')&gt;0
+     NNETSETQ(1,'LINEPRINT')
+     ELSE
+     ? 'Queue is currently not serviced !'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng52317.html">NNETQSRVS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,38 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng318b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3cf.html">[^^Up^^]</A>
+<A HREF="ng3711.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>19  CHANGED: DBEDIT()*</B>
+--------------------------------------------------------------------------------
+
+     Instead of having no return value, DBEDIT() now returns NIL.  A
+     header file, Dbedit.ch, is provided to make DBEDIT() more
+     readable.  DBEDIT(), however, is now classified as a compatibility
+     function, and it is recommended that you use the TBrowse object
+     class for constructing browse facilities instead.
+
+     There is also an implementation change in DBEDIT().  In Summer '87,
+     DBEDIT() knew every record number on the screen.  If the user
+     function moved the record pointer to a record that was already on
+     the screen, DBEDIT() would change the current row without
+     refreshing the window.  If the user function moved the record
+     pointer to a record that was not on the screen, DBEDIT() would
+     refresh the window.  In 5.0, DBEDIT() no longer knows the numbers
+     of all the records in the window.  As a result of this change,
+     DBEDIT() refreshes the window whenever the user function changes
+     the record pointer, even if the new current record is already on
+     the screen.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

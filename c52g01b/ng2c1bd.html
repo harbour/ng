@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2b905.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng2cd0d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DISPBOX()</B>
+ Display a box on the screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DISPBOX(&lt;nTop&gt;, &lt;nLeft&gt;, &lt;nBottom&gt;, &lt;nRight&gt;,</B>
+     <B>   [&lt;cnBoxString&gt;], [&lt;cColorString&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B>, and <B>&lt;nRight&gt;</B> define the
+     coordinates of the box.  DISPBOX() draws a box using row values from
+     zero to MAXROW(), and column values from zero to MAXCOL().  If &lt;nBottom&gt;
+     and &lt;nRight&gt; are larger than MAXROW() and MAXCOL(), the bottom-right
+     corner is drawn off the screen.
+
+     <B>&lt;cnBoxString&gt;</B> is a numeric or character expression that defines the
+     border characters of the box.  If specified as a numeric expression, a
+     value of 1 displays a single-line box and a value of 2 displays a
+     double-line box.  All other numeric values display a single-line box.
+
+     If &lt;cnBoxString&gt; is a character expression, it specifies the characters
+     to be used in drawing the box.  This is a string of eight border
+     characters and a fill character.  If &lt;cnBoxString&gt; is specified as a
+     single character, that character is used to draw the whole box.
+
+     If this argument is not specified, a single-line box is drawn.
+
+     <B>&lt;cColorString&gt;</B> defines the display color of the box that is drawn.
+     If not specified, the box is drawn using the standard color setting of
+     the current system color as defined by SETCOLOR().
+
+ <B>Returns</B>
+
+     DISPBOX() always returns NIL.
+
+ <B>Description</B>
+
+     DISPBOX() is a screen function that draws a box at the specified display
+     coordinates in the specified color.  If you specify &lt;cnBoxString&gt;,
+     DISPBOX() draws a box on the screen using configurable border and fill
+     characters.  DISPBOX() draws the box using &lt;cnBoxString&gt; starting from
+     the upper lefthand corner, proceeding clockwise and filling the screen
+     region with the ninth character.  If the ninth character is not
+     specified, the screen region within the box is not painted.  Existing
+     text and color remain unchanged.
+
+     After DISPBOX() executes, the cursor is located in the upper corner of
+     the boxed region at &lt;nTop&gt; + 1 and &lt;nLeft&gt; + 1.  ROW() and COL() are
+     also updated to reflect the new cursor position.
+
+     Note that Box.ch, located in \INCLUDE, provides constants for various
+     border configurations.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code example displays a double-line box using a numeric
+        value to specify the box border:
+
+        #define B_SINGLE   1
+        #define B_DOUBLE   2
+        //
+        DISPBOX(1, 1, 10, 10, B_DOUBLE, "BG+/B")
+
+     <B>.</B>  This example displays a single-line top and double-line side
+        box by specifying border characters with a manifest constant defined
+        in Box.ch:
+
+        #include "Box.ch"
+        //
+        DISPBOX(1, 1, 10, 10, B_SINGLE_DOUBLE, "BG+/B")
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Box.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng722ec.html">@...BOX</A>
+<A HREF="ng7a0c5.html">@...TO</A>
+<A HREF="ngfc149.html">Box characters</A>
+<A HREF="ngf99ac.html">Colors</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

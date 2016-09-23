@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1402e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng14b57.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_IsFiltRec():</B>
+
+  Purpose:  Used to test if a record is in a Roll-Your-Own filter.
+
+   Syntax:  m6_IsFiltRec( &lt;nHandle&gt;, &lt;nRecord&gt; )
+
+    Where:  &lt;nHandle&gt;     --  Is a handle to a previously allocated
+                              RYO filter.
+
+            &lt;nRecord&gt;     --  Record to check in the filter
+
+  Returns:  Logical value:  .T. means the record is set in the filter ( if
+            the filter is partially optimizable, .T. means a potential match),
+            .F. indicates that record is NOT if the filter.
+
+     Note:  If the filter is partially optimizable ( To test the optimization
+            level of a filter call m6_FiltInfo().) then a true value from
+            this function indicates that record is a candidate to be in the
+            filter.  A candidate record is one that the indexed portion of the
+            query determined could be in the filter, however until the
+            partially optimizable portion has been tested, one cannot be
+            certain that the record is actually in the filter.  See the
+            function m6_EvalPartial() to resolve the uncertainty of a
+            partially optimizable filter.
+
+            *Always free RYO filters that are no longer being used.*
+
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         //..............................................create RYO filter
+         nHandle := m6_NewFilter( 100 )
+
+         //......................................add records to the filter
+         ? m6_FiltAddRec( nHandle,  5 )  // .T.
+         ? m6_FiltAddRec( nHandle, 10 )  // .T.
+
+         //..............................fest if records are in the filter
+         ? <B>m6_IsFiltRec( nHandle,  5 )</B>   // .T.
+         ? <B>m6_IsFiltRec( nHandle, 20 )</B>   // .F.
+
+         //.................................free memory allocated to filter
+         ? m6_FreeFilter( nHandle )      // .T.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng159ed.html">m6_NewFilter()</A>
+<A HREF="ngd643.html">m6_EvalPartial()</A>
+<A HREF="ngdc96.html">m6_FiltAddRec()</A>
+<A HREF="ng136a1.html">m6_FreeFilter()</A>
+<A HREF="ngce09.html">m6_Error()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

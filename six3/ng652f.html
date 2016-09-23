@@ -1,0 +1,103 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5e0e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng6ce1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Filter():</B>
+
+  Purpose:  Sets a filter using a HiPer-SEEK index.
+
+   Syntax:  hs_Filter( &lt;cIndex&gt;, &lt;cVal&gt;, [cExpr], [nBufSize], [nOpenMode] )
+
+    Where:  &lt;cIndex&gt; is the Hiper-SEEK index file name to use for the filter.
+              If index extension is not specified, defaults to .HSX.
+
+            &lt;cVal&gt; is a space-delimited string of one or more tokens to look
+              for.
+
+            [cExpr] is an optional expression to validate "hits" with.  If no
+              parameter (or an empty string) is passed, "fuzzy" matches are
+              accepted.
+
+            [nBufSize] is an optional buffer size in kbytes.  Default is 8.
+
+            [nOpenMode] is an optional Open Mode.  Default is 2.  Valid values
+              are:
+
+                  0 = READ-WRITE + SHARED
+                  1 = READ-WRITE + EXCLUSIVE
+                  2 = READ-ONLY + SHARED
+                  3 = READ-ONLY + EXCLUSIVE
+
+  Returns:  The number of records matching the filter condition.
+
+  Comments:  This function combines the HiPer-SEEK's Fast Text Search roots
+             with the Mach SIx query optimizer's Roll-Your-Own filter
+             technology.
+
+  Example:
+
+    #include "inkey.ch"
+
+    LOCAL cExpr := "test-&gt;FIRST + test-&gt;LAST + test-&gt;STREET + test-&gt;CITY"
+    LOCAL nCount := 0, lStrict := .F.
+    LOCAL cSearch := "Steve John Robert"
+    LOCAL GetList := {}
+
+    CLS
+    USE test EXCL
+
+    IF !file("TEST.HSX")
+      @ 0,0 "Building HiPer-SEEK Index..."
+      hs_Index( "TEST.HSX", cExpr, 2 )
+      ?? "Done!"
+      Inkey(1)
+      CLS
+    ENDIF
+
+    WHILE .T.
+      cSearch := PadR( cSearch, 59 )
+      @ 0,0 SAY "Search Values.....:" GET cSearch
+      @ 1,0 SAY "Strict Match (Y/N):" GET lStrict PICTURE "Y"
+      READ
+      IF LastKey() == K_ESC
+        CLS
+        EXIT
+      ENDIF
+      cSearch := AllTrim( cSearch )
+
+      @ 3,0 SAY "Setting HiPer-SEEK Filter ..."
+
+      nCount := <B>hs_Filter( "TEST.HSX", cSearch, iif( lStrict, cExpr, "" ))</B>
+
+      ?? "Done!"
+      @ 4,0 SAY LTrim( Str( nCount )) + " records meeting filter condition."
+
+      @ 6,0 SAY "Press any key to browse the matching records..."
+      Inkey(0)
+
+      GO TOP
+      Browse()
+      CLS
+    ENDDO
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng16f7c.html">m6_SetFilter()</A>
+<A HREF="ng159ed.html">m6_NewFilter()</A>
+<A HREF="ng83cf.html">hs_Next()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

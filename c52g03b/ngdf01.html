@@ -1,0 +1,119 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd5d5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng96fc.html">[^^Up^^]</A>
+<A HREF="nge7a7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_itemFreeC()</B>
+ Frees a character string allocated by the Item API
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "item.api"</B>
+     <B>BOOL _itemFreeC(</B>
+     <B>                 BYTEP fpItemVal</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>fpItemVal</B> is a pointer returned by the Item API in response to an
+     _itemGetC() call.
+
+ <B>Returns</B>
+
+     True if requested pointer was released.
+
+ <B>Description</B>
+
+     When _itemGetC() is asked to provide a character string from a character
+     Item, it allocates memory for the string from one of several places.
+     You need to call the _itemFreeC() function to release the memory once
+     the string is no longer necessary.
+
+     <B>Warning! </B> Do <B>not</B> call _itemFreeC() unless the character string
+     was retrieved through _itemGetC().  Calling _itemFreeC() with a NULL
+     pointer, a pointer already freed, or a string not retrieved by
+     _itemGetC() will result in a VM Integrity fault or other internal error.
+
+ <B>Examples</B>
+
+     /*
+     *
+     * CharCount( cString, cChar )
+     *
+     * Count occurrences of a single character
+     * in a CA-Clipper string.  Version 1.00
+     *
+     */
+
+     CLIPPER CharCount( void )
+     {
+        USHORT uiChars = 0;
+        USHORT uiLen;
+        USHORT i;
+        HANDLE vmhString;
+
+        BYTEP  cStringP;
+        BYTE   cFindMe;
+
+        ITEM   itemString, itemFindMe, itemRet;
+
+        if (PCOUNT != 2)
+        {
+           _ret();               // NOTE: Withhold service
+           return;               // Early return!
+        }
+
+        itemRet    = _itemPutNL( NULL, 0 );
+        itemString = _itemParam( 1 );
+        itemFindMe = _itemParam( 2 );
+
+        if ( (_itemType( itemString ) == CHARACTER) &amp;&amp;
+              (_itemType( itemFindMe ) == CHARACTER) )
+        {
+           _itemCopyC( itemFindMe, &amp;cFindMe, 1 );
+
+           vmhString = _xvalloc( _itemSize( itemString ), NULL );
+           cStringP = _xvlock( vmhString );
+
+           uiLen = _itemCopyC( itemString, cStringP, NULL );
+
+           for( i = 0; i &lt; uiLen; i++ )
+           {
+              if ( cStringP[i] == cFindMe )
+                 uiChars++;
+           }
+
+           _xvunlock( vmhString );
+           _xvfree( vmhString );
+
+           itemRet = _itemPutNL( itemRet, (long)uiChars );
+
+        }
+
+        _itemReturn( itemRet );
+
+        _itemRelease( itemRet );
+        _itemRelease( itemString );
+        _itemRelease( itemFindMe );
+
+        return;
+     }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Item.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge7a7.html">_itemGetC()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3231b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng32e44.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosReallocSeg()               Resize extended memory block of up to 64kb.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Resize an extended memory block of up to 64kb.</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosReallocSeg( USHORT size, SEL selector);</B></U>
+
+ <U>size       <B>New size of segment in bytes (0 = 64 Kb).</B></U>
+
+ <U>selector   <B>Selector originally returned by DosAllocSeg() when the memory</B></U>
+            <B>block was allocated.</B>
+
+ <U>Return   : <B>None</B></U>
+
+ DosReallocSeg() changes the size of a memory block originally allocated with
+ DosAllocSeg(). The block may not be reallocated to a size larger than 64kb
+ (use DosAllocHuge()/DosReallocHuge() to allocate/reallocate huge memory
+ blocks).
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main (void)</B>
+    <B>{</B>
+    <B>SEL         selector;</B>
+    <B>/* Allocate a 4kb block */</B>
+    <B>if (DosAllocSeg(4096, &amp;selector, 0) != 0)</B>
+    <B>   {</B>
+    <B>   printf("DosAllocSeg() failed\n");</B>
+    <B>   exit(255);</B>
+    <B>   }</B>
+    <B>printf("4K block allocated at : %04X\n",selector);</B>
+    <B>/* Expand block to 8kb */</B>
+    <B>if (DosReallocSeg(8192, &amp;selector) != 0)</B>
+    <B>   {</B>
+    <B>   printf("DosReallocSeg() failed\n");</B>
+    <B>   exit(254);</B>
+    <B>   }</B>
+    <B>printf("Block successfully expanded to 8kb\n");</B>
+    <B>DosFreeSeg(selector);</B>
+    <B>}</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,297 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc9493.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngc8ba2.html">[^^Up^^]</A>
+<A HREF="ngcc489.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>&amp;</B>
+ Macro evaluation--unary                         (Special)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>&amp;&lt;cMacroVar&gt;[.]</B>
+     <B>&amp;(&lt;cMacroExp&gt;)</B>
+
+ <B>Operands</B>
+
+     <B>&lt;cMacroVar&gt;</B> can be any character variable.  The period (.) is the
+     macro terminator and indicates the end of the macro variable and
+     distinguishes the macro variable from adjacent text in the statement.
+
+     <B>&lt;cMacroExp&gt;</B> is a character expression enclosed in parentheses.  In
+     this instance, the expression is evaluated first, and the macro
+     operation is performed on the resulting character value.  This allows
+     the contents of fields and array elements to be compiled and run.
+
+ <B>Description</B>
+
+     The macro operator in CA-Clipper is a special operator that allows
+     runtime compilation of expressions and text substitution within strings.
+     Whenever the macro operator (&amp;) is encountered, the operand is submitted
+     to a special runtime compiler (the macro compiler) that compiles
+     expressions, but not statements or commands.
+
+     <B>Text Substitution</B>
+
+     Whenever a reference to a private or public macro variable, embedded in
+     a character string is encountered:
+
+     cMacro := "there"
+     ? "Hello &amp;cMacro"            // Result: Hello there
+
+     the variable reference is replaced by the content of the macro variable.
+     If you specify a macro expression (e.g., &amp;(cMacro1 + cMacro2), and the
+     macro variable is a local, static, field variable, or an array element,
+     it is treated as literal text and not expanded.
+
+     <B>Compile and Run</B>
+
+     When a macro variable or expression specified within an expression is
+     encountered, it is treated like an expression, with the macro symbol
+     behaving as the compile and run operator.  If the macro is specified as
+     a macro variable:
+
+     cMacro := "DTOC(DATE())"
+     ? &amp;cMacro
+
+     the macro compiler compiles, then executes the content of the macro
+     variable.  The compiled code is then discarded.
+
+     If you specify an expression enclosed in parentheses and prefaced by the
+     macro operator (&amp;):
+
+     ? &amp;(INDEXKEY(0))
+
+     the expression is evaluated and the resulting character string is
+     compiled and run as a macro variable.
+
+     Using the macro operator, you can compile a character string containing
+     a code block definition:
+
+     bBlock := &amp;("{ |exp| QOUT(exp) }")
+
+     The run portion of the operation returns the code block as a value.  You
+     may then use the code block by invoking it with the EVAL() function.
+     This is especially significant in activations that involve extensive
+     looping through user-defined conditions, (operations that in earlier
+     versions of CA-Clipper required macro expansion).  In those versions,
+     the macro expression was compiled and run for each iteration of the
+     loop.  With the combination of a macro expansion and a code block
+     EVAL(), the compilation is performed once at compile time, and the
+     EVAL() merely executes the code block each time through the loop.  The
+     time savings at runtime can be enormous.
+
+     EVAL(bBlock, DATE())
+
+ <B>Notes</B>
+
+     <B>.  Command keywords</B>: You cannot use the macro operator (&amp;) to
+        substitute or compile command keywords.  However, you can redefine
+        command keywords by modifying the command definition in STD.CH,
+        overriding an existing command definition with a new definition using
+        the #command directive, or redefining a command keyword using the
+        #translate directive.  In any case, you may redefine a command
+        keyword only at compile time, not at runtime.
+
+     <B>.  Command arguments</B>: In prior versions of CA-Clipper as well as
+        in other dialects, you could use macro variables as the arguments of
+        commands requiring literal text values.  These included all file
+        command arguments and SET commands with toggle arguments.  In these
+        instances, you can now use an extended expression enclosed in
+        parentheses in place of the literal argument.  For example:
+
+        xcDatabase = "Invoices"
+        USE &amp;xcDatabase.
+
+        can be replaced with:
+
+        xcDatabase = "Invoices"
+        USE (xcDatabase)
+
+        It is important to use extended expressions if you are using local
+        and static variables.  Generally, commands are preprocessed into
+        function calls with command arguments translated into function
+        arguments as valid CA-Clipper values.  Filenames in file commands,
+        for instance, are stringified using the smart stringify result marker
+        and passed as arguments to the functions that actually perform the
+        desired actions.  If you specify a literal or macro value as the
+        command argument, it is stringified.  If, however, the argument is an
+        extended expression, it is written to the result text exactly as
+        specified.  This example:
+
+        #command RENAME &lt;xcOld&gt; TO &lt;xcNew&gt;;
+        =&gt;;
+              FRENAME( &lt;(xcOld)&gt;, &lt;(xcNew)&gt; )
+        //
+        RENAME &amp;xcOld TO &amp;xcNew
+        RENAME (xcOld) TO (xcNew)
+
+        is written to the result text as this:
+
+        FRENAME( "&amp;xcOld", "&amp;xcNew" )
+        FRENAME( xcOld, xcNew )
+
+        when preprocessed.  When the macro variables are stringified, the
+        macro variable names are hidden in the string and not compiled.
+        Later, at runtime, they are substituted into the string and passed as
+        arguments to the FRENAME() function.  This precludes local and static
+        macro variables since the names of the variables are not present at
+        runtime to be substituted.  Public and private variables, however,
+        behave as expected.
+
+     <B>.  Lists as arguments of commands</B>: The macro operator (&amp;)will not
+        fully substitute or compile a list as an argument of most commands.
+        In particular, these are commands where an argument list is
+        preprocessed into an array or a code block.  Instances of this are
+        arguments of the FIELDS clause and SET INDEX.  An exception is the
+        SET COLOR command which preprocesses the list of colors into a single
+        character string and passes it to the SETCOLOR() function.
+
+        In any case, list arguments should always be specified as extended
+        expressions with each list argument specified:
+
+        LOCAL xcIndex := { "Ntx1", "Ntx2" }
+        SET INDEX TO (xcIndex[1]), (xcIndex[2])
+
+     <B>.  Arrays:</B> You can use the macro operator (&amp;) with arrays and
+        array elements.  However, because of the increased power of
+        CA-Clipper arrays, you may find less need to use the macro operator
+        (&amp;) to  make variable references to arrays.  You can now assign array
+        references to variables, return array references from user-defined
+        functions, and nest array references within other arrays.  You may
+        also create arrays by specifying literal arrays or using the ARRAY()
+        function.
+
+        You can, therefore, make references to arrays and array elements
+        using both macro variables and macro expressions with the restriction
+        that you cannot make the subscript references in a PRIVATE or PUBLIC
+        statement.  Also, you cannot specify the macro operator (&amp;) in a
+        declaration statement, such as a LOCAL or STATIC statement.
+        Attempting this will generate a fatal compiler error.
+
+        This example references array elements using macro variables:
+
+        cName := "aArray"
+        nElements := 5
+        cNameElement := "aArray[1]"
+        //
+        PRIVATE &amp;cName.[nElements]    // Creates "array" with 5
+                                      // elements
+        &amp;cNameElement. := 100         // Assigns 100 to element 1
+        &amp;cName.[3] := "abc"           // Assigns "abc" to element 3
+
+        You can successfully apply a macro operator (&amp;) to an array element
+        if the reference is made using a macro expression.  A macro variable
+        reference, however, will generate a runtime error.  For example, the
+        following lists the values of all fields of the current record:
+
+        USE Customer NEW
+        aStruc := DBSTRUCT()
+        //
+        FOR nField := 1 TO LEN(aStruc)
+           ? &amp;(aStruc[nField, 1])
+        NEXT
+
+     <B>.  Code blocks</B>: You can apply the macro operator (&amp;) to a macro
+        variable or expression in a code block in most cases. There is a
+        restriction when the macro variable or macro expression contains a
+        declared variable.  A runtime error occurs if you specify a complex
+        expression (an expression that contains an operator and one or more
+        operands) that includes the macro operator (&amp;) within a code block.
+
+        This  has important implications on the use of local and static
+        variables in the conditional clauses of commands, since these clauses
+        are blockified as they are written to the result text during
+        preprocessing.  This applies to all FOR and WHILE clauses, the SET
+        FILTER command, and the SET RELATION linking expression.  The general
+        workaround is to gather the entire expression into a single macro
+        variable then apply the macro operator (&amp;) to the variable.
+
+     <B>.  Macro conditions:</B> When using the macro operator (&amp;) to specify
+        conditional clauses of database commands such as FOR or WHILE
+        clauses, there are some restrictions based on the expression's
+        complexity and size:
+
+        <B>-</B>  The maximum string size the macro compiler can process is 254
+           characters.
+
+        <B>-</B>  There is a limit to the complexity of conditions (the more
+           complex, the fewer the number of conditions you can specify).
+
+     <B>.  Procedures and functions</B>: You can reference procedure and
+        function calls using macro variables and expressions.  With DO, the
+        macro variable reference to the procedure can be all or part of the
+        procedure name.  With a call to a function (built-in or
+        user-defined), the macro variable reference must include the function
+        name and all of its arguments.
+
+        In CA-Clipper, because of the added facility code blocks, all
+        invocations of procedures and functions using the macro operator
+        should be converted to the evaluation of code blocks.  This code
+        fragment:
+
+        cProc := "AcctsRpt"
+        .
+        .
+        .
+        DO &amp;cProc
+
+        can be replaced with:
+
+        bProc := &amp;( "{ || AcctsRpt() }" )
+        .
+        .
+        .
+        EVAL(bProc)
+
+        The advantage of a code block over  a macro evaluation is that the
+        result of the compilation of a string containing a code block can be
+        saved and therefore need only be compiled once.  Macro evaluations
+        compile each time they are referenced.
+
+     <B>.  References into overlays:</B> You must declare procedures and
+        user-defined functions that are used in macro expressions and
+        variables but not referenced elsewhere as EXTERNAL, or the linker
+        will not include them into the executable (.EXE) file.  The only
+        exception to this rule is a prelinked procedure or user-defined
+        function in a (.PLL) library.
+
+     <B>.  TEXT...ENDTEXT:</B> Macro variables referenced within a
+        TEXT...ENDTEXT construct are expanded.  Note that a field cannot be
+        expanded, so you must first assign the field value to a memory
+        variable then reference the memory variable as a macro variable
+        within the TEXT...ENDTEXT.  For example:
+
+        USE Customer NEW
+        myVar := Customer-&gt;CustName
+        TEXT
+        This is text with a macro &amp;myVar
+        ENDTEXT
+
+     <B>.  Nested macros:</B> The processing of macro variables and
+        expressions in CA-Clipper permits  nested macro definitions.  For
+        example, after assigning a macro variable to another macro variable,
+        the original macro variable can be expanded resulting in the
+        expansion of the second macro variable and evaluation of its
+        contents:
+
+        cOne = "&amp;cTwo"            // expand cTwo
+        cTwo = "cThree"           // yielding "cThree"
+        cThree = "hello"
+        //
+        ? &amp;cOne                   // Result: "hello"
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngcc489.html">( )</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

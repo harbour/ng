@@ -1,0 +1,99 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb0c58.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ngb1e6f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>UPDATE</B>
+ Update current database file from another database file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>UPDATE FROM &lt;xcAlias&gt;</B>
+     <B>   ON &lt;expKey&gt; [RANDOM]</B>
+     <B>   REPLACE &lt;idField&gt; WITH &lt;exp&gt;</B>
+     <B>   [, &lt;idField2&gt; WITH    &lt;exp2&gt;...]</B>
+
+ <B>Arguments</B>
+
+     <B>FROM &lt;xcAlias&gt;</B> specifies the alias of the work area used to update
+     records in the current work area.  This argument may be specified either
+     as a literal filename or as a character expression enclosed in
+     parentheses.
+
+     <B>ON &lt;expKey&gt;</B> specifies the expression that defines matching records
+     in the FROM work area.
+
+     <B>REPLACE &lt;idField&gt;</B> specifies a field in the current work area to
+     replace with a new value.
+
+     <B>WITH &lt;exp&gt;</B> specifies the value to replace into the current field.
+     You must reference any field contained in the FROM work area with the
+     correct alias.
+
+     <B>RANDOM</B> allows records in the FROM database file to be in any order.
+     If this option is specified, the current database file must be indexed
+     on &lt;expKey&gt;.
+
+ <B>Description</B>
+
+     UPDATE is a database command that replaces fields in the current work
+     area with values from another work area based on the specified key
+     expression.  UPDATE is designed to update only current work area records
+     based on a one-to-one or one-to-many relation with the FROM work area.
+     This means that UPDATE can only update records in the current work area
+     with unique key values.  When there is more than one instance of a key
+     value, only the first record with the key value is updated.  The FROM
+     work area, however, can have duplicate key values.
+
+     There are two formulations of the command depending on whether the FROM
+     work area records are sorted or indexed on &lt;expKey&gt; or not.  If RANDOM
+     is not specified, both the current work area and the FROM work area must
+     be indexed or sorted in &lt;expKey&gt; order.  If RANDOM is specified, the
+     current work area must be indexed by &lt;expKey&gt;, but the FROM work area
+     records can be in any order.
+
+     To use UPDATE in a network environment, the current database file must
+     be locked with FLOCK() or USEed EXCLUSIVEly.  The FROM database file may
+     be used in any mode.  Refer to the Network Programming chapter in the
+     Programming and Utilities guide for more information.
+
+ <B>Notes</B>
+
+     <B>.  Deleted records:</B> If DELETED is OFF, deleted records in both
+        source files are processed.  Records in the file being updated retain
+        their deleted status and are not affected by the deleted status of
+        records in the FROM file.  If DELETED is ON, however, no deleted
+        records are processed from either source file.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example UPDATEs Customers database file with outstanding
+        invoice amounts:
+
+        USE Invoices NEW
+        USE Customer INDEX Customer NEW
+        UPDATE FROM Invoices ON Last;
+           REPLACE Owed WITH Owed + Invoices-&gt;Amount RANDOM
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng895a7.html">INDEX</A>
+<A HREF="ng8c446.html">JOIN</A>
+<A HREF="ng94bb4.html">REPLACE</A>
+<A HREF="ngab66b.html">SET UNIQUE*</A>
+<A HREF="ngacef0.html">SORT</A>
+<A HREF="ngaf81b.html">TOTAL</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

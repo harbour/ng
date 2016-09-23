@@ -1,0 +1,203 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>RYO Filters:</B>
+
+  RYO filters give you ultimate flexibility in filtering records.  You can
+  perform tasks like tagging records to create fully customized browses.  Or
+  you can use RYO filters to span related data tables to yield a set of
+  records based on criteria from ANY of the related files.
+
+  Like the SIx Drivers RYO indexes, RYO filters are simple and easy to use.
+  The function names for managing RYO filters are similar to those for RYO
+  indexes.  For example, you would use Sx_KeyAdd() to add a key to a RYO
+  index.  With MachSIx you would use m6_FiltAddRec() to add a record to an
+  RYO filter.
+
+  Following is a list of functions available to you to manage RYO filters:
+
+        m6_AddScoped()             m6_FiltPos()
+        m6_EvalPartial()           m6_FiltRestore()
+        m6_FiltAddRec()            m6_FiltSave()
+        m6_FiltBott()              m6_FiltSkip()
+        m6_FiltChgRec()            m6_FiltTop()
+        m6_FiltCopy()              m6_GetAreaFilter()
+        m6_FiltDropRec()           m6_FreeFilter()
+        m6_FiltGoRec()             m6_IsFiltRec()
+        m6_FiltInfo()              m6_NewFilter()
+        m6_FiltInverse()           m6_SetAreaFilter()
+        m6_FiltJoin()
+
+  You can find examples for the simpler RYO Filter implementations through-
+  out the documentation.  For instance, an example of tagging records for
+  customized browses can be found under the documentation for
+  m6_FiltAddRec().  Therefore, the discussion here will focus on one of the
+  more powerful uses of RYO filters -- filtering information on related
+  files.
+
+  Our example consists of accounts and payments, that are stored in the
+  tables ACCOUNT.DBF and PAYMENT.DBF respectively.  There is a one to many
+  relation- ship between the accounts and payments based on the ACCOUNT key
+  field of AcctNo.
+
+  In the example we would like to view all accounts in California that have
+  made payments to their account by cash.  By conventional means this would
+  be a difficult task.  As you will see, with RYO filters it is relatively
+  painless and fast.
+
+
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *
+  *  Example of RYO filters and related tables
+  *
+  :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX.CH"
+
+  clear screen
+
+  //........................................open accounts and payments
+  Use Account Via "SIXCDX"
+
+  Use Payment Via "SIXCDX" New
+
+  Select Account
+
+  // In effect, we want to set a filter for the following condition
+  // SET FILTER TO Account-&gt;State="CA" .and. Payment-&gt;PayCode='CASH'
+
+  //....................create a filter for all records in California
+  nAcctFilt := <B>m6_NewFilter( "State='CA'")</B>
+
+  //.............convert record based filter to account number based
+  nAcctFilt := RecNo2AcctNo( nAcctFilt )
+
+  Select Payment
+
+  //......................create a RYO filter for all "CASH" payments
+  nPayFilt := <B>m6_NewFilter( "PayCode='CASH'")</B>
+
+  //.............convert record based filter to account number based
+  nPayFilt := RecNo2AcctNo( nPayFilt )
+
+  //..........................................join filters  ( .AND. )
+  <B>m6_FiltJoin( nAcctFilt, nPayFilt, JOIN_INTERSECT )</B>
+
+  Select Account
+
+  //...........................set tag to AcctNo for filter conversion
+  set tag to AcctNo
+
+  //..............convert account based filter to a record based filter
+  nResult := AcctNo2RecNo( nAcctFilt )
+
+  //..............................SET FILTER TO the RYO filter nResult
+  <B>m6_SetAreaFilter( nResult )</B>
+
+  //..................................go to first record in the filter
+  go top
+
+  //.................................................view the results
+  Browse()
+
+  quit
+
+  #define MAX_ACCTNO  99999
+
+  /*
+  *..RecNo2AcctNo() -- Converts record based filter to Account based
+  */
+  Function RecNo2AcctNo( nHandle )
+    local nSaveOrder, nSaveRec, nNewFilter, nRecNo
+
+    //..............................save index order and record number
+    nSaveOrder := indexord()
+    nSaveRec := RecNo()
+
+    //..................................................set order to 0
+    dbSetOrder(0)
+
+    //.............................................create a empty filter
+    nNewFilter := <B>m6_NewFilter( MAX_ACCTNO )</B>
+
+    //.........................................get first record in filter
+    nRecNo := <B>m6_FiltTop( nHandle )</B>
+
+    //...............loop until we've processed all records in the filter
+    do while nRecNo != 0
+
+      //.................................................goto this record
+      dbGoto( nRecNo )
+
+      //...................................store account number in filter
+      <B>m6_FiltAddRec( nNewFilter, Field-&gt;nAcctNo )</B>
+
+      //........................................get next record in filter
+      nRecNo := <B>m6_FiltSkip( nHandle )</B>
+
+    enddo
+
+    //.......................................free the record based filter
+    <B>m6_FreeFilter( nHandle )</B>
+
+    //...........................reset the index order and record pointer
+    dbSetOrder( nSaveOrd )
+    dbGoto( nSaveRec )
+
+  Return ( nNewFilter )
+
+
+  /*
+  *..AcctNo2RecNo() -- Converts Account number based filter to record based
+  */
+  Function AcctNo2RecNo( nHandle )
+    local nSaveOrder, nSaveRec, nNewFilter, nAcctNo
+
+    //...................................................save record number
+    nSaveRec := RecNo()
+
+    //................................................create a empty filter
+    nNewFilter := <B>m6_NewFilter()</B>
+
+    //......................................get first account in the filter
+    nAcctNo := <B>m6_FiltTop( nHandle )</B>
+
+    //.................loop until we've processed all accounts in the filter
+    do while nAcctNo != 0
+
+      //...............................................seek to this account
+      Seek nAcctNo
+
+      //.....................................store record number in filter
+      <B>m6_FiltAddRec( nNewFilter, RecNo() )</B>
+
+      //.........................................get next account in filter
+      nAcctNo := <B>m6_FiltSkip( nHandle )</B>
+
+    enddo
+
+    //.......................................free the account based filter
+    <B>m6_FreeFilter( nHandle )</B>
+
+    //.................................................reset record pointer
+    dbGoto( nSaveRec )
+
+  Return ( nNewFilter )
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,151 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1ef26.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1763f.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_xvwire()</B>
+ Obtain a long term lock on a VM segment
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "vm.api"</B>
+     <B>FARP _xvwire(</B>
+     <B>              HANDLE hSegment</B>
+     <B>            )</B>
+
+ <B>Arguments</B>
+
+     <B>hSegment</B> is the VM segment handle returned by _xvalloc().
+
+ <B>Returns</B>
+
+     _xvwire() returns a far pointer to the base of the locked VM segment, or
+     a NULL pointer if the segment pointer is not valid (i.e., does not
+     represent an allocated segment).
+
+ <B>Description</B>
+
+     _xvwire() moves a segment to the low end of VM swap space and locks it,
+     preventing the segment from being moved or swapped.  Locking a VM
+     segment allows access to it through a standard far pointer.
+
+     VM segments locked by _xvwire() must be unlocked by _xvunwire().
+
+     <B>Warning! </B> Segments that you lock with _xvlock() may be placed in the
+     middle of the swap space.  Thus, if you hold the lock for a long period
+     of time, the swap space can become fragmented, reducing the size of the
+     largest contiguous memory block available.
+
+     _xvwire(), on the other hand, moves the locked segment to the lowest
+     possible position within the swap space.  Thus, if you use _xvwire() to
+     lock a segment for a long period of time, you avoid fragmentation.
+
+     <B>Note: </B> You may lock VM segment more than once.  The VMM system
+     maintains, for each segment, a lock count (_xvlockcount()) which is
+     incremented each time you lock the segment and decremented each time you
+     unlock the segment.  A segment is not physically unlocked until its lock
+     count is zero.
+
+ <B>Notes</B>
+
+     <B>.  _xvwire() vs. _xvlock(): </B> The question of when to use _xvwire() and
+        when to use _xvlock() is one of efficiency.  _xvlock() is faster at
+        locking segments, but you must unlock the segments relatively quickly
+        or they will inhibit the VMM system.
+
+        _xvwire() is slower at locking segments, but you can maintain the
+        segment locks for a long period of time.  This gives functions access
+        to the wired segment without having to lock it.
+
+        A good example of the need for _xvwire() is a serial communications
+        buffer.  The initialization routine is not affected by the extra time
+        it takes to wire a segment, but the ISR for the communications port
+        needs instant access to memory and, thus, cannot afford to wait for a
+        segment to be locked.
+
+     <B>.  Error conditions: </B> If the segment cannot be loaded into conventional
+        memory because of insufficient VM swap space, the system raises an
+        internal error and halts.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example allocates a segment with _xvalloc() and locks it
+        with _xvwire().  After a string is copied into the segment, it is
+        unlocked and freed.
+
+        // CA-Clipper include files
+        #include "extend.api"
+        #include "vm.api"
+
+        // Microsoft C include files
+        #include "string.h"
+
+        // Prototypes
+        Boolean VMWireExSetup(char * spSrc);
+        void VMWireExExit(void);
+
+        static HANDLE hSegment;
+        static char * spString = NULL;
+
+
+        Boolean VMWireExSetup(char * spSrc)
+        {
+           Boolean bResult = FALSE;
+
+           if (hSegment = _xvalloc(strlen(spSrc) + 1, 0))
+              {
+              spString = _xvwire(hSegment);
+              if (spString != NULL)
+                 {
+                 strcpy(spString, spSrc);
+
+
+                 bResult = TRUE;
+
+                 }
+              else
+                 _xvfree(hSegment);
+
+              }
+
+           return (bResult);
+        }
+
+
+        void VMWireExExit(void)
+        {
+            // Clean up if anything was allocated
+           if (spString)
+              {
+              _xvunwire(hSegment);
+
+              spString = NULL;
+
+              _xvfree(hSegment);
+              }
+
+           return;
+        }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Vm.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng179e4.html">_xvalloc()</A>
+<A HREF="ng181c4.html">_xvfree()</A>
+<A HREF="ng1c7b0.html">_xvlock()</A>
+<A HREF="ng1d383.html">_xvlockcount()</A>
+<A HREF="ng1ef26.html">_xvunwire()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,41 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1460d7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng143d7a.html">[^^Up^^]</A>
+<A HREF="ng14661d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>&lt;oPopUp&gt;:close([&lt;lCloseChild&gt;]) --&gt; self</B>
+
+        &lt;lCloseChild&gt; is a logical value that indicates whether
+        PopUpMenu:close() should deactivate the pop-up menu in its selected
+        item, which in turn deactivates the pop-up menu in its selected item
+        and so on.  This is useful for nested menus where multiple levels of
+        choices are presented.  A value of true (.T.) indicates that child
+        pop-up menu items should be closed.  A value of false (.F.) indicates
+        that child pop-up menu items should not be closed.  The default value
+        is true.
+
+        close() is a method of the PopUpMenu class that is used for
+        deactivating a pop-up menu.  When called, PopUpMenu:close() performs
+        three operations.  First, if the value of &lt;lCloseChild&gt; is not false
+        (.F.) , close() determines if its selected menu item contains a
+        PopUpMenu object.  If so, it calls its selected menu item's close()
+        method.  Second, close() restores the previous contents of the region
+        of the screen that it occupies.  Third, close() sets its selected
+        item to 0.
+
+        <B>Note: </B> This message only has meaning when the pop-up menu is
+        open.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

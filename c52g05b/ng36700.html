@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng36010.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng346a0.html">[^^Up^^]</A>
+<A HREF="ng370eb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>6   Dynamic Overlaying</B>
+------------------------------------------------------------------------------------------
+
+     Clipper 5.0, using the supplied special version of .RTLink, manages
+     compiled Clipper code using a technique called dynamic overlaying.
+     This technique eliminates the need for complicated overlay structures
+     and allows flexible runtime management of compiled code.
+
+     During linking, .RTLink breaks compiled Clipper modules into fixed-size
+     <B>pages.</B>  These pages are stored either in the executable file or in
+     separate overlay files.  The paging architecture eliminates
+     restrictions and memory calculations based on the size of compiled
+     functions or modules.  Large modules are broken into multiple pages;
+     small functions are grouped together in a single page.
+
+     At execution time, the dynamic overlay manager loads pages based on
+     information embedded in the .EXE by the linker.  The dynamic pages are
+     loaded into VM segments, allowing the VMM to manage the overlay pages
+     on a competitive basis with other uses of memory.  The paging
+     architecture allows the system to discard low-use sections of code even
+     if the code is associated with a pending active function; overlays are
+     not required to <B>nest</B> in parallel with function activations.  Code
+     pages which are being heavily used are maintained in memory by the
+     VMM's LRU swapping policy.
+
+     When possible, the VMM will place dynamic overlay pages in EMM,
+     reducing overlay reads.  Overlay pages are never written to the VMM
+     disk swap file, however.  If a VM segment containing an overlay page is
+     to be removed from memory altogether, it is simply discarded.  If it is
+     needed subsequently, it is re-read from the overlay file.
+
+     In addition to virtual memory, the dynamic overlay manager uses a
+     dedicated area of real memory to cache the most active dynamic overlay
+     pages.
+
+     <B>Configuration:</B>  The dynamic overlay manager will hold overlay pages
+     in virtual memory only as long as it can maintain an active file handle
+     for the disk file containing the pages.  If the file is closed, the
+     pages are discarded from virtual memory.  The maximum number of file
+     handles used by the dynamic overlay manager can be controlled using the
+     DYNF setting of the CLIPPER environment variable.  Valid settings are
+     from 1 to 8.  The default setting is 2.  For applications which use
+     many separate overlay files, increasing this setting can improve
+     performance.
+
+     <B>Example:</B>  SET CLIPPER=DYNF:4
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

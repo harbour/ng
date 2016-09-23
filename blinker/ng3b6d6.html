@@ -1,0 +1,122 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3b3c7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng3c5de.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPRUNCMD() / SWPRUNCMDBAS()  Execute child process.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Execute a child process.</B></U>
+
+ <U>Syntax   : <B>lValue = SWPRUNCMD(cCommand, nuMem, cRunPath, cTempPath)</B></U>
+
+ <U>Return   : <B>TRUE if the command interpreter was executed.</B></U>
+            <B>FALSE if an error occurred</B>
+
+ This function executes a child process of the current program, freeing
+ conventional memory occupied by the parent program. Any non conventional
+ memory used by the parent will remain allocated.
+
+ The parameters to SWPRUNCMD() are as follows:
+
+ cCommand: The name of the program, batch file or DOS internal command to be
+ executed, followed by any required parameters. An empty string will cause
+ the command interpreter to be loaded, giving a DOS prompt.
+
+ nuMem: The amount of memory in kilobytes (kb) to be freed prior to executing
+ the child process. If this parameter is passed as zero, as much memory as
+ possible will be freed.
+
+ cRunPath: The drive and directory to make current prior to executing the
+ child process.
+
+ cTempPath: The drive and directory where the swap function should create a
+ disk swap file containing the image (or partial image) of the parent
+ program. Note that XMS and EMS memory will be used in preference to a disk
+ swap file if available provided their use has not been prohibited through
+ the use of SWPUSEEMS() and SWPUSEXMS().
+
+ Note  that this parameter may be overridden at runtime through the use of
+ the SWAP or BLINKER environment variables. For example:
+
+    <B>SET SWAP=F:\TEMP;</B>
+
+ or
+
+    <B>SET BLINKER=/SDF:\TEMP</B>
+
+ will cause the temporary diskfile to be created in F:\TEMP, regardless of
+ the value passed as a parameter to the SWPRUNCMD().
+
+ The swap function will always invoke the current command interpreter as
+ specified in the COMSPEC environment variable, which in turn will execute
+ cCommand. This allows the parent program to execute any internal or external
+ DOS command, a batch file or any program which can be executed from the DOS
+ prompt. The return code of the child process can be retrieved using the
+ function SWPERRLEV().
+
+ The return value is a logical (boolean) value indicating the success of the
+ SWPRUNCMD() call. Following an unsuccessful call to SWPRUNCMD(), the program
+ can use SWPERRMAJ() and SWPERRMIN() to determine the nature of the error.
+
+ Example:
+
+    <B>success = SWPRUNCMD("",0,"","")</B>
+
+ Shell to DOS, freeing as much memory as possible, save swap file to current
+ directory if required.
+
+    <B>success = SWPRUNCMD("WIN",0,"C:\WINDOWS","F:\")</B>
+
+ This command will execute Microsoft Windows, freeing as much memory as
+ possible. The swap function will change drive and directory to C:\WINDOWS
+ prior to executing the WIN command. If a temporary disk swap file is
+ required, it will be created on F:\
+
+    <B>success = SWPRUNCMD("DIR /W",100,"","")</B>
+    <B>IF (!success)</B>
+    <B>   ? "Swap failed"</B>
+    <B>   majerr = SWPERRMAJ()</B>
+    <B>   minerr = SWPERRMIN()</B>
+    <B>   ? "Error codes :", majerr, minerr</B>
+    <B>ELSE</B>
+    <B>   ? "Swap succeeded"</B>
+    <B>   ? "Errorlevel :", SWPERRLEV()</B>
+    <B>ENDIF</B>
+
+ Execute the DOS DIR command, first freeing 100KB, cretae the swap disk file
+ to the current directory if required. On return, check the swap function
+ return code. If the swap failed display the swap major and minor error
+ codes, if it succeeded, display the return code of the child process.
+
+    <B>success = SWPRUNCMD("RRUN ABC",0,"","")</B>
+    <B>IF (!success)</B>
+    <B>   ? "Swap failed"</B>
+    <B>      majerr = SWPERRMAJ()</B>
+    <B>      minerr = SWPERRMIN()</B>
+    <B>      ? "Error code :", majerr, minerr</B>
+    <B>   ELSE</B>
+    <B>   ? "Swap succeeded"</B>
+    <B>   ? "Errorlevel :",SWPERRLEV()</B>
+    <B>ENDIF</B>
+
+ Execute the R &amp; R report writer, checking for errors on return.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng370d9.html">SWPERRLEV()</A>
+<A HREF="ng374d2.html">SWPERRMAJ()</A>
+<A HREF="ng378a5.html">SWPERRMIN()</A>
+<A HREF="ng547bb.html">1220: Swap error</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

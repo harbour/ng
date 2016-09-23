@@ -1,0 +1,225 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng545a5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3dfc5.html">[^^Up^^]</A>
+<A HREF="ng56172.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1220: swap error [major/minor] (text message)</B>
+------------------------------------------------------------------------------
+
+ This message indicates that a fatal error has occurred in the Blinker swap
+ system. The error consists of a major error number and an associated minor
+ error number [major/minor] and a text message indicating the type of error
+ that occurred.
+
+ Normally such errors are reported through the swap function error functions
+ SWPERRMAJ() and SWPERRMIN(), however, in the case that the program cannot be
+ restored to memory, a 1220 error will be output, and the program will return
+ to DOS.
+
+ The following major error codes have the following meanings and text
+ messages:
+
+    0     No error
+
+    1     Disk full
+
+    2*    File not found
+
+    3*    Disk I/O error
+
+    4     Change directory error
+
+    5     Temporary file creation error
+
+    6     Change drive error
+
+    7*    EMS error
+
+    8*    XMS error
+
+    9     SHELL error
+
+    10    Handle table too large to save
+
+    11+   Top of memory error
+
+    12+   MCB chain corrupt
+
+    13    Too many MCBs
+
+    14*   DOS memory function call error
+
+    15+   Unable to locate same segment
+
+    16    Unable to find COMSPEC in environment
+
+    254+  Swap internal error
+
+    255+  Swap internal error
+
+ Errors marked with a (+) are always fatal and will result in a 1220 error
+ message. Errors marked with a (*) may result in a 1220 message, or may be
+ non-fatal depending on when the error occurs in the swap process.
+
+ Errors that are not marked with either (+) or (*) are non-fatal (and will
+ not result in a 1220 message), but the child process will not have been
+ executed. These errors can be detected through the SWPERRMAJ() and
+ SWPERRMIN() functions (see Chapter 10).
+
+ The explanation for each major error is as follows:
+
+ <B>0 - No error</B>
+
+ A major error of zero indicates that the swap function successfully restored
+ the command interpreter, and restored the program image. Normally a minor
+ error code of zero will be returned. In the case that the swap function had
+ to remove a TSR from memory, however, the minor error code will be set to 1,
+ purely for informational purposes.
+
+ If the size of DOS memory increased during the swap (by executing a program
+ such as Quarterdeck's VIDRAM) the minor error code returned will be 2. Users
+ should be STRONGLY discouraged from executing such programs during the swap.
+ Please note that a decrease in DOS memory through the use of such a utility
+ will result in a fatal error (major code 11).
+
+ <B>1 - Disk full</B>
+
+ The disk on which the swap function was attempting to save the program image
+ is full.
+
+ The minor error code is the associated DOS error code.
+
+ <B>2 - File not found</B>
+
+ DOS returned a 'file not found' error when the swap function attempted to
+ restore the program image from a disk swap file. The swap file may have been
+ deleted.
+
+ The minor error code is the associated DOS error code.
+
+ <B>3 - Disk I/O error</B>
+
+ DOS returned an unexpected error while the swap function was either reading
+ from or writing to the disk file containing the program image.
+
+ The minor code is the associated DOS error code.
+
+ <B>4 - Change directory error</B>
+
+ The swap function encountered an error either when changing to the requested
+ directory passed as a parameter to the swap function or when restoring the
+ current directory following the swap.
+
+ The minor code is the associated DOS error code.
+
+ <B>5 - Temporary file creation error</B>
+
+ DOS returned an error when the swap function attempted to create a temporary
+ file to restore the program image. Check that the path specified for the
+ temporary file is valid.
+
+ The minor code is the associated DOS error code.
+
+ <B>6 - Change drive error</B>
+
+ The swap function encountered an error either when changing to the requested
+ drive passed as a parameter to the swap function, or when restoring the
+ current drive following the swap.
+
+ The minor code is the associated DOS error code.
+
+ <B>7 - EMS error</B>
+
+ An unexpected error occurred during an EMS operation.
+
+ The minor code is the EMS function call that failed.
+
+ <B>8 - XMS error</B>
+
+ An unexpected error occurred during an XMS operation.
+
+ The minor code is the XMS function call that failed.
+
+ <B>9 - SHELL error</B>
+
+ The swap function was unable to execute the command processor. Check that
+ the COMSPEC environment variable was set to point to the command
+ interpreter.
+
+ The minor code is the associated DOS error code.
+
+ <B>10 - Handle table too large to save</B>
+
+ The swap function can only save an expanded handle table that contains 255
+ (or fewer) handles.
+
+ The minor error code is the number of handles in the current handle table.
+
+ <B>11 - Top of memory error</B>
+
+ The top of DOS memory was at a lower address following the swap than it was
+ before the swap. Do not execute programs like Quarterdeck's VIDRAM utility
+ while a program is swapped out.
+
+ The minor error code is the segment address at the top of memory.
+
+ <B>12 - MCB chain corrupt</B>
+
+ The swap function detected that the DOS memory control block chain was
+ corrupted.
+
+ The minor error code is the segment address of the corrupted MCB.
+
+ <B>13 - Too many MCBs</B>
+
+ The swap function can only save programs that own 128 or fewer DOS memory
+ control blocks, which is more than sufficient in most cases.
+
+ The minor error code is the number of MCBs.
+
+ <B>14 - DOS memory function call error</B>
+
+ DOS returned an error on a memory-related function call. Please contact
+ technical support with full details of the situation causing the error.
+
+ The minor code is the associated DOS error code.
+
+ <B>15 - Unable to allocate same segment</B>
+
+ In order to restore the program image correctly, the swap function must be
+ able to allocate the same memory blocks that the program originally owned.
+ This message indicates that DOS returned a block at a different address than
+ the swap function expected. The program cannot be correctly restored.
+
+ The minor error code is the segment address returned by DOS.
+
+ <B>16 - Unable to find COMSPEC in environment</B>
+
+ The swap function needs to locate the command interpreter (usually
+ COMMAND.COM) in order to execute the child process. This error indicates
+ that the COMSPEC environment variable that specifies the location of the
+ command interpreter could not be found. Make sure you have a valid COMSPEC
+ setting in the environment.
+
+ <B>254 - Swap internal error</B>
+
+ Please contact technical support with full details of the situation causing
+ this error.
+
+ <B>255 - Swap internal error</B>
+
+ Please contact technical support with full details of the situation causing
+ this error.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng38118.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng3897d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETVOLMAX()</B>
+ Determines the maximum capacity of a server volume
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETVOLMAX(&lt;nVolume&gt;) --&gt; nMaxBytes</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nVolume&gt;</B>  Designates the selected volume number of the related
+     default file server.  This value can be from 0 to 31.
+
+ <B>Returns</B>
+
+     NNETVOLMAX() returns the total capacity available on the volume
+     designated by &lt;nVolume&gt;.
+
+ <B>Description</B>
+
+     NOVELL NET VOLUME MAXIMUM
+     Using NNETVOLMAX(), you can determine the total available capacity of
+     any volume on the default file server.
+
+ <B>Note</B>
+
+     <B>.</B>  This function requires that the station have console
+        privileges at least.
+
+ <B>Example</B>
+
+     Determine the capacities for all volumes:
+
+     FOR I = 0 TO NNETVOLNUM()
+        ? NNETVOLMAX(I)         // The related capacity
+     NEXT I
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng38d25.html">NNETVOLNUM()</A>
+<A HREF="ng3897d.html">NNETVOLNAM()</A>
+<A HREF="ng38118.html">NNETVOLFRE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

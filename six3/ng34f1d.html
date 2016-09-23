@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng349b5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3572b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_ROXLock():</B>
+
+  Syntax:   Sx_ROXLock()
+
+  Returns:  Logical .T. if index lock was successful, .F. if not.
+
+  Description:  Turns Read-Only Index Locking on for the currently active
+                index.  By locking the index prior to successive record
+                pointer movement actions (SKIPs, SEEKs, etc.), you will
+                notice a signifigant speed increase.  This function has no
+                effect in a non-shared mode.
+
+                With this Read-Only index lock set:
+
+                  . All other network stations doing non-update operations
+                    (SKIP, SEEK, GO TOP, GO BOTTOM) will behave normally.
+
+                  . Any other network station attempting to update the index
+                    will fail to get a lock until this station releases the
+                    lock.  The other station will retry indefinitely to get
+                    a lock, unless you have set a timeout value with the
+                    Sx_LockRetry() function.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    LOCAL nSecs := 0
+
+    SET EXCLUSIVE OFF              // Make sure we're in SHARED mode
+
+    RDDSetDefault("SIXCDX")        // Select the SIXCDX Driver
+    CLEAR                          // Clear the screen
+    USE test                       // Open a table with SIXCDX
+    INDEX ON last TO last          // Create an IDX index
+    CLOSE ALL                      // Close everything and reopen it
+    USE test INDEX test            //   to unlock the newly-created index
+
+    dbGoTop()                      // Make sure we're at the top
+    nSecs := Seconds()             // Save the start time
+    ? "Without ROXLock...: "       // Display an informational message
+    DO WHILE !Eof()                // Skip through the entire database
+      dbSkip()
+    ENDDO
+    ?? AllTrim( Str( Seconds()-nSecs )) + " Seconds"  // Display total time
+
+    dbGoTop()                      // Make sure we're at the top
+    <B>Sx_ROXLock()</B>                   // Set a Read-Only lock on LAST.IDX
+    nSecs := Seconds()             // Save the start time
+    ? "With ROXLock......: "       // Display an informational message
+    DO WHILE !Eof()                // Skip through the entire database
+      dbSkip()
+    ENDDO
+    ?? AllTrim( Str( Seconds()-nSecs )) + " Seconds"  // Display total time
+    Sx_ROXUnLock()                 // Unlock the index
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3572b.html">Sx_ROXUnLock()</A>
+<A HREF="ng2c476.html">Sx_IsROXLock()</A>
+<A HREF="ng2cb8b.html">Sx_IsMyROX()</A>
+<A HREF="ng342f2.html">Sx_RLock()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

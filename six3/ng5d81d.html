@@ -1,0 +1,47 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+   <B>Moving From SIx 2.0 to SIx 3.0:</B>
+
+   The primary differences to be aware of in SIx v3.0 when coming from v2.0
+   are as follows:
+
+     <B>.</B>  The SIx Driver library is now called SIX3.LIB instead of SIX2.LIB.
+        The link script file that overlays it is called SIX3.LNK.
+
+     <B>.</B>  You no longer need to link in MACHSIX.LIB, MACHSIX.LNK, CDXMACH6.OBJ,
+        or NSXMACH6.OBJ to use the Mach SIx query optimizer.  Query optimiza-
+        tion is now handled automatically, and all Mach SIx-related functions
+        are contained within SIX3.LIB.
+
+        If you want to specifically prevent Mach SIx from being linked into
+        your SIx 3.0 application, you can do so by simply linking in the
+        included NOMACH6.LIB file.  This library must be specified with the
+        SEARCH keyword rather than the LIB keyword to you linker, and it
+        must be listed prior to the SIX3.LIB file.
+
+        <B>NOTE:  If your linker does not support the SEARCH keyword, simply</B>
+        <B>       specify the NOMACH6.LIB file as a FILE instead of a LIB.</B>
+
+     <B>.</B>  SET DIRTYREAD is now SET TURBOREAD.  Sx_SetDirty() is now
+        Sx_SetTurbo().  Sx_DirtyArea() is now Sx_TurboArea().  Only the
+        names have changed.  The useage and functionality are the same as in
+        SIx 2.0.  Backwards compatibilty is provided through the OBSOLETE.CH
+        file, which is referenced by SIXCDX.CH and SIXNSX.CH.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

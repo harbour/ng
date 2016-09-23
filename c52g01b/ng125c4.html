@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng11c73.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng1295d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CDOW()</B>
+ Convert a date value to a character day of the week
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CDOW(&lt;dExp&gt;) --&gt; cDayName</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;dExp&gt;</B> is the date value to convert.
+
+ <B>Returns</B>
+
+     CDOW() returns the name of the day of the week as a character string.
+     The first letter is uppercase and the rest of the string is lowercase.
+     For a null date value, CDOW() returns a null string ("").
+
+ <B>Description</B>
+
+     CDOW() is a date conversion function used in formatting date displays
+     for reports, labels, and screens.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate CDOW():
+
+        ? DATE()                      // Result: 09/01/90
+        ? CDOW(DATE())                // Result: Friday
+        ? CDOW(DATE() + 7)            // Result: Friday
+        ? CDOW(CTOD("06/12/90"))      // Result: Tuesday
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng14152.html">CTOD()</A>
+<A HREF="ng14f89.html">DATE()</A>
+<A HREF="ng1534a.html">DAY()</A>
+<A HREF="ng2e26c.html">DOW()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

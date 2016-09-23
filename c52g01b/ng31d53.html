@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3133f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng325c8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>EVAL()</B>
+ Evaluate a code block
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>EVAL(&lt;bBlock&gt;, [&lt;BlockArg list&gt;]) --&gt; LastBlockValue</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;bBlock&gt;</B> is the code block to evaluate.
+
+     <B>&lt;BlockArg list&gt;</B> is a list of arguments to send to the code block
+     before it is evaluated.
+
+ <B>Returns</B>
+
+     EVAL() returns the value of the last expression within the block.  A
+     code block can return a value of any type.
+
+ <B>Description</B>
+
+     EVAL() is a code block function.  It is the most basic code block
+     evaluation facility in the CA-Clipper system.  A code block is a special
+     data value that refers to a piece of compiled program code.  For more
+     information on code blocks, refer to the Basic Concepts chapter in the
+     Programming and Utilities guide.
+
+     To execute or evaluate a code block, call EVAL() with the block value
+     and any parameters.  The parameters are supplied to the block when it is
+     executed.  Code blocks may be a series of expressions separated by
+     commas.  When a code block is evaluated, the returned value is the value
+     of the last expression in the block.
+
+     The CA-Clipper compiler usually compiles a code block at compile time.
+     There are, however, occasions at runtime, when you may need to compile a
+     code block from a character string.  You can do this by using the macro
+     operator (&amp;).
+
+     EVAL() is often used to create iterator functions.  These are functions
+     that apply a block to each member of a data structure.  AEVAL(),
+     ASORT(), ASCAN(), and DBEVAL() are iterator functions (e.g., AEVAL()
+     applies a block to each element within an array).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a code block that increments a number
+        then evaluates it:
+
+        bBlock := { |nArg| nArg + 1 }
+        ? EVAL(bBlock, 1)                     // Result: 2
+
+     <B>.</B>  This example demonstrates compiling a code block at runtime
+        using the macro operator (&amp;):
+
+        // Compile a string to a block
+        bBlock := &amp;("{ |nArg| nArg + 1 }")
+
+        // Evaluate the block
+        ? EVAL(bBlock, 1)
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng912c.html">AEVAL()</A>
+<A HREF="ngd812.html">ASCAN()</A>
+<A HREF="ngeac0.html">ASORT()</A>
+<A HREF="ng1d373.html">DBEVAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

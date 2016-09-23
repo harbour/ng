@@ -1,0 +1,120 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6647.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng7af9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER EXECUTABLE CLIPPER    Specify default CLIPPER environment settings</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify default CLIPPER environment settings</B></U>
+
+ <U>Syntax   : <B>BLINKER EXECUTABLE CLIPPER &lt;environment string&gt;</B></U>
+
+ <U>Example  : <B>BLINKER EXECUTABLE CLIPPER //F:35</B></U>
+
+ This command is used to burn default values for the CA-Clipper runtime
+ environment variables into the executable file.
+
+ Those settings set using the BLINKER EXECUTABLE CLIPPER command take
+ precedence over those set with the SET CLIPPER command. Parameters not
+ specified with the BLINKER EXECUTABLE CLIPPER command will retain values
+ originally assigned by the SET CLIPPER command. However, if you want the
+ values in the SET CLIPPER command to take precedence, use the command
+ BLINKER ENVIRONMENT OVERRIDE.
+
+ The maximum string length that can be burned into a CA-Clipper application
+ is 128 bytes, and Blinker will ignore all but the LAST environment burn-in
+ command encountered, so all parameters that are to be burned in should be
+ specified in a single BLINKER EXECUTABLE CLIPPER command.
+
+ PLEASE NOTE THAT THIS AND OTHER SIMILAR BLINKER COMMANDS TAKE EFFECT ONLY
+ WHEN A FULL LINK IS EXECUTED.
+
+ The burned-in environment values are not returned by the CA-Clipper
+ functions GETE() / GETENV().
+
+ <B>Note for CA-Clipper 5.x:</B>
+
+ The CA-Clipper runtime parameters listed here are applicable to CA-Clipper
+ 5.x. Check the latest CA-Clipper documentation for a complete list of these
+ parameters, correct syntax and default values.
+
+    E:nnnn            Expanded Memory (in kb)
+    F:nnn             Number of files
+    X:nn              eXclude memory in kb
+    BADCACHE          protect the EMS pageframe
+    CGACURS           disable EGA cursor
+    DYNF:nn           number of handles for dynamic paging
+    NOIDLE            disable background garbage collection
+    SWAPK:nnnn        size of disk swap file
+    SWAPPATH:'path'   path for swap file
+    TEMPPATH:'path'   path for temporary files
+
+ CA-Clipper 5.x environment settings can always be overridden (regardless of
+ the BLINKER ENVIRONMENT OVERRIDE setting) on the application command line,
+ using the command line switch '//' as in:
+
+    <B>MYAPP //SWAPPATH:'D:\'</B>
+
+ which would cause CA-Clipper to create the VMM swapfile in the root of drive
+ D:.
+
+ There is usually no reason to disable expanded memory support (E0) for
+ CA-Clipper 5.x applications.
+
+ <B>Note for CA-Clipper Summer '87:</B>
+
+ The CA-Clipper runtime settings are detailed in Chapter 9 - The Runtime
+ Environment - of the CA-Clipper Summer '87 manual.
+
+ They consist of 6 values:
+
+    Ennn     Expanded memory (in kb)
+    Fnnn     Number of open files
+    Rnnn     Run command / index memory (in kb)
+    Sn       Snow indicator
+    Vnnn     Variable table area (in kb)
+    Xnnn     eXclude memory (in kb)
+
+ For example, to ensure that 41 files are available to CA-Clipper and that
+ 100kb will be available to run external commands, use the following command:
+
+    <B>BLINKER EXECUTABLE CLIPPER F41;R100</B>
+
+ Remember that for the application to be able to use 41 file handles,
+ corresponding values have to be set in the CONFIG.SYS, and, if necessary, in
+ the appropriate network configuration.
+
+ At runtime, using the above burned-in settings, the 'F' and 'R' parameters
+ in the CLIPPER environment will be ignored, but all the other parameters
+ will be used in the normal way. It should be noted that the CLIPPER
+ environment variable should be used to disable expanded memory usage by
+ CA-Clipper Summer '87. If this is not done index files may be corrupted when
+ CA-Clipper Summer '87 uses this memory in conjunction with certain expanded
+ memory drivers, or RUN errors may occur. To disable CA-Clipper Summer '87
+ usage of expanded memory set the CLIPPER environment variable 'E' to 0 as
+ follows (this may be used in conjunction with the other settings for number
+ of files etc.):
+
+    <B>SET CLIPPER=E0</B>
+
+ Alternatively, the E0 may be burned into the application:
+
+    <B>BLINKER EXECUTABLE CLIPPER E0</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5792.html">BLINKER ENVIRONMENT CLIPPER</A>
+<A HREF="ng6241.html">BLINKER ENVIRONMENT OVERRIDE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

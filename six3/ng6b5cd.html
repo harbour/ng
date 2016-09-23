@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6ad61.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6a0ba.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>The OTTO Utility:</B>
+
+  The OTTO utility is a tool that can assist you in converting your
+  existing database file structures to use SIx 3.0's new "V" field types,
+  for more efficient data storage.
+
+  To create the OTTO.EXE utility, change to the directory where the SIx 3.0
+  sample files were installed.  By default, this would be \SIX3\SAMPLES.
+  Insure that the SIx 3.0 .LIB, .OBJ, and .CH files are in the current
+  directory or in the required DOS environment paths, then just run the
+  included MAKEOTTO.BAT file.  This will call Blinker to link the files
+  required to create OTTO.EXE.
+
+   <B>NOTE: If you are using ExoSpace or CauseWay instead of Blinker, just   </B>
+   <B>      edit the MAKEOTTO.BAT file to call your linker instead of        </B>
+   <B>      BLINKER.EXE.                                                     </B>
+   <B>                                                                       </B>
+   <B>      The RTLink that comes with CA-Clipper is not recommended for     </B>
+   <B>      building the OTTO utility as OTTO pulls in a good majority of the</B>
+   <B>      SIx 3.0 library.  The Clipper-included RTLink does not have the  </B>
+   <B>      ability to overlay any of this code, thus low memory problems are</B>
+   <B>      bound to occur.                                                  </B>
+   <B>                                                                       </B>
+   <B>      If you only have RTLink available, you can download a pre-built  </B>
+   <B>      version of OTTO.EXE from our in-house BBS or from our CompuServe </B>
+   <B>      section (GO SWARE, LIB 3).                                       </B>
+
+  To use OTTO.EXE, just run it with either no command-line arguments, or
+  you can optionally pass it the name of the database file to be converted.
+  If you do not specify the file name at the command line, OTTO will
+  display a scrolling picklist of the .DBF files in the current directory
+  to choose from.
+
+  Once OTTO knows which file is to be converted, it displays the old
+  structure alongside the new structure.  By default:
+
+    <B>.</B> All CHARACTER fields greater than 16 characters are defaulted to 10
+      byte "V" fields.  However, for short CHARACTER fields, or those whose
+      data is always a fixed length, you may want to change them back to
+      "C" types instead of using "V" types.
+
+    <B>.</B> All MEMO fields are defaulted to 0 byte "V" fields.
+
+    <B>.</B> All NUMERIC fields greater than four bytes long and less than 11 bytes
+      long are converted to four byte "I" (long integer) fields.
+
+    <B>.</B> All 8 byte DATE fields are converted to 3 byte DATE fields.
+
+    <B>.</B> Any fields which cannot (or should not) be modified will be greyed
+      out, and cannot be edited at all.
+
+  You can edit any of the other default settings for the destination file
+  structure by highlighting the field to edit with the cursor keys and
+  pressing &lt;Enter&gt;.  Follow the instructions in the message box at the
+  bottom of the screen.
+
+  Once you have defined your destination file's structure, press F10.  OTTO
+  will convert the data file to the new structure, renaming the old data
+  file(s) to have a "K" at the end of the file extension.  For example, an
+  old TEST.DBF and TEST.FPT would become TEST.DBK and TEST.FPK.
+
+  When converting a database with a .DBT memo file, the old memo file name
+  is not changed, since .DBT's do not support VariField data, the new file
+  would have to be an .FPT or .SMT memo file.  Also, adding a "K" to the
+  end of an old TEST.DBF and TEST.DBT would have resulted in two TEST.DBK
+  files.  Not good.
+
+   <B>WARNING: After modifying the structure of your database with OTTO, you</B>
+   <B>         should rebuild ALL index files.  Failing to do so may result</B>
+   <B>         in index corruption errors when performing a REPLACE operations.</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng794e3.html">DBFINFO.EXE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

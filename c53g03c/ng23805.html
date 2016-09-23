@@ -1,0 +1,102 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng23422.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng206af.html">[^^Up^^]</A>
+<A HREF="ng24258.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_errLaunch()</B>
+ Launch the CA-Clipper error handler system
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "error.api"</B>
+     <B>ERRCODE _errLaunch(</B>
+     <B>                    ERRORP pError</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>pError</B> is a pointer to a properly created and generated Error
+     object.
+
+ <B>Returns</B>
+
+     _errLaunch() returns an error code indicating the action to take, or
+     zero if no error occurred.
+
+ <B>Description</B>
+
+     _errLaunch() invokes the CA-Clipper error handler, using pError as an
+     argument.  This function handles errors that can default or retry (see
+     _errPutFlags()).
+
+     The following table shows several manifest constants defined in
+     Error.api that you may use to test the return value of this function.
+     The error code returned indicates the value returned by the error
+     handler.  You should return an error code from each function in the
+     subsystem so that you may test for an error after the function returns.
+
+     <B>_errLaunch() Return Values</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Value     Meaning/Action</B>
+     ------------------------------------------------------------------------
+     E_BREAK        FFFFh    Error Handler issued a BREAK command or BREAK()
+                             function. Clean up and exit immediately.
+     E_RETRY        1        Retry operation (occurs only if you specify
+                             EF_CANRETRY flag).   Retry the failed operation
+                             and increment the value of tries.
+     E_DEFAULT      0        Ignore failure (occurs only if you specify
+                             EF_CANDEFAULT  flag).  Ignore the failure,
+                             taking whatever default action is required
+                             for the subsystem to continue.
+     ------------------------------------------------------------------------
+
+     Notice that E_DEFAULT is the same as the value for success (zero).
+     E_DEFAULT literally means to pretend nothing happened and, therefore,
+     the calling routine has no need to distinguish between E_DEFAULT and
+     success.  The most common use you will find for E_DEFAULT is to handle
+     warnings.  Never use E_DEFAULT if the error will affect the operation of
+     any other part of the subsystem.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment demonstrates launching an error and
+        returning the error code to the calling function:
+
+        #include "error.api"
+
+           .
+           .   &lt;an error occurs&gt;
+           .
+           ERRORP pError;
+           ERRCODE uiErrCode;
+
+           pError = _errNew();
+           .
+           .   &lt;put values in error&gt;
+           .
+           uiErrCode = _errLaunch( pError );
+           _errRelease( pError );
+
+           return ( uiErrCode );
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Error.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng24258.html">_errNew()</A>
+<A HREF="ng253ae.html">_errPutFlags()</A>
+<A HREF="ng28243.html">_errPutTries()</A>
+<A HREF="ng287e1.html">_errRelease()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

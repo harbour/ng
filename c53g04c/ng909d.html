@@ -1,0 +1,69 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8bfb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d0.html">[^^Up^^]</A>
+<A HREF="ng980f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Database Utility--DBU.EXE</B>
+ Creates and modifies database structures; performs simple data management
+ tasks.
+------------------------------------------------------------------------------
+
+     <B>DBU [/&lt;colorString&gt;] [&lt;filename&gt;] /E</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;colorString&gt;</B> is /C for color and /M for monochrome.
+
+     <B>&lt;filename&gt;</B> is the name of a view file (.vew) previously created in
+     DBU or a database file (.dbf).  Specifying this argument causes DBU to
+     open and browse the specified file.  Otherwise, the main screen is
+     active where you can open files and access the DBU menu bar.
+
+     <B>/E</B> opens the file EXCLUSIVE.  This parameter is not case-sensitive.
+
+ <B>System Architecture</B>
+
+     DBU is provided in source code form.  If you installed CA-Clipper in the
+     default configuration, the following source files are located in the
+     \CLIP53\SOURCE\DBU directory:
+
+     <B>.</B>  Dbu.prg
+     <B>.</B>  Dbu.hlp
+     <B>.</B>  Dbucopy.prg
+     <B>.</B>  Dbuedit.prg
+     <B>.</B>  Dbuhelp.prg
+     <B>.</B>  Dbuindx.prg
+     <B>.</B>  Dbunet.prg
+     <B>.</B>  Dbustru.prg
+     <B>.</B>  Dbuutil.prg
+     <B>.</B>  Dbuview.prg
+
+     The system is provided as source code so you can modify it to suit your
+     specific needs.  You may want to make enhancements specific to your
+     development environment or simply add the DBU system to your
+     application, thereby giving your users the power to create and modify
+     their own database file structures.
+
+     To facilitate maintenance of the DBU program files, the make file,
+     DBU.RMK, is also installed with the DBU source files.  Assuming your
+     current DOS directory is \CLIP53\SOURCE\DBU, you can easily rebuild
+     DBU.EXE after you make source code changes with the following command:
+
+     RMAKE DBU
+
+     If your changes involve additional source modules or changes in the
+     existing file dependencies, you will need to update DBU.RMK to reflect
+     those changes.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

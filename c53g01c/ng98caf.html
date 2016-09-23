@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng98513.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng99438.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SAVESCREEN()</B>
+ Save a screen region for later display
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SAVESCREEN([&lt;nTop&gt;], [&lt;nLeft&gt;],</B>
+     <B>   [&lt;nBottom&gt;], [&lt;nRight&gt;]) --&gt; cScreen</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B>, and <B>&lt;nRight&gt;</B> define the
+     coordinates of the screen region to be saved.  If either &lt;nBottom&gt; or
+     &lt;nRight&gt; is greater than MAXROW() or MAXCOL(), the screen is clipped.
+     If you specify no coordinates, the entire screen (i.e., from 0,0 to
+     MAXROW(), MAXCOL()) is saved.
+
+ <B>Returns</B>
+
+     SAVESCREEN() returns the specified screen region as a character string.
+
+ <B>Description</B>
+
+     SAVESCREEN() is a screen function that saves a screen region to a
+     variable of any storage class including a field variable.  Later, you
+     can redisplay the saved screen image to the same or a new location using
+     RESTSCREEN().  Screen regions are usually saved and restored when using
+     a pop-up menu routine or dragging a screen object.
+
+     <B>Warning! </B> SAVE SCREEN, RESTORE SCREEN, SAVESCREEN(), and
+     RESTSCREEN() are supported when using the default (IBM PC memory mapped)
+     screen driver.  Other screen drivers may not support saving and
+     restoring screens.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following user-defined function creates a pop-up menu
+        using ACHOICE() with SAVESCREEN() and RESTSCREEN(), returning the
+        selection in the array of choices:
+
+        FUNCTION PopMenu( nTop, nLeft, nBottom, nRight, ;
+                             aItems, cColor )
+           LOCAL cScreen, nChoice, cLastColor := ;
+                 SETCOLOR(cColor)
+           //
+           cScreen:= SAVESCREEN(nTop, nLeft, nBottom, nRight)
+           @ nTop, nLeft TO nBottom, nRight DOUBLE
+           //
+           nChoice:= ACHOICE(++nTop, ++nLeft, ;
+                        --nBottom, --nRight, aItems)
+           //
+           RESTSCREEN(--nTop, --nLeft, ++nBottom, ++nRight, ;
+                          cScreen)
+           SETCOLOR(cLastColor)
+           RETURN nChoice
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng95e00.html">RESTSCREEN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

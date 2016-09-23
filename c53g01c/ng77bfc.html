@@ -1,0 +1,125 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng779c9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng78a74.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MSHOW()</B>
+ Display the mouse pointer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MSHOW([&lt;nCol&gt;, &lt;nRow&gt;, &lt;nStyle&gt;])</B>
+     <B>    --&gt; nOldCursorShape</B>
+
+     <B>MSHOW([&lt;nCursorShape&gt;]) --&gt; nOldCursorShape</B>
+
+     <B>MSHOW([&lt;nCursorShape&gt;] | [&lt;nCol&gt;, &lt;nRow&gt;, &lt;nMode&gt;])</B>
+     <B>    --&gt; nOldCursorShape</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nCol&gt;</B> and <B>&lt;nRow&gt;</B> define mouse pointer coordinates.
+
+     <B>&lt;nStyle&gt;</B> defines the style of mouse pointer using one of the
+     constants listed in the table below:
+
+     <B>Text and Graph Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Description</B>
+     ------------------------------------------------------------------------
+     LLM_COOR_TEXT  Specifies that the coordinates are passed in rows and
+                    columns of text
+     LLM_COOR_GRAPH Specifies that the coordinates are passed in pixels
+     ------------------------------------------------------------------------
+
+     <B>&lt;nCursorShape&gt;</B> is a numeric value representing the mouse cursor
+     shape.  The following are the possible values predefined for this
+     parameter:
+
+     <B>Cursor Shape Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant                 Description</B>
+     ------------------------------------------------------------------------
+     LLM_CURSOR_ARROW         Standard pointer
+     LLM_CURSOR_SIZE_NS       North South arrow
+     LLM_CURSOR_SIZE_WE       West East arrow
+     LLM_CURSOR_SIZE_NW_SE    North-West South-East arrow
+     LLM_CURSOR_SIZE_NE_SW    North-East South-West arrow
+     LLM_CURSOR_HAND          Hand
+     LLM_CURSOR_FINGER        Hand with one pointing finger
+     LLM_CURSOR_CROSS         Cross
+     LLM_CURSOR_WAIT          Hourglass
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     MSHOW() returns the previously used cursor shape.  See &lt;nCurorShape&gt;
+     above for further information.
+
+ <B>Description</B>
+
+     MSHOW() displays the mouse pointer.  It is generally used without
+     parameters to simply redisplay the mouse pointer at the position where
+     MHIDE() hid it (assuming the user has not moved the mouse).
+
+     It is possible to use two sets of parameters with this function.
+
+     <B>.</B>  Specify the coordinates where the pointer should appear.  In
+        this case, three parameters must be passed:  the mode and its
+        coordinates.  In text mode, coordinates are passed as row and column.
+        In graphic mode, you can pass either text or graphic coordinates.
+        Conversion is done automatically based on the font size of the
+        current characters.
+
+     <B>.</B>  You can also specify the mouse cursor shape to be displayed
+        when the mouse is visible.  This feature is available in graphic mode
+        only.
+
+     It is important to hide the mouse pointer before any new screen display,
+     and then show it again.  See MHIDE() for further information on how to
+     do this.
+
+     <B>Note:</B>  The MSETCURSOR() function should be used in place of MSHOW()
+     and MHIDE().  It is kept here for compatibility.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example hides the mouse pointer before using an
+        @...SAY command and then redisplays it.  Next, the mouse pointer is
+        repositioned, hidden, changed to an hour-glass, and then restored to
+        its previous shape:
+
+        LOCAL nOldShape := 0
+        MHIDE()
+           @ 10, 20 say "Hello world!!!"
+        MSHOW()
+        // Position the pointer at the center of the screen
+        MSHOW(MAXCOL() / 2, MAXROW() / 2, LLM_COOR_TEXT)
+        MHIDE()
+           @ 10, 20 say "Please wait ..."
+        // Display an hour glass cursor
+        nOldShape := MSHOW(LLM_CURSOR_WAIT)
+        // Your code
+        // Restore previously used cursor
+        MSHOW(nOldShape)
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng727bc.html">MHIDE()</A>
+<A HREF="ng76d8f.html">MSETCLIP()</A>
+<A HREF="ng77bfc.html">MSHOW()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

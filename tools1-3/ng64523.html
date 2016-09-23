@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng63dab.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>WORDTOCHAR()</B>
+ Exchanges double characters for individual ones
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>WORDTOCHAR(&lt;cDoubleCharacterList&gt;,&lt;cString&gt;,</B>
+     <B>   &lt;cCharacterlist&gt;) --&gt; cString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDoubleCharacterList&gt;</B>  Designates multiple 2-byte sequences which
+     are exchanged for corresponding individual characters from the
+     &lt;cCharacterlist&gt;.
+
+     <B>&lt;cString&gt;</B>  Designates the character string within which 2-byte
+     sequences are exchanged for individual characters.
+
+     <B>&lt;cCharacterlist&gt;</B>  Designates a sequence of individual characters
+     which correspond to 2-byte sequences in &lt;cDoubleCharacterList&gt; for
+     replacement within &lt;cString&gt;.
+
+ <B>Returns</B>
+
+     WORDTOCHAR() returns the modified character string.
+
+ <B>Description</B>
+
+     When you use SOUNDEX algorithms, sequences of two characters must often
+     be exchanged for a single other character.  WORDTOCHAR() makes this
+     process extremely simple and quick.
+
+     The function processes the &lt;cString&gt; in 1-byte steps.  The behavior
+     after exchanging a sequence for a character is determined by
+     CSETATMUPA().  If CSETATMUPA is .F., the search for more sequences
+     continues after the exchanged characters.  If CSETATMUPA is .T., the
+     search for more sequences continues and includes the exchanged
+     characters.
+
+ <B>Notes</B>
+
+     <B>.</B>  The term "word" is not used here in the textual sense, but
+        rather as it is used in assembler programming.  A "word" consists of
+        units of 16 bits, or more precisely, 2 bytes.
+
+     <B>.</B>  &lt;cCharacterlist&gt; can be shorter than &lt;cDoubleCharacterList&gt;.
+        When this occurs, the function exchanges the sequences in
+        &lt;cDoubleCharacterList&gt; that do not have corresponding sequences in
+        &lt;cCharacterlist&gt; for the last sequence in &lt;cDoubleCharacterList&gt;.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows a simple replacement:
+
+        ? WORDTOCHAR("aa", "Xaaaa", "a")      // "Xaa"
+
+     <B>.</B>  This example shows WORDTOCHAR() in conjunction with
+        CSETATMUPA():
+
+        CSETATMUPA(.F.)                       // Multi pass off
+        ? WORDTOCHAR("aa", "Xaaaa", "a")      // "Xaa"
+        CSETATMUPA(.T.)                       // Multi pass on
+        ? WORDTOCHAR("aa", "Xaaaa", "a")      // "Xa"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4d968.html">CSETATMUPA()</A>
+<A HREF="ng630d0.html">WORDREPL()</A>
+<A HREF="ng49307.html">CHARREPL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

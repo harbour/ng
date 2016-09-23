@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng761e7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng76af3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FILESCREEN()</B>
+ Reads screen content from a file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FILESCREEN(&lt;cFileName&gt;, [&lt;nOffset&gt;]) --&gt; nByte</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFileName&gt;</B>  Designates the name and path of the screen file.
+
+     <B>&lt;nOffset&gt;</B>  Designates from which part of the file offset the screen
+     is to be read.  The default is the beginning of file.
+
+ <B>Returns</B>
+
+     FILESCREEN() returns the number of bytes read.
+
+ <B>Description</B>
+
+     FILESCREEEN() is the opposite of SCREENFILE().  Use FILESCREEN() to read
+     and display a screen stored with SCREENFILE().  Use the &lt;nOffSet&gt;
+     parameter to indicate an offset from which the file is to be read.
+     Since the number of bytes written with SCREENFILE() is known, you can
+     compute the location within the file of the beginning of the new screen.
+     This allows you to save multiple screens in a single file.
+
+ <B>Note</B>
+
+     <B>.</B>  The file read with FILESCREEN() can also contain end of file
+        markers.  The read procedure does not end prematurely as a result,
+        since the function always reads 4000 bytes.
+
+ <B>Examples</B>
+
+     <B>.</B>  Read a screen from the beginning of a file:
+
+        FILESCREEN("screen.tst")
+
+     <B>.</B>  Read the second screen.  Since the offset is specified as
+        4000, the first screen is skipped:
+
+        FILESCREEN("screen.tst", 4000)
+
+     <B>.</B>  Drive and path are permitted:
+
+        FILESCREEN("\screen.tst")
+        FILESCREEN("a:screen.tst")
+
+     <B>.</B>  Wildcards are not permitted:
+
+        FILESCREEN("screen.*")         // Result:  0
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng81141.html">SCREENFILE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

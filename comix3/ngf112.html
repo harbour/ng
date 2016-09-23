@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngdf84.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlTest()</B>              Determine if a record is in a RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlTest(rl, nRecno) -&gt; lPresent
+
+<B>Arguments</B>
+
+    rl is the RecordList to check.
+
+    nRecno is the record number to check for.
+
+<B>Returns</B>
+
+    rlTest() returns a logical.  It will return .T. if nRecno is in rl.  It
+    will return .F. otherwise.
+
+<B>Description</B>
+
+    rlTest() allows you to determine if a record is contained in a
+    RecordList.
+
+<B>Example</B>
+
+    rl := rlNew(50)
+<B>    ? rlTest(rl, 25)            &amp;&amp; Will return .f.</B>
+    rlSet(rl, 25)               &amp;&amp; Add record 25
+<B>    ? rlTest(rl, 25)            &amp;&amp; Will return .t.</B>
+    rlClear(rl,25)              &amp;&amp; Remove record 25
+<B>    ? rlTest(rl, 25)            &amp;&amp; Will return .f. (no longer in RecordList)</B>
+    rlDestroy(rl)               &amp;&amp; Get rid of the RecordList
+
+<B>See Also</B>
+
+    rlClear(), rlSet()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng81a5.html">rlClear()</A>
+<A HREF="ngd5dc.html">rlSet()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng39fcf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng3a606.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DISKNAME()</B>
+ Return the current DOS drive
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DISKNAME() --&gt; cDrive</B>
+
+ <B>Returns</B>
+
+     DISKNAME() returns the letter of the current DOS drive, without a
+     trailing colon.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates the relationship between
+        DISKNAME()and DISKCHANGE() and shows that DISKNAME() is unaffected by
+        the SET DEFAULT TO command:
+
+        ? DISKNAME()      // C
+        SET DEFAULT TO A
+        ? DISKNAME()      // C
+        DISKCHANGE("A")
+        ? DISKNAME()      // A
+        DISKCHANGE("C")
+        ? DISKNAME()      // C
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1b556.html">CURDIR()</A>
+<A HREF="ng39fcf.html">DISKCHANGE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,182 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng41e34.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>AREA</B>
+ Information to administrate the work area
+-------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct _AREA</B>
+     <B>{</B>
+     <B>   struct _RDDFUNCS far * lprfsHost;</B>
+     <B></B>
+     <B>   USHORT uiArea;</B>
+     <B>   FARP   atomAlias;</B>
+     <B></B>
+     <B>   USHORT  uiFieldExtent;</B>
+     <B>   USHORT  uiFieldCount;</B>
+     <B>   LPFIELD lpFields;</B>
+     <B>   FARP    lpFieldExtents;</B>
+     <B></B>
+     <B>   ITEM valResult;</B>
+     <B></B>
+     <B>   BOOL fTop;</B>
+     <B>   BOOL fBottom;</B>
+     <B>   BOOL fBof;</B>
+     <B>   BOOL fEof;</B>
+     <B>   BOOL fFound;</B>
+     <B></B>
+     <B>   DBSCOPEINFO  dbsi;</B>
+     <B>   DBFILTERINFO dbfi;</B>
+     <B></B>
+     <B>   LPDBORDERCONDINFO lpdbOrdCondInfo;</B>
+     <B></B>
+     <B>   LPDBRELINFO lpdbRelations;</B>
+     <B>   USHORT      uiParents;</B>
+     <B></B>
+     <B>   HANDLE heap;</B>
+     <B>   USHORT heapSize;</B>
+     <B></B>
+     <B>   USHORT rddID;</B>
+     <B></B>
+     <B>} AREA;</B>
+     <B></B>
+     <B>typedef AREA far * LPAREA;</B>
+
+ <B>Elements</B>
+
+     <B>lprfsHost</B>
+
+        Contains a pointer to the virtual method table for this work area (see
+        RDDFUNCS).
+
+     <B>uiArea</B>
+
+        Contains a numeric value representing the number assigned to this
+        work area.  This number is analogous to the value returned by the
+        CA-Clipper SELECT() function.
+
+     <B>atomAlias</B>
+
+        Contains a character data type value representing the CA-Clipper
+        ALIAS of the work area.
+
+     <B>uiFieldExtent</B>
+
+        Contains a numeric value specifying the total number of columns
+        allocated for the work area.  Columns are allocated by a call to
+        setFieldExtent().
+
+     <B>uiFieldCount</B>
+
+        Contains a numeric value specifying the total number of columns
+        currently in use by the work area.  uifieldCount is incremented with
+        each call to addField().
+
+     <B>lpFields</B>
+
+        Contains a pointer to an array of FIELD items.  lpFields defines all
+        the fields used by this work area including type, length, and name
+        (see FIELD).
+
+     <B>lpFieldExtents</B>
+
+        Contains a pointer to an array of additional field properties.
+
+     <B>valResult</B>
+
+        Contains an item that is used on occasion by the CA-Clipper runtime
+        system and may be used by the RDD developer as an all purpose result
+        holder for an operation.
+
+     <B>fTop</B>
+
+        Contains a boolean value that is set to TRUE if the record pointer is
+        on the first logical record.
+
+     <B>fBottom</B>
+
+        Contains a boolean value that is set to TRUE if the record pointer is
+        on the last logical record.
+
+     <B>fBof</B>
+
+        Contains a boolean value that is set to TRUE if logical beginning of
+        file is reached.
+
+     <B>fEof</B>
+
+        Contains a boolean value that is set to TRUE if logical end of file
+        is reached.
+
+     <B>fFound</B>
+
+        Contains a boolean value that is set to TRUE when a seek() operation
+        successfully locates a key value.
+
+     <B>dbsi</B>
+
+        Contains a data structure specifying the scoping condition used by
+        the CA-Clipper LOCATE command (see DBSCOPEINFO).
+
+     <B>dbfi</B>
+
+        Contains a data structure specifying the filter condition to use for
+        the work area (see DBFILTERINFO).
+
+     <B>lpdbOrdCondInfo</B>
+
+        Contains a pointer to a data structure specifying the order condition
+        to use for the work area (see DBORDERCONDINFO).
+
+     <B>lpdbRelations</B>
+
+        Contains information about relations currently in use by the work area
+        (see DBRELINFO).
+
+     <B>uiParents</B>
+
+        Contains a numeric value specifying the number of parent work areas
+        currently in effect for this work area.
+
+     <B>heap</B>
+
+        Contains a virtual memory handle that can be used by the RDD
+        developer to allocate a VM heap and make use of the VM heap
+        suballocation routines available through the Virtual Memory API.
+
+     <B>heapSize</B>
+
+        Contains a numeric value indicating the size of the heap, above.
+
+     <B>rddID</B>
+
+        Reserved.
+
+     <B>Note:</B>  In addition to being used by the data structures indicated
+     in the Used By section below, the AREA structure is used by all methods
+     in the RDD API.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+ <B>Used By</B>    DBRELINFO, DBTRANSINFO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng45304.html">DBRELINFO</A>
+<A HREF="ng46d91.html">DBTRANSINFO</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

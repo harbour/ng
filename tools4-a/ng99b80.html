@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng996ef.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng97123.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPMODFU()</B>
+ Determines the functions of a mode definition
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPMODFU(&lt;cDevice&gt;,&lt;cModus&gt;,[&lt;cServer&gt;,&lt;nConId&gt;])</B>
+     <B>   --&gt; aFuncs</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDevice&gt;</B>  Designates the name of the device that is processed.
+
+     <B>&lt;cMode&gt;</B>  Designates the name of a mode established for &lt;cDevice&gt;.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server for which the
+     device definitions are used.  Your workstation must be attached to
+     &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates connection ID of your workstation on &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPMODFU() returns a one-dimensional array that contains the names of
+     the functions for  &lt;cMode&gt; of &lt;cDevice&gt;.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT MODE FUNCTIONS
+     Netware allows you to manage printer and form information in a database
+     (NET$PRN.DAT).  For each device you can define modes that contain a
+     number of functions for &lt;cDevice&gt;.  NNETPMODFU() returns a list of the
+     functions for &lt;cMode&gt; .
+
+ <B>Example</B>
+
+     Determine and display the functions of the plain mode for device HPLJ:
+
+     aFuncs = NNETPMODFU('HPLJ', 'PLAIN')
+     FOR i = 1 TO LEN(aFuncs)
+     ? aFuncs[i]
+     NEXT[i]
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng996ef.html">NNETPMODES()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,42 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng80905.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng81642.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Why can't I lock more than 20 records at a time?:</B>
+
+  You probably won't experience this problem if you are locking records on a
+  network drive.  However, on a local hard drive, with SHARE.EXE loaded, you
+  may notice that Sx_IsLocked() starts returning FALSE after the 20th record
+  has been locked with Sx_RLock().  The answer to this problem is simple.
+
+  By default, SHARE.EXE allows up to 20 <B>files</B> to be locked at one time.
+  Apparently, SHARE also counts record locks in the same way that it counts
+  file locks.  If you load share using the <B>/l</B> switch, you can set it for the
+  desired amount of record locks that you need.
+
+  For example, the following line, when executed at the DOS prompt, would
+  allow you to lock up to 50 records on a local hard drive:
+
+    <B>SHARE /l:50</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng342f2.html">Sx_RLock()</A>
+<A HREF="ng2b953.html">Sx_IsLocked()</A>
+<A HREF="ng290d2.html">Sx_GetLocks()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

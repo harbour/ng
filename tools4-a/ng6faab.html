@@ -1,0 +1,104 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6f418.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng704ac.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSPSTA()</B>
+ Queries the status of a print server printer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSPSTA(&lt;cPServer&gt;,&lt;nPrinter&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; nStatus</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;nPrinter&gt;</B>  Designates the number of the printer on &lt;cPServer&gt;.
+     Values between 0 and 15 are possible.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can therefore depend on the specified file
+     server.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSPSTA() returns a numeric value that specifies the current status
+     of &lt;nPrinter&gt; on &lt;cPServer&gt;.
+
+     <B>Table 27.11:  Return Values of NNETPSPPSTA()</B>
+     ------------------------------------------------------------------------
+     <B>Value   CTPS.CH        Definition</B>
+     ------------------------------------------------------------------------
+     -1                     Call error
+     0       PST_WAIT_JOB   Printer waiting for job
+     1       PST_WAIT_FORM  Printer waiting for form
+     2       PST_PRINT      Printer is processing job
+     3       PST_PAUSED     Printer on hold
+     4       PST_STOPPED    Printer stopped
+     5       PST_MARK       Printer marking top of form
+     6       PST_GO_DOWN    Printer ready for deinitialization
+     7       PST_NOT_CON    Remote printer not connected
+     8       PST_PRIVATE    Remote printer in private mode
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER PRINTER STATUS
+     With the aid of NNETPSPSTA(), applications can determine the status of
+     &lt;nPrinter&gt; on &lt;cPServer&gt;.
+
+ <B>Example</B>
+
+     Determine the status of printer 0 on print server PSERVER:
+
+     #include "ctps.ch"
+
+     nStat=NNETPSPSTA('PSERVER',0)
+
+     DO CASE
+        CASE nStat=PST_WAIT_JOB
+           ? 'Printer waiting for job!'
+        CASE nStat=PST_WAIT_FORM
+           ? 'Printer waiting for form!'
+        CASE nStat=PST_PRINT
+           ? 'Printer is processing job!'
+        CASE nStat=PST_PAUSED
+           ? 'Printer on hold!'
+        CASE nStat=PST_STOPPED
+           ? 'Printer stopped!'
+        CASE nStat=PST_MARK
+           ? 'Printer is marking top of form!'
+        CASE nStat=PST_GO_DOWN
+           ? 'Printer ready for deinitialization!'
+        CASE nStat=PST_NOT_CON
+           ? 'Remote printer not connected!'
+        CASE nStat=PST_PRIVATE
+           ? 'Remote printer in private mode!'
+        OTHERWISE
+           ? 'Error!'
+     ENDCASE
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6ec52.html">NNETPSPROB()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

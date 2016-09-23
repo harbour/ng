@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>With SCOPE:</B>
+
+  Mach SIx will respect any active index SCOPE while optimizing queries. For
+  example,  doing a COUNT with a SCOPE set will return the number of records
+  within the SCOPE that match the condition.  If no condition was specified,
+  the total number of records in SCOPE will be returned.
+
+
+  Example:
+
+     USE Customers
+     SET INDEX TO State, Name
+     SET ORDER TO 2
+
+     SET SCOPE TO "E"
+
+     ? m6_IsOptimize()    //  Returns 2
+
+     ? "Total: "
+     COUNT TO nCount
+     ?? nCount
+
+     ? "Total: "
+     COUNT TO nCount FOR state == "CA"
+     ?? nCount
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

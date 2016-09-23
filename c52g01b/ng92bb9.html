@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng91542.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng93235.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RECALL</B>
+ Restore records marked for deletion
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RECALL [&lt;scope&gt;] [WHILE &lt;lCondition&gt;]</B>
+     <B>   [FOR &lt;lCondition&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;scope&gt;</B> is the portion of the current database file to RECALL.  The
+     default scope is the current record, or NEXT 1.  If a condition is
+     specified, the default scope becomes ALL.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to RECALL
+     within the given scope.
+
+ <B>Description</B>
+
+     RECALL is a database command that restores records marked for deletion
+     in the current work area.  This is the inverse of the DELETE command.
+     If DELETED is ON, RECALL can restore the current record or a specific
+     record, if you specify a RECORD scope.  Note that once you PACK a
+     database file, all marked records have been physically removed from the
+     file and cannot be recovered.
+
+     In a network environment, RECALLing the current record requires an
+     RLOCK().  RECALLing several records requires an FLOCK() or EXCLUSIVE USE
+     of the current database file.  Refer to the Network Programming chapter
+     in the Programming and Utilities guide for more information.
+
+ <B>Examples</B>
+
+     <B>.</B>  This examples show the results of RECALL:
+
+        USE Sales NEW
+        //
+        DELETE RECORD 4
+        ? DELETED()               // Result: .T.
+        //
+        RECALL
+        ? DELETED()               // Result: .F.
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng85cb0.html">DELETE</A>
+<A HREF="ng284ba.html">DELETED()</A>
+<A HREF="ng384c9.html">FLOCK()</A>
+<A HREF="ng90b67.html">PACK</A>
+<A HREF="ng5dd2e.html">RLOCK()</A>
+<A HREF="ng9fc92.html">SET DELETED</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

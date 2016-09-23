@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng90e4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng271.html">[^^Up^^]</A>
+<A HREF="nga736.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>VAR...[IS...] TO</B>
+
+ <B>Synopsis</B>
+
+         Forward variable's messages (assign and access)
+
+ <B>Syntax</B>
+
+         VAR &lt;variable name&gt; [IS &lt;target name&gt;]
+              TO &lt;target variable&gt;
+
+ <B>Arguments</B>
+
+         <B>&lt;variable name&gt;</B> is the name of the 'variable' being declared.
+         In fact, this command does not declare a variable but rather
+         allows access to a variable in another object.
+
+         <B>&lt;target name&gt;</B> is the name of the variable, in the target
+         class, which <B>&lt;variable name&gt; </B> will be mapped to. This argument
+         should be omitted if its value is the same as <B>&lt;variable name&gt;</B>.
+
+         <B>&lt;target variable&gt;</B> is the name of the instance variable that
+         the variable messages being declared will be forwarded to. The
+         target variable must be a member of the current class or of a
+         superclass. Two special keywords can be used instead of specifying
+         a target variable: <B>CLASS &lt;className&gt;</B> and <B>SENDER</B>. Their use
+         is described in the entry for the <B>MESSAGE...[IS...] TO</B>
+         command.
+
+ <B>Description</B>
+
+         This command causes the specified variable's access and assignment
+         messages to be forwarded to the object contained in the specified
+         target variable. This makes it appear as though the variable
+         exists in the class in which this command is used.
+
+ <B>Example</B>
+
+           CLASS Graph
+              VAR oWin // refers to Window object
+           EXPORT:
+              VAR nGraphTop IS nTop TO oWin
+              // ...
+           END CLASS
+
+         This class specification will cause instances of the Graph class,
+         upon receiving the <U>nGraphTop</U> message for access or assign, to
+         respond by sending the equivalent <U>nTop</U> message to the object
+         referred to by the instance variable <U>oWin</U>. Thus, for example,
+         the following code has the ultimate effect of assigning the number
+         5 to the nTop variable in the Window object contained in the Graph
+         object oGraph.
+
+           LOCAL oGraph := Graph():new(...)
+           oGraph:nGraphTop := 5
+           ? oGraph:nGraphTop
+
+ <B>See Also</B>
+
+         <B>MESSAGE...[IS...] TO</B>, <B>Message Forwarding</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5663.html">MESSAGE...[IS...] TO</A>
+<A HREF="ng14440.html">Message Forwarding</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

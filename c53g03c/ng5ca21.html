@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5c579.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5cd1e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>clearFilter()</B>
+ Clear the active filter expression
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE clearFilter(</B>
+     <B>                        AREAP wa</B>
+     <B>                      )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     clearFilter() clears the filter expression currently in use for a
+     specified work area.
+
+ <B>Default Behavior</B>
+
+     clearFilter() removes the filter expression in wa-&gt;dbfi.  The items held
+     in wa-&gt;dbfi.itmCobExpr and wa-&gt;dbfi.abFilterText are both released and
+     set to NULL.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Verify that all items are properly released upon any
+        reimplementation of clearFilter().
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng5d5f4.html">setFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

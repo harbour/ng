@@ -1,0 +1,290 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng72c86.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng76582.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>@...GET</B>
+ Create a new Get object and display it to the screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>@ &lt;nRow&gt;, &lt;nCol&gt;</B>
+     <B>   [SAY &lt;exp&gt;</B>
+     <B>      [PICTURE &lt;cSayPicture&gt;]</B>
+     <B>      [COLOR &lt;cColorString&gt;]]</B>
+     <B>   GET &lt;idVar&gt;</B>
+     <B>      [PICTURE &lt;cGetPicture&gt;]</B>
+     <B>      [COLOR &lt;cColorString&gt;]</B>
+     <B>      [WHEN &lt;lPreExpression&gt;]</B>
+     <B>      [RANGE* &lt;dnLower&gt;, &lt;dnUpper&gt;] |</B>
+     <B>      [VALID &lt;lPostExpression&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nRow&gt;</B> and <B>&lt;nCol&gt;</B> specify the row and column coordinates for the
+     operation.  If the SAY clause is present, &lt;nRow&gt; and &lt;nCol&gt; specify the
+     coordinates for the SAY, and the GET is displayed to the right of the
+     SAY output.  If the SAY clause is not present, &lt;nRow&gt; and &lt;nCol&gt;
+     directly specify the coordinates for the GET.  In either case, output
+     which extends beyond the visible extent of the display is clipped and
+     does not appear.
+
+     <B>SAY &lt;exp&gt;</B> displays the value of &lt;exp&gt; at the specified coordinates.
+     If you specify the PICTURE &lt;cSayPicture&gt; clause, &lt;exp&gt; is formatted
+     according to the rules of SAY pictures.
+
+     <B>GET &lt;idVar&gt;</B> specifies the name of the variable associated with the
+     GET.  &lt;idVar&gt; may be of any storage class (if the storage class is
+     ambiguous, FIELD is assumed).  If &lt;idVar&gt; contains an array value, you
+     must supply one or more subscripts.  The current value of &lt;idVar&gt; is
+     displayed at the GET coordinates.  The value must be character, date,
+     numeric, or logical type.  Array, NIL, code block, and null string values
+     are not permitted.
+
+     <B>PICTURE &lt;cGetPicture&gt;</B> specifies the display format and editing rules
+     for the GET.
+
+     <B>COLOR &lt;cColorString&gt;</B> defines the color settings for the current Get
+     object.  &lt;cColorString&gt; is a character expression containing one or more
+     color settings.  You must specify literal color settings enclosed in
+     quote marks.
+
+     If you specify two color settings, the first determines the unselected
+     color (the display color for the Get object) and the second determines
+     the selected color (the color when the Get object has focus).  If you
+     only specify one color, it determines both the unselected and selected
+     colors for the Get object.
+
+     On a combined @...SAY...GET command, two COLOR clauses are required to
+     specify colors for both the SAY and the GET: one for the SAY, and one
+     for the GET.
+
+     <B>WHEN &lt;lPreExpression&gt;</B> specifies an expression that must be satisfied
+     before the cursor can enter the GET during a READ.  The expression can
+     optionally be a code block.  The GET object is passed as a parameter to
+     the code block.
+
+     <B>VALID &lt;lPostExpression&gt;</B> specifies an expression that must be
+     satisfied before the cursor can leave the GET during a READ.  The
+     expression can optionally be a code block.  The GET object is passed as
+     a parameter to the code block.
+
+     <B>RANGE* &lt;dnLower&gt;</B>, <B>&lt;dnUpper&gt;</B> specifies a range of allowable
+     values for input to the GET.  During a READ command, if you enter a new
+     GET value that does not fall within the specified range, the cursor
+     cannot leave the GET.
+
+ <B>Description</B>
+
+     The @...GET command creates a new Get object, displays its value, and
+     adds it to the array referred to by the variable GetList.  If no
+     variable called GetList has been declared or created in the current
+     procedure, and no PRIVATE variable called GetList exists from a previous
+     procedure, the system uses the predefined PUBLIC variable GetList.  A
+     subsequent READ command activates the GETs contained in the GetList
+     array and allows the user to edit their contents.
+
+     Each Get object has an associated variable, &lt;idVar&gt;.  The variable may
+     be of any storage class, including a database field, private, public,
+     local, or static variable.  If &lt;idVar&gt; is followed by one or more
+     subscripts, the specified array element is associated with the GET.
+     When the Get object is created, the &lt;idVar&gt; name is stored in the Get
+     object, along with a code block which allows the value of &lt;idVar&gt; to be
+     retrieved or assigned during the READ.
+
+     The READ command performs a full-screen edit of the GETs in the GetList
+     array.  As the user moves the cursor into each GET, the value of the
+     associated &lt;idVar&gt; is retrieved by evaluating the code block saved in
+     the Get object.  The value is converted to textual form and placed in a
+     buffer within the Get object.  This buffer is displayed on the screen,
+     and the user is allowed to edit the text from the keyboard.  When the
+     user moves the cursor out of the GET, the updated buffer is converted
+     back to the appropriate data type and assigned to &lt;idVar&gt;.
+
+     <B>Automatic formatting and validation:</B> During a READ, some formatting
+     and edit validation is automatically performed for numeric, date, and
+     logical values.  As the user is typing, an automatic data type test is
+     performed on each key pressed, preventing the user from entering an
+     invalid character.
+
+     <B>Prevalidation:</B> The WHEN clause specifies a condition which must be
+     satisfied before the cursor can enter the GET.  During a READ,
+     &lt;lPreExpression&gt; is evaluated whenever the user attempts to move the
+     cursor into the GET.  If it evaluates to true (.T.), the cursor can
+     enter; otherwise, the GET is skipped.
+
+     <B>Postvalidation:</B> You may perform postvalidation using either the
+     VALID or RANGE* clauses.  VALID specifies a condition which must be
+     satisfied before the cursor can leave the GET.  During a READ,
+     &lt;lPostExpression&gt; is evaluated whenever the user attempts to move the
+     cursor out of the GET.  If it evaluates to true (.T.), the cursor can
+     leave; otherwise, the cursor remains in the GET.  RANGE* specifies a
+     range of acceptable values for numeric or date values.  If the value
+     entered by the user is not within the specified range, the cursor cannot
+     leave the GET.
+
+     <B>PICTURE:</B> When you specify the PICTURE clause for a GET, the
+     character string specified by &lt;cGetPicture&gt; controls formatting and edit
+     validation.  The picture string controls the display format like a SAY
+     picture.  It also controls the way the user can edit the buffer.  A
+     picture string consists of two distinct parts, a function string and a
+     template string, either or both of which may be present.
+
+     <B>.  Function string:</B> A PICTURE function string specifies
+        formatting or validation rules which apply to the GET's display value
+        as a whole, rather than to particular character positions within it.
+        The function string consists of the @ character, followed by one or
+        more additional characters, each of which has a particular meaning
+        (see table below).  The function string must be the first element of
+        a PICTURE clause and cannot contain spaces.  A function string may be
+        specified alone or with a template string.  If both are present, the
+        function string must precede the template string, and the two must be
+        separated by a single space.
+
+        <B>GET PICTURE Format Functions</B>
+        ---------------------------------------------------------------------
+        <B>Func    Type Action</B>
+        ---------------------------------------------------------------------
+        A       C    Allows only alphabetic characters
+        B       N    Displays numbers left-justified
+        C       N    Displays CR after positive numbers
+        D       D,N  Displays dates in SET DATE format
+        E       D,N  Displays dates with day and month inverted independent
+                     of the current DATE SETting, numerics with comma and
+                     period reverse (European style)
+        K       ALL  Deletes default text if first key is not a cursor key
+        R       C    Nontemplate characters are inserted in the display but
+                     not saved in the variable
+        S&lt;n&gt;    C    Allows horizontal scrolling within a GET.  &lt;n&gt; is an
+                     integer that specifies the width of the region.
+        X       N    Displays DB after negative numbers
+        Z       N    Displays zero as blanks
+        (       N    Displays negative numbers in parentheses with leading
+                     spaces
+        )       N    Displays negative numbers in parentheses without leading
+                     spaces
+        !       C    Converts alphabetic character to uppercase
+        ---------------------------------------------------------------------
+
+     <B>.  Template string:</B> A PICTURE template string specifies
+        formatting or validation rules on a character by character basis.
+        The template string consists of a series of characters, some of which
+        have special meanings (see table below).  Each position in the
+        template string corresponds to a position in the displayed GET value.
+        Characters in the template string which do not have assigned meanings
+        are copied verbatim into the displayed GET value.  If you use the @R
+        picture function, these characters are inserted between characters of
+        the display value, and are automatically removed when the display
+        value is reassigned to &lt;idVar&gt;; otherwise, they overwrite the
+        corresponding characters of the display value and also affect the
+        value assigned to &lt;idVar&gt;.  You may specify a template string alone
+        or with a function string.  If you use both, the function string must
+        precede the template string, and the two must be separated by a
+        single space.
+
+        <B>GET PICTURE Template Symbols</B>
+        ---------------------------------------------------------------------
+        <B>Template     Action</B>
+        ---------------------------------------------------------------------
+        A            Allows only alphabetic characters
+        N            Allows only alphabetic and numeric characters
+        X            Allows any character
+        9            Allows digits for any data type including sign for
+                     numerics
+        #            Allows digits, signs and spaces for any data type
+        L            Allows only T, F, Y or N
+        Y            Allows only Y or N
+        !            Converts an alphabetic character to uppercase
+        $            Displays a dollar sign in place of a leading space in a
+                     numeric
+        *            Displays an asterisk in place of a leading space in a
+                     numeric
+        .            Displays a decimal point
+        ,            Displays a comma
+        ---------------------------------------------------------------------
+
+     <B>SCOREBOARD:</B> If a new value is rejected because it fails the RANGE*
+     test or because it is a malformed date value, a message appears on the
+     screen.  The message displays in the SCOREBOARD area, which you can
+     enable or disable using the SET SCOREBOARD command.
+
+     <B>Exit with Esc:</B> If the user exits a GET by pressing Esc, the GET
+     variable is restored to the value it had on entry to the GET, and the
+     READ is terminated.  No postvalidation is performed.  You can enable or
+     suppress this behavior with the SET ESCAPE command.
+
+     <B>SET KEY procedures:</B> The SET KEY command lets you specify a procedure
+     to be executed whenever a specific key is pressed during a READ.  After
+     a SET KEY procedure terminates, the GET is reactivated with the cursor
+     restored to its previous position.
+
+     <B>Lifetime of a Get object:</B> Get objects, like arrays, exist as long as
+     there are active references to them somewhere in the current program.
+     Normally, only the array in the GetList variable maintains a reference
+     to the Get object; the GET is released when GetList is released or
+     reassigned.  The CLEAR and CLEAR GETS commands assign an empty array to
+     GetList, as does the READ command unless you specify the SAVE clause.
+
+     <B>Assignment:</B> Each GET is associated with a variable, &lt;idVar&gt;, in the
+     @...GET command.  At various times during the editing process, &lt;idVar&gt;
+     may be assigned the current value of the Get object's buffer.  This
+     occurs in the following instances:
+
+     <B>.</B>  After the user presses an exit key and before the validation
+        expression is executed
+
+     <B>.</B>  After the user presses a SET KEY
+
+     Also, the current Get object's buffer is refreshed from &lt;idVar&gt; and
+     redisplayed at various intervals:
+
+     <B>.</B>  After a SET KEY procedure terminates
+
+     <B>.</B>  After a WHEN expression is evaluated
+
+     <B>.</B>  After a VALID expression is evaluated
+
+     This lets you explicitly assign &lt;idVar&gt; within any of these operations.
+     See the note below for more information.
+
+     <B>GET coordinates and display:</B> When you create a Get object using the
+     @...GET command, the row and column coordinates at which the GET is
+     initially displayed are stored into the Get object.  When the @...GET
+     command executes, the new GET displays at &lt;nRow&gt; and &lt;nCol&gt;, unless you
+     specify the SAY clause which positions the GET so there is one display
+     column between the last character of the SAY output and the first
+     character of the GET (or of the DELIMITERS, see below).
+
+     If SET DELIMITERS is ON when the @...GET command executes , the current
+     DELIMITER characters display on either side of the initial GET display,
+     and the column coordinate of the GET is adjusted accordingly.  Note that
+     the delimiters are not attributes of the GET object, but simply display
+     as the SAY clause does.
+
+     If INTENSITY is ON, GETs initially display in the current unselected
+     color (or the enhanced color, if no unselected color has been
+     specified).  During a READ, the active GET displays in the enhanced
+     color, while the remaining GETs display in the unselected color.  With
+     INTENSITY OFF, all GETs display in the standard color.
+
+     When a GET displays, the width of the displayed value is determined by
+     the length of the value in &lt;idVar&gt; or, if you specify the PICTURE
+     clause, by the number of positions in &lt;cGetPicture&gt;.  If you specify the
+     @S function as a part of &lt;cGetPicture&gt;, the @S argument controls the
+     width of the displayed value.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng76582.html">@...GET...</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3d861.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng3e298.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DOW()</B>
+ Convert a date value to a numeric day of the week
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DOW(&lt;dDate&gt;) --&gt; nDay</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;dDate&gt;</B> is a date value to convert.
+
+ <B>Returns</B>
+
+     DOW() returns the day of the week as a number between zero and seven.
+     The first day of the week is one (Sunday) and the last day is seven
+     (Saturday).  If &lt;dDate&gt; is empty, DOW() returns zero.
+
+ <B>Description</B>
+
+     DOW() is a date conversion function that converts a date value to a
+     number identifying the day of the week.  It is useful when you want date
+     calculations on a weekly basis.  DOW() is similar to CDOW(), which
+     returns the day of week as a character string instead of a number.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate CDOW() and its relationship to
+        DOW():
+
+        ? DATE()                        // Result: 09/01/89
+        ? DOW(DATE())                  // Result: 3
+        ? CDOW(DATE())                  // Result: Tuesday
+        ? DOW(DATE() - 2)               // Result: 1
+        ? CDOW(DATE() - 2)            // Result: Sunday
+
+     <B>.</B>  This is a user-defined function that uses DOW() to calculate
+        the date of last Monday from any other date:
+
+        FUNCTION LastMonday(dDate)
+           RETURN (dDate - DOW(dDate) + 2)
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng19116.html">CDOW()</A>
+<A HREF="ng1baff.html">DATE()</A>
+<A HREF="ng1bec1.html">DAY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

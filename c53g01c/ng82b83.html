@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng824b9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng83270.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDISUNIQUE()</B>
+ Return the status of the unique flag for a given order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDISUNIQUE([&lt;cOrder&gt; | &lt;nPosition&gt;],</B>
+     <B>   [&lt;cIndexFile&gt;]) --&gt; lUnique</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrder&gt; | &lt;nPosition&gt;</B> is the name of the order or a number
+     representing its position in the order list.  Using the order name is
+     the preferred method since the position may be difficult to determine
+     using multiple-order index files.  If omitted or NIL, the controlling
+     order is assumed.
+
+     Specifying an invalid order will raise a runtime error.
+
+     <B>&lt;cIndexFile&gt;</B> is the name of an index file, including an optional
+     drive and directory (no extension should be specified).  Use this
+     argument with &lt;cOrder&gt; to remove ambiguity when there are two or more
+     orders with the same name in different index files.
+
+     If &lt;cIndexFile&gt; is not open by the current process, a runtime error is
+     raised.
+
+ <B>Returns</B>
+
+     ORDISUNIQUE() returns the status of the indicated order's unique flag as
+     a logical value.
+
+ <B>Description</B>
+
+     By default, this function operates on the currently selected work area.
+     It will operate on an unselected work area if you specify it as part of
+     an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows the return value of ORDISUNIQUE() using
+        various orders:
+
+        USE Customer VIA "DBFCDX"
+        INDEX ON LastName TAG Last UNIQUE
+        INDEX ON FirstName TAG First
+        INDEX ON Age TO j:\test\tmp\age UNIQUE
+
+        SET ORDER TO TAG Last
+
+        ? ORDISUNIQUE()                // Result: .T. for Last
+        ? ORDISUNIQUE("First")         // Result: .F.
+        ? ORDISUNIQUE("Age")           // Result: .T.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8153c.html">ORDDESCEND()</A>
+<A HREF="ng824b9.html">ORDFOR()</A>
+<A HREF="ng83270.html">ORDKEY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

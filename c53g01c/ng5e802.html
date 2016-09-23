@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5e17a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng5ed2f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>HEADER()</B>
+ Return the current database file header length
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>HEADER() --&gt; nBytes</B>
+
+ <B>Returns</B>
+
+     HEADER() returns the number of bytes in the header of the current
+     database file as an integer numeric value.  If no database file is in
+     use, HEADER() returns a zero (0).
+
+ <B>Description</B>
+
+     HEADER() is a database function that is used with LASTREC(), RECSIZE(),
+     and DISKSPACE() to create procedures for backing up files.
+
+     By default, HEADER() operates on the currently selected work area.  It
+     will operate on an unselected work area if you specify it as part of an
+     aliased expression (see example below).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example determines the header size of Sales.dbf:
+
+        USE Sales NEW
+        ? HEADER()            // Result: 258
+
+     <B>.</B>  This example defines a pseudofunction, DbfSize(), that uses
+        HEADER() with RECSIZE() and LASTREC() to calculate the size of the
+        current database file in bytes:
+
+        #define DbfSize()      ((RECSIZE() * LASTREC()) + ;
+              HEADER() + 1)
+
+        Later you can use DbfSize() as you would any function:
+
+        USE Sales NEW
+        USE Customer NEW
+        ? DbfSize()
+        ? Sales-&gt;(DbfSize())
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3a606.html">DISKSPACE()</A>
+<A HREF="ng6569a.html">LASTREC()</A>
+<A HREF="ng952d0.html">RECSIZE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,36 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2954f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng27ce3.html">[^^Up^^]</A>
+<A HREF="ng2994d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Linking the DBPX Database Driver</B>
+------------------------------------------------------------------------------
+
+     To link the DBPX driver, you must specify DBPX.LIB to the linker along
+     with your application object (.OBJ) modules.
+
+     1. To link with .RTLink using positional syntax:
+
+        C&gt;RTLINK &lt;appObjectList&gt; ,,,DBPX
+
+     2. To link with .RTLink using freeformat syntax:
+
+        C&gt;RTLINK FI &lt;appObjectList&gt; LIB DBPX
+
+     <B>Note: </B> These link commands all assume the LIB, OBJ, and PLL
+     environment variables are set to the standard locations.  They also
+     assume that the CA-Clipper programs were compiled without the /R option.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

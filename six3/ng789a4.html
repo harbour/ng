@@ -1,0 +1,109 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng785a7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng75ccf.html">[^^Up^^]</A>
+<A HREF="ng794e3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>DBCRE8.EXE:</B>
+
+  Many of the sample programs included with the SIx Driver will require that
+  you have created a TEST.DBF file for the example to use.
+
+  We have provided you with a small utility called DBCRE8.EXE which you can
+  use to quickly create a test database file full of pseudo-random data.  You
+  can also optionally create an associated memo file in either the CA-Clipper
+  (.DBT), FoxPro (.FPT), or SuccessWare (.SMT) formats.  VariField "V" field
+  types are also supported.
+
+  The structure of the database files created by the DBCRE8 utility is as
+  follows:
+
+          <B>NAME        TYPE LEN DEC</B>
+          <B>----------- ---- --- ---</B>
+          <B>FIRST       C     20</B>
+          <B>LAST        C     20</B>
+          <B>STREET      C     30</B>
+          <B>CITY        C     30</B>
+          <B>STATE       C      2</B>
+          <B>ZIP         C     10</B>
+          <B>HIREDATE    D      8</B>
+          <B>MARRIED     L      1</B>
+          <B>AGE         N      2   0</B>
+        <U>*</U> <B>SALARY      N      6   0</B>
+       <U>**</U> <B>NOTES       C     70</B>
+
+
+   <U>(*) The SALARY field's DEC value becomes 2 if the /d switch is used.</U>
+
+  <U>(**) If the /mD or /mF switch is used, this field will become a memo field</U>
+       <U>(Type "M") with a length of 10.</U>
+
+  The command-line syntax for using DBCRE8.EXE is as follows:
+
+      DBCRE8 &lt;nRecs&gt; [options]
+
+      Where:  &lt;nRecs&gt; = Number of records to add to the DBF file.
+
+    Options:  /d = Make SALARY field use &lt;n&gt; decimal places.  ( Ex: /d3 ).
+                   The specified value can be from 1-4.  The default is 2.
+
+              /e = Encrypt the DBF with password.  Ex:  /ePASSWORD.
+
+              /f = Optional DBF file name to create.  Ex: /fBOGUS.  The
+                   default data file name is TEST.
+
+             /mD = Include MEMO field using DBT format.
+
+             /mF = Include MEMO field using FPT format.  An optional memo
+                   block size can also be set by immediately following the
+                   \"F\" with a colon followed by the desired block size.
+                   Ex:  /mF:512 or /mF:16.  This value can be any value
+                   between 1 and 1024.  The default value is 32.
+
+             /mS = Include MEMO field using SMT format.  An optional memo
+                   block size can also be set as with the /mF switch (above).
+                   The default value is 1.
+
+              /r = Randomize record data.  (Creates unique data sets.)
+
+              /s = Silent operation (no screen output at all).
+
+           /vF|S = Use VariFields with FPT memo or SMT memo format.
+
+           /x&lt;n&gt; = Mark every &lt;n&gt;th record as deleted.  Ex:  /x10.
+
+
+  Examples:
+
+    Create TEST.DBF with 1000 records ...........:  <B>DBCRE8 1000</B>
+
+    Same as above, encrypted with password "FOO" :  <B>DBCRE8 1000 /eFOO</B>
+
+    Create BOGUS.DBF with 500 records ...........:  <B>DBCRE8 500 /fBOGUS</B>
+
+    Create TEST.DBF and TEST.DBT with 100 records:  <B>DBCRE8 100 /mD</B>
+
+    Create FOO.DBF and FOO.FPT with 250 records .:  <B>DBCRE8 250 /mF /fFOO</B>
+
+    Create FOO.DBF and FOO.SMT w/ 32-byte blocks :  <B>DBCRE8 250 /mS:32 /fFOO</B>
+
+    Create TEST.DBF w/ 2 decimal places in SALARY:  <B>DBCRE8 1000 /d</B>
+
+    Create DEMO.DBF w/ 3 decimal places in SALARY:  <B>DBCRE8 1000 /d3 /fDEMO</B>
+
+    Create TEST.DBF and TEST.SMT w/ VariFields   :  <B>DBCRE8 1000 /vS</B>
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

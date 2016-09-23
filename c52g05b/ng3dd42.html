@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3da76.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b69f.html">[^^Up^^]</A>
+<A HREF="ng3e6d8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>12  The _parc() Function</B>
+--------------------------------------------------------------------------------
+
+     The Extend system's _parc() function is used to access
+     character-type parameters passed from Clipper.  It returns a
+     pointer to a series of bytes representing the parameter value.
+
+     In order to obtain this pointer, _parc() first locates the
+     parameter's VALUE.  If the parameter was a reference to a variable
+     (a VREF), _parc() finds the variable first and retrieves the VALUE
+     from there.  Otherwise, the VALUE is present on the Eval Stack and
+     _parc() can obtain it directly.  Once _parc() has obtained the
+     VALUE, it extracts the OREF from it and performs a de-referencing
+     operation.  It then places a lock on the virtual memory segment
+     containing the character data (preventing it from moving in
+     conventional memory) and returns a pointer to the first byte of the
+     data.
+
+     As noted above, the fact that OREFs are often duplicated when
+     character values are assigned, although transparent at the Clipper
+     level, can become an issue when _parc() is used.  If a string's
+     OREF has been duplicated, it means that the string may be referred
+     to by several variables or array elements at the same time.  This
+     is why the documentation for _parc() warns that the pointer
+     obtained from _parc() should not be used to modify the string
+     directly--doing so may have the effect (at the Clipper level) of
+     modifying several variables at once.
+
+     Note that Summer '87 also allowed multiple references to the same
+     string in certain cases.  Generally, however, when a string was
+     assigned to a variable, it was duplicated, giving each variable its
+     own copy of the string.  The Summer '87 documentation is not clear
+     about the effect of modifying a string via the pointer returned
+     from _parc(), saying only that _parc() "does not make a copy" of
+     the string.
+
+     In Clipper 5.01, _parc() has been changed to better mimic the
+     Summer '87 behavior.  It does this by automatically duplicating the
+     string in certain cases.  This change is sufficient to produce
+     compatible behavior for many older Extend functions.  For new
+     functions, however, you should take the necessary steps to
+     guarantee that you are working with a dedicated copy of the
+     string.  This can be done using the techniques described in the
+     Programming and Utilities Guide or using the new technique
+     discussed below.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

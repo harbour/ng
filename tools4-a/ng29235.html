@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng281fb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng272ab.html">[^^Up^^]</A>
+<A HREF="ng29ba9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETMAPINF()</B>
+ Determines the mapping for a drive
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETMAPINF([&lt;cDrive&gt;],[&lt;lExpand&gt;]) --&gt; cPath</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDrive&gt;</B>  Designates the drive for which the mapping is determined.
+     Without this parameter, NNETMAPINF() returns the mapping for the default
+     drive.  Values from "A" to "Z" for a normal drive and "S1" to "S16" for
+     a search drive are possible.
+
+     <B>&lt;lExpand&gt;</B>  Designates how the search drives are handled.  When
+     called without this parameter, or when the parameter is .F., the
+     function returns the drive that corresponds to a search drive
+     designator, followed by a colon and a period.  When called with
+     &lt;lExpand&gt; equal to .T., NNETMAPINF() returns the network path assigned
+     to the drive designator.  The default value is .F..
+
+ <B>Returns</B>
+
+     NNETMAPINF() returns the path that has been mapped to &lt;cDrive&gt; with the
+     function NNETMAP().  For normal network drives, the return value
+     contains the server name, the volume name, and the directory.  For
+     search drives, the return value depends on the parameter &lt;lExpand&gt;.  If
+     this parameter is set to .F., the function returns the drive, followed
+     by a colon and a period.  If this parameter is set to .T., the complete
+     network path is returned.  If &lt;cDrive&gt; contains a local drive,
+     NNETMAPINF() returns the drive designator, followed by a colon.  An
+     empty string is returned if the designated drive does not exist.
+
+ <B>Description</B>
+
+     NOVELL NET MAP INFORMATION
+     In a Novell environment, NNETMAPINF() allows you to differentiate
+     between local, network, or unassigned drive designators.  For a network
+     drive, the function returns the server name, the volume name, and the
+     path allocated to &lt;cDrive&gt;.  For a search drive, you can determine the
+     drive designator.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the mapping for drive C:
+
+        ? NNETMAPINF('C')         // C: is a local hard disk
+
+     <B>.</B>  Determine the mapping for drive J:
+
+        ? NNETMAPINF('J')         // Login directory
+        NANGERTOOLS2/SYS:LOGIN
+
+     <B>.</B>  Determine the mapping for search drive S13:
+
+        ? NNETMAPINF('S13')       // Returns: Z:.
+
+     <B>.</B>  Determine the mapping for search drive S13 as a complete path:
+
+        ? NNETMAPINF('S13',.T.)
+        NNANGERTOOLS2/SYS:PUBLIC
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng281fb.html">NNETMAP()</A>
+<A HREF="ng29ba9.html">NNETMAPMOD()</A>
+<A HREF="ng2a76f.html">NNETSEARCH()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

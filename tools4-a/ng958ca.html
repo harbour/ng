@@ -1,0 +1,159 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng935a2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SPXLISTCON()</B>
+ Opens the SPX sending and receiving buffer and waits for a connection in the
+ background
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SPXLISTCON(&lt;nSourceSocket&gt;,[&lt;nRecBuffer&gt;],</B>
+     <B>   [&lt;nSendBuffer&gt;],[&lt;nPacket&gt;],[&lt;lHeader&gt;],</B>
+     <B>   [&lt;nRepeat&gt;],[&lt;lWatchDog&gt;],[&lt;nECBs&gt;]) --&gt; nHandle</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nSourceSocket&gt;</B>  Designates the socket number of the communication's
+     transmitting side.
+
+     <B>&lt;nRecBuffer&gt;</B>  Designates the selected size of the receiving buffer.
+     If no value is passed for &lt;nRecBuffer&gt;, no receiving buffer is
+     established.  The minimum size of the receiving buffer is &lt;nPacket&gt;.  If
+     the value for &lt;nRecBuffer&gt; is too small, it is changed automatically by
+     SPXLISTCON().  The maximum size of the receiving buffer is 64 KByte.
+
+     <B>&lt;nSendBuffer&gt;</B>  Designates the selected size of the sending buffer.
+     If no value is passed for &lt;nSendBuffer&gt;, no sending buffer is
+     established.  The minimum size of the sending buffer is &lt;nPacket&gt;.  If
+     the value for &lt;nSendBuffer&gt; is too small, it is changed automatically by
+     SPXLISTCON().  The maximum size of the sending buffer is 64 KByte.
+
+     <B>&lt;nPacket&gt;</B>  Designates the packet size of the data that is sent.  The
+     packet size can be between 1 and 534 bytes.  Values outside of this
+     range are changed automatically.  The default value is 534 Bytes.
+
+     <B>&lt;lHeader&gt;</B>  Specifies whether only the data range (.F.) or the data
+     range and the header of the packet (.T.) are to be transmitted to the
+     receiving buffer.
+
+     <B>&lt;nRepeat&gt;</B>  Designates the number of repeat attempts if a faulty
+     packet transmission occurs.  The value is valid for all sending
+     operations processed during a session.  A value of 0 indicates that SPX
+     assumes the standard repeat value.
+
+     <B>&lt;lWatchDog&gt;</B>  Designates whether the watchdog is activated (.T.) or
+     not (.F).  This parameter allows the supervision of the connection with
+     watchdog, an SPX internal mechanism.  If the supervision is activated,
+     watchdog checks in regular intervals to see if the remote station is
+     still responding.  The default value (.T.) activates the watchdog.
+
+ <B>Returns</B>
+
+     SPXLISTCON() returns a communication handle if the buffer has been
+     established successfully.  If an error occurs, the function returns 0.
+
+ <B>Description</B>
+
+     SPXLISTCON() allows you to establish a communication buffer for an SPX
+     communication with another station in the network.  SPXLISTCON() also
+     installs a handler that waits for a connection setup by any other
+     station.  The communication buffer can contain a sending and receiving
+     buffer through which the interrupt controlled sending and receiving of
+     data is processed.
+
+     &lt;nSourceSocket&gt; is the socket number of the communication's transmitting
+     side (see the Introduction to this chapter).  The socket can be opened
+     with the function OPENSOCK() before the call of SPXLISTCON().  If
+     &lt;nSourceSocket&gt; has not been opened, it is opened by SPXLISTCON()
+     automatically.  If 0 is passed for &lt;nSourceSocket&gt;, SPXLISTCON() opens
+     any available socket.
+
+     The parameters &lt;nRecBuffer&gt; and &lt;nSendBuffer&gt; determine the size of the
+     receiving and sending buffer.  The buffers are automatically designed
+     for one NetBIOS packet.  Each buffer can be up to 64 KByte in size.
+     However, the size of the buffer that is allocated by SPXLISTCON()
+     depends on the application and the configuration of the computer used.
+
+     &lt;nPacket&gt; determines the maximum size of the data range of the SPX
+     packets that are sent or received.  The maximum value (and the default
+     value) is 536 bytes.  Smaller packets can be sent without failure.
+     However, larger packets are discarded.  The value of &lt;nPacket&gt; is also
+     valid for use in sending data.
+
+     With &lt;lHeader&gt; you can determine if the header of an SPX packet (42
+     bytes) is transmitted to the receiving buffer.  The header can contain
+     important information about the received packet.  For a description of
+     the header structure, see the Introduction to this chapter.
+
+     The number of repeat attempts for faulty send operations during the
+     session can be specified with &lt;nRepeat&gt;.  A value of 0 sets an SPX
+     internal standard value.
+
+     A session is supervised by an SPX watchdog.  If the watchdog determines
+     that the remote station is not responding, a key trap can be triggered
+     (see PPCKEY()).  The connection flag for the session is set to .F..  If
+     you want to deactivate the watchdog, the parameter &lt;lWatchdog&gt; can be
+     designated .F..
+
+     SPX needs Event Control Blocks (ECBs) for receiving data and for
+     administration purposes.  The ECBs are created and managed by
+     SPXLISTCON() automatically.  The default value is two ECBs for each SPX
+     session.  The value can be increased if slow computers are used.
+     However, you cannot prevent data loss that is the result of a full
+     receiving buffer.
+
+     If all parameters have been passed correctly and the buffers have been
+     established successfully, SPXLISTCON() returns a communication handle.
+     However, a communication handle does not indicate that an SPX has
+     already been set up.  After SPXLISTCON() has been executed, a handler
+     waits for a connection request in the background.  The communication
+     handler, returned by SPXLISTCON(), cannot be used for sending and
+     receiving before a connection has been established.  The current
+     connection status after a call of SPXLISTCON() can be queried with
+     PPCCONACT().  It is also possible to trigger a key trap with PPCKEY().
+
+ <B>Note</B>
+
+     <B>.</B>  Unlike an IPX communication, an SPX communication is
+        connection-oriented.  A connection is established between two
+        stations.  As long as no error occurs, a successful delivery of sent
+        packets is guaranteed.
+
+ <B>Examples</B>
+
+     <B>.</B>  Wait for an SPX connection setup:
+
+        nHandle=SPXLISTCON(20000,1000)
+        WHILE .NOT. PPCCONACT(nHandle)
+        ENDDO
+
+     <B>.</B>  After an SPX connection has been set up successfully, put key
+        code 255 into the keyboard buffer:
+
+        #include "ctppc.ch"
+
+        nHandle=SPXLISTCON(20000,5000,1000)
+        PPCKEY(nHandle,255,PPC_CONESTB)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng935a2.html">SPXESTBCON()</A>
+<A HREF="ng8c1de.html">PPCCANCEL()</A>
+<A HREF="ng8d688.html">PPCKEY()</A>
+<A HREF="ng8e251.html">PPCREAD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

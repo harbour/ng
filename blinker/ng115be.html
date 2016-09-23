@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng10871.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng11b06.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER OVERLAY THRESHOLD     Set size of smallest overlaid segments</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Set size of the smallest overlaid segments</B></U>
+
+ <U>Syntax   : <B>BLINKER OVERLAY THRESHOLD &lt;nuLimit&gt;</B></U>
+
+ <U>Default  : <B>32 bytes</B></U>
+
+ <U>Example  : <B># Only overlay segments larger than 64 bytes</B></U>
+            <B>BLINKER OVERLAY THRESHOLD 64</B>
+
+ This command sets the threshold size below which code specified to be
+ overlaid will be moved back to the root section of the program. Very small
+ routines (less than 32 bytes) take up more root space when they are
+ overlaid, due to overlay manager table entries, than they would if they were
+ simply left in the root.
+
+ Additionally, very small overlaid routines execute disproportionately
+ slower, since the time overhead in loading / calling them may be large in
+ comparison with the actual execution time of the routine. If it is the case
+ that very small routines are very frequently called, the developer may wish
+ to specify a threshold large enough to cause them to be moved back to the
+ root, improving the performance of the program.
+
+ <B>CA-Clipper 5.x note</B>
+
+ This command has no effect on CA-Clipper 5.x code overlaid through the
+ paging system, but could be used, for example, for C functions within a
+ CA-Clipper program.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

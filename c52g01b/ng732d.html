@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng45a7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng7794.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ACLONE()</B>
+ Duplicate a nested or multidimensional array
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ACLONE(&lt;aSource&gt;) --&gt; aDuplicate</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aSource&gt;</B> is the array to duplicate.
+
+ <B>Returns</B>
+
+     ACLONE() returns a duplicate of &lt;aSource&gt;.
+
+ <B>Description</B>
+
+     ACLONE() is an array function that creates a complete duplicate of the
+     &lt;aSource&gt; array.  If &lt;aSource&gt; contains subarrays, ACLONE() creates
+     matching subarrays and fills them with copies of the values in the
+     &lt;aSource&gt; subarrays.  ACLONE() is similar to ACOPY(), but ACOPY() does
+     not duplicate nested arrays.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates an array then duplicates it using
+        ACLONE().  The first array is then altered, but the duplicate copy is
+        unaffected:
+
+        LOCAL aOne, aTwo
+        aOne := { 1, 2, 3 }        // Result: aOne is {1, 2, 3}
+        aTwo := ACLONE(aOne)       // Result: aTwo is {1, 2, 3}
+        aOne[1] := 99              // Result: aOne is {99, 2, 3}
+                                   // aTwo is still {1, 2, 3}
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7794.html">ACOPY()</A>
+<A HREF="ng7f92.html">ADEL()</A>
+<A HREF="ngae9a.html">AINS()</A>
+<A HREF="nge58b.html">ASIZE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

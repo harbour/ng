@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7b04d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7a98e.html">[^^Up^^]</A>
+<A HREF="ng7b972.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETDOWN()</B>
+ Shuts down the file server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETDOWN([&lt;lMode&gt;],[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;lMode&gt;</B>  Designates whether  the file server is shut down only if
+     the current workstation is the only logged in station (.F.) or if the
+     server is shut down for all logged in stations (.T.).  The default value
+     is .F..
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server that is used.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETDOWN() returns .T. if the down process has been established.  If an
+     error occurs, the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET DOWN
+     NNETDOWN() allows you to shut down a file server.
+
+     <B>Important! </B> If the parameter &lt;lMode&gt; is designated .T., all logged
+     in stations are logged out immediately.  Data that is still in the
+     buffer cannot be saved.
+
+     This function requires supervisor rights on the related file server.
+
+ <B>Examples</B>
+
+     <B>.</B>  Attempt to shut down the default file server:
+
+        IF NNETDOWN()
+           ? 'Successful!'
+        ELSE
+           ? 'Error'
+        ENDIF
+
+     <B>.</B>  Wait until the server can be shut down safely:
+
+        WHILE .NOT. NNETDOWN()
+        ENDDO
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

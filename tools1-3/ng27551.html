@@ -1,0 +1,210 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng26a91.html">[^^Up^^]</A>
+<A HREF="ng29b1d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Introduction</B>
+
+     There are a number of ways that the serial port can be used.  Modems,
+     bar code readers, and many other devices deliver data over this port or
+     are regulated by it.  Although standards do exist, in the final
+     analysis, the type of communication is different every time.
+
+     The functions in this chapter offer possibilities for data transmission
+     and allow you to influence control signals.  These functions do not
+     support any particular protocol or any specific instrument.  For a few
+     expanded applications, like the XMODEM protocol, you should find
+     sufficient information in the example programs for CA-Clipper Tools.
+
+ <B>Port Parameters</B>
+
+     All the parameters for the port, like baud rate, parity, file length,
+     and stop bits, are fully adjustable.  It is possible to change the
+     settings for a port without closing it.  In this way the transmission
+     speed can be changed without losing the contents of the buffer or
+     terminating an existing connection (DTR-signal).
+
+ <B>Data Transmission</B>
+
+     Using CA-Clipper Tools, you can use up to four serial ports
+     simultaneously.  You can create a sending and a receiving buffer of up
+     to 64kB in size.  The characters for the background transmission mode
+     are placed in the sending buffer, while characters received through the
+     port are stored using an interrupt handler.  You can determine the
+     number of characters in the receive buffer from your CA-Clipper program,
+     and as many of the available characters as you like can be read.
+     Additional special control functions exist for the sending buffer that
+     give the governing program full control.  It is also possible to engage
+     a software or hardware handshake that is performed completely in the
+     background.
+
+ <B>Handshake</B>
+
+     As previously mentioned, CA-Clipper Tools functions support both a
+     hardware and software handshake.  As soon as the receiving buffer
+     threatens to overflow by at least one page, a special handshake
+     character is transmitted that tells the other side that no further data
+     should be transmitted.  Whether you implement the hardware or software
+     handshake depends upon the type of data transmission.  Hardware
+     handshakes use physical port controls.  These port controls are usually
+     RTS and CTS, so within the scope of CA-Clipper Tools functions, these
+     control ports cannot be used for modem transmission.  Modems are
+     generally not able to reproduce port controls directly over the
+     transmission route (i.e.  telephone connection).  A software handshake
+     must be implemented in such cases.
+
+     A software handshake uses characters from the ASCII character set to
+     control the data flow.  The ASCII character set is a standard which
+     defines the XOFF (stop data, transmission off) as CHR(19) and the XON
+     (continue transmission, transmission on) as CHR(17).  (You will
+     recognize the similarity to your keyboard since CHR(19) corresponds to
+     Ctrl-S, and CHR(17) corresponds to Ctrl-Q).
+
+     If one of the handshake processes is implemented, the software must test
+     both sides to see if the receiving buffer has been filled.  The software
+     then either deactivates the CTS controls or sends an XOFF character.  By
+     contrast, when sending data you must constantly test to see if the RTS
+     input from the remote station has been deactivated or if an XOFF
+     character has been received.  In both cases transmission must stop
+     immediately.
+
+     Since you can never be sure if the remote stations stop immediately
+     after receiving an XOFF character, the internal handshake becomes active
+     when the buffer is 75% full.  If the remote stations ignore the
+     handshake, the 75% limit is probably insufficient at a set buffer size
+     of 100 byte (which equals a 25 byte reserve).
+
+     The techniques described here for the handshake are managed completely
+     by the CA-Clipper Tools routines.  They do not concern themselves with
+     the interface cards or the Universal Asynchronous Receiver Transmitters
+     (UARTS).  It is sufficient to activate the selected method, which allows
+     your program to regulate the status of the sending and receiving buffers
+     on an ongoing basis.
+
+ <B>Protocols</B>
+
+     As previously mentioned, remote data transmission is, as a rule,
+     implemented only through a software handshake.  A significant
+     disadvantage to this method is that the characters used for flow
+     control, CHR (19) and CHR(17) can no longer appear in the original data.
+     Because these characters appear in binary files, remote data
+     transmission is not possible -- transmission protocols must be used.
+     You find XMODEM routines written in CA-Clipper in the example programs.
+     Using the CA-Clipper Tools port functions and this example as a basis,
+     other protocols can be developed fairly simply.
+
+     Firm protocols are not provided within CA-Clipper Tools because their
+     realization in CA-Clipper code presents no real advantage.  It is more
+     important that you have the ability to create your own protocols so that
+     you are not locked into whatever protocol is within CA-Clipper Tools.
+
+ <B>Control Signals</B>
+
+     You can set or query all important port connector control signals, like
+     CD (carrier detect), DTR (data terminal ready), etc..  To simplify your
+     programming, there is a separate function for each signal.  For all
+     other status and control information, which is seldom required in serial
+     communications, you can read or describe the corresponding UARTS
+     register of the port directly.
+
+ <B>Direct Hardware Access</B>
+
+     All CA-Clipper Tools port functions directly address the hardware.
+     Working over BIOS or even DOS calls would be impractical or even
+     impossible.  We therefore presuppose 100% hardware compatibility with
+     the established IBM personal computer industry standard.
+
+     In order to guarantee that everything is functioning properly, both
+     ports must be equipped with either UART 8250 or the compatible 16450.
+     When you use the 8250, interrupt controlled transmission is only
+     possible up to 2400 baud.  Technical details regarding the ports and the
+     UART registers can be found in the corresponding technical instructions,
+     like the IBM Technical Reference Manuals.
+
+ <B>I/O Addresses and Interrupt Requests</B>
+
+     CA-Clipper Tools assumes the following basic settings for the four
+     ports:
+
+     <B>Table 1: Standard Port Settings</B>
+     ------------------------------------------------------------------------
+     <B>Port    I/O Address    IRQ</B>
+     ------------------------------------------------------------------------
+     COM1:   3F8H           4
+     COM2:   2F8H           3
+     COM3:   3E8H           4 - Not specifically defined
+     COM4:   2E8H           3 - Not specifically defined
+     ------------------------------------------------------------------------
+
+     In contrast to COM1 and COM2, the I/O addresses and IRQs for other ports
+     are often different.  If you want to use hardware that is not entirely
+     compatible, CA-Clipper Tools has additional functions that you can use:
+     COM_SETIO() and COM_SETIRQ().  When you use these functions, the I/O and
+     IRQ settings for the port routines can be changed to the selected
+     values.  However, please notice that incorrect settings can have a wide
+     range of consequences when they come in conflict with other hardware.
+     These consequences include data loss or damage to hardware.
+
+     The correct settings for your hardware can be found at any given time in
+     its accompanying documentation.
+
+ <B>Possible Hardware Conflicts</B>
+
+     CA-Clipper Tools recognizes the four addresses mentioned above for the
+     ports COM1 to COM4.  The COM_NUM() function uses these addresses to
+     determine the number of available ports.  For example, if the PC has a
+     built-in ArcNet adapter, you can have a conflict between the I/O
+     addresses.  The CA-Clipper Tools routine addresses 02EAh, which is
+     defined totally differently for the ArcNet adapter than for a serial
+     interface.  In this case an existing network connection would probably
+     be disconnected.  The COM_SETIO() function can provide assistance by
+     designating the second parameter as 0:
+
+     COM_SETIO(&lt;port&gt;,0)
+
+     The corresponding standard address within the internal address table is
+     deleted and access to other hardware is avoided.  However, this is only
+     possible if the COM_NUM() function has not previously been called within
+     the program.  (In this case the interface would have already been marked
+     "in use.")
+
+ <B>Important Notes</B>
+
+     As the table of default settings indicates, it is possible for multiple
+     ports to use the same IRQ -- a procedure known as interrupt sharing.
+
+     While CA-Clipper Tools functions support these procedures, standard port
+     hardware usually does not.  Specialized multiple port cards are
+     available from different manufacturers for this purpose.
+
+     <B>Generally we cannot guarantee that interrupt sharing can be</B>
+     <B>implemented.</B>
+
+     CA-Clipper Tools supports up to four ports, each with sending and
+     receiving buffers of up to 64kB and speed of up to 19200 baud.  This is
+     not to say that all this could be used at the same time to its highest
+     limit.  Eight buffers at 64kB are not possible.  The buffers must be in
+     conventional memory because the buffers are handled by interrupt
+     routines.  The number of ports and the speed with which they can
+     function correctly is dependent upon the computer being used.
+
+ <B>Differences from BASIC</B>
+
+     In contrast to other programming languages (like BASIC),
+     COM_OPEN()/COM_INIT() do not influence control signals.  If you want to
+     address a modem over the serial port using CA-Clipper, you must set DTR
+     and any other signals yourself, using the corresponding CA-Clipper Tools
+     functions.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

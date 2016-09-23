@@ -1,0 +1,120 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng1ea28.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER Programming Functions</B>
+------------------------------------------------------------------------------
+
+ <B>Function Overview</B>
+
+ Blinker features a number of functions which provide the program developer
+ with increased control over the runtime overlay environment and additional
+ debugging information. All Blinker functions used by your program are
+ automatically linked without the need to specify any additional libraries.
+ Blinker functions can only be used in Blinker linked programs.
+
+ All the functions which produce output take a file handle as an optional
+ parameter, and all output from the function will be sent to that file
+ handle. The handle is not validated, and should be either 1, to send output
+ to the screen, 2 to send output to the standard error device, 4 to send
+ output to the printer, or the handle of a file opened by the program.
+
+ The default handle may be set at link time using the BLINKER DEBUG HANDLE
+ command or in the program using the Debug Handle function (BLIDBGHAN())
+ detailed below. If no handle is specified then the output is sent to DOS
+ file handle 1 (the screen).
+
+ <B>Naming Conventions</B>
+
+ Assembler programmers note: when calling from assembler you should prepend
+ an underbar character to the function names in order to comply with C naming
+ conventions.
+
+ BASIC programmers note: Blinker functions called from BASIC which receive
+ string parameters or return string values have a different function name -
+ the letters 'BAS' are appended to the normal nine character function name.
+ For example, the BASIC version of BLIDEMDTE() is called BLIDEMDTEBAS().
+
+ <B>Notational Conventions</B>
+
+ Many of the functions provided by Blinker can be accessed from several
+ languages, using the standard C calling conventions.
+
+ Blinker provides specific interfaces for the C language, Microsoft Basic PDS
+ &amp; QuickBasic, and for CA-Clipper Summer '87 and 5.01. If you are using a
+ language not mentioned here, it is likely that your compiler can be directed
+ to use the C calling convention to access Blinker functions. Consult your
+ compiler documentation for further information on mixed language
+ programming.
+
+ The tables on the following pages detail the notational convention used to
+ describe the types of parameters and return values, and the appropriate data
+ types for each calling convention.
+
+ Each parameter, (or return value) is preceded by a two letter prefix
+ denoting the type of the value, which also implies the way the parameter is
+ passed to the function.
+
+ <B>Parameter type conventions</B>
+
+ The following tables show the data types used as parameters and return
+ values from all Blinker functions. The prefixes have the following meanings:
+
+    ni numeric     signed integer    (signed word)
+    nu numeric     unsigned integer  (unsigned word)
+    nl numeric     long integer      (signed dword)
+    c  character   string            (byte pointer)
+    l  logical     (boolean)         (word)
+
+ For each language listed in the table (CA-Clipper, Basic, and C) the
+ language declaration for each type is given (no type declaration is needed
+ in the CA-Clipper language, but the passed parameters must be of the correct
+ type).
+
+ Logical (or boolean) values are only directly supported for CA-Clipper. All
+ other languages should use the numeric integer type, passing a zero value to
+ indicate false, and a non zero value to indicate true. Return values from
+ the functions use the same convention.
+
+ For languages not listed, use the data types which match the C types.
+
+ <B>Calling conventions</B>
+
+ The Blinker functions are provided with interfaces to most languages, and
+ these are defined in the language include files BLINKER.BI, BLINKER.H,
+ BLINKER.CH, BLINKER.FI, BLINKER.HDR, BLINKER.DEF and BLINKER.INC,. These
+ files can be found in the BAS, C, CLP, FOR, FRC, MOD and PAS subdirectories
+ respectively of the Blinker installation directory.
+
+ The CA-Clipper interface uses the CA-Clipper extend system, and requires no
+ special treatment as far as the CA-Clipper programmer is concerned.
+
+ The BASIC interface is identical to the C interface for simple data types,
+ but strings require special treatment. For this reason, any of the Blinker
+ functions which pass or return string values have the suffix 'BAS' appended
+ to the normal function name.
+
+ The C interface uses the following calling conventions:
+
+    .  Simple data types are passed on the stack
+    .  Strings are passed by far reference
+    .  Parameters are passed in reverse order, ie the last parameter is
+       pushed onto the stack first.
+
+ which are the same as standard C calling conventions.
+
+ Languages for which no interface is provided should use the C interface.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

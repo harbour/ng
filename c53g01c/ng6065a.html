@@ -1,0 +1,123 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6017a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng6147b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>INDEXKEY()</B>
+ Return the key expression of a specified index
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>INDEXKEY(&lt;nOrder&gt;) --&gt; cKeyExp</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nOrder&gt;</B> is the ordinal position of the index in the list of index
+     files opened by the last USE...INDEX or SET INDEX TO command for the
+     current work area.  A zero value specifies the controlling index,
+     without regard to its actual position in the list.
+
+ <B>Returns</B>
+
+     INDEXKEY() returns the key expression of the specified index as a
+     character string.  If there is no corresponding index or if no database
+     file is open, INDEXKEY() returns a null string ("").
+
+ <B>Description</B>
+
+     INDEXKEY() is a database function that determines the key expression of
+     a specified index in the current work area and returns it as a character
+     string.  To evaluate the key expression, specify INDEXKEY() as a macro
+     expression like this: &amp;(INDEXKEY(&lt;nOrder&gt;)).
+
+     INDEXKEY() has a number of applications, but two specific instances are
+     important.  Using INDEXKEY(), you can TOTAL on the key expression of the
+     controlling index without having to specify the key expression in the
+     source code.  The other instance occurs within a DBEDIT() user function.
+     Here, you may want to determine whether or not to update the screen
+     after the user has edited a record.  Generally, it is only necessary to
+     update the screen if the key expression of the controlling index has
+     changed for the current record.  Both of these examples are illustrated
+     below.
+
+     By default, INDEXKEY() operates on the currently selected work area.  It
+     can be made to operate on an unselected work area by specifying it
+     within an aliased expression (see example below).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example accesses the key expression of open indexes in
+        the current work area:
+
+        #define ORD_NATURAL      0
+        #define ORD_NAME         1
+        #define ORD_SERIAL      2
+        //
+        USE Customer INDEX Name, Serial NEW
+        SET ORDER TO ORD_SERIAL
+        ? INDEXKEY(ORD_NAME)         // Result: Name index exp
+        ? INDEXKEY(ORD_SERIAL)      // Result: Serial index exp
+        ? INDEXKEY(ORD_NATURAL)      // Result: Serial index exp
+
+     <B>.</B>  This example accesses the key expression of the controlling
+        index in an unselected work area:
+
+        USE Customer INDEX Name, Serial NEW
+        USE Sales INDEX Salesman NEW
+        ? INDEXKEY(0), Customer-&gt;(INDEXKEY(0))
+
+     <B>.</B>  This example uses INDEXKEY() as part of a TOTAL ON key
+        expression.  Notice that INDEXKEY() is specified using a macro
+        expression to force evaluation of the expression:
+
+        USE Sales INDEX Salesman NEW
+        TOTAL ON &amp;(INDEXKEY(0)) FIELDS SaleAmount TO ;
+              SalesSummary
+
+     <B>.</B>  This example uses INDEXKEY() to determine whether the DBEDIT()
+        screen should be updated after the user has edited the current field
+        value.  Generally, you must update the DBEDIT() screen if the user
+        changes a field that is part of the controlling index key.
+        FieldEdit() is a user-defined function called from a DBEDIT() user
+        function to edit the current field if the user has pressed an edit
+        key.
+
+        #include "Dbedit.ch"
+        #define ORD_NATURAL   0
+        FUNCTION FieldEdit()
+           LOCAL indexVal
+           // Save current key expression and value
+           indexVal = &amp;(INDEXKEY(ORD_NATURAL))
+           .
+           . &lt;code to GET current field value&gt;
+           .
+           // Refresh screen if key value has changed
+           IF indexVal != &amp;(INDEXKEY(ORD_NATURAL))
+              nRequest = DE_REFRESH
+           ELSE
+              nRequest = DE_CONT
+           ENDIF
+           RETURN nRequest
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngcc94d.html">INDEX</A>
+<A HREF="ng6017a.html">INDEXEXT()</A>
+<A HREF="ng6147b.html">INDEXORD()</A>
+<A HREF="nge93ab.html">SET INDEX</A>
+<A HREF="ngec1fc.html">SET ORDER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

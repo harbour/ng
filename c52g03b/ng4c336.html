@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4bfa9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4c933.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>putValue()</B>
+ Assign a value to the current column (field)
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE putValue(</B>
+     <B>                  WORKAREAP wa,</B>
+     <B>                  USHORT fieldNum,</B>
+     <B>                  ITEM value</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>fieldNum</B> specifies the ordinal position of the column whose value is
+     to be assigned.
+
+     <B>value</B> is a CA-Clipper Item which contains the value to place at the
+     current cursor position.
+
+ <B>Description</B>
+
+     Places a value in the column at the current workarea cursor position.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  putValue() should check wa-&gt;fields[fieldNum] to retrieve the
+        column information.  This allows your implementation of putValue() to
+        translate the CA-Clipper value to the RDD's native data store format.
+
+     <B>.</B>  putValue() must address the shared and read-only status of the
+        workarea.  Calling putValue() must trigger a call to goHot().
+
+     <B>.</B>  putValue() is one of the few workarea methods that the
+        CA-Clipper runtime calls without benefit of a higher-level wrapper
+        function.  The following code generates a call to this method:
+
+        MYDATA-&gt;BobDobbs := cBobDobbs
+
+     <B>.</B>  If your RDD supports relations, update them with a forceRel()
+        prior to placing a value in the buffer.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng52cb2.html">forceRel()</A>
+<A HREF="ng4ab61.html">getValue()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

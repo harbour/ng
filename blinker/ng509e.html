@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4a1f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng5792.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER DEMONSTRATION MINUTES Specify number of minutes for demonstration version </B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify number of minutes for demonstration version</B></U>
+
+ <U>Syntax   : <B>BLINKER DEMONSTRATION MINUTES &lt;nuLimit&gt;</B></U>
+
+ <U>Example  : <B># Set the limit on length of program execution</B></U>
+            <B>BLINKER DEMONSTRATION MINUTES 20</B>
+
+ This command is used to set the number of minutes of program runtime before
+ it will end with the 'demonstration minutes limit exceeded' message. It may
+ be set to any number from 1 minute to 65535 minutes.
+
+ This can be used to create a demonstration version of the program without
+ having to modify the source code. When the specified time limit is reached,
+ the error handling procedure BLERRPRG is called with error number 1209,
+ indicating that the demonstration minutes limit has been exceeded.
+
+ The source for this error handler is provided should you want to modify the
+ text of the termination message.
+
+ Note: The demonstration restrictions are only checked when overlays are
+ loaded, so to use them please ensure that at least one function or procedure
+ which is called regularly is overlaid. To be sure that overlays exist, be
+ aware that any overlaid segment that is smaller than the BLINKER OVERLAY
+ THRESHOLD default of 32 bytes will automatically be removed from the overlay
+ area.
+
+ The function BLIDEMMIN() allows the limit to be extended from within the
+ program. Please see the appropriate section in Chapter 10 for more details.
+
+ <B>CA-Clipper 5.x note:</B>
+
+ To include Blinker's overlay manager in the application, some non-CA-Clipper
+ code must be overlaid, for example EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4a1f.html">BLINKER DEMONSTRATION DATE</A>
+<A HREF="ng1f290.html">BLIDEMMIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

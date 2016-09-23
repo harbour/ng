@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng722ec.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng73148.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>@...CLEAR</B>
+ Clear a rectangular region of the screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>@ &lt;nTop&gt;, &lt;nLeft&gt; [CLEAR</B>
+     <B>   [TO &lt;nBottom&gt;, &lt;nRight&gt;]]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B> and <B>&lt;nLeft&gt;</B> define the upper left corner coordinate.
+
+     <B>TO &lt;nBottom&gt;, &lt;nRight&gt;</B> defines the lower right corner coordinates of
+     the screen region to CLEAR.  If the TO clause is not specified, these
+     coordinates default to MAXROW() and MAXCOL().
+
+ <B>Description</B>
+
+     @...CLEAR erases a rectangular region of the screen by filling the
+     specified region with space characters using the current standard color
+     setting.  After @...CLEAR erases the designated region, the cursor is
+     located in the upper corner of the region at &lt;nTop&gt; + 1 and &lt;nLeft&gt; + 1.
+     ROW() and COL() are also updated to reflect the new cursor position.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example erases the screen from 10, 10 to 20, 40, painting
+        the region blue then displaying a box bright cyan on blue:
+
+        SETCOLOR("BG+/B")
+        @ 10, 10 CLEAR TO 20, 40
+        @ 10, 10 TO 20, 40
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng722ec.html">@...BOX</A>
+<A HREF="ng7f2a9.html">CLEAR SCREEN</A>
+<A HREF="ng60390.html">SCROLL()</A>
+<A HREF="ng6375d.html">SETCOLOR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

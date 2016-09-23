@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng142423.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng141fe8.html">[^^Up^^]</A>
+<A HREF="ng142c4f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>MenuItem(&lt;cCaption&gt;, &lt;expData&gt;, [&lt;nShortcut&gt;],</B>
+     <B>   [&lt;cMessage&gt;], [&lt;nID&gt;]) --&gt; oMenuItem</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cCaption&gt;</B> is a character string that contains either a text string
+     that concisely describes the menu option or a menu separator specifier.
+     This value is assigned to the MenuItem:caption instance variable.
+
+     <B>&lt;expData&gt;</B> is a value that contains either a code block or a
+     PopUpMenu object.  This argument is ignored when &lt;cCaption&gt; contains a
+     menu separator specifier.  This value is assigned to the MenuItem:data
+     instance variable.
+
+     <B>&lt;nShortcut&gt;</B> is an optional numeric inkey value that indicates the
+     shortcut key combination that selects and launches the menu selection.
+     The default is 0.  This value is assigned to the MenuItem:shortcut
+     instance variable.  Constant values for various key combinations are
+     defined in Inkey.ch.
+
+     <B>&lt;cMessage&gt;</B> is an optional character string that indicates the text
+     to display on the status bar when the menu item is selected.  The
+     default is an empty string.  This value is assigned to the
+     MenuItem:message instance variable.
+
+     <B>&lt;nID&gt;</B> is an optional numeric value that uniquely identifies the menu
+     item.  The default is 0.  This value is assigned to the MenuItem:id
+     instance variable.
+
+ <B>Returns</B>
+
+     Returns a MenuItem object when all of the required arguments are
+     present; otherwise, MenuItem() returns NIL.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

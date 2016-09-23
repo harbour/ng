@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng849db.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng86463.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DELETE</B>
+ Mark records for deletion
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DELETE [&lt;scope&gt;] [WHILE &lt;lCondition&gt;]</B>
+     <B>   [FOR &lt;lCondition&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;scope&gt;</B> is the portion of the current database file to DELETE.  If a
+     scope is not specified, DELETE acts only on the current record.  If a
+     conditional clause is specified, the default becomes ALL records.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to DELETE
+     within the given scope.
+
+ <B>Description</B>
+
+     DELETE is a database command that tags records so they can be filtered
+     with SET DELETED ON, queried with DELETED(), or physically removed from
+     the database file with PACK.  In addition, display commands such as LIST
+     and DISPLAY identify deleted records with an asterisk (*) character.
+     Once records are deleted, you can reinstate them by using RECALL.  If
+     you want to remove all records from a database file, use ZAP instead of
+     DELETE ALL and PACK.
+
+     In a network environment, DELETE requires the current record be locked
+     with RLOCK() if you are DELETEing a single record.  If you are DELETEing
+     several records, the current database file must be locked with FLOCK()
+     or USEed EXCLUSIVEly.  Refer to the Network Programming chapter in the
+     Programming and Utilities guide for more information.
+
+ <B>Notes</B>
+
+     <B>.  DELETE with SET DELETED ON:</B> If the current record is deleted
+        with SET DELETED ON, it will be visible until the record pointer is
+        moved.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates use of the FOR clause to mark a set
+        of records for deletion:
+
+        USE Sales INDEX Salesman NEW
+        DELETE ALL FOR Inactive
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1d373.html">DBEVAL()</A>
+<A HREF="ng284ba.html">DELETED()</A>
+<A HREF="ng90b67.html">PACK</A>
+<A HREF="ng92bb9.html">RECALL</A>
+<A HREF="ng9fc92.html">SET DELETED</A>
+<A HREF="ngb450c.html">ZAP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

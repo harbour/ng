@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng15592b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng154bf5.html">[^^Up^^]</A>
+<A HREF="ng1560d3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>bitmaps                                 (Assignable)</B>
+
+        Contains an array of exactly three elements.  The first element of
+        this array is the file name of the bitmap to be displayed at the top
+        of a vertical scroll bar or to the left of a horizontal scroll bar.
+        The second element of this array is the file name of the bitmap to be
+        displayed at the bottom of a vertical scroll bar or to the right of a
+        horizontal scroll bar.  The third element of this array is the file
+        name of the bitmap to be used as the thumbwheel.
+
+        Drive and directory names are not allowed; the file name extension is
+        required.  A bitmap file can be stored as a file on disk or in a
+        bitmap library.  If stored as a file, the file must reside in the
+        same directory as the application.  If stored in a bitmap library,
+        the library must reside in the same directory as the application and
+        it also must have the same name as the application with a .BML
+        extension.
+
+        CA-Clipper will search for the file name first and then, if it is not
+        found, it will search in the bitmap library.  If no file is found
+        either on disk or in the library, no bitmap will be displayed.
+
+        If this instance variable is not used, and the application is running
+        in graphic mode, the files ARROW_L.BMU, ARROW_R.BMU, and ARROW_E.BMU
+        will be used for a horizontal scroll bar and the files ARROW_U.BMU,
+        ARROW_D.BMU, and ARROW_E.BMU will be used for a horizontal scroll
+        bar.
+
+        This instance variable only affects applications running in graphic
+        mode and is ignored in text mode.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

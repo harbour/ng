@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngacaf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ngb606.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlNew()</B>               Create a RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlNew([nLen]) -&gt; rlResult
+
+<B>Arguments</B>
+
+    nLen is the length of the RecordList to be created.  If omitted, then
+    the recCount() of the current database will be used.
+
+<B>Returns</B>
+
+    The RecordList (actually represented by a long).
+
+<B>Description</B>
+
+    rlNew() allows you to create a new RecordList which initially contains
+    no records (i.e., has no bits set).
+
+    When you are done with the RecordList, it must be destroyed.
+
+<B>Example</B>
+
+<B>    rl := rlNew(50)                 &amp;&amp; Create a new RecordList</B>
+    ? rlLen(rl)                     &amp;&amp; Will return 50
+    ? rlCount(rl)                   &amp;&amp; Will return 0 (no recs in it)
+    rlSet(rl, 10)                   &amp;&amp; Add record 10
+    rlSet(rl, 30)                   &amp;&amp; Add record 30
+    rlSet(rl, 70)                   &amp;&amp; Add record 70 (won't do anything
+                                    &amp;&amp; because 70 is greater than the
+                                    &amp;&amp; length of the RecordList (50))
+    ? rlCount(rl)                   &amp;&amp; Will return 2 (10 &amp; 30 are in it)
+    rlDestroy(rl)                   &amp;&amp; Get rid of it
+
+<B>Example</B>
+
+    use demo
+<B>    rl := rlNew()                   &amp;&amp; Set up a new RecordList (default len)</B>
+    ? rlLen(rl)                     &amp;&amp; Will return # of recs n database
+    ? recCount()                    &amp;&amp; Will return same as above
+    rlDestroy(rl)                   &amp;&amp; Get rid of it
+
+<B>See Also</B>
+
+    rlNewDup(), rlNewQuery()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb606.html">rlNewDup()</A>
+<A HREF="ngc16d.html">rlNewQuery()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

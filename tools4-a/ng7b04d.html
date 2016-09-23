@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7ad3a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7a98e.html">[^^Up^^]</A>
+<A HREF="ng7b407.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>HEXTOSTR()</B>
+ Converts a hexadecimal string into a byte sequence
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>HEXTOSTR(&lt;cHex&gt;) --&gt; cBytes</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cHex&gt;</B>   Designates a character string of which two characters are
+     recognized as a hexadecimal form of a byte.  &lt;cHex&gt; can contain only the
+     characters "0" to "9" and "A" to "F".
+
+ <B>Returns</B>
+
+     HEXTOSTR() returns a character string that contains a byte sequence in
+     which each byte corresponds to two characters of its hexadecimal form.
+     The return value is half as long as &lt;cHex&gt;.
+
+ <B>Description</B>
+
+     HEXTOSTR() is useful when working with the internet addresses that are
+     required in conjunction with the IPX/SPX functions of Point To Point
+     communication.
+
+ <B>Example</B>
+
+     Convert the hexadecimal string into a byte sequence:
+
+     ? HEXTOSTR('4130')   // "A0"
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7dce9.html">STRTOHEX()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

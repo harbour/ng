@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng409ca.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4142c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBOPENINFO</B>
+ Information about a data store (table) to be opened in the workarea
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   USHORT area;</B>
+     <B>   BYTEP  name;</B>
+     <B>   BYTEP  alias;</B>
+     <B>   BOOL   shared;</B>
+     <B>   BOOL   readonly;</B>
+     <B>} DBOPENINFO;</B>
+     <B></B>
+     <B>typedef DBOPENINFO far * DBOPENINFOP;</B>
+
+ <B>Elements</B>
+
+     <B>area</B>
+
+        Contains a numeric value representing the workarea number where the
+        data store will be opened.  This number corresponds directly to the
+        CA-Clipper-language level SELECT() area.
+
+     <B>name</B>
+
+        Contains a pointer to a null-terminated string identifying the data
+        store.  In most cases, it is a filename.
+
+     <B>alias</B>
+
+        Contains a pointer to a null-terminated string used from the
+        CA-Clipper-language level to access the new workarea.  The alias
+        element must follow CA-Clipper-level rules for valid symbolic
+        references (i.e., a valid CA-Clipper identifier).
+
+     <B>shared</B>
+
+        Contains a boolean value that is set to TRUE if the data store is to
+        be opened in a shared (network) mode.
+
+     <B>readonly</B>
+
+        Contains a boolean value that is set to TRUE if the data store is to
+        be opened in a read-only mode.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   create(), open()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4e184.html">create()</A>
+<A HREF="ng4f456.html">open()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

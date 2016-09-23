@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng62ff4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng639fd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_mState()</B>
+ Retrieve the current mouse state
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>ERRCODE _mState(</B>
+     <B>                 BOOL bReset,</B>
+     <B>                 LLG_LPMOUSESTATE lpMState</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>bReset</B> is a flag that resets the number of left and right mouse
+     clicks if you specify true (.T.).  If you specify false (.F.), these
+     values are not reset.
+
+     <B>lpMState</B> is a pointer to an LLG_MOUSESTATE structure that you must
+     allocate prior to calling this function.  _mState() writes information
+     regarding the current mouse state to this structure.
+
+ <B>Returns</B>
+
+     SUCCESS if successful; otherwise, an error code.
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6be78.html">LLG_MOUSESTATE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,124 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1be36.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1763f.html">[^^Up^^]</A>
+<A HREF="ng1d383.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_xvlock()</B>
+ Lock a VM segment
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "vm.api"</B>
+     <B>FARP _xvlock(</B>
+     <B>              HANDLE hSegment</B>
+     <B>            )</B>
+
+ <B>Arguments</B>
+
+     <B>hSegment</B> is the VM segment handle returned by _xvalloc().
+
+ <B>Returns</B>
+
+     _xvlock() returns a far pointer to the base of the locked VM segment, or
+     a NULL pointer if the VM segment handle is not valid (i.e., does not
+     represent an allocated VM segment).
+
+ <B>Description</B>
+
+     _xvlock() guarantees that the VM segment is located in conventional
+     memory and cannot be moved or swapped.  The pointer returned is valid
+     until the segment is unlocked using _xvunlock().
+
+     <B>Note: </B> A VM segment may be locked more than once.  The VMM system
+     maintains, for each segment, a lock count (_xvlockcount()) which is
+     incremented each time you lock the segment and decremented each time you
+     unlock the segment.  A segment is not physically unlocked until its lock
+     count is zero.  You must eventually unlock all VM segments with
+     _xvunlock().
+
+     <B>Warning! </B> Do not leave a VM segment locked unnecessarily.  Because
+     all locked segments reside in conventional memory, the more of them you
+     lock the greater is the chance of exhausting conventional memory.
+     Therefore, always unlock a VM segment with _xvunlock() when you are not
+     actively accessing it.  Typically, this will mean locking and unlocking
+     the same VM segment several times within one function call.
+
+     If you have to lock a VM segment for an extended period of time, use
+     _xvwire().  This function places the VM segment in an area of the swap
+     space that least inhibits the VMM system.
+
+ <B>Notes</B>
+
+     <B>.  Error conditions:</B>  If there is not enough VM swap space available
+        for the segment to be loaded into conventional memory, the system
+        raises an internal error and halts.
+
+     <B>.  Garbage collection:</B>  The VMM system may take up to several seconds
+        to lock a VM segment if locking it triggers garbage collection.  Use
+        _xvwire() for routines that require fast access to a buffer.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example allocates a segment with _xvalloc() and locks it
+        using _xvlock().  After a string is copied into the locked segment,
+        the segment is unlocked and freed (with _xvunlock() and _xvfree()):
+
+        // CA-Clipper include files
+        #include "extend.api"
+        #include "vm.api"
+
+        // Microsoft C include files
+        #include "string.h"
+
+        // Prototype
+        Boolean VMExample(char * spSrc);
+
+
+        Boolean VMExample(char * spSrc)
+        {
+           HANDLE hSegment;
+           char * spString;
+           Boolean bResult = FALSE;
+
+           if (hSegment = _xvalloc(strlen(spSrc) + 1, 0))
+              {
+              spString = _xvlock(hSegment);
+              if (spString != NULL)
+                 {
+                 strcpy(spString, spSrc);
+
+                 .
+                 . &lt;statements&gt;
+                 .
+
+                 bResult = TRUE;
+
+                 _xvunlock(hSegment);
+                 }
+              _xvfree(hSegment);
+              }
+
+           return (bResult);
+        }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Vm.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng179e4.html">_xvalloc()</A>
+<A HREF="ng1d383.html">_xvlockcount()</A>
+<A HREF="ng1e6fa.html">_xvunlock()</A>
+<A HREF="ng1f7e8.html">_xvwire()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng46495.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng46d91.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>DBSORTITEM</B>
+ Array of items indicating key values, in order, to use when sorting data
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   USHORT uiField;</B>
+     <B>   USHORT uiFlags;</B>
+     <B>} DBSORTITEM;</B>
+     <B></B>
+     <B>typedef DBSORTITEM far * LPDBSORTITEM;</B>
+
+ <B>Elements</B>
+
+     <B>uiField</B>
+
+        Contains a numeric value; an index into the AREA-&gt;lpFields structure
+        indicating the field on which the sort is based.
+
+     <B>uiFlags</B>
+
+        Contains literal constants that function as sort optimization and
+        control flags.  They are passed to your RDD sort() routine from the
+        high-level wrapper function for the CA-Clipper SORT command.  The
+        flag values are defined in Rdd.api and have the following meanings:
+
+        <B>DBSORTITEM Sort Flag Values</B>
+        ---------------------------------------------------------------------
+        <B>Constant       Meaning</B>
+        ---------------------------------------------------------------------
+        SF_ASCEND      An ascending sort
+        SF_CASE        A case-insensitive sort
+        SF_DESCEND     A descending sort
+        SF_NUM         The sort is on numeric data only
+        SF_DOUBLE      The sort is to be done exclusively with floating point
+                       numbers
+        SF_LONG        The sort is to be done exclusively with integers
+        ---------------------------------------------------------------------
+
+ <B>Files</B>  Header file is Rdd.api.
+
+ <B>Used By</B>    DBSORTINFO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng46495.html">DBSORTINFO</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

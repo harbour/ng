@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge4309.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge50f8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET DESCENDING</B>
+ Change the descending flag of the controlling order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET DESCENDING ON | OFF | (&lt;lToggle&gt;)</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> enables the descending flag.
+
+     <B>OFF</B> disables the descending flag.
+
+     <B>&lt;lToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+     <B>Note: </B> The initial default of this setting depends on whether the
+     controlling order was created with DESCENDING as an attribute.
+
+ <B>Description</B>
+
+     SET DESCENDING is functionally equivalent to ORDDESCEND().  Refer to
+     this function for more information.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example illustrates SET DESCENDING.  every order
+        can be both ascending and descending:
+
+        USE Customer VIA "DBFCDX"
+        INDEX ON LastName TAG Last
+        INDEX ON FirstName TAG First DESCENDING
+
+        SET ORDER TO TAG Last
+        // last was originally created in ascending order
+
+        // Swap it to descending
+        SET DESCENDING ON
+        // Last will now be processed in descending order
+
+        SET ORDER TO TAG First
+        // First was originally created in descending order
+
+
+        // Swap it to ascending
+        SET DESCENDING OFF
+        // First will now be processed in ascending order
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8153c.html">ORDDESCEND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

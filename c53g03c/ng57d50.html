@@ -1,0 +1,69 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng57a94.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng58332.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>childEnd()</B>
+ Report end of relation
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE childEnd(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     LPDBRELINFO lpdbRelInfo</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpdbRelInfo</B> is a pointer to a structure containing information on a
+     relation.
+
+ <B>Description</B>
+
+     childEnd() indicates that one of wa's parent work areas is no longer related.
+
+ <B>Default Behavior</B>
+
+     childEnd() indicates that the referenced work area is related to one less
+     parent by decrementing wa-&gt;uiParents.  This method does not physically
+     unhook a child from a parent.
+
+     <B>Warning!</B>  There is no check to guarantee that <B>wa-&gt;uiParents</B> will
+     wrap from 0 to 255 after the decrement.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If your RDD supports relations, ensure that the child work area
+        (denoted by wa) does not have a pending relational move that relies
+        upon the existence of the parent referenced by lpdbRelInfo.  If such
+        a movement exists, it must be resolved by a call to SELF_FORCEREL()
+        prior to removal.
+
+     <B>.</B>  In most driver implementations, parent-child relations will be
+        stored exclusively in the parent work area.  clearRel() removes all
+        child relations from a parent; there is no way to remove a single
+        relation from a parent's relation list using the CA-Clipper DML.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng45304.html">DBRELINFO</A>
+<A HREF="ng58332.html">childStart()</A>
+<A HREF="ng58bd3.html">clearRel()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

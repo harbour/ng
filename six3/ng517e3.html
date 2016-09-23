@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng51048.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng51ea9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SET TAG TO:</B>
+  <B>SET ORDER TO:</B>
+
+  Syntax:
+
+  <B>SET TAG TO [&lt;tagname&gt; [OF &lt;indexname&gt;]]</B>
+  <B>SET ORDER TO [TAG &lt;tagname&gt; [OF &lt;indexname&gt;]]</B>
+
+  <B>TAG &lt;tagname&gt;</B> specifies the name of the tag to set the order to.  If a
+  .CDX/.NSX file is not specified, then the open .CDX's are searched for the
+  tag in the order that they were opened.  Once the tag is found, the order
+  is set to its .CDX/.NSX file, and control is given to the tag specified.
+
+  <B>OF &lt;cdxname&gt;</B> specifies which .CDX/.NSX file contains the specified tag.
+  This is used to eliminate any conflicts between two .CDX's that may each
+  have a tag of the same name.  Order is set to the specified .CDX/.NSX, and
+  specified tag is given control.
+
+  If no tagname is specified, then order is set to 0 (record # order).
+  For example:
+
+      <B>SET ORDER TO</B>
+  and
+      <B>SET TAG TO</B>
+
+  are both equivalent to:
+
+      <B>SET ORDER TO 0</B>
+
+
+    NOTE:  The SET TAG and SET ORDER TO TAG commands are NOT supported
+           under SIXNTX.  SET ORDER TO is supported as it is under DBFNTX.
+
+
+  Example:
+
+
+    // Assuming TEST.DBF has a TEST.CDX file with two tags, AGE and STATE
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"     // Open TEST.DBF and TEST.CDX
+    <B>SET TAG TO age</B>            // Selects the AGE tag
+
+    INDEX ON last TO last     // Create a new LAST.IDX file at the end of the
+                              // order.  In this case, it's in order 3.  The
+                              // two tags in TEST.CDX (AGE and STATE) are
+                              // orders 1 and 2.
+
+    <B>SET ORDER TO 2</B>            // Selects the STATE tag from within TEST.CDX
+
+    <B>SET TAG TO age</B>            // Selects the AGE tag within TEST.CDX
+
+    <B>SET ORDER TO 3</B>            // Selects LAST.IDX, which was in order 3
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng37ce6.html">Sx_SetTag()</A>
+<A HREF="ng380bc.html">Sx_SetTagNo()</A>
+<A HREF="ng435.html">Sx_OrdSetFocus()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

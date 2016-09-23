@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng54a40.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSETQ()</B>
+ Sets a print queue for the capture mode
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSETQ(&lt;nPrinter&gt;,&lt;cPrintQueue&gt;) --&gt; lLoggedIn</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nPrinter&gt;</B>  Designates to which LPT device a new print queue is
+     redirected.  LPT1(1) to LPT3(3) are valid.
+
+     <B>&lt;cPrintQueue&gt;</B>  Designates the name of the print queue on the default
+     server where the future print output is created.
+
+ <B>Returns</B>
+
+     NNETSETQ() returns .T. when the designated print queue has been found
+     and redirected.
+
+ <B>Description</B>
+
+     NOVELL NET SET QUEUE
+     You can use NNETSETQ() to determine which print queue of the default
+     server generates the future print output.  If the queue is on another
+     server, then you must switch over using NNETSETSRV().  All other
+     settings required for printing can be done using the NNETCAPSSF()
+     function.
+
+ <B>Note</B>
+
+     <B>.</B>  The currently logged in user must have rights to use the
+        designated queue.
+
+ <B>Example</B>
+
+     Redirect the queue USER:
+
+     ? NNETSETQ("USER")         // .T., when successful
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng2674f.html">NNETCAPSSF()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

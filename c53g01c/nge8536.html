@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge8018.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge8d89.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET FORMAT*</B>
+ Activate a format when READ is executed
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET FORMAT TO [&lt;idProcedure&gt;[.&lt;ext&gt;]]</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;idProcedure&gt;</B> is a format (.fmt) file, a program (.prg) file, or
+     a procedure.
+
+     <B>&lt;ext&gt;</B> is the extension of the format file.  If not specified, the
+     default extension is (.fmt).
+
+     SET FORMAT TO with no argument deactivates the current format.
+
+ <B>Description</B>
+
+     SET FORMAT defines a procedure to execute when a READ is invoked.
+     Unlike the interpreted environment, formats are not opened and executed
+     at runtime.  Instead, the CA-Clipper compiler treats SET FORMAT the same
+     as a DO command.  The compiler first looks to see whether it has already
+     compiled a procedure with the same name as &lt;idProcedure&gt;.  If it has, it
+     uses that procedure for the reference.  If &lt;idProcedure&gt; is not found,
+     the compiler looks to disk for a file with the same name.  If this file
+     is not found, an external reference is generated that must be resolved
+     at link time.
+
+     SET FORMAT is a compatibility command and not recommended.
+
+ <B>Notes</B>
+
+     <B>.  Active format procedures:</B> Unlike other dialects where each
+        work area can have an active format, CA-Clipper supports only one
+        active format procedure for all work areas.
+
+     <B>.  Screen CLEARing:</B> CA-Clipper does not clear the screen when a
+        format procedure is executed.
+
+     <B>.  Legal statements:</B> Format procedures allow statements and
+        commands in addition to @...SAY and @...GET.
+
+     <B>.  Multiple pages:</B> CA-Clipper does not support multiple-page
+        format procedures.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses a format procedure to add records to a
+        database file until the user presses Esc:
+
+        USE Sales NEW
+        SET FORMAT TO SalesScr
+        DO WHILE LASTKEY() != 27
+           APPEND BLANK
+           READ
+        ENDDO
+        RETURN
+
+        PROCEDURE SalesScr
+           @ 12, 12 SAY "Branch     : " GET  Branch
+           @ 13, 12 SAY "Salesman   : " GET  Salesman
+           RETURN
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ng10a778.html">PROCEDURE</A>
+<A HREF="ngd4eb5.html">READ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

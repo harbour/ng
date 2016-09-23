@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng424a9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng42e9f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBRELINFO</B>
+ List of relational information
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct _DBRELINFO_</B>
+     <B>{</B>
+     <B>   ITEM bExpr;</B>
+     <B>   ITEM cExpr;</B>
+     <B></B>
+     <B>   struct _WORKAREA_ far * parent;</B>
+     <B>   struct _WORKAREA_ far * i;</B>
+     <B></B>
+     <B>   struct _DBRELINFO_ far * next;</B>
+     <B></B>
+     <B>} DBRELINFO;</B>
+     <B></B>
+     <B>typedef DBRELINFO far * DBRELINFOP;</B>
+
+ <B>Elements</B>
+
+     <B>bExpr / cExpr</B>
+
+        Contain a code block and a character expression, respectively, used
+        to reposition the cursor of the child database when this relation is
+        resolved.
+
+     <B>parent</B>
+
+        Contains a pointer to the parent workarea of this relation.  When you
+        move the cursor of a parent workarea to a new position, you must move
+        the cursor of each of its children to corresponding positions
+        (usually with forceRel()).  Find the corresponding position by
+        performing a seek() for the result of the cExpr.
+
+     <B>child</B>
+
+        Contains a pointer to the workarea containing the child in this
+        relation.
+
+     <B>next</B>
+
+        Contains a pointer identifying the next field in the field list.
+        Note that a null pointer in this field indicates the end of the list.
+        By convention, this list is not circular.
+
+     <B>Warning! </B> You should perform code block evaluations with great
+     caution.  Save any states that are likely to change as a result of
+     re-entrance, so you can restore them after the code evaluation.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   WORKAREA, childEnd(), childStart(), relEval(), setRel()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng51ae4.html">childEnd()</A>
+<A HREF="ng520af.html">childStart()</A>
+<A HREF="ng53584.html">relEval()</A>
+<A HREF="ng53ef2.html">setRel()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

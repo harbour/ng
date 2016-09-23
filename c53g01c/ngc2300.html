@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc1f1c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngc26c8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CLEAR TYPEAHEAD</B>
+ Empty the keyboard buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CLEAR TYPEAHEAD</B>
+
+ <B>Description</B>
+
+     CLEAR TYPEAHEAD is a keyboard command that clears all pending keys from
+     the CA-Clipper keyboard buffer.  This is useful in user interface
+     procedures or user-defined functions to guarantee that keys processed
+     from the keyboard buffer are appropriate to the current activity and not
+     pending from a previous activity.  User functions called by ACHOICE()
+     and DBEDIT() are especially sensitive to such keys.
+
+     Note that both the SET TYPEAHEAD and KEYBOARD commands also clear the
+     keyboard buffer.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example empties the keyboard buffer before invoking
+        DBEDIT(), guaranteeing that any pending keys will not be executed:
+
+        CLEAR TYPEAHEAD
+        DBEDIT()
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd087b.html">KEYBOARD</A>
+<A HREF="ngf1c3d.html">SET TYPEAHEAD</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

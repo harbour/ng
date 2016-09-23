@@ -1,0 +1,38 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4919.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng228.html">[^^Up^^]</A>
+<A HREF="ng4fd6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>C2014   LOOP statement violates enclosing SEQUENCE</B>
+
+     <B>Explanation:</B>  You specified a LOOP statement within BEGIN SEQUENCE
+     and RECOVER statements without an enclosing DO WHILE or FOR loop.  This
+     could happen for several reasons:
+
+     1. You specified a LOOP statement with no enclosing DO WHILE or FOR
+        control structure within a SEQUENCE.
+
+     2. You are attempting to LOOP to a DO WHILE or FOR statement outside the
+        current SEQUENCE from within the SEQUENCE.
+
+     <B>Action:</B>
+
+     1. Check to determine if you omitted the DO WHILE or FOR control
+        structure statements.  If so, add the control structure statements.
+
+     2. Check to determine if you intended to LOOP to a control structure
+        enclosing the current SEQUENCE.  If so, you must BREAK to the RECOVER
+        or the END statements and then LOOP.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

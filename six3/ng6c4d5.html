@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng6c360.html">[^^Up^^]</A>
+<A HREF="ng6caf5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>The Mach SIx Query Optimizer</B>
+
+  The Mach SIx Query Optimizer is an integrated system that provides
+  high-speed query optimization for SET FILTER and other selected Clipper
+  commands when used with a FOR condition.  Mach SIx optimizes queries by
+  following a procedural set of steps that determine the best access plan
+  to retrieve the requested set of data.  Mach SIx's primary focus is on
+  the existence of index key expressions in the FOR criteria of its
+  supported commands and functions.  Using this information, Mach SIx is
+  able to directly search the index files to satisfy all or part of the
+  query without ever having to access the database.
+
+  Once it becomes necessary to query the physical database, Mach SIx only
+  queries the set of records found to meet the condition based on the data
+  in the index files.  This means that including just one indexed
+  expression, in the FOR condition, has the potential to narrow the scope of
+  the query to a very small set of the original file.  This translates to
+  incredible speed gains for any optimized command that contains one or more
+  index key expressions.  Queries that used to take minutes, now return in
+  seconds.  In some cases, you will experience performance increases  that
+  are magnitudes above standard Clipper.  It's completely done for you in
+  the background.
+
+  If Mach SIx is unable to optimize the query condition, it simply
+  turns control over to standard Clipper, but when it can, you'll see
+  Clipper sail, and sail like it never has before.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

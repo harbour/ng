@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng23449.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng22190.html">[^^Up^^]</A>
+<A HREF="ng24090.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Lock Time-outs</B>
+------------------------------------------------------------------------------
+
+     Problem:  Index locking in previous versions of CA-Clipper was handled
+     automatically by the database driver, and had no time-out provision.
+     This created the potential for problems in network environments if a
+     workstation died while holding a lock.  If this situation occurred all
+     other workstations waiting for an index lock would appear to freeze
+     while waiting to obtain their lock.  This could also happen if a user
+     placed a CA-Clipper application in the background on a multitasking
+     system without sufficient processing time allocated to it.  Eventually,
+     most network operation systems would clear a connection that had no
+     activity for a specified period of time.  This would free the lock and
+     everything would resume as normal, but frustrated users may have
+     rebooted their machines possibly causing file corruption.
+
+     Solution:  In CA-Clipper 5.2 the NTX driver will generate a recoverable
+     runtime error if it fails to lock the index after a predetermined number
+     of retries.  The default error handler for this system simply returns
+     (.T.) to retry the operation.  This emulates the behavior of previous
+     CA-Clipper versions.
+
+ <B>Error Handling</B>
+
+     Time out handling:  The handling of this error is problematic because
+     the lock is issued from various internal index routines.  Therefore the
+     only safe recoveries are to retry or quit.  Choosing to default from the
+     error or issuing a break will more than likely leave the index in a
+     corrupted state.  If either of the options is employed, the application
+     should immediately recreate the index.  The preferred way to handle a
+     time out such as this is to alert the user of the situation so they
+     don't think their machine has hung, and then have the network
+     administrator determine what workstation is causing the problem.  When
+     the problem workstation is cleared, the users that have timed out can
+     select  retry and continue processing.
+
+     NTXERR.PRG:  The file NTXERR.PRG contains the source code for the
+     default error handler INIT procedure.  This error handler can be
+     modified to allow user-defined error handling for index lock time-outs.
+     Care should be exercised when modifying the error handler as detailed
+     above.
+
+     Compatibility:  The lock time-out capability when used in conjunction
+     with the default error handler is totally compatibility with previous
+     versions of CA-Clipper.  No changes are made to the NTX file structure
+     and no action is required by the developer to activate the time-out
+     functionality.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

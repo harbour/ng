@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng92bb9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng93c77.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>REINDEX</B>
+ Rebuild open indexes in the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>REINDEX</B>
+     <B>[EVAL &lt;lCondition&gt;]</B>
+     <B>[EVERY &lt;nRecords&gt;]]</B>
+
+ <B>Arguments</B>
+
+     <B>EVAL &lt;lCondition&gt;</B> specifies a condition that is evaluated either for
+     each record processed or at the interval specified by the EVERY clause.
+     This clause is identical to the EVAL clause of the INDEX command, but
+     must be respecified in order for the reindexing operation to be
+     monitored since the value of &lt;lCondition&gt; is transient.
+
+     <B>EVERY &lt;nRecords&gt;</B> specifies a numeric expression that modifies how
+     often EVAL is evaluated.  When using EVAL, the EVERY option offers a
+     performance enhancement by evaluating the condition for every nth record
+     instead of for each record reindexed.  The EVERY keyword is ignored if
+     no EVAL condition is specified.
+
+ <B>Description</B>
+
+     REINDEX is a database command that rebuilds all open indexes in the
+     current work area.  When the reindexing operation finishes, all rebuilt
+     indexes remain open, order is reset to one, and the record pointer is
+     positioned to the first record in the controlling index.  If any of the
+     indexes were created with SET UNIQUE ON, REINDEX adds only unique keys
+     to the index.  If any of the indexes were created using a FOR condition,
+     only those key values from records matching the condition are added to
+     the index.
+
+     In a network environment, REINDEX requires EXCLUSIVE USE of the current
+     database file.  Refer to the Network Programming chapter in the
+     Programming and Utilities guide for more information.
+
+     <B>Caution! </B> REINDEX does not recreate the header of the index file
+     when it recreates the index.  Because of this, REINDEX does not help if
+     there is corruption of the file header.  To guarantee a valid index,
+     always use INDEX ON in place of REINDEX to rebuild damaged indexes
+
+ <B>Notes</B>
+
+     Index key order, UNIQUE status, and the FOR condition are known to the
+     (.ntx) file and are, therefore, respected and maintained by REINDEX.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example REINDEXes the index open in the current work
+        area:
+
+        USE Sales INDEX Salesman, Territory NEW
+        REINDEX
+
+     <B>.</B>  This example REINDEXes using a progress indicator:
+
+        USE Sales INDEX Salesman, Territory NEW
+        REINDEX EVAL NtxProgress() EVERY 10
+
+        FUNCTION NtxProgress
+        LOCAL cComplete := LTRIM(STR((RECNO()/LASTREC()) * 100))
+        @ 23, 00 SAY "Indexing..." + cComplete + "%"
+        RETURN .T.
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng895a7.html">INDEX</A>
+<A HREF="ng90b67.html">PACK</A>
+<A HREF="nga475d.html">SET INDEX</A>
+<A HREF="ngb1e6f.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

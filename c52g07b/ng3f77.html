@@ -1,0 +1,111 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2fa1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2471.html">[^^Up^^]</A>
+<A HREF="ng50f3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Basic Terminology</B>
+------------------------------------------------------------------------------
+
+     The RDD architecture introduces several new terms and concepts that are
+     key to the design and usage of RDDs.  You should familiarize yourself
+     with these concepts and terms as you begin to use the RDD functionality.
+     The meaning of some earlier terminology is also further defined.  The
+     following RDD functional glossary defines the terminology for all RDDs.
+
+     <B>.  Key Expression:</B>  A valid CA-Clipper expression that creates a
+        key value from a single record.
+
+     <B>.  Key Value:</B>  A value that is based on value(s) contained within
+        database fields, associated with a particular record in a database.
+
+     <B>.  Identity:</B>  A unique value guaranteed by the structure of the
+        data file to reference a specific record in a database even if the
+        record is empty.  In the Xbase file (.dbf), the identity is the
+        record number; but it could be the value of a unique primary key or
+        even the offset of an array in memory.
+
+     <B>.  Keyed-Pair:</B>  A pair consisting of a key value and an identity.
+
+     <B>.  Identity Order:</B>  Describes a database arranged by identity.
+        In Xbase, this refers to the physical arrangement of the records in
+        the database in the order in which they were entered (natural order).
+
+     <B>.  Tag:</B>  A set of keyed-pairs that provides ordered access to the
+        table based on a key value.  Usually, an Order in a multiple-Order
+        index (Order).  An Order.
+
+     <B>.  Order:</B>  A named mechanism (index) that provides logical access
+        to a database according to the keyed-pairs.  This term encompasses
+        both single indexes and the Tags in multiple-Tag indexes.
+
+        Orders are not, themselves, data files.  They provide access to data
+        that gives the appearance of an ordering of the data in a specific
+        way.  This ordering is defined by the relationships between keyed-
+        pairs.  An Order does not change the physical (the natural or entry)
+        order of data in a database.
+
+     <B>.  Controlling Order:</B>  The active Order (index) for a particular
+        work area.  Only one Order may control a work area at any time, and
+        it controls the order in which the database is accessed during paging
+        and searching.
+
+     <B>.  Order List:</B>  A list of all the Orders available to the
+        database in the specified work area.
+
+     <B>.  Order Bag:</B>  A container that holds zero or more Orders.
+        Normally a disk or memory file.  A traditional index like (.ntx) is
+        an Order Bag that holds only one Order.  A multiple-Tag index (.mdx
+        or .cdx) is an Order Bag that holds zero or more Orders.  Though
+        Order Bags may be a memory or disk file, CA-Clipper 5.2 only supports
+        Order Bags as disk files.
+
+     <B>.  Record:</B>  A record in the traditional database paradigm is a
+        row of one or more related columns (fields) of data.  In the expanded
+        architecture of CA-Clipper, a record could be data that does not
+        exactly fit this definition.
+
+        A record is, in this expanded context, data associated with a single
+        identity.  In an Xbase data structure, this corresponds to a row
+        (fields associated with a record number); in other data structures,
+        this may not be the case.
+
+        In this document we use "record" in the traditional sense, but you
+        should be aware that CA-Clipper permits expansion of the meaning of
+        record.
+
+     <B>.  single-Order Bag:</B>  An Order Bag that can contain only one
+        Order.  The (.ntx) and (.ndx) files are examples of single-Order
+        Bags.
+
+     <B>.  multiple-Order Bag:</B>  An Order Bag that can contain any number
+        of Orders; a multiple-Tag index.  The (.cdx) and (.mdx) files are
+        examples of multiple-Order Bags.
+
+     <B>.  maintainable scoped Orders:</B>  Scoped (filtered) Orders created
+        using the FOR clause.  The FOR condition is stored in the index
+        header.  Orders of this type are correctly updated using the
+        expression to reflect record updates, deletions and additions.
+
+     <B>.  non-maintainable/temporary Orders:</B>  Orders created using the
+        WHILE or NEXT clauses.  These Orders are useful because they can be
+        created quickly.  However, the conditions in these clauses are not
+        stored in the index header.  Therefore, Orders of this type are not
+        correctly updated to reflect record updates, deletions and additions.
+        They are only for temporary use.
+
+     <B>.  Lock List:</B>  A list of the records that are currently locked in
+        the work area.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

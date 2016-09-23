@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4587e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng46721.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJDEL()</B>
+ Deletes a job from a print queue
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJDEL(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is deleted from
+     &lt;cQueue&gt;.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJDEL() returns .T. if the job has been deleted successfully.  If an
+     error occurs, the function returns .F.  An error can occur if &lt;cQueue&gt;
+     does not exist or the requesting user does not have the required access
+     rights.
+
+ <B>Description</B>
+
+     NOVELL NET JOB DELETE
+     NNETJDEL() allows you to delete a job from a queue.  The job that is
+     deleted is specified by its job number.  The job number has nothing to
+     do with the logical position of a job within a queue.  The job number
+     can be determined with NNETCAPJOB() or NNETJLIST().  A job that is
+     already in process is canceled immediately by a call of NNETJDEL().
+
+ <B>Note</B>
+
+     <B>.</B>  The user of a queue can delete a job only if the user
+        submitted it to the queue.  The queue operator can remove any job.
+
+ <B>Example</B>
+
+     Delete the second job from the queue LINEPRINTER:
+
+     nJob=BIN2I(SUBSTR(NNETJLIST('LINEPRINTER'),3,2))
+     IF NNETJDEL('LINEPRINTER',nJob)
+     ? 'Job has been deleted successfully!'
+     ELSE
+     ? 'Job could not be deleted!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42436.html">NNETCAPJOB()</A>
+<A HREF="ng49eec.html">NNETJLIST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

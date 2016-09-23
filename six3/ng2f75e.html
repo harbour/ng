@@ -1,0 +1,98 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2eff1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng301df.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_KeyDrop():</B>
+
+  Syntax:   Sx_KeyDrop([[nTagNo | cTagName,] nOrder | cIndexName])
+
+            nTagNo     = Position of tag within compound index file
+            cTagName   = Name of the tag to remove from
+            nOrder     = Position of index in list of indexes
+            nIndexName = Name of the index to remove from
+
+  Returns:   &lt;logical&gt; .T. if the key was successfully removed.
+                  .F. if an error occurred.
+
+  Description:    This function is used to manually remove a key from an
+                  index.  The current record in the current table is used
+                  to determine the entry to remove from the current or
+                  specified index.  If the current or specified index is a
+                  compound index (.CDX/.NSX) then the key is removed from
+                  the active tag.
+
+                  The new key is removed from the index or tag only if:
+
+                     * The record pointer is positioned on a record (not
+                       EOF).
+                     * The key exists in the index/tag.
+
+                  If no arguments are specified, then Sx_KeyDrop() uses the
+                  current index file and current tag (if applicable).  If
+                  only one argument is supplied, then nOrder/cIndexName is
+                  assumed.  0 (zero) can be used for either nTagNo or nOrder
+                  to specify the current tag or index, respectively.
+
+                  This function can be used in conjunction with Sx_KeyAdd()
+                  to create your own customized indexes.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXNSX.CH"
+
+    // Create a standard Roll-Your-Own (RYO) Index
+
+    USE test VIA "SIXNSX"               // Open database
+    INDEX ON last TO last EMPTY         // Create EMPTY index file
+    GOTO 10                             // Select a record
+    Sx_KeyAdd()                         // Add a key for this record
+    ? Sx_KeyData()                      // Displays key value for this rec
+    ? Sx_KeyCount()                     // 1
+    <B>Sx_KeyDrop()</B>                        // Delete this key from the index
+    ? Sx_KeyCount()                     // 0
+
+    // Create a Multi-Keyed, Free-Format RYO Index
+
+    INDEX ON sxChar(12) TO phones       // Create empty index file
+    GOTO 100                            // Select a record
+    ? Sx_KeyCount()                     // 0
+    Sx_KeyAdd( 0,0,"213-555-1212" )     // Add one phone number for this rec
+    Sx_KeyAdd( 0,0,"213-555-9999" )     // Add another to the same record
+    Sx_KeyAdd( 0,0,"310-222-9876" )     // And yet another phone number!
+    ? Sx_KeyCount()                     // 3
+
+    // Now delete all phone numbers (keys) for this record
+    IF Sx_FindRec( 100, .F. )           // Find first key for this record
+      ? "Deleting: " + Sx_KeyData()     // Display key value being deleted
+      <B>Sx_KeyDrop()</B>                      // Delete first phone number
+      DO WHILE Sx_FindRec( 100, .T. )   // Find any other keys for this rec
+        ? "Deleting: " + Sx_KeyData()   // Display key value being deleted
+        <B>Sx_KeyDrop()</B>                    // Delete other phone numbers
+      ENDDO
+    ENDIF
+    ? Sx_KeyCount()                     // 0
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2d4d1.html">Sx_KeyAdd()</A>
+<A HREF="ng2eff1.html">Sx_KeyData()</A>
+<A HREF="ng2e480.html">Sx_KeyCount()</A>
+<A HREF="ng306aa.html">Sx_KeyNo()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

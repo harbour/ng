@@ -1,0 +1,120 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc6e4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="nge177.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETRDITM()</B>
+ Reads an item property segment
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETRDITM(&lt;cObjName&gt;,&lt;nType&gt;,&lt;cProperty&gt;,[&lt;nSeg&gt;],</B>
+     <B>   [&lt;lMode&gt;],[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; cPropValue</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cObjName&gt; </B> Designates the name of the bindery object that is
+     processed.
+
+     <B>&lt;nType&gt; </B> Designates the object type of &lt;cObjName&gt;.  The header file
+     CTNNET.CH contains symbolic constants for a number of object types.
+     When you work with numeric values, take into account that, for
+     efficiency reasons, NNETRDITM() expects the object type in the high-low
+     format.
+
+     <B>&lt;cPropName&gt; </B> Designates the name of the property that is processed.
+     &lt;cPropName&gt; must describe an item property.
+
+     <B>&lt;nSeg&gt; </B> Designates the number of the segment that is read.  The
+     smallest possible number, as well as the default value, is 1.
+
+     <B>&lt;lMode&gt; </B> Designates whether the contents of the property are
+     interpreted as text (&lt;lMode&gt; = .F.) or as binary byte sequence (&lt;lMode&gt;
+     = .T.).  The default value is .F..  If text, NNETRDITM() returns the
+     characters up to the first occurrence of a terminator 0.  In binary
+     mode, all 128 bytes of the required property segment are returned.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server for which the
+     bindery is accessed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETRDITM() returns the contents of the specified property segment in
+     the form of a character string.  In text mode, the returned string
+     contains all characters up to the first occurrence of a terminator 0.
+     In binary mode, the string always contains 128 characters.  If an error
+     occurs, the function returns an empty string.
+
+ <B>Description</B>
+
+     NOVELL NET READ ITEM PROPERTY
+     Internally, Novell Netware defines two property types:  item and set
+     property.  With NNETRDITM(), you can read the contents of an item
+     property.  Item properties can contain any type of data.  The
+     information within an item property is organized in segments that have a
+     constant length of 128 bytes.  NNETRDITM() allows you to read single
+     segments (&lt;nSeg&gt;) of a property (&lt;cPropName&gt;) of a bindery object,
+     specified by &lt;cObjName&gt; and &lt;nType&gt;.  The organization of the
+     information within a segment depends on the property.  With &lt;lMode&gt; you
+     can specify if segment contains text or a binary sequence (see the
+     arguments).  An example for text mode is the property IDENTIFICATION.
+     The IDENTIFICATION property contains a bindery object's full name as a
+     zero-terminated ASCII character string.  An example for the binary mode
+     is the property LOGIN_CONTROL.  The property LOGIN_CONTROL contains
+     binary-coded information about a user's access limits.  To avoid
+     incorrect results when working with binary-coded information, the
+     parameter &lt;lMode&gt; must be designated .T..
+
+     To read all property segments, call NNETRDITM() with an incrementing
+     value for &lt;nSeg&gt; until NNETRDITM() returns an empty string and
+     NNETERROR() returns 236.
+
+     With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the bindery of any attached
+     file server can be accessed.  The connection ID of a file server is
+     returned by NNETATTACH() or NNETLOGIN().
+
+     The function NNETRDITM() requires sufficient bindery and property access
+     rights.  The necessary property access rights depend on the property
+     security of the property that is read.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the full name of user MIKE:
+
+        #include "ctnnet.ch"
+
+        ? NNETRDITM('MIKE',OBJ_USER,'IDENTIFICATION')
+
+     <B>.</B>  Determine the date of the last login of user MIKE:
+
+        #include "ctnnet.ch"
+
+        cBuf=NNETRDITM('MIKE',OBJ_USER,'LOGIN_CONTROL',1,.T.)
+        IF !EMPTY(cBuf)
+         dLast=       STOD('19'+NTOC(ASC(SUBSTR(cBuf,57,1)),,2,'0');
+            +NTOC(ASC(SUBSTR(cBuf,58,1)),,2,'0');
+            +NTOC(ASC(SUBSTR(cBuf,59,1)),,2,'0'))
+         ? dLast
+        ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge177.html">NNETRDSET()</A>
+<A HREF="ng1161d.html">NNETWRTITM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

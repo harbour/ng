@@ -1,0 +1,126 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng27c37.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng272ab.html">[^^Up^^]</A>
+<A HREF="ng29235.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETMAP()</B>
+ Maps and unmaps drives
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETMAP([&lt;cDrive&gt;],[&lt;cPath&gt;],[&lt;lFake&gt;],[&lt;lTemp&gt;]</B>
+     <B>   [&lt;lInsert&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDrive&gt;</B>  Designates the drive that is mapped or unmapped.  Valid
+     identifiers are "A" to "Z" and "S1" to "S16" (search drives).  When
+     called without this parameter, the function uses the current drive.
+
+     <B>&lt;cPath&gt;</B>  Designates the path on a server volume that is assigned to
+     &lt;cDrive&gt;.  This parameter must be passed if a drive is mapped.  When
+     called without &lt;cPath&gt;, NNETMAP() deletes a mapping for &lt;cDrive&gt;.
+
+     <B>&lt;lFake&gt;</B>  Designates whether &lt;cPath&gt; is created as fake root (.T.) or
+     not (.F.).  The default value (.F.) designates that &lt;cPath&gt; is not a
+     fake root..
+
+     <B>&lt;lTemp&gt;</B>  Designates whether the mapping is permanent (.F.) or
+     temporary (.T.).  The default value is .F..
+
+     <B>&lt;lInsert&gt;</B>  Designates whether the mapped search drive (S1 to S16)
+     replaces an existing search drive (.F.) or is inserted on the position
+     before the old entry (.T.).  This parameter is only important if
+     &lt;cDrive&gt; is a search drive.  The default value is .F..
+
+ <B>Returns</B>
+
+     NNETMAP() returns .T. if the operation has been successful.
+
+ <B>Description</B>
+
+     NOVELL NET MAP
+     NNETMAP() allows you to map or unmap drives and search drives within an
+     application.  If NNETMAP() is called with only the &lt;cDrive&gt; parameter,
+     the mapping for the drive is deleted.
+
+     To map a drive, NNETMAP() must be called with the arguments &lt;cDrive&gt; and
+     &lt;cPath&gt;.  The path can contain a local drive designator, path, server
+     name, volume name, and already mapped drives as well as search drives.
+     The default mapping is permanent which means that the mapping continues
+     after the application that created the mapping terminates.  If the
+     mapping is terminated with the application, the parameter &lt;lTemp&gt; must
+     be set to .T..
+
+     The directory &lt;cPath&gt; becomes the root of &lt;cDrive&gt; if the parameter
+     &lt;lFake&gt; is set to .T..
+
+     NNETMAP() allows you to create search drives.  Up to 16 search drives,
+     "S1" to "S16" can be addressed.  If a search drive is created (Sn,
+     n=1..16), NNETMAP() determines the first available drive designator with
+     a descending search that starts with "Z".  If no designator is
+     available, NNETMAP() cannot perform the allocation and returns .F..  If
+     a designator is available, &lt;cPath&gt; is mapped to the drive designator and
+     the drive is set on position n in the path environment variable.  The
+     previous entry in the path variable is replaced.  If &lt;lInsert&gt; is set to
+     .T., the drive  designator is placed before position n in the path list.
+     To delete the mapping for a search drive, &lt;cDrive&gt; can be passed either
+     with the search drive (S1 to S16) or the drive designator.  The drive
+     designator is removed from the path variable.
+
+ <B>Notes</B>
+
+     <B>.</B>  Fake roots require Novell shell version 3.01 or higher.  If
+        version 3.01 or higher is not available, the attempt to map a fake
+        root fails (&lt;cFake&gt;=.T.) and NNETMAP() returns .F..
+
+     <B>.</B>  You cannot add a new search drive if the path environment
+        variable already contains 16 entries.
+
+     <B>.</B>  Do not create temporary search drives because the drive
+        mapping is canceled in the program; the invalid drive designator is
+        not removed from the path variable.
+
+ <B>Examples</B>
+
+     <B>.</B>  Map drive L: to directory PUBLIC on server NANGERTOOLS2,
+        volume SYS:
+
+        ? NNETMAP('L','NANGERTOOLS2/SYS:PUBLIC')
+
+     <B>.</B>  Map directory ABC to the next available drive designator,
+        starting from drive L:
+
+        ? NNETMAP(NNETNXTFRE(),'L:ABC')
+
+     <B>.</B>  Create directory SYS:DATA as a permanent search drive on the
+        current server, and insert the search drive on position 5 in the path
+        variable.  The directory becomes the root for the new drive:
+
+        ? NNETMAP('S5','SYS:DATA',.T.,,.T.)
+
+     <B>.</B>  Terminate the mapping for drive K:
+
+        NNETMAP('K')
+
+     <B>.</B>  If K: was a search drive, it is removed from the PATH
+        variable.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2a296.html">NNETNXTFRE()</A>
+<A HREF="ng29235.html">NNETMAPINF()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

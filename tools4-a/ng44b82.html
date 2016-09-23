@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng44402.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng4512e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJCNT()</B>
+ Determines the number of jobs in a print queue
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJCNT(&lt;cQueue&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nJobs</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJCNT() returns the number of jobs that are currently in a print
+     queue.  If an error occurs (for example, non existing print queue), the
+     function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET JOB COUNT
+     NNETJCNT() allows you to determine when it is safe to modify certain
+     characteristics of a queue (for example, the connection to a print
+     server).  You should wait until the queue is empty to modify certain
+     characteristics of the queue.  NNETJCNT() can be used to count the jobs
+     in a number of queues.  With NNETSETQ() you can then assign a job to the
+     queue with the lowest number of jobs.
+
+ <B>Note</B>
+
+     <B>.</B>  This function requires that the requesting user have access to
+        the queue as a user or an operator.
+
+ <B>Example</B>
+
+     Determine the number of jobs in the queue LINEPRINTER:
+
+     ? 'Jobs:',NNETJCNT('LINEPRINTER')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng49eec.html">NNETJLIST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

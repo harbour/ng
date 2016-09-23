@@ -1,0 +1,82 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4af1c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng4be9f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJPOINT()</B>
+ Determines if a job is serviced at an interrupt
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJPOINT(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;lNewMode&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; lMode</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;lNewMode&gt;</B>  Designates an optional parameter that specifies if
+     &lt;nJob&gt; is serviced by a print server when the job file has not been
+     closed correctly.  If the parameter is designated .T., the QMS submits
+     &lt;nJob&gt; to a print server.  If the parameter is set to .F., QMS discards
+     the &lt;nJob&gt; when the job file has not been closed correctly.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     The return value of NNETJPOINT() indicates whether a job is printed
+     (.T.) or discarded (.F.) when the job file has not been closed
+     correctly.
+
+ <B>Description</B>
+
+     NOVELL NET JOB PRINT ON INTERRUPT
+     NNETJPOINT() allows you to determine whether or not a job is printed
+     when the job file has not been closed correctly.  To query the current
+     setting for &lt;nJob&gt;, do not pass a value for &lt;lNewMode&gt;.
+
+     The required job is specified by its job number.  The job number has
+     nothing to do with the logical position of a job within a queue; for
+     example, the job with the highest priority in a queue is not
+     automatically job number 1.  The job number must be determined with
+     NNETCAPJOB() or NNETJLIST().
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine if the first job in the queue LINEPRINTER is printed
+        when the job file has not been closed correctly:
+
+        nJob=BIN2I(SUBSTR(NNETJLIST('LINEPRINTER'),5,2))
+        ? NNETJPOINT('LINEPRINTER', nJob)
+
+     <B>.</B>  Determine that the first job in the queue LINEPRINTER is
+        printed when the job file has not been closed correctly:
+
+        nJob=BIN2I(SUBSTR(NNETJLIST('LINEPRINTER'),5,2))
+        ? NNETJPOINT('LINEPRINTER', nJob, .T.)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng486b1.html">NNETJFLAGS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

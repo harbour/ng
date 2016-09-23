@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4cd3f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4d577.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>createFields()</B>
+ Add all columns defined in an array to the work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE createFields(</B>
+     <B>                           AREAP wa,</B>
+     <B>                           FARP  lpvStru</B>
+     <B>                        )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpvStru</B> is a pointer to an array containing the column definitions
+     to add.  The length of this array is equal to the number of columns to
+     add.  Each element of lpvStru is a subarray containing information about
+     a single column.
+
+ <B>Default Behavior</B>
+
+     createFields() is used to implement the CA-Clipper DBCREATE() function.
+     It adds the columns, in the order specified by lpvStru, by calling
+     addField() for each subarray.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Most implementations should use the default behavior for
+        createFields().  However, if you change the createFields()
+        implementation, be aware of the order imposed on adding fields
+        to the work area structures.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng421a9.html">DBFIELDINFO</A>
+<A HREF="ng4c7bf.html">addField()</A>
+<A HREF="ng52c65.html">setFieldExtent()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

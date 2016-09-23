@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng30dc6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng31c45.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosRealFarCall()              Make far call to real mode address</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Make a far call to a real mode address</B></U>
+
+ <U>Syntax   : <B>USHORT _far _cdecl DosRealFarCall( REALPTR realfn,</B></U>
+            <B>PREGS regs, REALPTR reserved, short wordcount, ...);</B>
+
+ <U>realfn     <B>Real mode address to call.</B></U>
+
+ <U>regs       <B>Pointer to REGS16 structure containing the register values to be</B></U>
+            <B>passed to and returned from real mode.</B>
+
+ <U>reserved   <B>Reserved. Must be zero.</B></U>
+
+ <U>wordcount  <B>Count of word arguments to be passed to realfn on the stack. Zero</B></U>
+            <B>indicates none and a negative count causes them to be passed</B>
+            <B>using the Pascal calling convention.</B>
+
+ <U>...        <B>Arguments to realfn if wordcount &lt;&gt; 0.</B></U>
+
+ <U>Return   : <B>Register values in regs structure.</B></U>
+
+ DosRealFarCall() allows real mode code to be called from protected mode via
+ a far call. The real mode code must return via a far return instruction.
+ Arguments may be passed on the stack or in registers via the REGS16
+ structure. Return values are returned in the REGS16 structure.
+
+ Example:
+
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>REGS16         regs;</B>
+    <B>BYTE           far *xmsdriver ;</B>
+    <B>printf("This program attempts to get the XMS driver ");</B>
+    <B>printf("version number\n");</B>
+    <B>printf("using DosRealIntr() and DosRealFarCall()\n\n");</B>
+    <B>/* Important to clear structure to zero */</B>
+    <B>memset(&amp;regs, 0, sizeof(REGS16)) ;</B>
+    <B>regs.ax = 0x4300 ;</B>
+    <B>if (DosRealIntr(0x2f, &amp;regs, 0L, 0) == 0)</B>
+    <B>/* XMS installation check */</B>
+    <B>   if ((regs.ax &amp; 0xff)==0x80)</B>
+    <B>      {</B>
+    <B>      printf("XMS driver installed\n");</B>
+    <B>      /* Get driver entry point */</B>
+    <B>      regs.ax = 0x4310;</B>
+    <B>      if (DosRealIntr(0x2f, &amp;regs, 0L, 0) == 0)</B>
+    <B>         {</B>
+    <B>         xmsdriver = MK_FP(regs.es, regs.bx);</B>
+    <B>         /* real mode entry point */</B>
+    <B>         printf("XMS real mode entry point is : %Fp\n", </B>
+    <B>            xmsdriver);</B>
+    <B>         /* Clear register structure to zero */</B>
+    <B>         memset(&amp;regs, 0, sizeof(REGS16));</B>
+    <B>         /* Get version function */</B>
+    <B>         regs.ax = 0;</B>
+    <B>         if (DosRealFarCall((REALPTR)xmsdriver, </B>
+    <B>            &amp;regs, 0L, 0) == 0)</B>
+    <B>            if(regs.ax != 0)</B>
+    <B>               printf("XMS driver version : %04X\n", regs.ax);</B>
+    <B>            else</B>
+    <B>               printf("XMS get version call failed\n");</B>
+    <B>         else</B>
+    <B>            printf("DosRealFarCall() failed\n");</B>
+    <B>         }</B>
+    <B>      else</B>
+    <B>         printf("DosRealIntr() call failed\n");</B>
+    <B>      }</B>
+    <B>   else</B>
+    <B>      printf("XMS driver not installed\n");</B>
+    <B>else</B>
+    <B>   printf("DosRealIntr() call failed\n");</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng31c45.html">DosRealIntr()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

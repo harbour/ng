@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng157b2e.html">[^^Up^^]</A>
+<A HREF="ng15844c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TBColumn</B>
+ Provide column objects for TBrowse objects
+------------------------------------------------------------------------------
+ <B>Description</B>
+
+     A TBColumn object is a simple object containing the information needed
+     to fully define one data column of a TBrowse object.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example is a code fragment that creates a TBrowse object
+        and adds some TBColumn objects to it:
+
+        USE Customer NEW
+        //
+
+        // Create a new TBrowse object
+        objBrowse := TBrowseDB(1, 1, 23, 79)
+        //
+
+        // Create some new TBColumn objects and
+        // add them to the TBrowse object
+        objBrowse:addColumn(TBColumnNew("Customer", ;
+              {|| Customer-&gt;Name}))
+        objBrowse:addColumn(TBColumnNew("Address", ;
+              {|| Customer-&gt;Address}))
+        objBrowse:addColumn(TBColumnNew("City", ;
+              {|| Customer-&gt;City}))
+        .
+        . &lt;statements to actually browse the data&gt;
+        .
+        CLOSE Customer
+
+        For more information on TBrowse, refer to the "Introduction to
+        TBrowse" chapter in the Programming and Utilities Guide.  For a fully
+        operational example of a TBrowse object, see TbDemo.prg located in
+        \CLIP53\SOURCE\SAMPLE.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng18740.html">BROWSE()*</A>
+<A HREF="ng20e4d.html">DBEDIT()</A>
+<A HREF="ng15a315.html">TBrowse class</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

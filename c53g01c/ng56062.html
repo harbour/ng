@@ -1,0 +1,220 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng55637.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng57ff6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GMODE()</B>
+ Switch video mode
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GMODE([&lt;nMode&gt;]) --&gt; aOldState</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nMode&gt;</B> is a numeric value that represents the video mode.
+
+     The following are valid &lt;nMode&gt; values.  They are all #defines in
+     Llibg.ch.
+
+     <B>Video Mode Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant                      Description</B>
+     ------------------------------------------------------------------------
+     LLG_VIDEO_TXT                 Switch to text mode
+     LLG_VIDEO_VGA_640_480_16      Switch to VGA 640x480x16 mode
+     LLG_VIDEO_VESA_800_592_16     Switch to VESA 800x592x16
+     LLG_VIDEO_VESA_1024_768_16    Switch to VESA 1024x768x16
+     LLG_VIDEO_VESA_1280_1024_16   Switch to VESA 1280x1024x16
+     LLG_VIDEO_VESA_640_480_256    Switch to VESA 640x480x256
+     LLG_VIDEO_VESA_800_592_256    Switch to VESA 800x592x256
+     LLG_VIDEO_VESA_1024_768_256   Switch to VESA 1024x768x256
+     LLG_VIDEO_VESA_1280_1024_256  Switch to VESA 1280x1024x256
+     ------------------------------------------------------------------------
+
+     <B>Note: </B> LLG_VIDEO_TEXT and LLG_VIDEO_VGA_640_480_16 are the only two
+     video modes applicable to CA-Clipper.
+
+     You can precede &lt;nMode&gt; by a minus sign.  Supplying a negative argument
+     in this manner causes GMODE() to check if the specified mode is
+     available without switching to that mode.
+
+ <B>Returns</B>
+
+     If the video mode is available, GMODE() will return an array containing
+     the settings for the requested video mode.  The following table shows
+     the array structure:
+
+     <B>aOldState Structure</B>
+     ------------------------------------------------------------------------
+     <B>Array Position           Return Value</B>
+     ------------------------------------------------------------------------
+     LLG_MODE_TEXT_ROW        Numeric value representing the number of text
+                              rows on screen.
+     LLG_MODE_TEXT_COL        Numeric value representing the number of text
+                              columns on screen.
+     LLG_MODE_GRAPH_ROW       Numeric value representing the number of
+                              graphic rows on screen.
+     LLG_MODE_GRAPH_COL       Numeric value representing the number of
+                              graphic columns on screen.
+     LLG_MODE_FONT_ROW        Numeric value representing the number of
+                              graphic rows per character.
+     LLG_MODE_FONT_COL        Numeric value representing the number of
+                              graphic columns per character.
+     LLG_MODE_COLOR_MAX       Numeric value representing the number of
+                              available colors.
+     LLG_MODE_IN_USE          Numeric value representing the video mode that
+                              was in use before calling GMODE().  See table
+                              in the Arguments section.
+     LLG_MODE_LIB_VERSION     Numeric value representing the version of the
+                              LLIBG library.
+     LLG_MODE_LST_COLOR       Numeric value representing the last color used
+                              in a GXXX()function.  This value will be used
+                              in the next call to a GXXX() function if the
+                              color parameter is not defined.  The initial
+                              value is 7.
+     LLG_MODE_LST_MODE        Numeric value representing the last mode
+                              (SET|AND|OR|XOR).
+     ------------------------------------------------------------------------
+
+     If &lt;nMode&gt; is omitted, GMODE() returns the current video mode settings.
+
+ <B>Description</B>
+
+     The GMODE() function is used to change the video mode or to retrieve
+     information about the current video mode.  CA-Clipper graphic mode
+     supports the video modes described above.  LLG_VIDEO_TEXT and
+     LLG_VIDEO_VGA_640_480_16 are the only two video modes applicable to
+     CA-Clipper.  You can switch between modes at any time in your
+     application.  To switch to regular text mode use GMODE(LLG_VIDEO_TXT).
+     The video will not change if GMODE() is called without parameters.
+     GMODE() will return the current video mode information only.
+
+     When switching from LLG_VIDEO_TXT to LLG_VIDEO_VGA_640_480_16 mode, all
+     displayed text lines are converted to the equivalent graphic mode
+     display.  This conversion does not happen when switching back to text
+     mode.  If you need an application to start in graphic mode with an empty
+     screen, call CLS before calling GMODE (LLG_VIDEO_VGA_640_480_16).
+
+     <B>Important!</B>  To switch video modes, the SET VIDEOMODE command must be
+     used.  Without this command, the video mode may not be switched
+     properly.
+
+ <B>Notes</B>
+
+     During video mode switching, the library calls CA-Clipper's SETMODE()
+     function with 25,80 as parameters.  If you use other values, the call to
+     GMODE() should be followed with a call to SETMODE (nYourRow,nYourCol).
+
+     In graphic mode, you have access to all available screen lines and
+     columns.  Any call to SETMODE() with a number of lines less than or
+     equal to 30 causes CA-Clipper graphic mode to use a 16-pixel font that
+     yields 30 lines.
+
+     For example, if you call SETMODE (25,80) with a font that is 8 pixels
+     wide by 16 pixels high, and switch video mode to
+     LLG_VIDEO_VGA_640_480_16, the same font is used.  You get an additional
+     5 rows of text to the specified 25 i.e.,(480/16) = 30 rows of text!
+
+     CA-Clipper uses the following chart for calculating font sizes based on
+     video settings:
+
+     <B>SETMODE(nRow, nColumn) Calculation Chart</B>
+     ------------------------------------------------------------------------
+     <B>nRow      Fonts          Number of Rows Available</B>
+     ------------------------------------------------------------------------
+     31- 34    14-pixel font  34
+     43        See note below
+     60+       8-pixel font   60
+     ------------------------------------------------------------------------
+
+     <B>Note: </B> The 43-line mode being an EGA emulation of a VGA card, is not
+     available in 640 x 480 x 16 mode.
+
+     The following are the available settings:
+
+     <B>Available Settings</B>
+     ------------------------------------------------------------------------
+     <B>Wide / High Pixels     Column / Row</B>
+     ------------------------------------------------------------------------
+     640 x  480             80 x  30 or 80 x  60
+     800 x  592             100 x  37 or 100 x  74
+     1024 x  768            128 x  48 or 100 x  96
+     1280 x 1024            160 x  64 or 160 x 128
+     ------------------------------------------------------------------------
+
+     During the execution of a QUIT or on the last RETURN of your
+     application, the application is automatically set back to the starting
+     video mode, which is usually text mode.
+
+     <B>Note: </B> CA-Clipper uses the ROM fonts of your VGA video card.  This
+     allows you to speed up text display.  It guarantees zero use of main
+     memory since no font loading is required, even in graphic mode.  You can
+     also avoid having to provide one or more font files with the .EXE.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example executes an entire application in graphic mode:
+
+        // Switch to graphic mode
+        SET VIDEOMODE TO LLG_MODE_VGA_640_480_16
+
+        // This is equivalent to GMODE (LLG_VIDEO_VGA_640_480_16)
+        // Your CA-Clipper instructions will now operate
+        // in graphic mode!
+        .
+        .
+        .
+        QUIT                            // End of application
+
+     <B>.</B>  This example stores the graphic mode parameters in variables
+        which can be used later on in an application:
+
+     // Switch to graphic mode and save the current graphic mode
+        // settings
+        SET VIDEOMODE TO LLG_MODE_VGA_640_480_16
+        aMode := GMODE()
+        // Store the different values
+        nTxtRow    := aMode[LLG_MODE_TEXT_ROW]
+        nTxtCol    := aMode[LLG_MODE_TEXT_COL]
+        nGraRow    := aMode[LLG_MODE_GRAPH_ROW]
+        nGraCol    := aMode[LLG_MODE_GRAPH_COL]
+        nFonRow    := aMode[LLG_MODE_FONT_ROW]
+        nFonCol    := aMode[LLG_MODE_FONT_COL]
+        nColorMax  := aMode[LLG_MODE_COLOR_MAX]
+        nVideoMode := aMode[LLG_MODE_IN_USE]
+
+        nLibVer    := aMode[LLG_MODE_LIB_VERSION]
+        nLstColor  := aMode[LLG_MODE_LST_COLOR]
+        nLstMode   := aMode[LLG_MODE_LST_MODE]
+
+     <B>.</B>  This example creates two pseudo-functions which return the
+        number of lines and columns in pixels, similar to the way MAXROW()
+        and MAXCOL() return line and column values:
+
+        #translate GMAXROW()   =&gt; GMODE()[LLG_MODE_GRAPH_ROW]
+        #translate GMAXCOL()   =&gt; GMODE()[LLG_MODE_GRAPH_COL]
+
+     <B>.</B>  This is a similar function that returns the number of colors
+        available:
+
+        #translate GMAXCOLOR() =&gt; GMODE()[LLG_MODE_COLOR_MAX]
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf2963.html">SET VIDEOMODE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

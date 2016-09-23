@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngfa10.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng106ca.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Instantiation and Performance</B>
+
+  Creating new objects (instantiation) in Class(y) is a relatively fast
+  operation. However, other factors, such as class creation, can make it
+  seem slower than it really is.
+
+  When the first object in a system is created, Class(y) initializes itself
+  by creating various system classes and performing other internal
+  operations. You can force Class(y) to initialize itself before any objects
+  are created, by including a call to a function called Class(). This will
+  initialize Class(y).
+
+  Whenever any class is used for the first time, that class must first be
+  created. Each class is created only once during the execution of an
+  application. To force a class to be created before any objects of that
+  class are created, the <B>class function</B> for that class should be called.
+  For example, if an application includes a class called InvItem, the class
+  can be created by calling the InvItem() function during initialization of
+  the application.
+
+  Creating a class in this way will also have the side effect of
+  initializing Class(y), eliminating the need for an explicit call to
+  Class().
+
+  Other factors which may affect performance are discussed under
+  <B>Performance</B>.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1498e.html">Performance</A>
+<A HREF="ngc6e7.html">Class Functions</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6cdc6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LLG_VIDEOMODE structure</B>
+ Structure for video mode information
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   int      iTextRow;</B>
+     <B>   int      iTextCol;</B>
+     <B>   int      iGraphRow;</B>
+     <B>   int      iGraphCol;</B>
+     <B>   int      iFontRow;</B>
+     <B>   int      iFontCol;</B>
+     <B>   DWORD    dwColorNb;</B>
+     <B>   int      iVideoMode;</B>
+     <B>   int      iLibVer;</B>
+     <B>   int      iLastMode;</B>
+     <B>   DWORD   dwLastColor;</B>
+     <B>} LLG_VIDEOMODE;</B>
+     <B></B>
+     <B>typedef LLG_VIDEOMODE far * LLG_LPVIDEOMODE;</B>
+
+ <B>Elements</B>
+
+     <B>iTextRow</B> is the number of text rows on the screen.
+
+     <B>iTextCol</B> is the number of text columns on the screen.
+
+     <B>iGraphRow</B> is the number of graphic rows on the screen.
+
+     <B>iGraphCol</B> is the number of graphic columns on the screen.
+
+     <B>iFontRow</B> is the number of graphic rows per character.
+
+     <B>iFontCol</B> is the number of graphic columns per character.
+
+     <B>dwColorNb</B> is the number of available colors.
+
+     <B>iVideoMode</B> is the video mode (see _gModeGet() for a table of
+     possible values).
+
+     <B>iLibVer</B> is the version number of LLIBG.LIB.
+
+     <B>iLastMode</B> is the last display mode setting (see _gEllipse() for a
+     table of possible values).
+
+     <B>dwLastColor</B> is the last color used in a Light Lib Graphics API
+     function call.
+
+ <B>Files</B>   Header file is Llibg.api.
+
+ <B>Used By</B>   _gModeGet()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng67c7a.html">_gModeGet()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng369b2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng37752.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DEVOUT()</B>
+ Write a value to the current device
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DEVOUT(&lt;exp&gt;, [&lt;cColorString&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp&gt;</B> is the value to display.
+
+     <B>&lt;cColorString&gt;</B> is an optional argument that defines the display
+     color of &lt;exp&gt;.  If the current DEVICE setting is SCREEN, the output is
+     displayed in the specified color.
+
+     If not specified, &lt;exp&gt; is displayed as the standard color of the
+     current system color as defined by SETCOLOR().  &lt;cColorString&gt; is a
+     character expression containing the standard color setting.  If you want
+     to specify a literal color setting, enclose it in quote marks.
+
+ <B>Returns</B>
+
+     DEVOUT() always returns NIL.
+
+ <B>Description</B>
+
+     DEVOUT() is a full-screen display function that writes the value of a
+     single expression to the current device at the current cursor or
+     printhead position.  Use DEVOUT() with DEVPOS() in Std.ch to implement
+     the @...SAY command.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows the relationship between the DEVOUT()
+        function and the @...SAY command:
+
+        DEVPOS(10, 10)
+        DEVOUT("Hello there", "BG+/B"))
+        //
+        @ 10, 10 SAY "Hello there" COLOR "BG+/B"
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng19e0f.html">COL()</A>
+<A HREF="ng37de5.html">DEVPOS()</A>
+<A HREF="ng8f431.html">QOUT()</A>
+<A HREF="ng97e75.html">ROW()</A>
+<A HREF="ng9f30f.html">SETPOS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

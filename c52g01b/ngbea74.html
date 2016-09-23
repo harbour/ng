@@ -1,0 +1,137 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbe1da.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb4a83.html">[^^Up^^]</A>
+<A HREF="ngbfbea.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>INIT PROCEDURE</B>
+ Declare an initialization procedure
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>INIT PROCEDURE &lt;idProcedure&gt; [(&lt;idParam list&gt;)]</B>
+     <B>   [FIELD &lt;idField list&gt; [IN &lt;idAlias&gt;]]</B>
+     <B>   [LOCAL &lt;identifier&gt; [[:= &lt;initializer&gt;]]]</B>
+     <B>   [MEMVAR &lt;identifer list&gt;]</B>
+     <B>   .</B>
+     <B>   . &lt;executable statements&gt;</B>
+     <B>   .</B>
+     <B>   [RETURN]</B>
+
+ <B>Arguments</B>
+
+     <B>INIT PROCEDURE</B> declares a procedure that will be executed at program
+     startup.
+
+     <B>&lt;idProcedure&gt;</B> is the name of the initialization procedure to
+     declare. Initialization procedure names can be any length, but only the
+     first 10 characters are significant.  Names may not begin with an
+     underscore but can contain any combination of characters, numbers, or
+     underscores.
+
+     <B>&lt;idParam list&gt;</B> is the declaration of one or more parameter
+     variables. Variables specified in this list are declared local.
+
+     <B>FIELD</B> declares a list of identifiers to use as field names whenever
+     encountered.  If the IN clause is specified, referring to the declared
+     name includes an implicit reference to the specified alias.
+
+     <B>LOCAL</B> declares, and optionally initializes, a list of variables or
+     arrays whose visibility and lifetime is the current procedure.
+
+     <B>MEMVAR</B> declares a list of identifiers to use as private or public
+     memory variables or arrays whenever encountered.
+
+     <B>RETURN</B> passes control to the next initialization procedure or the
+     first executable routine in the program, if no other initialization
+     procedures are pending.
+
+ <B>Description</B>
+
+     The INIT PROCEDURE statement declares a procedure that will be executed
+     at program startup.  INIT procedures are called prior to the first
+     executable statement in a CA-Clipper  application, and are useful for
+     performing common initialization tasks such as reading configuration
+     settings, or opening a communications port.
+
+     INIT PROCEDUREs are executed implicitly by CA-Clipper  at program
+     startup.  The visibility of initialization procedures is restricted to
+     the system; therefore, it is not possible to call an INIT PROCEDURE from
+     a procedure or user-defined function.  Each INIT PROCEDURE receives a
+     copy of the DOS command line arguments used to invoke the application.
+
+     Control passes from one INIT PROCEDURE to the next until all procedures
+     in the initialization list have been called.  Control then passes to the
+     first executable statement in the program.
+
+     The ANNOUNCE statement declares a module identifier for a source (.prg)
+     file.  Once declared, INIT PROCEDUREs are referenced by this module
+     identifier.  An application may use any number of initialization
+     procedures by explicitly REQUESTing their module identifiers.
+
+     The INIT PROCEDUREs requested for an appplication are collectively
+     referred to as the initialization list.  There is no default execution
+     order of procedures in the initialization list; however, the following
+     rules apply:
+
+     <B>.</B>  The CA-Clipper initialization procedure, CLIPINIT, is always
+        called first.
+
+     <B>.</B>  If an INIT PROCEDURE is declared in the same source (.prg)
+        file as the application's primary (root) routine, it will be the last
+        initialization procedure called.
+
+     CLIPINIT is called first to establish system integrity by installing the
+     default error recovery system (ErrorSys).  Once CLIPINIT has finished
+     executing, control passes to the next INIT PROCEDURE in the
+     initialization list.
+
+     If an error is raised during system initialization, the system returns
+     to DOS, and pending initialization procedures are not called.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses both INIT and EXIT PROCEDUREs to save and
+        restore the context of the operating system.  By simply REQUESTing
+        "SaveDos" in your main source file, the context of the operating
+        system is preserved:
+
+        ANNOUNCE SaveDos
+
+        #define DOS_SCREEN   1
+        #define DOS_ROW      2
+        #define DOS_COL      3
+        #define DOS_CURSOR   4
+        #define DOS_COUNT    4
+
+        STATIC saSaveDos[ SD_COUNT ]
+
+        INIT PROCEDURE dosSave()
+           SAVE SCREEN TO saSaveDos[ DOS_SCREEN ]
+           saSaveDos[ DOS_ROW ]    := ROW()
+           saSaveDos[ DOS_COL ]    := COL()
+           saSaveDos[ DOS_CURSOR ] := SETCURSOR()
+           RETURN
+
+        EXIT PROCEDURE dosRestore()
+           RESTORE SCREEN FROM saSaveDos[ DOS_SCREEN ]
+           SETPOS   ( saSaveDos[ DOS_ROW ], saSaveDos[ DOS_COL ] )
+           SETCURSOR( saSaveDos[ DOS_CURSOR ] )
+           RETURN
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb5022.html">ANNOUNCE</A>
+<A HREF="ngc6799.html">REQUEST</A>
+<A HREF="ngb90dc.html">EXIT PROCEDURE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

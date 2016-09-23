@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5f0e2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5f724.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>getValueFile()</B>
+ Retrieve the current value of a column and put it into a file
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE getValueFile(</B>
+     <B>                           AREAP wa,</B>
+     <B>                           USHORT uiIndex,</B>
+     <B>                           BYTEP lpbFile</B>
+     <B>                        )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>uiIndex</B> is the ordinal position of the column (memo field) whose
+     value is to be obtained.
+
+     <B>lpbFile</B> is a pointer to a string representing the file name.
+
+ <B>Description</B>
+
+     getValueFile() retrieves the current value of the column
+     referenced by uiIndex in the work area referenced by wa.  The current
+     value is put into a file referenced by lpbFile.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng5fa55.html">putValueFile()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

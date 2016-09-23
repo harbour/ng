@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng77d46.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng75ccf.html">[^^Up^^]</A>
+<A HREF="ng785a7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>BLIGPF.EXE:</B>
+
+  BLIGPF will scan a Blinker 3.x-created .MAP file for the symbol being
+  referenced by the memory address information (Segment and Offset) displayed
+  by a General Protection Fault (GPF) Error.  If found, the symbol and its
+  associated information will be displayed.
+
+  The usage syntax for BLIGPF is as follows:
+
+
+  Usage:  BLIGPF [&lt;MapFile&gt;] [&lt;SSSS:OOOO&gt;]
+
+  Where:  &lt;MapFile&gt; = Optional name of the Blinker 3.x MAP file to be
+                      processed.  If no file name is specified, BLIGPF will
+                      attempt to read it directly from the Blinker 3.x GPF
+                      error message on the current video screen.  If this
+                      fails, the first .MAP file in the current directory
+                      (if any) will be assumed.
+
+        &lt;SSSS:OOOO&gt; = Optional Segment and Offset values of the memory
+                      address reported by the GPF error message.  (Example:
+                      0005:01AE).  If no address is specified, BLIGPF will
+                      attempt to read it directly from the Blinker 3.x GPF
+                      error message on the current video screen.
+
+                 /? = Displays this help screen.
+
+  NOTE:  The Blinker 3.x MAP file MUST be created with MAP A or MAP S,A.
+
+
+  <B>NOTE:  This utility is also included on the Blinker 3.x distribution disk.</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng79e26.html">EXOGPF.EXE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

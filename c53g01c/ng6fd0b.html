@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6f748.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng704fe.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MEMOSETSUPER()</B>
+ Set an RDD inheritance chain for the DBFMEMO database driver
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MEMOSETSUPER([&lt;cSuperRDD&gt;]) --&gt; cOldSuperName</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSuperRDD&gt;</B> is a character string representing the name of the RDD
+     from which DBFMEMO will inherit.
+
+ <B>Returns</B>
+
+     MEMOSETSUPER() always returns NIL.
+
+ <B>Description</B>
+
+     The DBFMEMO driver is only capable of handling commands and functions
+     that relate to memo fields.  Therefore, it must inherit the non-memo
+     database characteristics (such as SKIP, REPLACE, SEEK, etc.) from a
+     "super" driver (such as DBFNTX).
+
+     For example, the DBFCDX RDD is nothing more than the DBFMEMO RDD
+     hardwired to inherit database characteristics from the _DBFCDX RDD.
+     That is, when you use the DBFCDX RDD, you are using the DBFMEMO driver
+     to handle the memo field operations and you are using the _DBFCDX driver
+     to handle the other database and index operations as the "super" driver.
+
+     At times, you may want to use a database driver such as DBFNTX instead
+     of DBFCDX but, at the same time, have the efficient and enhanced memo
+     field capabilities of the DBFMEMO RDD instead of the DBT memo file
+     format.  In order to do this, you would use MEMOSETSUPER().
+
+     <B>Warning! </B> The MEMOSETSUPER() function can only set one inheritance
+     chain per application instance.  That is, once you have set
+     MEMOSETSUPER() in an application, MEMOSETSUPER() cannot be changed.
+     Doing so will have unpredictable results.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses MEMOSETSUPER() to create a database (.dbf)
+        file with an .fpt/.dbv memo field:
+
+        REQUEST DBFMEMO
+        // Set the default to DBFMEMO
+        RDDSETDEFAULT( "DBFMEMO" )
+        // Make DBFMEMO inherit from DBFNTX
+        MEMOSETSUPER( "DBFNTX" )
+
+        // Create a DBF with an FPT/DBV not DBT
+        dbCreate( "test.dbf", {{"notes", "M", 10, 0}} )
+
+        // Open DBF with FPT/DBV
+        // Indexes created would be NTX if created
+        USE test NEW
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

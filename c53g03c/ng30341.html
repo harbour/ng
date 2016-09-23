@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2fc83.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2980a.html">[^^Up^^]</A>
+<A HREF="ng307f4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_fsRmDir()</B>
+ Remove a directory
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "filesys.api"</B>
+     <B>BOOL _fsRmDir(</B>
+     <B>                  BYTEP fpDirName</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>fpDirName</B> is the name of the directory to remove, including an
+     optional drive.  If you do not specify a drive, the current one is used.
+
+ <B>Returns</B>
+
+     _fsRmDir() returns TRUE if successful; otherwise, FALSE.
+
+ <B>Description</B>
+
+     This function removes a specified directory.  You must have sufficient
+     rights to delete a directory.  A directory must be empty in order to be
+     deleted.  Therefore, to delete a directory that contains subdirectories,
+     you must first delete the subdirectories.  This function is equivalent
+     to the CA-Clipper function DIRREMOVE().  If an error occurs, _fsError()
+     will return the number of the error.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following code fragment illustrates the use of _fsRmDir():
+
+        #include "filesys.api"
+        .
+        .
+        .
+        if (! _fsRmDir( "c:\test\one" ) )
+        {
+           // Report the error condition using _fsError()
+        }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Filesys.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2bee3.html">_fsError()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng53584.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng53ef2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>relText()</B>
+ Obtain the character expression of the specified relation
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE relText(</B>
+     <B>                 WORKAREAP wa,</B>
+     <B>                 USHORT relNum,</B>
+     <B>                 BYTEP cExpr</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>relNum</B> is a numeric value that specifies for which relation the
+     character expression is to be obtained.
+
+     <B>cExpr</B> is a pointer to a buffer that contains the character
+     expression of relation relNum.
+
+ <B>Description</B>
+
+     Obtains a string that describes the relationship of the relNum relation
+     to the workarea referenced by wa.  relNum is a one-based number.
+
+ <B>Default Behavior</B>
+
+     relText() implements the behavior of the CA-Clipper function
+     DBRELATION().  It scans relations for the workarea at wa and returns the
+     key text for the child workarea.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If this method is reimplemented, be careful to return the key
+        text for the relation at relNum-1 since relNum is a one-based number.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng53128.html">relArea()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,41 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3a502.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng3a998.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>650     Out of stack space</B>
+
+     <B>Explanation: </B> stack space is exhausted.
+
+     <B>Action:</B>  Some suggestions to resolve the problem are:
+
+     1. Use STACK or PROCEDURE DEPTH command to instruct the linker to
+        increase the stack space at link time.
+
+     2. check for recursion.  Some modifications to the CA-Clipper
+        errorsys.prg may cause a recursive call, which will exhaust the call
+        stack.
+
+     3. try using the default CA-Clipper errorsys.prg if the errorsys.prg was
+        modified to test for runaway recursion caused by an error occurring
+        while attempting to handle an Error Object.
+
+     4. Check for UDFs/.PRGs that have the same name as an internal
+        CA-Clipper function.
+
+     5. Check for use of an incorrect or invalid version of the Errorsys.prg,
+        i.e., the Summer '87 CA-Clipper Errorsys.prg does not use an Error
+        object.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

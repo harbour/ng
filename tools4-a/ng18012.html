@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng17a2e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng1882d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETMAXCON()</B>
+ Sets or determines the maximum number of connections
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETMAXCON(&lt;cUser&gt;,[&lt;nNumber&gt;],[&lt;cServer&gt;|&lt;nConId&gt;)</B>
+     <B>   --&gt; nMaxConn</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cUser&gt; </B> Designates the name of the user for whom the maximum number
+     of connections is set or determined.
+
+     <B>&lt;nNumber&gt; </B> Designates the new maximum number of connections for
+     &lt;cUser&gt;.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server where &lt;cUser&gt; is
+     established.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETMAXCON() returns the maximum number of connections for &lt;cUser&gt;. If
+     the function was called with a value for &lt;nNumber&gt; and the return value
+     does not match &lt;nNumber&gt;, the requesting user did not have the rights to
+     modify the number of connections.
+
+ <B>Description</B>
+
+     NOVELL NET MAXIMUM CONNECTIONS
+     NNETMAXCON() allows you to query or set the maximum number of
+     connections for &lt;cUser&gt; (the number of workstations where a user can be
+     logged in).  To determine the maximum number of connections, do not pass
+     a value for &lt;nNumber&gt;.  If &lt;nNumber&gt; contains a numeric value,
+     NNETMAXCON() tries to set the maximum number of connections to
+     &lt;nNumber&gt;.  Supervisor rights are required on the related file server to
+     modify the number of connections.  With &lt;nNumber&gt; equal to 0, an
+     existing limit for the number of connections can be removed.
+
+     With &lt;cServer&gt; or &lt;nConId&gt;, the number of connections for users on any
+     attached file servers can be modified.  The connection ID of a server is
+     returned by NNETATTACH() or NNETLOGIN().
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the maximum number of connections for user MIKE:
+
+        ? NNETMAXCON('MIKE')   // For example 2
+
+     <B>.</B>  Set the new number of connections for user MIKE:
+
+        NNETMAXCON('MIKE',5)
+
+     <B>.</B>  Remove the limit for user MIKE:
+
+        NNETMAXCON("MIKE",0)
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

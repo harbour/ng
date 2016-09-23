@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng794c9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng773df.html">[^^Up^^]</A>
+<A HREF="ng7a323.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETTTSEND()</B>
+ Terminates a transaction
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETTTSEND([&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nTransNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server that is used.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETTTSEND() returns the transaction number.  If the error occurs, the
+     function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET TRANSACTION TRACKING SYSTEM END
+     A call of NNETTTSEND() validates all write accesses to flagged,
+     transactional files since the start of the transaction (NNETTTSBEG()).
+     Before the end of a transaction, a buffer commit is executed.  At the
+     end of a transaction, the file server assigns a transaction number, that
+     can be used to determine when a transaction has been written
+     successfully.
+
+ <B>Note</B>
+
+     <B>.</B>  When you use the Transactional Tracking System (TTS), always
+        take into account that other stations might not be able to read files
+        attached by the transaction (see the Introduction to this chapter).
+
+ <B>Example</B>
+
+     The following example demonstrates a typical transaction.  The
+     transaction is embedded in a begin sequence structure.  If no problems
+     occur, the transaction is completed normally at the end of the
+     structure.  If problems do occur, a break causes a branch into the
+     recover routine, where the transaction is undone by NNETTTSAB().
+
+     BEGIN SEQUENCE
+        NNETTTSBEG()
+        //
+        // Data manipulation
+        //
+        IF DISKSPACE() &lt; 50000
+           BREAK
+        ENDIF
+        //
+        // Data manipulation
+        //
+        NNETTTSEND()
+     RECOVER
+        NNETTSAB()
+     END
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng78e7d.html">NNETTTSAB()</A>
+<A HREF="ng794c9.html">NNETTTSBEG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

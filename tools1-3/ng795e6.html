@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng78479.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng79d64.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FONTSELECT()</B>
+ Determines font areas for normal- and high-intensity output
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FONTSELECT(&lt;nFontArea&gt;, [&lt;nIntensiveFontArea&gt;])</B>
+     <B>    --&gt; nErrorCode</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nFontArea&gt;</B>  Designates which font area the normal output mode
+     should use.
+
+     <B>&lt;nIntensiveFontArea&gt;</B>  Designates which font area the higher-
+     intensity output mode should use.  The default is &lt;nFontArea&gt;.
+
+ <B>Returns</B>
+
+     FONTSELECT() returns an error code with the following meaning:
+
+     <B>Table 6-3: Error code definitions</B>
+     ------------------------------------------------------------------------
+     <B>Code    Definition</B>
+     ------------------------------------------------------------------------
+      0      Font loaded successfully
+     -1      Invalid font area specified
+     -2      Impossible in current video mode
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     This function selects the font areas for both normal output and higher-
+     intensity output.  Use SET COLOR TO with "+", to bring up to 512
+     different characters to the screen at the same time.  The second font is
+     displayed at a higher intensity.  If this is not what you want, you can
+     change the display (not the attribute itself) with
+     EGAPALETTE()/VGAPALETTE().  The system is preset for both output modes
+     and corresponds to a call of FONTSELECT(1, 1).
+
+ <B>Note</B>
+
+     <B>.</B>  After you change the video mode with SETSCRMODE(), the fonts
+        must be re-selected.
+
+ <B>Examples</B>
+
+     <B>.</B>  Show font area 1 with normal output and area 4 with high
+        intensity:
+
+        ? FONTSELECT(1, 4)      // 0  OK
+        SET COLOR TO W
+        ? "Nantucket"           // Output over font 1
+        SET COLOR TO W+         // Output over font 4
+
+     <B>.</B>  Show font area 2 for both output modes:
+
+        ? FONTSELECT(2)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng76af3.html">FONTLOAD()</A>
+<A HREF="ng77f31.html">FONTRESET()</A>
+<A HREF="ng21e3e.html">SETSCRMODE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

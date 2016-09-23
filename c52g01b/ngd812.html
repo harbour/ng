@@ -1,0 +1,116 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd40d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="nge58b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ASCAN()</B>
+ Scan an array for a value or until a block returns true (.T.)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ASCAN(&lt;aTarget&gt;, &lt;expSearch&gt;,</B>
+     <B>   [&lt;nStart&gt;], [&lt;nCount&gt;]) --&gt; nStoppedAt</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aTarget&gt;</B> is the array to scan.
+
+     <B>&lt;expSearch&gt;</B> is either a simple value to scan for, or a code block.
+     If &lt;expSearch&gt; is a simple value it can be character, date, logical, or
+     numeric type.
+
+     <B>&lt;nStart&gt;</B> is the starting element of the scan.  If this argument is
+     not specified, the default starting position is one.
+
+     <B>&lt;nCount&gt;</B> is the number of elements to scan from the starting
+     position.  If this argument is not specified, all elements from the
+     starting element to the end of the array are scanned.
+
+ <B>Returns</B>
+
+     ASCAN() returns a numeric value representing the array position of the
+     last element scanned.  If &lt;expSearch&gt; is a simple value, ASCAN() returns
+     the position of the first matching element, or zero if a match is not
+     found.  If &lt;expSearch&gt; is a code block, ASCAN() returns the position of
+     the element where the block returned true (.T.).
+
+ <B>Description</B>
+
+     ASCAN() is an array function that scans an array for a specified value
+     and operates like SEEK when searching for a simple value.  The
+     &lt;expSearch&gt; value is compared to the target array element beginning with
+     the leftmost character in the target element and proceeding until there
+     are no more characters left in &lt;expSearch&gt;.  If there is no match,
+     ASCAN() proceeds to the next element in the array.
+
+     Since ASCAN() uses the equal operator (=) for comparisons, it is
+     sensitive to the status of EXACT.  If EXACT is ON, the target array
+     element must be exactly equal to the result of &lt;expSearch&gt; to match.
+
+     If the &lt;expSearch&gt; argument is a code block, ASCAN() scans the &lt;aTarget&gt;
+     array executing the block for each element accessed.  As each element is
+     encountered, ASCAN() passes the element's value as an argument to the
+     code block, and then performs an EVAL() on the block.  The scanning
+     operation stops when the code block returns true (.T.), or ASCAN()
+     reaches the last element in the array.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates scanning a three-element array using
+        simple values and a code block as search criteria.  The code block
+        criteria shows how to perform a case-insensitive search:
+
+        aArray := { "Tom", "Mary", "Sue" }
+        ? ASCAN(aArray, "Mary")             // Result: 2
+        ? ASCAN(aArray, "mary")             // Result: 0
+        //
+        ? ASCAN(aArray, { |x| UPPER(x) ;
+              == "MARY" })                  // Result: 2
+
+     <B>.</B>  This example demonstrates scanning for multiple instances of a
+        search argument after a match is found:
+
+        LOCAL aArray := { "Tom", "Mary", "Sue",;
+                           "Mary" }, nStart := 1
+        //
+        // Get last array element position
+        nAtEnd := LEN(aArray)
+        DO WHILE (nPos := ASCAN(aArray, "Mary", ;
+                     nStart)) &gt; 0
+           ? nPos, aArray[nPos]
+           //
+           // Get new starting position and test
+           // boundary condition
+           IF (nStart := ++nPos) &gt; nAtEnd
+              EXIT
+           ENDIF
+        ENDDO
+
+     <B>.</B>  This example scans a two dimensional array using a code block.
+        Note that the parameter aVal in the code block is an array:
+
+        LOCAL aArr:={}
+        CLS
+        AADD(aArr,{"one","two"})
+        AADD(aArr,{"three","four"})
+        AADD(aArr,{"five","six"})
+        ? ASCAN(aArr, {|aVal| aVal[2] == "four"})         // Returns 2
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng912c.html">AEVAL()</A>
+<A HREF="ng31d53.html">EVAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

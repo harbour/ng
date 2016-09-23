@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5661a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng56d06.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>sysName()</B>
+ Obtain name of replaceable database driver (RDD) subsystem
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE sysName(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     BYTEP name</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>name</B> is a pointer to a buffer that is assigned the name of the RDD.
+
+ <B>Description</B>
+
+     sysName() obtains the name of the driver subsystem.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+     <B>Warning!  name</B> must point to a preallocated buffer of at least 16
+     bytes.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Your RDD should implement sysName() by simply returning the
+        name of your driver.  For example, the DBFNTX driver copies "DBFNTX"
+        into name and returns.  There is no need to maintain the inheritance
+        chain for sysName().
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng54425.html">info()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

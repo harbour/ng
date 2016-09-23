@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng370d9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng378a5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPERRMAJ()                   Get swap system major error code</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get the swap system major error code</B></U>
+
+ <U>Syntax   : <B>niValue = SWPERRMAJ()</B></U>
+
+ <U>Return   : <B>Swap system major error code</B></U>
+
+ If an error occurs during the swap process itself, the SWPRUNCMD()
+
+ function will return false. SWPERRMAJ() returns the major error code,
+ indicating the type of error that occurred.
+
+ Example:
+
+    <B>* Attempt to swap out, compile and link a program</B>
+    <B>success = SWPRUNCMD("Compile myprog -m",0,"","")</B>
+    <B>IF .NOT. success</B>
+    <B>   ? "Swap failed..."</B>
+    <B>   ? "Major Error Number ",SWPERRMAJ()</B>
+    <B>   ? "Minor Error Number ",SWPERRMIN()</B>
+    <B>ELSE</B>
+    <B>   err_lev = SWPERRLEV()</B>
+    <B>   IF err_lev = 0</B>
+    <B>      SWPRUNCMD("BLINKER @myscr",0,"","")</B>
+    <B>   ELSE</B>
+    <B>      ?"Compile failed - errorlevel ",err_lev</B>
+    <B>   ENDIF</B>
+    <B>ENDIF</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng378a5.html">SWPERRMIN()</A>
+<A HREF="ng547bb.html">1220: Swap error</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

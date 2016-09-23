@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4e184.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4ebf0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>dbEval()</B>
+ Evaluate code block for each row (record) in workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>HIDE ERRCODE dbEval(</B>
+     <B>                     WORKAREAP wa,</B>
+     <B>                     DBEVALINFOP dbEvalInfo</B>
+     <B>                   )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>dbEvalInfo</B> is a pointer to a structure containing information
+     necessary for a code block evaluation.
+
+ <B>Description</B>
+
+     Evaluates a code block for each row in scope in wa.
+
+ <B>Default Behavior</B>
+
+     dbEval() emulates the CA-Clipper DBEval() function, obeying the "normal"
+     Xbase scoping conditions.  dbEval() calls evalBlock() for each row in
+     the database, using the wa's skip() method to traverse the data.  Both
+     wa and dbEvalInfo-&gt;bBlock are passed to each call of evalBlock() while
+     the following conditions are met:
+
+     <B>.</B>  If dbEvalInfo-&gt;scope.nRecord is set to a number, evalBlock()
+        is called once with that physical record number.
+
+     <B>.</B>  If dbEvalInfo-&gt;scope.nNext is set to a number n, then n
+        iterations occur.
+
+     <B>.</B>  Otherwise, evalBlock() is called for each record while wa-&gt;eof
+        is not true and the dbEvalInfo-&gt;scope.bWhile block evaluates to TRUE.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If this method is reimplemented, care should be taken to
+        completely emulate the behavior of Xbase scoping.  This will offer
+        the CA-Clipper developer maximum compatibility with the Xbase DML.
+        Note especially that several of the scoping conditions exclude each
+        other, and many opportunities exist for optimization.  The default
+        behavior of this method provides a very high level of optimization
+        with the default Xbase scoping.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3eab9.html">DBEVALINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng48150.html">skip()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

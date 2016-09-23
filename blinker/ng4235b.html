@@ -1,0 +1,35 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4217e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3dfc5.html">[^^Up^^]</A>
+<A HREF="ng426f4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1005: the default overlay class '&lt;class&gt;' contains the word 'DATA'</B>
+------------------------------------------------------------------------------
+
+ This message indicates that the default overlay class, taken from the class
+ of the first segment in the first .OBJ being linked, contains the word
+ 'DATA'. Blinker currently only overlays code, so this message is displayed
+ as a warning in case a non-standard .OBJ file is being linked as the first
+ .OBJ file.
+
+ If the class name displayed is not a code class then check that the first
+ .OBJ being linked contains a valid code segment as the first segment, or
+ place one of your own program .OBJ files as the first .OBJ file in the
+ script file.
+
+ If the class name displayed is correct as the class of code to be overlaid
+ then you may override this warning message by including the command OVERLAY
+ CODE, &lt;class&gt; in the link script file.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

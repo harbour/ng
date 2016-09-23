@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2060d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng20ff8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETINUSE()</B>
+ Returns the number of objects currently logged into the network
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETINUSE() --&gt; nStations</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Returns</B>
+
+     NNETINUSE() returns the number of stations currently in use on the
+     default file server.
+
+ <B>Description</B>
+
+     NOVELL NET IN USE
+     With NNETINUSE() you can determine the number of stations that are
+     currently in use on the default file server.  For example, you could
+     provide an overview of network capacity.
+
+ <B>Note</B>
+
+     <B>.</B>  The returned value does not agree with the users that are
+        displayed in USERLIST or CONNECTION INFORMATION within FCONSOLE.  You
+        will always have at least one more channel that is open than there
+        are users in the network.  The returned value for Netware, versions
+        2.1 or later, agree with STATISTIC --&gt; SUMMARY --&gt; CONNECTIONS IN USE
+        under FCONSOLE.
+
+ <B>Example</B>
+
+     Determine the stations in use on the default file server:
+
+     ? NNETINUSE()                        // e.g. 7
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng641ec.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng6486d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gClipSet()</B>
+ Set the screen clipping region
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>ERRCODE _gClipSet(</B>
+     <B>                   LLG_LPRECT lpClipRectSet</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>lpClipRectSet</B> is a pointer to an LLG_RECT structure that you must
+     allocate and initialize prior to calling this function.  _gClipSet()
+     uses the members of this structure to set the current screen clipping
+     region.
+
+ <B>Returns</B>
+
+     SUCCESS if successful; otherwise, an error code.
+
+ <B>Description</B>
+
+     _gClipSet() limits the active display for Light Lib Graphic API
+     functions to a portion of the screen, called a clipping region.
+
+     <B>Note: </B> To retrieve information regarding the current clipping region
+     without changing it, call _gClipGet().
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng61fa5.html">_mClipSet()</A>
+<A HREF="ng641ec.html">_gClipGet()</A>
+<A HREF="ng6c9c3.html">LLG_RECT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng86b29.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng87cf2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDLISTADD()</B>
+ Add orders to the order list
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDLISTADD(&lt;cOrderBagName&gt; [, &lt;cOrderName&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrderBagName&gt;</B> is the name of a disk file containing one or more
+     orders.  You may specify &lt;cOrderBagName&gt; as the file name with or
+     without the path name or appropriate extension.  If you do not include
+     the extension as part of &lt;cOrderBagName&gt;, CA-Clipper uses the default
+     extension of the current RDD.
+
+     <B>&lt;cOrderName&gt;</B> the name of the specific order from the order bag to be
+     added to the order list of the current work area.  If you do not specify
+     &lt;cOrderName&gt;, all orders in the order bag are added to the order list of
+     the current work area.
+
+ <B>Returns</B>
+
+     ORDLISTADD() always returns NIL.
+
+ <B>Description</B>
+
+     ORDLISTADD() is an order management function that adds the contents of
+     an order bag, or a single order in an order bag, to the order list.
+     This function lets you extend the order list without issuing a SET INDEX
+     command that, first, clears all the active orders from the order list.
+
+     Any orders already associated with the work area continue to be active.
+     If the newly opened order bag contains the only order associated with
+     the work area, it becomes the controlling order; otherwise, the
+     controlling order remains unchanged.
+
+     After the new orders are opened, the work area is positioned to the
+     first logical record in the controlling order.
+
+     ORDLISTADD() is similar to the SET INDEX command or the INDEX clause of
+     the USE command, except that it does not clear the order list prior to
+     adding the new order(s).
+
+     ORDLISTADD() supersedes the DBSETINDEX() function.
+
+     The active RDD determines the order capacity of an order bag.  The
+     default  DBFNTX and the DBFNDX drivers only support single-order bags,
+     while other RDDs may support multiple-order bags (e.g., the DBFCDX
+     driver).  When using RDDs that support multiple-order bags, you must
+     explicitly SET ORDER (or ORDSETFOCUS()) to the desired controlling
+     order.  If you do not specify a controlling order, the data file will be
+     viewed in first order.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example Customer.cdx contains three orders, CuAcct,
+        CuName, and CuZip.  ORDLISTADD() opens Customer.cdx but only uses the
+        order named CuAcct:
+
+        USE Customer VIA "DBFCDX" NEW
+        ORDLISTADD("Customer", "CuAcct")
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngcc94d.html">INDEX</A>
+<A HREF="nge93ab.html">SET INDEX</A>
+<A HREF="ngf8dbc.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

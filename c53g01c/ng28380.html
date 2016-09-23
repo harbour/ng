@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng27c3e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng289a1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBGOTO()</B>
+ Position record pointer to a specific identity
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBGOTO(&lt;xIdentity&gt;) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xIdentity&gt;</B> is a unique value guaranteed by the structure of the
+     data file to reference a specific item in a data source (database).  In
+     a Xbase data structure (.dbf) &lt;xIdentity&gt; is the record number.  In
+     other data formats, &lt;xIdentity&gt; is the unique primary key value.
+     &lt;xIdentity&gt; could be an array offset or virtual memory handle if the
+     data set is in memory instead of on disk.
+
+ <B>Returns</B>
+
+     DBGOTO() always returns NIL.
+
+ <B>Description</B>
+
+     DBGOTO() is a database function that positions the record pointer in the
+     current work area at the specified &lt;xIdentity&gt;.  In an Xbase data
+     structure, this identity is the record number because every record, even
+     an empty record, has a record number.  In non-Xbase data structures,
+     identity may be defined as something other than record number.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example saves the current record number, searches for a
+        key, and then restores the record pointer to the saved position:
+
+        FUNCTION KeyExists( xKeyExpr )
+
+           LOCAL nSavRecord := RECNO()      // Save the current record
+                                            // pointer position
+           LOCAL lFound
+
+           SEEK xKeyExpr
+           IF ( lFound := FOUND() )
+           .
+           .&lt; statements &gt;
+           .
+           ENDIF
+
+           DBGOTO( nSavRecord )               // Restore the record
+                                            // pointer position
+           RETURN ( lFound )
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng17b80.html">BOF()</A>
+<A HREF="ng27c3e.html">DBGOBOTTOM()</A>
+<A HREF="ng289a1.html">DBGOTOP()</A>
+<A HREF="ng2ff8b.html">DBSEEK()</A>
+<A HREF="ng33c29.html">DBSKIP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

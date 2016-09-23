@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng75346.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng745f1.html">[^^Up^^]</A>
+<A HREF="ng76222.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSEMOPN()</B>
+ Opens and initializes a semaphore
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSEMOPN(&lt;cName&gt;,[&lt;nValue&gt;],[&lt;cServer&gt;|&lt;nConId&gt;]),</B>
+     <B>   --&gt; nHandle</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cName&gt;</B>  Designates the name of the semaphore that is opened.
+
+     <B>&lt;nValue&gt;</B>  Designates a start value between -128 and 127 for the
+     semaphore &lt;cName&gt;.  The default value is 1.  The file server accepts the
+     assignment only if &lt;cName&gt; is created by the function call.
+
+     <B>&lt;nHandle&gt;</B>  Designates the semaphore handle that has been returned by
+     NNETSEMOPN() when the semaphore is opened.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cName&gt;
+     is created.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID for your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETSEMOPN() returns the handle of the semaphore that has been opened.
+     The handle is used by the file server to manage the semaphores.  If an
+     error occurs, the function returns 0.
+
+ <B>Description</B>
+
+     NOVELL NET SEMAPHOR OPEN
+     NNETSEMOPN() allows you to open an existing semaphore or to create a new
+     semaphore.  If the specified semaphore does not exist on the file
+     server, the semaphore is created and entered into the file server's
+     semaphore table.  The new semaphore can be assigned a start value by
+     passing &lt;nValue&gt;.
+
+     The function returns the handle used by the file server for the
+     semaphore &lt;cName&gt;.  Handles are used to save variables because they are
+     needed as identification characteristics for other operations.  Once a
+     semaphore has been opened successfully, it is exclusively addressed with
+     the handle returned by NNETSEMOPN().
+
+ <B>Examples</B>
+
+     <B>.</B>  Create semaphore SUPERACC, and check to see if the semaphore
+        has been opened successfully with the handle:
+
+        nHandle=NNETSEMOPN("superacc")
+        IF nHandle=0
+           ? 'Error during opening the semaphore!'
+        ENDIF
+
+     <B>.</B>  Create semaphore TEST and assign a start value of  3, if it
+        does not already exist:
+
+        nHandle=NNETSEMOPN("test",3)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng74e73.html">NNETSEMCLO()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

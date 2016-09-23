@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd103e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngd26f1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LIST</B>
+ List records to the console
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LIST &lt;exp list&gt;</B>
+     <B>   [TO PRINTER] [TO FILE &lt;xcFile&gt;]</B>
+     <B>   [&lt;scope&gt;] [WHILE &lt;lCondition&gt;]</B>
+     <B>   [FOR &lt;lCondition&gt;] [OFF]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp list&gt;</B> is the list of expressions to be evaluated and displayed
+     for each record processed.
+
+     <B>TO PRINTER</B> echoes output to the printer.
+
+     <B>TO FILE &lt;xcFile&gt;</B> echoes output to the specified file name and can be
+     specified either as a literal file name or as a character expression
+     enclosed in parentheses.  If an extension is not specified, .txt is
+     added.
+
+     <B>&lt;scope&gt;</B> is the portion of the current database file to LIST.  The
+     default is ALL records.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to LIST
+     within the given scope.
+
+     <B>OFF</B> suppresses the display of record numbers.
+
+ <B>Description</B>
+
+     LIST is a console command that sequentially accesses records in the
+     current work area, displaying the results of one or more expressions for
+     each record accessed.  The output is in tabular format with each column
+     separated by a space.  LIST is identical to DISPLAY with the exception
+     that its default scope is ALL rather than NEXT 1.
+
+     When invoked, output is sent to the screen and, optionally, to the
+     printer and/or a file.  To suppress output to the screen while printing
+     or echoing output to a file, SET CONSOLE OFF before the LIST invocation.
+
+ <B>Notes</B>
+
+     <B>.  Interrupting LIST:</B> So the user may interrupt a LIST, use
+        INKEY() as part of the FOR condition to test for an interrupt key
+        press.  See the example below.
+
+     <B>.  Printer margin:</B> LIST honors the current SET MARGIN for output
+        echoed to the printer.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, a simple list is followed by a conditional
+        list to the printer:
+
+        USE Sales
+        LIST DATE(), TIME(), Branch
+        LIST Branch, Salesman FOR Amount &gt; 500 TO PRINTER
+
+     <B>.</B>  This example interrupts LIST using INKEY() to test whether the
+        user pressed the Esc key:
+
+        #define K_ESC     27
+        USE Sales INDEX Salesman NEW
+        LIST Branch, Salesman, Amount WHILE INKEY() != K_ESC
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngab504.html">?|??</A>
+<A HREF="ngca839.html">DISPLAY</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng17f74.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng18e5b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MODULE                        Specify placement of individual library modules </B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify placement of individual library modules</B></U>
+
+ <U>Syntax   : <B>MODULE &lt;module&gt; [,&lt;module&gt; ...]</B></U>
+            <B>[FROM &lt;libname&gt;]</B>
+
+ <U>Example  : <B># Move the module COLOR to the current location</B></U>
+            <B>MODULE COLOR</B>
+
+ The MODULE command allows individual modules to be forced into the root or
+ the overlay area regardless of whether the originating libraries or object
+ modules are specified within an overlay area or not.
+
+ The module name refers to an object module that exists within a library
+ which has been specified elsewhere in the link script with a LIB or SEARCH
+ command. Blinker's VERBOSE command output lists all modules that are
+ processed at link time.
+
+ The position of the module command within the link script determines the
+ placement of the named module within the executable - if the MODULE command
+ is in the root the named modules will be forced into the root; if it is in
+ the overlay area, the named modules will be overlaid. Multiple modules can
+ be specified on the same command line separated by ','.
+
+ The library and module names should be specified without path names; if
+ included, they will be ignored. The VERBOSE command can be used to determine
+ the correct module name to use, since it displays each module name as it is
+ processed from the library or object module. This is the same name as used
+ by the Microsoft librarian (LIB.EXE).
+
+ MODULE commands are case insensitive, (upper or lower case will be treated
+ the same) unless the MIXCASE command has been specified in the script file
+ before the MODULE command.
+
+ The MODULE command has a second mode of operation, whereby a source library
+ is specified using the FROM &lt;libname&gt; option. This allows modules from
+ specific libraries to be used in preference to others, and at the same time
+ performs the normal MODULE function of changing the placement of routines in
+ the root or overlay area. This is useful to resolve a conflict between two
+ libraries which contain modules with the same name.
+
+ It is advisable to use the FROM option only when necessary, since it
+ modifies the normal linking sequence.
+
+    <B>MODULE DBEDIT, MEMOEDIT FROM EXTEND</B>
+
+ This command forces the modules DBEDIT and MEMOEDIT from EXTEND to be used
+ in preference to modules of the same name which may have been found
+ previously in other libraries or files, AND moves those modules to the
+ current location in the script file.
+
+    <B>MODULE MEMOEDIT FROM NUL</B>
+
+ This command forces the module MEMOEDIT not to be linked at all, since
+ Blinker will be looking for a library called NUL, which cannot exist. If,
+ however, something in MEMOEDIT is explicitly referenced by another module,
+ this will cause an unresolved external. To override this, use the DEFINE
+ command rather than the MODULE command, and DEFINE the public symbols within
+ the module which are unresolved.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1510e.html">DEFINE</A>
+<A HREF="nge3ff.html">BLINKER MESSAGE DUPLICATES</A>
+<A HREF="ng16f16.html">LIBRARY</A>
+<A HREF="ng1c7f4.html">VERBOSE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

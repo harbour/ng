@@ -1,0 +1,103 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8c6be.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng8d688.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCEVENT()</B>
+ Queries the event code that most recently triggered a key trap
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCEVENT(&lt;nHandle&gt;) --&gt; nEventCode</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication receiving buffer.
+
+ <B>Returns</B>
+
+     PPCEVENT() returns a numeric code that specifies the event that most
+     recently triggered a key trap for the communication buffer defined by
+     &lt;nHandle&gt;.  All possible event codes can be seen in the following table.
+
+     <B>Table 31.5:  Possible Return Values of PPCEVENT()</B>
+     ------------------------------------------------------------------------
+     <B>Value   Sym. Con.           Definition</B>
+     ------------------------------------------------------------------------
+     1       PPC_RECSUC          Packet received successfully
+     2       PPC_RECFAIL         Packet received with errors
+     4       PPC_RECBUFF75FULL   Receiving buffer more than 75% full
+     8       PPC_RECPACKDISCARD  Packet discarded because of a full receiving
+                                 buffer
+     16      PPC_SNDFAIL         Failure during sending of a packet
+     32      PPC_CONESTAB        Session set up successfully
+     64      PPC_CONTERM         Session terminated
+     ------------------------------------------------------------------------
+
+     A value of 0 indicates that no event has been triggered through PPCKEY()
+     since the installation of the event handler.  If an error occurs (for
+     example, if the handle is invalid), PPCEVENT() returns -1.
+
+ <B>Description</B>
+
+     With the function PPCKEY() you can define a key code for each
+     communication buffer to be triggered when a specified  event occurs.
+     PPCEVENT() allows you to determine the last event.  Dependent on the
+     return value of PPCEVENT(), various actions can be executed in the event
+     handler.  If no event mask has been defined for the communication
+     buffer, PPCEVENT() returns 0.
+
+ <B>Example</B>
+
+     Open an SPX receiving buffer and wait for a connection in the
+     background.  An event supervision is installed with PPCKEY() for the
+     communication buffer.  The event handler displays a message when a
+     connection is set up or canceled.  Additionally, the receiving buffer is
+     read as soon as it is 75% full:
+
+     #include "ctppc.ch"
+
+     PRIVATE nHandle
+
+     // Wait for connection on socket 20000
+     // open receiving buffer of 5000 bytes
+
+     nHandle:=SPXLISTCON(20000,5000)
+
+     // install event handler
+     // PPC_CONESTAB+PPC_CONTERM+PPC_RECBUFF75FULL=100
+
+     PPCKEY(nHandle,255,100)
+     SET KEY 255 TO handler
+     WAIT
+
+     PROCEDURE handler
+        LOCAL nEvent:=PPCEVENT(nHandle)
+        LOCAL cBuffer
+        DO CASE
+           CASE nEvent=PPC_CONESTB
+              ? 'Connection set up!'
+           CASE nEvent=PPC_CONTERM
+              ? 'Connection terminated!'
+           CASE nEvent=PPC_RECBUFF75FULL
+              cBuffer=PPCREAD(nHandle)
+        ENDCASE
+     RETURN
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8d688.html">PPCKEY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

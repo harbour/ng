@@ -1,0 +1,159 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng23f2f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng2590d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_DefTrigger():</B>
+
+  Syntax:   Sx_DefTrigger( &lt;nEvent&gt;, &lt;nArea&gt;, &lt;nFieldPos&gt;, &lt;xTrigVal&gt; )
+
+        nEvent = A numeric value indicating the type of event that is
+                 activating the trigger.  These values are defined as
+                 manifest constants in the SIXCDX.CH file, and are as
+                 follows:
+
+                 EVENT_PREUSE       = A DBF file is about to be opened
+               <B>*</B> EVENT_POSTUSE      = A DBF file has just been opened
+               <B>*</B> EVENT_UPDATE       = An index is being updated
+                 EVENT_APPEND       = A new record is being appended
+                 EVENT_DELETE       = A record is being deleted
+                 EVENT_RECALL       = A deleted record is being recalled
+                 EVENT_PACK         = The DBF file is being packed
+                 EVENT_ZAP          = The DBF file is being zapped
+                 EVENT_PUT          = A value is being stored in the DBF
+                 EVENT_GET          = A value is being retrieved from the DBF
+                 EVENT_PRECLOSE     = The DBF file is about to be closed
+               <B>*</B> EVENT_POSTCLOSE    = The DBF file has just been closed
+                 EVENT_PREMEMOPACK  = A MEMOPACK is just about to occur
+                 EVENT_POSTMEMOPACK = A MEMOPACK has just been completed
+
+                 <U>NOTE:</U>  Although these constants preprocess into numeric
+                        values, you should not use the numeric values in
+                        your source code.  Instead, you should use the
+                        constants, as defined above.  This will insure
+                        compatibility with all future releases of the
+                        SIx Driver.
+
+               (<B>*</B>) - The events marked with an asterisk (*) will continue
+                     even if the return value for that event is set to false
+                     (.F.).  This is to insure data integrity.
+
+         nArea = The currently active workarea number.
+
+     nFieldPos = The field position for the PUT or GET, if applicable.
+
+      xTrigVal = This parameter contains the value, if any, associated with
+                 the event being processed.  If no value of significance is
+                 associated with the event, a zero (0) is passed down.
+
+  Returns:   Logical.  TRUE (.T.) if the current event should be allowed to
+             successfully complete, FALSE (.F.) if not.
+
+  Description:  By default, this function is automatically called whenever
+                any of the events listed above occurs.  It contains the
+                default triggers (none) to be attached to each event.
+
+                The parameters are passed to it automatically by the SIx
+                Driver.  This is similar to the way parameters are
+                automatically passed to a UDF used in Clipper's MemoEdit()
+                or AChoice() functions.
+
+                To cause the SIx Driver to use a different set of triggers,
+                you would USE the file with the TRIGGER keyword, specifying
+                the name of the desired trigger function in quotes.  For
+                example, to use a modified Sx_DefTrigger() function called
+                DemoTrigger(), you would do this:
+
+                    <B>USE test VIA "SIXCDX" TRIGGER "DemoTrigger"</B>
+
+                This would cause all triggerable events for this workarea to
+                be handled through DemoTrigger(), rather than the SIx
+                Driver's default Sx_DefTrigger() function.
+
+                The Clipper source code for Sx_DefTrigger() is contained in
+                SIXTRIG.PRG, and can be modified as desired.  Just insure
+                that the new SIXTRIG.OBJ module is linked into your
+                application ahead of the SIXCDX.LIB file.  The complete
+                source for Sx_DefTrigger() is also listed below in the
+                Example section.
+
+                In its present condition, Sx_DefTrigger() maintains the
+                exact same behavior as in previous SIx Driver releases.
+                The call to Sx_SetTrigger( TRIGGER_REMOVE ) under the
+                EVENT_PREUSE case effectively removes the trigger controls
+                just prior to a database being opened.  To allow support
+                for event trigger handling, just comment out this call to
+                Sx_SetTrigger().
+
+                Also, if you want the SIx Driver to automatically look for
+                an associated .INI file when a .DBF is USEd, you need to
+                uncomment the _sx_INIinit( nArea ) call.  See the section
+                on ".INI Files" for more details on these.  The _sx_INIinit()
+                function can ONLY be used in this manner.  If it is called
+                anywhere else in your application, unpredictable results can
+                occur.
+
+
+    <U>NOTE:  See the TRIGDEMO.PRG file for an example of using event triggers.</U>
+
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    FUNC Sx_DefTrigger( nEvent, nArea, nFieldPos, xTrigVal )
+
+      DO CASE
+
+        CASE nEvent == EVENT_PREUSE
+    //    _sx_INIinit( nArea )
+          Sx_SetTrigger( TRIGGER_REMOVE )
+
+        CASE nEvent == EVENT_POSTUSE
+
+        CASE nEvent == EVENT_UPDATE
+
+        CASE nEvent == EVENT_APPEND
+
+        CASE nEvent == EVENT_DELETE
+
+        CASE nEvent == EVENT_RECALL
+
+        CASE nEvent == EVENT_PACK
+
+        CASE nEvent == EVENT_ZAP
+
+        CASE nEvent == EVENT_PUT
+
+        CASE nEvent == EVENT_GET
+
+        CASE nEvent == EVENT_PRECLOSE
+
+        CASE nEvent == EVENT_POSTCLOSE
+
+        CASE nEvent == EVENT_PREMEMOPACK
+
+        CASE nEvent == EVENT_POSTMEMOPACK
+
+      ENDCASE
+
+    Return( .T. )
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng386d6.html">Sx_SetTrigger()</A>
+<A HREF="ng2f9f.html">_sx_INIinit()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

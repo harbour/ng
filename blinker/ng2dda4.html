@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2d881.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2e414.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosGetMachineMode()           Get current machine mode (real, 286 protected).</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get the current machine mode (real, 286 protected).</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosGetMachineMode(BYTE *mmode);</B></U>
+
+ <U>mmode      <B>Pointer to a byte to receive the machine mode.</B></U>
+
+ <U>Return   : <B>Machine mode indicator byte</B></U>
+
+ DosGetMachineMode() returns the current machine mode (either real or
+ protected). Since Blinker has the capability of creating dual mode programs
+ that may run in protected or real mode depending on the host environment,
+ DosGetMachineMode() may be used to determine the current mode and take
+ appropriate action.
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>unsigned char far *VideoBuffer;</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>BYTE        machinemode;</B>
+    <B>SEL         selector;</B>
+    <B>if (DosGetMachineMode(&amp;machinemode) == 0)</B>
+    <B>   switch (machinemode)</B>
+    <B>      {</B>
+    <B>      case MODE_REAL:</B>
+    <B>         printf ("\nReal mode - absolute pointers ok\n");</B>
+    <B>         VideoBuffer = MK_FP(0xb800,0);</B>
+    <B>         break;</B>
+    <B>      case MODE_PROTECTED:</B>
+    <B>         printf ("\n286 Protected mode - plenty memory\n");</B>
+    <B>         if (DosMapRealSeg (0xb800, 0x8000l, &amp;selector))</B>
+    <B>            {</B>
+    <B>            printf ("\nTrouble\n");</B>
+    <B>            exit (1);</B>
+    <B>            }</B>
+    <B>         VideoBuffer = MK_FP(selector,0);</B>
+    <B>         break;</B>
+    <B>      default:</B>
+    <B>         printf ("\nOther mode - interesting\n");</B>
+    <B>         exit(1);</B>
+    <B>      }</B>
+    <B>}</B>
+
+ Then:
+
+    <B>/* Display a '*' in top left corner of screen*/</B>
+    <B>*VideoBuffer[0] = '*';</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

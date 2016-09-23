@@ -1,0 +1,35 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng56f0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng270.html">[^^Up^^]</A>
+<A HREF="ng5b4a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>C2019   CALL of CA-Clipper procedure or function</B>
+
+     <B>Explanation:</B>  You invoked a previously declared procedure or
+     function with the CALL command.  CALL is designed to invoke separately
+     compiled or assembled routines and not CA-Clipper-compiled procedures
+     and functions.
+
+     <B>Action:</B>  Some suggestions to resolve the problem are:
+
+     1. Rename either the external routine name, or the conflicting procedure
+        or function name.
+
+     2. If you are compiling multiple program (.prg) files into a single
+        object (.OBJ) file, check to see if the conflicting procedure or
+        function is in another program file (.prg).  If it is and not called
+        by procedures and functions outside of the program (.prg) file,
+        consider declaring it a STATIC FUNCTION or PROCEDURE.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

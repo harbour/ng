@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng64643.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng639de.html">[^^Up^^]</A>
+<A HREF="ng651b8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>VariFields (tm):</B>
+
+  Under SIx 2.0 the term <B>VariField</B> referred primarily to ability to
+  store and retrieve variable data types into a MEMO field.  For  example,
+  an array stored in MEMO field would return "A" from Clipper's ValType()
+  function.  This concept is still supported in SIx 3.0.
+
+
+  <B>Variable Data Type Storage:</B>
+
+  Besides being able to store arrays into FPT/SMT memo files, the SIx Driver
+  also allows you store any Clipper data type (except code-blocks) into
+  an FPT/SMT memo field.  This includes numeric, logical, and date values.
+  Of course character values are supported as always!
+
+  The neat thing is, for the particular record that you're on at the time,
+  the <B>type</B> of that memo field will depend on what data type was stored in
+  it.  By default, if nothing at all or plain text is stored in the memo
+  field, Clipper's ValType() function returns "M".  However, after storing a
+  different data type in the memo field, the ValType() return value for that
+  particular record will reflect the value that was stored.  For example:
+
+
+    <B>// Assuming TEST.DBF has a memo field called NOTES</B>
+
+    <B>USE test VIA "SIXNSX"</B>
+    <B>? ValType( test-&gt;NOTES )     // "M"</B>
+
+    <B>test-&gt;NOTES := Date()        // Store a date value into the NOTES field</B>
+    <B>? ValType( test-&gt;NOTES )     // "M"</B>
+
+    <B>test-NOTES := 1000           // Store a numeric value into NOTES</B>
+    <B>? ValType( test-&gt;NOTES )     // "N"</B>
+
+    <B>test-&gt;NOTES := .T.           // Store a logical value into NOTES</B>
+    <B>? ValType( test-&gt;NOTES )     // "L"</B>
+
+    <B>test-&gt;NOTES := { 1, 2, 3 }   // Store an array into NOTES</B>
+    <B>? ValType( test-&gt;NOTES )     // "A"</B>
+
+    <B>test-&gt;NOTES := "Testing..."  // Store plain text into NOTES</B>
+    <B>? ValType( test-&gt;NOTES )     // "M"</B>
+
+
+  <B>Variable Length Fields:</B>
+
+  In SIx 3.0, a new field type -- 'V' -- has been added.  There are
+  <B>weakly-typed</B> and <B>strongly-typed</B> VariFields.
+
+  Depending on the structure and content on your particular database
+  file(s), it's possible to cut the size of your data files in half using
+  "V" fields.  The <B>OTTO.EXE</B> utility can assist you in converting your
+  existing database files to store data more efficiently using 'V' fields.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6a172.html">Using VariField 'V' Field Types</A>
+<A HREF="ng6b5cd.html">The OTTO Utility</A>
+<A HREF="ng67e05.html">Array storage in FPT/SMT memo fields</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

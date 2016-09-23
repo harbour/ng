@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngfd85.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf477.html">[^^Up^^]</A>
+<A HREF="ng110dc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>Overview</B>
+------------------------------------------------------------------------------
+
+This section provides a model of how ClipMore operates.  This is intended to
+give you a conceptual framework so that you can best utilize ClipMore's
+capabilities.  The Function Reference chapter covers the details of
+ClipMore.
+
+ClipMore is intended to speed up selective access to records.  Selective
+access means those cases where you want to only access records which meet a
+FOR condition, FILTER condition or fall within a SEEK/WHILE range.
+
+<B>How Clipper Operates Alone</B>
+
+Consider a specific case where you have done a SET FILTER TO, and are then
+doing a dbedit().  When you press Down Arrow to move to the next record,
+Clipper will look at the next record and determine if it meets the filter
+condition.  If it does, it stops at that record.  However, if the record
+doesn't meet the condition, Clipper skips to the next record, and repeats
+the process until it finds a record which meets the condition.
+
+This identical process is followed whenever you use a FOR condition. Clipper
+simply skips through the records until it finds a record which meets the FOR
+condition.
+
+If almost all records meet the condition the time required is negligible.
+However, if only 1 out of a 100 records meets the FILTER (or FOR) condition,
+it takes a considerable length of time to get the next record.
+
+This problem can be so bad that a filter condition is considered taboo in
+many circles.  ClipMore alleviates this problem.
+
+<B>How ClipMore Operates</B>
+
+ClipMore uses all available indexes to determine which records meet the
+condition (it does not need to access the actual records).  This capability
+is provided by the cmFilter() function.  For example, in Clipper, you might
+specify:
+
+    set filter to &lt;condition&gt;
+
+Using ClipMore, you would instead specify:
+
+    cmFilter("&lt;condition&gt;")
+
+The cmFilter() function parses your condition, determines what indexes are
+available, and uses the indexes to determine exactly what records meet the
+condition.
+
+ClipMore now knows which records meet the condition.  So, whenever you skip,
+ClipMore only stops on records which meet the condition.  No time is wasted
+retrieving records which don't meet the condition.
+
+So, each time Clipper skips to another record it finds a record which meets
+the condition.  No time is wasted going through 100 records which don't meet
+the condition.  This is how ClipMore achieves its performance gain.
+
+The cmFilter() function has the identical effect of a SET FILTER TO, but is
+_much_ faster.
+
+<B>Summary</B>
+
+Clipper (without ClipMore) inspects each record to determine which records
+meet the condition.  If there is no master index, the records are examined
+in record number order.  If there is a master index, the records are
+examined in the order specified by the master index.
+
+ClipMore improves Clipper's performance through the cmFilter() function.
+cmFilter() analyzes your condition and uses all available indexes to rapidly
+determine the records that meet the condition.  This process is fast because
+the actual database records need not be retrieved;  instead the information
+in the available indexes is used directly to determine which records meet
+the condition.
+
+ClipMore then helps Clipper skip directly to records which meet the
+condition; not time is wasted accessing records which don't meet the
+condition.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

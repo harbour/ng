@@ -1,0 +1,105 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc7dfa.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbe570.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>XTOC()</B>
+ Converts an expression of any data type into a string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>XTOC(&lt;expValue&gt;) --&gt; cValue</B>
+
+ <B>Argument</B>
+
+     <B>&lt;expValue&gt;</B>  Designates an expression of any desired data type.
+
+ <B>Returns</B>
+
+     XTOC() returns a character string version of the &lt;expValue&gt; parameter.
+
+ <B>Description</B>
+
+     At first glance, the XTOC() function does not appear to accomplish
+     anything that cannot be done with the other functions.  However, the
+     advantage lies in the fact that you do not have to pay attention to the
+     input data types.  For example, you can convert the data in every field
+     within a loop into a string.  You could then link these into a longer
+     string and use them to index or for comparisons.
+
+     Each data type always returns a string with a particular fixed length:
+
+     <B>Table 13-9: Resulting String</B>
+     ------------------------------------------------------------------------
+     <B>Data Type    Result Length</B>
+     ------------------------------------------------------------------------
+     Numeric      8
+     Logical      1
+     Date         8
+     String       Unchanged
+     ------------------------------------------------------------------------
+
+ <B>Note</B>
+
+     <B>.</B>  The index string cannot be longer than 256 characters.
+
+ <B>Examples</B>
+
+     <B>.</B>  In the case of logical parameters, XTOC() works like LTOC():
+
+        ? XTOC(.T.)                              // "T"
+        ? XTOC(.F.)                              // "F"
+
+     <B>.</B>  Numeric values always return an 8-byte string:
+
+        ? XTOC(0)                                // Length 8
+        ? XTOC(9.9)                              // Ditto
+        ? XTOC(-9.9)                             // Ditto
+        ? XTOC(99)                               // Ditto
+        ? XTOC(-99)                              // Ditto
+
+     <B>.</B>  A string returns the same string:
+
+        ? XTOC("123ABCabc")                      // "123ABCabc"
+
+     <B>.</B>  A date returns the ANSI date:
+
+        ? XTOC(CTOD("12/31/99"))                 // "19991231"
+        ? XTOC(CTOD("01/01/00")                  // "19000101"
+
+     <B>.</B>  An empty or false date returns an empty string rather than a
+        null string:
+
+        ? XTOC(CTOD("  /  /  ")                  // "        "
+        ? XTOC(CTOD("77/77/77")                  // "        "
+
+     <B>.</B>  Show a function where all the fields in a database are
+        combined into one string.  This way, you can do a complete comparison
+        of the two data strings:
+
+        FUNCTION STRINGREC
+           PRIVATE nI, nFieldNo, cField, cStringRec
+           cStringRec := ""
+           nFieldNo   := FCOUNT()                // Number of fields
+           FOR nI = 1 to nFieldNo
+             cField          := FIELD(nI)        //  Field name
+             cStringRec := cStringRec + XTOC(&amp;cField)
+           NEXT nI
+           RETURN (cStringRec)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng66ca1.html">CTOF()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

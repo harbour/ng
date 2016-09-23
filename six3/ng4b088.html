@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4aebe.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng4bc19.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>RECALL:</B>
+
+  Syntax:
+
+  <B>RECALL [&lt;scope&gt;] [FOR &lt;lCondition&gt;] [WHILE &lt;lCondition&gt;] </B>
+  <B>       [NOOPTIMIZE]</B>
+
+  <B>&lt;scope&gt;</B> is the portion of the current database file to RECALL.  The
+  default scope is the current record, or NEXT 1.  If a condition is
+  specified, the default scope becomes ALL.  Mach SIx only supports the
+  ALL scope.
+
+  <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the condition
+  from the current record until the condition fails. Mach SIx does not
+  support a WHILE condition.
+
+  <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to RECALL
+  within the given scope.  Mach SIx will optimize any FOR condition that
+  contains one or more active index keys.
+
+  <B>NOOPTIMIZE</B>, preempts optimization and forces default Clipper processing.
+
+  <B>Description:</B>
+
+  RECALL is a database command that restores records marked for deletion in
+  the current work area.  This is the inverse of the DELETE command.  If
+  DELETED is ON, RECALL can restore the current record or a specific record
+  if you specify a RECORD scope.  Note that once a database file has been
+  PACKed, all records marked are physically removed from the file and cannot
+  be recovered.
+
+  In a network environment, RECALLing the current record requires an RLOCK().
+  RECALLing several records requires an FLOCK() or EXCLUSIVE USE of the
+  current database file.  Refer to the Network Programming chapter in
+  Clipper's Programming and Utilities book for more information.
+
+  The RECALL command may be optimized by specifying one or more active
+  index keys in the FOR condition. Note that Mach SIx will only optimize
+  the RECALL command when used with a FOR condition and a scope of ALL.
+  WHILE conditions, and alternate scopes cannot be optimized by Mach SIx.
+
+  <B>Notes:</B>
+
+  SET DELETED must be OFF when specifying a condition to RECALL deleted
+  records.
+
+
+  <B>---------------------------------| EXAMPLE |--------------------------------</B>
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates optimized RECALL command                                  *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX.CH"
+
+  USE Account VIA "SIXCDX"  // Structural index ACCOUNT.CDX opened
+                            // automatically
+  CLEAR SCREEN
+
+  // Make sure set deleted is off to bring deleted records into scope.
+  // (Clipper's default for SET DELETED is OFF )
+  SET DELETED OFF
+  ? "Example of an optimized RECALL command."
+  ?
+
+  // Fully optimized recall of all records where last name is empty().
+  // Note that the FOR condition in this example does not exactly match the
+  // index key for tag NAME.  However, Mach SIx will optimize this query by
+  // locating the index key within the empty() function call and translate
+  // the empty() portion of the condition into one that can be optimized.
+
+  <B>RECALL FOR empty( Last )</B>
+  CLOSE ALL
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng45ca7.html">DELETE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

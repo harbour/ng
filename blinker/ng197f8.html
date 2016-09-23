@@ -1,0 +1,42 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1957e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng19be9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NOEXTDICTIONARY               Disable processing of extended library dictionaries</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Disable processing of extended library dictionaries</B></U>
+
+ <U>Syntax   : <B>NOEXTDICTIONARY</B></U>
+
+ <U>Default  : <B>Disabled</B></U>
+
+ This command specifies that Blinker should ignore the extended dictionary
+ which is appended to library files by some librarian utility programs. The
+ extended dictionary is a cross reference of the library contents, and is
+ used by Blinker to speed up the processing of libraries.
+
+ If use of the extended dictionary is disabled using this command, Blinker
+ will process the library slightly slower. Some librarians have been known to
+ create invalid extended dictionaries, which can lead to erratic results at
+ link time - this command will ensure that such libraries will be processed
+ correctly.
+
+ This command applies globally to all libraries processed during the link.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng15ef6.html">EXTDICTIONARY</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

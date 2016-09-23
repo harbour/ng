@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng739b6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSVER()</B>
+ Determines a print server.s version
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSVER(&lt;cPServer&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; cVersion</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSVER() returns a character strings that contains the version of the
+     print server in the form "Main_version.Sub_version.Revision_number".  If
+     an error occurs, the function returns an empty string.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER VERSION
+     NNETPSVER() allows you to determine the version of a print server.
+
+ <B>Example</B>
+
+     Determine the version of print server PSERVER:
+
+     ? NNETPSVER('PSERVER')            // For example "1.2.1"
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng739b6.html">NNETPSTYPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

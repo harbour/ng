@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng39284.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng39016.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>2   Visibility of Locals Referenced in a Code Block</B>
+------------------------------------------------------------------------------------------
+
+     A local variable referenced in a code block is still visible after
+     the declaring function is no longer active as long there is an
+     active reference to the code block.  For example:
+
+     bBlock := MyFunc()
+
+     FOR i := 1 TO 10
+       ? EVAL( bBlock )
+     NEXT
+     RETURN
+
+     FUNCTION MyFunc()
+       LOCAL nNumber
+       LOCAL bBlock
+
+       nNumber := 10
+       bBlock := {|| nNumber++}
+
+       RETURN bBlock
+
+     In this example, each time the code block returned by MyFunc() is
+     evaluated, it increments nNumber and returns the new value.
+
+     nNumber is accessible via the code block as the function defining
+     the code block's activation record becomes <B>detached</B> from the
+     activation stack when the function returns.  The function's local
+     variables then become, in essence, a free-floating array.  The
+     detached activation lives in object memory and stays alive as long
+     as any of the blocks referring to it are alive.
+
+     This facility has significant ramifications for the capabilities of
+     a code block.  In particular, it solves the problem where a code
+     block instance needs long term ownership of some values.  It means,
+     generally, that you need to macro-compile a code block only if the
+     actual code to be executed isn't known until runtime--not, for
+     example, because you wanted the block to always contain or operate
+     on a value which isn't known until runtime.
+
+     Note also that every call to the function will generate unique
+     instances of the local variables.  If a code block refers to those
+     variables, then those variables will continue to exist as long as
+     there is a code block that refers to them.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

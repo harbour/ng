@@ -1,0 +1,104 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng65d7e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng66e48.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LEN()</B>
+ Return the length of a character string or the number of elements in an array
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LEN(&lt;cString&gt; | &lt;aTarget&gt;) --&gt; nCount</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string to count.
+
+     <B>&lt;aTarget&gt;</B> is the array to count.
+
+ <B>Returns</B>
+
+     LEN() returns the length of a character string or the number of elements
+     in an array as an integer numeric value.  If the character string is a
+     null string ("") or the array is empty, LEN() returns zero.
+
+ <B>Description</B>
+
+     LEN() is a character and array function that returns the length of a
+     character string or the number of elements in an array.  With a
+     character string, each byte counts as one, including an embedded null
+     byte (CHR(0)).  By contrast, a null string ("") counts as zero.
+
+     For an array, LEN() returns the number of elements.  If the array is
+     multidimensional, subarrays count as one element.  This means that the
+     LEN() of a nested or multidimensional array simply returns the length of
+     the first dimension.  To determine the number of elements in other
+     dimensions, use LEN() on the subarrays as shown in the example below.
+     Note that nested arrays in CA-Clipper need not have uniform dimensions.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples demonstrate LEN() with various arguments:
+
+        ? LEN("string of characters")         // Result: 20
+        ? LEN("")                              // Result: 0
+        ? LEN(CHR(0))                        // Result: 1
+        //
+        LOCAL aTest[10]
+        ? LEN(aTest)                           // Result: 10
+
+     <B>.</B>  This example creates a literal two-dimensional array, and then
+        returns the number of elements in the subarray contained in the first
+        element of the original array:
+
+        LOCAL aArray := { {1, 2}, {1, 2}, {1, 2} }
+        ? LEN(aArray)                        // Result: 3
+        ? LEN(aArray[1])                     // Result: 2
+
+     <B>.</B>  This example navigates a multidimensional array using LEN():
+
+     LOCAL aArray := { {1, 2}, {1, 2}, {1, 2} }
+        LOCAL nRow, nColumn, nRowCount, nColumnCount
+
+        //
+        nRowCount = LEN(aArray)
+        FOR nRow = 1 TO nRowCount
+           nColumnCount = LEN(aArray[nRow])
+           FOR nColumn = 1 TO nColumnCount
+              ? nRow, nColumn, aArray[nRow][nColumn]
+           NEXT
+        NEXT
+
+     <B>.</B>  In this example a function returns an array of numeric values
+        that describe the dimensions of a nested or multidimensional array.
+        The function assumes that the array has uniform dimensions:
+
+        FUNCTION Dimensions( aArray )
+           LOCAL aDims := {}
+           DO WHILE ( VALTYPE(aArray) == "A" )
+              AADD( aDims, LEN(aArray) )
+              aArray := aArray[1]
+           ENDDO
+           RETURN (aDims)
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng394e.html">AADD()</A>
+<A HREF="nge6e8.html">ASIZE()</A>
+<A HREF="ng6790f.html">LTRIM()</A>
+<A HREF="ng98513.html">RTRIM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

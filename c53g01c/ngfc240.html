@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ngfbcd2.html">[^^Up^^]</A>
+<A HREF="ngfc7b7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ANNOUNCE</B>
+ Declare a module identifier
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ANNOUNCE &lt;idModule&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idModule&gt;</B> is a module identifier name.
+
+ <B>Description</B>
+
+     ANNOUNCE is a declaration statement that defines a module identifier.  A
+     linker may use this identifier later to satisfy pending module REQUESTs.
+     ANNOUNCE and REQUEST provide a mechanism for managing application
+     modules (.prg files).
+
+     Specify ANNOUNCE statements prior to any executable statements in a
+     program file.  A source (.prg) file can only have one module identifier;
+     all subsequent ANNOUNCE declarations produce a compiler warning and will
+     be ignored.  Module identifiers must be unique and should not duplicate
+     the name of any procedures or user-defined functions in a source (.prg)
+     file.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates the ANNOUNCE declaration:
+
+        ANNOUNCE CustomInit
+
+        INIT PROCEDURE MyInit
+           ? "Hypothetical Industries, Inc."
+           RETURN
+
+        The above program module, CustomInit, should be compiled with the /N
+        option.  Subsequently, the program is addressed in the source code of
+        another program module through use of the REQUEST statement,
+
+        REQUEST CustomInit
+
+        which causes the module CustomInit to be linked into the resultant
+        executable (.EXE) file.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng10da82.html">REQUEST</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

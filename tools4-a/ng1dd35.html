@@ -1,0 +1,98 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1da4d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng1e6ed.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETADR()</B>
+ Determines the internal netaddress of a user
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETADR([&lt;cUser&gt;],[&lt;nNumber&gt;],[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>    --&gt; cNetAddress</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cUser&gt;</B>  Designates the login name of the user whose internal
+     netaddress is determined.  The default value is the internal netaddress
+     of the current workstation.
+
+     <B>&lt;nNumber&gt;</B>  Designates the connection of &lt;cUser&gt;.  The default value
+     is 1.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cUser&gt;
+     is logged in.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETADR() returns the internal netaddress of &lt;cUser&gt; in the form of a 20-
+     character hexadecimal string.  The returned string represents a
+     10-byte sequence, where each byte consists of two hexadecimal
+     characters.  The leading eight characters of &lt;cNetAddress&gt; (four byte)
+     specify the network number of &lt;cUser&gt;.  The remaining 12 characters (six
+     byte) contain the station ID of &lt;cUser&gt; (number of the network adapter,
+     Node Address).
+
+     If an error occurs (no user is logged in with the name &lt;cUser&gt;),
+     NNETADR() returns an empty string.
+
+ <B>Description</B>
+
+     NOVELL NET ADDRESS
+     NNETADR() allows you to determine the internal netaddress of the
+     workstation, where &lt;cUser&gt; is currently logged in.  For example, this
+     address can be used to establish a Point-To-Point connection with
+     &lt;cUser&gt;.
+
+     Netware does not limit the number of workstations where a user can be
+     simultaneously logged in.  The currently active connections can be
+     passed with the optional parameter &lt;nNumber&gt;.  The default return value
+     of NNETADR() contains the internal netaddress of the first connection.
+     By passing &lt;nNumber&gt;, additional addresses can be determined.
+
+ <B>Note</B>
+
+     <B>.</B>  &lt;nNumber&gt; does not specify the connection ID of &lt;cServer&gt;.
+        This parameter simply counts the connections of &lt;cUser&gt;.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the internal netaddress of the first connection of
+        user MIKE:
+
+        ? NNETADR('MIKE')  // z.B. "4921750400001B025A99"
+
+     <B>.</B>  Determine the internal netaddresses of all connections of user
+        MIKE:
+
+        nNumber=1
+        cAdr=""
+        WHILE .T.
+        cAdr=NNETADR('MIKE',nNumber)
+        IF EMPTY(cAdr)
+        EXIT
+        ENDIF
+        ? cAdr
+        nNumber=nNumber+1
+        ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng239bb.html">NNETSTAID()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

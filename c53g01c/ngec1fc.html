@@ -1,0 +1,104 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngebcd9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngecec7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET ORDER</B>
+ Select the controlling order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET ORDER TO [&lt;nOrder&gt; | [TAG &lt;cOrderName&gt;]</B>
+     <B>   [IN &lt;xcOrderBagName&gt;]]</B>
+
+ <B>Arguments</B>
+
+     <B>TAG</B> is an optional clause that provides compatibility with RDDs that
+     access multiple-order order bags.  You must use this keyword anytime you
+     specify &lt;cOrderName&gt;.
+
+     <B>&lt;cOrderName&gt;</B> is the name of an order, a logical arrangement of a
+     database according to a keyed pair.  This order will become the
+     controlling order in the order list.  If you specify &lt;cOrderName&gt;, you
+     must use the keyword TAG.
+
+     <B>Note:</B>  This differs from dBASE and FoxPro where TAG is totally
+     optional.
+
+     <B>&lt;nOrder&gt;</B> is the number of the target order in the order list.  You
+     may represent the order as an integer or as a character string enclosed
+     in quotes.
+
+     <B>IN &lt;xcOrderBagName&gt;</B> is the name of a disk file containing one or
+     more orders.  You may specify &lt;xcOrderBagName&gt; as the file name with or
+     without the path name or appropriate extension.  If you do not include
+     the extension as part of &lt;xcOrderBagName&gt;, CA-Clipper uses the default
+     extension of the current RDD.
+
+ <B>Description</B>
+
+     When you SET ORDER TO a new controlling order (index), all orders are
+     properly updated when you either append or edit records.  This is true
+     even if you SET ORDER TO 0.  After a change of controlling order, the
+     record pointer still points to the same record.
+
+     SET ORDER TO 0 restores the database access to natural order, but leaves
+     all orders open.  SET ORDER TO with no arguments closes all orders and
+     empties the order list
+
+     Though you may use &lt;cOrderName&gt; or &lt;nOrder&gt; to specify the target order,
+     &lt;nOrder&gt; is only provided for compatibility with earlier versions of
+     CA-Clipper.  Using &lt;cOrderName&gt; is a surer way of accessing the correct
+     order in the order list.
+
+     If you supply &lt;xcOrderBagName&gt;, only the orders belonging to
+     &lt;xcOrderBagName&gt; in the order list are searched.  Usually you need not
+     specify &lt;xcOrderBagName&gt; if you use unique order names throughout an
+     application.
+
+     To determine which order is the controlling order use the ORDSETFOCUS()
+     function.
+
+     In RDDs that support production or structural indices (e.g., DBFCDX),
+     if you specify a tag but do not specify an order bag, the tag is created
+     and added to the index.  If no production or structural index exists, it
+     will be created and the tag will be added to it.  When using RDDs that
+     support multiple order bags, you must explicitly SET ORDER (or
+     ORDSETFOCUS()) to the desired controlling order.  If you do not specify
+     a controlling order, the data file will be viewed in natural order.
+
+     SET ORDER can open orders in a network environment instead of the INDEX
+     clause of the USE command.  Generally, specify USE, and then test to
+     determine whether the USE succeeded.  If it did succeed, open the
+     associated orders with SET ORDER.  See the example below.
+
+ <B>Examples</B>
+
+     USE Customer NEW
+     IF (! NETERR())
+        SET ORDER TO Customer
+     ENDIF
+
+     SET ORDER TO "CuAcct"         // CuAcct is an Order in Customer
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngcc94d.html">INDEX</A>
+<A HREF="ng6147b.html">INDEXORD()</A>
+<A HREF="ngdd095.html">SEEK</A>
+<A HREF="nge93ab.html">SET INDEX</A>
+<A HREF="ngf8dbc.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

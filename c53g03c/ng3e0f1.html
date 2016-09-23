@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3dd74.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng31a91.html">[^^Up^^]</A>
+<A HREF="ng3e5c8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gtWrite()</B>
+ Write a string to the current screen location
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "gt.api"</B>
+     <B>ERRCODE _gtWrite(</B>
+     <B>                  BYTEP fpStr,</B>
+     <B>                  USHORT uiLen</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>fpStr</B> is the string to write.
+
+     <B>uiLen</B> is the length of the string.
+
+ <B>Returns</B>
+
+     _gtWrite() returns zero if successful.  Any other value indicates an
+     error.
+
+ <B>Description</B>
+
+     _gtWrite() displays a string to the screen at the current cursor
+     location.  The internal row and column coordinates are updated so the
+     CA-Clipper functions, ROW() and COL() will reflect the new cursor
+     position.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a simple function that displays a
+        null-terminated string at a specific screen location:
+
+        #include "gt.api"
+
+        void PrintStr( USHORT uiRow, USHORT uiCol, BYTEP fpStr );
+
+        void PrintStr( USHORT uiRow, USHORT uiCol, BYTEP fpStr )
+        {
+           _gtSetPos( uiRow, uiCol );               // Set new position
+           _gtWrite( fpStr, strlen( fpStr ) );      // Write string
+           return;
+        }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Gt.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng35e1b.html">_gtGetPos()</A>
+<A HREF="ng3d778.html">_gtSetPos()</A>
+<A HREF="ng3e5c8.html">_gtWriteAt()</A>
+<A HREF="ng3ebaf.html">_gtWriteCon()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

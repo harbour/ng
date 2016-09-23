@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng747b8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng745f1.html">[^^Up^^]</A>
+<A HREF="ng75346.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSEMCLO()</B>
+ Closes a semaphore
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSEMCLO(&lt;nHandle&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the semaphore handle that is returned by
+     NNETSEMOPN() when the semaphore is opened.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;nHandle&gt;
+     has been created.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID for your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETSEMCLO() returns .T. if the semaphore specified by &lt;nHandle&gt; has
+     been closed successfully.  If an error occurs (for example, if the
+     handle is invalid), the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET SEMAPHOR CLOSE
+     NNETSEMCLO() allows you to close a semaphore that is no longer needed.
+     The semaphore is specified by a handle.  If the closing workstation is
+     the only workstation using the semaphore, the related file server
+     removes the semaphore from its semaphore table.
+
+ <B>Example</B>
+
+     Open and close semaphore:
+
+     nHandle=NNETSEMOPN("superacc")
+     NNETSEMCLO(nHandle)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng759a5.html">NNETSEMOPN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

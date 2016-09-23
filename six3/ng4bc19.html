@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4b088.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng4c02e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>REFRESH FILTER</B>
+
+  Syntax:
+
+  <B>REFRESH FILTER</B>
+
+  <B>Description:</B>
+
+  The REFRESH FILTER command allows you to control when the internal
+  filtered record list maintained by Mach SIx is updated for shared
+  files.
+
+  <B>---------------------------------| EXAMPLE |--------------------------------</B>
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates the REFRESH FILTER command.                               *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+   #include "SIXCDX.CH"
+   #include "MACHSIX.CH"
+
+   USE Names SHARED INDEX Name, Salary, State, Date
+
+   //............................................set filter condition
+   SET FILTER TO State = "CA"
+
+   //.............................................activate the filter
+   GO TOP
+
+   DO WHILE LastKey() != 27
+
+      //..................................browse the filtered records
+      Browse()
+
+      //............................................refresh the filter
+      <B>REFRESH FILTER</B>
+  ENDDO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng166d4.html">m6_RefreshFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng431be.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng44341.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FERASE()</B>
+ Delete a file from disk
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FERASE(&lt;cFile&gt;) --&gt; nSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFile&gt;</B> is the name of the file to be deleted from disk, including
+     extension, optionally preceded by a drive and/or path specification.
+
+ <B>Returns</B>
+
+     FERASE() returns -1 if the operation fails and zero if it succeeds.  In
+     the case of a failure, FERROR() can be used to determine the nature of
+     the error.
+
+ <B>Description</B>
+
+     FERASE() is a file function that deletes a specified file from disk.
+     FERASE() is the same as the ERASE command but returns a value and can be
+     specified within an expression.  When FERASE() is called, &lt;cFile&gt; is
+     deleted from disk only if found in the current DOS directory or in the
+     directory explicitly specified as part of the file name.  Like the other
+     file functions and commands, FERASE() does not use either SET DEFAULT or
+     SET PATH to locate &lt;cFile&gt;.
+
+     <B>Warning! </B> Files must be CLOSEd before removing them with FERASE().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example deletes a set of files matching a wildcard
+        pattern:
+
+        #include "Directry.ch"
+        AEVAL(DIRECTORY("*.BAK"), { |aFile| ;
+           FERASE(aFile[F_NAME]) })
+
+     <B>.</B>  This example erases a file and displays a message if the
+        operation fails:
+
+        IF FERASE("AFile.txt") == -1
+           ? "File erase error:", FERROR()
+           BREAK
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc26c8.html">CLOSE</A>
+<A HREF="ngcb7da.html">ERASE</A>
+<A HREF="ng44341.html">FERROR()</A>
+<A HREF="ng4b4f4.html">FRENAME()</A>
+<A HREF="ngd7f89.html">RENAME</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng735cf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6dbf4.html">[^^Up^^]</A>
+<A HREF="ng74032.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Searching Multiple Fields:</B>
+
+  Using HiPer-SEEK to search multiple fields solves the problem of finding
+  items in a .DBF when you do not know with certainty in which field the
+  data is to be found. For example, imagine a file in which four fields
+  have been reserved for medical diagnoses. Each field contains a
+  diagnosis. To find all records containing the diagnosis heart disease
+  without using HiPer-SEEK you would probably resort to a slow sequential
+  search using the LOCATE command.
+
+    <B>LOCATE FOR "HEART DISEASE" $ Upper( diag1 ) .OR. ;</B>
+    <B>           "HEART DISEASE" $ Upper( diag2 ) .OR. ;</B>
+    <B>           "HEART DISEASE" $ Upper( diag3 ) .OR. ;</B>
+    <B>           "HEART DISEASE" $ Upper( diag4 )       </B>
+
+  In contrast, HiPer-SEEK provides a quick solution. Assuming you create an
+  index consisting of all the fields you intend to search by concatenating
+  the fields;
+
+    <B>Trim( diag1 ) + Trim( diag2 ) + Trim( diag3 ) + Trim( diag4)</B>
+
+  and then passing the resulting string to hs_Add(); a search for all
+  instances of heart disease becomes:
+
+    <B>USE diagnose</B>
+    <B>h := hs_Open("diag.hsx", 16, 1 )</B>
+    <B>cStr := "HEART DISEASE"</B>
+    <B>hs_Set( h, cStr )</B>
+    <B>nRec := hs_Next( h )     // get first hit</B>
+    <B>DO WHILE nRec &gt; 0        // get all the records</B>
+    <B>  GOTO nRec              // get record in .DBF</B>
+    <B>  bVeri := { || Trim(diag1) + Trim(diag2) + Trim(diag3) + Trim(diag4) }</B>
+    <B>  IF hs_Verify( bVeri, cStr ) == .T.</B>
+    <B>  .</B>
+    <B>  . &lt; process verified hit &gt;</B>
+    <B>  .</B>
+    <B>  ENDIF</B>
+    <B>  nRec := hs_Next( h )   // get next 'hit'</B>
+    <B>ENDDO</B>
+
+  Although the code is somewhat more complicated than using LOCATE,
+  HiPer-SEEK's speed and generality lets you create applications that are
+  easier to use and which certainly execute much more quickly.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

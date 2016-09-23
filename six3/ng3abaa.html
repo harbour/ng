@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3a698.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3afa4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_Step:</B>
+
+  Syntax:   Sx_Step()
+
+  Returns:  The STEP value used in an INDEX ON...OPTION command as a numeric.
+            If no STEP (or EVERY) clause was used, zero (0) is returned.
+
+  Description:  This function is only useful within a UDF that is called
+                from the OPTION (or EVAL) clause of the INDEX ON command.
+                It is used to determine the STEP (or EVERY) clause value
+                that was passed to the INDEX ON command.
+
+                This function is used in the ODOMETER() function contained
+                in SIXTOOLS.PRG.
+
+  Example:
+
+    #include "SIXNSX.CH"
+
+    CLS
+    USE test VIA "SIXNSX"
+    INDEX ON last TO last OPTION MyFunc() STEP 10
+
+    //------------------------------------------//
+    FUNC MyFunc()
+
+      STATIC nCount := 0, nTotal := 0, nStepVal := 0
+
+      IF Bof()
+        nCount := 0
+        nTotal := LastRec()
+        <B>nStepVal := Sx_Step()</B>
+      ENDIF
+
+      @ 0,0 SAY "Records Processed: " +;
+                  AllTrim( Str( nCount )) + "/" + AllTrim( Str( nTotal ))
+
+      nCount += iif( nCount &lt; nTotal, nStepVal, 0 )
+
+    Return( .T. )
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40c12.html">INDEX ON</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng58bd3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng59420.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>forceRel()</B>
+ Force relational seeks in the specified work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE forceRel(</B>
+     <B>                     AREAP wa</B>
+     <B>                   )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     forceRel() causes any pending relational seeks in the work area
+     referenced by wa to be performed immediately.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  The ideal implementation for forceRel() would have a pending
+        relation structure (DBRELINFO) defined as a part of the subclassed
+        AREA structure.  Using this information, forceRel() should ensure
+        that the work area buffer is not hot and call SELF_RELEVAL() to
+        position the work area.
+
+     <B>.</B>  This is one of the rare instances when wa-&gt;fFound should be
+        set if the relational move is successful.  While this is not a
+        seek(), part of the specification of the CA-Clipper implementation of
+        FOUND() is to return TRUE if a relational seek is successful.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng45304.html">DBRELINFO</A>
+<A HREF="ng5988e.html">relEval()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

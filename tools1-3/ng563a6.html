@@ -1,0 +1,76 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng55d4c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng56b01.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>POSUPPER()</B>
+ Finds the position of the first upper case, alphabetic character
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>POSUPPER(&lt;cString&gt;,[&lt;lMode&gt;],[&lt;nIgnore&gt;])</B>
+     <B>   --&gt; nPosition</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B>  Designates the string that is searched.
+
+     <B>&lt;lMode&gt;</B>  Designates how the function searches for the first upper
+     case, alphabetic character.  The default value (.F.) searches for the
+     first alphabetic character that would be changed by the CA-Clipper
+     function LOWER().
+
+     <B>&lt;nIgnore&gt;</B>  Designates the number of characters at the beginning of
+     the character string that are excluded from the search.  The default
+     value excludes none (0).
+
+ <B>Returns</B>
+
+     The value returned corresponds to the position of the character located.
+     When no matching character is found, the function returns 0.
+
+ <B>Description</B>
+
+     Starting from the beginning of the string, POSUPPER() searches for the
+     first upper case, alphabetic character in the &lt;cString&gt; that corresponds
+     to the first character that would be changed by the CA-Clipper LOWER()
+     function.  If &lt;lMode&gt; is .T., the function searches for the first non-
+     alphabetic character that would not be changed by LOWER().  The
+     &lt;nIgnore&gt; parameter can exclude a specific number of characters at the
+     beginning of &lt;cString&gt;.
+
+ <B>Notes</B>
+
+     <B>.</B>  Characters located when the &lt;lMode&gt; parameter is .T. are not
+        necessarily lower case, alphabetic characters.
+
+     <B>.</B>  The function works in conjunction with the NATION module
+        because different languages use different characters to represent
+        their alphabets.
+
+ <B>Example</B>
+
+     cString  :=  "123abcUABC"
+
+     ? POSUPPER(cString)                 // Result: 7
+     ? POSUPPER(cString, .T.)            // Result: 1
+     ? POSUPPER(cString, .F., 7)         // Result: 8
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng52b2c.html">POSALPHA()</A>
+<A HREF="ng54e87.html">POSLOWER()</A>
+<A HREF="ng55592.html">POSRANGE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8d555.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng8e4c3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PROCLINE()</B>
+ Return the source line number of the current or previous activation
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PROCLINE([&lt;nActivation&gt;]) --&gt; nSourceLine</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nActivation&gt;</B> is a numeric value that specifies which activation to
+     query.  Zero refers to the current activation, one refers to the
+     previous activation, etc.  If not specified, the default value is zero.
+
+ <B>Returns</B>
+
+     PROCLINE() returns the line number of the last line executed in a
+     currently executing procedure, function, or code block as an integer
+     numeric value.  If the /L compiler option suppresses line number
+     information, PROCLINE() always returns zero.
+
+ <B>Description</B>
+
+     PROCLINE() queries the CA-Clipper activation stack to determine the last
+     line executed in a currently executing procedure, user-defined function,
+     or code block.  The activation stack is an internal structure that
+     maintains a record of each procedure, function, or code block
+     invocation.  A line number is relative to the beginning of the original
+     source file.  A line includes a comment, blank line, preprocessor
+     directive, and a continued line.  A multistatement line is counted as a
+     single line.
+
+     For the current activation, PROCLINE() returns the number of the current
+     line.  For a previous activation, PROCLINE() returns the number of the
+     line that invoked the procedure or a user-defined function in which
+     PROCLINE() is invoked.
+
+     If the activation being queried is a code block evaluation, PROCLINE()
+     returns the line number of the procedure in which the code block was
+     originally defined.
+
+     PROCLINE() is used with PROCNAME() to report debugging information.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, PROCLINE() returns the line number for the
+        current activation, followed by the line number of the previous
+        activation:
+
+        // First line of source file
+        MyFunction()
+           RETURN
+
+        FUNCTION MyFunction
+           ? PROCLINE()      // Result: 6 (current activation)
+           ? PROCLINE(1)      // Result: 2 (previous activation)
+           RETURN NIL
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8e4c3.html">PROCNAME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

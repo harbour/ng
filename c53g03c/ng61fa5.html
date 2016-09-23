@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng61cd7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng624b9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_mClipSet()</B>
+ Set the mouse clipping region
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>ERRCODE _mClipSet(</B>
+     <B>                   LLG_LPRECT lpClipRectSet</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>lpClipRectSet</B> is a pointer to an LLG_RECT structure that you must
+     allocate and initialize prior to calling this function.  _mClipSet()
+     uses the members of this structure to set the current mouse clipping
+     region.
+
+ <B>Returns</B>
+
+     SUCCESS if successful; otherwise, an error code.
+
+ <B>Description</B>
+
+     _mClipSet() and _mClipErase() control mouse pointer movements.  You use
+     _mClipSet() to restrict movement to a rectangular area of the screen,
+     called a clipping region.  When a clipping region is defined and the
+     user tries to move the mouse pointer out of the rectangle, the mouse
+     pointer remains stuck at the edge of the region but is still visible.
+     Then, when the clipping region is no longer needed, you use
+     _mClipErase() to remove it and resume using the entire screen.
+
+     <B>Note: </B> To retrieve the current mouse clipping region without
+     changing it, call _mClipGet().
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng61997.html">_mClipErase()</A>
+<A HREF="ng61cd7.html">_mClipGet()</A>
+<A HREF="ng644bc.html">_gClipSet()</A>
+<A HREF="ng6c9c3.html">LLG_RECT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

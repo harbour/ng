@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4f2ef.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng4fe86.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MIN()</B>
+ Return the smaller of two numeric or date values
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MIN(&lt;nExp1&gt;, &lt;nExp2&gt;) --&gt; nSmaller</B>
+     <B>MIN(&lt;dExp1&gt;, &lt;dExp2&gt;) --&gt; dSmaller</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nExp1&gt;</B> and <B>&lt;nExp2&gt;</B> are the numeric values to compare.
+
+     <B>&lt;dExp1&gt;</B> and <B>&lt;dExp2&gt;</B> are the date values to compare.
+
+ <B>Returns</B>
+
+     MIN() returns the smaller of the two arguments.  The value returned is
+     the same data type as the arguments.
+
+ <B>Description</B>
+
+     MIN() is a numeric and a date function that ensures the value of an
+     expression is smaller than a specified minimum.  The inverse of MIN() is
+     MAX() which returns the greater of two numeric or date values.
+
+ <B>Examples</B>
+
+     <B>.</B>  In these examples MIN() returns the smaller of two numeric
+        values:
+
+        ? MIN(99, 100)                  // Result: 99
+        ? MIN(100, 99)                  // Result: 99
+
+     <B>.</B>  In these examples MIN() compares date values:
+
+        ? DATE()                        // Result: 09/01/90
+        ? MIN(DATE(), DATE() + 30)      // Result: 09/01/90
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng472b0.html">MAX()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

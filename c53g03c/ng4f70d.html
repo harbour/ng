@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4f428.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4fc71.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>getValue()</B>
+ Obtain the current value of a column (field)
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE getValue(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     USHORT fieldNum,</B>
+     <B>                     ITEMP value</B>
+     <B>                   )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>fieldNum</B> specifies the ordinal position of the column whose value is
+     to be obtained.
+
+     <B>value</B> is a pointer to a CA-Clipper item which will contain the
+     field's value.
+
+ <B>Description</B>
+
+     getValue() provides the mechanism by which the values of a row are
+     obtained for use by the CA-Clipper runtime system.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  getValue() should check wa-&gt;lpFields[fieldNum] to retrieve the
+        column information.  This permits the implementation of getValue() to
+        translate the value from the data store into an appropriate
+        CA-Clipper type.
+
+     <B>.</B>  getValue() is one of the few work area methods that the
+        CA-Clipper runtime calls without benefit of a higher-level wrapper
+        function.  A simple column access generates a call to this method, as
+        in:
+
+        cBobDobbs := MYDATA-&gt;BobDobbs
+
+     <B>Warning!  value</B> must point to a valid item.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4fc71.html">getVarLen()</A>
+<A HREF="ng50efd.html">putValue()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

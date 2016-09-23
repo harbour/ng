@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3abaa.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3b852.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_StrxCheck():</B>
+
+  Syntax:   Sx_StrxCheck( [lStrict] )
+
+            lStrict = Optional logical value.  A value of .T. turns strict
+                      structural .CDX/.NSX checking on.  The default value is
+                      .F. (off).
+
+  Returns:  The previous setting.  If no parameter is passed, the current
+            state is returned.
+
+  Description:  If a database file has a structural .CDX/.NSX file, a byte in
+                the header of the DBF indicates this.  If the structural
+                index file is deleted, the SIx Driver (unlike FoxPro) will
+                not generate an error when the DBF file is reopened.
+                Instead, it just toggles that byte in the DBF header back to
+                "No Structual" mode, and continues to open the DBF file
+                uneventfully.
+
+                <U>FYI: The byte in the DBF file header that indicates if a</U>
+                <U>     DBF file has a structural index file is at offset 28.</U>
+                <U>     If it is zero (0), there is no structural index file.</U>
+                <U>     A value of one (1) indicates that there is.</U>
+
+                If you would prefer an error code to be generated if a struc-
+                tural index file is missing when a USE command is issued,
+                call Sx_StrxCheck(.T.).  This will cause a SIX???/690 error
+                to be generated, where "???" is either "CDX under SIXCDX or
+                "NSX" under SIXNSX.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    // Assuming TEST.DBF has a structural TEST.CDX file
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"         // Open TEST.DBF
+    INDEX ON age TAG age          // Create TEST.CDX with AGE tag
+    CLOSE                         // Close the files
+
+    ERASE test.cdx                // Delete TEST.CDX
+    USE test VIA "SIXCDX"         // Open TEST.DBF.  By default, no error
+                                  // is generated and the byte in the header
+                                  // of the DBF file is toggled to the
+                                  // "No structural CDX" value (0).
+    CLOSE                         // Close the file
+
+    // Now lets rebuild the TEST.CDX file and set CDX checking on.
+
+    USE test VIA "SIXCDX"         // Open TEST.DBF
+    INDEX ON state TAG state      // Creates STATE tag within TEST.CDX
+    CLOSE
+
+    WAIT "So far so good.  Press a key to get SIXCDX/690 Error..."
+
+    <B>Sx_StrxCheck(.T.)</B>             // Turn structural CDX checking on
+    ERASE test.cdx                // Delete TEST.CDX
+    USE test VIA "SIXCDX"         // Open TEST.DBF.  This will generate a
+                                  // SIXCDX/690 error.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5b0be.html">SIX???/690</A>
+<A HREF="ng202c9.html">Sx_AutoOpen()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

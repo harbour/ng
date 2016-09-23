@@ -1,0 +1,106 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng414b6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng421a4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>AVERAGE:</B>
+
+  Syntax:
+
+  <B>AVERAGE &lt;nExp list&gt; TO &lt;idVar list&gt;</B>
+  <B>        [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]</B>
+  <B>        [NOOPTIMIZE]</B>
+
+  <B>&lt;nExp list&gt;</B> is a list of the numeric fields to AVERAGE for each record
+  processed.
+
+  <B>&lt;idVar list&gt;</B> identifies the receiving variables to assign the average
+  results to.  Variables that either do not exist or are not visible are
+  created as private variables. &lt;idVar list&gt; must contain the same number of
+  elements as &lt;nExp list&gt;.
+
+  <B>&lt;scope&gt;</B> defines the portion of the current database file to AVERAGE.
+  The default scope is ALL.  Mach SIx only supports the ALL scope.
+
+  <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the condition
+  from the current record until the condition fails.  Mach SIx does not
+  support a WHILE condition.
+
+  <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to AVERAGE
+  within the given scope.  Mach SIx will optimize any FOR condition that
+  contains one or more active index keys.
+
+  <B>NOOPTIMIZE</B> preempts optimization and forces default Clipper processing.
+
+  <B>Description:</B>
+
+  AVERAGE averages one or more numeric expressions to variables for a range
+  of records in the current database file.  Zero values are counted in the
+  AVERAGE unless explicitly ruled out with a FOR condition.
+
+  The AVERAGE command may be optimized by specifying one or more active
+  index keys in the FOR condition.  Note that Mach SIx will only optimize
+  the AVERAGE command when used with a command with a FOR condition.
+  Specifying a WHILE condition or a SCOPE other than ALL will cancel
+  optimization.
+
+  <B>---------------------------------| EXAMPLE |--------------------------------</B>
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates optimized AVERAGE command                                 *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX.CH"
+
+  LOCAL nAvg := 0
+
+  USE Account VIA "SIXCDX"  // Structural index ACCOUNT.CDX opened
+                            // automatically
+  CLEAR SCREEN
+  ? "Example of optimized AVERAGE command."
+  ?
+
+  // Fully optimized average of account balances, taking
+  // advantage of the STATE index tag
+  AVERAGE account-&gt;BALANCE TO nAvg FOR account-&gt;STATE = "CA"
+
+  ? "Average account balance for California.", nAvg
+
+  // Fully optimized average of income, making use of
+  // multiple index tags
+  <B>AVERAGE account-&gt;INCOME TO nAvg  FOR (Age &gt;= 20 .AND. Age &lt; 30) .AND. ;</B>
+  <B>                                    State = "AK" .and. City = "Sicily"</B>
+
+  ? "Average income for those twenty-something people in Sicily, Alaska.",;
+     nAvg
+
+  // Partially optimized average of age, for Orlando residents born in 1972.
+  // Note that Year( BirthDate ) could not be optimized because there was
+  // not an index built on this expression. Year( BirthDate ) is an example
+  // of a non-indexed expression.
+
+  AVERAGE Age TO nAvg FOR City = "Orlando" .AND. Year( BirthDate ) = 1972
+  ? "Average age:", nAvg
+
+  CLOSE ALL
+  // End of example program
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng543c9.html">TOTAL</A>
+<A HREF="ng53a59.html">SUM</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

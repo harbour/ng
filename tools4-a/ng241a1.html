@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng23dee.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETWHOAMI()</B>
+ Determines the station LOGIN name
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETWHOAMI() --&gt; cStationName</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Returns</B>
+
+     NNETWHOAMI() returns the names that are logged in at the station in use
+     on the default file server.
+
+ <B>Description</B>
+
+     NOVELL NET WHO AM I
+     The CA-Clipper NETNAME() function returns information (limited by the
+     Novell software) in a Novell network when a machine name is defined in
+     the login script.  However, NNETWHOAMI() is a special Novell call that
+     returns the name logged in at a station.  The returned character string
+     can be up to 48 characters long.
+
+ <B>Example</B>
+
+     Determine the name under which the station is logged in:
+
+     ? NNETWHOAMI()      // Character string/max 48 characters
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

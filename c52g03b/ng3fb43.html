@@ -1,0 +1,157 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3f77f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng409ca.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBFUNCTABLE</B>
+ The virtual method table for the workarea
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct _DBFUNCTABLE_</B>
+     <B>{</B>
+     <B></B>
+     <B>   /* Movement and positioning methods */</B>
+     <B></B>
+     <B>   DBENTRYP_SP  bof;</B>
+     <B>   DBENTRYP_SP  eof;</B>
+     <B>   DBENTRYP_SP  found;</B>
+     <B>   DBENTRYP_V   goBottom;</B>
+     <B>   DBENTRYP_L   go;</B>
+     <B>   DBENTRYP_I   goToId;</B>
+     <B>   DBENTRYP_V   goTop;</B>
+     <B>   DBENTRYP_SI  seek;</B>
+     <B>   DBENTRYP_L   skip;</B>
+     <B>   DBENTRYP_L   skipFilter;</B>
+     <B>   DBENTRYP_L   skipRaw;</B>
+     <B></B>
+     <B></B>
+     <B>   /* Data management */</B>
+     <B></B>
+     <B>   DBENTRYP_VP  addField;</B>
+     <B>   DBENTRYP_S   append;</B>
+     <B>   DBENTRYP_V   delete;</B>
+     <B>   DBENTRYP_SP  deleted;</B>
+     <B>   DBENTRYP_SP  fieldCount;</B>
+     <B>   DBENTRYP_SVP fieldName;</B>
+     <B>   DBENTRYP_V   flush;</B>
+     <B>   DBENTRYP_SI  getValue;</B>
+     <B>   DBENTRYP_SVP getVarLen;</B>
+     <B>   DBENTRYP_V   goCold;</B>
+     <B>   DBENTRYP_V   goHot;</B>
+     <B>   DBENTRYP_VP  putRec;</B>
+     <B>   DBENTRYP_SI  putValue;</B>
+     <B>   DBENTRYP_V   recall;</B>
+     <B>   DBENTRYP_LP  reccount;</B>
+     <B>   DBENTRYP_I   recno;</B>
+     <B>   DBENTRYP_S   setFieldExtent;</B>
+     <B></B>
+     <B>   /* Workarea/Database management */</B>
+     <B></B>
+     <B>   DBENTRYP_VP  alias;</B>
+     <B>   DBENTRYP_V   close;</B>
+     <B>   DBENTRYP_VP  create;</B>
+     <B>   DBENTRYP_SI  info;</B>
+     <B>   DBENTRYP_V   new;</B>
+     <B>   DBENTRYP_VP  open;</B>
+     <B>   DBENTRYP_V   release;</B>
+     <B>   DBENTRYP_SP  structSize;</B>
+     <B>   DBENTRYP_VP  sysName;</B>
+     <B>   DBENTRYP_VP  dbEval;</B>
+     <B>   DBENTRYP_V   pack;</B>
+     <B>   DBENTRYP_VP  sort;</B>
+     <B>   DBENTRYP_VP  trans;</B>
+     <B>   DBENTRYP_VP  transRec;</B>
+     <B>   DBENTRYP_V   zap;</B>
+     <B></B>
+     <B></B>
+     <B>   /* Relational Methods */</B>
+     <B></B>
+     <B>   DBENTRYP_VP  childEnd;</B>
+     <B>   DBENTRYP_VP  childStart;</B>
+     <B>   DBENTRYP_VP  childSync;</B>
+     <B>   DBENTRYP_V   syncChildren;</B>
+     <B>   DBENTRYP_V   clearRel;</B>
+     <B>   DBENTRYP_V   forceRel;</B>
+     <B>   DBENTRYP_SVP relArea;</B>
+     <B>   DBENTRYP_VP  relEval;</B>
+     <B>   DBENTRYP_SVP relText;</B>
+     <B>   DBENTRYP_VP  setRel;</B>
+     <B></B>
+     <B></B>
+     <B>   /* Order Management */</B>
+     <B></B>
+     <B>   DBENTRYP_VP  orderListAdd;</B>
+     <B>   DBENTRYP_V   orderListClear;</B>
+     <B>   DBENTRYP_VP  orderListDelete;</B>
+     <B>   DBENTRYP_VP  orderListFocus;</B>
+     <B>   DBENTRYP_V   orderListRebuild;</B>
+     <B></B>
+     <B>   DBENTRYP_VP  orderCondition;</B>
+     <B>   DBENTRYP_VP  orderCreate;</B>
+     <B>   DBENTRYP_VP  orderDestroy;</B>
+     <B>   DBENTRYP_SVP orderInfo;</B>
+     <B></B>
+     <B>   /* Filters and Scope Settings */</B>
+     <B></B>
+     <B>   DBENTRYP_V   clearFilter;</B>
+     <B>   DBENTRYP_V   clearLocate;</B>
+     <B>   DBENTRYP_V   clearScope;</B>
+     <B>   DBENTRYP_VP  filterText;</B>
+     <B>   DBENTRYP_VP  setFilter;</B>
+     <B>   DBENTRYP_VP  setLocate;</B>
+     <B>   DBENTRYP_VP  setScope;</B>
+     <B></B>
+     <B>   /* Miscellaneous */</B>
+     <B></B>
+     <B>   DBENTRYP_VP  compile;</B>
+     <B>   DBENTRYP_VP  error;</B>
+     <B>   DBENTRYP_I   evalBlock;</B>
+     <B></B>
+     <B></B>
+     <B>   /* Network operations */</B>
+     <B></B>
+     <B>   DBENTRYP_VP  lock;</B>
+     <B>   DBENTRYP_L   unlock;</B>
+     <B></B>
+     <B>} DBFUNCTABLE;</B>
+     <B></B>
+     <B>typedef DBFUNCTABLE  far * DBFUNCTABLEP;</B>
+     <B>typedef DBFUNCTABLEP far * DBFUNCTABLEPP;</B>
+
+ <B>Elements</B>
+
+     The elements of the DBFUNCTABLE structure define the slots of the
+     virtual method table.  Each slot in the table represents the location of
+     a specific method (i.e., the address of the function that acts as the
+     pseudo-method).  Methods that will not be supported by the RDD should
+     have a NULL placed in its corresponding slot.  When the RDD is
+     initialized, CA-Clipper will use the default behavior of the superclass
+     instead.  If no functionality is provided by the superclass, CA-Clipper
+     will generate an appropriate "unsupported" error.
+
+     <B>Warning! </B> Under no circumstance should the virtual method table be
+     expanded.  The size and ordinal positioning of the methods in the table
+     is critical.  Failure to adhere to this arrangement will cause
+     unpredictable results and potential memory corruption.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   WORKAREA
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

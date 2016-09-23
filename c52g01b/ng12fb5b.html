@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng12faa2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng12ac15.html">[^^Up^^]</A>
+<A HREF="ng12ff1d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>ColorRect(&lt;aRect&gt;, &lt;aColors&gt;) --&gt; self</B>
+
+        Directly alters the color of a rectangular group of cells.  &lt;aRect&gt;
+        is an array of four numbers (top, left, bottom, and right).  The
+        numbers refer to cells within the data area of the browse display,
+        not to screen coordinates.  &lt;aColors&gt; is an array of two numbers.
+        The numbers are used as indexes into the color table for the browse.
+        These colors will become the normal and highlighted colors for the
+        cells within the specified rectangle.
+
+        Cells that are colored using colorRect retain their color until they
+        are scrolled off the screen up or down.  Horizontal panning has no
+        affect on these colors and, in fact, cells that are currently off
+        screen left or right can be colored even if they are not visible.
+
+        This example colors the entire virtual window (on and off screen):
+
+        aRect := {1, 1, browse:RowCount, browse:ColCount}
+        browse:ColorRect( aRect, {2, 1} )
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

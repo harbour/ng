@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng56062.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng5892e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GPOLYGON()</B>
+ Draw a polygon on screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GPOLYGON(&lt;aVertex&gt;, &lt;lFilled&gt;, &lt;nMode&gt;, &lt;nOutLine&gt;,</B>
+     <B>   &lt;nFillColor&gt;) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aVertex&gt;</B> is an array value representing an array of polygon
+     vertices coordinates.
+
+     <B>&lt;lFilled&gt;</B> is a logical value that creates a filled or non-filled
+     polygon.  LLG_FILL or LLG_FRAME are valid constants.
+
+     <B>&lt;nMode&gt;</B> is a numeric value representing the video Mode.  The
+     following are valid &lt;nMode&gt; values.  They are all # defines in Llibg.ch.
+
+     <B>Display Mode Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Description</B>
+     ------------------------------------------------------------------------
+     LLG_MODE_SET   Display in SET mode (ignores any pixels present under the
+                    line displayed).  This is the most common display mode.
+     LLG_MODE_AND   Display in AND mode (executes an AND on pixels present
+                    under the line at display time and on the display color).
+     LLG_MODE_OR    Display in OR mode (executes an OR on pixels present
+                    under the line at display time and on the display color).
+     LLG_MODE_XOR   Display in XOR mode (executes an XOR on pixels present
+                    under the line at display time and on the display color).
+                    See note.
+     ------------------------------------------------------------------------
+
+     <B>Note:</B>  This method allows you to move objects around on the screen
+     without damaging the background.  To retrieve the initial background,
+     just repeat the call for display in XOR mode.  If the display mode
+     parameter is missing, the last mode specified in a call to a CA-Clipper
+     graphic function is used.
+
+     <B>&lt;nOutLine&gt;</B> is a numeric value representing the outline color.
+
+     <B>&lt;nFillColor&gt;</B> is a numeric value representing the fill color.
+
+ <B>Returns</B>
+
+     GPOLYGON() always returns NIL.
+
+ <B>Description</B>
+
+     GPOLYGON() can be used to create a polygon.  Simply pass an array of
+     coordinates which make up the polygon.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following array of vertices would draw a triangle:
+
+        aVertex := {{1,5},;      // First point
+        {20,45},;                  // Second point
+        {65,145} ;               // Third point}
+
+ <B>Files</B>   Library is LLIBG.LIB, the header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4e643.html">GELLIPSE()</A>
+<A HREF="ng55637.html">GLINE()</A>
+<A HREF="ng59216.html">GRECT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

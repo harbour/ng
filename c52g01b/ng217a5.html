@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng20df9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng22017.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBRSELECT()</B>
+ Return the target work area number of a relation
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBRSELECT(&lt;nRelation&gt;) --&gt; nWorkArea</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nRelation&gt;</B> is the position of the desired relation in the list of
+     current work area relations.  The relations are numbered according to
+     the order in which they were defined with SET RELATION.
+
+ <B>Returns</B>
+
+     DBRSELECT() returns the work area number of the relation specified by
+     &lt;nRelation&gt; as an integer numeric value.  If there is no RELATION SET
+     for &lt;nRelation&gt;, DBRSELECT() returns zero.
+
+ <B>Description</B>
+
+     DBRSELECT() is a database function used in combination with DBRELATION()
+     to determine the work area and linking expression of an existing
+     relation created with the SET RELATION command.  DBRSELECT() returns the
+     work area defined by the INTO clause.  DBRELATION() returns the linking
+     expression defined by the TO clause.  To determine the alias of the
+     relation instead of the work area number, use the expression
+     ALIAS(DBRSELECT(&lt;nRelation&gt;)).
+
+     By default, DBRSELECT() operates on the currently selected work area.
+     It will operate on an unselected work area if you specify it as part of
+     an aliased expression (see example below).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example opens three database files, sets two child
+        relations from the parent work area, then displays the linking
+        expression to the second child work area as well as the target work
+        area of the relation:
+
+        USE Invoices INDEX Invoices NEW
+        USE BackOrder INDEX BackOrder NEW
+        USE Customer INDEX Customer NEW
+        SET RELATION TO CustNum INTO Customer, ;
+              OrderNum INTO BackOrder
+        //
+        ? DBRELATION(2), DBRSELECT(2)    // Result: OrderNum 3
+        ? ALIAS(DBRSELECT(2))            // Result: BACKORDER
+
+     <B>.</B>  Later, you can query the same information from an unselected
+        work area by using an aliased expression:
+
+        USE Archive NEW
+        ? Customer-&gt;(DBRELATION(2))      // Result: OrderNum
+        ? Customer-&gt;(DBRSELECT(2))       // Result: 3
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1e796.html">DBFILTER()</A>
+<A HREF="ng20df9.html">DBRELATION()</A>
+<A HREF="nga9600.html">SET RELATION</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

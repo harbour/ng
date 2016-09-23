@@ -1,0 +1,36 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng15dbba.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng15a315.html">[^^Up^^]</A>
+<A HREF="ng15e0c5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>skipBlock                                       (Assignable)</B>
+
+        Contains a code block that repositions the data source.  During
+        stabilization, this code block is executed with a numeric argument
+        when the TBrowse object needs to reposition the data source.  The
+        numeric argument passed to the block represents the number of records
+        to be skipped.  A positive value means skip forward, and a negative
+        value means skip backward.  A value of zero indicates that the data
+        source does not need to be repositioned, but the current record may
+        need to be refreshed.  Typically, the data source is a database file,
+        and this block calls a user-defined function that executes a SKIP
+        command to reposition the record pointer.
+
+        The block must return the number of rows (positive, negative, or
+        zero) actually skipped.  If the value returned is not the same as the
+        value requested, the TBrowse object assumes that the skip operation
+        encountered the beginning or end of file.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

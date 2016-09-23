@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4397b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng44695.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LASTKEY()</B>
+ Return the INKEY() value of the last key extracted from the keyboard buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LASTKEY() --&gt; nInkeyCode</B>
+
+ <B>Returns</B>
+
+     LASTKEY() returns a number between -39 and 386, identifying the INKEY()
+     value of the last key extracted from the keyboard buffer.
+
+ <B>Description</B>
+
+     LASTKEY() is a keyboard function that reports the INKEY() value of the
+     last key fetched from the keyboard buffer by the INKEY() function, or a
+     wait state such as ACCEPT, INPUT, READ, WAIT, ACHOICE(), DBEDIT(), or
+     MEMOEDIT().  LASTKEY() retains its current value until another key is
+     fetched from the keyboard buffer.
+
+     LASTKEY() has a number of uses which include:
+
+     <B>.</B>  Determining the key that terminates a READ
+
+     <B>.</B>  Determining the key that exits the current Get object within a
+        user-defined function, invoked by a VALID clause
+
+     <B>.</B>  Identifying an exception key in the user function of
+        ACHOICE(), DBEDIT(), or MEMOEDIT()
+
+     LASTKEY() is also used with UPDATED() to determine if any Get object's
+     buffer was changed during a READ.
+
+     LASTKEY() is related to NEXTKEY() and READKEY().  NEXTKEY() reads the
+     current key pending in the keyboard buffer without removing it.  Use
+     NEXTKEY() instead of INKEY() when polling for a key.
+
+     For a complete list of INKEY() codes and Inkey.ch constants for each
+     key, refer to the Error Messages and Appendices guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates a typical application of LASTKEY() to
+        test the key that exits a READ.  If the user exits with any key other
+        than Esc and a GET was changed, the specified database file is
+        updated:
+
+        #include "Inkey.ch"
+        //
+        USE Customer NEW
+        MEMVAR-&gt;balance = Customer-&gt;Balance
+        @ 10, 10 SAY "Current Balance" GET MEMVAR-&gt;balance
+        READ
+        //
+        IF (LASTKEY() != K_ESC) .AND. UPDATED()
+           REPLACE Customer-&gt;Balance WITH MEMVAR-&gt;balance
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Inkey.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1295d.html">CHR()</A>
+<A HREF="ng40fd0.html">INKEY()</A>
+<A HREF="ng8cf5b.html">KEYBOARD</A>
+<A HREF="ng53579.html">NEXTKEY()</A>
+<A HREF="ngf8bf1.html">Inkey codes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

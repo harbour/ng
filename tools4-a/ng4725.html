@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3a10.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+<A HREF="ng4fca.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETBINACC()</B>
+ Determines the bindery security access level
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETBINACC([&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nRights</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server for which the
+     bindery security access level is determined.  Your workstation must be
+     attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETBINACC() returns the bindery security access level of the currently
+     logged in user.  nRights can be a numeric value between 0 and 3.
+
+ <B>Description</B>
+
+     NOVELL NET BINDERY ACCESS LEVEL
+     All bindery objects and their properties have security levels for  read
+     and write access.  For example, the security code can be defined when a
+     new bindery object is created with the NNETCRTOBJ() function.  The
+     access to an object or a property is possible only if the user's access
+     right is equivalent to or higher than the security level defined for the
+     operation.  With NNETBINACC(), you can determine the security access
+     level.  The function returns a numeric value between 0 and 3.
+
+     <B>Table 18.1:  Security Access Levels</B>
+     ------------------------------------------------------------------------
+     <B>Value   Definition</B>
+     ------------------------------------------------------------------------
+     0       User has not logged in to the file server
+     1       User has logged in to the file server
+     2       User has logged in to the file server with password
+     3       User has logged in to the file server as supervisor
+     ------------------------------------------------------------------------
+
+     With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the security access level can
+     be determined for any attached file server.  The connection ID of a file
+     server can be determined with the functions NNETATTACH() or NNETLOGIN().
+
+ <B>Example</B>
+
+     Determine the bindery security access level; if the return value is 3
+     (supervisor), delete a user:
+
+     #include "ctnnet.ch"
+
+     IF NNETBINACC()=3
+     NNETDELOBJ('GUEST',OBJ_USER)
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5d43.html">NNETCRTOBJ()</A>
+<A HREF="ng6abb.html">NNETCRTPRP()</A>
+<A HREF="ng7799.html">NNETDELOBJ()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

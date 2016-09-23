@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng53fb2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng546a2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>OUTERR()</B>
+ Write a list of values to the standard error device
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>OUTERR(&lt;exp list&gt;) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp list&gt;</B> is a list of values to display and can consist of any
+     combination of data types including memo.
+
+ <B>Returns</B>
+
+     OUTERR() always returns NIL.
+
+ <B>Description</B>
+
+     OUTERR() is identical to OUTSTD() except that it writes to the standard
+     error device rather than the standard output device.  Output sent to the
+     standard error device bypasses the CA-Clipper console and output devices
+     as well as any DOS redirection.  It is typically used to log error
+     messages in a manner that will not interfere with the standard screen or
+     printer output.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example displays an error message along with the date and
+        time of occurrence to the screen:
+
+        OUTERR("File lock failure", DATE(), TIME())
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2d66d.html">DISPOUT()</A>
+<A HREF="ng546a2.html">OUTSTD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5904a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3dfc5.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Other common errors</B>
+------------------------------------------------------------------------------
+
+ <B>DOS open error 4</B>
+
+ This is a DOS error that indicates there are no more handles left to open
+ another file. Increase the number of file handles in each of three places:
+
+    .  The workstation - FILES=nn in CONFIG.SYS
+    .  The network - (SHELL.CFG for Novell)
+    .  The program - some C compilers limit the number of file handles in the
+       start-up routine.
+
+ Remember that Blinker requires one file handle per overlay: one for an
+ internal overlay or when using external overlays one per SECTION INTO
+ command. Also, CA-Clipper 5.x requires a corresponding number of file
+ handles for the dynamic paging system.
+
+ <B>DOS open error 5</B>
+
+ Particularly for DOS 4.0 and 5.0 where SHARE is automatically loaded, a
+ fixed sized table is allocated that will contain the file name and full path
+ for each open file. This error often indicates that there is no more room in
+ this table to open another file. In this case, execute the DOS SHARE command
+ with an enlarged space for the /f parameter.
+
+ <B>Sharing Violation</B>
+
+ Certain networks including 3COM and LANTASTIC encounter sharing violation
+ errors with internal overlays when a second copy of the program is loaded.
+ This appears to be due to the network requiring exclusive write access to
+ the program file when it loads it.
+
+ To circumvent this problem either set the .EXE to read only access by using
+ the Blinker command READONLY (or the DOS ATTRIB command) or specify an
+ external overlay with the Blinker command SECTION INTO at the start of the
+ BEGINAREA in the script file.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

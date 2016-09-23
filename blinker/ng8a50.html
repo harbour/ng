@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng85d5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng9162.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER EXECUTABLE IPX        Specify number of IPX ecbs and send buffers</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify number of IPX ecbs and send buffers</B></U>
+
+ <U>Syntax   : <B>BLINKER EXECUTABLE IPX &lt;ecb count&gt;[,&lt;send buffer</B></U>
+            <B>count&gt;]</B>
+
+ <U>Default  : <B>64,32</B></U>
+
+ <U>Example  : <B># Specify 48 ecbs and 16 send packet buffers</B></U>
+            <B>BLINKER EXECUTABLE IPX 48,16</B>
+
+ The Blinker Dos extender provides transparent Novell IPX and SPX support
+ (Novell network communications), which requires low memory buffers to be
+ allocated by the extender for both send and receive events.
+
+ This command specifies the number of IPX ECBs and send buffers that the DOS
+ extended executable will be able to use.
+
+ Two types of buffers are required by the IPX/SPX module. The first type are
+ the ECBs (event control blocks) one of which is needed for each pending send
+ or receive event. The second type of buffers are the send packet buffers
+ which hold data which has been submitted to IPX/SPX, but has yet to be sent
+ (pending send events). In the case of ECBs, the number required is the total
+ number of pending events that have been submitted to IPX, but have not yet
+ completed at any given time. The number of send buffers required is the
+ total number of simultaneous active send events.
+
+ Each ECB buffer specified requires approximately 42 bytes of conventional
+ memory, and each send buffer specified requires approximately 550 bytes. The
+ total size of both types of buffers may not exceed 64K when added together.
+
+ Unless your program posts a large number of IPX listens, or sends a large
+ number of packets simultaneously, the default values should be sufficient.
+
+ No memory is allocated by the extender until the first IPX call is made.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

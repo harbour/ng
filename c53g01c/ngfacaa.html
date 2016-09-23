@@ -1,0 +1,82 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf8dbc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngfb4d4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>WAIT*</B>
+ Suspend program processing until a key is pressed
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>WAIT [&lt;expPrompt&gt;] [TO &lt;idVar&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;expPrompt&gt;</B> is an expression of any data type displayed as a prompt.
+     If no &lt;expPrompt&gt; is specified, the default prompt displayed is:  "Press
+     any key to continue..."
+
+     <B>TO &lt;idVar&gt;</B> is the variable, of any storage class, that holds the
+     value of the key pressed as a character value.  If &lt;idVar&gt; does not
+     exist or is not visible, it is created as a private variable and then
+     assigned the character value.
+
+ <B>Description</B>
+
+     WAIT is a console command and wait state that displays a prompt after
+     sending a carriage return/line feed to the screen.  It then waits for
+     the user to press a key.  If the TO clause is specified, &lt;idVar&gt; is
+     assigned the keystroke as a character value.  If an Alt or Ctrl key is
+     pressed, WAIT assigns CHR(0) to &lt;idVar&gt;.  Non-alphanumeric values
+     entered by pressing an Alt-keypad combination assign the specified
+     character.  If the character can be displayed, it is echoed to the
+     screen.  Function keys are ignored unless assigned with SET FUNCTION or
+     SET KEY.
+
+     WAIT is a compatibility command and, therefore, is not recommended for
+     general usage.  It is superseded by both @...GET/READ and INKEY() for
+     getting single character input.
+
+ <B>Notes</B>
+
+     <B>.  WAITing without a prompt:</B> To pause execution without
+        displaying a prompt, specify WAIT, null string (""), or INKEY(0).
+        The latter is recommended since it does not disturb the current
+        screen cursor position.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates how to store the WAIT keystroke as an
+        array element:
+
+        aVar := ARRAY(6)
+
+        WAIT "Press a key..." TO aVar[1]
+        ? aVar[1]                  // Result: key pressed in
+                                   // response to WAIT
+        ? aVar[2]                  // Result: NIL
+        ? VALTYPE(aVar)            // Result: A
+        ? VALTYPE(aVar[1])         // Result: C
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngbd1f2.html">ACCEPT*</A>
+<A HREF="ng61b6e.html">INKEY()</A>
+<A HREF="ngcf693.html">INPUT*</A>
+<A HREF="ngd3103.html">MENU TO</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,343 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4124.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng732d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ACHOICE()</B>
+ Execute a pop-up menu
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ACHOICE(&lt;nTop&gt;, &lt;nLeft&gt;, &lt;nBottom&gt;, &lt;nRight&gt;,</B>
+     <B>   &lt;acMenuItems&gt;,</B>
+     <B>   [&lt;alSelectableItems&gt; | &lt;lSelectableItems&gt;],</B>
+     <B>   [&lt;cUserFunction&gt;],</B>
+     <B>   [&lt;nInitialItem&gt;],</B>
+     <B>   [&lt;nWindowRow&gt;]) --&gt; nPosition</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;, &lt;nLeft&gt;</B> and <B>&lt;nBottom&gt;, &lt;nRight&gt;</B> are the upper left and lower
+     right window coordinates.  Row values can range from zero to MAXROW()
+     and column values can range from zero to MAXCOL().
+
+     <B>&lt;acMenuItems&gt;</B> is an array of character strings to display as the
+     menu items.  The individual menu items are later identified by their
+     numeric positions in this array.
+
+     <B>&lt;alSelectableItems&gt;</B> is a parallel array of logical values--one
+     element for each item in &lt;acMenuItems&gt;--that specify the selectable menu
+     items.  Elements can be logical values or character strings.  ACHOICE()
+     will not permit a null string and stops displaying if it encounters one.
+     If the element is a character string, it is evaluated as a macro
+     expression which should evaluate to a logical data type.  In either
+     case, a value of false (.F.) means that the corresponding menu item is
+     not available, and a value of true (.T.) means that it is available.  If
+     you specify &lt;lSelectableItems&gt; instead of an array, false (.F.) makes
+     all menu items unavailable and true (.T.) makes all menu items
+     available.  By default, all menu items are available for selection.
+
+     <B>&lt;cUserFunction&gt;</B> is the name of a user-defined function that executes
+     when an unrecognizable key is pressed.  Specify the function name as a
+     character expression without parentheses or arguments.  Note that the
+     behavior of ACHOICE() is affected by the presence of this argument.
+     Refer to the discussion below for further information.
+
+     <B>&lt;nInitialItem&gt;</B> is the position in the &lt;acMenuItems&gt; array of the
+     item that will be highlighted when the menu is initially displayed.  If
+     you specify an unavailable menu item or no argument at all, the initial
+     menu item is the first selectable item in the array.
+
+     <B>&lt;nWindowRow&gt;</B> is the window row number on which the initial menu item
+     will appear.  Row numbering begins with zero.  By default, the initial
+     menu item appears as close to the top of the window as possible, without
+     leaving any empty rows at the bottom.  Thus, if there are enough menu
+     items following the initial one to fill up the window, the initial form
+     will appear on the first row (row zero) of the menu.  This function
+     argument is used to control the initial menu appearance when there are
+     more menu items than will fit in the window.
+
+     As with all functions, optional arguments are omitted by using a comma
+     instead of the actual argument.
+
+ <B>Returns</B>
+
+     ACHOICE() returns the numeric position in the &lt;acMenuItems&gt; array of the
+     menu item selected.  If the selection process is aborted, ACHOICE()
+     returns zero.
+
+ <B>Description</B>
+
+     ACHOICE() is a user interface function that can create various kinds of
+     pop-up menus.  Each menu uses an array of character strings as menu
+     items and a parallel array of logical values to determine whether items
+     are selectable.  When you invoke ACHOICE(), the list of menu items is
+     displayed within the specified window coordinates.  When the user
+     presses Return, the current item is selected, and ACHOICE() returns the
+     position of the menu item in &lt;acMenuItems&gt;.  When the user presses Esc,
+     ACHOICE() aborts and returns zero.
+
+     The menu items scroll if the number of items in &lt;acMenuItems&gt; exceeds
+     the number of rows in the menu window, and the user attempts to move the
+     highlight beyond the top or bottom of the menu window.  Note that the
+     highlight does not wrap when you reach the top or bottom of the list of
+     items.  Pressing the first letter does, however, wrap the highlight
+     within the set of items whose first letter matches the key you press.
+
+     <B>.  Navigating the menu:</B> ACHOICE() has two modes depending on
+        whether the &lt;cUserFunction&gt; argument is specified.  If it is not
+        specified the following navigation keys are active:
+
+        <B>ACHOICE() Keys (No User Function)</B>
+        ---------------------------------------------------------------------
+        <B>Key            Action</B>
+        ---------------------------------------------------------------------
+        Uparrow        Go to previous item
+        Dnarrow        Go to next item
+        Home           Go to first item in menu
+        End            Go to last item in menu
+        Ctrl-Home      Go to first item in window
+        Ctrl-End       Go to last item in window
+        PgUp           Go to previous page
+        PgDn           Go to next page
+        Ctrl-PgUp      Go to the first item in menu
+        Ctrl-PgDn      Go to last item in menu
+        Return         Select current item
+        Esc            Abort selection
+        Leftarrow      Abort selection
+        Rightarrow     Abort selection
+        First Letter   Go to next item beginning with first letter
+        ---------------------------------------------------------------------
+
+     <B>.  Color:</B> Menu items are displayed in standard color, the
+        highlight in enhanced color, and the unavailable items in the
+        unselected color.  For example, the following color statement:
+
+        SETCOLOR("W+/N, BG+/B, , , W/N")
+
+        displays a menu that is bright white on black, the highlight is
+        bright cyan on blue, and the unavailable menu items are dim white on
+        black.
+
+     <B>.  User function:</B> Like the other user interface functions,
+        ACHOICE() supports a user function.  The user function is specified
+        when you want to nest ACHOICE() invocations to create hierarchical
+        menus or to redefine keys.
+
+        When a user function is specified, ACHOICE() processes only a limited
+        set of keys automatically.  These are listed in the table below.  All
+        other keys generate a key exception which passes control to the user
+        function for handling.  Control is also passed to the user function
+        when ACHOICE() goes idle (i.e., when there are no more keys to
+        process).
+
+        <B>ACHOICE() Keys (User Function Specified)</B>
+        ---------------------------------------------------------------------
+        <B>Key            Action</B>
+        ---------------------------------------------------------------------
+        Uparrow        Go to previous item
+        Dnarrow        Go to next item
+        Ctrl-Home      Go to first item in window
+        Ctrl-End       Go to last item in window
+        PgUp           Go to previous page
+        PgDn           Go to next page
+        Ctrl-PgUp      Go to the first item in menu
+        Ctrl-PgDn      Go to last item in menu
+        ---------------------------------------------------------------------
+
+        When ACHOICE() executes the user function, it automatically passes
+        the following three parameters:
+
+        <B>-</B>  The current ACHOICE() mode
+
+        <B>-</B>  The current element in the array of items
+
+        <B>-</B>  The relative row position within the menu window
+
+        The mode indicates the current state of ACHOICE() depending on the
+        key pressed and the action taken by ACHOICE() prior to executing the
+        user function.  The mode parameter has the following possible values:
+
+        <B>ACHOICE() Modes</B>
+        ---------------------------------------------------------------------
+        <B>Mode    Achoice.ch     Description</B>
+        ---------------------------------------------------------------------
+        0       AC_IDLE        Idle
+        1       AC_HITTOP      Attempt to cursor past top of list
+        2       AC_HITBOTTOM   Attempt to cursor past bottom of list
+        3       AC_EXCEPT      Keystroke exceptions
+        4       AC_NOITEM      No selectable items
+        ---------------------------------------------------------------------
+
+        After the user function has performed whatever operations are
+        appropriate to the ACHOICE() mode or LASTKEY(), it must RETURN a
+        value requesting ACHOICE() to perform an operation from the following
+        set of actions:
+
+        <B>ACHOICE() User Function Return Values</B>
+        ---------------------------------------------------------------------
+        <B>Value   Achoice.ch     Action</B>
+        ---------------------------------------------------------------------
+        0       AC_ABORT       Abort selection
+        1       AC_SELECT      Make selection
+        2       AC_CONT        Continue ACHOICE()
+        3       AC_GOTO        Go to the next item whose first character
+                               matches the key pressed
+        ---------------------------------------------------------------------
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses two literal arrays to specify the menu items
+        and selection criteria.  After the menu is displayed and the user
+        makes a selection, the name of the selected menu item is displayed:
+
+        acMenuItems := {"One", "Two", "-------", "Three"}
+        alSelectableItems := {.T., .T., .F., .T.}
+        nPosition := ACHOICE(10, 10, 12, 15, acMenuItems,;
+                             alSelectableItems)
+        ? acMenuItems[nPosition]
+
+     <B>.</B>  This example declares an array of menu items and supplies a
+        user-defined function which displays a message with each highlighted
+        choice:
+
+        #include "achoice.ch"
+        #include "inkey.ch"
+
+        PROCEDURE Main()
+
+           LOCAL acMenuItems[4], cUserFunction, nRetVal
+           LOCAL nKey, nPos
+
+           acMenuItems[1] := "Add"
+           acMenuItems[2] := "Edit"
+           acMenuItems[3] := "Delete"
+           acMenuItems[4] := "Update"
+
+           CLS
+
+           nPos := ACHOICE( 10, 10, 13, 15, acMenuItems,;
+                           .T., "cUserFunction" )
+           DO CASE
+           CASE nPos == 1
+              //  Put ADD routine here
+           CASE nPos == 2
+              //  Put EDIT routine here
+           CASE nPos == 3
+              //  Put DELETE routine here
+           CASE nPos ==4
+              //  Put UPDATE routine here
+           ENDCASE
+
+        RETURN
+
+
+        FUNCTION cUserFunction( nMode, nCurElement, nRowPos )
+
+           LOCAL nRetVal := AC_CONT     // Default, Continue
+           LOCAL nKey := LASTKEY()
+
+           DO CASE
+        // After all pending keys are processed, display message
+           CASE nMode == AC_IDLE
+           DO CASE
+              CASE nCurElement == 1
+                 @ 22, 5 SAY " Adding   "
+              CASE nCurElement == 2
+                 @ 22, 5 SAY " Editing  "
+              CASE nCurElement ==  3
+                 @ 22, 5 SAY " Deleting "
+              CASE nCurElement ==  4
+                 @ 22, 5 SAY " Updating "
+           ENDCASE
+
+              nRetVal := AC_CONT            // Continue ACHOICE()
+
+           CASE nMode == AC_HITTOP          // Attempt to go past Top
+              TONE( 100, 3 )
+           CASE nMode == AC_HITBOTTOM       // Attempt to go past
+                                            // Bottom
+              TONE( 100, 3 )
+
+           CASE nMode == AC_EXCEPT          // Key Exception
+              DO CASE
+              CASE nKey == K_RETURN         // If RETURN key, select
+                 nRetVal := AC_SELECT
+              CASE nKey == K_ESC            // If ESCAPE key, abort
+                 nRetVal := AC_ABORT
+              OTHERWISE
+                    nRetVal := AC_GOTO      // Otherwise, go to item
+              ENDCASE
+           ENDCASE
+
+        RETURN nRetVal
+
+     <B>.</B>  The next example declares the arrays, specifies a selection
+        condition for one of the menu items, and supplies a user function:
+
+        EXTERNAL UPDATED
+        //
+        FUNCTION MyMenu
+           LOCAL acMenuItems[4], alSelectableItems[4],;
+                  cUserFunction := "DoIt"
+           //
+           acMenuItems[1] := "Add Record"
+           acMenuItems[2] := "Edit Record"
+           acMenuItems[3] := "Delete Record"
+           acMenuItems[4] := "Update Record"
+           //
+           alSelectableItems[1] := .T.
+           alSelectableItems[2] := .T.
+           alSelectableItems[3] := .T.
+           alSelectableItems[4] := "!UPDATED()"
+           // Selection condition
+
+           RETURN ACHOICE(10, 10, 12, 15, acMenuItems,;
+              alSelectableItems, cUserFunction)
+
+     <B>.</B>  This example uses two arrays to specify menu items and
+        corresponding action blocks.  After the menu is displayed and the
+        user makes a selection, the ACHOICE() return value is used to
+        determine which action block of the aActionItems array is evaluated:
+
+        PROCEDURE Main()
+           LOCAL nChoice
+           LOCAL aMenuItems := { "Add Record   ", ;
+                                 "Edit Record  ", ;
+                                 "Delete Record", ;
+                                 "Update Record"   }
+
+           LOCAL aActionItems := { {|| AddFunc()  }, ;
+                                   {|| EditFunc() }, ;
+                                   {|| DelFunc()  }, ;
+                                   {|| UpdFunc()  }  }
+
+           nChoice := ACHOICE( 10, 10, 13, 22, aMenuItems )
+
+           IF nChoice == 0
+              QUIT      // ESCAPE was pressed
+           ENDIF
+
+           EVAL( aActionItems[nChoice] )
+
+        RETURN
+
+ <B>Files:</B>  Library is EXTEND.LIB, header files are Achoice.ch and Inkey.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8f7cb.html">MENU TO</A>
+<A HREF="ng6375d.html">SETCOLOR()</A>
+<A HREF="ngf8bf1.html">Inkey codes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

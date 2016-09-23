@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8442b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng84e9c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NBDELNAME()</B>
+ Deletes a NetBIOS name from the local name table
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NBDELNAME(&lt;cName&gt;) --&gt;lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cName&gt;</B>  Designates a station or group name that is deleted from a
+     local name table.  The name can be up to 15 characters long and is case
+     sensitive.
+
+ <B>Returns</B>
+
+     NBDELNAME() returns .T. if &lt;cName&gt; has been deleted successfully from
+     the local name table.  If an error occurs (for example, if the name is
+     not in the name table), the function returns .F..
+
+ <B>Description</B>
+
+     NBDELNAME() allows you to delete a station or group name from the local
+     name table.  For example, all names added to a table within an
+     application can be deleted at the end of the program.
+
+     When a name is deleted from a name table, all NetBIOS datagram and
+     NetBIOS session communication buffers for which &lt;cName&gt; has been passed
+     as source name are closed.  Related communication handles are then
+     invalid.
+
+ <B>Example</B>
+
+     Delete the NetBIOS name MIKE from the local name table:
+
+     IF NBDELNAME('MIKE')
+        ? 'Name has been deleted successfully!'
+     ELSE
+        ? 'Name  could not be deleted!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng83ed3.html">NBADDGROUP()</A>
+<A HREF="ng8442b.html">NBADDNAME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

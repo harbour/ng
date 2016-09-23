@@ -1,0 +1,41 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng21497.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng182ca.html">[^^Up^^]</A>
+<A HREF="ng21b3d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BASE/5300    Memory low</B>
+
+     <B>Default Behavior:</B>  Continue with program execution.  Default
+     behavior is only available when Error:severity is set to ES_WARNING.
+
+     <B>Explanation:</B>  The application has insufficient conventional memory.
+     If the condition is a warning (severity 1), execution can continue but
+     an unrecoverable error may occur without further warning.  If the
+     condition is a recoverable error (severity 2), execution cannot
+     continue.
+
+     <B>Action:</B>  For safety, quit the application.  Make more memory
+     available before running the application again.  Remove unneeded
+     resident utilities or device drivers.  Opening fewer database or index
+     files may make more memory available.  This error may occur when
+     manipulating large browse objects or character values, indicating that
+     there is insufficient memory to swap in the object or character value.
+     If many C or Assembler add-on functions are linked, staticly overlaying
+     some of these functions may free up memory for other uses.
+
+     <B>See Also:</B>  For information on overlaying C and Assembler code, refer
+     to The CA-Clipper Linker--RTLINK.EXE chapter in the Programming and
+     Utilities guide.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

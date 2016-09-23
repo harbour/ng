@@ -1,0 +1,112 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng328c0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng33c29.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBSETRELATION()</B>
+ Relate two work areas
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBSETRELATION(&lt;nArea&gt; | &lt;cAlias&gt;, &lt;bExpr&gt;, &lt;cExpr&gt;)</B>
+     <B>   --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nArea&gt;</B> is a numeric value that specifies the work area number of
+     the child work area.
+
+     <B>&lt;cAlias&gt;</B> is a character value that specifies the alias of the child
+     work area.
+
+     <B>&lt;bExpr&gt;</B> is a code block that expresses the relational expression in
+     executable form.
+
+     <B>&lt;cExpr&gt;</B> is a character value that expresses the relational
+     expression in textual form.
+
+ <B>Returns</B>
+
+     DBSETRELATION() always returns NIL.
+
+ <B>Description</B>
+
+     DBSETRELATION() relates the work area specified by &lt;nArea&gt; or &lt;cAlias&gt;
+     (the child work area) to the current work area (the parent work area).
+     Any existing relations remain active.
+
+     Relating work areas synchronizes the child work area with the parent
+     work area.  This is achieved by automatically repositioning the child
+     work area whenever the parent work area moves to a new record.  If there
+     is an active index in the child work area, moving the parent work area
+     causes an automatic SEEK operation in the child work area; the seek key
+     is based on the expression specified by &lt;bExpr&gt; and/or &lt;cExpr&gt;.  If the
+     child work area has no active index, moving the parent work area causes
+     an automatic GOTO in the child work area; the record number for the GOTO
+     is based on the expression specified by &lt;bExpr&gt; and/or &lt;cExpr&gt;.
+
+     The relational expression may be a code block (&lt;bExpr&gt;) or both a code
+     block and equivalent text (&lt;cExpr&gt;).  If both versions are supplied,
+     they must be equivalent.  If the text version is omitted, DBRELATION()
+     will return an empty string for the relation.
+
+     DBSETRELATION() performs the same function as the standard SET RELATION
+     command with the ADDITIVE clause.  For more information, refer to the
+     SET RELATION command.
+
+ <B>Notes</B>
+
+     <B>.  Side effects:</B> DBSETRELATION() is only guaranteed to
+        synchronize the work areas as described above.  The relational
+        expression is not necessarily evaluated at any particular time, by
+        any particular means, or on any particular record or series of
+        records.  If the relational expression relies on information external
+        to the parent work area or its associated database file, the effect
+        is unpredictable.  If the expression changes the state of either work
+        area (e.g., by moving to a different record or changing the contents
+        of a record), the effect is unpredictable.
+
+     <B>.  Evaluation context:</B> When the relational expression is
+        evaluated, the parent work area is automatically selected as the
+        current work area before the evaluation; the previously selected work
+        area is automatically restored afterward.
+
+     <B>.  Soft seeking:</B> Seek operations that occur as part of relational
+        positioning are never soft seeks.  If a relational movement is
+        unsuccessful, the child work area is positioned to LASTREC() + 1, its
+        FOUND() status returns false (.F.), and its EOF() status returns true
+        (.T.).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates a typical use of the DBSETRELATION()
+        function:
+
+        USE Employee NEW
+        USE Department NEW INDEX Dept
+        SELECT Employee
+        DBSETRELATION("Department", {|| Employee-&gt;Dept},;
+                        "Employee-&gt;Dept")
+        LIST Employee-&gt;Name, Department-&gt;Name
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1d18b.html">DBCLEARREL()</A>
+<A HREF="ng2dfcc.html">DBRELATION()</A>
+<A HREF="ng2f329.html">DBRSELECT()</A>
+<A HREF="ng49aff.html">FOUND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3897d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETVOLNUM()</B>
+ Determines the maximum number of available server volumes
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETVOLNUM() --&gt; nMaxVol</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Returns</B>
+
+     NNETVOLNUM() returns the maximum number of available volumes on the
+     default file server.  If an error occurs, the function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET VOLUME NUMBER
+     This function returns the maximum number of available volumes for the
+     default file server.  This value can be between 0 and NNETVOLNUM().
+     With NETVOLNUM() you can determine the name and total free capacity for
+     each active volume.  You can also determine all of the available
+     directory entries that are possible.
+
+ <B>Note</B>
+
+     <B>.</B>  Volumes between 0 and NNETVOLNUM() can be inactive (not
+        mounted).
+
+ <B>Example</B>
+
+     Determine the names of all the volumes.  The function returns a null
+     string if a volume is inactive:
+
+     FOR I = 0 TO NNETVOLNUM()
+        ? NNETVOLNAM(I)         // Displays related names
+     NEXT I
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng3897d.html">NNETVOLNAM()</A>
+<A HREF="ng385ad.html">NNETVOLMAX()</A>
+<A HREF="ng38118.html">NNETVOLFRE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng295d5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DOS Extender functions</B>
+------------------------------------------------------------------------------
+
+ The following functions are for use with the Blinker DOS extender. They will
+ seldom have meaningful effects or return meaningful information except when
+ used with the DOS extender.
+
+ In the subsequent discussions and examples, the following terms are used:
+
+ <U>Descriptor <B>A structure containing the size, base and attributes of a</B></U>
+            <B>protected mode segment.</B>
+
+ <U>Paragraph  <B>The segment portion of a real mode address, eg the paragraph of</B></U>
+            <B>the colour adapter is B800h.</B>
+
+ <U>Segment    <B>The actual code or data unit as allocated and stored in memory.</B></U>
+
+ <U>Selector   <B>The value used to identify a segment when running in protected</B></U>
+            <B>mode, i.e. that is passed to and from the protected mode memory</B>
+            <B>allocation functions.</B>
+
+ All functions assume the following definitions from the include file
+ BLX286.H which can be found in the C subdirectory of the Blinker
+ installation directory:
+
+    <B>typedef unsigned char BYTE;</B>
+    <B>typedef unsigned short SEL;</B>
+    <B>typedef unsigned short USHORT;</B>
+    <B>typedef unsigned long ULONG;</B>
+    <B>typedef unsigned short _far *PSEL;</B>
+    <B>typedef struct</B>
+    <B>   {</B>
+    <B>   ULONG segbase;    /* Segment linear base address */</B>
+    <B>   ULONG seglen;        /* Segment length in bytes */</B>
+    <B>   USHORT segattrib; /* Segment attribute bytes */</B>
+    <B>   } DESC;              /* This is not a real descriptor */</B>
+    <B>#define BLXAPI pascal _far</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

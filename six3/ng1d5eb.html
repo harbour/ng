@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1cc0f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng1da67.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>RDD_Count():</B>
+
+  Syntax:   RDD_Count()
+
+  Returns:  Number of database drivers available to the .EXE as an integer.
+
+  Description:  This function returns the number of database drivers (RDD's)
+                that have been linked into the program.  The number may be a
+                bit misleading due to the fact that the index and table
+                drivers are each counted as a separate driver.  For example,
+                DBFNTX and DBF are both included, since they are each a
+                separate driver.
+
+  Example:
+
+    #include "SIXCDX.CH"        // Forces SIXCDX to be linked in
+
+    REQUEST SIXNSX              // Forces SIXNSX to be linked in
+    REQUEST SIXNTX              // Forces SIXNTX to be linked in
+
+    LOCAL aRDDInfo, nCnt, nRDDCnt := <B>RDD_Count()</B>
+
+    FOR nCnt := 1 TO nRDDCnt
+      aRDDInfo := RDD_Info( RDD_Name( nCnt ))   // Fill aRDDInfo array
+
+      ? "RDD Name.............: " + aRDDInfo[ 1 ]
+      ? "Loaded?..............: " + iif( aRDDInfo[ 2 ], "Yes", "No" )
+      ? "Table File Extension.: " + aRDDInfo[ 3 ]
+      ? "Index File Extension.: " + aRDDInfo[ 4 ]
+      ? "Secondary Index Ext..: " + aRDDInfo[ 5 ]
+      ? "Memo File Extension..: " + aRDDInfo[ 6 ]
+      ?
+    NEXT
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1da67.html">RDD_Info()</A>
+<A HREF="ng1e186.html">RDD_Name()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

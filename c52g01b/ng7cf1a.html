@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7b4c3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng7d5d2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>AVERAGE</B>
+ Average numeric expressions in the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>AVERAGE &lt;nExp list&gt; TO &lt;idVar list&gt;</B>
+     <B>   [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nExp list&gt;</B> is a list of the numeric values to AVERAGE for each
+     record processed.
+
+     <B>TO &lt;idVar list&gt;</B> identifies a list of receiving variables which will
+     contain the average results.  Variables that either do not exist or are
+     not visible are created as private variables.  &lt;idVar list&gt; must contain
+     the same number of elements as &lt;nExp list&gt;.
+
+     <B>&lt;scope&gt;</B> defines the portion of the current database file to AVERAGE.
+     The default scope is ALL.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to AVERAGE
+     within the given scope.
+
+ <B>Description</B>
+
+     AVERAGE calculates the average of one or more numeric expressions to
+     variables for a range of records in the current database file.  Zero
+     values are counted in the AVERAGE unless explicitly ruled out with a FOR
+     condition.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example averages a single numeric field using a condition
+        to select a subset of records from the database file:
+
+        USE Sales NEW
+        AVERAGE Amount TO nAvgAmount FOR Branch = "100"
+
+     <B>.</B>  This example finds the average date for a range of dates:
+
+        AVERAGE (SaleDate - CTOD("00/00/00")) ;
+           TO nAvgDays FOR !EMPTY(SaleDate)
+           dAvgDate := CTOD("00/00/00") + nAvgDays
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1d373.html">DBEVAL()</A>
+<A HREF="ngae9a4.html">SUM</A>
+<A HREF="ngaf81b.html">TOTAL</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

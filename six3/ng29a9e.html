@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng29628.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng29f4e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_I_TagName():</B>
+
+  Syntax:   Sx_I_TagName()
+
+  Returns:  &lt;char&gt; Name of current tag being indexed or reindexed.
+                   "" if no index or reindex occurring.
+
+  Description:  This function returns the name of the tag currently being
+                indexed or reindexed.  This function would be used in a
+                UDF (specified with the OPTION clause of INDEX or REINDEX)
+                to identify which tag is being indexed or reindexed.
+
+                If the current file is an .IDX (single index file), then
+                the file name is returned.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE TEST VIA "SIXCDX"             // TEST.CDX opened automatically
+    REINDEX OPTION ShowIt() STEP 100
+
+    FUNC ShowIt()
+
+      // Bof() is .T. on first call to OPTION UDF.  Use this for setup.
+      IF Bof()
+          // Display the appropriate message
+          ? iif(Sx_IsReindex(), "Reindexing ", "Indexing ")
+
+          // Display the index file name and tag name.
+          ? Sx_I_IndexName() + " : " + <B>Sx_I_TagName()</B>
+          ?
+          Return(NIL)
+      ENDIF
+
+      // Show how many keys have been included so far
+      @ ROW(),1 SAY Sx_KeysIncluded()
+
+    Return(NIL)
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng29628.html">Sx_I_IndexName()</A>
+<A HREF="ng2aa8b.html">Sx_IndexName()</A>
+<A HREF="ng1c1b8.html">OrdName()</A>
+<A HREF="ng2c044.html">Sx_IsReindex()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

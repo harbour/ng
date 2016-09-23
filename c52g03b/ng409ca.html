@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3fb43.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng40efb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBLOCKINFO</B>
+ Information necessary to lock a row or table for exclusive access
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   ULONG  record;</B>
+     <B>   USHORT method;</B>
+     <B>   BOOL   result;</B>
+     <B>} DBLOCKINFO;</B>
+     <B></B>
+     <B>typedef DBLOCKINFO far * DBLOCKINFOP;</B>
+
+ <B>Elements</B>
+
+     <B>record</B>
+
+        Contains a numeric value indicating the row to lock.  This element is
+        only meaningful if method is set to DBLM_EXCLUSIVE or DBLM_MULTIPLE.
+
+     <B>method</B>
+
+        Contains a literal constant indicating the type of lock to obtain.
+        The numeric constants used for method are defined in Rdd.api and have
+        the following meanings:
+
+        <B>DBLOCKINFO Lock Type Values</B>
+        ---------------------------------------------------------------------
+        <B>Constant          Meaning</B>
+        ---------------------------------------------------------------------
+        DBLM_EXCLUSIVE    Lock a row, releasing currently locked rows
+        DBLM_MULTIPLE     Lock a row, maintaining currently locked rows
+        DBLM_FILE         Lock a table, releasing locks currently held
+        ---------------------------------------------------------------------
+
+     <B>result</B>
+
+        Contains a boolean value specifying the success of the lock
+        operation.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   lock()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng57777.html">lock()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

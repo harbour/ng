@@ -1,0 +1,40 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng258b4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng22190.html">[^^Up^^]</A>
+<A HREF="ng26060.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Error Handling</B>
+------------------------------------------------------------------------------
+
+ <B>Corruption Detected</B>
+
+     Since older applications have no knowledge of the new index features nor
+     how to interpret the additional flags in the header signature, these
+     applications will assume the index is corrupt and will produce an Index
+     Corrupted error.
+
+ <B>EOF()</B>
+
+     If an index is created with a FOR condition and an attempt is made to
+     update the index with a key that does not match the condition, the
+     update is suppressed and the index is placed at EOF().  This is
+     consistent with the current behavior for indexes created with the unique
+     flag when an update is attempted with a non-unique key.
+
+     Also if a navigational action is attempted (SKIP) and the current record
+     is not found in the index, the index will place the record pointer at
+     EOF().  This is true for both conditional and temporary indexes.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

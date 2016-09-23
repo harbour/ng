@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5c2d2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng5ce37.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>REPLICATE()</B>
+ Return a string repeated a specified number of times
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>REPLICATE(&lt;cString&gt;, &lt;nCount&gt;) --&gt; cRepeatedString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string to repeat.
+
+     <B>&lt;nCount&gt;</B> is the number of times to repeat &lt;cString&gt;.
+
+ <B>Returns</B>
+
+     REPLICATE() returns a character string up to a maximum of 65,535 (64K)
+     bytes in length.  Specifying a zero as the &lt;nCount&gt; argument returns a
+     null string ("").
+
+ <B>Description</B>
+
+     REPLICATE() is a character function that repeatedly displays, prints, or
+     stuffs the keyboard with one or more characters.  REPLICATE() is like
+     the SPACE() function which returns a specified number of space
+     characters.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples demonstrate REPLICATE() repeating strings:
+
+        ? REPLICATE("*", 5)           // Result: *****
+        ? REPLICATE("Hi ", 2)         // Result: Hi Hi
+        ? REPLICATE(CHR(42), 5)       // Result: *****
+
+     <B>.</B>  This example uses REPLICATE() to stuff the keyboard with
+        several Dnarrow keys:
+
+        #include "Inkey.ch"
+        KEYBOARD REPLICATE(CHR(K_DN), 25)
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng67418.html">SPACE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4f8e4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng500fb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>release()</B>
+ Release all references to workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE release(</B>
+     <B>                 WORKAREAP wa</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     Releases the workarea referenced by wa.
+
+ <B>Default Behavior</B>
+
+     release() releases the workarea referenced by wa, and performs the
+     following tasks:
+
+     <B>.</B>  Releases memory used by wa-&gt;fields
+
+     <B>.</B>  Removes the referenced workarea from the list of open
+        workareas
+
+     <B>.</B>  If the referenced workarea is the current workarea, the
+        current workarea symbol is set to NULL
+
+     <B>.</B>  Releases the memory held by the current WORKAREA structure
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  It is highly recommended that you do not break the inheritance
+        chain of release() (i.e., any implementation of release() in your RDD
+        should call SUPERRELEASE()).
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng4dd37.html">close()</A>
+<A HREF="ng4f111.html">new()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

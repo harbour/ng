@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2e414.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2eb94.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosGetRealVec()               Get real mode pointer to real mode interrupt handler</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get a real mode pointer to a real mode interrupt handler</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosGetRealVec( USHORT intno,</B></U>
+            <B>PINTHAN far *handler);</B>
+
+ <U>intno      <B>Interrupt number.</B></U>
+
+ <U>handler    <B>Pointer to a function pointer to receive the real mode address of</B></U>
+            <B>the interrupt handler.</B>
+
+ <U>Return   : <B>Address of the interrupt handler.</B></U>
+
+ DosGetRealVec() returns the real mode address of the real mode interrupt
+ handler for the specified interrupt number.
+
+ Example:
+
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>INTHAN handler;</B>
+    <B>if (DosGetRealVec(0x21, &amp;handler) == 0)</B>
+    <B>   {</B>
+    <B>   printf("Real mode Int 21 handler : %Fp\n",handler);</B>
+    <B>   }</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2e414.html">DosGetProtVec()</A>
+<A HREF="ng33de9.html">DosSetRealVec()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

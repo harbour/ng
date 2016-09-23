@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb75be.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb0492.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETLASTKEY()</B>
+ Sets the value for LASTKEY()
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETLASTKEY(&lt;nKeyValue&gt;) --&gt; cNull</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nKeyValue&gt;</B> Designates the character code passed to LASTKEY().
+
+ <B>Returns</B>
+
+     SETLASTKEY() always returns a null string.
+
+ <B>Description</B>
+
+     SETLASTKEY() changes the contents of the memory area used by LASTKEY().
+     This allows you to save the current contents of the LASTKEY() buffer in
+     an error trap and restore it when you return to the program.
+
+ <B>Example</B>
+
+     Save the last key value so it can be changed and restored later:
+
+     nCharacter: = LASTKEY()        // Save character code   *...   *...
+     SETLASTKEY(nCharacter)         //  Reset LASTKEY
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

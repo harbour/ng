@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1de35.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1b9d1.html">[^^Up^^]</A>
+<A HREF="ng1e704.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Tips For Using DBFCDX</B>
+------------------------------------------------------------------------------
+
+     1. Make sure index extensions aren't hard-coded in your application.
+        The default extension for DBFCDX indexes is (.idx), not (.ntx).  You
+        can still use (.ntx) as the extension as long as you specify the
+        extension when you create your indexes.  The best way to determine
+        index extensions in an application is to call ORDBAGEXT().
+
+        For example, if you currently use the following code to determine the
+        existence of an index file:
+
+        IF .NOT. FILE("index.ntx")
+           INDEX ON field TO index
+        ENDIF
+
+        Change the code to include the INDEXEXT() function, as follows:
+
+        IF .NOT. FILE("index"+ORDBAGEXT())
+           INDEX ON field TO index
+        ENDIF
+
+     2. If your application uses memo fields, you should convert your (.dbt)
+        files to (.fpt) files.
+
+        There are some good reasons for using (.fpt) files.  Most important
+        is the smaller block size (64 bytes).  CA-Clipper's (.dbt) files use
+        a fixed block size of 512 bytes which means that every time you store
+        even 1 byte in a memo field CA-Clipper uses 512 bytes to store it.
+        If the data in a memo field grows to 513 bytes, then two blocks are
+        required.
+
+        When creating (.fpt) files, the block size is set at 64 bytes to
+        optimize it for your needs.  A simple conversion from (.dbt) files to
+        (.fpt) files will generally shrink your memo files by approximately
+        30%.
+
+     3. Add DBFCDX.LIB as a library to your link command or link script.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

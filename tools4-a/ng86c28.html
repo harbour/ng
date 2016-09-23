@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng86639.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng870e3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NBNAMECNT()</B>
+ Determines the number of NetBIOS names on a workstation
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NBNAMECNT([&lt;cStatName&gt;]) --&gt; nNames</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cStatName&gt;</B>  Designates the station name of the workstation from
+     which the name table is read.  The default value is the local
+     workstation.
+
+ <B>Returns</B>
+
+     NBNAMECNT() returns the number of established NetBIOS names on the
+     station &lt;cStatName&gt;.  If an error occurs (for example, if &lt;cStatName&gt;
+     has not been found), the function returns -1.
+
+ <B>Description</B>
+
+     Internally, each NetBIOS workstation keeps a local name table with up to
+     20 NetBIOS names.  NBNAMECNT() allows you to determine the number of
+     names in the table.  The number of names can be determined for the local
+     workstation or for any workstation in the network, if you pass a NetBIOS
+     station name &lt;cStatName&gt;.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the number of NetBIOS names on the local
+        workstation:
+
+        ? NBNAMECNT()
+
+     <B>.</B>  Determine the number of NetBIOS names on workstation MIKE:
+
+        ? NBNAMECNT("MIKE")
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng86639.html">NBNAME()</A>
+<A HREF="ng87469.html">NBNAMESTAT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

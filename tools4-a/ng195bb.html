@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng18e37.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng19d87.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPEXPI()</B>
+ Sets or determines the password expiration interval
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPEXPI(&lt;cUser&gt;,[&lt;nDays&gt;],[&lt;cServer&gt;|&lt;nConId&gt;)</B>
+     <B>   --&gt; nExpiration</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cUser&gt; </B> Designates the name of user whose password expiration
+     interval is set or determined.
+
+     <B>&lt;nDays&gt; </B> Designates the new password expiration interval of &lt;cUser&gt;.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server to which &lt;cUser&gt;
+     has access.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPEXPI() returns the current expiration interval of the password for
+     &lt;cUser&gt;.  If &lt;nDays&gt; has been passed and the return value does not match
+     &lt;nDays&gt;, the requesting user did not have the rights required for the
+     modification.
+
+ <B>Description</B>
+
+     NOVELL NET PASSWORD EXPIRATION INTERVALL
+     NNETPEXPI() allows you to query or set the expiration interval of the
+     password of &lt;cUser&gt;. To determine the expiration interval, do not pass a
+     value for &lt;nDays&gt;.  If &lt;nDays&gt; contains a numeric value, NNETPEXPI()
+     tries to set this value as new expiration interval.  Supervisor rights
+     are required on the related file server to modify the expiration
+     interval.  An existing expiration interval can be removed if you set
+     &lt;nDays&gt; equal to 0.  With &lt;cServer&gt; or &lt;nConId&gt;, the password expiration
+     interval of users on any attached file servers can be modified.  The
+     connection ID of a server is returned by NNETATTACH() or NNETLOGIN().
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the password expiration interval for user MIKE:
+
+        ? NNETPEXPI('MIKE')                     // For example 40
+
+     <B>.</B>  Set the new password expiration interval for user MIKE:
+
+        NNETPEXPI('MIKE',50)
+
+     <B>.</B>  Remove the password expiration interval for user MIKE:
+
+        NNETPEXPI("MIKE",0)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng18e37.html">NNETPEXPD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,113 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng994cb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng9a6b6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SELECT</B>
+ Change the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SELECT &lt;xnWorkArea&gt; | &lt;idAlias&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xnWorkArea&gt;</B> is the work area number between zero and 250 inclusive.
+     This argument is an extended expression and can be specified either as a
+     literal number or as a numeric expression enclosed in parentheses.
+
+     <B>&lt;idAlias&gt;</B> is the name of an existing work area to SELECT if there is
+     a database file open in that area.
+
+ <B>Description</B>
+
+     SELECT is a database command that changes work areas.  CA-Clipper
+     supports 250 work areas, with each work area a logical handle to an open
+     database file and all of its attributes.  You can refer to work areas
+     with SELECT by number or by alias.  The alias of a work area is
+     automatically assigned when a database file is USEd in that work area or
+     by using the ALIAS clause.
+
+     Work area zero refers to the first empty or next available work area.
+     Using this, you can SELECT 0 and USE &lt;xcDatabase&gt; as a method of opening
+     database files.
+
+ <B>Notes</B>
+
+     <B>.  Aliased expressions:</B> Aliased expressions are a much more
+        powerful method of selecting new work areas than the SELECT command.
+        Instead of SELECTing a work area then performing an operation for
+        that work area, you can apply an alias to an expression that performs
+        the operation.  This is done by specifying the alias of the remote
+        work area and the expression enclosed in parentheses.  For example,
+        to access the value of EOF() in an unselected work area, you would
+        normally execute a series of statements like the following:
+
+     SELECT Remote
+        ? EOF()
+
+        SELECT Main
+
+        Using the aliased expression form, these statements become:
+
+        ? Remote-&gt;(EOF())
+
+     <B>.  USE...NEW:</B> Instead of using SELECT0 and USE &lt;xcDatabase&gt; to
+        open a database file in a new work area, the preferred method is to
+        USE &lt;xcDatabase&gt; NEW.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example opens a series of database files by SELECTing
+        each work area by number then USEing each database file in that work
+        area:
+
+        SELECT 1
+        USE Customer
+        SELECT 2
+        USE Invoices
+        SELECT 3
+        USE Parts
+        SELECT Customer
+
+     <B>.</B>  A better method is to open each database in the next available
+        work area by specifying the NEW clause on the USE command line.  In
+        this example USE...NEW is employed instead of SELECT0 then USE:
+
+        USE Customer NEW
+        USE Invoices NEW
+        SELECT Customer
+
+     <B>.</B>  This code fragment changes work areas while saving the current
+        work area name to a variable using the SELECT() function.  After
+        executing an operation for the new work area, the original work area
+        is restored:
+
+        nLastArea := SELECT()
+        USE Newfile NEW
+        //
+        &lt;statements&gt;...
+        //
+        SELECT (nLastArea)
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbd59.html">ALIAS()</A>
+<A HREF="ng61227.html">SELECT()</A>
+<A HREF="nga475d.html">SET INDEX</A>
+<A HREF="ngb1e6f.html">USE</A>
+<A HREF="ng6e0d6.html">USED()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

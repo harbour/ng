@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7d991.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7a98e.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>STRTOHEX()</B>
+ Converts a byte sequence into hexadecimal form
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>STRTOHEX(&lt;cBytes&gt;) --&gt; cHex</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cBytes&gt;</B>   Designates a character string that is recognized as a
+     byte sequence.
+
+ <B>Returns</B>
+
+     STRTOHEX() returns a character string that contains each byte
+     (character) of the passed string in its two-character, hexadecimal form.
+     The returned string is exactly twice as long as &lt;cBytes&gt;.
+
+ <B>Description</B>
+
+     STRTOHEX() is useful when working with the internet addresses that are
+     required in conjunction with the IPX/SPX functions of Point To Point
+     communication.
+
+ <B>Example</B>
+
+     Convert the byte sequence to hexadecimal form:
+
+     ? STRTOHEX(CHR(27)+'A')   // "1B41"
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7b04d.html">HEXTOSTR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

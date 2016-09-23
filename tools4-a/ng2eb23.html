@@ -1,0 +1,130 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2e29d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng2faad.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETFILES()</B>
+ Determines the extended information about subdirectories
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETFILES([&lt;cPath&gt;],[&lt;nAttr&gt;|&lt;cAttr&gt;],[&lt;l386&gt;])</B>
+     <B>   --&gt; aFiles</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPath&gt;</B>  Designates the directory for which the subdirectories are
+     read.  The parameter contains a search mask for the directories that are
+     read.  Within the search mask, the wildcard characters "?" and "*" can
+     be used.
+
+     <B>&lt;nAttr&gt;</B>  Designates the file attributes in numeric form, according
+     to the following table.  The default (0) designates  normal files.
+
+     <B>&lt;cAttr&gt;</B>  Designates the file attributes in form of a character
+     string, according to the following table .  The default value ("")
+     designates  normal files.
+
+     <B>&lt;l386&gt;</B> Designates whether NNETFILES() also returns extended
+     information that is only available on Netware 3.x servers.  The
+     parameter must be designated .T..  The default value (.F.) does not
+     return extended information.
+
+ <B>Returns</B>
+
+     NNETFILES() returns an array with subarrays (two-dimensional array).
+     Each subarray contains information about each directory entry that is
+     found.  The structure of the subarrays are described in the following
+     table.
+
+     <B>Table 23.5:  NNETFILES() Subarray Structure</B>
+     ------------------------------------------------------------------------
+     <B>Position     Metasymbol     CTNNET.CH      Definition </B>
+     ------------------------------------------------------------------------
+     1            cName          NF_NAME        Directory name
+     2            nSize          NF_SIZE        File size
+     3            cUpdDate       NF_UPDDATE     Date of last update
+     4            cUpdTime       NF_UPDTIME     Time of last update
+     5            dCrDate        NF_CREADATE    Creation date
+     6            nAttr          NF_ATTR        File attributes
+     7            nExtAttr       NF_EXTATTR     Extended file attributes
+     8            cOwner         NF_OWNER       Owner
+     ------------------------------------------------------------------------
+
+     If &lt;l386&gt; has been designated .T., the returned array contains the
+     following extension:
+
+     <B>Table 23.6:  Extended NNETFILES() Subarray Structure</B>
+     ------------------------------------------------------------------------
+     <B>Position     Metasymbol     CTNNET.CH      Definition</B>
+     ------------------------------------------------------------------------
+     9            cArcDate       NF_ARCDATE     Date of last archive
+     10           nArcTime       NF_ARCTIME     Time of last archive
+     11           cArchiver      NF_ARCHIVER    Name of archivist
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     NOVELL NET FILES
+     NNETFILES() returns extended information about files on file servers.
+     The files can be specified by a search mask in &lt;cPath&gt; and by
+     determining the file attribute.  The attribute can be passed in the form
+     of a numeric value or a character string:
+
+     <B>Table 23.7:  Coding of File Attributes for NNETFILES()</B>
+     ------------------------------------------------------------------------
+     <B>Value   Symbol    Definition</B>
+     ------------------------------------------------------------------------
+     1       R         Read Only
+     2       H         Hidden directories
+     4       S         System directories
+     32      A         Archive bit set
+     ------------------------------------------------------------------------
+
+     To specify an attribute, numeric values must be added or the related
+     symbols must be added to a character string.
+
+ <B>Examples</B>
+
+     <B>.</B>  Read the files in L:\, and display the file names:
+
+        #include "ctnnet.ch"
+
+        aFiles=NNETFILES('L:\*.*')
+
+        FOR i=1 TO LEN(aFiles)
+           ? aFiles[i,NF_NAME]
+        NEXT i
+
+     <B>.</B>  Read the files in NANGERTOOLS1/VOL1:DATA, including the hidden
+        files and the system files:
+
+        aFiles=NNETFILES('NANGERTOOLS1/VOL1:DATA/*.*','SH')
+
+     <B>.</B>  Read the files in L:\ with extended 3.x information, and
+        display he file names and the date of the last archive:
+
+        #include "ctnnet.ch"
+
+        aFiles=NNETFILES('L:\*.*',,.T.)
+
+        FOR i=1 TO LEN(aFiles)
+           ? aFiles[i,NF_NAME],aFiles[i,NF_ARCDATE])
+
+        NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2c843.html">NNETDIRS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

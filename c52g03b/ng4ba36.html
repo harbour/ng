@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4b56c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4bfa9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>goHot()</B>
+ Mark the workarea data buffer as hot
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE goHot(</B>
+     <B>               WORKAREAP wa</B>
+     <B>             )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     Informs the RDD that data in memory is not guaranteed to match data in
+     the data store (usually a disk).
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  The concept of hot and cold refers to the current state of
+        information in memory as it relates to information on disk.  If the
+        information in memory, has changed since last written to disk, it is
+        considered hot.  A cold workarea's memory is in sync with its disk-
+        based counterpart.
+
+     <B>.</B>  When a workarea goes hot in a shared environment, you must be
+        certain that all necessary locks are in place.  Going hot indicates
+        that a write is about to be performed on data.
+
+     <B>.</B>  You must never allow workareas marked as wa-&gt;readonly to
+        goHot().  This is an ideal place to generate runtime recoverable
+        errors indicating that locks must be present or the workarea must not
+        be in a read-only mode.
+
+     <B>.</B>  wa should remain hot until it is marked cold by goCold().
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng4b56c.html">goCold()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

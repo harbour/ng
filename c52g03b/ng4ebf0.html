@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4e500.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4f111.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>info()</B>
+ Retrieve information about the current driver
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE info(</B>
+     <B>              WORKAREAP wa,</B>
+     <B>              USHORT message,</B>
+     <B>              ITEM value</B>
+     <B>            )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>message</B> is a value that determines the type of information to be
+     provided.
+
+     <B>value</B> is a CA-Clipper Item which will contain the information that
+     corresponds to message.
+
+ <B>Description</B>
+
+     Obtains information regarding the current driver.
+
+ <B>Default Behavior</B>
+
+     The info() method returns Items of data in response to some basic
+     questions concerning the driver's functionality.  Those questions
+     are defined by value passed in message.  Some suggested values for
+     message and their associated meanings are provided in the header
+     file Rdd.api.
+
+     <B>Warning! </B> value must be a valid Item.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If your implementation of info() cannot determine the return
+        value based on the value of message, you should allow the workarea
+        default implementation to attempt it by calling SUPERINFO().
+
+     <B>.</B>  The first 1000 possible values for message are reserved by
+        CA-Clipper.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng5099a.html">sysName()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

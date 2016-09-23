@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng59a39.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng5acea.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>READMODAL()</B>
+ Activate a full-screen editing mode for a GetList
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>READMODAL(&lt;aGetList&gt;) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aGetList&gt;</B> is an array containing a list of Get objects to edit.
+
+ <B>Returns</B>
+
+     READMODAL() always returns NIL.
+
+ <B>Description</B>
+
+     READMODAL() is a user interface function that implements the full-screen
+     editing mode for GETs, and is part of the open architecture Get system
+     of CA-Clipper.  READMODAL() is like the READ command, but takes a
+     GetList array as an argument and does not reinitialize the GetList array
+     when it terminates.  Because of this, you can maintain multiple lists of
+     Get objects and activate them any time in a program's execution as long
+     as the array to activate is visible.
+
+     In order to retain compatibility with previous versions of CA-Clipper,
+     the GET system in CA-Clipper is implemented using a public array called
+     GetList.  Each time an @...GET command executes, it creates a Get object
+     and adds to the currently visible GetList array.  The standard READ
+     command is preprocessed into a call to READMODAL() using the GetList
+     array as its argument.  If the SAVE clause is not specified, the
+     variable GetList is assigned an empty array after the READMODAL()
+     function terminates.
+
+     Some of the functions in the Getsys.prg have been made public so that they
+     can be used when implementing customized Get readers.  These functions
+     are listed in the table below.
+
+     <B>Get System functions</B>
+     ------------------------------------------------------------------------
+     <B>Function            Description</B>
+     ------------------------------------------------------------------------
+     GETACTIVE()         Return the currently active Get object
+     GETAPPLYKEY()       Apply a key to a Get object from within a Get reader
+     GETDOSETKEY()       Process SET KEY during Get editing
+     GETPOSTVALIDATE()   Postvalidate the current Get object
+     GETPREVALIDATE()    Prevalidate a Get object
+     GETREADER()         Execute standard READ behavior for a Get object
+     GETPREVALIDATE()    Prevalidate a Get object
+     READFORMAT()        Return, and optionally set the code block that
+                         implements a format (.fmt) file
+     READKILL()          Return, and optionally set whether the current Read
+                         should be exited
+     READUPDATED()       Return, and optionally set whether a Get has changed
+                         during a Read
+     ------------------------------------------------------------------------
+
+     For reference information on the Get objects and functions listed above,
+     refer to the Get System chapter in the Programming and Utilities guide.
+
+     For more information on the supported keys in the default READMODAL()
+     function, refer to the READ command reference in this chapter.
+
+ <B>Files:</B>  Library is CLIPPER.LIB, source file is SOURCE\SYS\GETSYS.PRG.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng73148.html">@...GET</A>
+<A HREF="ng91542.html">READ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

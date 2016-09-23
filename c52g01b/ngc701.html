@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc28a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ngcc31.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ALTD()</B>
+ Invoke The CA-Clipper Debugger
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ALTD([&lt;nAction&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nAction&gt;</B> defines what action ALTD() performs when invoked.  The
+     following is a complete list of &lt;nAction&gt; values and their actions:
+
+     <B>ALTD() Actions</B>
+     ------------------------------------------------------------------------
+     <B>Argument     Action</B>
+     ------------------------------------------------------------------------
+     None         Invokes the Debugger if it is enabled
+     0            Disables Alt-D
+     1            Enables Alt-D
+     Other        No action
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     ALTD() always returns NIL.
+
+ <B>Description</B>
+
+     ALTD() performs differently depending on its argument as shown in the
+     table above.  For more information on using the Debugger, refer to The
+     CA-Clipper Debugger chapter in the Programming and Utilities guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates a series of manifest constants that
+        can be used as arguments for ALTD() before invoking the debugger
+        programmatically:
+
+        #define ALTD_DISABLE   0
+        #define ALTD_ENABLE    1
+        //
+        ALTD(ALTD_ENABLE)
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga1778.html">SET ESCAPE</A>
+<A HREF="ng62fe9.html">SETCANCEL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

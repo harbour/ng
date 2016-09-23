@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngcca65.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngc8ba7.html">[^^Up^^]</A>
+<A HREF="ngcd41c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RATE()</B>
+ Computes the interest rate for a loan
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RATE(&lt;nCapital&gt;,&lt;nPayment&gt;,&lt;nNumberPayments&gt;)</B>
+     <B>   --&gt; nInterestRate</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nCapital&gt;</B>  Designates the amount of the loan.
+
+     <B>&lt;nPayment&gt; </B> Designates the payment per installment.
+
+     <B>&lt;NumberPayments&gt; </B> Designates the number of the planned payment
+     periods.
+
+ <B>Returns</B>
+
+     RATE() returns the loan interest rate.
+
+ <B>Description</B>
+
+     RATE() determines the annual interest rate for a loan &lt;nCapital&gt; in the
+     &lt;nNumberPayments&gt; period at the specified &lt;nPayment&gt; installment.  The
+     calculated interest rate is based on a Newtonian iterative solution
+     procedure:
+
+         lk+1=ik - f(ik)/f(ik)
+
+     where:
+
+         f(i)=(1-(l + i)^-n)/i - PV/PMT
+
+     The initial value for i is selected as follows:
+
+         -io = PMT/PV - PV/n^2PMT
+
+ <B>Note</B>
+
+     <B>.</B>  This function allows a maximum value for the payment period of
+        1020.
+
+ <B>Example</B>
+
+     For a $2500 loan, you pay $86.67 per month for 3 years.  What is the
+     effective annual interest rate?
+
+     nLoan     :=  2500
+     nPayment  :=  86.67
+     nPeriod   :=  36
+
+     ? RATE(nLoan, nPayment, nPeriod) * 12      // 0.1501 (15.01%)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngcbf52.html">PAYMENT()</A>
+<A HREF="ngcca65.html">PV()</A>
+<A HREF="ngcb4ec.html">FV()</A>
+<A HREF="ngcc3b6.html">PERIODS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

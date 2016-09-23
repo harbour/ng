@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng31d53.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng32a5a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>EXP()</B>
+ Calculate e**x
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>EXP(&lt;nExponent&gt;) --&gt; nAntilogarithm</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nExponent&gt;</B> is the natural logarithm for which a numeric value is to
+     be calculated.
+
+ <B>Returns</B>
+
+     EXP() returns a numeric value that is equivalent to the value e raised
+     to the specified power.
+
+ <B>Description</B>
+
+     EXP() is a mathematical function that calculates the value, y, (the
+     antilogarithm) of the following equation:
+
+     <B>e**x = y</B>
+
+     Where e is the base of natural logarithms (2.71828...) and x is
+     &lt;nExponent&gt;.  The maximum value of &lt;nExponent&gt; is 45 before a numeric
+     overflow occurs.  EXP() and LOG() are inverse functions.
+
+     The number of decimal places displayed is determined solely by SET
+     DECIMALS regardless of the current SET FIXED value.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates several invocations of EXP():
+
+        ? EXP(1)                      // Result: 2.72
+        SET DECIMALS TO 10
+        ? EXP(1)                      // Result: 2.7182818285
+        ? LOG(EXP(1))                 // Result: 1.0000000000
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng45d33.html">LOG()</A>
+<A HREF="ng9efaa.html">SET DECIMALS</A>
+<A HREF="nga33cc.html">SET FIXED</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

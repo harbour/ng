@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng917d7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng91f24.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCSNDFLSH()</B>
+ Clears a communication sending buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCSNDFLSH(&lt;nHandle&gt;) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication sending buffer.
+
+ <B>Returns</B>
+
+     PPCSNDFLSH() returns .T. if the buffer has been cleared successfully.
+
+ <B>Description</B>
+
+     PPCSNDFLSH() allows you to delete all characters from a sending buffer,
+     independently of the protocol used (IPX, SPX, NetBIOS datagram, or
+     NetBIOS session).
+
+ <B>Example</B>
+
+     Clear the sending buffer:
+
+     IF PPCSNDFLSH(nHandle)
+        ? 'Buffer has been cleared successfully!'
+     ELSE
+        ? 'Buffer could not be cleared!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng90025.html">PPCRECFLSH()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

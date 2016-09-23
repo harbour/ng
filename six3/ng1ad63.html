@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1a815.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng1b334.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>OrdKey():</B>
+
+  Syntax:   OrdKey( &lt;cOrderName&gt; | &lt;nOrder&gt; [, &lt;cIndexFile&gt;] )
+
+       cOrderName = The name of the Order (or tag) to be created.
+
+       nOrder = An integer that identifies the position in the Order List
+                of the target Order whose cForExp is sought.
+
+       cIndexFile = The name of the index file containing one or more Orders.
+                    You may specify &lt;cIndexFile&gt; as the filename with or
+                    without the path name or extension.  If you do not inc-
+                    lude the extension as part of &lt;cIndexFile&gt;, the default
+                    extension of the currently active RDD is assumed.
+
+  Returns:
+
+     Returns a character string representing the expression from which the
+     Order was created.
+
+  Description:
+
+     OrdKey() is an Order management function that returns a character
+     expression, cExpKey, that represents the key expression of the specified
+     Order.
+
+     You may specify the Order by name or with a number that represents its
+     position in the Order List.  Using the Order name is the preferred
+     method.
+
+     The active RDD determines the Order capacity of an Order Bag.  The
+     default DBFNTX and the DBFNDX drivers (as well as the SIx Driver's
+     SIXNTX flavor) only support single-Order Bags, while other RDDs may
+     support multiple-Order Bags (e.g., the SIXCDX and SIXNSX drivers).
+
+  Example:
+
+     USE test VIA "SIXCDX"
+     INDEX ON test-&gt;LAST TO LAST FOR test-&gt;AGE &gt; 35
+     ? <B>OrdKey( "LAST" )</B>      // Returns: "test-&gt;LAST"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3c65e.html">Sx_TagInfo()</A>
+<A HREF="ng1a815.html">OrdFor()</A>
+<A HREF="ng1c1b8.html">OrdName()</A>
+<A HREF="ng1c7a8.html">OrdNumber()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

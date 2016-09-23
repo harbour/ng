@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngae9a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ngbd59.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ALERT()</B>
+ Display a simple modal dialog box
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ALERT( &lt;cMessage&gt;, [&lt;aOptions&gt;] ) --&gt; nChoice</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cMessage&gt;</B> is the message text displayed, centered, in the alert
+     box.  If the message contains one or more semicolons, the text after the
+     semicolons is centered on succeeding lines in the dialog box.
+
+     <B>&lt;aOptions&gt;</B> defines a list of up to 4 possible responses to the
+     dialog box.
+
+ <B>Returns</B>
+
+     ALERT() returns a numeric value indicating which option was chosen.  If
+     the Esc key is pressed, the value returned is zero.
+
+ <B>Description</B>
+
+     The ALERT() function creates a simple modal dialog.  It is useful in
+     error handlers and other "pause" functions.  The user can respond by
+     moving a highlight bar and pressing the Return or SpaceBar keys, or by
+     pressing the key corresponding to the first letter of the option.  If
+     &lt;aOptions&gt; is not supplied, a single "Ok" option is presented.
+
+     ALERT() is sensitive to the presence or absence of the CA-Clipper
+     full-screen I/O system.  If the full-screen system is not present,
+     ALERT() uses standard I/O to display the message and options tty-style
+     (i.e. 80-column, without word wrap, each line ended with carriage
+     return/linefeed).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates use of an alert dialog box .  First,
+        the array of options is defined, the ALERT() function gets the user's
+        selection, and finally, the user's choice is handled with a DO
+        CASE...ENDCASE control structure:
+
+        #define AL_SAVE     1
+        #define AL_CANCEL   2
+        #define AL_CONT     3
+
+        // Define an array of options
+        aOptions := {"Save", "Don't Save", "Continue"}
+
+        // Display the dialog box and get the user's selection
+        nChoice  := ALERT("File has changed...", aOptions)
+
+        // Handle the user's request
+        DO CASE
+        CASE nChoice == AL_SAVE
+           ? "Save"
+        CASE nChoice == AL_CANCEL
+           ? "Don't Save"
+        CASE nChoice == AL_CONT
+           ? "Continue"
+        OTHERWISE
+           ? "Escape"
+        ENDCASE
+        //
+        RETURN
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng77580.html">@...PROMPT</A>
+<A HREF="ng8f7cb.html">MENU TO</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

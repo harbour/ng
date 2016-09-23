@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng568aa.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng56e17.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>filterText()</B>
+ Return filter condition of the specified workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE filterText(</B>
+     <B>                    WORKAREAP wa,</B>
+     <B>                    BYTEP cExpr</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>cExpr</B> is a pointer to a buffer containing the text expression.
+
+ <B>Description</B>
+
+     filterText() returns a text string indicating the current filtering
+     condition set for the data store referenced by wa.
+
+ <B>Default Behavior</B>
+
+     The workarea implementation returns the value at wa-&gt;filter.cExpr.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  This method emulates CA-Clipper DBFILTER() function.  Refer to
+        this function for more information regarding the rules of
+        implementation.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng56e17.html">setFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

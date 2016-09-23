@@ -1,0 +1,29 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3c8cd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng3ce6e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1101    Maximum workareas exceeded</B>
+
+     <B>Explanation:</B>  CA-Clipper supports 250 work areas.  This error can be
+     produced if this limit is exceeded.  This usually indicates that an
+     internal process tried to access a field which does not exist, or that
+     an internal field structure is not valid for the work area.  This means
+     the runtime system is out of work areas for work area index strings.
+
+     <B>Action:</B>  A good place to start looking is in the third-party RDD or
+     any "in house" C/ASM code.  Make sure the database driver was REQUESTed
+     and linked.  Check the .LIBrary link order.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

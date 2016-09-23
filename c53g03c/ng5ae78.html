@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5aab5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5b475.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>orderCreate()</B>
+ Create new order
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE orderCreate(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     LPDBORDERCREATEINFO lpdbCreateOrderInfo</B>
+     <B>                     )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpdbCreateOrderInfo</B> is a pointer to a structure containing
+     information for order creation.
+
+ <B>Description</B>
+
+     The orderCreate method creates a new order in wa.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Before you create and attach a new order to the work area,
+        call goCold().
+
+     <B>.</B>  orderCreate() provides the functionality of the CA-Clipper
+        INDEX ON command.  In most implementations, orderCreate() should
+        close any currently open orders before creating the new order.  After
+        order creation, the closed orders may then be reopened or left
+        closed, as dictated by the RDD implementation.
+
+     <B>.</B>  The base ordering procedure requires key evaluation on an
+        empty phantom row.  To reposition to a phantom row, perform a
+        SELF_GOTO().  See go() for more information.
+
+     <B>Warning!</B>  If you choose to allow orders to remain open during order
+     creation, and your implementation provides for scoped or conditional
+     orders, keep in mind that future order creations may be affected by such
+     orders.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4484f.html">DBORDERCREATEINFO</A>
+<A HREF="ng4a086.html">go()</A>
+<A HREF="ng5c579.html">orderListRebuild()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

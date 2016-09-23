@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb866.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ngc115.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER INCREMENTAL OFF       Disable CA-Clipper incremental linking</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Disable CA-Clipper incremental linking</B></U>
+
+ <U>Syntax   : <B>BLINKER INCREMENTAL OFF</B></U>
+
+ <U>Default  : <B>ON</B></U>
+
+ This command is used to turn off Blinker's use of incremental linking. Every
+ link performed will be a full link, no new incremental .BIF file will be
+ created, and no padding will be left between procedures to allow room for
+ incremental linking.
+
+ This command should be used for the final link of an application to obtain
+ its smallest memory requirement, and best runtime performance.
+
+ <B>Symbol Table Compression:</B>
+
+ Using this command also enables symbol table compression for both CA-Clipper
+ Summer'87 and CA-Clipper 5.x, which reduces the size of the application
+ symbol table by removing unneeded duplicate entries.
+
+ The amount of reduction achieved may vary between individual applications,
+ depending on programming style, and the size of the application.
+
+ <B>Dynamic Paging:</B>
+
+ Using this option with CA-Clipper 5.x applications also enables dynamic
+ paging of CA-Clipper code, which provides very good runtime performance for
+ overlaid CA-Clipper code, with negligible memory overhead.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb866.html">BLINKER INCREMENTAL FILE</A>
+<A HREF="ngc115.html">BLINKER INCREMENTAL PAD</A>
+<A HREF="ng4193.html">BLINKER CLIPPER PAGE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

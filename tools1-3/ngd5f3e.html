@@ -1,0 +1,93 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd58d8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngd1d84.html">[^^Up^^]</A>
+<A HREF="ngd67d4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SAVEGETS()</B>
+ Saves the GET settings of the active environment
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SAVEGETS() --&gt; aSavedGets</B>
+
+ <B>Returns</B>
+
+     SAVEGETS() returns an array that contains all information necessary to
+     save the active GET environment.
+
+ <B>Description</B>
+
+     SAVEGETS() only returns the array with the current GET object.  This
+     allows you to save it to a LOCAL variable and restore it later to the
+     previous GET settings through RESTGETS().  This way, it is also possible
+     to newly open a GET mask or VALID UDF from within a KEYTRAP procedure
+     without losing the previous one.
+
+ <B>Notes</B>
+
+     <B>Important!</B>  Never use the CA-Clipper CLEAR or CLEAR GETS commands
+     within the SAVEGETS()/RESTGETS() construction.
+
+     <B>.</B>  The array returned by SAVEGETS() is valid only during the
+        current program run.  Therefore, it is not useful to save this data
+        in the file.
+
+     <B>.</B>  Effective with CA-Clipper, the cursor position is always saved
+        when you leave an input field.  If you do not want to do this, place
+        the key code for Pos1 in the keyboard buffer through KEYSEND at the
+        end of the trap procedure.
+
+ <B>Example</B>
+
+     F1 activates the HELP procedure from an input mask.  The active GET is
+     saved there and then newly opened.  Both GET masks use different PICTURE
+     definitions like different VALID UDF's:
+
+       CLEAR
+        SET KEY 28 TO HELP            // KEYTRAP definition
+        cFirstname  :=  SPACE(10)
+        cLastname   :=  SPACE(10)
+        @ 10, 10 GET cFirstname PICTURE "@!"
+        @ 11, 10 GET cLastname PICTURE "@!" VALID MAINFUNC()
+        READ
+     *
+     * HELP procedure opens new GET
+     *
+     PROCEDURE HELP (A, B, C)
+        LOCAL aOldGets
+        aOldGets := SAVEGETS()        // Save GETS
+     WOPEN(4, 30, 20, 76)             // Open window
+        WBOX()                        // Window border
+        cHelp1  :=  SPACE(10)
+        cHelp2  :=  SPACE(10)
+        @ 10, 10 GET cHelp1 PICTURE "@A"
+        @ 11, 10 GET cHelp2 PICTURE "@A" VALID HELPFUNC()
+        READ
+        RESTGETS(aOldGets)            // Recreate GETS
+        WCLOSE()                      // Close window
+        RETURN
+
+     FUNCTION MAINFUNC
+        SOUND(1000, 10)               // Short beep
+        RETURN(.T.)
+
+     FUNCTION HELPFUNC
+        SOUND(1000, 100)              // One long beep
+        RETURN(.T.)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd524c.html">RESTGETS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

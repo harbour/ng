@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6c7cf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng6cdc6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LLG_RECT structure</B>
+ Structure for screen region information
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   int   iLeft;</B>
+     <B>   int   iTop;</B>
+     <B>   int   iRight;</B>
+     <B>   int   iBottom;</B>
+     <B>} LLG_RECT;</B>
+     <B></B>
+     <B>typedef LLG_RECT far * LLG_LPRECT;</B>
+
+ <B>Elements</B>
+
+     <B>iLeft</B> is the X coordinate of the top left corner of the screen
+     region.
+
+     <B>iTop</B> is the Y coordinate of the top left corner of the screen
+     region.
+
+     <B>iRight</B> is the X coordinate of the bottom right corner of the screen
+     region.
+
+     <B>iBottom</B> is the Y coordinate of the bottom right corner of the screen
+     region.
+
+     <B>Note: </B> These coordinates are pixel-based unless you specify the
+     bIsGraphic parameter as false (.F.) when you call _gExclSet().
+
+ <B>Files</B>   Header file is Llibg.api.
+
+ <B>Used By</B>   _mClipGet(), _mClipSet(), _gClipGet(), _gClipSet(), _gExclGet(),
+           _gExclSet()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng61cd7.html">_mClipGet()</A>
+<A HREF="ng61fa5.html">_mClipSet()</A>
+<A HREF="ng641ec.html">_gClipGet()</A>
+<A HREF="ng644bc.html">_gClipSet()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

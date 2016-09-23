@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng704ac.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng718ad.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSRRP()</B>
+ Requests a remote printer.s configuration information
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSRRP(&lt;cPServer&gt;,&lt;nPrinter&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; aInfo</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;nPrinter&gt;</B>  Designates the number of the printer on &lt;cPServer&gt;.
+     Values between 0 and 15 are possible.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSQL() returns a one-dimensional array that contains configuration
+     information about the passed printer.  The elements of the array are
+     defined in the table that follows.
+
+     <B>Table 27.13:  NNETPSRRP() Array Structure</B>
+     ------------------------------------------------------------------------
+     <B>Position     Metasymbol   CTPS.CH      Definition </B>
+     ------------------------------------------------------------------------
+     1            nType        RRP_TYPE     Printer type
+     2            lInt         RRP_INT      Use interrupts
+     3            nIRQ         RRP_IRQ      IRQ number
+     4            nBuf         RRP_BUF      Rec. number of 512 byte buffers
+     5            lXon         RRP_XON      Use Xon/XOff protocol
+     6            nBaud        RRP_BAUD     Baud rate
+     7            nData        RRP_DATA     Data bits
+     8            nStop        RRP_STOP     Stop bits
+     9            nParity      RRP_PARITY   Parity
+     10           nSocket      RRP_SOCKET   Socket number for communication
+                                            with print server
+     ------------------------------------------------------------------------
+
+     For a list of possible remote printers, see the function NNETPSARP().
+     The elements RRP_XON, RRP_BAUD, RRP_DATA, RRP_STOP, and RRP_PARITY are
+     useful only if the remote printer is configured as serial printer.  The
+     baud rate, stop bits, and parity are coded as numeric values:  0=300
+     baud, 1=600 baud, 2=1200 baud, 3=2400 baud, 4=4800 baud, 5=9600 baud;
+     0=0 stop bits, 1=1,5 stop bits, 2=1 stop bit; parity: 0=no, 1=even,
+     2=odd.
+
+     If an error occurs, the function returns an empty array.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER REQUEST REMOTE PRINTER
+     Netware print servers are able to service printers that are connected to
+     a workstation (remote printers).  NNETPSRRP() allows you to request a
+     remote printer from a print server to emulate a remote printer from
+     within a CA-Clipper application (see the sample program RPRINTER.PRG).
+
+     For the emulation of a remote printer, the most important information
+     within the return value is the socket number (RRP_SOCKET).  For the
+     following setup of an SPX session, this socket number must be passed as
+     target socket.
+
+ <B>Example</B>
+
+     You can find a detailed example for the description of NNETPSRRP() on
+     the CA-Clipper Tools disks under RPRINTER.PRG.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng62c42.html">NNETPSARP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5206c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng53212.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NETERR()</B>
+ Determine if a network command has failed
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NETERR([&lt;lNewError&gt;]) --&gt; lError</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;lNewError&gt;</B> if specified sets the value returned by NETERR() to the
+     specified status.  &lt;lNewError&gt; can be either true (.T.) or false (.F.).
+     Setting NETERR() to a specified value allows the runtime error handler
+     to control the way certain file errors are handled.  For more
+     information, refer to Errorsys.prg.
+
+ <B>Returns</B>
+
+     NETERR() returns true (.T.) if a USE or APPEND BLANK fails.  The initial
+     value of NETERR() is false (.F.).  If the current process is not running
+     under a network operating system, NETERR() always returns false (.F.).
+
+ <B>Description</B>
+
+     NETERR() is a network function.  It is a global flag set by USE,
+     USE...EXCLUSIVE, and APPEND BLANK in a network environment.  It is used
+     to test whether any of these commands have failed by returning true
+     (.T.) in the following situations:
+
+     <B>NETERR() Causes</B>
+     ------------------------------------------------------------------------
+     <B>Command             Cause</B>
+     ------------------------------------------------------------------------
+     USE                 USE EXCLUSIVE by another process
+     USE...EXCLUSIVE     USE EXCLUSIVE or USE by another process
+     APPEND BLANK        FLOCK() or RLOCK() of LASTREC() + 1 by another user
+     ------------------------------------------------------------------------
+
+     NETERR() is generally applied in a program by testing it following a USE
+     or APPEND BLANK command.  If it returns false (.F.), you can perform the
+     next operation.  If the command is USE, you can open index files.  If it
+     is APPEND BLANK, you can assign values to the new record with a REPLACE
+     or @...GET command.  Otherwise, you must handle the error by either
+     retrying the USE or APPEND BLANK, or terminating the current operation
+     with a BREAK or RETURN.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates typical usage of NETERR().  If the
+        USE succeeds, the index files are opened and processing continues.
+        If the USE fails, a message displays and control returns to the
+        nearest BEGIN SEQUENCE construct:
+
+        USE Customer SHARED NEW
+        IF !NETERR()
+           SET INDEX TO CustNum, CustOrders, CustZip
+        ELSE
+           ? "File is in use by another"
+           BREAK
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7af04.html">APPEND BLANK</A>
+<A HREF="ng384c9.html">FLOCK()</A>
+<A HREF="ng5dd2e.html">RLOCK()</A>
+<A HREF="ngb1e6f.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,106 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7a23f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng75ccf.html">[^^Up^^]</A>
+<A HREF="ng7b096.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SEEK.EXE:</B>
+
+
+  The SEEK utility is very handy in making sure that the file you think your
+  compiler and/or linker are using is the correct one.  SEEK will look for
+  the specified file in the specified (or assumed) DOS environment path.
+
+  For example, if you think that your linker may be picking up an old version
+  of your BOGUS.LIB file somewhere in your LIB path, SEEK will tell you.  It
+  will search your LIB path for the first BOGUS.LIB file that your linker
+  would be using.
+
+  If you're not sure which FOOBAR.CH file, CA-Clipper's preprocessor will be
+  using, SEEK can tell you that as well.
+
+  For obvious file extensions, there is no need to specify the environment
+  path to search in, unless you want to force SEEK to look in a different
+  environment path instead.  For example, if the file extension is .h, .ch,
+  or .inc, SEEK will assume it's a header file and scan the INCLUDE path.
+
+  SEEK will also optionally:
+
+    <B>.</B>  List ALL of the specified files that were found in the selected DOS
+       environment path.
+
+    <B>.</B>  Change to the drive and directory of the found file.  Actually, for
+       people who happen to nest their development files many levels deep,
+       even when you know for sure which file is being used, this option can
+       be used as a quick way to get to that directory.
+
+    <B>.</B>  Copy the found file into the current directory.
+
+    <B>.</B>  Display with a terse (single line, no title screen) output.  This is
+       mainly useful when using SEEK in a batch file to display large groups
+       of file paths.
+
+  The command-line syntax for using SEEK.EXE is as follows:
+
+    SEEK &lt;cFileName&gt; [&lt;cEnvPath&gt;] [options]
+
+    Where:  &lt;cFileName&gt; = The file to search for.
+             &lt;cEnvPath&gt; = Optional environment path to search for the
+                          file in.  If no path is specified, obvious
+                          defaults are assumed.
+
+    Options:         /a = Find all occurrences of specified file in path.
+
+                     /c = Copy the found file into the current directory.
+                          (Not available if /a switch is used.)
+
+                     /d = Change to the directory of the found file.
+                          (Not available if /a switch is used.)
+
+                     /t = Terse display (only show the SEEK result line)
+
+   Examples:
+
+    <B>SEEK BOGUS.LIB LIB</B>       // Searches LIB
+
+    <B>SEEK STDIO.H INCLUDE</B>     // Searches INCLUDE
+
+    <B>SEEK TEST.EXE PATH</B>       // Searches PATH
+
+    <B>SEEK BOGUS.LIB</B>           // Assumes LIB
+
+    <B>SEEK BOGUS.LNK</B>           // Assumes LIB
+
+    <B>SEEK STDIO.H</B>             // Assumes INCLUDE
+
+    <B>SEEK STD.CH</B>              // Assumes INCLUDE
+
+    <B>SEEK DOIT.BAT</B>            // Assumes PATH
+
+
+    // Search for TEST.EXE, but in the PRG environment path instead
+    <B>SEEK TEST.EXE PRG</B>
+
+    // Search for all MYUDC.CH files in INCLUDE path
+    <B>SEEK MYUDC.CH /a</B>
+
+    // Search for TEST.OBJ and copy it to the current directory
+    <B>SEEK TEST.OBJ /c</B>
+
+    // Search for DEMO.LIB, and change to the directory it's found in
+    <B>SEEK DEMO.LIB /d</B>
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

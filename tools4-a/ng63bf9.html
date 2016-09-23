@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng636bf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng6428b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSCHGQ()</B>
+ Changes the queue priority
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSCHGQ(&lt;cPServer&gt;,&lt;nPrinter&gt;,&lt;cQueue&gt;,[&lt;nPrior&gt;],</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;nPrinter&gt;</B>  Designates the number of the printer on &lt;cPServer&gt;.
+     Values between 0 and 15 are possible.
+
+     <B>&lt;cQueue&gt;</B>  Designates the queue for which the priority is changed.
+
+     <B>&lt;nPrior&gt;</B>  Designates the new priority for &lt;cQueue&gt;.  The highest
+     priority is 1, which is also the default value.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSCHGQ() returns .T. if the priority has been changed successfully.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER CHANGE QUEUE (PRIORITY)
+     Jobs within a queue are serviced by a print server according to the
+     queue priorities.  NNETPSCHGQ() allows you to change the priority of a
+     queue (&lt;cQueue&gt;) for a print server (&lt;nPrinter&gt;).  This function
+     requires operator rights for &lt;cPServer&gt;.
+
+ <B>Example</B>
+
+     Set the priority of QUEUE1 for printer 0 on PSERVER to 3 (low priority):
+
+     IF NNETPSCHGQ('PSERVER',0,'QUEUE1',3)
+        ? 'Priority changed successfully!'
+     ELSE
+        ? 'Error!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng613f6.html">NNETPSADDQ()</A>
+<A HREF="ng64caf.html">NNETPSDELQ()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

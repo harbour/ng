@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng62e62.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng636d2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_mShow()</B>
+ Display a new mouse pointer at a particular location
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>int _mShow(</B>
+     <B>            int iCursorShape,</B>
+     <B>            int iRow,</B>
+     <B>            int iCol</B>
+     <B>          )</B>
+
+ <B>Arguments</B>
+
+     <B>iCursorShape</B> is the mouse pointer shape, which you specify using one
+     of the following values:
+
+     <B>Mouse Pointer Shape Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant                 Mouse Pointer Shape</B>
+     ------------------------------------------------------------------------
+     LLM_CURSOR_ARROW         Standard pointer
+     LLM_CURSOR_CROSS         Cross
+     LLM_CURSOR_FINGER        Hand with pointing index finger
+     LLM_CURSOR_HAND          Hand
+     LLM_CURSOR_SIZE_NE_SW    North-East South-West arrow
+     LLM_CURSOR_SIZE_NS       North South arrow
+     LLM_CURSOR_SIZE_NW_SE    North-West South-East arrow
+     LLM_CURSOR_SIZE_WE       West East arrow
+     LLM_CURSOR_WAIT          Hourglass
+     ------------------------------------------------------------------------
+
+     <B>iRow</B> is the text-based row at which to display the mouse pointer.
+
+     <B>iCol</B> is the text-based column at which to display the mouse pointer.
+
+ <B>Returns</B>
+
+     The cursor shape of the previous mouse pointer (see iCursorShape above
+     for a table of possible values).
+
+ <B>Description</B>
+
+     _mShow() serves two purposes.  You can use it after calling _mHide() to
+     redisplay a mouse pointer that was previously hidden, or you can use it
+     to change the current mouse pointer shape without first hiding it.
+     _mCol(), _mRow(), _mPixX(), and _mPixY() are updated accordingly after
+     calling _mShow().
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng62651.html">_mHide()</A>
+<A HREF="ng636d2.html">_mState()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

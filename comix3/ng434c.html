@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3fec.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng4aec.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmKeyCount()</B>          Return the number of keys in the index (filtered)
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmKeyCount( [nOrder] | [cTag [, cBag]] ) -&gt; nKeys
+
+<B>Arguments</B>
+
+    nOrder, cTag and cBag are optional parameters which specify the index.
+    If omitted, the current master index will be used.
+
+<B>Returns</B>
+
+    cmKeyCount() returns the number of keys in the current which meet the
+    filter condition (and fall within the current index scope if one is
+    defined).
+
+<B>Description</B>
+
+    cmKeyCount() is similar to cmxKeyCount(), but returns the number of keys
+    which meet the filtered condition in the current master index.
+    (cmxKeyCount() returns the "raw" count regardless of the filter).
+    
+    If the index is not conditional (i.e., no FOR clause), this is the same
+    as the number of records which meet the condition.
+
+    If the index is conditional, this will be the number of records which
+    meet the filter condition and meet the FOR condition of the index.
+
+    cmKeyCount() will force Linear Optimization to be performed so that the
+    count returned is fully accurate.
+
+    cmKeyCount() obeys the current index scope (if any).  I.e., it will only
+    count the number of keys for the current index which meet the condition
+    _and_ fall within the current index scope.
+
+<B>Example</B>
+
+    index on age to age
+    index on age ageFor for last = 'J'
+    index on salary to salary
+    use demo index age, ageFor, salary
+    ...
+
+    cmFilter("salary &gt;= 75000")
+
+    *   Get the number that meet the filter condition
+    set order tag age
+<B>    ? cmxKeyCount(), " records match: " + dbFilter()</B>
+
+    *   Get the number that meet the filter condition and "last = 'J'"
+    set order tag ageFor
+<B>    ? cmxKeyCount(), " records match: " + dbFilter() + " .and. " +;</B>
+            indexFilter()
+
+<B>See Also</B>
+
+    cmKeyGoto(), cmKeyNo(), cmKeySkip(), cmDoLinear()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4aec.html">cmKeyGoto()</A>
+<A HREF="ng4ebf.html">cmKeyNo()</A>
+<A HREF="ng542c.html">cmKeySkip()</A>
+<A HREF="ng2810.html">cmDoLinear()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

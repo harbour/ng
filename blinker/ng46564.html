@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4639f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3dfc5.html">[^^Up^^]</A>
+<A HREF="ng46b06.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1115: &lt;file(module)&gt; : '&lt;symbol&gt;'unresolved external</B>
+------------------------------------------------------------------------------
+
+ This message indicates that the '&lt;symbol&gt;', defined as external in module
+ (module) of file &lt;file&gt;, cannot be found in any of the other .OBJ files or
+ libraries in the script file.
+
+ The usual cause of this problem is that an object or library file required
+ by the program has been omitted from the script file.
+
+ Another possible cause of this message is that some libraries require the
+ use of the SEARCH command, as their library cross reference records are not
+ complete. Try a SEARCH on the library you suspect contains the missing
+ '&lt;symbol&gt;'. For a full description of the SEARCH command see Chapter 9.
+
+ If you are aware of the cause for this message and want to continue linking
+ to create an executable file, use the command BLINKER EXECUTABLE NODELETE.
+
+ <B>Note for CA-Clipper Summer '87:</B>
+
+ If you get '__dos_hold' as an unresolved external then please check that you
+ have the updated version of CLIPPER.EXE, CLIPPER.LIB and EXTEND.LIB from
+ Computer Associates (Summer '87). The original versions all have a date of
+ 12-21-87 and a time of 12:00 am (which may not be displayed), while the
+ updated versions have the same date, but a time of 2:00am. Blinker will work
+ correctly only with the updated versions, as there were a number of problems
+ fixed in them.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

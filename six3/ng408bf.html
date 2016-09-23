@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng40575.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_WildSeek():</B>
+
+  Syntax:  Sx_WildSeek( &lt;cSearchStr&gt;, [&lt;lCont&gt;] )
+
+           cSearchStr = The wildcard string to base the search on.
+           lCont      = .T. searches from the current record pointer, .F.
+                        searches from the top of the DBF (Default).
+
+  Returns:  .T. if match is found (also sets found() to .T.), .F. if not
+            (also sets found() to .F.).
+
+  Description:  Performs a wildcard SEEK on the currently selected tag or
+                index.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Examples:
+
+      // To find the first Smith or Smyth
+      <B>Sx_WildSeek( "Sm?th" )</B>            // Begin search from Bof()
+      <B>Sx_WildSeek( "Sm?th", .T. )</B>       // Begin Search from current recno()
+
+      // To find the first Johnson, Johnston, Johannson, Josephson, etc...)
+      <B>Sx_WildSeek( "Jo*son" )</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5594c.html">WILDSEEK</A>
+<A HREF="ng55ec5.html">WILDSEEKNEXT</A>
+<A HREF="ng40575.html">Sx_WildMatch()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

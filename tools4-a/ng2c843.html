@@ -1,0 +1,139 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2c41d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng2d9c0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETDIRS()</B>
+ Determines the extended information about subdirectories
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETDIRS([&lt;cPath&gt;],[&lt;nAttr&gt;|&lt;cAttr&gt;],[&lt;l386&gt;]) --&gt; aDir</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPath&gt;</B>  Designates the directory for which the subdirectories are
+     read.  The parameter contains a search mask for the directories that are
+     read.  Within the search mask, the wildcard characters "?" and "*" can
+     be used.  A file identifier is not permitted.  The search mask is
+     ignored if the function is called on a Netware 2.x server, but this
+     parameter must be passed.
+
+     <B>&lt;nAttr&gt;</B>  Designates the file attributes in numeric form, according
+     to the table in the description .  The default value is 16.
+
+     <B>&lt;cAttr&gt;</B> Designates the file attributes in the form of a character
+     string, according to the table in the description.  The default value is
+     "D".
+
+     <B>&lt;l386&gt;</B> Designates whether NNETDIRS() also returns extended
+     information that is only available on Netware 3.x servers.  The
+     parameter must be designated .T..  The default value ( .F.) does not
+     return extended information.
+
+ <B>Returns</B>
+
+     NNETDIRS() returns an array with subarrays (two-dimensional array).
+     Each subarray contains information about each directory entry that is
+     found.  The structure of the subarrays is described in the following
+     table.
+
+     <B>Table 23.1:  NNETDIRS() Subarray Structure</B>
+     ------------------------------------------------------------------------
+     <B>Position  Metasymbol CTNNET.CH    Definition </B>
+     ------------------------------------------------------------------------
+     1         cName      ND_NAME      Directory name
+     2         dCrDate    ND_CREADATE  Creation date
+     3         cCrTime    ND_CREATIME  Creation time
+     4         nRights    ND_RIGHTS    Maximum (2.x) / Inherited (3.x) Rights
+     5         cOwner     ND_OWNER     Owner
+     ------------------------------------------------------------------------
+
+     If &lt;l386&gt; has been designated .T., the returned array contains the
+     following extension:
+
+     <B>Table 23.2:  Extended NNETDIRS() Subarray Structure</B>
+     ------------------------------------------------------------------------
+     <B>Position     Metasymbol     CTNNET.CH      Definition</B>
+     ------------------------------------------------------------------------
+     6            cUpdDate       ND_UPDDATE     Date of last update
+     7            dUpdTime       ND_UPDTIME     Time of last update
+     8            cArcDate       ND_ARCDATE     Date of last  archive
+     9            nArcTime       ND_ARCTIME     Time of last archive
+     10           cArchive       ND_ACHIVER     Name of archivist
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     NOVELL NET DIRECTORIES
+     NNETDIRS() returns extended information about the subdirectories of file
+     server directories.  On Netware 3.x servers, the subdirectories can be
+     determined by a search mask in &lt;cPath&gt;.  You can also determine the
+     default file attribute.  The attribute can be passed in the form of a
+     numeric value or a character string:
+
+     <B>Table 23.3:  File Attribute Coding for NNETDIRS()</B>
+     ------------------------------------------------------------------------
+     <B>Value   Symbol    Definition</B>
+     ------------------------------------------------------------------------
+     1       R         Read Only
+     2       H         Hidden directories
+     4       S         System directories
+     16      D         Subdirectories (always set by  NNETDIRS())
+     32      A         Archive bit set
+     ------------------------------------------------------------------------
+
+     To specify an attribute, numeric values must be added or the related
+     symbols must be added to a character string.
+
+     A call of NNETDIRS() for a Netware 2.x file server also requires a
+     search mask in &lt;cPath&gt;; however, the mask is ignored.  Under Netware
+     2.x, the function returns all subdirectories that correspond to the
+     passed attributes.
+
+ <B>Examples</B>
+
+     <B>.</B>  Read the subdirectories of L:\, and display the directory
+        names:
+
+        #include "ctnnet.ch"
+
+        aDirs=NNETDIRS('L:\*')
+
+        FOR i=1 TO LEN(aDirs)
+           ? aDirs[i,ND_NAME]
+        NEXT i
+
+     <B>.</B>  Read the subdirectories of NANGERTOOLS1/VOL1:DATA, including
+        the hidden system directories:
+
+        aDirs=NNETDIRS('NANGERTOOLS1/VOL1:DATA/*','SH')
+
+     <B>.</B>  Read the subdirectories of L:\ with extended 3.x information.
+        Display the directory name and the date of the last update:
+
+        #include "ctnnet.ch"
+
+        aDirs=NNETDIRS('L:\*',,.T.)
+
+        FOR i=1 TO LEN(aDirs)
+           ? aDirs[i,ND_NAME],aDirs[i,ND_UPDDATE])
+        NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2eb23.html">NNETFILES()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

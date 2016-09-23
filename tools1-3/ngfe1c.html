@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf128.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng1043c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CGA40()</B>
+ Switches to 40-column mode (color or monochrome)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CGA40([&lt;lMonochromeMode&gt;]) --&gt; lSwitch</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lMonochromeMode&gt;</B>  Designates the 40.character mode.  If this
+     parameter is .T., the function switches to the monochrome CGA
+     40-character mode.  If this parameter is.F., the function switches to
+     the 40-character color mode.  The default value is .F..
+
+ <B>Returns</B>
+
+     CGA40() returns .T. if the screen adapter you use permits a switch.
+
+ <B>Description</B>
+
+     This function can be used with any screen adapter that has CGA emulation
+     capability.  You can switch to CGA 40-character mode, color or
+     monochrome.  The function ISCOLOR() also returns .T. in the monochrome
+     mode because this option activates a "color summing" of the screen
+     adapter and does not switch to the monochrome mode for a hercules
+     adapter or a monochrome text adapter.
+
+ <B>Notes</B>
+
+     <B>Important!</B>  This function cannot be implemented when windows are
+     open.
+
+     <B>.</B>  Modes set through this function can also be combined with
+        other line counts, i.e. EGA43().
+
+     <B>.</B>  A call with .T. corresponds to BIOS mode 0.  A call with .F.
+        corresponds to BIOS mode 1.
+
+ <B>Examples</B>
+
+     <B>.</B>  Switch to 40-character mode (color):
+
+        ?  CGA40()         //  .T., if successful
+
+     <B>.</B>  Switch to 40-character mode (monochrome):
+
+        ?  CGA40(.T.)      //  .T., if successful
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng15b01.html">GETMODE()</A>
+<A HREF="ng1043c.html">CGA80()</A>
+<A HREF="ng12f83.html">EGA43()</A>
+<A HREF="ng266d4.html">VGA50()</A>
+<A HREF="ng1a2ae.html">MONOCHROME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

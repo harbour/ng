@@ -1,0 +1,35 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2187c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng18790.html">[^^Up^^]</A>
+<A HREF="ng21f3c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1215:   error accessing XMS overlay cache</B>
+
+     <B>Explanation:</B>  This message indicates that an error has occurred
+     while the Blinker overlay manager is accessing XMS for the storage
+     and/or retrieval of overlays in the overlay cache.
+
+     <B>Action:</B>  Disable the BLINKER CACHE XMS command in the link script
+     file.  If this fixes the problem, it is possible that you have a TSR or
+     device driver working in the background which is manipulating XMS
+     directly in a non-standard manner.  Try removing all TSRs and device
+     drivers from the system except for the XMS driver, and test if the
+     problem still occurs.  If it does, contact Computer Associates technical
+     support.
+
+     <B>See also:</B>  The Linker Reference Commands section in the "CA-Clipper
+     Real Mode Linker--BLINKER.EXE" chapter of the Programming and Utilities
+     Guide.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,106 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7b728.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng75ccf.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>STRTRAN.EXE:</B>
+
+
+  The STRTRAN.EXE utility allows you to do a binary search and replace of
+  any text within any file or set of files.  This allows you to modify any
+  text or symbols within source, header, object, library, or executable
+  files.
+
+  STRTRAN.EXE can also be used to simply locate a string of text within a
+  file or group of files, without doing any replacements.
+
+  When doing a search and replace of text, the new value must be the exact
+  same length as the value being replaced.  This is because this is a binary,
+  byte-for-byte replacement, unlike a text insert replacement that a text
+  editor or word processor do to text files.  This utility simplifies tasks
+  you would normally use a HEX editor for.
+
+  If the new value is shorter than the old value, or if the values to be
+  replaced have a space in them, you can surround the values with quotation
+  marks, padding the replacement value if necessary.  See the examples
+  below for a demonstration of this technique.
+
+  All files that are modified during a replace are backed up to a file with
+  the same base name as the original file, but with a .BAK extension.  In
+  the event that the file being modified is a *.BAK file itself, it will be
+  backed up to a file with a .$$$ extension instead.
+
+  The command-line syntax for using STRTRAN.EXE is as follows:
+
+  STRTRAN &lt;cFileName&gt; &lt;cOldValue&gt; &lt;cNewValue&gt; [Options]
+
+  Where:  cFileName = Name of file(s) to be processed, including extension.
+                      Wildcards can be used.  ( Example: *.OBJ )
+          cOldValue = String to search for in &lt;cFileName&gt;.
+          cNewValue = String to replace all occurrences of &lt;cOldVal&gt; with.
+                      This value must be the same length as &lt;cOldValue&gt;.
+
+  Options:  /b = Do not backup original files.  By default, if a file is
+                 modified, STRTRAN copies the original file to a .BAK
+                 file.  Use of this switch speeds up processing in cases
+                 where backups are not required.
+
+            /c = Case-Insensitive Search.  (Replace value is not affected)
+
+            /s = Show finds only;  Don't replace.  If this switch is
+                 used, &lt;cNewValue&gt; is not required and will be ignored.
+
+            /v = Verbose display.  Shows file offset and a 50-byte file
+                 snippet for each find.
+
+  Examples:
+
+    // Replace all occurrences of SIXCDX with SIXNSX in TEST.PRG
+    <B>STRTRAN test.prg SIXCDX SIXNSX</B>
+
+    // Replace all occurrences of Loren Scott with Ceci Smith in FOO.EXE
+  <U>*</U> <B>STRTRAN foo.exe "Loren Scott" "Ceci Smith "</B>
+
+    // Replace all occurrences of One( "Foo" ) to Two( "Bar" ) in *.PRG
+ <U>**</U> <B>STRTRAN *.PRG "One( \"Foo\" )" "Two( \"Bar\")"</B>
+
+    // Replace all occurrences of CLIPPER501 with CLIPPER520 in *.OBJ
+    <B>STRTRAN *.OBJ CLIPPER501 CLIPPER520</B>
+
+    // Replace all occurrences of Loren or LOREN with Bogus in *.PRG
+    <B>STRTRAN *.prg Loren Bogus /c</B>
+
+    // Count the number of occurrences of Loren or LOREN in *.TXT
+    <B>STRTRAN *.txt Loren /c /s</B>
+
+    // Same as above, but shows offset and a text snippet for each find
+    <B>STRTRAN *.txt Loren /c /s /v</B>
+
+    // Replaces all occurrences of FOO with BAR in TEST.EXE, without
+    // creating TEST.BAK
+    <B>STRTRAN test.exe FOO BAR /b</B>
+
+
+  <U>*  - When spaces are contained in either the string to be replaced or the</U>
+       <U>replacement string, you must surround the entire string with double</U>
+       <U>quotes (").</U>
+
+  <U>** - If the string being replaced contains double quotes ("), you must</U>
+       <U>precede each quotation mark with a backslash (\) to force the quote</U>
+       <U>to be handled as part of the string.  The backslash does NOT count</U>
+       <U>as part of the length of the string.</U>
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

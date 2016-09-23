@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1b4e8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng1c20b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SECTION INTO                  Specify files to be placed in external overlay</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify files to be placed in an external overlay</B></U>
+
+ <U>Syntax   : <B>SECTION INTO &lt;ovlname&gt; [FILE [d:][path]&lt;filename&gt;</B></U>
+            <B>[, [d:][path]&lt;filename&gt;...] ]</B>
+
+ <U>Default  : <B>Disabled</B></U>
+
+ <U>Example  : <B>FILE MAIN</B></U>
+            <B>BEGINAREA</B>
+            <B>SECTION INTO OVL1</B>
+            <B>FILE ABC, DEF, GHI # Placed in OVL1</B>
+            <B>SECTION INTO OVL2</B>
+            <B>FILE JKL, MNO, PQR # Placed in OVL2</B>
+            <B>ENDAREA</B>
+
+ The SECTION INTO command is used to specify the name of an external overlay
+ file for the overlays. The file may have any extension except .EXE, and if
+ no extension is specified then .OVL is assumed. The first SECTION INTO
+ command must precede the first overlaid FILE command, otherwise an internal
+ overlay within the OUTPUT file will be created and all SECTION INTO commands
+ will be ignored. Note that this command does NOT cause overlays to be
+ created, it merely causes overlays (if any) to be stored external to the EXE
+ file (in OVL files). The BEGINAREA and ENDAREA commands are used to create
+ overlays.
+
+ Once an overlay file has been specified using the SECTION INTO command, all
+ overlaid code will be placed in the same file until a SECTION INTO command
+ with a different file name is found. At this time a new overlay file will be
+ created. Output may be spread between the overlay files by the use of
+ multiple SECTION INTO commands.
+
+ Once an internal overlay has been created, all SECTION INTOs will be ignored
+ and all overlaid procedures will be stored internally. Once an external
+ overlay has been created it is not possible to create an internal overlay.
+ Blinker has a limit of 15 external overlays in this version.
+
+ At program runtime, one file handle is allocated to each overlay file, so it
+ may be necessary to increase the number of file handles available to the
+ program.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2d82.html">BEGINAREA</A>
+<A HREF="ng15d76.html">ENDAREA</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

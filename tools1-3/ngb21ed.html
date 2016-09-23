@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb1c28.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb0492.html">[^^Up^^]</A>
+<A HREF="ngb2669.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CSETDATE()*</B>
+ Queries the SET DATE setting
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CSETDATE() --&gt; nDateFormat</B>
+
+     <B>*  This function is retained for compatibility purposes.  Use the</B>
+     <B>   CA-Clipper SET() function to develop future applications.</B>
+
+ <B>Returns</B>
+
+     The returned numeric code signifies the current setting for SET DATE.
+
+ <B>Description</B>
+
+     This function allows you to query the current setting for SET DATE.  The
+     table below describes the numeric codes that are returned:
+
+     <B>Table 11-3: Coding for country specific date formats</B>
+     ------------------------------------------------------------------------
+     <B>Code    Definition</B>
+     ------------------------------------------------------------------------
+     1       AMERICAN
+     2       ANSI
+     3       BRITISH
+     4       FRENCH
+     5       GERMAN
+     6       ITALIAN
+     ------------------------------------------------------------------------
+
+ <B>Note</B>
+
+     <B>.</B>  This function cannot alter the status of SET DATE.
+
+ <B>Example</B>
+
+     For SET DATE AMERICAN, CSETDATE() returns a value of 1.
+
+     SET DATE AMERICAN ? CSETDATE()      // 1
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,29 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng12728.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf3b9.html">[^^Up^^]</A>
+<A HREF="ng12a83.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ert0004 Duplicate stacks</B>
+
+     <B>Explanation:</B>  Two different stacks are requested by a program.  The
+     most probable cause is that you have written a program in assembly
+     language that has direct control over allocation of stack segments.
+
+     <B>Action:</B>  The solution is to eliminate the allocation of one of the
+     stack segments.  The SS and SP registers can be moved once your program
+     begins execution, but the linker needs to identify a single stack
+     segment so that it can know how to initialize the registers in the .EXE
+     header.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

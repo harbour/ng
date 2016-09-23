@@ -1,0 +1,262 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng28fbc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng2ca74.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBORDERINFO()</B>
+ Return and optionally change information about orders and index files
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBORDERINFO(&lt;nInfoType&gt;,   [&lt;cIndexFile&gt;],</B>
+     <B>   [&lt;cOrder&gt; | &lt;nPosition&gt;],</B>
+     <B>   [&lt;expNewSetting&gt;]) --&gt; uCurrentSetting</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nInfoType&gt;</B> determines the type of information as specified by the
+     constants below.  Note, however, that not all constants are supported
+     for all RDDs.  These constants are defined in the Dbinfo.ch header file,
+     which must be included (#include) in your application.
+
+     <B>Order/Index Information Type Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant                      Description</B>
+     ------------------------------------------------------------------------
+     DBOI_CONDITION                For condition of the specified order as a
+                                   string.
+     DBOI_CUSTOM                   Logical flag indicating whether the
+                                   specified order is custom-built (for RDDs
+                                   that support custom-built orders).  Note
+                                   that although you can turn the custom-
+                                   built flag on for a standard order by
+                                   specifying true (.T.) for the &lt;uNewSetting&gt;
+                                   argument, you cannot turn a custom-built
+                                   order into a standard order.  Specifying
+                                   false (.F.) for &lt;uNewSetting&gt; is the same
+                                   as not specifying the argument at all--
+                                   both return the current setting.
+     DBOI_EXPRESSION               Order key expression of the specified
+                                   order as a string.
+     DBOI_FILEHANDLE               Handle of the specified index file as a
+                                   number.
+     DBOI_HPLOCKING                Logical flag indicating whether the
+                                   specified index file uses the high
+                                   performance index locking schema.
+     DBOI_INDEXEXT (DBOI_BAGEXT)   Default index file extension as a string.
+     DBOI_INDEXNAME (DBOI_BAGNAME) Name of the specified index file as a
+                                   string.
+     DBOI_ISCOND                   Logical flag that determines whether the
+                                   specified order was defined using a FOR
+                                   condition.
+     DBOI_ISDESC                   Logical flag that determines if the
+                                   specified order is descending.  For
+                                   drivers that support dynamically setting
+                                   the descending flag at runtime, specify
+                                   the new value as a logical, using
+                                   DBORDERINFO(DBOI_ISDESC, [&lt;cIndexFile&gt;],
+                                   [&lt;cOrder&gt; | &lt;nPosition&gt;], &lt;lNewSetting&gt;).
+                                   The current setting is returned before it
+                                   is changed.
+     DBOI_KEYADD                   Logical flag indicating whether a key has
+                                   been successfully added to the specified
+                                   custom-built order.
+     DBOI_KEYCOUNT                 Number of keys in the specified order.
+     DBOI_KEYDEC                   Number of decimals in the key of the
+                                   specified order.
+     DBOI_KEYDELETE                Logical flag indicating whether a key has
+                                   been successfully deleted from the
+                                   specified custom-built order.
+     DBOI_KEYGOTO                  Logical flag indicating whether the record
+                                   pointer has been successfully moved to a
+                                   record specified by its logical record
+                                   number in the controlling order.
+     DBOI_KEYSINCLUDED             Number of keys included in the specified
+                                   order so far.  This is primarily useful
+                                   for conditional orders.  It can be used
+                                   during the status display process (with
+                                   the EVAL clause of the INDEX command).
+     DBOI_KEYSIZE                  Size of the key in the specified order as
+                                   a number.
+     DBOI_KEYTYPE                  Data type of the key in the specified
+                                   order as a string.
+     DBOI_KEYVAL                   Key value of the current record from the
+                                   controlling order.
+     DBOI_LOCKOFFSET               Locking offset for the specified index
+                                   file as a numeric value.
+     DBOI_NAME                     Name of the specified order as a string.
+     DBOI_NUMBER                   Numeric position of the specified order in
+                                   the order list.
+     DBOI_ORDERCOUNT               Number of orders in the specified index
+                                   file.
+     DBOI_POSITION                 Logical record number of the current
+                                   record within the specified order.
+     DBOI_RECNO                    Physical record number of the current
+                                   record within the specified order.
+     DBOI_SCOPEBOTTOM              Bottom boundary of the scope (as a number)
+                                   for the specified order.
+     DBOI_SCOPEBOTTOMCLEAR         Clears the bottom boundary of the scope
+                                   for the specified order.
+     DBOI_SCOPETOP                 Top boundary of the scope (as a number)
+                                   for the specified order.
+     DBOI_SCOPETOPCLEAR            Clears the top boundary of the scope for
+                                   the specified order.
+     DBOI_SETCODEBLOCK             Key for the specified order as a code
+                                   block.
+     DBOI_SKIPUNIQUE               Logical flag indicating whether the record
+                                   pointer has been successfully moved to the
+                                   next or previous unique key in the
+                                   controlling order.
+     DBOI_UNIQUE                   Logical flag indicating whether the
+                                   specified order has the unique attribute
+                                   set.
+     ------------------------------------------------------------------------
+
+     <B>Important! </B> DBOI_USER is a constant that returns the minimum value
+     that third-party RDD developers can use for defining new &lt;nInfoType&gt;
+     parameters.  Values less than DBOI_USER are reserved for Computer
+     Associates development.
+
+     <B>&lt;cIndexFile&gt;</B> is the name of an index file, including an optional
+     drive and directory (no extension should be specified).  Use this
+     argument with &lt;cOrder&gt; to remove ambiguity when there are two or more
+     orders with the same name in different index files.
+
+     <B>&lt;cOrder&gt;</B> | <B>&lt;nPosition&gt;</B> is the name of the order about which you
+     want to obtain information or a number representing its position in the
+     order list.  For single-order index files, the order name is the
+     eight-letter index file name.  Using the order name is the preferred
+     method since the position may be difficult to determine using
+     multiple-order index files.  Invalid values are ignored.  If no index
+     file or order is specified, the controlling order is assumed.
+
+     <B>&lt;expNewSetting&gt;</B> is reserved for RDDs that allow the file information
+     to be changed, in addition to being retrieved.  None of the RDDs
+     supplied with CA-Clipper support this argument.  It can be omitted or
+     specified as NIL.
+
+ <B>Returns</B>
+
+     If &lt;expNewSetting&gt; is not specified, DBORDERINFO() returns the current
+     setting.  If &lt;expNewSetting&gt; is specified, the previous setting is
+     returned.
+
+ <B>Description</B>
+
+     DBORDERINFO() retrieves information about the orders and index files.
+     By default, DBORDERINFO() operates on the currently selected work area.
+     It can be made to operate on an unselected work area by specifying it
+     within an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses DBOI_NAME to save the current controlling
+        order.  After changing to a new controlling order, it uses the saved
+        value to restore the original order:
+
+        #include Dbinfo.ch
+
+        USE Customer INDEX Name, Serial NEW
+        cOrder := DBORDERINFO(DBOI_NAME)               // Name
+        Customer-&gt;DBSETORDER("Serial")
+        ? DBORDERINFO(DBOI_NAME)                     // Serial
+        Customer-&gt;DBSETORDER(cOrder)
+        ? DBORDERINFO(DBOI_NAME)                     // Name
+
+     <B>.</B>  This example uses aliased expressions to return the default
+        index file extension (using DBOI_INDEXEXT) in two different work
+        areas:
+
+        #include Dbinfo.ch
+
+        USE Sales INDEX All_Sales VIA "DBFCDX" NEW
+        USE Customer INDEX Name, Serial VIA "DBFNTX" NEW
+        ? Sales-&gt;DBORDERINFO(DBOI_INDEXEXT)                  // .CDX
+        ? Customer-&gt;DBORDERINFO(DBOI_INDEXEXT)               // .NTX
+
+     <B>.</B>  In this example, DBORDERINFO(DBOI_INDEXEXT) checks for the
+        existence of the Customer index file independent of the RDD linked
+        into the current work area:
+
+        #include Dbinfo.ch
+
+        USE Customer NEW
+        IF !FILE( "Customer" + DBORDERINFO(DBOI_INDEXEXT))
+                 Customer-&gt;DBCREATEINDEX("Customer", "CustName",;
+                                               {||Customer-&gt;CustName} )
+        ENDIF
+
+     <B>.</B>  This example accesses the key expression of several orders
+        from the same index file:
+
+        #include Dbinfo.ch
+
+        USE Customer INDEX All_Cust VIA "DBFMDX" NEW
+        Customer-&gt;DBSETORDER("Serial")
+        ? DBORDERINFO(DBOI_EXPRESSION,, "Name")
+        // Result: key expression for name order
+        ? DBORDERINFO(DBOI_EXPRESSION,, "Serial")
+        // Result: key expression for serial order
+
+     <B>.</B>  This example uses DBORDERINFO() as part of a TOTAL ON key
+        expression.  Since DBORDERINFO() returns the expression as a string,
+        it is specified using a macro expression to force evaluation of the
+        key expression:
+
+        #include Dbinfo.ch
+
+        USE Sales INDEX Salesman NEW
+        TOTAL ON &amp;(DBORDERINFO(DBOI_EXPRESSION)) ;
+           FIELDS SaleAmount TO Summary
+
+     <B>.</B>  In this example, All_Cust.mdx contains three orders named
+        CuAcct, CuName, CuZip.  The DBOI_INDEXNAME constant is used to
+        display the name of the index file using one of its orders:
+
+        #include Dbinfo.ch
+
+        USE Customer VIA "DBFNTX" NEW
+        Customer-&gt;DBSETINDEX("All_Cust")
+        ? DBORDERINFO(DBOI_INDEXNAME,, "CuName")
+        // Returns: All_Cust
+
+     <B>.</B>  The following example searches for CuName in the order list:
+
+        #include Dbinfo.ch
+
+        USE Customer VIA "DBFNTX" NEW
+        Customer-&gt;DBSETINDEX("CuAcct")
+        Customer-&gt;DBSETINDEX("CuName")
+        Customer-&gt;DBSETINDEX("CuZip")
+        ? DBORDERINFO(DBOI_NUMBER,, "CuName")            // 2
+
+     <B>.</B>  This example retrieves the FOR condition from an order:
+
+        #include Dbinfo.ch
+
+        USE Customer NEW
+        INDEX ON Customer-&gt;Acct TO Customer ;
+           FOR Customer-&gt;Acct &gt; "AZZZZZ"
+        ? DBORDERINFO(DBOI_CONDITION,, "Customer")
+        // Returns: Customer-&gt;Acct &gt; "AZZZZZ"
+
+ <B>Files</B>   Library is CLIPPER.LIB, header file is Dbinfo.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng25343.html">DBFIELDINFO()</A>
+<A HREF="ng28fbc.html">DBINFO()</A>
+<A HREF="ng2d04f.html">DBRECORDINFO()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

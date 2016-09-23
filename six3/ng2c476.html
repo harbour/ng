@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2c044.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng2cb8b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_IsROXLock():</B>
+
+  Syntax:   Sx_IsROXLock()
+
+  Returns:  .T. if a Read-Only lock has been set on the currently active
+            index (<U>using the Sx_ROXLock() function</U>), .F. if not.
+
+  Description:  This function is used to test if the currently active index
+                already has a Read-Only lock active on it.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    LOCAL nSecs := 0, nCount := 0
+
+    SET EXCLUSIVE OFF              // Make sure we're in SHARED mode
+
+    RDDSetDefault("SIXCDX")        // Select the SIXCDX Driver
+    CLEAR                          // Clear the screen
+    USE test                       // Open a table with SIXCDX
+    INDEX ON last TO last          // Create an IDX index
+    CLOSE ALL                      // Close everything and reopen it
+    USE test INDEX test            //   to unlock the newly-created index
+
+    // Is Read-Only Index Locking Active?
+    ? "ROX On? :" + iif( <B>Sx_IsROXLock()</B>, "Yes", "No" )   // Returns .F.
+
+    nSecs := Seconds()             // Save the start time
+    ? "Without ROXLock...: "       // Display an informational message
+    FOR nCount := 1 TO 1000        // Loop 1000 times and
+      dbSeek("BogusName")          //   SEEK a value that doesn't exist
+    ENDDO
+    ?? AllTrim( Str( Seconds()-nSecs )) + " Seconds"  // Display total time
+
+    // Now let's put a read-only lock on the index file
+    Sx_ROXLock()
+
+    // Is Read-Only Index Locking Active?
+    ? "ROX On? :" + iif( <B>Sx_IsROXLock()</B>, "Yes", "No" )   // Returns .T.
+
+    nSecs := Seconds()             // Save the start time
+    ? "With ROXLock......: "       // Display an informational message
+    FOR nCount := 1 TO 1000        // Loop 1000 times and
+      dbSeek("BogusName")          //   SEEK a value that doesn't exist
+    ENDDO
+    ?? AllTrim( Str( Seconds()-nSecs )) + " Seconds"  // Display total time
+    Sx_ROXUnLock()                 // Unlock the index
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng34f1d.html">Sx_ROXLock()</A>
+<A HREF="ng3572b.html">Sx_ROXUnlock()</A>
+<A HREF="ng2cb8b.html">Sx_IsMyROX()</A>
+<A HREF="ng32407.html">Sx_LockRetry()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

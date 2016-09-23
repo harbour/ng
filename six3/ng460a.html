@@ -1,0 +1,158 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng409f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng5e0e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Create():</B>
+
+  Purpose:  Used to create a new, empty HiPer-SEEK index file. If another
+            file of the same name exists, it will be over written.  Unlike
+            hs_Index(), this function does not automatically populate the
+            HiPer-SEEK index file.
+
+   Syntax:  hs_Create( &lt;cExpr&gt;,&lt;nBufSize&gt;,&lt;nKeySize&gt;,&lt;lCase&gt;,&lt;nFiltSet&gt; )
+
+    Where:  &lt;cExpr&gt; is a string representing a file path name. It may contain
+              drive and subdirectory information.
+
+            &lt;nBufSize&gt; an integer that will be multiplied by 1024 to
+              determine how much buffer space is to be used by the HiPer-SEEK
+              routines for this index. For example, a value of 10 will
+              allocate 10k or 10240 bytes of buffer space plus a small amount
+              of overhead. This is sometimes referred to as BUFFER SIZE.
+
+            &lt;nKeySize&gt; is an integer from 1 to 3. This value has two effects:
+
+              1)  The larger the value, the greater the number of bytes
+                  written for each record in the index.
+
+              2)  The larger the value the lower the number of aliases (or
+                  false positives) returned by a search.
+
+              For most cases, a value of 2 is the best choice, offering a
+              low alias rate and small index size. For a value of two, each
+              new index record increases the size of the index by 32 bytes.
+              For values of 1 and 3 it increases by 16 and 64 bytes
+              respectively. Sometimes referred to as INDEX SIZE or SIZE
+              FACTOR, it is usually worthwhile to do some experimentation.
+
+           &lt;lCase&gt; can be set to either .T. or .F., depending if case is to
+              be significant during matches. If .T., then case is not signi-
+              ficant and lower-case will match both lower and upper-case. If
+              the value is .F., then upper-case characters will not match
+              lower-case.
+
+           &lt;nFiltSet&gt; is a number which indicates the filter set to be used
+              for indexing and searching.  A filter set is a translation of
+              characters from the source to the index. HiPer-SEEK indexes
+              have two sets.
+
+              Filter set 1, the recommended choice, will mask off the high-
+              order bit and treat all non-printing characters as spaces.
+              Filter set 2 does not eliminate any characters. For most text
+              purposes, filter set 1 is recommended since it eliminates
+              carriage returns, line-feeds, etc., from becoming part of the
+              index.
+
+              Filter set 2 is useful for non-standard character sets which
+              use the high order bit.
+
+  Returns:  If successful, a non-negative integer, representing the
+            HiPer-SEEK index file handle.  Otherwise, returns a negative
+            integer indicating an error.  Valid handles range from 0 to 63.
+            See comment 5 below.
+
+  Errors Returned:
+
+      -1 (CREATEFAIL) System was unable to create the file specified.
+         Check that you are not trying to write over a protected file and
+         that there is sufficient space on disk for the file.
+      -2 (MEMERR) System was unable to allocate the memory requested. Try
+         again with a smaller value of &lt;nVal&gt;.
+      -3 (BADWRITE) System generated a write error while writing the index
+         file header.
+     -16 (BADPARMS) Invalid parameters were passed to the function.
+
+  Comments:
+
+    1.  &lt;lCase&gt; is set during the index creation process and cannot be
+    changed later. Appreciable time savings in execution speed are realized
+    when case is not significant (i.e. &lt;lCase &gt; is .T.).
+
+    2.  Unlike &lt;lCase&gt;, &lt;nBufSize&gt; can be different each time the file is
+    opened. &lt;nBufSize&gt; only specifies the amount of memory buffer used, and
+    is not otherwise an indexing factor. This is why &lt;nVal1&gt; is an argument
+    for both hs_Create() and hs_Open() while &lt;lCase&gt; is not.
+
+    Generally, the larger this buffer is the faster an index file will be
+    created. The buffer size is less important to performance in systems
+    using fast fixed disks and disk caching. The index file can be opened
+    later with a smaller buffer. The memory used for these buffers is
+    released when the index file is closed.
+
+    3.  The value of &lt;nKeySize&gt; relates to the speed of index creation
+    and retrieval. For a value of 2, each record occupies 32 bytes in
+    memory. If the total number of records indexed * 32 is less than the
+    value of &lt;nKeySize&gt; * 1024, then the entire index can be buffered
+    in memory, greatly increasing the speed of adds and finds. Otherwise
+    disk accesses will be needed for each find and add. This value can be
+    used to check if the correct number of records are in an index file.
+
+      Example: (100 records * 32) + 512 (the header) == 3712 bytes.
+
+    4.  hs_Create() creates an index file with no records in it. You must
+    add records using hs_Add(). hs_Create() leaves this index file open so
+    don't try to open it again without closing it first. It is a good idea
+    to close a newly created file and then reopen it before searching. This
+    allows you to change the buffer size and the network mode of the index
+    file. Using hs_Index() instead will eliminate many of the potential
+    problems encountered in creating a new index file.
+
+    5.  The hs_Create(), hs_Index(), and hs_Open() functions return a
+    'HANDLE' to the calling program. This handle is an integer between 0 and
+    63.  You must save the handle returned by these functions for use with
+    the remaining HiPer-SEEK functions. HiPer-SEEK handles are nothing more
+    than an identifier returned by HiPer-SEEK's create and open routines; in
+    other words, the value of a HiPer-SEEK handle is only meaningful to other
+    HiPer-SEEK functions. Although you may inspect the value of the handle,
+    its value is arbitrary and of no significance except to other HiPer-SEEK
+    functions.  Under no circumstances should your application ever change
+    the value of a HiPer-SEEK handle.
+
+  Example:
+
+    nBufSize := 8    // Make HiPer-SEEK buffer 8K
+    nKeySize := 3    // Use largest index size (64 bytes per record)
+    lCase    := .T.  // Upper and lower case are equal
+    nFilter  := 1    // strip non-printing characters
+
+    SET DELETED OFF  // Insure that deleted records are added to the index
+
+    USE test EXCL    // Open database
+    SET ORDER TO 0   // Make sure index is built in natural order
+
+    h := <B>hs_Create( "SALES.HSX", nBufSize, nKeySize, lCase, nFilter )</B>
+    IF h &lt; 0
+      ? "Error creating HiPer-SEEK index!"
+    ENDIF
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng720f.html">hs_Index()</A>
+<A HREF="ng32c0.html">hs_Add()</A>
+<A HREF="ng8a4c.html">hs_Open()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

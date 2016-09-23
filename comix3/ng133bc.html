@@ -1,0 +1,103 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng110dc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf477.html">[^^Up^^]</A>
+<A HREF="ng13d38.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>Installation</B>
+------------------------------------------------------------------------------
+
+This chapter describes installing and linking with ClipMore.  It assumes
+that you are also using the Comix RDD.
+
+If you are new to the Comix RDD, we suggest that you first install and use
+Comix.  Then, once you are comfortable in using Comix, come back and use
+ClipMore.
+
+<B>Files</B>
+
+All ClipMore files are located in the \CLIPMORE directory.  All
+subdirectories mentioned are contained in this directory.  The first files
+for ClipMore are:
+
+o   cm.ng
+
+    This is the Norton Guide for ClipMore.
+
+o   cm.lnk
+
+    This is the recommended link script when working with Blinker.
+
+The following files need to be available to use ClipMore.  Copy them from
+the \52 directory.
+
+o   cm52.ch
+
+    This is the header file which automatically maps SET FILTER TO commands
+    to the optimized version.
+
+o   cm52.lib
+
+    This is the library file which contains the ClipMore optimizer.
+
+o   cm52.obj
+
+    This is the object file which makes certain that certain ClipMore
+    functions are linked in preference to the Comix (non-optimizing)
+    versions of the same functions.
+
+<B>Linking</B>
+
+    <B>Overview</B>
+
+In order to use ClipMore you will need to link with cm52.lib.  For example,
+suppose you have a simple test program, test and are using RTLink.  Your
+link line would be:
+
+    rtlink /stack:7168 file test, cm52, cmx52 lib cm52, cmx52
+
+Please note that <B>ClipMore is specified _BEFORE_ Comix</B> (both in the
+object file listing and the library listing).  This is necessary because
+ClipMore replaces some of the functions in Comix.  In order that the linker
+use ClipMore's functions in preference to the Comix versions, you must
+specify ClipMore before Comix.
+
+<B>There is a simple rule in linking with ClipMore: ClipMore BEFORE Comix.</B>
+If you do not do this, you will get incorrect behavior and non-optimized
+performance.
+
+Note that <B>the stack size is increased by 3K</B> over the default.  This is
+the maximum which ClipMore/Comix will use.
+
+    <B>Blinker</B>
+
+For Blinker users, here's what your basic link script might look like to use
+ClipMore with Comix:
+
+    OUTPUT test
+    <B>STACK 7168</B>
+    BEGINAREA
+        FILE test
+        <B>FILE cm52</B>
+        <B>ALLOCATE cm52</B>
+        FILE cmx52
+        ALLOCATE cmx52
+    ENDAREA
+    @cm.lnk
+    @cmx.lnk
+
+<B>Important: ClipMore _must_ be listed before Comix.  Failure to do so will</B>
+<B>           result in incorrect behavior and non-optimized performance.</B>
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

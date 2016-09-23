@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6a15c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng69344.html">[^^Up^^]</A>
+<A HREF="ng6a8d9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>EXPORTS                       Define exported functions</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Define exported functions</B></U>
+
+ <U>Syntax   : <B>EXPORTS entryname [=intname] [@ord [table]] [NODATA] [params]</B></U>
+
+ <U>Example  : <B>EXPORTS GetStr = String1</B></U>
+
+ This command makes listed functions (which are by default hidden) available
+ to other executable files at run time.
+
+ entryname defines the function name as it is known to other programs.
+
+ intname defines the actual name of the function as it appears within the
+ exporting program. This is by default the same as entryname.
+
+ ord defines a function's ordinal position within the module definition
+ table.
+
+ table is one of two optional keywords RESIDENTNAME or NONAME which determine
+ whether the entry name is placed in the resident or non-resident names table
+ or discarded at link time. NONAME is the default and the most efficient way
+ of exporting functions and means that the symbol can only be imported using
+ the specified ordinal.
+
+ RESIDENTNAME allows the symbol to be directly imported by name.
+
+ NODATA specifies that there is no static data in the function, so the
+ function will use the current data segment.
+
+ params specifies the number of words the function expects to be passed as
+ parameters.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

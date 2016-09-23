@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge4018.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge36fa.html">[^^Up^^]</A>
+<A HREF="nge489b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GETDOSETKEY()</B>
+ Process SET KEY during Get editing
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GETDOSETKEY(&lt;oGet&gt;) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;oGet&gt;</B> is a reference to the current Get object.
+
+ <B>Returns</B>
+
+     GETDOSETKEY() always returns NIL.
+
+ <B>Description</B>
+
+     GETDOSETKEY() is a Get system function that executes a SET KEY code
+     block, preserving the context of the passed Get object.
+
+     Note that the procedure name and line number passed to the SET KEY block
+     are based on the most recent call to READMODAL().
+
+ <B>Notes</B>
+
+     <B>.</B>  If a CLEAR GETS occurs in the SET KEY code, Get:exitState is
+        set to GE_ESCAPE.  In the standard system this cancels the current
+        Get object processing and terminates READMODAL().
+
+ <B>Files:</B>  Library is CLIPPER.LIB, source file is Getsys.prg.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5a1a6.html">READMODAL()</A>
+<A HREF="nga5556.html">SET KEY</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,93 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng68e99.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng6a58e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SUBSTR()</B>
+ Extract a substring from a character string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SUBSTR(&lt;cString&gt;, &lt;nStart&gt;, [&lt;nCount&gt;]) --&gt; cSubstring</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string from which to extract a substring.
+     It can be up to 65,535 (64K) bytes, the maximum character string size in
+     CA-Clipper.
+
+     <B>&lt;nStart&gt;</B> is the starting position in &lt;cString&gt;.  If &lt;nStart&gt; is
+     positive, it is relative to the leftmost character in &lt;cString&gt;.  If
+     &lt;nStart&gt; is negative, it is relative to the rightmost character in the
+     &lt;cString&gt;.
+
+     <B>&lt;nCount&gt;</B> is the number of characters to extract.  If omitted, the
+     substring begins at &lt;nStart&gt; and continues to the end of the string.  If
+     &lt;nCount&gt; is greater than the number of characters from &lt;nStart&gt; to the
+     end of &lt;cString&gt;, the extra is ignored.
+
+ <B>Returns</B>
+
+     SUBSTR() returns a character string.
+
+ <B>Description</B>
+
+     SUBSTR() is a character function that extracts a substring from another
+     character string or memo field.  SUBSTR() is related to the LEFT() and
+     RIGHT() functions which extract substrings beginning with leftmost and
+     rightmost characters in &lt;cString&gt;, respectively.
+
+     The SUBSTR(), RIGHT(), and LEFT() functions are often used with both the
+     AT() and RAT() functions to locate either the first and/or the last
+     position of a substring before extracting it.  They are also used to
+     display or print only a portion of a character string.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples extract the first and last name from a
+        variable:
+
+        cName:= "Biff Styvesent"
+        ? SUBSTR(cName, 1, 4)               // Result: Biff
+        ? SUBSTR(cName, 6)                  // Result: Styvesent
+        ? SUBSTR(cName, LEN(cName) + 2)     // Result: null string
+        ? SUBSTR(cName, -9)                 // Result: Styvesent
+        ? SUBSTR(cName, -9, 3)              // Result: Sty
+
+     <B>.</B>  This example uses SUBSTR() with AT() and RAT() to create a
+        user-defined function to extract a filename from a file
+        specification:
+
+        ? FileBase("C:\PRG\MYFILE.OBJ")      // Result: MYFILE.OBJ
+
+        FUNCTION FileBase( cFile )
+           LOCAL nPos
+           IF (nPos := RAT("\", cFile)) != 0
+              RETURN SUBSTR(cFile, nPos + 1)
+           ELSEIF (nPos := AT(":", cFile)) != 0
+              RETURN SUBSTR(cFile, nPos + 1)
+           ELSE
+              RETURN cFile
+           ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf688.html">AT()</A>
+<A HREF="ng44c6e.html">LEFT()</A>
+<A HREF="ng5876b.html">RAT()</A>
+<A HREF="ng5d64a.html">RIGHT()</A>
+<A HREF="ng67c35.html">STR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

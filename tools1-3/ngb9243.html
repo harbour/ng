@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb8dc5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb7bb9.html">[^^Up^^]</A>
+<A HREF="ngb9607.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DOSPARAM()</B>
+ Retrieves the DOS command line as a string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DOSPARAM() --&gt; cDOSCommandLine</B>
+
+ <B>Returns</B>
+
+     DOSPARAM() returns the parameters from the DOS command line.
+
+ <B>Description</B>
+
+     DOSPARAM() returns all the parameters passed from the DOS command when
+     you run the application.  Use DOSPARAM() when you do not want the
+     parameters to be separated.  With this function, it is no longer
+     necessary to check each individual parameter in a loop.
+
+ <B>Note</B>
+
+     <B>.</B>  With the TOKEN() function, it is easy to break down the
+        returned character string.  It can also use your own rules.
+
+ <B>Example</B>
+
+     Given the DOS command line C&gt;MyApp A: C: /a ,
+     the following is true:
+
+     DOSPARAM()                // "A: C: /a"
+     TOKEN(DOSPARAM())         // "A"
+
+     This way, it is easy to break down parameter lines according to your own
+     rules.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5d27e.html">TOKEN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

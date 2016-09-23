@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng54de4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5570a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>pack()</B>
+ Remove rows (records) marked for deletion from a database
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE pack(</B>
+     <B>                  AREAP wa</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     pack() physically removes rows marked for deletion from the database.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Since a pack operation must traverse the entire data store,
+        the buffer for the current work area must call goCold() before any
+        pack() operation can take place.  Further, in a shared environment,
+        you can only implement this method after the proper locks are
+        established.
+
+     <B>.</B>  If your RDD supports relations, resolve any pending relational
+        moves (perhaps by simply removing them) before attempting the
+        pack() operation.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4d577.html">delete()</A>
+<A HREF="ng4d9e0.html">deleted()</A>
+<A HREF="ng50136.html">goCold()</A>
+<A HREF="ng5570a.html">packRec()</A>
+<A HREF="ng57a94.html">zap()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

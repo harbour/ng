@@ -1,0 +1,92 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng76873.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng77742.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MSETCLIP()</B>
+ Define an inclusion region
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MSETCLIP([&lt;nCoord list&gt;], [&lt;nMode&gt;])</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nCoord List&gt;</B> contains the coordinates of the inclusion region which
+     is represented as a comma-separated list of four coordinates whose
+     interpretation differs depending on mode.  If &lt;nMode&gt; is LLM_COOR_TEXT,
+     the coordinates look like this:  &lt;nTop&gt;, &lt;nLeft&gt;, &lt;nBottom&gt;, &lt;nRight&gt;.
+     If &lt;nMode&gt; is LLM_COOR_GRAPH, the coordinates are &lt;nX1&gt;, &lt;nY1&gt;, &lt;nX2&gt;,
+     &lt;nY2&gt;.
+
+     <B>&lt;nMode&gt;</B> is one of the following two constants:
+
+     <B>Coordinate Type Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Description</B>
+     ------------------------------------------------------------------------
+     LLM_COOR_TEXT  Specifies that the coordinates are given in lines and
+                    columns of text
+     LLM_COOR_GRAPH Specifies that the coordinates are given in pixels
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     MSETCLIP() returns an array of coordinate information.  The coordinates
+     of the inclusion area are given in pixels and then in row/col format:
+
+     aRegions := {nIncX1, nIncY1, nIncX2, nIncY2,;
+        nIncR1, nIncC1, nIncR2, nIncC2,;
+        nCoorType}
+
+ <B>Description</B>
+
+     MSETCLIP() controls mouse pointer movements.  It allows you to restrict
+     movement to a region.  When an inclusion is defined and the user tries
+     to move the mouse pointer out of the rectangle, it remains stuck at the
+     edge of the area, but is still visible.  This mode should be used to
+     restrict the range of user choices for moving or clicking the mouse.
+
+ <B>Notes</B>
+
+     The inclusion area is initialized to be the entire screen.  To eliminate
+     an inclusion region you just pass the value LLM_INCLUDE as the first
+     parameter or pass the four parameters for maximum screen values 0, 0,
+     MAXCOL(), MAXROW().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows how the MSETCLIP() function works:
+
+        // Define an inclusion region and save the current
+        // inclusion region in the array aOldInc
+
+           aOldInc := MSETCLIP(5, 5, 20, 75,LLM_COOR_TEXT)
+        // Code for selecting objects and buttons
+        // Restore old inclusion region
+        MSETCLIP(aOldInc[5],;
+           aOldInc[6],;
+           aOldInc[7],;
+           aOldInc[8],;
+        LLG_VIDEO_TEXT)
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng727bc.html">MHIDE()</A>
+<A HREF="ng77742.html">MSETCURSOR()</A>
+<A HREF="ng77bfc.html">MSHOW()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

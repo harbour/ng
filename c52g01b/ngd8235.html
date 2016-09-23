@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd7bf6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngc8ba2.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>{ }</B>
+ Literal array and code block delimiters         (Special)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>{ &lt;exp list&gt; }                   (literal array)</B>
+     <B>{ |&lt;param list&gt;| &lt;exp list&gt; }    (code block definition)</B>
+
+ <B>Operands</B>
+
+     <B>&lt;exp list&gt;</B> is a list of expressions of any type.  If the item is a
+     literal array definition, it can contain another literal array
+     definition.
+
+     <B>&lt;param list&gt;</B> is a list of variables to receive parameters passed to
+     a code block from an invocation of the EVAL() function.  The parameter
+     list is comma-separated and must be enclosed by vertical bars (||).
+     Variables specified in this list are declared local to the code block
+     and are visible only within the code block definition.
+
+ <B>Description</B>
+
+     Curly braces ({}) delimit references to literal arrays or code blocks.
+     If the reference is a literal array, you can use them to create an array
+     in either an assignment or a variable declaration statement.  If the
+     reference is a variable declaration, the array can contain expressions
+     of any kind as elements, unless STATIC is the declaration statement.  In
+     this case, the literal array can only contain constant values.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses literal arrays in declaration statements to
+        create a variable and initialize it with an array reference:
+
+        LOCAL aPerson := { "Name", "Address", DATE() }
+        STATIC aNumList := { 1, 2, 3, 4, 5, 6, 7, 8 }
+
+     <B>.</B>  This example creates a multiple dimension literal array:
+
+        aMulti := { {1, 2, 3}, {"A", "B", "C"} }
+
+     <B>.</B>  This example uses curly braces to formulate a simple code
+        block with a single parameter:
+
+        LOCAL bSayBlock
+        bSayBlock := { |x| QOUT(x) }
+        EVAL(bSayBlock, 10)               // Result: 10
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng31d53.html">EVAL()</A>
+<A HREF="ngbfbea.html">LOCAL</A>
+<A HREF="ngc25d0.html">PRIVATE</A>
+<A HREF="ngc587f.html">PUBLIC</A>
+<A HREF="ngc78ff.html">STATIC</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

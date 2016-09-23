@@ -1,0 +1,276 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd8bff.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngd8973.html">[^^Up^^]</A>
+<A HREF="ngde423.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+     <B>Result Pattern</B>
+
+     The &lt;resultPattern&gt; portion of a translation directive is the text the
+     preprocessor will produce if a piece of input text matches the
+     &lt;matchPattern&gt;.  &lt;resultPattern&gt; is made from one or more of the
+     following components:
+
+     <B>.  Literal tokens</B> are actual characters that are written directly
+        to the result text.
+
+     <B>.  Words</B> are CA-Clipper keywords and identifiers that are written
+        directly to the result text.
+
+     <B>.  Result markers</B> refer directly to a match marker name.  Input
+        text matched by the match marker is written to the result text via
+        the result marker.
+
+        This table lists the Result marker forms.
+
+        <B>Result Markers</B>
+        ---------------------------------------------------------------------
+        <B>Result Marker     Name</B>
+        ---------------------------------------------------------------------
+        &lt;idMarker&gt;        Regular result marker
+        #&lt;idMarker&gt;       Dumb stringify result marker
+        &lt;"idMarker"&gt;      Normal stringify result marker
+        &lt;(idMarker)&gt;      Smart stringify result marker
+        &lt;{idMarker}&gt;      Blockify result marker
+        &lt;.idMarker.&gt;      Logify result marker
+        ---------------------------------------------------------------------
+
+        <B>-  Regular result marker:</B> Writes the matched input text to the
+           result text, or nothing if no input text is matched.  Use this,
+           the most general result marker, unless you have special
+           requirements.  You can use it with any of the match markers, but
+           it almost always is used with the regular match marker.
+
+        <B>-  Dumb stringify result marker:</B> Stringifies the matched input
+           text and writes it to the result text.  If no input text is
+           matched, it writes a null ("") string.  If the matched input text
+           is a list matched by a list match marker, this result marker
+           stringifies the entire list and writes it to the result text.
+
+           This result marker writes output to result text where a string is
+           always required.  This is generally the case for commands where a
+           command or clause argument is specified as a literal value but the
+           result text must always be written as a string even if the
+           argument is not specified.
+
+        <B>-  Normal stringify result marker:</B> Stringifies the matched input
+           text and writes it to the result text.  If no input text is
+           matched, it writes nothing to the result text.  If the matched
+           input text is a list matched by a list match marker, this result
+           marker stringifies each element in the list and writes it to the
+           result text.
+
+           The normal stringify result marker is most often used with the
+           blockify result marker to compile an expression while saving a
+           text image of the expression (See the SET FILTER condition and the
+           INDEX key expression in STD.CH).
+
+        <B>-  Smart stringify result marker:</B> Stringifies matched input text
+           only if source text is enclosed in parentheses.  If no input text
+           matched, it writes nothing to the result text.  If the matched
+           input text is a list matched by a list match marker, this result
+           marker stringifies each element in the list (using the same
+           stringify rule) and writes it to the result text.
+
+           The smart stringify result marker is designed specifically to
+           support extended expressions for commands other than SETs with
+           &lt;xlToggle&gt; arguments.  Extended expressions are command syntax
+           elements that can be specified as literal text or as an expression
+           if enclosed in parentheses.  The &lt;xcDatabase&gt; argument of the USE
+           command is a typical example.  For instance, if the matched input
+           for the &lt;xcDatabase&gt; argument is the word Customer, it is written
+           to the result text as the string "Customer," but the expression
+           (cPath + cDatafile) would be written to the result text unchanged
+           (i.e., without quotes).
+
+        <B>-  Blockify result marker:</B> Writes matched input text as a code
+           block without any arguments to the result text.  For example, the
+           input text x + 3 would be written to the result text as {|| x +
+           3}.  If no input text is matched, it writes nothing to the result
+           text.  If the matched input text is a list matched by a list match
+           marker, this result marker blockifies each element in the list.
+
+           The blockify result marker used with the regular and list match
+           markers matches various kinds of expressions and writes them as
+           code blocks to the result text.  Remember that a code block is a
+           piece of compiled code to execute sometime later.  This is
+           important when defining commands that evaluate expressions more
+           than once per invocation.  When defining a command, you can use
+           code blocks to pass an expression to a function and procedure as
+           data rather than as the result of an evaluation.  This allows the
+           target routine to evaluate the expression whenever necessary.
+
+           In STD.CH, the blockify result marker defines database commands
+           where an expression is evaluated for each record.  Commonly, these
+           are field or expression lists, FOR and WHILE conditions, or key
+           expressions for commands that perform actions based on key values.
+
+        <B>-  Logify result marker:</B> Writes true (.T.) to the result text if
+           any input text is matched; otherwise, it writes false (.F.) to the
+           result text.  This result marker does not write the input text
+           itself to the result text.
+
+           The logify result marker is generally used with the restricted match
+           marker to write true (.T.) to the result text if an optional
+           clause is specified with no argument; otherwise it writes false
+           (.F.).  In STD.CH, this formulation defines the EXCLUSIVE and
+           SHARED clauses of the USE command.
+
+     <B>.  Repeating result clauses</B> are portions of the &lt;resultPattern&gt;
+        enclosed by square brackets ([ ]).  The text within a repeating
+        clause is written to the result text as many times as it has input
+        text for any or all result markers within the clause.  If there is no
+        matching input text, the repeating clause is not written to the
+        result text.  Repeating clauses, however, cannot be nested.  If you
+        need to nest repeating clauses, you probably need an additional
+        #command rule for the current command.
+
+        Repeating clauses are the result pattern part of the #command
+        facility that create optional clauses which have arguments.  You can
+        match input text with any match marker other than the restricted
+        match marker and write to the result text with any of the
+        corresponding result markers.  Typical examples of this facility are
+        the definitions for the STORE and REPLACE commands in STD.CH.
+
+ <B>Notes</B>
+
+     <B>.  Less than operator:</B> If you specify the less than operator (&lt;)
+        in the &lt;resultPattern&gt; expression, you must precede it with the
+        escape character (\).
+
+     <B>.  Multistatement lines:</B> You can specify more than one statement
+        as a part of the result pattern by separating each statement with a
+        semicolon.  If you specify adjacent statements on two separate lines,
+        the first statement must be followed by two semicolons.
+
+ <B>Examples</B>
+
+     These examples encompass many of the basic techniques you can use when
+     defining commands with the #command and #translate directives.  In
+     general, these examples are based on standard commands defined in
+     STD.CH.  Note, however, the functions specified in the example result
+     patterns are not the actual functions found in STD.CH, but fictitious
+     functions specified for illustration only.
+
+     <B>.</B>  This example defines the @...BOX command using regular match
+        markers with regular result markers:
+
+        #command  @ &lt;top&gt;, &lt;left&gt;, &lt;bottom&gt;, &lt;right&gt; BOX ;
+              &lt;boxstring&gt;;
+        =&gt;;
+              CmdBox( &lt;top&gt;, &lt;left&gt;, &lt;bottom&gt;, ;
+              &lt;right&gt;,&lt;boxstring&gt; )
+
+     <B>.</B>  This example uses a list match marker with a regular result
+        marker to define the ? command:
+
+        #command ? [&lt;list,...&gt;] =&gt; QOUT(&lt;list&gt;)
+
+     <B>.</B>  This example uses a restricted match marker with a logify
+        result marker to implement an optional clause for a command
+        definition.  In this example, if the ADDITIVE clause is specified,
+        the logify result marker writes true (.T.) to the result text;
+        otherwise, it writes false (.F.):
+
+        #command RESTORE FROM &lt;file&gt; [&lt;add: ADDITIVE&gt;];
+        =&gt;;
+              CmdRestore( &lt;(file)&gt;, &lt;.add.&gt; )
+
+     <B>.</B>  This example uses a list match marker with a smart stringify
+        result marker to write to the result text the list of fields
+        specified as the argument of a FIELDS clause.  In this example, the
+        field list is written as an array with each field name as an element
+        of the array:
+
+        #command COPY TO &lt;file&gt; [FIELDS &lt;fields,...&gt;];
+        =&gt;;
+              CmdCopyAll( &lt;(file)&gt;, { &lt;(fields)&gt; } )
+
+     <B>.</B>  These examples use the wild match marker to define a command
+        that writes nothing to the result text.  Do this when attempting to
+        compile unmodified code developed in another dialect:
+
+        #command SET ECHO &lt;*text*&gt;    =&gt;
+        #command SET TALK &lt;*text*&gt;    =&gt;
+
+     <B>.</B>  These examples use wild match markers with dumb stringify
+        result markers to match command arguments specified as literals, then
+        write them to the result text as strings in all cases:
+
+        #command SET PATH TO &lt;*path*&gt;  =&gt;  ;
+           SET( _SET_PATH, #&lt;path&gt; )
+        #command SET COLOR TO &lt;*spec*&gt; =&gt;  SETCOLOR( #&lt;spec&gt; )
+
+     <B>.</B>  These examples use a normal result marker with the blockify
+        result marker to both compile an expression and save the text version
+        of it for later use:
+
+        #command SET FILTER TO &lt;xpr&gt;;
+        =&gt;;
+              CmdSetFilter( &lt;{xpr}&gt;, &lt;"xpr"&gt; )
+
+        #command INDEX ON &lt;key&gt; TO &lt;file&gt;;
+        =&gt;;
+              CmdCreateIndex( &lt;(File)&gt;, &lt;"Key"&gt;, &lt;{Key}&gt; )
+
+     <B>.</B>  This example demonstrates how the smart stringify result
+        marker implements a portion of the USE command for those arguments
+        that can be specified as extended expressions:
+
+        #command USE &lt;db&gt; [ALIAS &lt;a&gt;];
+        =&gt;;
+              CmdOpenDbf( &lt;(db)&gt;, &lt;(a)&gt; )
+
+     <B>.</B>  This example illustrates the importance of the blockify result
+        marker for defining a database command.  Here, the FOR and WHILE
+        conditions matched in the input text are written to the result text
+        as code blocks:
+
+        #command COUNT [TO &lt;var&gt;];
+              [FOR &lt;for&gt;] [WHILE &lt;while&gt;];
+              [NEXT &lt;next&gt;] [RECORD &lt;rec&gt;] [&lt;rest:REST&gt;] [ALL];
+        =&gt;;
+              &lt;var&gt; := 0,;
+              DBEVAL( {|| &lt;var&gt;++}, &lt;{for}&gt;, &lt;{while}&gt;,;
+                 &lt;next&gt;, &lt;rec&gt;, &lt;.rest.&gt; )
+
+     <B>.</B>  In this example the USE command again demonstrates the types
+        of optional clauses with keywords in the match pattern; one clause is
+        a keyword followed by a command argument, and the second is solely a
+        keyword:
+
+        #command USE &lt;db&gt; [&lt;new: NEW&gt;] [ALIAS &lt;a&gt;] ;
+              [INDEX &lt;index,...&gt;][&lt;ex: EXCLUSIVE&gt;] ;
+              [&lt;sh: SHARED&gt;] [&lt;ro: READONLY&gt;];
+        =&gt;;
+              CmdOpenDbf(&lt;(db)&gt;, &lt;(a)&gt;, &lt;.new.&gt;,;
+                 IF(&lt;.sh.&gt; .OR. &lt;.ex.&gt;, !&lt;.ex.&gt;, NIL),;
+                    &lt;.ro.&gt;, {&lt;(index)&gt;})
+
+     <B>.</B>  This example uses the STORE command definition to illustrate
+        the relationship between an optional match clause and a repeating
+        result clause:
+
+        #command STORE &lt;value&gt; TO &lt;var1&gt; [, &lt;varN&gt; ];
+        =&gt;;
+              &lt;var1&gt; := [ &lt;varN&gt; := ] &lt;value&gt;
+
+     <B>.</B>  This example uses #translate to define a pseudofunction:
+
+        #translate AllTrim(&lt;cString&gt;) =&gt; LTRIM(RTRIM(&lt;cString&gt;))
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngde423.html">#define</A>
+<A HREF="nge33f3.html">#xcommand</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

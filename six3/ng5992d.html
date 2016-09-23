@@ -1,0 +1,38 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng59854.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng561bb.html">[^^Up^^]</A>
+<A HREF="ng59cbe.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SIX???/612  Invalid Key Length</B>
+
+  <B>Problem:   </B>The stored index key length and actual length when evaluating
+             the key expression were found to be different.
+
+  <B>Solution:  </B>Make sure the key expression will produce a value of the same
+             length for all records.  Do not use functions such as TRIM() in
+             the key expression.  To restrict the length of the key values,
+             use the LEFT() or PADR() functions.  If a User-Defined Function
+             (UDF) is used in the key expression, make sure that the same
+             function is available in all applications that use the index,
+             and that the function returns a value of the same length for all
+             records.
+
+             This error can also come up if the index command is using ext-
+             ended expressions without using the proper header file.  To use
+             extended expressions, you must use the SIXCDX2.CH or SIXNSX2.CH
+             file instead of SIXCDX.CH or SIXNSX.CH.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,47 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7efa4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng7f4fe.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SAVECURSOR()</B>
+ Saves current cursor position and form
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SAVECURSOR() --&gt; nCursorSetting</B>
+
+ <B>Returns</B>
+
+     SAVECURSOR() returns a numeric value that corresponds to the setting for
+     ROW(), COL(), SETCURSOR(), and CSETCURS().
+
+ <B>Description</B>
+
+     SAVECURSOR() saves three pieces of screen information at one time.
+     SAVECURSOR() returns a combined numeric value that you can save and
+     restore later with RESTCURSOR().
+
+ <B>Example</B>
+
+     Save and restore the cursor:
+
+     nVar  :=  SAVECURSOR()
+     DO OUTPUT
+     RESTCURSOR(nVar)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7efa4.html">RESTCURSOR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

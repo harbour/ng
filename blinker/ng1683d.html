@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng161ef.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng16f16.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FILE                          Specify object file(s)</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify object file(s)</B></U>
+
+ <U>Syntax   : <B>FILE [d:][path]&lt;filename&gt; [, [d:][path]&lt;filename&gt; ...]</B></U>
+
+ <U>Example  : <B>FILE Myapp1, D:\APPS\OBJ\Myapp2</B></U>
+
+ The FILE command is used to specify to the linker the names of one or more
+ .OBJ files to be included in the output file at that point. The default file
+ extension of .OBJ need not be specified. The first file specified will
+ generally be the program's main module.
+
+ Several filenames may be specified within a single FILE command, separated
+ by commas. Blinker will interpret a carriage return / linefeed combination
+ as the end of a FILE command, therefore the FILE command must be restated at
+ the beginning of each line.
+
+ All files listed in FILE commands are included in the linked program,
+ whether they are required or not. To include only the files needed by the
+ specific program, a library (.LIB) file should be created using a librarian
+ such as Microsoft LIB.EXE. This library can then be linked into the program
+ using the LIBRARY command, and only the required .OBJ files from the .LIB
+ file will be linked to the program.
+
+ Blinker looks for each file first in the current directory and then in each
+ directory path specified in the OBJ environment variable in the order they
+ appear. Alternatively, a full drive and directory path may be specified with
+ any or each of the file names.
+
+ The FILE command can be used on a library file to force all the modules
+ within the library to be included in the .EXE. In this case the .LIB
+ extension and full path will probably need to be specified, e.g. FILE
+ path\CLD.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng16f16.html">LIBRARY</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

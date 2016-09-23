@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc8a1c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngc9790.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DELETE FILE</B>
+ Remove a file from disk
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DELETE FILE | ERASE &lt;xcFile&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcFile&gt;</B> is the name of the file to be deleted from disk and can be
+     specified either as a literal file name or as a character expression
+     enclosed in parentheses.  You must specify the file name, including the
+     extension, and it may optionally be preceded by a drive and/or path
+     specification.
+
+ <B>Description</B>
+
+     DELETE FILE, a synonym for ERASE, is a file command that removes the
+     specified file from disk.  SET DEFAULT and SET PATH do not affect DELETE
+     FILE.  The file is deleted from disk only if found in the current DOS
+     directory or in the directory explicitly specified as part of the file
+     name.
+
+     <B>Warning! </B> Files must be CLOSEd before deleting them.  Otherwise,
+     either a sharing violation or a date corruption on the drive may occur.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example removes a specified file from disk then tests to
+        see if the file was in fact removed:
+
+        ? FILE("Temp.dbf")               // Result: .T.
+        DELETE FILE Temp.dbf
+        ? FILE("Temp.dbf")               // Result: .F.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc26c8.html">CLOSE</A>
+<A HREF="ng1b556.html">CURDIR()</A>
+<A HREF="ng474c3.html">FILE()</A>
+<A HREF="ngf8dbc.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

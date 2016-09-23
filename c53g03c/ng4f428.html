@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4f10f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4f70d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>getRec()</B>
+ Retrieve the pointer to the RDD's record data buffer
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE getRec(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     BYTEPP lplpBuffer</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lplpBuffer</B> is a pointer to a pointer to the current record data
+     buffer.
+
+ <B>Description</B>
+
+     getRec() retrieves the pointer to the current record data buffer.  This
+     method is most notably used to transfer data between two similar
+     work areas.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng50b76.html">putRec()</A>
+<A HREF="ng57370.html">transRec()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3e146.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng3e67e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>4412    Indexing miscalculation</B>
+
+     <B>Explanation:</B>  This error occurs during indexing if there has been a
+     miscalculation of how indexing should occur.
+
+     <B>Action:</B>  Some suggestions to resolve the problem are:
+
+     1. Try increasing available conventional memory for indexing operation.
+
+     2. Try indexing using a small test program.
+
+     3. Test recreating the index with one more or one less database record.
+
+     4. Test recreating the index with one more or one less byte in the key
+        expression.
+
+     5. Test adding CHR(0) to the key.
+
+     6. Test with the E:0 parameter in the SET CLIPPER environment variable.
+
+     <B>Note:</B>  The LEN( CHR(0) ) is one byte, the LEN("") is 0 bytes.  Test
+     with combinations of the above suggestions.
+
+     <B>See Also:</B>  "The Runtime Environment" chapter of the Programming and
+     Utilities Guide.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

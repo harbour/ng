@@ -1,0 +1,82 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng80ce.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng8a4c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Next():</B>
+
+  Purpose:  Assuming that a hs_Set() call has occurred immediately preceding
+            the first call to hs_Next() for a given search, this function
+            performs the actual 'find' operation using the index. The first
+            call returns the record number of the first hit, the second of
+            the second hit, etc. When all possible hits have been returned,
+            the function returns zero.
+
+   Syntax:  hs_Next( &lt;hIndex&gt; )
+
+    Where:  &lt;hIndex&gt; is an integer handle of a HiPer-SEEK index file.
+
+  Returns:  Returns the record number of the next possible match. If zero,
+            there are no more matches. A negative return value indicates an
+            error. Each hs_Next() call results in the return of a single
+            number.
+
+  Errors Returned:
+
+      -5 (BADREAD) Error while attempting disk read.
+     -16 (BADPARMS) Invalid parameters were passed to the function.
+     -18 (BADHANDLE) Invalid handle was passed to the function.
+
+
+  Example:
+
+    // Lists all record numbers that contain the word "John" anywhere in
+    // either the FIRST, LAST, STREET, or CITY fields.  Uses hs_Verify()
+    // to prevent "fuzzy" matches.
+
+    LOCAL cExpr := "test-&gt;FIRST + test-&gt;LAST + test-&gt;STREET + test-&gt;CITY"
+    LOCAL bExpr := &amp;( "{||" + cExpr + "}" )
+    LOCAL cVal := "John", h := 0, nRec := 0
+
+    CLS
+    USE test EXCL
+
+    IF !file("TEST.HSX")
+      ? "Building HiPer-SEEK Index..."
+      h := hs_Index( "TEST.HSX", cExpr, 2 )
+    ELSE
+      h := hs_Open( "TEST.HSX", 8, 1 )
+    ENDIF
+
+    hs_Set( h, cVal )
+    nRec := <B>hs_Next( h )</B>
+
+    DO WHILE nRec &gt; 0
+      dbGoto( nRec )
+      IF hs_Verify( bExpr, cVal )
+        ? nRec
+      ENDIF
+      nRec := <B>hs_Next( h )</B>
+    ENDDO
+
+    hs_Close( h )
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga481.html">hs_Set()</A>
+<A HREF="ngb3f9.html">hs_Verify()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

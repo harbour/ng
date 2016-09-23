@@ -1,0 +1,33 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2a81.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng228.html">[^^Up^^]</A>
+<A HREF="ng303e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>C1005   Redefinition or duplicate definition of #define</B>
+
+     <B>Explanation:</B>  You have attempted to #define an identifier that is
+     already defined.  This happens when you redefine an identifier without
+     first undefining it with #undef.  This problem can occur because you
+     simply omitted the #undef directive, an unintended side effect of
+     including a header file that defined the same identifier, or
+     architectural problems in the use of #define directives in the current
+     program file (.prg).
+
+     <B>Action:</B>  Check first to see if you intended to redefine the
+     specified identifier.  If you did, add a #undef directive above the
+     #define directive.  If this is not the source of the problem, check to
+     see if the identifier was first defined or redefined in any header file
+     used by the current program file (.prg).
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

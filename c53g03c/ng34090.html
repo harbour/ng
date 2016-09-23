@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3392b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng31a91.html">[^^Up^^]</A>
+<A HREF="ng34982.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gtDispBegin()</B>
+ Begin buffering screen output
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "gt.api"</B>
+     <B>ERRCODE _gtDispBegin(void)</B>
+
+ <B>Returns</B>
+
+     _gtDispBegin() returns zero if successful.  Any other value indicates an
+     error.
+
+ <B>Description</B>
+
+     _gtDispBegin() informs the CA-Clipper display system of the start of a
+     series of display operations that are to be buffered.  Display output
+     that occurs after _gtDispBegin(), but before _gtDispEnd(), accumulates
+     in internal buffers.  All screen updates are performed after
+     _gtDispEnd().  This can enhance the performance of applications with
+     complex screen displays.
+
+     _gtDispBegin() and _gtDispEnd() calls are optional.
+
+ <B>Notes</B>
+
+     <B>.  Nested calls:</B>  _gtDispBegin() calls are nested internally.  If
+        you issue several _gtDispBegin() calls, buffering occurs until you
+        issue a corresponding number of _gtDispEnd() calls.
+
+     <B>.  Guaranteed operations:</B>  Display updates performed between
+        _gtDispBegin() and _gtDispEnd() are not guaranteed to be buffered.
+        Some updates may become visible before _gtDispEnd() is called.
+        However, all updates are guaranteed to be visible after the closing
+        call to _gtDispEnd().
+
+     <B>.  Terminal operations:</B>  CA-Clipper terminal input operations
+        such as INKEY() and READ should not be performed between
+        _gtDispBegin() and _gtDispEnd().  Doing this may cause input or
+        display output to be lost.
+
+     <B>.  Incompatible operations:</B>  Display output other than by the
+        CA-Clipper display functions (e.g., by add-on libraries or by DOS via
+        the OUTSTD() function) may not be compatible with _gtDispBegin() and
+        _gtDispEnd().  Output may be lost.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example buffers screen output, updates the screen, then
+        displays the buffered screen output:
+
+        #include "gt.api"
+        .
+        .
+        .
+           _gtDispBegin();      // Start screen buffering
+
+           _gtSetPos(10, 10);
+           _gtWrite( "A display update", 17 );
+
+           _gtSetPos(11, 10)
+           _gtWrite( "Another display update", 22 )
+
+           _gtDispEnd()         // Display buffered screen data
+        .
+        .
+        .
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Gt.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng34982.html">_gtDispCount()</A>
+<A HREF="ng34d53.html">_gtDispEnd()</A>
+<A HREF="ng35e1b.html">_gtGetPos()</A>
+<A HREF="ng3d778.html">_gtSetPos()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

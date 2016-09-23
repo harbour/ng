@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc3bb3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngc4826.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COPY STRUCTURE</B>
+ Copy the current .dbf structure to a new database (.dbf) file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>COPY STRUCTURE [FIELDS &lt;idField list&gt;]</B>
+     <B>   TO &lt;xcDatabase&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>FIELDS &lt;idField list&gt;</B> defines the set of fields to copy to the new
+     database structure in the order specified.  The default is all fields.
+
+     <B>TO &lt;xcDatabase&gt;</B> is the name of the target database file and can be
+     specified either as a literal database file name or as a character
+     expression enclosed in parentheses.  The default extension is .dbf
+     unless another is specified.
+
+ <B>Description</B>
+
+     COPY STRUCTURE is a database command that creates an empty database file
+     with field definitions from the current database file.  If &lt;xcDatabase&gt;
+     exists, it is overwritten.
+
+     COPY STRUCTURE creates empty structures that can be used to archive
+     records from the current database file or to create a temporary database
+     file for data entry.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, COPY STRUCTURE creates a temporary file.
+        After the user enters data into the temporary file, the master
+        database file is updated with the new information:
+
+        USE Sales NEW
+        COPY STRUCTURE TO Temp
+        USE Temp NEW
+        lMore := .T.
+        DO WHILE lMore
+           APPEND BLANK
+           @ 10, 10 GET Temp-&gt;Salesman
+           @ 11, 11 GET Temp-&gt;Amount
+           READ
+           IF UPDATED()
+              SELECT Sales
+              APPEND BLANK
+              REPLACE Sales-&gt;Salesman WITH Temp-&gt;Salesman
+              REPLACE Sales-&gt;Amount WITH Temp-&gt;Amount
+              SELECT Temp
+              ZAP
+           ELSE
+              lMore := .F.
+           ENDIF
+        ENDDO
+        CLOSE DATABASES
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc4826.html">COPY STRU EXTE</A>
+<A HREF="ngc712a.html">CREATE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

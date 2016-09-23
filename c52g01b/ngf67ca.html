@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf62aa.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngf6c7b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RECNO() function</B>
+ Return the identity at the position of the record pointer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     RECNO() --&gt; <B>Identity</B>
+
+ <B>Returns</B>
+
+     RECNO() returns the identity found at the position of the record
+     pointer.
+
+ <B>Description</B>
+
+     RECNO() is a database function that returns the identity found at the
+     current position of the record pointer.  Identity is a unique value
+     guaranteed by the structure of the data file to reference a specific
+     record of data file.  The data file need not be a traditional Xbase
+     file.  Therefore, unlike earlier versions of CA-Clipper, the value
+     returned need not be a numeric data type.
+
+     Under all RDDs, RECNO() returns the value at the position of the record
+     pointer; the data type and other characteristics of this value are
+     determined by the content of the accessed data and the RDD active in the
+     current work area.  In an Xbase database this value is the record
+     number.
+
+ <B>Examples</B>
+
+     USE Sales VIA "DBFNTX"
+     .
+     . &lt; statements &gt;
+     .
+     DBGOTOP()
+     RECNO()            // Returns 1
+
+ <B>Status:</B>  Enhanced
+
+ <B>See also:</B>  DBGOTO()
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngeaf9e.html">DBGOTO()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

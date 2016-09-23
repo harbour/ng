@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7078b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6d7d4.html">[^^Up^^]</A>
+<A HREF="ng718c2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ExoSegDSAlias()</B>
+ Creates a data descriptor for the given code segment
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>void *ExoSegDSAlias(void *pm_ptr)</B>
+
+ <B>Returns</B>
+
+     This function returns a data pointer to the same linear address as
+     pm_ptr, or NULL if an error occurred.
+
+ <B>Description</B>
+
+     This function creates a new data descriptor with the same base as the
+     segment specified by pm_ptr.  After the call to ExoSegDSAlias(), the
+     descriptor indicated in pm_ptr still exists and retains its original
+     segment type.  The offset of the alias will ALWAYS equal the offset of
+     the original pointer.
+
+     ExoFreeSelector() MUST be called to free the selector allocated with
+     ExoSegDSAlias().  Selectors are a limited resource and repeated calls to
+     ExoSegDSAlias() as well as ExoSegCSAlias() and ExoProtectedPtr() could
+     use up all the available selectors causing the program to crash.  Once
+     you are done with a pointer created with ExoSegDSAlias(), free the
+     selector unless you will be using the pointer throughout the program.
+
+ <B>Examples</B>
+
+     The example below consists of two modules: one in assembly language and
+     one in C. The int_instruction label in the assembly code marks the
+     location of an instruction signaling Interrupt 0h.  The C code
+     overwrites this instruction so that a different interrupt is signaled.
+
+     The C code calls ExoSegDSAlias() to get an alias data pointer to
+     int_instruction. The example then increments the pointer by one byte to
+     point to the location of "0h" in the instruction. The example overwrites
+     this location with "0x88" and frees the data descriptor with
+     ExoFreeSelector() since it is no longer needed.
+
+     public _do_int, int_instruction
+     _do_int:
+     ...
+     int_instruction:
+     int 0h
+     ...
+
+     char *data;
+     extern int_instruction();
+
+     /* create data segment alias and write interrupt number 0x88 */
+     data = ExoSegDSAlias(int_instruction);
+     *(data + 1) = 0x88;
+
+     /* mark code segment as resident so the VMM system won't swap
+        it out and lose the changes made to it */
+     ExoReside(int_instruction);
+
+     /* free the selector created by ExoSegDSAlias() since we don't
+        need it anymore */
+     ExoFreeSelector(FP_SEG(data));
+
+ <B>Files</B>   Library is EXOSPACE.LIB, header file is Exospace.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7078b.html">ExoSegCSAlias()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

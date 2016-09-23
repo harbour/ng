@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng51b6c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng5287d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MPOSTOLC()</B>
+ Return line and column position of a formatted string based on a specified
+ byte position
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MPOSTOLC(&lt;cText&gt;, &lt;nWidth&gt;, &lt;nPos&gt;,</B>
+     <B>   [&lt;nTabSize&gt;], [&lt;lWrap&gt;]) --&gt; aLineColumn</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cText&gt;</B> is a text string.
+
+     <B>&lt;nWidth&gt;</B> is the length of the formatted line.
+
+     <B>&lt;nPos&gt;</B> is the byte position within text counting from one.
+
+     <B>&lt;nTabSize&gt;</B> is the number of columns between tab stops.  If not
+     specified, the default is four.
+
+     <B>&lt;lWrap&gt;</B> is the word wrap flag.  If not specified, the default is
+     true (.T.).
+
+ <B>Returns</B>
+
+     MPOSTOLC() returns an array containing the line and the column values
+     for the specified byte position, &lt;nPos&gt;.
+
+ <B>Description</B>
+
+     MPOSTOLC() is a memo function that determines the formatted line and
+     column corresponding to a particular byte position within &lt;cText&gt;.  Note
+     that the line number returned is one-relative, the column number is
+     zero-relative.  This is compatible with MEMOEDIT().  &lt;nPos&gt; is
+     one-relative, compatible with AT(), RAT(), and other string functions.
+
+     MPOSTOLC(), used with MLCTOPOS(), can create search routines or other
+     text processing for MEMOEDIT().  Refer to the source code for the
+     program editor (PE) found in \CLIPPER5\SOURCE\PE directory.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example determines, for the text string shown, the line
+        and column corresponding to the tenth character of the text, assuming
+        a formatting width of five columns.  A formatting width of five would
+        cause each of the first three words to be placed on a line by itself.
+        The tenth character of the text is the "s" in "side."  The word
+        "side" would be at the leftmost column of the third line of the
+        formatted text, so the return value is {3, 0}:
+
+        cText := "Note the side on which the bread ;
+              is buttered."
+        //
+        aLC := MPOSTOLC(cText, 5, 10)         // Result: {3, 0}
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng47e75.html">MEMOEDIT()</A>
+<A HREF="ng50765.html">MLCTOPOS()</A>
+<A HREF="ng50e03.html">MLPOS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

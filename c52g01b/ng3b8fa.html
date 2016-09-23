@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3b241.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng3c09c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FRENAME()</B>
+ Change the name of a file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FRENAME(&lt;cOldFile&gt;, &lt;cNewFile&gt;) --&gt; nSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOldFile&gt;</B> is the name of the file to rename, including the file
+     extension.  A drive letter and/or path name may also be included as part
+     of the filename.
+
+     <B>&lt;cNewFile&gt;</B> is the new name of the file, including the file
+     extension.  A drive letter and/or path name may also be included as part
+     of the name.
+
+ <B>Returns</B>
+
+     FRENAME() returns -1 if the operation fails and zero if it succeeds.  In
+     the case of a failure, FERROR() can be used to determine the nature of
+     the error.
+
+ <B>Description</B>
+
+     FRENAME() is a file function that changes the name of a specified file
+     to a new name and is identical to the RENAME command.
+
+     When FRENAME() is called, &lt;cOldFile&gt; is renamed only if it is located in
+     the current DOS directory or in the specified path.  FRENAME() does not
+     use SET DEFAULT or SET PATH to locate &lt;cOldFile&gt;.
+
+     If the source directory is different from the target directory, the file
+     moves to the target directory.  In the instance that either &lt;cNewFile&gt;
+     exists or is currently open, FRENAME() fails and returns -1, indicating
+     that it did not perform its designated action.  The nature of the error
+     can be determined with FERROR().
+
+     <B>Warning! </B> Files must be CLOSEd before renaming.  Attempting to
+     rename an open file will produce unpredictable results.  When a database
+     file is renamed, the associated memo (.dbt) file must also be renamed.
+     Failure to do so may compromise the integrity of your databases.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates a file rename:
+
+        IF FRENAME("OldFile.txt", "NewFile.txt") == -1
+           ? "File error:", FERROR()
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7fa4e.html">CLOSE</A>
+<A HREF="ng88076.html">ERASE</A>
+<A HREF="ng34170.html">FERASE()</A>
+<A HREF="ng3477a.html">FERROR()</A>
+<A HREF="ng378ce.html">FILE()</A>
+<A HREF="ng943cc.html">RENAME</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

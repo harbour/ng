@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngace9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ngb9d9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Verify():</B>
+
+  Purpose:  Verify a target string against the .DBF source string, passed as
+            a code block.
+
+   Syntax:  hs_Verify( &lt;bSource&gt;, &lt;cValue&gt; [, lCase] )
+
+    Where:  &lt;bSource&gt; is a code block containing the expression to evaluate.
+
+            &lt;cValue&gt; is the value to compare against the evaluated &lt;bSource&gt;.
+
+            [lCase] is an optional logical value indicating if the
+                    verification is to be case insensitive (TRUE), or not
+                    (FALSE).  The default is FALSE (case sensitive).
+
+  Returns:  Logical .T. if cValue is contained anywhere within Eval(bSource),
+            else .F.
+
+  Comments:  This differs somewhat in functionality to the CFTS CftsVerify()
+             function, has been coded specifically for use with Clipper, and
+             is roughly 10 times faster than CftsVerify().
+
+  Example:
+
+    // Lists all record numbers that contain the word "John" anywhere in
+    // either the FIRST, LAST, STREET, or CITY fields.  Uses hs_Verify()
+    // to prevent "fuzzy" matches.
+
+    LOCAL cExpr := "test-&gt;FIRST + test-&gt;LAST + test-&gt;STREET + test-&gt;CITY"
+    LOCAL bExpr := &amp;( "{||" + cExpr + "}" )
+    LOCAL cVal := "John", h := 0, nRec := 0
+
+    CLS
+    USE test EXCL
+
+    IF !file("TEST.HSX")
+      ? "Building HiPer-SEEK Index..."
+      h := hs_Index( "TEST.HSX", cExpr, 2 )
+    ELSE
+      h := hs_Open( "TEST.HSX", 8, 1 )
+    ENDIF
+
+    hs_Set( h, cVal )
+    nRec := hs_Next( h )
+
+    DO WHILE nRec &gt; 0
+      dbGoto( nRec )
+      IF <B>hs_Verify( bExpr, cVal )</B>
+        ? nRec
+      ENDIF
+      nRec := hs_Next( h )
+    ENDDO
+
+    hs_Close( h )
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng83cf.html">hs_Next()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

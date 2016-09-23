@@ -1,0 +1,106 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8cbaa.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng8e251.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCKEY()</B>
+ Supervises the communication buffer with key traps
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCKEY(&lt;nHandle&gt;,[&lt;nKeyValue&gt;],[&lt;nEventMask&gt;])</B>
+     <B>    --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication receiving buffer.
+
+     <B>&lt;nKeyValue&gt;</B>  Designates the key code that is triggered when specific
+     events occur.  All values of the CA-Clipper KEYBOARD command are valid.
+     Without this parameter, a previously set buffer supervision is removed.
+
+     <B>&lt;nEventMask&gt;</B>  Designates a numeric value that determines the events
+     that trigger a key trap.  The value contains an OR operation of various
+     events according to the following table.
+
+     <B>Table 31.6:  Event Codes for PPCKEY()</B>
+     ------------------------------------------------------------------------
+     <B>Value   Sym. Con.           Definition</B>
+     ------------------------------------------------------------------------
+     1       PPC_RECSUC          Packet received successfully
+     2       PPC_RECFAIL         Packet received with errors
+     4       PPC_RECBUFF75FULL   Receiving buffer more than 75% full
+     8       PPC_RECPACKDISCARD  Packet discarded because of a full receiving
+                                 buffer
+     16      PPC_SNDFAIL         Failure during sending of a packet
+     32      PPC_CONESTAB        Session set up successfully
+     64      PPC_CONTERM         Session terminated
+     ------------------------------------------------------------------------
+
+     The default value (127) triggers a key trap on each event.  The symbolic
+     constants are defined in the header file CTPPC.CH.
+
+ <B>Returns</B>
+
+     PPCKEY() returns .T. when a key code has been set or removed
+     successfully.
+
+ <B>Description</B>
+
+     PPCKEY() allows you , independently of the protocol used (IPX, SPX,
+     NetBIOS datagram, or NetBIOS session), to supervise a communication
+     buffer within a wait state without having to control specific values
+     (for example, the number of characters in buffer).  If an event that is
+     specified by &lt;nEventMask&gt; occurs, PPCKEY() puts the key code &lt;nKeyValue&gt;
+     into the keyboard buffer.  With a previously defined SET KEY procedure,
+     you can react to the event immediately .  For example, with PPCEVENT()
+     you can determine the event that triggered the key trap.
+
+     If no key code is passed for PPCKEY(), the supervision for the
+     communication handle is removed.
+
+ <B>Examples</B>
+
+     <B>.</B>  Put key code 255 into the keyboard buffer at any event:
+
+        IF PPCKEY(nHandle,255)
+           ? 'Event handler installed successfully!'
+        ELSE
+           ? 'Event handler could not be installed!'
+        ENDIF
+
+     <B>.</B>  Store key code 255 to the keyboard buffer when a packet is
+        received:
+
+        #include "ctppc.ch"
+
+        PPCKEY(nHandle,255,PPC_RECSUC)
+
+     <B>.</B>  Store key code 255 to the keyboard buffer when a session is
+        set up or canceled (only for SPX or NetBIOS session communication):
+
+        #include "ctppc.ch"
+
+        PPCKEY(nHandle,255,NUMOR(PPC_CONESTB,PPC_CONTERM))
+
+     <B>.</B>  Remove the event supervision:
+
+        PPCKEY(nHandle)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8cbaa.html">PPCEVENT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

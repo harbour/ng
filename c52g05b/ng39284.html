@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3912d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng39016.html">[^^Up^^]</A>
+<A HREF="ng39d8e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1   Early and Late Evaluation of Macros in Code Blocks</B>
+--------------------------------------------------------------------------------
+
+     When a code block contains a macro, an ambiguity arises regarding
+     when the macro is evaluated.  There are two possibilities, early or
+     late evaluation.
+
+   <B>Early Evaluation</B>
+
+     The macro is expanded at the time the code block is created, and
+     the expanded value remains constant for all subsequent evaluations
+     of the block.
+
+     Clipper 5.0 uses early evaluation by default, with an alternate
+     method available for late evaluation.
+
+     As an example of early evaluation, consider a SET FILTER command in
+     which the filter expression is a macro:
+
+     SET FILTER TO &amp;cFilter
+
+     A filter expression, specified by a SET FILTER command, is executed
+     each time a SKIP command is issued.  The macro string contained in
+     cFilter above, however, should be expanded only once, when the
+     command is first issued.  Otherwise, if the macro is re-expanded
+     each time the filter block is evaluated, the macro variable
+     (cFilter above) must be preserved for the duration of the filter.
+
+     In Clipper 5.0, the SET FILTER command is implemented by use of a
+     code block.  The code for the above command, after preprocessing,
+     is similar to the following example:
+
+     DBFILTER( { || &amp;cFilter } )
+
+     Early evaluation of the macro within the code block results in the
+     desired behavior: cFilter is evaluated when the block is defined
+     (as part of the creation of the block).  The block is created via
+     the macro system and remains constant through all subsequent block
+     evaluations, regardless of any change to the value of cFilter.
+
+   <B>Late Evaluation</B>
+
+     The macro is re-evaluated each time the block is evaluated.
+
+     As an example of a situation where late evaluation is required,
+     consider a block which must perform a macro operation on one of its
+     own parameters.
+
+     The following block attempts to assign a value to a variable by use
+     of a macro:
+
+     assignVarByNameBlock := { |vName, value| &amp;vName := value }
+
+     Because Clipper 5.0 implements early evaluation, this code block
+     would not have the desired effect: instead of evaluating the macro
+     each time the block is run, Clipper would evaluate the macro when
+     the block was first created.  The initial value of vName would
+     become part of the block.
+
+     Late evaluation is available by using a macro expression.  The
+     above code block will function correctly if defined as follows:
+
+     assignVarByNameBlock := { |vName, value| &amp;(vName) := value }
+
+     The use of a macro expression (the macro operator applied to a
+     parenthesized expression) prevents the early evaluation from taking
+     place, and the code block will re-evaluate the macro string
+     contained in vName during each block evaluation.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

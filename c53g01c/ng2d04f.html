@@ -1,0 +1,105 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2ca74.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng2db8d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBRECORDINFO()</B>
+ Return and optionally change information about a record
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBRECORDINFO(&lt;nInfoType&gt;,</B>
+     <B>   [&lt;nRecord&gt;],</B>
+     <B>   [&lt;expNewSetting&gt;]) --&gt; uCurrentSetting</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nInfoType&gt;</B> determines the type of information, as specified by the
+     constants below.  Note, however, that not all constants are supported
+     for all RDDs.  These constants are defined in the Dbinfo.ch header file,
+     which must be included (#include) in your application.
+
+     <B>Record Information Type Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Description</B>
+     ------------------------------------------------------------------------
+     DBRI_DEL       Deleted flag status of the record
+     DBRI_LOCK      Locked flag status of the record
+     DBRI_SIZE      Length of the record
+     DBRI_RECNO     Position of the record
+     DBRI_UPDAT     Updated flag status of the record
+     ------------------------------------------------------------------------
+
+     <B>Important! </B> DBI_USER is a constant that returns the minimum value
+     that third-party RDD developers can use for defining new &lt;nInfoType&gt;
+     parameters.  Values less than DBI_USER are reserved for Computer
+     Associates development.
+
+     <B>&lt;nRecord&gt;</B> is the record to obtain information.  If omitted, the
+     current record is used.
+
+     <B>&lt;expNewSetting&gt;</B> is reserved for RDDs that allow the file information
+     to be changed, in addition to being retrieved.  None of the RDDs
+     supplied with CA-Clipper support this argument.  It can be omitted or
+     specified as NIL.
+
+ <B>Returns</B>
+
+     If &lt;expNewSetting&gt; is not specified, DBRECORDINFO() returns the current
+     setting.  If &lt;expNewSetting&gt; is specified, the previous setting is
+     returned.
+
+ <B>Description</B>
+
+     DBRECORDINFO() retrieves information about the state of a record (row).
+     The type of information is specified by the &lt;nInfoType&gt; parameter.  By
+     default, this function operates on the currently selected record.
+
+     DBRECORDINFO() is designed to allow for additional &lt;nInfoType&gt; values
+     that can be defined by third-party RDD developers.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example uses DBRECORDINFO() to retrieve field
+        information:
+
+        #include "Dbinfo.ch"
+
+        DBRECORDINFO(DBRI_SIZE)               // Same as RECSIZE()
+
+        DBRECORDINFO(DBRI_LOCK, 200)         // Is record 200 locked?
+
+        DBRECORDINFO(DBRI_DEL, 201)         // Is record 201 locked?
+
+        DBRECORDINFO(DBRI_UPDAT)            // Is the current record
+                                            // updated?
+
+        DBRECORDINFO(DBRI_RECNO, 230)         // On which position is
+
+                                            // record 230?
+                                            // If no orders are active,
+                                            // the position is 230;
+                                            // otherwise, the relative
+                                            // position within the order
+                                            // will be returned.
+
+ <B>Files</B>   Library is CLIPPER.LIB, header file is Dbinfo.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng25343.html">DBFIELDINFO()</A>
+<A HREF="ng28fbc.html">DBINFO()</A>
+<A HREF="ng2a6f6.html">DBORDERINFO()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

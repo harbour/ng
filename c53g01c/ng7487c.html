@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng74326.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng7508e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MOD()*</B>
+ Return the dBASE III PLUS modulus of two numbers
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MOD(&lt;nDividend&gt;, &lt;nDivisor&gt;) --&gt; nRemainder</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nDividend&gt;</B> is the dividend of the division operation.
+
+     <B>&lt;nDivisor&gt;</B> is the divisor of the division operation.
+
+ <B>Returns</B>
+
+     MOD() returns a number representing the remainder of &lt;nDividend&gt; divided
+     by &lt;nDivisor&gt;.
+
+ <B>Description</B>
+
+     MOD() is a numeric function that emulates the dBASE III PLUS MOD()
+     function.  It is implemented using the CA-Clipper modulus operator (%).
+     Note that there are differences between the dBASE III PLUS MOD()
+     function and the CA-Clipper modulus operator which are described in the
+     following table:
+
+     <B>Differences Between dBASE III PLUS MOD() Function and the</B>
+     <B>CA-Clipper Modulus Operator</B>
+     ------------------------------------------------------------------------
+     <B>Dividend     Divisor   Modulus Operator    MOD()     dBASE III PLUS</B>
+     <B>                                                     MOD() function</B>
+     ------------------------------------------------------------------------
+      3             0            Error          Error           3
+      3            -2             1             -1             -1
+     -3             2            -1              1              1
+     -3             0            Error          Error          -3
+     -1             3            -1              2              2
+     -2             3            -2              1              1
+      2            -3             2             -1             -1
+      1            -3             1             -2             -2
+     ------------------------------------------------------------------------
+
+     MOD() is supplied as a compatibility function and therefore not
+     recommended.  It is superseded entirely by the modulus operator (%).
+
+ <B>Notes</B>
+
+     <B>.  Zero divisor in dBASE III PLUS:</B> In dBASE III PLUS, a zero
+        divisor returns the dividend for every value of the dividend.  In
+        CA-Clipper, by contrast, the modulus of any dividend using a zero
+        divisor causes a runtime error.
+
+     <B>.  Zero divisor in earlier versions:</B> In versions of CA-Clipper
+        prior to Summer '87, a modulus operation with a zero divisor returned
+        zero for all dividends.  In Summer '87 and later versions, it returns
+        a runtime error.
+
+ <B>Files</B>   Library is EXTEND.LIB, source file is SOURCE\SAMPLE\MOD.PRG.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

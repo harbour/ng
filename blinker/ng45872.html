@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng45687.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3dfc5.html">[^^Up^^]</A>
+<A HREF="ng461f6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1113: segment &lt;name&gt; or its group exceeds 64kb</B>
+------------------------------------------------------------------------------
+
+ This message indicates one of a number of situations :
+
+ Two related libraries may have been separated by other libraries in the link
+ script file, so that the code in one library cannot reach the code in the
+ other library. This may also occur when related .OBJ files, possibly
+ extracted from the same library, have been separated by too many other .OBJ
+ files in the script file.
+
+ Non-overlayable code may have been overlaid. When third party products are
+ linked into the program, please refer to the file 3RDPARTY.DOC supplied on
+ the distribution diskette and to the products' documentation for their
+ suggested method for dynamic overlaying.
+
+ Two libraries may have declared the same segment names in different classes,
+ which should not occur in most programs.
+
+ Two or more libraries may have been specified in an incorrect order within
+ the link script. See the section, "Ordering the Libraries" in chapter 4 of
+ this manual.
+
+ The program's default data segment (usually named DGROUP in the program's
+ MAP file) may have exceeded 64K in size. Try changing near data to far data,
+ by declaring large data items as far, or instruct the compiler to do this
+ automatically, e.g. using the Microsoft C/C++ -Gt compile switch.If using
+ Borland C/C++, try changing the large memory model compile option to huge.
+ If using CA-Clipper, determine which 3rd-party product is using the most of
+ DGROUP by systematically removing each library and running the program with
+ the //INFO parameter of the CLIPPER environment variable enabled. When the
+ offending library is found, please contact that product's technical support.
+
+ If these approaches do not work, and recreating or reinstalling the
+ specified file does not help, then please contact Blinker technical support
+ with exact details of the problem.
+
+ <B>CA-Clipper note:</B>
+
+ For CA-Clipper applications, the usual cause of this problem is that the
+ first .OBJ file specified on the command line or in the script file is not a
+ CA-Clipper .OBJ file. When linking a CA-Clipper application the first .OBJ
+ file specified must be the CA-Clipper starting program.
+
+ If the first .OBJ file is definitely a CA-Clipper .OBJ then please review
+ Chapter 4 which discusses the order of third party libraries in the script
+ file.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

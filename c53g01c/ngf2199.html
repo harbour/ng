@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf1c3d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf2963.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET UNIQUE*</B>
+ Toggle inclusion of non-unique keys into an index
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET UNIQUE on | OFF | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> causes index files to be created with a uniqueness attribute.
+
+     <B>OFF</B> causes index files to be created without a uniqueness attribute.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET UNIQUE is a database command that controls whether indexes are
+     created with uniqueness as an attribute.  With UNIQUE ON, new indexes
+     are created including only unique keys.  This is the same as creating an
+     index with the INDEX...UNIQUE command.
+
+     If, during the creation or update of an unique index, two or more
+     records are encountered with the same key value, only the first record
+     is included in the index.  When the unique index is updated, REINDEXed,
+     or PACKed, only unique records are maintained, without regard to the
+     current SET UNIQUE value.
+
+     Changing key values in a unique index has important implications.
+     First, if a unique key is changed to the value of a key already in the
+     index, the changed record is lost from the index.  Second, if there is
+     more than one instance of a key value in a database file, changing the
+     visible key value does not bring forward another record with the same
+     key until the index is rebuilt with REINDEX, PACK, or INDEX...UNIQUE.
+
+     With UNIQUE OFF, indexes are created with all records in the index.
+     Subsequent updates to the database files add all key values to the index
+     independent of the current UNIQUE SETting.
+
+     SET UNIQUE is a compatibility command not recommended.  It is superseded
+     by the UNIQUE clause of the INDEX command.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1fd41.html">DBCREATEIND()</A>
+<A HREF="ngcc94d.html">INDEX</A>
+<A HREF="ngd44c1.html">PACK</A>
+<A HREF="ngd6dd9.html">REINDEX</A>
+<A HREF="ngdd095.html">SEEK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

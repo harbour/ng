@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng18254.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng19405.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MURPHY                        Create worst case overlay situation</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Create a worst case overlay situation</B></U>
+
+ <U>Syntax   : <B>MURPHY</B></U>
+
+ <U>Default  : <B>Disabled</B></U>
+
+ The MURPHY command causes the overlay manager to attempt to force any
+ inadvertent overlay errors (programming errors) to manifest themselves
+ during testing or debugging.
+
+ When MURPHY is enabled, the overlay manager will only allow a single overlay
+ to be in memory at any given time, allowing the developer to detect 'badly
+ behaved' dependencies between overlays and correct them.
+
+ The overlay manager also fills all unused space in the overlay pool with INT
+ 3 instructions, with a far jump to an error reporting routine within the
+ overlay manager being placed at the very end of the overlay area.
+
+ When the program is run under a debugger, and an erroneous jump to an
+ invalid (i.e. non-vectored) address within the overlay area occurs, the INT
+ 3 instruction will cause the debugger to breakpoint at the offending
+ address.
+
+ If the program is not being executed under a debugger, the processor will
+ execute all the INT 3 instructions and the far jump to the error routine in
+ the overlay manager, at which point the overlay manager will display a
+ message and terminate the program.
+
+ The use of the MURPHY command may slow down the execution of the program
+ significantly.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

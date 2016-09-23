@@ -1,0 +1,134 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng13d38.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf477.html">[^^Up^^]</A>
+<A HREF="ng15567.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>Optimizable Expressions</B>
+------------------------------------------------------------------------------
+
+ClipMore works by matching up indexes with parts of your condition.  Any
+part of your condition which can be paired up with an index is called an
+optimizable expression.  (E.g., if your query is "age = 30", and you have an
+index on "age", then "age = 30" is an optimizable expression).
+
+This chapter covers the kinds of matches which cmFilter() (and rlNewQuery())
+perform automatically.
+
+NOTE:   rlOptLevel() will return the level of optimization achieved for any
+        query.  This can help you determine if you have the indexes that
+        ClipMore needs to fully optimize an expression.
+
+
+<B>Conditional Indexes</B>
+
+ClipMore will _never_ use a conditional index.  In other words, if an index
+has a FOR condition it will _not_ be used for optimization.
+
+You can use a conditional index explicitly with the rl*() functions and in
+many cases this can be intensely useful.  However, cmFilter() (and
+rlNewQuery()) will never use an index which has a FOR condition.
+
+
+<B>Basic (Identical) Matches</B>
+
+If the query expression exactly matches the index expression, it will always
+be used.
+
+Use of parentheses, spacing and case will NOT affect the match, given that
+the expression is semantically identical.
+
+    <B>Examples</B>
+
+    index on age to age
+    cmFilter("age = 30")                        // Optimizable
+
+    index on last to last
+    cmFilter("last = 'J'")                      // Optimizable
+
+    index on last+first+state to lfs
+    cmFilter("(last + first) + state = 'J'")    // Optimizable
+
+    index on iif(married, 'M' + last, 'S' + last) to ifMarried
+    cmFilter("iif(married,'M'+last,'S'+last) = 'M'")    // Optimizable
+    
+
+<B>Abbreviated Function Names</B>
+
+ClipMore will automatically use the abbreviated name of various functions.
+E.g., SUBSTR() is synonymous with SUBS(), SUBST() and SUBSTR(); DELETED() is
+synonymous with DELE(), DELET(), DELETE(), DELETED(); etc.
+
+    <B>Examples</B>
+
+    index on substr(last,4,3) to last
+    cmFilter("subs(last,4,3) = 'abc'")          // Optimizable
+
+
+<B>Leading Character Expressions</B>
+
+Given an index on A+B+C (where A, B, and C are all character strings),
+ClipMore will be able to optimize a query expression using A, A+B, or
+A+B+C.  In other words, it can optimize any _leading_ part of the key.
+
+ClipMore cannot, however, optimize an embedded (non-leading) part of the
+key.  In the example of the key A+B+C, an expression on B or B+C would _not_
+be optimizable.
+
+    <B>Examples</B>
+
+    index on last+first to lastFir
+    cmFilter("last = 'J'")                      // Optimizable
+    cmFilter("last+first = 'Johnson     T')     // Optimizable
+    cmFilter("first = 'J')                      // NOT optimizable (first is
+                                                // not leading part of key)
+
+<B>EMPTY()</B>
+
+ClipMore will automatically optimize any EMPTY() function call provided that
+the expression within the EMPTY() is optimizable.
+
+    <B>Examples</B>
+
+    index on age to age
+    cmFilter("empty(age)")          // age is optimizable, so empty(age) is
+
+    index on last to last
+    cmFilter("empty(last)")         // last is optimizable, so empty(last) is
+
+    index on last+first to lastFir
+    cmFilter("empty(last)")         // last is optimizable, so empty(last) is
+
+
+<B>DTOS()</B>
+
+ClipMore can use an index on DTOS(dDate) to optimize an expression involving
+dDate.  Conversely, ClipMore can use an index on dDate to optimize an
+expression involving DTOS(dDate).
+
+    <B>Examples</B>
+
+    index on dtos(lastcall) to date
+    cmFilter("dtos(lastcall) = '1989'")             // Optimizable
+    cmFilter("lastcall = ctod('01/01/89')")         // Optimizable
+
+    index on dtos(lastcall)+last to dateLast
+    cmFilter("dtos(lastcall) = '1989'")             // Optimizable
+    cmFilter("lastcall = ctod('01/01/89')")         // Optimizable
+
+    index on lastcall to lastcall
+    cmFilter("dtos(lastcall) = '1989'")             // Optimizable
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

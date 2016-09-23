@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng98c4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng743f.html">[^^Up^^]</A>
+<A HREF="nga008.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET LIB</B>
+ Define a list of paths to search for .lib, .plt, and .pll files
+-------------------------------------------------------------------------------
+
+    <B>SET LIB=&lt;pathSpec list&gt;</B>
+
+ <B>Arguments</B>
+
+    <B>&lt;pathSpec list&gt;</B> specifies one or more paths, separated by
+    semicolons (;).
+
+ <B>Description</B>
+
+    The LIB environment variable specifies the paths that .RTLink uses to
+    search for library (.lib), prelinked transfer (.plt) files, and
+    prelink (.pll) libraries not found in the current directory at link
+    time.  For .plt and .pll files, .RTLink searches the PLL path before
+    the LIB path.  At runtime, the LIB environment variable is used to
+    search for files (.pll) not in the directory where the executable file
+    (.exe) is located or the path specified by the PLL environment variable.
+
+    The default location of the CA-Clipper libraries is the \CLIPPER5\LIB
+    directory.
+
+ <B>Examples</B>
+
+    SET LIB=C:\CLIPPER5\LIB
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng11c4.html">CA-Clipper Linker</A>
+<A HREF="nga300.html">SET PLL</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

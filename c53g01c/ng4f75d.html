@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4e643.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng4fcb8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GETACTIVE()</B>
+ Return the currently active Get object
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GETACTIVE([&lt;oGet&gt;]) --&gt; objGet</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;oGet&gt;</B> is a reference to a Get object.
+
+ <B>Returns</B>
+
+     GETACTIVE() returns the Get object referenced by &lt;oGet&gt;.  If &lt;oGet&gt; is
+     not specified, then the current active Get object within the current
+     READ is used.  If there is no READ active when GETACTIVE() is called, it
+     returns NIL.
+
+ <B>Description</B>
+
+     GETACTIVE() is an environment function that provides access to the
+     active Get object during a READ.  The current active Get object is the
+     one with input focus at the time GETACTIVE() is called.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code uses a WHEN clause to force control to branch to a
+        special reader function.  Within this function, GETACTIVE() retrieves
+        the active Get object:
+
+        @ 10, 10 GET x
+        @ 11, 10 GET y WHEN MyReader()
+        @ 12, 10 GET z
+        READ
+
+        // Called just before second get (above)
+        // becomes current
+        FUNCTION MyReader
+           LOCAL objGet               // Active Get holder
+           objGet := GETACTIVE()      // Retrieve current
+
+                                      // active Get
+           BarCodeRead( objGet )
+           RETURN (.F.)               // Causes Get to be
+                                      // skipped in READ
+
+ <B>Files</B>   Library is CLIPPER.LIB, source file is Getsys.prg.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngd4eb5.html">READ</A>
+<A HREF="ng92f8a.html">READMODAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

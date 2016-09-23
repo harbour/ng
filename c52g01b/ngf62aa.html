@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf5f21.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngf67ca.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RDDSETDEFAULT() function</B>
+ Set or return the default RDD for the application
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     RDDSETDEFAULT([&lt;cNewDefaultRDD&gt;])
+        --&gt; cPreviousDefaultRDD
+
+ <B>Arguments</B>
+
+     <B>&lt;cNewDefaultRDD&gt;</B> is a character string, the name of the RDD that is
+     to be made the new default RDD in the application.
+
+ <B>Returns</B>
+
+     RDDSETDEFAULT() returns a character string, cPreviousDefaultRDD, the
+     name of the previous default driver.  The default driver is the driver
+     that CA-Clipper uses if you do not explicitly specify an RDD with the
+     VIA clause of the USE command.
+
+ <B>Description</B>
+
+     RDDSETDEFAULT() is an RDD function that sets or returns the name of the
+     previous default RDD driver and, optionally, sets the current driver to
+     the new RDD driver specified by cNewDefaultRDD.  If &lt;cNewDefaultDriver&gt;
+     is not specified, the current default driver name is returned and
+     continues to be the current default driver.
+
+     This function replaces the DBSETDRIVER() function.
+
+ <B>Examples</B>
+
+     // If the default driver is not DBFNTX, make it the default
+
+     IF ( RDDSETDEFAULT() != "DBFNTX" )
+        cOldRdd := RDDSETDEFAULT( "DBFNTX" )
+     ENDIF
+
+ <B>Status:</B>  New
+
+ <B>See also:</B>  DBSETDRIVER()
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng23276.html">DBSETDRIVER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

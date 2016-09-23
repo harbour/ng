@@ -1,0 +1,32 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng12289a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng121572.html">[^^Up^^]</A>
+<A HREF="ng122d5e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>CanRetry                                       (Assignable)</B>
+
+        Contains a logical value indicating whether the subsystem can retry
+        the operation that caused the error condition.  A value of true (.T.)
+        indicates that a retry is possible.  Retry may or may not be
+        available, depending on the subsystem and the error condition.
+
+        Retry is requested by returning true (.T.) from the error block
+        invoked to handle the error.  Note that Error:CanRetry never contains
+        true (.T.) if Error:CanSubstitute contains true (.T.).
+
+        oNewErr:CanRetry := .F.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng14401.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng14f2d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GETCURSOR()*</B>
+ Determines the setting for the cursor form
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GETCURSOR([&lt;lMode&gt;]) --&gt; nCursorForm</B>
+
+     <B>*  This function has been retained for compatibility reasons only.</B>
+     <B>   Its use in development of future applications is not recommended.</B>
+     <B>   For future applications use the SETCURSOR() function.</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lMode&gt;</B>  Sets the cursor form to the overwrite (.F.) or the insert
+     (.T.) mode.  The default value (.F.) sets the cursor form to the
+     overwrite mode.
+
+ <B>Returns</B>
+
+     The returned value designates how many scan lines are used to display
+     the cursor.
+
+ <B>Description</B>
+
+     GETCURSOR() allows you to save the current cursor form for an input
+     field in a function called with a VALID, before you change it in a UDF.
+     GETCURSOR() then allows you to restore its old form before returning to
+     the GET field.
+
+     CA-Clipper Tools stores the form for two cursor displays: one for
+     overwriting and one for inserting.  If &lt;lMode&gt;  is .F. or omitted, then
+     the overwrite cursor form is returned.  If &lt;lMode&gt; is .T., then the
+     insert cursor form is returned.  (See the note with SETCURSOR()).
+
+     The cursor is broken down into lines on the screen called scan lines.
+     The form and height of the cursor are specified by two instructions that
+     correspond to the first and the last line used for the cursor display.
+     GETCURSOR() returns both numbers combined into one value, according to
+     the following formula:
+
+           (Starting Line * 256) + Final Line
+
+     The NUMHIGH() and NUMLOW() functions let you separate the starting and
+     final lines very easily.
+
+ <B>Notes</B>
+
+     <B>.</B>  The word "line" here does not mean a screen (output) line, but
+        the scan or pixel lines from which screen characters are created.
+
+     <B>.</B>  This function works independently of the SET CURSOR setting.
+
+ <B>Example</B>
+
+     Break down cursor information into a starting line and a final line:
+
+     nCursor  :=  GETCURSOR()
+     ? NUMHIGH(nCursor)            // Cursor start line
+     ? NUMLOW(nCursor)             // Cursor final line
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1bae7.html">SETCURSOR()</A>
+<A HREF="ng6b180.html">NUMHIGH()</A>
+<A HREF="ng6b4f8.html">NUMLOW()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4f824.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng502af.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LTOC()</B>
+ Converts a logical value into a character
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LTOC([&lt;lValue&gt;]) --&gt; cCharacter</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lValue&gt;</B>  Designates the logical value that is converted. The
+     default value is .F..
+
+ <B>Returns</B>
+
+     The character returned corresponds to the logical value specified in the
+     parameter.
+
+ <B>Description</B>
+
+     In contrast to the LTON() function, which converts a logical value into
+     a number, LTOC() returns a value for the type character string.  This
+     can be particularly helpful with combined index keys.
+
+ <B>Examples</B>
+
+     <B>.</B>  Without parameters, .F. is assumed:
+
+        ? LTOC()               // "F"
+
+     <B>.</B>  Return a letter that corresponds to the specified logical
+        value:
+
+        ? LTOC(.F.)            // "F"
+
+        ? LTOC(.T.)            // "T"
+
+     <B>.</B>  Other functions can return the logical value:
+
+        ? LTOC(DELETED())      // "T" or "F"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6983d.html">LTON()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

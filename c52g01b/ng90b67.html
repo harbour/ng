@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9050e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng9115b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PACK</B>
+ Remove deleted records from a database file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PACK</B>
+
+ <B>Description</B>
+
+     PACK is a database command that removes all records marked for deletion
+     from the current database file, REINDEXes all active indexes in the
+     current work area, and recovers all the physical space occupied by the
+     deleted records.  During its operation, PACK does not create any backup
+     files, although the associated REINDEX operation may.  After the PACK
+     command terminates, the record pointer is reset to the first logical
+     record in the current work area.
+
+     In a network environment, PACK requires the current database be USEd
+     EXCLUSIVEly.  If this condition is not met when PACK is invoked,
+     CA-Clipper generates a runtime error.
+
+     Note that PACKing large database files can be a time-consuming process
+     and may not be feasible in a high-volume transaction system on a
+     network.  By modifying the system design, you can remove the necessity
+     of physically removing records from the database file altogether.  See
+     the Network Programming chapter in the Programming and Utilities guide
+     for more information.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following shows the result of a simple PACK:
+
+        USE Sales NEW
+        ? LASTREC()                  // Result: 84
+        //
+        DELETE RECORD 4
+        PACK
+        ? LASTREC()                  // Result: 83
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng85cb0.html">DELETE</A>
+<A HREF="ng284ba.html">DELETED()</A>
+<A HREF="ng384c9.html">FLOCK()</A>
+<A HREF="ng92bb9.html">RECALL</A>
+<A HREF="ng93235.html">REINDEX</A>
+<A HREF="ngb450c.html">ZAP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

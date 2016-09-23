@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2a549.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2b508.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosCreateCSAlias()            Create executable (code) selector corresponding to data selector.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Create an executable (code) selector corresponding to a data</B></U>
+            <B>selector.</B>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosCreateCSAlias( SEL datasel,</B></U>
+            <B>PSEL codesel);</B>
+
+ <U>datasel    <B>Data selector to be aliased. This selector must belong to a</B></U>
+            <B>single data segment less than or equal to 64kb.</B>
+
+ <U>codesel    <B>Pointer to an integer to receive the code selector (alias).</B></U>
+
+ <U>Return   : <B>Executable selector corresponding to data selector. The returned</B></U>
+            <B>selector has the same linear base address and limit as the</B>
+            <B>original data selector, but has a read / execute code attribute.</B>
+
+ This function allows code to be executed in a data segment.
+
+ Note: The original data selector should be locked in memory (using
+ DosLockSeg()) prior to creating the alias selector. This ensures that the
+ original selector will not be swapped out of memory, which could later cause
+ the linear base address of the segment to change when the segment is
+ reloaded from disk. This is necessary because alias selectors do not track
+ changes to the original selector. The original data selector may be unlocked
+ by calling DosUnlockSeg() after the alias selector has been freed using
+ DosFreeSelector().
+
+ Example:
+
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>#define TOSCREEN     2</B>
+    <B>#define TOPRINT      5</B>
+    <B>unsigned char codebyte[] =</B>
+    <B>   {</B>
+    <B>   0xb8, 0x00, 0x00,       /* mov AX, 0 */</B>
+    <B>   0xba, 0x00, 0x00, /* mov DX, 0 */</B>
+    <B>   0xcd, 0x21,  /* int 21 */</B>
+    <B>   0xcb   /* retf */</B>
+    <B>   };</B>
+    <B>void (far *execdata) (void);</B>
+    <B>void output(char *string, unsigned char device)</B>
+    <B>   {</B>
+    <B>   while (*string)</B>
+    <B>      {</B>
+    <B>      codebyte[2] = device;      /* screen or printer */</B>
+    <B>      codebyte[4] = *string;  /* char to output */</B>
+    <B>      (*execdata)();</B>
+    <B>      string++;</B>
+    <B>      }</B>
+    <B>   }</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>/* This is a contrived example */</B>
+    <B>void far *fp;</B>
+    <B>SEL         codesel ;</B>
+    <B>/* Lock the segment first */</B>
+    <B>fp = (void far *)(codebyte);</B>
+    <B>DosLockSeg(SELECTOROF(fp));</B>
+    <B>if (DosCreateCSAlias(SELECTOROF(fp),&amp;codesel) == 0)</B>
+    <B>   {</B>
+    <B>   execdata = MK_FP(codesel, OFFSETOF(fp));</B>
+    <B>   output("This is a contrived example\n",TOSCREEN);</B>
+    <B>   output("This is a contrived example\n",TOPRINT);</B>
+    <B>   DosFreeSelector(codesel);</B>
+    <B>   }</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2b508.html">DosCreateDSAlias()</A>
+<A HREF="ng2fcb1.html">DosLockSeg()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

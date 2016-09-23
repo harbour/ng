@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4b4dd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4bf54.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>skip()</B>
+ Reposition cursor relative to current position
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE skip(</B>
+     <B>                  AREAP wa,</B>
+     <B>                  LONG count</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>count</B> is the number of rows to skip.
+
+ <B>Description</B>
+
+     skip() skips count number of rows (count may be negative, indicating
+     reverse traversal), obeying filter and scope conditions.  This method is
+     intended to provide the functionality of the CA-Clipper SKIP command.
+
+ <B>Default Behavior</B>
+
+     The default implementation of skip() calls skipFilter() and skipRaw() to
+     successfully navigate the work area.  skip() also sets wa-&gt;fTop,
+     wa-&gt;fBottom, wa-&gt;fBof, and wa-&gt;fEof, when appropriate.
+
+     <B>Note: </B> As implemented, skip() may pass a zero (0) value to skipRaw()
+     indicating that a COMMIT (flush()) is to be performed.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If an order is attached to your implementation of work area,
+        skip() should support this new ordering as well as any condition or
+        filtering behavior.
+
+     <B>.</B>  If your RDD supports relations, update them with a forceRel()
+        prior to attempting relative movement.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4f10f.html">flush()</A>
+<A HREF="ng58f71.html">forceRel()</A>
+<A HREF="ng4a086.html">go()</A>
+<A HREF="ng4bf54.html">skipFilter()</A>
+<A HREF="ng4c2a5.html">skipRaw()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

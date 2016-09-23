@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng20ea7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng2184e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLILIBFRE()                   Free CA-Clipper DLL library</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Free a CA-Clipper DLL library</B></U>
+
+ <U>Syntax   : <B>BLILIBFRE(nuHandle)</B></U>
+
+ <U>Return   : <B>None</B></U>
+
+ This function is used to free a dynamically loaded CA-Clipper DLL.once it is
+ no longer needed.
+
+ All function handles allocated for a library using BLIFUNHAN() become
+ invalid once the library has been freed.
+
+ Please see Chapter 5, 'DOS extended / Dual Mode programs', for more details
+ on using DLLs.
+
+ Example:
+
+    <B>libhan = BLILIBLOD (dllnme)      // Dynamically load the DLL</B>
+    <B>if libhan &gt; 32                // If it loaded successfully</B>
+    <B>   funhan = BLIFUNHAN (libhan,funnme)  // Get the handle</B>
+    <B>   if funhan &gt; 0              // If the function was found</B>
+    <B>                  // Call function with (multiple) params</B>
+    <B>      funres = BLIFUNCAL (funpa1,funpa2,funhan)</B>
+    <B>                     // Note that function handle is LAST</B>
+    <B>   endif</B>
+    <B>   BLILIBFRE(libhan)          // Done so free the library</B>
+    <B>endif</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2088f.html">BLIFUNCAL()</A>
+<A HREF="ng20ea7.html">BLIFUNHAN()</A>
+<A HREF="ng2184e.html">BLILIBLOD()</A>
+<A HREF="ng21d2b.html">BLILIBOVR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

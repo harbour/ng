@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng96d06.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng97e75.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ROUND()</B>
+ Return a numeric value rounded to a specified number of digits
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ROUND(&lt;nNumber&gt;, &lt;nDecimals&gt;) --&gt; nRounded</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nNumber&gt;</B> is the numeric value to be rounded.
+
+     <B>&lt;nDecimals&gt;</B> defines the number of decimal places to retain.
+     Specifying a negative &lt;nDecimals&gt; value rounds whole number digits.
+
+ <B>Returns</B>
+
+     ROUND() returns a numeric value.
+
+ <B>Description</B>
+
+     ROUND() is a numeric function that rounds &lt;nNumber&gt; to the number of
+     places specified by &lt;nDecimals&gt;.  Specifying a zero or negative value
+     for &lt;nDecimals&gt; allows rounding of whole numbers.  A negative
+     &lt;nDecimals&gt; indicates the number of digits to the left of the decimal
+     point to round.  Digits between five to nine (inclusive) are rounded up.
+     Digits below five are rounded down.
+
+     The display of the return value does not obey the DECIMALS setting
+     unless SET FIXED is ON.  With SET FIXED OFF, the display of the return
+     value contains as many decimal digits as you specify for &lt;nDecimals&gt;, or
+     zero, if &lt;nDecimals&gt; is less than one.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples round values with decimal digits:
+
+        SET DECIMALS TO 2
+        SET FIXED ON
+        //
+        ? ROUND(10.4, 0)                     // Result: 10.00
+        ? ROUND(10.5, 0)                     // Result: 11.00
+        ? ROUND(10.51, 0)                    // Result: 11.00
+        ? ROUND(10.49999999999999, 2)        // Result: 10.50
+
+     <B>.</B>  These examples use a negative &lt;nDecimals&gt; argument to round
+        numeric values to whole number values:
+
+        ? ROUND(101.99, -1)                  // Result: 100.00
+        ? ROUND(109.99, -1)                  // Result: 110.00
+        ? ROUND(109.99, -2)                  // Result: 100.00
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nge302a.html">SET DECIMALS</A>
+<A HREF="nge8018.html">SET FIXED</A>
+<A HREF="nga0e79.html">STR()</A>
+<A HREF="nga7e04.html">VAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

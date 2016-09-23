@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng24fe8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng25d97.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIOVLOPS()                   Get size of overlay pool memory.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get size of overlay pool memory.</B></U>
+
+ <U>Syntax   : <B>nlValue = BLIOVLOPS()</B></U>
+
+ <U>Return   : <B>Overlay Pool Operating Size in bytes</B></U>
+
+ This function returns the operating size of the overlay pool in bytes.
+
+ This is set at link time using the BLINKER OVERLAY OPSIZE &lt;size&gt; command, or
+ at run time using the /OOnn setting in the BLINKER environment variable.
+ (see Chapter 9, BLINKER OVERLAY OPSIZE).
+
+ The figure returned by this function represents the requested size of the
+ overlay area at the time the program started running. This value will be the
+ most recent of the value set at link time with the BLINKER OVERLAY OPSIZE
+ nnn command and the /OOnnn setting of the BLINKER environment variable at
+ runtime. The actual size of the area allocated may vary depending on the
+ availability of EMS and UMBs and the settings of the appropriate BLINKER
+ options. See the function BLIOVLSIZ() for details of the actual size
+ allocated.
+
+ CA-Clipper Summer '87 DYNAMIC method note:
+
+ When using the BLINKER OVERLAY DYNAMIC (the default) method of overlay
+ allocation, this size is the maximum amount of memory which Blinker will
+ allocate from CA-Clipper for overlays. Once Blinker has used this much
+ memory for overlays, it will discard unused overlays to free up space for
+ the next overlay, rather than allocating more dynamic memory from CA-Clipper
+ to store the overlay.
+
+ During execution the overlay manager may be forced to increase this value if
+ overlays become heavily nested, since all active overlays must remain in
+ memory with the DYNAMIC method. The new value will remain current until the
+ program is ended unless a BLIOVLCLR() is executed. In this case the OPSIZE,
+ and therefore the value returned by the BLIOVLOPS() function, will be reset
+ to the value defined at start-up.
+
+ Example:
+
+    <B>* Get the overlay pool operating size.</B>
+    <B>*</B>
+    <B>? "The overlay pool operating size is "</B>
+    <B>?? BLIOVLOPS(), "bytes"</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfeb9.html">BLINKER OVERLAY OPSIZE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

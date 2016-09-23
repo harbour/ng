@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8a277.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng8b3f8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDSKIPUNIQUE()</B>
+ Move the record pointer to the next or previous unique key in the controlling
+ order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDSKIPUNIQUE([&lt;nDirection&gt;]) --&gt; lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nDirection&gt;</B> specifies whether the function will skip to the next or
+     previous key.  Omitting this value or specifying it as 1 causes the
+     record pointer to skip to the next unique key.  Specifying a negative
+     value makes it skip to the previous key.
+
+ <B>Returns</B>
+
+     ORDSKIPUNIQUE() returns true (.T.) if successful; otherwise, it returns
+     false (.F.).
+
+ <B>Description</B>
+
+     ORDSKIPUNIQUE() allows you to make a non-unique order look like a unique
+     order.  Each time you use ORDSKIPUNIQUE(), you are moved to the next (or
+     previous) unique key exactly as if you were skipping through a unique
+     order.  This function eliminates the problems associated with
+     maintaining a unique order, while providing you with fast access to
+     unique keys.
+
+     By default, this function operates on the currently selected work area.
+     It will operate on an unselected work area if you specify it as part of
+     an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses ORDSKIPUNIQUE() to build an array of unique
+        last names beginning with the letter "J":
+
+        FUNCTION LASTUNIQUE()
+           LOCAL aLast[0]
+           SET INDEX TO Last          // Use the last name order
+           ? ORDISUNIQUE()            // Result: .F.
+           SET SCOPE TO "J"           // Only look at the J's
+
+           GO TOP
+           DO WHILE !EOF()            // Add all the unique J
+              AADD(aLast, Last)       // last names to aLast
+              ORDSKIPUNIQUE()
+           ENDDO
+
+           SET SCOPE TO               // Clear the scope
+           RETURN aLast               // Return array of
+                                      // unique J names
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngcc94d.html">INDEX</A>
+<A HREF="ng82b83.html">ORDISUNIQUE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

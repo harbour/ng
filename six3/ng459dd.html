@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng455ad.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng45ca7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>CLEAR SCOPE:</B>
+
+  Syntax:
+
+  <B>CLEAR SCOPE</B>
+
+  Clears the SCOPETOP and SCOPEBOTTOM values.  This command is equivalent to
+  SET SCOPETOP TO and SET SCOPEBOTTOM TO with no values specified.
+
+    NOTE:  This command is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX        // Open TEST.DBF
+    INDEX ON state TAG state    // Create an index on the STATE field
+    SET SCOPE TO "AZ"           // Sets the SCOPE to "AZ"
+    Browse()                    // Browse all records from Arizona
+    <B>CLEAR SCOPE</B>                 // Clears the SCOPE
+
+
+  <U>NOTE:  See the SCOPE.PRG program for a more detailed, practical example.</U>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng50a71.html">SET SCOPE</A>
+<A HREF="ng51048.html">SET SCOPETOP/BOTTOM</A>
+<A HREF="ng21e08.html">Sx_ClrScope()</A>
+<A HREF="ng372fc.html">Sx_SetScope()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

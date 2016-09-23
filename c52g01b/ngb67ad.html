@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb558d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb4a83.html">[^^Up^^]</A>
+<A HREF="ngb6d89.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DECLARE*</B>
+ Create and initialize private memory variables and arrays
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DECLARE &lt;identifier&gt; [[:= &lt;initializer&gt;], ... ]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;identifier&gt;</B> is the name of a private variable or array to create.
+     If the &lt;identifier&gt; is followed by square brackets ([ ]), it is created
+     as an array.  If the &lt;identifier&gt; is an array, the syntax for specifying
+     the number of elements for each dimension is either array[&lt;nElements&gt;,
+     &lt;nElements2&gt;,...] or array[&lt;nElements&gt;][&lt;nElements2&gt;]...  The maximum
+     number of elements per dimension is 4096.
+
+     <B>&lt;initializer&gt;</B> is the optional assignment of a value to a new private
+     variable.  An &lt;initializer&gt; expression for a private variable consists
+     of the inline assignment operator (:=) followed by any valid CA-Clipper
+     expression, including a literal array.  If no explicit &lt;initializer&gt; is
+     specified, the variable is given an initial value of NIL.  In the case
+     of an array, each element is NIL.  Array identifiers, cannot be given
+     values with an &lt;initializer&gt;.
+
+     DECLARE can create, and optionally initialize, a list of variable
+     arrays, if definitions are separated by commas.
+
+ <B>Description</B>
+
+     DECLARE is a compatibility statement that is a synonym for the PRIVATE
+     statement.  Its general use is not recommended.  PRIVATE should be used
+     in all instances.  See PRIVATE for more information.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc25d0.html">PRIVATE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

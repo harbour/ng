@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng97a85.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng98c70.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SAVE</B>
+ Save variables to a memory (.mem) file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SAVE TO &lt;xcMemFile&gt; [ALL [LIKE | EXCEPT &lt;skeleton&gt;]]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcMemFile&gt;</B> is the memory (.mem) file to SAVE to disk.  You may
+     specify the filename as a literal string or as a character expression
+     enclosed in parentheses.  If you specify no extension, the file is
+     created with a (.mem) extension.
+
+     <B>ALL [LIKE|EXCEPT &lt;skeleton&gt;]</B> defines the set of visible private and
+     public memory variables to save to &lt;xcMemFile&gt;.  &lt;skeleton&gt; is the
+     wildcard mask that characterizes a group of memory variables to SAVE.
+     The wildcard characters supported are * and ?.
+
+ <B>Description</B>
+
+     SAVE copies public and private memory variables visible within the
+     current procedure or user-defined function to a memory (.mem) file.
+     Arrays and local and static variables, however, cannot be SAVEd.  When
+     variables are SAVEd, they are copied without any reference to scope.
+     Variables hidden by PRIVATE or LOCAL declarations are not SAVEd.
+
+     If you specify the ALL LIKE clause, variable names matching the
+     &lt;skeleton&gt; mask are saved.  By contrast, if you specify ALL EXCEPT,
+     variable names not matching the &lt;skeleton&gt; are saved.
+
+     You can specify a &lt;skeleton&gt; that includes wildcard characters.  The
+     wildcard character * matches any group of adjacent characters ending a
+     variable name and can be specified only at the end of the &lt;skeleton&gt;.
+     The wildcard character ? matches any single character and can be
+     specified anywhere within the &lt;skeleton&gt;.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example saves all visible private and public variables to
+        Temp.mem:
+
+        PRIVATE cOne := "1"
+        SAVE ALL TO Temp
+
+     <B>.</B>  This example saves all visible private and public variables
+        with names beginning with c to Myvars.mem:
+
+        SAVE ALL LIKE c* TO MyVars
+
+     <B>.</B>  This example saves all visible private and public variables
+        with names that do not begin with c to Myvars2.mem:
+
+        SAVE ALL EXCEPT c* TO MyVars2
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbfbea.html">LOCAL</A>
+<A HREF="ngc25d0.html">PRIVATE</A>
+<A HREF="ngc587f.html">PUBLIC</A>
+<A HREF="ng96a22.html">RESTORE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

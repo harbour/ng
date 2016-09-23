@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng6dbf4.html">[^^Up^^]</A>
+<A HREF="ng6eab3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>HiPer-SEEK Overview:</B>
+
+  HiPer-SEEK is a relatively simple, yet powerful, system which uses Index
+  Applications' Fast Text Search technology.  Married to the Mach SIx query
+  optimizer, it provides unmatched power for high speed searches and
+  filters.
+
+  The HiPer-SEEK system is a set of functions which create and maintain a
+  proprietary index file(s) enabling the rapid search of textual data from
+  within Clipper compiled applications.  The HiPer-SEEK functions can be
+  used to index and search any character based information the application
+  can access.
+
+  Data for a HiPer-SEEK index usually consist of selected fields of .DBF
+  records. For example, you might want to be able to find people in a
+  customer database. HiPer-SEEK could build an index based on the contents
+  of the first name, last name, address, city, state and zipcode fields.
+  You would then be able to find individual records by specifying character
+  strings which occur anywhere in any of these fields.
+
+  Given "john," HiPer-SEEK would identify records for John Smith, Elton
+  John, 345 John White Avenue, and Johnson City. Additionally, the
+  application might limit matches to those containing "john" in a
+  particular field or in a particular position within a field. Searches can
+  be very general or very specific. The speed of HiPer-SEEK makes all sorts
+  of these additional operations possible.
+
+  Another example is a parts inventory/order system. Part numbers are found
+  by searching on a description field. Part No. WS-740283-B, described in
+  an 80 character field as" Windshield bracket, right side for model year
+  1983" is found by searching for "right windshield 83" or "brack
+  windshield." HiPer-SEEK lets you specify almost any combination of words,
+  partial words, numeric characters and phrases. Word order can be
+  considered or not, as can case sensitivity.
+
+  The default index extension for HiPer-SEEK indexes is .HSX, although, as
+  with any other index file types, you can make it what you want when you
+  create it.
+
+  One of the new functions, hs_Filter(), is especially unique.  It combines
+  the CFTS technology with our Mach SIx query optimizer to allow you to
+  create extremely high speed filters on substrings within fields, text
+  within memos, and other typically non-indexable (or non-SEEKable) values.
+  For example, in a standard index built on LAST+FIRST, you can't find John
+  Smith by doing a SEEK on "John", since it's not at the fron of the index.
+  Thus, Mach SIx would have previously been unable to optimize a filter
+  looking for "John" by using that index.  With the marriage of CFTS and
+  Mach SIx this, and many other possibilities, are now possible.
+
+  Compile, link, and run the HSFILT.PRG to see a quick example of this in
+  action.  A TEST.DBF file must be created using DBCRE8.EXE for the
+  HSFILT.EXE program to use.  For best impact, use a good number of records
+  (at least 10000 or more).
+
+
+  <B>Note For Current CFTS Users:</B>
+
+  If you currently use CFTS, you no longer need to include the CFTS5.LIB
+  file when you link.  The SIX3.LIB file is all that's needed.
+
+  The internal CFTS function names remain unchanged, and can still be used
+  in your applications that previously used CFTS5.LIB.  However, we have
+  provided special surface functions (hs_*) which we will document and
+  support.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

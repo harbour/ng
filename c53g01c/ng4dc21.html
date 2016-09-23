@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4d165.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng4e643.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GBMPLOAD()</B>
+ Load a bitmap (.bmp) or icon (.ico) file into memory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GBMPLOAD(&lt;cFileName&gt;) --&gt; aBmpArray</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFileName&gt;</B> is a character value that specifies the name of .bmp or
+     .ico file to load into VMM memory.
+
+ <B>Returns</B>
+
+     GBMPLOAD() returns a reference to &lt;aBmpArray&gt; which is the pointer to
+     the VMM region containing the .BMP or .ICO (not a black and white icon).
+     The first two elements of &lt;aBmpArray&gt; contain the height and width of
+     the .BMP or .ICO in pixels.  Do not modify this array before passing it
+     to GBMPDISP().  The following table shows the array structure:
+
+     <B>aBmpArray Structure</B>
+     ------------------------------------------------------------------------
+     <B>Array Position    Return Value</B>
+     ------------------------------------------------------------------------
+     LLG_BMP_X         Returns size on the X axis
+     LLG_BMP_Y         Returns size on the Y axis
+     ------------------------------------------------------------------------
+
+     The size and elements of this array should never be changed.
+
+ <B>Description</B>
+
+     GBMPLOAD() allows you to load one or more .BMP or .ICO files into memory
+     without having to display them.  This function is useful when you want
+     to load a group of small .BMP files which are used often in an
+     application (e.g., buttons).  It avoids having to load the .BMP file
+     each time you display it.
+
+     <B>Warning! </B> It is not a good idea to keep backgrounds or images in
+     memory unless you have a great deal of memory.  This also includes any
+     variable pointing to the variables which contain the .BMP.
+
+ <B>Notes</B>
+
+     When a .BMP or .ICO is stored in a LOCAL variable, the memory occupied
+     in the VMM is automatically freed when the function returns.  You can
+     free the memory at any time by assigning NIL to the variable.  It is not
+     necessary to be in graphic mode to use GBMPLOAD(), but it is necessary
+     to be in graphic mode before calling GBMPDISP().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example stores all the buttons used by an application in
+        an array:
+
+        STATIC aIcons:= {}
+        AADD(aIcons, GBMPLOAD('ARROW_U.BMP'))
+        AADD(aIcons, GBMPLOAD('ARROW_D.BMP'))
+        AADD(aIcons, GBMPLOAD('ARROW_L.BMP'))
+        AADD(aIcons, GBMPLOAD('ARROW_R.BMP'))
+        // Set video to graphic mode
+        SET VIDEOMODE TO LLG_VIDEO_VGA_640_480_16
+        // Display the ARROW_U.BMP
+        GBMPDISP(aIcons[1], 100, 200)
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4d165.html">GBMPDISP()</A>
+<A HREF="ng56062.html">GMODE()</A>
+<A HREF="ng5c311.html">GSETPAL()</A>
+<A HREF="ng5cee0.html">GWRITEAT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

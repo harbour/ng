@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng593d6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5575e.html">[^^Up^^]</A>
+<A HREF="ng59e9d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPJDEL()</B>
+ Deletes a print job definition
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPJDEL(&lt;cJob&gt;,[&lt;cUser&gt;],[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cJob&gt;</B>  Designates the name of the print job definition.
+
+     <B>&lt;cUser&gt;</B>  Designates the name of the user whose print job definition
+     file (PRINTCON.DAT) is accessed.  The default value accesses the current
+     user.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPJDEL() returns .T. if the print job definition &lt;cJob&gt; has been
+     deleted successfully.  If an error occurs, the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET PRINT JOB DELETE
+     NNETPJDEL() allows you to delete the print job definition (&lt;cJob&gt;) of
+     the current user or any other user (if the print job definition file can
+     be accessed for that user).  The default job cannot be deleted.
+
+ <B>Example</B>
+
+     Delete the print job HPLJ of the current user:
+
+     IF NNETPJDEL('HPLJ')
+        ? 'Job definition deleted successfully!'
+     ELSE
+        ? 'Error'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5619a.html">NNETPJADD()</A>
+<A HREF="ng58e4f.html">NNETPJCRT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

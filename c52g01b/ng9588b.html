@@ -1,0 +1,135 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng94bb4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng96a22.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>REPORT FORM</B>
+ Display a report to the console
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>REPORT FORM &lt;xcReport&gt;</B>
+     <B>   [TO PRINTER] [TO FILE &lt;xcFile&gt;] [NOCONSOLE]</B>
+     <B>   [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]</B>
+     <B>   [PLAIN | HEADING &lt;cHeading&gt;] [NOEJECT] [SUMMARY]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcReport&gt;</B> is the name of the report form (.frm) file that contains
+     the definition of the REPORT.  If an extension is not specified, (.frm)
+     is assumed.  &lt;xcReport&gt; can be specified as a literal string or as a
+     character expression enclosed in parentheses.
+
+     <B>TO PRINTER</B> echoes output to the printer.
+
+     <B>TO FILE &lt;xcFile&gt;</B> echoes output, without formfeed characters (ASCII
+     12), to a file.  If a file extension is not specified, a (.txt) is
+     added.  You can specify &lt;xcFile&gt; as a literal string or as a character
+     expression enclosed in parentheses.
+
+     <B>NOCONSOLE</B> suppresses all REPORT FORM output to the console.  If not
+     specified, output automatically displays to the console unless SET
+     CONSOLE is OFF.
+
+     <B>&lt;scope&gt;</B> is the portion of the current database file to report.  The
+     default scope is ALL.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to report
+     within the given scope.
+
+     <B>PLAIN</B> suppresses the display of the date and page number, and causes
+     the report to print without page breaks.  In addition, the report title
+     and column headings display only at the top of the report.
+
+     <B>HEADING</B> places the result of &lt;cHeading&gt; on the first line of each
+     page.  &lt;cHeading&gt; is evaluated only once at the beginning of the report,
+     before the record pointer is moved.  If both PLAIN and HEADING are
+     specified, PLAIN takes precedence.
+
+     <B>NOEJECT</B> suppresses the initial page eject when the TO PRINTER clause
+     is used.
+
+     <B>SUMMARY</B> causes the REPORT FORM to display only group, subgroup, and
+     grand total lines.  Detail lines are suppressed.
+
+ <B>Description</B>
+
+     REPORT FORM is a console command that sequentially accesses records in
+     the current work area displaying a tabular, and optionally grouped
+     report with page and column headings from a definition held in a (.frm)
+     file.  The actual REPORT FORM file (.frm) is created using RL.EXE or
+     dBASE III PLUS.  Refer to the Report and Label Utility chapter in the
+     Programming and Utilities guide for more information about creating
+     report definitions.
+
+     When invoked, REPORT FORM sends output to the screen and, optionally, to
+     the printer and/or a file.  To suppress output to the screen while
+     printing or echoing output to a file, SET CONSOLE OFF before the REPORT
+     FORM invocation.
+
+     When invoked, REPORT FORM searches the current SET PATH drive and
+     directory if the &lt;xcReport&gt; file is not found in the current directory
+     and the path is not specified.
+
+ <B>Notes</B>
+
+     <B>.  Interrupting REPORT FORM:</B> To allow the user to interrupt a
+        REPORT FORM, use INKEY(), to test for an interrupt key press, as a
+        part of the FOR condition .  See the example below.
+
+     <B>.  Printer margin:</B> REPORT FORM obeys the current SET MARGIN value
+        for output echoed to the printer.
+
+     <B>.  Forcing formfeed characters into an output file:</B> To include
+        formfeed characters when sending a REPORT FORM TO FILE, redirect
+        printer output to a file using SET PRINTER like this:
+
+        SET PRINTER TO &lt;xcFile&gt;
+        REPORT FORM &lt;xcReport&gt; TO PRINTER
+        SET PRINTER TO
+
+     <B>.  Reporting in a network environment:</B> REPORT FORM commands
+        executed in a network environment can be affected by changes made to
+        database files by other users while the report is in progress.  For
+        example, if a user changes a key value from "A" to "Z" while the
+        report is printing, the same record could appear twice.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses both a literal and an extended expression to
+        execute a REPORT FORM:
+
+        LOCAL xcReport := "Sales"
+        USE Sales INDEX Sales NEW
+        REPORT FORM Sales TO PRINTER FOR Branch = "100";
+                  HEADING "Branch 100"
+        REPORT FORM (xcReport) TO PRINTER FOR Branch != "100"
+
+     <B>.</B>  This example interrupts a REPORT FORM using INKEY() to test
+        whether the user has pressed the Esc key:
+
+        #define K_ESC  27
+        USE Sales INDEX Sales NEW
+        REPORT FORM Sales WHILE INKEY() != K_ESC
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8d71e.html">LABEL FORM</A>
+<A HREF="ng8e457.html">LIST</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

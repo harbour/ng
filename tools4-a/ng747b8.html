@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng745f1.html">[^^Up^^]</A>
+<A HREF="ng74e73.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Introduction</B>
+
+     A semaphore controls certain states: for example, the states between two
+     applications that run on different workstations.  To enable all stations
+     to access existing semaphores, each Netware file server has a table
+     available to manage these semaphores.
+
+     Semaphores can be interpreted as variables kept on the file server.
+     Each semaphore is assigned a name when it is created.  A semaphore name
+     can be up to 127 characters long and is not case sensitive.  An
+     application can access a semaphore by opening the semaphore with its
+     name (NNETSEMOPN()).
+
+     A semaphore can be opened by any number of workstations.  For each
+     workstation, the semaphore has the same value.  The semaphore value
+     cannot be modified; however, by using specific functions it can be
+     incremented (NNETSEMSNG()) or decrements (NNETSEMWAI())
+     by 1.
+
+     Each semaphore is assigned information in addition to the semaphore
+     value.  For each semaphore, the file server counts the number of
+     stations currently accessing the semaphore.  This information can be
+     determined with the function NNETSEMOPC().  For example, a semaphore
+     named after an application can be used to limit a resource to this
+     application.
+
+     Semaphores are often used to implement logical lockings for any kind of
+     resource.  A semaphore is assigned to each resource.  Before the
+     resource is accessed, the application tries to decrement the semaphore's
+     value by one (NNETSEMWAI()).  If the resulting value is negative, the
+     resource is locked by another station.  When an application is finished
+     using a semaphore's resource, the function NNETSEMSNG() must be called
+     to increment the semaphore's value.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

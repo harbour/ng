@@ -1,0 +1,96 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb9d9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ngca54.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_ChgOwner():</B>
+
+  Purpose:  This function allows you to change to ownership of a filter
+            from "system-owned" to "user-owned" which prevents it
+            from being released by the system.
+
+   Syntax:  m6_ChgOwner( &lt;nHandle&gt; )
+
+    Where:  &lt;nHandle&gt;     --  Is a handle to a previously allocated
+                              filter.
+
+     Note:  This function has no effect on filters that are already
+            "user-owned".
+
+  Returns:  Logical value:  .T. means the operation was successful,  .F.
+            indicates it failed.  In the case of a .F. value call m6_Error()
+            to retrieve the reason for the error.
+
+
+  Example:
+
+        #include "SIXCDX.CH"
+        #include "MACHSIX.CH"
+
+        USE Salesmen INDEX Sales
+
+        //..................................................Set a filter
+        SET FILTER TO SaleTot &gt; 10000
+
+        //..........................................Initialize the filter
+        GO TOP
+
+        //.................Get the handle to the filter in this workarea
+        nHandle := m6_GetAreaFilter()
+
+        //...............................Get information about the filter
+        aInfo := m6_FiltInfo( nHandle )
+
+        //..........Display filter owner.  Note it's owned by the system
+        ? "Filter owner="
+        ?? aInfo[ INFO_OWNER ]                      //  1 - System owned
+
+        //..........................Change ownership from system to user
+        lSuccess := <B>m6_ChgOwner( nHandle )</B>
+
+        //...............................................Check for error
+        if !lSuccess
+           ? "Error changing filter ownership to user."
+           ? "m6_Error()="
+           ?? m6_Error()
+           quit
+        endif
+
+        //..................................Get information about filter
+        aInfo := m6_FiltInfo( nHandle )
+
+        //...............................Note that we own the filter now
+        ? "Filter owner ( before SET FILTER TO )="
+        ?? aInfo[ INFO_OWNER ]                       // 2 - User owned
+
+        //......................... Clear the filter from this workarea
+        SET FILTER TO
+
+        //............................................Get info once again
+        aInfo := m6_FiltInfo( nHandle )
+
+        //.Even after the filter has been cleared we still retain ownership
+        ? "Filter owner ( after SET FILTER TO )="
+        ?? aInfo[ INFO_OWNER ]                       // 2 - User owned
+
+        //.Because we own the filter, it is our responsibility to free it
+        m6_FreeFilter( nHandle )
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf867.html">m6_FiltInfo()</A>
+<A HREF="ng136a1.html">m6_FreeFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

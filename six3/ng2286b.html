@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng22348.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng22e80.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_dbCreate():</B>
+
+  Syntax:   Sx_dbCreate( &lt;cFile&gt;, &lt;aStru&gt; )
+
+            cFile = Name of database file to create.
+            aStru = Multi-dimensional array defining the database structure.
+
+  Returns:  NIL
+
+  Description:
+
+    Sx_dbCreate() behaves, for the most part, the same as Clipper's own
+    dbCreate() function.  However, it adds a few enhancements that make
+    using SIx 3.0 new "V" field-types easier to code.
+
+    Sx_dbCreate() automatically adds six to the length of weakly-typed "V"
+    fields, and supports entering strongly-typed "V" field types of "I,4"
+    and "D,3", automatically translating them to "V,4" and "V,3",
+    respectively.
+
+    One of the primary reasons for this function is to support SIx 3.0's
+    three-byte packed DATE values.  Clipper's dbCreate() function will not
+    accept a "D" field of anything other than 8 bytes long.  You <B>can</B>
+    pass dbCreate() a "V" field of three bytes, which is interpreted by
+    SIx 3.0 as a packed DATE value anyway.  However, to make it simpler on
+    the eyes to code, Sx_dbCreate() supports defining packed DATE values
+    as a "D" type with a length of three bytes.
+
+  Example:  // The following two function calls have the same result
+
+            dbCreate( "TEST", {{ "LAST"    , "V", 16, 0},;
+                               { "FIRST"   , "V", 16, 0},;
+                               { "SALARY"  , "V",  4, 0},;
+                               { "HIREDATE", "V",  3, 0},;
+                               { "NOTES"   , "V",  6, 0}} )
+
+         <B>Sx_dbCreate( "TEST", {{ "LAST"    , "V", 10, 0},;</B>
+         <B>                      { "FIRST"   , "V", 10, 0},;</B>
+         <B>                      { "SALARY"  , "I",  4, 0},;</B>
+         <B>                      { "HIREDATE", "D",  3, 0},;</B>
+         <B>                      { "NOTES"   , "V",  0, 0}} )</B>
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

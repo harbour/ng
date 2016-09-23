@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng32fb9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng32080.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>3   Modifying the Standard Header File (STD.CH)</B>
+--------------------------------------------------------------------------------
+
+     In the Getting Started guide as well as in other parts of the
+     documentation, it is stated or implied that the standard command
+     set used by CLIPPER.EXE to compile Clipper 5.0 programs is defined
+     in STD.CH located in the \INCLUDE directory.  This is not quite
+     correct.  The standard command set is in fact defined as a part of
+     the compiler and never taken directly from STD.CH unless this file
+     is specified on the compile command-line with the /U option.  This
+     increases the compiling speed of the standard command and function
+     set and guarantees that the compiler can always compile the
+     standard commands.
+
+     For example, the following compiler invocation command-lines show
+     how different configurations of /U can used to use different
+     command sets:
+
+     C&gt;CLIPPER Myprog               // Compile with standard command set
+     C&gt;CLIPPER Myprog /USTD.CH      // Compile with STD.CH
+     C&gt;CLIPPER Myprog /UOTHER.CH    // Compile with OTHER.CH
+     C&gt;CLIPPER Myprog /U            // Compile with no command set
+
+     If you are using an alternate command set on a regular basis, you
+     might want to add it to your CLIPPERCMD like this:
+
+     C&gt;SET CLIPPERCMD=/UALTSTD.CH
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

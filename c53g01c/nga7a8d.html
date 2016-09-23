@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga73ff.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="nga7e04.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>USED()</B>
+ Determine whether a database file is in USE
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>USED() --&gt; lDbfOpen</B>
+
+ <B>Returns</B>
+
+     USED() returns true (.T.) if there is a database file in USE; otherwise,
+     it returns false (.F.).
+
+
+ <B>Description</B>
+
+     USED() is a database function that determines whether there is a
+     database file in USE in a particular work area.  By default, USED()
+     operates on the currently selected work area.  It will operate on an
+     unselected work area if you specify it as part of an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example determines whether a database file is in USE in
+        the current work area:
+
+        USE Customer NEW
+        ? USED()               // Result: .T.
+        CLOSE
+        ? USED()               // Result: .F.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngddba5.html">SELECT</A>
+<A HREF="ng9a2c7.html">SELECT()</A>
+<A HREF="ngf8dbc.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,126 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf050a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngf1b8c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDCREATE() function</B>
+ Create an Order in an Order Bag
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     ORDCREATE(&lt;cOrderBagName&gt;,[&lt;cOrderName&gt;],    &lt;cExpKey&gt;,
+        [&lt;bExpKey&gt;], [&lt;lUnique&gt;]) --&gt; NIL
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrderBagName&gt;</B> is the name of a disk file containing one or more
+     Orders.  You may specify &lt;cOrderBagName&gt; as the filename with or without
+     the pathname or extension.  If you do not include the extension as part
+     of &lt;cOrderBagName&gt; CA-Clipper uses the default extension of the current
+     RDD.
+
+     <B>&lt;cOrderName&gt;</B> is the name of the Order to be created.
+
+     <B>Note:</B> Although both &lt;cOrderBagName&gt; and &lt;cOrderName&gt; are both
+     optional, at least one of them must be specified.
+
+     <B>&lt;cExpKey&gt;</B> is an expression that returns the key value to place in
+     the Order for each record in the current work area.  &lt;cExpKey&gt; can
+     represent a character, date, logical, or numeric data type.  The maximum
+     length of the index key expression is determined by the database driver.
+
+     <B>&lt;bExpKey&gt;</B> is a code block that evaluates to a key value that is
+     placed in the Order for each record in the current work area.  If you do
+     not supply &lt;bExpKey&gt;, it is macro-compiled from &lt;cExpKey&gt;.
+
+     <B>&lt;lUnique&gt;</B> is an optional logical value that specifies whether a
+     unique Order is to be created.  If &lt;lUnique&gt; is omitted, the current
+     global _SET_UNIQUE setting is used.
+
+ <B>Returns</B>
+
+     ORDCREATE() always returns NIL.
+
+ <B>Description</B>
+
+     ORDCREATE() is an Order management function that creates an Order in the
+     current work area.  It works like DBCREATEINDEX() except that it lets
+     you create Orders in RDDs that recognize multiple-Order Bags.
+     ORDCREATE() supersedes the DBCREATEINDEX() function because of this
+     capability, and is the preferred function.
+
+     The active RDD determines the Order capacity of an Order Bag.  The
+     default  DBFNTX and the DBFNDX drivers only support single-Order Bags,
+     while other RDDs may support multiple-Order Bags (e.g., the DBFCDX and
+     DBFMDX drivers).
+
+     In RDDs that support production or structural indexes (e.g., DBFCDX,
+     DBPX), if you specify a Tag but do not specify an Order Bag, the Tag is
+     created and added to the index.  If no production or structural index
+     exists, it will be created and the Tag will be added to it.  When using
+     RDDs that support multiple Order Bags, you must explicitly SET ORDER (or
+     ORDSETFOCUS()) to the desired controlling Order.  If you do not specify
+     a controlling Order, the data file will be viewed in natural Order.
+
+     If &lt;cOrderBagName&gt; does not exist, it is created in accordance with the
+     RDD in the current or specified work area.
+
+     If &lt;cOrderBagName&gt; exists and the RDD specifies that Order Bags can only
+     contain a single Order, &lt;cOrderBagName&gt; is erased and the new Order is
+     added to the Order List in the current or specified work area.
+
+     If &lt;cOrderBagName&gt; exists and the RDD specifies that Order Bags can
+     contain multiple Tags, &lt;cOrderName&gt; is created if it does not already
+     exist, otherwise &lt;cOrderName&gt; is replaced in &lt;cOrderBagName&gt; and the
+     Order is added to the Order List in the current or specified work area.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example demonstrates ORDCREATE() with the DBFNDX
+        driver:
+
+        USE Customer VIA "DBFNDX" NEW
+        ORDCREATE( "CuAcct",, "Customer-&gt;Acct" )
+
+
+     <B>.</B>  The following example demonstrates ORDCREATE() with the
+        default DBFNTX driver:
+
+        USE Customer VIA "DBFNTX" NEW
+        ORDCREATE( "CuAcct", "CuAcct", "Customer-&gt;Acct", ;
+              {|| Customer-&gt;Acct } )
+
+     <B>.</B>  The following example demonstrates ORDCREATE() with the FoxPro
+        driver, DBFCDX:
+
+        USE Customer VIA "DBFCDX" NEW
+        ORDCREATE( "Customer", "CuAcct", "Customer-&gt;Acct" )
+
+     <B>.</B>  This example creates the Order "CuAcct" and adds it to the
+        production index (Order Bag) "Customer".  The production index , will
+        be created if it doesn't exist:
+
+        USE Customer VIA "DBFMDX" NEW
+        ORDCREATE( , "CuAcct", "Customer-&gt;Acct" )
+
+ <B>Status:</B>  New
+
+ <B>See also:</B>  DBCREATEIND(), INDEX, SET UNIQUE*
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng19248.html">DBCREATEIND()</A>
+<A HREF="nged983.html">INDEX</A>
+<A HREF="ngab66b.html">SET UNIQUE*</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

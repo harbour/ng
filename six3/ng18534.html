@@ -1,0 +1,132 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng17fd1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng19728.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>OrdCondSet():</B>
+
+  Syntax:   OrdCondSet( cFor, bFor, lAll, bWhile, bOption, nStep, nRecNo,;
+                        nNext, nRecord, lRest, lDescend, lIsComp, cIndName,;
+                        lSubIndex, lEmpty, &lt;reserved&gt;, lAdditive )
+
+            cFor   = The FOR condition as a character string.
+            bFor   = The FOR condition as a code-block.
+            lAll   = Logical value indicating whether or not all records
+                     are to be included in the index.  Default is TRUE (.T.).
+            bWhile = Code-block to be evaluated for each record processed.
+                     Index creation is halted if this code-block returns
+                     FALSE (.F.).
+           bOption = Code-block to be evaluated for each record processed or,
+                     if the &lt;nStep&gt; parameter is passed, for each nStep
+                     records.  Index creation is halted if this code-block
+                     returns FALSE (.F.).
+            nStep  = Numeric value indicating how many records to process
+                     between calls to the code-block specified by the
+                     &lt;bOption&gt; parameter.
+            nRecNo = Record number to be used by the &lt;bWhile&gt; and &lt;nNext&gt;
+                     parameters as the record to start the index creation
+                     from.  Usually, the current record number is used in
+                     this parameter.
+            nNext  = Numeric value indicating how many records from the
+                     current record pointer to include in the index.
+           nRecord = Numeric value signifying a single record number that
+                     the index file is to be created with.  This will put
+                     only that single record in the index file.
+            lRest  = Indicates to include all records after the current
+                     record in the index.  This is basically the same as
+                     indexing WHILE !Eof().
+          lDescend = Logical value indicating whether or not this index is
+                     to be in descending order or not.  The default is FALSE
+                     (.T.) and builds indexes in ascending order.
+           lIsComp = Logical value indicating whether or not a TAG within a
+                     compound (CDX/NSX) index is to be created.  If the index
+                     file does not previously exist, it will be created.
+                     The default value is FALSE (.F.) and creates an
+                     individual index file (.IDX under SIXCDX).
+          cIndName = Character string holding the name of the compound index
+                     file to be created (if the &lt;lIsComp&gt; parameter is TRUE).
+                     By default the compound index file name will have the
+                     same base name as the currently selected DBF file.
+                     This value should include the index file extension.
+         lSubIndex = Logical value indicating whether or not a Sub-Index is
+                     to be created.  If TRUE (.T.) is specified, the
+                     currently active index order will remain active during
+                     the creation of the new index.  The default value is
+                     FALSE (.F.).
+            lEmpty = Logical value indicating whether or not to create an
+                     empty index (just the index header).  Any records added
+                     to or deleted from this index must be done via the
+                     Sx_KeyAdd() and Sx_KeyDrop() functions.  The default
+                     value is FALSE (.F.).
+        &lt;Reserved&gt; = &lt;Reserved&gt;
+         lAdditive = Logical value indicating whether or not to leave any
+                     currently open indexes open after creating this index.
+                     The default value is FALSE (.F.).  If this is set to
+                     TRUE, the newly-created index will appear at the end of
+                     the index order.
+
+  Returns:  Nothing
+
+  Description:  This function defines options to be used by the Clipper
+                OrdCreate() function when creating index files and tags.
+                Generally, it's easier to just use the INDEX command, and
+                let Clipper's preprocessor take care of translating that
+                into the calls to the OrdCondSet() and OrdCreate() functions.
+                However, in some data-driven applications, the developer may
+                prefer to pass the parameters directly to the functions.
+
+  Example:
+
+          // Declare values to use as parameters to the functions
+
+          LOCAL cDBFName := "TEST",;
+                cRDDName := "SIXCDX",;
+                lOpenNew := .T.,;
+                cFor     := "STATE == 'CA'",;
+                bFor     := {|| STATE == "CA"},;
+                bWhile   := {|| !Eof()},;
+                bOption  := {|| QQOut(".")},;
+                nStep    := 10,;
+                lIsComp  := .T.,;
+                cIndName := "BOGUS.CDX",;
+                cTagName := "STATES",;
+                cKey     := "upper(LAST)",;
+                bKey     := {|| upper(LAST)}
+
+          // Opens TEST.DBF in a new work area under the SIXCDX Driver
+
+          dbUseArea( lOpenNew, cRDDName, cDBFName )
+
+          // Set up conditions for creating the index file.  In this case,
+          // a conditional index tag called STATES is being created in the
+          // BOGUS.CDX file (If BOGUS.CDX did not previously exist, it will
+          // be created).  For each 10 records processed, a dot will be
+          // echoed to the screen as a progress indicator.
+
+          <B>OrdCondSet( cFor, bFor,, bWhile, bOption, nStep, Recno(),,,,,;</B>
+                      <B>lComp, cIndName )</B>
+
+          // Creates the STATES tag within the BOGUS.CDX file, indexing on
+          // upper(LAST)
+
+          OrdCreate( cTagName, cIndName, cKey, bKey )
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng19728.html">OrdCreate()</A>
+<A HREF="ng47c93.html">INDEX</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

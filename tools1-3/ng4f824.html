@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4f334.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng4feee.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LIKE()</B>
+ Compares character strings using wildcard characters
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LIKE(&lt;cString1&gt;,&lt;cString2&gt;) --&gt; lEqual</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString1&gt;</B>  Designates the wildcard string for comparison.  All
+     wildcards must be in this character string.
+
+     <B>&lt;cString2&gt;</B>  Designates the string to compare to &lt;cString1&gt;.
+
+ <B>Returns</B>
+
+     LIKE() returns .T. when, after taking wildcards into account, both
+     character strings are equal.
+
+ <B>Description</B>
+
+     This function allows you to compare two character strings with one
+     another, where the first can contain wildcard characters.  This is
+     similar to the way wildcard characters are used in conjunction with DOS
+     commands but not identical.  Any single character matches a "?" in the
+     first string (see examples).  The "*" within &lt;cString1&gt; can be placed
+     anywhere and matches multiple characters.  You can also use multiple
+     "*".
+
+ <B>Note</B>
+
+     <B>.</B>  You can also use wildcard characters in conjunction with an
+        array of other string functions by using the SETATLIKE() switch, but
+        only for the "?".
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows differences from DOS:
+
+        Dir XYZ?.DBF                     // shows XYZ.DBF and XYZ1.DBF
+
+        ? LIKE("XYZ?", "XYZ")            // .F.
+        ? LIKE("XYZ?", "XYZ1")           // .T.
+
+     <B>.</B>  This example shows other combinations:
+
+        ? LIKE("*OG.*", "PROG.PRG")      // .T.
+        ? LIKE("*OG.*", "LOG.PRG")       // .T.
+        ? LIKE("*R*T*", "PROTO")         // .T.
+        ? LIKE("*R*T*?", "PROTO")        // .F.
+        ? LIKE("*R*T*?", "PROTO2")       // .T.
+
+     <B>.</B>  Use wildcards in the first parameter only:
+
+        ? LIKE("*PER", "CLIPPER")        // .T.
+        ? LIKE("CLIPPER", "*PER")        // .F.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5a43c.html">SETATLIKE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

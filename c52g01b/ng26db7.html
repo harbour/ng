@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng26569.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng272f2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBUNLOCK()</B>
+ Release all locks for the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBUNLOCK() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DBUNLOCK() always returns NIL.
+
+ <B>Description</B>
+
+     DBUNLOCK() releases any record or file locks obtained by the current
+     process for the current work area.  DBUNLOCK() is only meaningful on a
+     shared database in a network environment.
+
+     DBUNLOCK() performs the same function as the standard UNLOCK command.
+     For more information, refer to the UNLOCK command.
+
+ <B>Notes</B>
+
+     <B>.  Network environment:</B> Releasing locks may cause updates to the
+        database to become visible to other processes.  For more information,
+        refer to the Network Programming chapter in the Programming and
+        Utilities guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example illustrates a basic use of the
+        DBUNLOCK() function:
+
+        cLast := "Winston"
+        USE Sales SHARED NEW VIA "DBFNTX"
+        DBSETINDEX( "LASTNAME" )
+        //
+        IF ( Sales-&gt;(DBSEEK(cLast)) )
+           IF Sales-&gt;( RLOCK() )
+              Sales-&gt;( DBDELETE() )
+              ? "Record deleted: ", Sales( DELETED() )
+              Sales-&gt;( DBUNLOCK() )
+           ELSE
+              ? "Unable to lock record..."
+           ENDIF
+        ELSE
+           ? "Not found"
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng272f2.html">DBUNLOCKALL()</A>
+<A HREF="ng384c9.html">FLOCK()</A>
+<A HREF="ng5dd2e.html">RLOCK()</A>
+<A HREF="ngb0c58.html">UNLOCK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

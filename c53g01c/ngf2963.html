@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf2199.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf2d3f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET VIDEOMODE </B>
+ Change the current video mode of the current application
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET VIDEOMODE TO &lt;nVideoMode&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>nVideoMode</B> is a numeric value representing a particular video mode.
+
+ <B>Description</B>
+
+     SET VIDEOMODE changes the current display to text mode and different
+     graphic modes.  There are two modes supported by CA-Clipper:
+     LLG_VIDEO_TEXT and LLG_VIDEO_VGA_640_480_16.
+
+ <B>Notes</B>
+
+     When switching from LLG_VIDEO_TEXT to LLG_VIDEO_VGA_640_480_16, all
+     displayed text lines are converted to the equivalent graphic display.
+     This conversion does not happen when switching back to LLG_VIDEO_TEXT
+     mode.
+
+     If you wish to have a part of your application switch to
+     LLG_VIDEO_VGA_640_480_16 mode and clear the screen, issue the CLS
+     command before switching modes.
+
+ <B>Files</B>   Libraries are CLIPPER.LIB and LLIBG.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng56062.html">GMODE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

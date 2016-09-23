@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8f101.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng8faa9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCRECERR()</B>
+ Determines the error code of the most recent receiving process
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCRECERR(&lt;nHandle&gt;) --&gt; nErrorCode</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication receiving buffer.
+
+ <B>Returns</B>
+
+     PPCRECERR() returns the error code of the most recent receiving process
+     for the specified receiving buffer.  If the packet has been received
+     successfully, the function returns 0.  If an error occurs (for example,
+     if the handle is invalid), the function returns -1.
+
+ <B>Description</B>
+
+     PPCRECERR() allows you to determine the error code of the most recent
+     receiving operation, independently of the protocol used (IPX, SPX,
+     NetBIOS datagram, or NetBIOS session).  The values are returned directly
+     by the IPX/SPX or NetBIOS driver.  Therefore, the return value depends
+     on the type of receiving buffer.  There is a description of the error
+     codes for the IPX/SPX communication buffer and for the NetBIOS
+     communication buffer in Appendices D and E.
+
+     Packets that have been received but have been discarded due to a full
+     buffer do not create an error code.
+
+ <B>Example</B>
+
+     Check to see if the last packet has been received successfully:
+
+     IF PPCRECERR(nHandle) = 0
+        ? 'Packet has been received successfully!'
+     ELSE
+        ? 'Error!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng813da.html">IPXERROR()</A>
+<A HREF="ng86113.html">NBERROR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

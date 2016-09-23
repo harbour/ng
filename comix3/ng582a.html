@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng542c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng5d8a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmReFilter()</B>          Rapidly isolate records meeting additive condition
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmReFilter(cCondition) -&gt; NIL
+
+<B>Arguments</B>
+
+    cCondition is the additional condition which records should meet.  This
+    condition is AND'd with the current filter set up by a previous
+    invocation of cmFilter() or cmReFilter().
+
+<B>Returns</B>
+
+    NIL.
+
+<B>Description</B>
+
+    The cmReFilter() function is very similar to cmFilter(), but it further
+    filters previously selected records.  The cCondition is simply AND'd
+    with the previously existing filter (if any).
+
+    The advantage of using this function is that none of the work done in
+    previously selecting the records is repeated.
+
+<B>Example</B>
+
+    use demo index last, age, lastcall
+    * Get records;  no previous filter, but works AOK
+<B>    retVal = cmReFilter("age &lt; 25")</B>
+    ? retVal, "records meet condition: " + dbfilter()
+    * Now further select on lastcall
+<B>    retVal = cmReFilter("lastcall &lt;= ctod('01/01/75')")</B>
+    ? retVal, "records meet condition: " + dbfilter()
+    * Now further select on street
+<B>    retVal = cmReFilter("street = '1'")</B>
+    ? retVal, "records meet condition: " + dbfilter()
+    * Bring database out of use
+    cmClose()
+
+<B>See Also</B>
+
+    cmFilter(), cmFiltCount(), cmClrFilter()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng359b.html">cmFilter()</A>
+<A HREF="ng2f7b.html">cmFiltCount()</A>
+<A HREF="ng1ff6.html">cmClrFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,42 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng193d1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1473c.html">[^^Up^^]</A>
+<A HREF="ng19924.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>49  CHANGED: SET()</B>
+--------------------------------------------------------------------------------
+
+     1.  The SET() function has been revised to take a third parameter
+         for these settings:
+
+         _SET_ALTFILE
+         _SET_PRINTFILE
+         _SET_EXTRAFILE
+
+         The third parameter is a logical value indicating whether or
+         not the specified file should be truncated or opened in append
+         mode.  A value of false (.F.) means the file should be
+         truncated.  A value of true (.T.) means the file should be
+         opened in append mode.  In either case, if the file does not
+         exist, it is created.
+
+     2.  A new global setting, _SET_SCROLLBREAK, has been added.  This
+         setting determines how Ctrl-S is interpreted by the keyboard
+         driver.  When _SET_SCROLLBREAK is true (.T.) Ctrl-S is
+         interpreted as a request to pause execution upon the next
+         attempt to perform output via Clipper.  When _SET_SCROLLBREAK
+         is false (.F.) Ctrl-S is interpreted as a data or cursor
+         control key.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

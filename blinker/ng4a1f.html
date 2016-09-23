@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng470f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng509e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER DEMONSTRATION DATE    Specify expiration date for demonstration version</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify expiration date for demonstration version</B></U>
+
+ <U>Syntax   : <B>BLINKER DEMONSTRATION DATE &lt;yyyy/mm/dd&gt;</B></U>
+
+ <U>Example  : <B># Set the program expiration date</B></U>
+            <B>BLINKER DEMONSTRATION DATE 1992/12/31</B>
+
+ This command is used to set the expiration date of a program, after which it
+ will end with the "demonstration date limit exceeded" message. It may be set
+ to any date in the format yyyy/mm/dd.
+
+ This can be used to create a demonstration version of the program without
+ having to modify the source code. When the overlay manager loads overlays
+ after the expiration date (as determined by the DOS system date), the error
+ handling procedure BLERRPRG is called with error number 1208, indicating
+ that the demonstration date limit has been exceeded. The source for this
+ error handler is provided should you want to modify the text of the
+ termination message.
+
+ Note: The demonstration restrictions are only checked when overlays are
+ called, so to use them please ensure that at least one function or procedure
+ which is called regularly is overlaid. To be sure thatoverlays exist, be
+ aware that any overlaid segment that is smaller than the BLINKER OVERLAY
+ THRESHOLD default of 32 bytes will automatically be removed from the overlay
+ area.
+
+ <B>CA-Clipper 5.x note:</B>
+
+ To include Blinker's overlay manager in the application, some non-CA-Clipper
+ code must be overlaid, for example EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng509e.html">BLINKER DEMONSTRATION MINUTES</A>
+<A HREF="ng1ef77.html">BLIDEMDTE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

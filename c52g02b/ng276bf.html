@@ -1,0 +1,30 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2750d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng182ca.html">[^^Up^^]</A>
+<A HREF="ng278b0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBFNDX/1026  Data width error</B>
+
+     <B>Explanation:</B>  When building an index, the initial evaluation of the
+     key expression (on a blank record) produced a character value of zero
+     length.
+
+     <B>Action:</B>  Make sure the key expression will produce a value of the
+     same length for all records.  Do not use functions such as TRIM() in the
+     key expression.  To restrict the length of the key values, use the
+     LEFT() or PADR() functions.
+
+     <B>See Also:</B>  INDEX command
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

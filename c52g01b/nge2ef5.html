@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge2aa5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngd8973.html">[^^Up^^]</A>
+<A HREF="nge33f3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>#undef</B>
+ Remove a #define macro definition
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>#undef &lt;identifier&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;identifier&gt;</B> is the name of the manifest constant or pseudofunction
+     to remove.
+
+ <B>Description</B>
+
+     #undef removes an identifier defined with the #define directive. After
+     an #undef, the specified dentifier becomes undefined.  Use #undef to
+     remove an identifier before you redefine it with #define, preventing the
+     compiler warning that occurs when an existing identifier is redefined.
+     Also, use #undef to make conditional compilation specific to certain
+     sections of a program.
+
+ <B>Examples</B>
+
+     <B>.</B>  To define then undefine a manifest constant and a
+        pseudofunction:
+
+        #define K_ESC  27
+        #define MAX(x, y)  IF(x &gt; y, x, y)
+        .
+        . &lt;statements&gt;
+        .
+        #undef K_ESC
+        #undef MAX
+
+     <B>.</B>  To use #undef to undefine an identifier before redefining it:
+
+        #define DEBUG
+        .
+        . &lt;statements&gt;
+        .
+        #undef DEBUG
+        #define DEBUG  .T.
+
+     <B>.</B>  To undefine an identifier if it exists, and otherwise define
+        it for later portions of the program file:
+
+        #ifdef TEST
+           #undef TEST
+        #else
+           #define TEST
+        #endif
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngde423.html">#define</A>
+<A HREF="nge0c18.html">#ifdef</A>
+<A HREF="nge1372.html">#ifndef</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

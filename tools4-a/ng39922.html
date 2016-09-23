@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng395c8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng39198.html">[^^Up^^]</A>
+<A HREF="ng3a4a1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETBRDCST()</B>
+ Determines or queries the receiving mode for broadcast messages
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETBRDCST([&lt;nMode&gt;]) --&gt; nPrevMode</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nMode&gt;</B>  Designates the new mode for receiving broadcast messages.
+     Values from 0 to 3 are accepted.
+
+     <B>Table 24.1:  Broadcast Receiving Modes</B>
+     ------------------------------------------------------------------------
+     <B>Value   Sym. Con.      Definition</B>
+     ------------------------------------------------------------------------
+     0       BRD_RECALL     Receive all messages automatically
+     1       BRD_RECSERVER  Receive server messages only, discard other
+                            messages
+     2       BRD_STORESERV  Store one server message on the server, discard
+                            other messages
+     3       BRD_STOREALL   Store any message on the server
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     NNETBRDCST() returns a numeric value between 0 and 3.  The value
+     represents the broadcast mode at the moment of the call of NNETBRDCST(),
+     before a new mode is set (see the argument).  With NNETBRDCST(), you can
+     save the previous mode and set a new mode.  A return value of -1
+     indicates an error.
+
+ <B>Description</B>
+
+     NOVELL NET BROADCAST MODE
+     With NNETBRDCST(), you can set the mode for receiving broadcast
+     messages.  Broadcast messages can be sent by a file server (system
+     messages or the shutdown of a server) or by any workstation within the
+     network (user messages set up with the Novell SEND utility or a
+     NNETSND()).  When a message is received, the network shell usually
+     interrupts the running application, displays the message in line 24 of
+     the screen and waits for a user input (&lt;Ctrl&gt; &lt;Enter&gt;).  This behavior
+     can be modified by using the function NNETBRDCST().  Four different
+     receiving modes are available (see the argument).  Modes 0 and 1 allow
+     the interruption of an application; however, mode 1 ignores user
+     messages.  Modes 2 and 3 suppress the display of messages on the screen
+     during an application.  The file server has a message buffer available
+     for each connected workstation.  As soon as the buffer is full,
+     additional messages are ignored.  Messages can be read with the function
+     NNETGETMSG().
+
+     Alternatively, the broadcast system of CA-Clipper Tools can be activated
+     (see NNETMSGOPN()).  This system allows the interrupt controlled
+     receiving of broadcast messages in the background.  Messages can be
+     processed within an application, and the computer is not interrupted by
+     incoming messages.
+
+ <B>Example</B>
+
+     Suppress incoming messages at program start, and reset to the previous
+     mode after the end of the application:
+
+     // Program start
+     #include "ctnnet.ch"
+
+     nOldMsg=NNETBRDCST(BRD_STOREALL)
+     ....
+     // End of program
+     NNETBRDCST(nOldMsg)
+     RETURN
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3a4a1.html">NNETGETMSG()</A>
+<A HREF="ng3b698.html">NNETMSGOPN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

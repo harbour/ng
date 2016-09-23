@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5fc0d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng60d8e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SCROLL()</B>
+ Scroll a screen region up or down, right or left
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SCROLL([&lt;nTop&gt;], [&lt;nLeft&gt;],</B>
+     <B>   [&lt;nBottom&gt;], [&lt;nRight&gt;], [&lt;nVert&gt;] [&lt;nHoriz&gt;])</B>
+     <B>   --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B>, and <B>&lt;nRight&gt;</B> define the
+     scroll region coordinates.  Row and columns values can range from 0, 0
+     to MAXROW(), MAXCOL().  If you do not specify coordinate arguments, the
+     dimensions of the visible display are used.
+
+     <B>&lt;nVert&gt;</B> defines the number of rows to scroll, vertically.  A
+     positive value scrolls up the specified number of rows.  A negative
+     value scrolls down the specified number of rows.  A value of zero
+     disables vertical scrolling.  If &lt;nVert&gt; is not specified, zero is
+     assumed.
+
+     <B>&lt;nHoriz&gt;</B> defines the number of rows to scroll horizontally.  A
+     positive value scrolls left the specified number of columns.  A negative
+     value scrolls right the specified number of columns.  A value of zero
+     disables horizontal scrolling.  If &lt;nHoriz&gt; is not specified, zero is
+     assumed.
+
+     If you supply neither &lt;nVert&gt; or &lt;nHoriz&gt; parameters to SCROLL(), the
+     area specified by the first four parameters will be blanked.
+
+     <B>Warning!</B>  Horizontal scrolling is not supported on all of the
+     alternate terminal drivers (i.e. ANSITERM, NOVTERM, PCBIOS).
+
+ <B>Returns</B>
+
+     SCROLL() always returns NIL.
+
+ <B>Description</B>
+
+     SCROLL() is a screen function that scrolls a screen region up or down a
+     specified number of rows.  When a screen scrolls up, the first line of
+     the region is erased, all other lines are moved up, and a blank line is
+     displayed in the current standard color on the bottom line of the
+     specified region.  If the region scrolls down, the operation is
+     reversed.  If the screen region is scrolled more than one line, this
+     process is repeated.
+
+     SCROLL() is used primarily to display status information into a defined
+     screen region.  Each time a new message is displayed, the screen region
+     scrolls up one line and a new line displays at the bottom.
+
+ <B>Examples</B>
+
+     <B>.</B>  This user-defined function displays a message string at the
+        bottom of a screen region after scrolling the region up one line:
+
+        FUNCTION ScrollUp( nTop, nLeft, nBottom, nRight, ;
+                             expDisplay )
+           //
+           SCROLL(nTop, nLeft, nBottom, nRight, 1)
+           @ nBottom, nLeft SAY expDisplay
+           //
+           RETURN NIL
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng722ec.html">@...BOX</A>
+<A HREF="ng72c86.html">@...CLEAR</A>
+<A HREF="ng7a0c5.html">@...TO</A>
+<A HREF="ng7f2a9.html">CLEAR SCREEN</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

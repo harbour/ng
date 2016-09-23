@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3d252.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b69f.html">[^^Up^^]</A>
+<A HREF="ng3da76.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>10  Character Values</B>
+--------------------------------------------------------------------------------
+
+     As noted, a VALUE cannot directly contain character data; instead,
+     it contains an OREF that allows the data to be located when it is
+     needed.  As with arrays, assigning a character value to a variable
+     simply overwrites the variable's VALUE with a new VALUE containing
+     an OREF to the character data.  Note that, as with arrays,
+     assigning a character value from one variable to another simply
+     duplicates the VALUE (i.e., the OREF); the character data itself is
+     not duplicated.
+
+     Note that this reference-based memory management technique is the
+     same for strings, arrays, and code blocks.  Clipper's garbage
+     collector monitors OREFs.  When there are no longer any references
+     to a particular piece of data, the space occupied by that data is
+     automatically reclaimed.
+
+     For arrays, the reference technique is easily observed at the
+     Clipper level: if the same array reference is assigned to two
+     variables, either variable can be used to modify the array.
+
+     With character data, however, the reference handling is not noticed
+     at the Clipper level.  This is simply because Clipper operators and
+     functions never act directly on character data--they always create
+     a new character value as their result.
+
+     Although unnoticed at the Clipper level, the reference technique
+     does have an effect at the Extend system level.  This is discussed
+     below.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

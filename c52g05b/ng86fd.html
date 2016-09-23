@@ -1,0 +1,47 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng85cc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3cf.html">[^^Up^^]</A>
+<A HREF="ng8c9c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>91  CHANGED: @...GET</B>
+--------------------------------------------------------------------------------
+
+     1. <B>VALID and RANGE:</B>  In Clipper 5.0, the VALID and RANGE clauses
+        are mutually exclusive (i.e., you cannot specify both in the
+        same command).
+
+     2. <B>Invalid dates:</B>  In Summer '87, entering an invalid date
+        cleared the date field and homed the cursor.  Pressing Esc left
+        the field display blank, but the original value was restored to
+        the Get variable.  In Clipper 5.0, the cursor stays in the date
+        field at the current position so the field can be edited, but
+        the field is not cleared.  Pressing Esc to quit the READ
+        restores the initial value in the display and the original value
+        is restored to the Get variable.
+
+     3. <B>Pressing Esc:</B>  In Clipper 5.0, pressing Esc while SET ESCAPE
+        is ON not only restores the previous value for the current GET
+        variable but also redisplays the previous value on the screen.
+        Summer '87 did not redisplay the previous value.
+
+     4. <B>Color behavior:</B>  In Clipper 5.0, the color of a Get variable
+        is fixed at the time of the @...GET.  This means that when a
+        READ is executed the Get variable retains its original color.
+
+     5. <B>Clipping behavior:</B>  In Summer '87, a Get variable that
+        attempted to display past column 80 wrapped to the next line.
+        In Clipper 5.0, a Get variable that attempts to display past
+        MAXCOL() is clipped.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

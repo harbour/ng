@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng13b74b.html">[^^Up^^]</A>
+<A HREF="ng13c6a2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ListBox</B>
+ Create a list box
+------------------------------------------------------------------------------
+ <B>Description</B>
+
+     A list box displays a list of strings (or items) to the user.  You can
+     use the methods of ListBox to add, arrange, remove, and interrogate the
+     items in a list box.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows how the user can select the screen's
+        foreground color:
+
+        function SelectFore()
+        local cOldWindow, oList, nChoice
+        memvar GetList
+           cOldWindow := SaveScreen(5, 10, 12, 20)
+           oList := ListBox(5, 10, 12, 20, { | x | iif(x == NIL,;
+              nChoice, nChoice  := x })
+           oList:addItem("Black", "N")
+           oList:addItem("Blue", "B")
+           oList:addItem("Green", "G")
+           oList:addItem("Cyan", "BG")
+           oList:addItem("Red", "R")
+           oList:addItem("Magenta", "RB")
+           oList:addItem("Brown", "GR")
+           oList:addItem("White", "W")
+           aAdd(GetList, oList)
+           read
+           RestScreen(5, 10, 12, 20, cOldWindow)
+        return (oList:GetData(nChoice))
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

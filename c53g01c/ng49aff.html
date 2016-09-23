@@ -1,0 +1,105 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng48d15.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng4a513.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FOUND()</B>
+ Determine if the previous search operation succeeded
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FOUND() --&gt; lSuccess</B>
+
+ <B>Returns</B>
+
+     FOUND() returns true (.T.) if the last search command was successful;
+     otherwise, it returns false (.F.).
+
+ <B>Description</B>
+
+     FOUND() is a database function that determines whether a search
+     operation (i.e., FIND, LOCATE, CONTINUE, SEEK, or SET RELATION)
+     succeeded.  When any of these commands are executed, FOUND() is set to
+     true (.T.) if there is a match; otherwise, it is set to false (.F.).
+
+     If the search command is LOCATE or CONTINUE, a match is the next record
+     meeting the scope and condition.  If the search command is FIND, SEEK or
+     SET RELATION, a match is the first key in the controlling index that
+     equals the search argument.  If the key value equals the search
+     argument, FOUND() is true (.T.); otherwise, it is false (.F.).
+
+     The value of FOUND() is retained until another record movement command
+     is executed.  Unless the command is another search command, FOUND() is
+     automatically set to false (.F.).
+
+     Each work area has a FOUND() value.  This means that if one work area
+     has a RELATION set to a child work area, querying FOUND() in the child
+     returns true (.T.) if there is a match.
+
+     By default, FOUND() operates on the currently selected work area.  It
+     can be made to operate on an unselected work area by specifying it
+     within an aliased expression (see example below).
+
+     FOUND() will return false (.F.) if there is no database open in the
+     current work area.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates the behavior of FOUND() after a
+        record movement command:
+
+        USE Sales INDEX Sales
+        ? INDEXKEY(0)              // Result: SALESMAN
+        SEEK "1000"
+        ? FOUND()                  // Result: .F.
+        SEEK "100"
+        ? FOUND()                  // Result: .T.
+        SKIP
+        ? FOUND()                  // Result: .F.
+
+     <B>.</B>  This example tests a FOUND() value in an unselected work area
+        using an aliased expression:
+
+        USE Sales INDEX Sales NEW
+        USE Customer INDEX Customer NEW
+        SET RELATION TO CustNum INTO Sales
+        //
+        SEEK "Smith"
+        ? FOUND(), Sales-&gt;(FOUND())
+
+     <B>.</B>  This code fragment processes all Customer records with the key
+        value "Smith" using FOUND() to determine when the key value changes:
+
+        USE Customer INDEX Customer NEW
+        SEEK "Smith"
+        DO WHILE FOUND()
+           .
+
+           . &lt;statements&gt;
+           .
+           SKIP
+           LOCATE REST WHILE Name == "Smith"
+        ENDDO
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc340a.html">CONTINUE</A>
+<A HREF="ng3f657.html">EOF()</A>
+<A HREF="ngd26f1.html">LOCATE</A>
+<A HREF="ngdd095.html">SEEK</A>
+<A HREF="ngef11d.html">SET RELATION</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,123 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1e6fa.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1763f.html">[^^Up^^]</A>
+<A HREF="ng1f7e8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_xvunwire()</B>
+ Unlock a wired VM segment
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "vm.api"</B>
+     <B>void _xvunwire(</B>
+     <B>                HANDLE hSegment</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>hSegment</B> is the VM segment handle returned by _xvalloc().
+
+ <B>Returns</B>
+
+     _xvunwire() has no return value.
+
+ <B>Description</B>
+
+     _xvunwire() unlocks a VM segment locked by _xvwire() and invalidates any
+     pointers to that segment.  Unwiring a segment allows the VMM system to
+     move and swap the segment as needed.
+
+     <B>Note: </B> If the segment's lock count (_xvlockcount()) is greater than
+     one, the lock count is decremented but the segment remains locked.  The
+     segment will not be unlocked until its lock count is decremented to
+     zero.
+
+     <B>Warning! </B> After you unlock a VM segment, you should not attempt to
+     access it with the far pointer returned by _xvwire() since there is no
+     guarantee that the segment at that physical memory address is the
+     segment you previously locked.  If you need further access to the
+     contents of the segment, lock it again and use the new pointer returned
+     by _xvwire().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example allocates a segment with _xvalloc() and locks it
+        with _xvwire().  After a string is copied into the segment, it is
+        unlocked and freed.
+
+        // CA-Clipper include files
+        #include "extend.api"
+        #include "vm.api"
+
+        // Microsoft C include files
+        #include "string.h"
+
+        // Prototypes
+        Boolean VMWireExSetup(char * spSrc);
+        void VMWireExExit(void);
+
+        static HANDLE hSegment;
+        static char * spString = NULL;
+
+
+        Boolean VMWireExSetup(char * spSrc)
+        {
+           Boolean bResult = FALSE;
+
+           if (hSegment = _xvalloc(strlen(spSrc) + 1, 0))
+              {
+              spString = _xvwire(hSegment);
+              if (spString != NULL)
+                 {
+                 strcpy(spString, spSrc);
+
+
+                 bResult = TRUE;
+
+                 }
+              else
+                 _xvfree(hSegment);
+              }
+
+           return (bResult);
+        }
+
+
+        void VMWireExExit(void)
+        {
+            // Clean up if anything was allocated
+           if (spString)
+              {
+              _xvunwire(hSegment);
+
+              spString = NULL;
+
+              _xvfree(hSegment);
+              }
+
+           return;
+
+        }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Vm.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng179e4.html">_xvalloc()</A>
+<A HREF="ng181c4.html">_xvfree()</A>
+<A HREF="ng1d383.html">_xvlockcount()</A>
+<A HREF="ng1e6fa.html">_xvunlock()</A>
+<A HREF="ng1f7e8.html">_xvwire()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

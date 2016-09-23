@@ -1,0 +1,44 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng712d2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6dbf4.html">[^^Up^^]</A>
+<A HREF="ng71c05.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Verifying HiPer-SEEK Aliases:</B>
+
+  We have made repeated reference to a step called verification. We do this
+  because when you create a HiPer-SEEK index, the system transforms the
+  original text into a text signature that represents the original text in
+  a coded form. When you search for a particular string, HiPer-SEEK looks
+  in the index for any and all instances of signatures that contain all of
+  the attributes of the string you are searching for. While this is a
+  powerful technique, it does have one drawback. It is possible that two
+  different strings will resolve to the same signature within the index.
+
+  Consequently, when HiPer-SEEK returns a hit during a hs_Next() call, you
+  must verify that the text you are searching for is actually contained in
+  the returned record by performing a more conventional sub-string search
+  with the target string.
+
+  SIx 3.0's HiPer-SEEK system contains a function that will efficiently
+  perform this verification, hs_Verify(). hs_Verify() is used to confirm
+  that each identified text record does actually contain the search
+  string(s). It returns .T. if successful and .F. if not.
+
+    <B>NOTE: hs_Verify() differs in operation to the CftsVerify() function</B>
+    <B>      found in CFTS, but is roughly 10 times faster.               </B>
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

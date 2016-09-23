@@ -1,0 +1,109 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng52b75.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng5432e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GFNTSET()</B>
+ Set an already loaded font as active
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GFNTSET(&lt;aFont&gt;, [&lt;nClipTop&gt;, &lt;nClipBottom&gt;])</B>
+     <B>   --&gt; aClipInfo</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aFont&gt;</B> represents the pointer to the VMM region where the .FND font
+     is loaded.  &lt;aFont&gt; would have been created with GFNTLOAD().
+
+     <B>&lt;nClipTop&gt;</B> and <B>&lt;nClipBottom&gt;</B> specify how many pixel rows to use
+     when displaying standard text output.  This provides the ability to
+     display a one pixel frame around a GET.
+
+ <B>Returns</B>
+
+     GFNTSET() returns a two-element array containing font clipping
+     information.
+
+ <B>Description</B>
+
+     GFNTSET() sets an already loaded font as active.  When GFNTSET() is
+     called, all subsequent DEVOUT() calls will use the new font.  This means
+     that you can use multiple .FND fonts at the same time.  To go back to
+     the standard ROM font, use GFNTSET( LLG_FNT_ROM ).  You can also use an
+     .FND font in a GWRITEAT() as shown in the following code:
+
+        aFndFont := GFNTLOAD("TestFnd.FND")
+        nColor   := 3
+        GWRITEAT(1, 1, "This is some text", nColor, LLG_MODE_SET, aFndFont)
+
+     GFNTSET() returns a two-element array containing font clipping
+     information.  The structure of this array is { nTopPixelRow,
+     nBottomPixelRow }.  This feature allows text to fit at a reduced height.
+     A common requirement is to draw a frame around a GET without having to
+     use a full text line over and under the GET.  When you display a
+     character with a DEVOUT() or a GET display method, the background always
+     gets overwritten.  So, if a frame is precisely drawn around the GET,
+     part of the frame will be overwritten as soon as a single character is
+     displayed.
+
+     In general, all regular fonts do not use the top and bottom row of
+     pixels.  This allows a displayed character to be clipped or restricted
+     so that DEVPOS()/DISPLAY() will only erase the lines 1-14 (instead of 0-
+     15) and will preserve the frame previously drawn.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example loads a font file called MyFont.FND:
+
+        FUNCTION ShowOneFont (cString)
+           LOCAL aFontBig, aFontSmall
+                    // Load a couple of fonts into memory
+           aFontBig    := GFNTLOAD("BigFnt.FND")
+           aFontSmall  := GFNTLOAD("SmallFnt.FND")
+                    // Set the BigFnt.FND to be active.  As soon as
+        GFNTSET() is
+                    // called, @...SAY, DEVOUT() etc. will use the new
+        font.
+           GFNTSET(aFontBig)
+           @1,1 SAY "This text should appear in the font 'BigFnt.FND'"
+                    // Display something in a Big font
+           GWRITEAT(X , Y , "Using Big Font...",   nColor, LLG_MODE_SET)
+           GWRITEAT(X , Y , "Using Small Font...", nColor, LLG_MODE_SET,;
+        aFontSmall)
+                    // Set the SmallFnt.FND to be active
+           GFNTSET(aFontSmall)
+                    // Display something in a Small font
+           GWRITEAT(X , Y , "Using Small Font...", nColor, G_MODE_SET)
+                    // Use the standard ROM font
+           GFNTSET(G_FNT_ROM)
+                    // Display something
+           GWRITEAT(X , Y , "Using ROM Font...", nColor, G_MODE_SET)
+                    // *Important*  You must erase the fonts from memory
+        // if it is no
+                    // longer used.  This is because CA-Clipper's VMM is
+        // unable to free
+                    // the memory occupied by aFont
+           GFNTERASE(aFontBig)
+           GFNTERASE(aFontSmall)
+           RETURN  NIL
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng52630.html">GFNTERASE()</A>
+<A HREF="ng52b75.html">GFNTLOAD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

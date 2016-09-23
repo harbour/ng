@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng21406.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng21d2b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLILIBLOD()                   Dynamically load CA-Clipper DLL library</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Dynamically load a CA-Clipper DLL library</B></U>
+
+ <U>Syntax   : <B>nuHandle = BLILIBLOD(cLibName)</B></U>
+
+ <U>Return   : <B>A handle representing the DLL, or an error code less than 32 if</B></U>
+            <B>the load failed</B>
+
+ This function is used to dynamically load a CA-Clipper DLL during program
+ execution. This allows programs to be extended or updated 'on the fly'
+ without relinking the main .EXE.
+
+ The library handle is used to obtain handles for the functions in the DLL
+ which are then used to call the functions.
+
+ Please see Chapter 5, 'DOS extended / Dual Mode programs', for more details
+ on using DLLs.
+
+ Example:
+
+    <B>libhan = BLILIBLOD (dllnme)      // Dynamically load the DLL</B>
+    <B>if libhan &gt; 32                // If it loaded successfully</B>
+    <B>   funhan = BLIFUNHAN (libhan,funnme)  // Get the handle</B>
+    <B>   if funhan &gt; 0              // If the function was found</B>
+    <B>                  // Call function with (multiple) params</B>
+    <B>      funres = BLIFUNCAL (funpa1,funpa2,funhan)</B>
+    <B>                     // Note that function handle is LAST</B>
+    <B>   endif</B>
+    <B>endif</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2088f.html">BLIFUNCAL()</A>
+<A HREF="ng20ea7.html">BLIFUNHAN()</A>
+<A HREF="ng21406.html">BLILIBFRE()</A>
+<A HREF="ng21d2b.html">BLILIBOVR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

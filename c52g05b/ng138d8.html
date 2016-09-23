@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng13466.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3cf.html">[^^Up^^]</A>
+<A HREF="ng14097.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>177 CHANGED: Runtime Environment</B>
+--------------------------------------------------------------------------------
+
+     In Clipper 5.0, the runtime configuration options (as controlled by
+     the CLIPPER environment variable) of a Clipper-compiled program
+     have been enhanced to provide you with more control over how your
+     application runs.  The following are the major areas of change:
+
+     1.  You can now specify runtime environment settings on the
+         application command-line as well as in the CLIPPER environment
+         variable.  To do this, invoke the application program in the
+         following manner:
+
+         C&gt;&lt;app&gt; [//&lt;setting&gt; ... ] [&lt;app arguments&gt;]
+
+     2.  You can now specify configuration settings with a colon to
+         separate the CLIPPER parameter from its associated argument.
+
+     3.  The V and R parameters available under previous releases are no
+         longer supported.
+
+     4.  The E, F, and X parameters are basically the same as in
+         previous versions.
+
+     5.  The following list summarizes the new CLIPPER parameters:
+
+         <B>Table: New Clipper 5.0 Runtime Configuration Parameters</B>
+         -----------------------------------------------------------------
+         <B>Parameter  Meaning</B>
+         -----------------------------------------------------------------
+         DYNK       Controls the amount of memory (in kilobytes)
+                    dedicated to the dynamic overlay cache
+         DYNF       Specifies the number of file handles the dynamic
+                    overlay system is allowed to use
+         SWAPK      Specifies the maximum allowable size of the disk
+                    swap file used for the virtual memory (VM) system
+         SWAPPATH   Specifies the location of the virtual memory swap
+                    file
+         XHEAP      Controls the minimum guaranteed amount of fixed
+                    memory available using _xgrab() or _xalloc()
+         BADCACHE   Causes VMM to save and restore the state of the EMM
+                    page frame before and after each EMM access
+         CGACURS    Prevents the use of the extended cursor of the
+                    EGA/VGA
+         -----------------------------------------------------------------
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

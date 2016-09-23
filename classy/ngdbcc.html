@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngce4f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="nge069.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Class Methods</B>
+
+  Class methods are declared using the <B>CLASS METHOD</B> command.
+
+  A class method is a method which operates on an entire class (or a subset
+  of a class), rather than on a single instance of that class. Any operation
+  which deals with more than one instance of a class is a good candidate for
+  a class method.
+
+  In a class method, the <U>self</U> variable refers to the class object for
+  that class. This means that class methods can access class variables
+  directly. For example, in the previous section, the expression:
+
+    ::class:currSelected
+
+  was used to access the class variable <U>currSelected</U>. In a class method,
+  we would instead use <U>::currSelected</U> to access the variable.
+
+  If a regular method is accessing class variables and methods repeatedly,
+  it is worth exploring whether that aspect of its operation can be
+  extracted and made into a class method. It is more efficient to access
+  class variables from within a class method. Also, it often makes better
+  sense from a conceptual design perspective to encapsulate, within a class
+  method, code which repeatedly uses class messages.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1259.html">CLASS METHOD</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

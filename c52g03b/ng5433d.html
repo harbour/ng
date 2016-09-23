@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng53ef2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng54712.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>syncChildren()</B>
+ Force relational movement in child workareas
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE syncChildren(</B>
+     <B>                      WORKAREAP wa,</B>
+     <B>                    )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+ <B>Description</B>
+
+     Synchronizes all child workareas in wa-&gt;relations.
+
+ <B>Default Behavior</B>
+
+     syncChildren() traverses the relation list wa-&gt;relations and calls
+     childSync(), passing the child's workarea structure and the current
+     relation info structure from the parent.
+
+     <B>Note: </B> childSync() must be implemented by a subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  You should only replace this method with extreme care because
+        recursive use of childSync() may call the code in syncChildren().
+        Also, error codes (return value from childSync()) may cause the
+        premature end of processing in this method.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng52461.html">childSync()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

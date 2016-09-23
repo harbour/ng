@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng342f2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng34f1d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_Rollback():</B>
+
+  Syntax:         Sx_Rollback( [nArea] )
+
+                  nArea = Workarea number.
+
+  Returns:   &lt;logical&gt; .T. if rollback was successful.
+                  .F. if an error occurred.
+
+  Description:    This function allows you to force Clipper to re-read a
+                  record from disk prior to a write, thereby allowing you
+                  to edit directly into a field without concern for the
+                  automatic write that is performed at the conclusion of a
+                  READ.
+
+                  If you specify the workarea (nArea) as 0, then the current
+                  record and all child-related records (that are <B>currently</B>
+                  being pointed to) will also be refreshed from the data on
+                  disk.  Note that this does not imply that <B>all</B> child
+                  records that may have been changed will be rolled back, but
+                  only the ones that the record pointers for each child
+                  workarea are <B>currently</B> on.
+
+  Example:
+
+    #include "INKEY.CH"
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"
+    GO TOP
+
+    CLEAR
+    @ 11,25 SAY "First Name:" GET test-&gt;FIRST
+    @ 12,25 SAY "Last Name :" GET test-&gt;LAST
+    @ 13,25 SAY "Age       :" GET test-&gt;AGE
+    @ 14,25 SAY "Married   :" GET test-&gt;MARRIED
+    READ
+
+    // If the user pressed &lt;Escape&gt;, restore all of the old field values
+    IF LastKey() == K_ESC
+      IF Alert( "Abort Edits?", {"Yes","No"} ) == 1
+        <B>Sx_RollBack()</B>
+      ENDIF
+    ENDIF
+
+
+  <U>NOTE:  See the ROLLBACK.PRG program for a more detailed, practical example.</U>
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

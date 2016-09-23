@@ -1,0 +1,161 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb5022.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb4a83.html">[^^Up^^]</A>
+<A HREF="ngb67ad.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BEGIN SEQUENCE</B>
+ Define a sequence of statements for a BREAK
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>BEGIN SEQUENCE</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>[BREAK [&lt;exp&gt;]]</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>[RECOVER [USING &lt;idVar&gt;]]</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>END [SEQUENCE]</B>
+
+ <B>Arguments</B>
+
+     <B>BREAK &lt;exp&gt;</B> branches execution to the statement immediately
+     following the nearest RECOVER statement if one is specified or the
+     nearest END SEQUENCE statement.  &lt;exp&gt; is the value returned into the
+     &lt;idVar&gt; specified in the USING clause of the RECOVER statement.
+
+     <B>RECOVER USING &lt;idVar&gt;</B> defines a recover point in the SEQUENCE
+     construct where control branches after a BREAK statement.  If USING
+     &lt;idVar&gt; clause is specified, &lt;idVar&gt; receives the value returned by the
+     BREAK statement.  In general, this is an error object.
+
+     <B>END</B> defines the end point of the SEQUENCE control structure.  If no
+     RECOVER statement is specified, control branches to the first statement
+     following the END statement after a BREAK.
+
+ <B>Description</B>
+
+     BEGIN SEQUENCE...END is a control structure used for exception and
+     runtime error handling.  It delimits a block of statements, including
+     invoked procedures and user-defined functions.  When a BREAK is
+     encountered anywhere in a block of statements following the BEGIN
+     SEQUENCE statement up to the corresponding RECOVER statement, control
+     branches to the program statement immediately following the RECOVER
+     statement.  If a RECOVER statement is not specified, control branches to
+     the statement following the END statement, terminating the SEQUENCE.  If
+     control reaches a RECOVER statement without encountering a BREAK, it
+     branches to the statement following the corresponding END.
+
+     The RECOVER statement optionally receives a parameter passed by a BREAK
+     statement that is specified with a return value.  This is usually an
+     error object, generated and returned by the current error handling block
+     defined by ERRORBLOCK().  If an error object is returned, it can be sent
+     messages to query information about the error.  With this information, a
+     runtime error can be handled within the context of the operation rather
+     than in the current runtime error handler.  See the example below.
+
+     Within a SEQUENCE construct there are some restrictions on what
+     statements are allowed between the BEGIN SEQUENCE and RECOVER
+     statements.  You cannot RETURN, LOOP, or EXIT between a BEGIN SEQUENCE
+     and RECOVER statement.  From within the RECOVER statement block,
+     however, you can LOOP, EXIT, BREAK, or RETURN since the SEQUENCE is
+     essentially completed at that point.  Using LOOP from with the RECOVER
+     statement block is useful for reexecuting the SEQUENCE statement block.
+     See the example below.
+
+     SEQUENCE constructs are quite flexible.  They can be nested and more
+     than one can be defined in the same procedure or user-defined function.
+     If more than one SEQUENCE construct is specified, each SEQUENCE should
+     delimit one discrete operation.
+
+     For more information on error objects, refer to Error class in this
+     chapter.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment demonstrates a SEQUENCE construct in which
+        the BREAK occurs within the current procedure:
+
+        BEGIN SEQUENCE
+           &lt;statements&gt;...
+           IF lBreakCond
+              BREAK
+           ENDIF
+        RECOVER
+           &lt;recovery statements&gt;...
+        END
+
+        &lt;recovery statements&gt;...
+
+     <B>.</B>  This example demonstrates an error handler returning an error
+        object to the variable specified in the USING clause of the RECOVER
+        statement:
+
+        LOCAL objLocal, bLastHandler
+        //
+        // Save current and set new error handler
+        bLastHandler := ERRORBLOCK({ |objErr| ;
+              MyHandler(objErr, .T.) })
+        //
+        BEGIN SEQUENCE
+           .
+           . &lt;operation that might fail&gt;
+           .
+        RECOVER USING objLocal
+           //
+           // Send messages to objLocal and handle the error
+           ? "Error: "
+           IF objLocal:genCode != 0
+              ?? objLocal:description
+           ENDIF
+           .
+           .
+           .
+        END
+        //
+        // Restore previous error handler
+        ERRORBLOCK( bLastHandler )
+
+        FUNCTION MyHandler( objError, lLocalHandler )
+           //
+           // Handle locally returning the error object
+           IF lLocalHandler
+              BREAK objError
+           ENDIF
+           .
+           . &lt;other statements to handle the error&gt;
+           .
+           RETURN NIL
+
+     <B>.</B>  This example reexecutes a SEQUENCE statement block by LOOPing
+        from within the RECOVER statement block:
+
+        DO WHILE .T.
+           BEGIN SEQUENCE
+              .
+              . &lt;operation that may fail&gt;
+              .
+           RECOVER
+              IF PrintRecover()
+                 LOOP      // Repeat the SEQUENCE statement block
+              ENDIF
+           END
+           EXIT            // Escape from the operation
+        ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng121a21.html">Error</A>
+<A HREF="ng3054f.html">ERRORBLOCK()</A>
+<A HREF="ngc6fd6.html">RETURN</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

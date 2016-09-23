@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4c2a5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4cd3f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>addField()</B>
+ Add a column (field) to the work area
+------------------------------------------------------------------------------
+ <B>.Prototype</B>
+
+     <B>ERRCODE addField(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     LPDBFIELDINFO lpdbFieldInfo</B>
+     <B>                   )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpdbFieldInfo</B> is a pointer to a structure containing information
+     about a column in the work area.
+
+ <B>Description</B>
+
+     addField() adds a column specified by lpdbFieldInfo to the wa work area.
+
+ <B>Default Behavior</B>
+
+     addField() inserts the column referred to by lpdbFieldInfo into the data
+     table referenced by the AREA structure.  The new column is added to the
+     end of the wa-&gt;lpFields structure.  wa-&gt;uiFieldCount is updated to
+     reflect the addition.
+
+     <B>Note:</B>  Call setFieldExtent() prior to adding fields to the AREA
+     structure.  setFieldExtent() sizes and clears the wa-&gt;lpFields
+     structure, readying it for use.
+
+     <B>Warning!  wa-&gt;uiFieldCount</B> must be less than <B>wa-&gt;uiFieldExtent</B>
+     or an assertion error will be raised.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Most implementations should use the default behavior for
+        addField().  However, if you change the addField() implementation, be
+        aware of the order imposed on adding fields to the work area
+        structures.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng421a9.html">DBFIELDINFO</A>
+<A HREF="ng4d122.html">createFields()</A>
+<A HREF="ng52c65.html">setFieldExtent()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

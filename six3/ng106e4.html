@@ -1,0 +1,138 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1025b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng115fd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_FiltJoin():</B>
+
+  Purpose:  Join two filters with respect to a UNION (.OR.),
+            INTERSECT (.AND.), or DIFFERENCE ( .XOR. ).
+
+   Syntax:  m6_FiltJoin( &lt;nHandle1&gt;, &lt;nHandle2&gt;, &lt;nJoinType&gt; )
+
+    Where:  &lt;nHandle1&gt;     --  Is any valid handle to a filter.
+
+            &lt;nHandle2&gt;     --  Is any valid handle to a filter.  If
+                               owned by user this filter will be
+                               automatically freed.
+
+            &lt;nJoinType&gt;    --  Type of join to execute.  Use the following
+                               constants defined in MachSIx.ch to specify
+                               what type of join to execute.
+
+                               #define JOIN_UNION        1
+                               #define JOIN_INTERSECT    2
+                               #define JOIN_DIFFERENCE   3
+
+  Returns:  Logical value:  .T. means the operation was successful,  .F.
+            indicates it failed.  In the case of a .F. value call m6_Error()
+            to retrieve the reason for the error.
+
+     Note:  This function joins the filter specified by &lt;nHandle2&gt; into
+            &lt;nHandle1&gt;.  If &lt;nHandle2&gt; is owned by the user then this filter
+            is freed from memory.  If you would like to retain the current
+            state of &lt;nHandle1&gt; prior to the join, make a copy of it with
+            m6_FiltCopy().
+
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         PRIVATE nHandle1, nHandle2
+
+         //..............................................use customer file
+         USE Customer via "SIXCDX"
+
+         // In this example we'll demonstrate joining two filters with
+         // respect to a UNION.  Filter1 is the record set { 5, 10 }.
+         // Filter2 is the record set { 5, 15 }.  The result of the
+         // UNION will be the record set { 5, 10, 15 }.
+
+         //..........call function below, to create two filters to join
+         InitFilters()
+
+         //......................join filters ( note filter2 will be freed )
+         <B>m6_FiltJoin( nHandle1, nHandle2, JOIN_UNION )</B>
+
+         //.......................................display records in filter
+         ? m6_FiltTop( nHandle1 )         //  5
+         ? m6_FiltSkip( nHandle1 )        // 10
+         ? m6_FiltSkip( nHandle1 )        // 15
+         ? m6_FiltSkip( nHandle1 )        //  0
+
+         //...........free filter1.  filter2 was freed in the join operation
+         ? m6_FreeFilter( nHandle1 )      // .T.
+
+         //.......................................Reset the example filters
+         InitFilters()
+
+         // Next we'll demonstrate an INTERSECT of the two filters.  The
+         // result will be the record set { 5 }
+
+         //......................join filters ( note filter2 will be freed )
+         <B>m6_FiltJoin( nHandle1, nHandle2, JOIN_INTERSECT )</B>
+
+         //.......................................display records in filter
+         ? m6_FiltTop( nHandle1 )         //  5
+         ? m6_FiltSkip( nHandle1 )        //  0
+
+         //...........free filter1.  filter2 was freed in the join operation
+         ? m6_FreeFilter( nHandle1 )      // .T.
+
+         //.......................................Reset the example filters
+         InitFilters()
+
+         // Finally we'll demonstrate the DIFFERENCE between the two filters.
+         // The result will be the record set { 10, 15 }.
+
+         //......................join filters ( note filter2 will be freed )
+         <B>m6_FiltJoin( nHandle1, nHandle2, JOIN_DIFFERENCE )</B>
+
+         //.......................................display records in filter
+         ? m6_FiltTop( nHandle1 )         //  10
+         ? m6_FiltSkip( nHandle1 )        //  15
+         ? m6_FiltSkip( nHandle1 )        //  0
+
+         //...............free filter1.  filter2 freed in the join operation
+         ? m6_FreeFilter( nHandle1 )      // .T.
+
+         /*
+         *..InitFilters() -- Initialize example filters
+         */
+         Function InitFilters()
+
+            //............................................create RYO filter1
+            nHandle1 := m6_NewFilter()
+
+            //............................................create RYO filter2
+            nHandle2 := m6_NewFilter()
+
+            //........................................add records to filter1
+            ? m6_FiltAddRec( nHandle1,  5 )  // .T.
+            ? m6_FiltAddRec( nHandle1, 10 )  // .T.
+
+            //........................................add records to filter2
+            ? m6_FiltAddRec( nHandle2,  5 )  // .T.
+            ? m6_FiltAddRec( nHandle2, 15 )  // .T.
+
+         Return ( NIL )
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1025b.html">m6_FiltInverse()</A>
+<A HREF="ng159ed.html">m6_NewFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

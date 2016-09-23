@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb3a7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng271.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>@:</B>
+
+ <B>Synopsis</B>
+
+         Invoke method in same class without using a message send
+
+ <B>Syntax</B>
+
+         @:&lt;method name&gt;[ ( [&lt;parameter list&gt;] ) ]
+
+ <B>Arguments</B>
+
+         <B>&lt;method name&gt;</B> is the name of the method to be invoked. It must
+         be a method in the same class as the currently executing method,
+         and should either be defined in the same program module or
+         according to the rules governing <B>external methods</B>.
+
+         <B>&lt;parameter list&gt;</B> is the list of parameters to be sent to the
+         method being invoked.
+
+ <B>Description</B>
+
+         Similar to the double-colon (<B>::</B>) for message sends to self,
+         the 'at-colon' allows direct invocation of methods in the same
+         class as the invoking method. Since the location of the invoked
+         method is known in such a case, a message lookup is not necessary.
+         A direct invocation of this kind is faster than the equivalent
+         message send, but this is a trade-off for loss of flexibility.
+
+ <B>Warning</B>
+
+         This feature should be used with great caution, since it prevents
+         methods invoked in this fashion from being overridden in a
+         subclass. This is sometimes desirable, however.
+
+         For those familiar with C++, <B>@:</B> allows methods to be invoked
+         in a way similar to that in which ordinary (non-virtual) C++
+         member functions are invoked. Because of dynamic or late binding,
+         methods in Clipper normally behave in a similar way to C++ virtual
+         methods.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb3a7.html">::</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

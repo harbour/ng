@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng100360.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngfbcd2.html">[^^Up^^]</A>
+<A HREF="ng101b88.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>EXTERNAL*</B>
+ Declare a list of procedure or user-defined function names to the linker
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>EXTERNAL &lt;idProcedure list&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idProcedure list&gt;</B> is the list of procedures, user-defined
+     functions, or format procedures to add to the list of routines that will
+     be linked into the current executable (.EXE) file.
+
+ <B>Description</B>
+
+     EXTERNAL is a declaration statement that specifies uncoded references to
+     the linker.  Like all other declaration statements, an EXTERNAL
+     statement must be specified before any executable statements in either
+     the program file, or a procedure or user-defined function definition.
+
+     During the compilation of CA-Clipper source code, all explicit
+     references to procedures and user-defined functions are made to the
+     linker.  In some instances, there may be no references made to procedure
+     or user-defined function names until runtime.  EXTERNAL resolves this by
+     forcing the named procedures or user-defined functions to be linked even
+     if they are not explicitly referenced in the source file.  This is
+     important in several instances:
+
+     <B>.</B>  Procedures, user-defined functions, or formats referenced with
+        macro expressions or variables
+
+     <B>.</B>  Procedures and user-defined functions used in REPORT and LABEL
+        FORMs and not referenced in the source code
+
+     <B>.</B>  User-defined functions used in index keys and not referenced
+        in the source code
+
+     <B>.</B>  ACHOICE(), DBEDIT(), or MEMOEDIT() user functions
+
+     To group common EXTERNAL declarations together, place them in a header
+     file and then include (#include) the header file into each program
+     (.prg) file that might indirectly use them.
+
+     EXTERNAL is a compatibility statement and therefore not recommended.  It
+     is superseded by the REQUEST statement that defines a list of module
+     identifiers to the linker.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples are equivalent header files consisting of
+        common EXTERNAL references for REPORT FORMs:
+
+        // Externals.ch
+        EXTERNAL HARDCR
+        EXTERNAL TONE
+        EXTERNAL MEMOTRAN
+        EXTERNAL STRTRAN
+
+        // Externals.ch
+        EXTERNAL HARDCR, TONE, MEMOTRAN, STRTRAN
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng128d78.html">#include</A>
+<A HREF="ng10da82.html">REQUEST</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

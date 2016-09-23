@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng719e4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng72cbb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MHIDE()</B>
+ Hide the mouse pointer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MHIDE() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     MHIDE() always returns NIL.
+
+ <B>Description</B>
+
+     MHIDE() hides the mouse pointer.  This function should be used together
+     with MSHOW() when updating the screen.  It is important to hide the
+     mouse pointer before changing the screen display and then show it again
+     after the change.
+
+     <B>Note:</B>  The MSETCURSOR() function should be used in place of MSHOW()
+     and MHIDE().  It is kept here for compatibility.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses the mouse pointer:
+
+        MHIDE()
+        @ 10, 20 say "Hi there, folks!!!"
+        MSHOW()
+
+     <B>.</B>  You can automate calls to MHIDE()/MSHOW() by modifying parts
+        of your header files (*.ch).  For example:
+
+        #command @ &lt;row&gt;, &lt;col&gt; SAY &lt;xpr&gt;;[PICTURE &lt;pic&gt;];
+           [COLOR &lt;color&gt;];
+           =&gt; DEVPOS(&lt;row&gt;, &lt;col&gt;);
+           DEVOUTPict(&lt;xpr&gt;, &lt;pic&gt; [, &lt;color&gt;])
+           // Can be changed to
+        #command @ &lt;row&gt;, &lt;col&gt; SAY &lt;xpr&gt;;
+           [PICTURE &lt;pic&gt;];
+
+           [COLOR &lt;color&gt;];
+
+           =&gt; MHIDE();
+           DEVPOS(&lt;row&gt;, &lt;col&gt;);
+           DEVOUTPict(&lt;xpr&gt;, &lt;pic&gt; [, &lt;color&gt;]);
+           MSHOW()
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng77bfc.html">MSHOW()</A>
+<A HREF="ng76d8f.html">MSETCLIP()</A>
+<A HREF="ng77742.html">MSETCURSOR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

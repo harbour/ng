@@ -1,0 +1,114 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngfd9e7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngfbcd2.html">[^^Up^^]</A>
+<A HREF="ngfef37.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DO*</B>
+ Call a procedure
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DO &lt;idProcedure&gt; [WITH &lt;argument list&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idProcedure&gt;</B> is the name of the procedure or user-defined function
+     to be executed.
+
+     <B>WITH &lt;argument list&gt;</B> specifies up to 128 arguments, separated by
+     commas, to pass to &lt;idProcedure&gt;.  Each argument may be a single
+     variable, field, array, array element, expression, or object.  Arguments
+     can be skipped or left off the end of the list.
+
+ <B>Description</B>
+
+     The DO statement calls a procedure or user-defined function, optionally
+     passing arguments to the called routine.  It performs the same action as
+     a user-defined function or procedure specified on a line by itself with
+     the exception that variables other than field variables are passed by
+     reference as the default.  In order to pass a field variable as an
+     argument, enclose it in parentheses, unless you declare it with the
+     FIELD statement or with an alias.
+
+     In CA-Clipper, the number of specified arguments need not match the
+     number of specified parameters in the called procedure.  If the number
+     of arguments is less than the number of parameters, the parameter
+     variables with no corresponding arguments are initialized with a NIL
+     value when the procedure is called.  If the number of arguments is
+     greater than the number of parameters, they are ignored.
+
+     Also, skipping an argument within the &lt;argument list&gt; by leaving an
+     empty spot next to the comma initializes the corresponding argument to
+     NIL.  To detect the position of the last argument passed in the
+     &lt;argument list&gt;, use PCOUNT().  To detect a skipped argument, compare
+     the receiving parameter to NIL.
+
+     In addition to calling a procedure or user-defined function, DO also has
+     an effect on compilation if you compile the current program file without
+     the /M option.  If the CA-Clipper compiler encounters a DO statement and
+     the specified procedure has not already been compiled, the compiler
+     searches the current directory for a .prg file with the same name and
+     compiles it.  If the file with the same name as the procedure is not
+     found, the called procedure is assumed to be external, and a reference
+     is added to the object (.OBJ) file.  At link time, the linker will
+     search other object files and libraries for this external reference.
+
+     In CA-Clipper, DO is a compatibility statement and therefore not
+     recommended.  Calling a procedure or function on a line by itself is the
+     preferred method.  Since this preferred calling convention normally
+     passes parameters by value, you must preface an argument with the pass-
+     by-reference operator (@) in order to pass by reference.  If you are
+     using DO to make a procedure call more readable, a user-defined command,
+     specified with the #command directive, can provide greater readability
+     without sacrificing the safety of variables passed as parameters.
+
+     For more information on passing parameters refer to the Functions and
+     Procedures section of the "Basic Concepts" chapter in the Programming
+     and Utilities Guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example executes a procedure with no parameters:
+
+        DO AcctsRpt
+        AcctsRpt()                           // Preferred method
+
+     <B>.</B>  This example executes a procedure passing two constants:
+
+        DO QtrRpt WITH "2nd", "Sales Division"
+        QtrRpt("2nd", "Sales Division")      // Preferred method
+
+     <B>.</B>  In this example, a procedure is executed with the first
+        argument passed by value and the second passed by reference:
+
+        nNumber := 12
+        DO YearRpt WITH nNumber + 12, nNumber
+        YearRpt(nNumber + 12, @nNumber)      // Preferred method
+
+     <B>.</B>  Here, a procedure is invoked with skipped arguments embedded
+        in the list of arguments:
+
+        DO DisplayWindow WITH ,,,,"My Window"
+        DisplayWindow(,,,,"My Window")       // Preferred method
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng10316b.html">FUNCTION</A>
+<A HREF="ng106eaa.html">LOCAL</A>
+<A HREF="ng108d37.html">PARAMETERS</A>
+<A HREF="ng10989f.html">PRIVATE</A>
+<A HREF="ng10a778.html">PROCEDURE</A>
+<A HREF="ng10cb5c.html">PUBLIC</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

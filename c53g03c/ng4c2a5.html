@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4bf54.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4c7bf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>skipRaw()</B>
+ Reposition cursor, regardless of filter
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE skipRaw(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     LONG numToSkip</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>numToSkip</B> is the number of rows to skip.  A positive number
+     indicates moving forward in the table, while a negative number indicates
+     backwards movement.
+
+ <B>Description</B>
+
+     skipRaw() relatively repositions the work area cursor numToSkip rows regardless of
+     filter settings.  skipRaw() is the base movement method for all relative
+     work area movements.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If an order is imposed on the work area by an index or other
+        such structure, skipRaw() should always follow that order.
+
+     <B>.</B>  In some systems, an absolute reposition using go() may be an
+        appropriate implementation of skipRaw().
+
+     <B>.</B>  skipRaw() must be able to accept a zero value for numToSkip,
+        indicating that the row at the current cursor position should be
+        committed (see flush()).
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng4f10f.html">flush()</A>
+<A HREF="ng4a086.html">go()</A>
+<A HREF="ng4ba0d.html">skip()</A>
+<A HREF="ng4bf54.html">skipFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

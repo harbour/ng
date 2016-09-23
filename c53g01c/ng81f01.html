@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8153c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng824b9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDDESTROY()</B>
+ Remove a specified order from an order bag
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDDESTROY(&lt;cOrderName&gt; [, &lt;cOrderBagName&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrderName&gt;</B> is the name of the order to be removed from the current
+     or specified work area.
+
+     <B>&lt;cOrderBagName&gt;</B> is the name of a disk file containing one or more
+     orders.  You may specify &lt;cOrderBagName&gt; as the file name with or
+     without the path name or appropriate extension.  If you do not include
+     the extension as part of &lt;cOrderBagName&gt;, CA-Clipper uses the default
+     extension of the current RDD.
+
+ <B>Returns</B>
+
+     ORDDESTROY() always returns NIL.
+
+ <B>Description</B>
+
+     ORDDESTROY() is an order management function that removes a specified
+     order from multiple-order bags.
+
+     The active RDD determines the order capacity of an order bag.  The
+     default DBFNTX and the DBFNDX drivers only support single-order bags,
+     while other RDDs may support multiple-order bags (e.g., the DBFCDX and
+     DBPX drivers).
+
+     <B>Note:</B>  RDD suppliers may define specific behaviors for this command.
+
+     <B>Warning!</B>  ORDDESTROY() is not supported for DBFNDX and DBFNTX.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates ORDDESTROY() with the FoxPro driver,
+        DBFCDX:
+
+        USE Customer VIA "DBFCDX" NEW
+        SET INDEX TO Customer, CustTemp
+        ORDDESTROY("CuAcct", "Customer")
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc9790.html">DELETE TAG</A>
+<A HREF="ng8059c.html">ORDCREATE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

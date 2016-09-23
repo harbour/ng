@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng35c40.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng36a8b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FIELDPOS()</B>
+ Return the position of a field in a work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FIELDPOS(&lt;cFieldName&gt;) --&gt; nFieldPos</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFieldName&gt;</B> is the name of a field in the current or specified work
+     area.
+
+ <B>Returns</B>
+
+     FIELDPOS() returns the position of the specified field within the list
+     of fields associated with the current or specified work area.  If the
+     current work area has no field with the specified name, FIELDPOS()
+     returns zero.
+
+ <B>Description</B>
+
+     FIELDPOS() is a database function that is the inverse of the FIELDNAME()
+     function.  FIELDPOS() is most often used with the FIELDPUT() and
+     FIELDGET() functions.
+
+     FIELDPOS() return the names of fields in any unselected work area by
+     referring to the function using an aliased expression.  See the example
+     below.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates a typical specification of the
+        FIELDPOS() function:
+
+        USE Customer NEW
+        ? FIELDPOS("Name")                     // Result: 1
+        ? FIELDGET(FIELDPOS("Name"))           // Result: Kate
+
+     <B>.</B>  This example uses FIELDPOS() to return the position of a
+        specified field in a unselected work area:
+
+        USE Customer NEW
+        USE Invoices NEW
+        ? Customer-&gt;(FIELDPOS("Name"))         // Result: 1
+        ? Customer-&gt;(FIELDGET(FIELDPOS("Name")))
+                                               // Result: Kate
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng356f4.html">FIELDGET()</A>
+<A HREF="ng36a8b.html">FIELDPUT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

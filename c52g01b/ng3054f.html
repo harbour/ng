@@ -1,0 +1,114 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2fa9c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng3133f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ERRORBLOCK()</B>
+ Post a code block to execute when a runtime error occurs
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ERRORBLOCK([&lt;bErrorHandler&gt;]) --&gt; bCurrentErrorHandler</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;bErrorHandler&gt;</B> is the code block to execute whenever a runtime
+     error occurs.  When evaluated, the &lt;bErrorHandler&gt; is passed an error
+     object as an argument by the system.
+
+ <B>Returns</B>
+
+     ERRORBLOCK() returns the current error handling code block.  If no error
+     handling block has been posted since the program was invoked,
+     ERRORBLOCK() returns the default error handling block.
+
+ <B>Description</B>
+
+     ERRORBLOCK() is an error function that defines an error handler to
+     execute whenever a runtime error occurs.  Specify the error handler as a
+     code block with the following form:
+
+     { |&lt;objError&gt;| &lt;expression list&gt;,... }
+
+     Where &lt;objError&gt; is an error object containing information about the
+     error.  Within the code block, messages can be sent to the error object
+     to obtain information about the error.  Returning true (.T.) from the
+     error handling block retries the failed operation and false (.F.)
+     resumes processing.
+
+     The error handling code block can be specified either as a list of
+     expressions or as a call to a user-defined function.  A call to a
+     user-defined function is more useful since you can use CA-Clipper
+     control statements instead of expressions.  This is particularly the
+     case if there is a BEGIN SEQUENCE pending and you want to BREAK to the
+     nearest RECOVER statement.
+
+     As this implies, error handling blocks can be used in combination with
+     BEGIN SEQUENCE...END control structures.  Within an error handling
+     block, you handle device, low-level, and common errors that have a
+     general recovery mechanism.  If the operation needs specific error
+     handling, define a BEGIN SEQUENCE then BREAK to the RECOVER statement,
+     returning the error object for local processing.  See the example below.
+
+     If no &lt;bErrorHandler&gt; has been specified using ERRORBLOCK() and a
+     runtime error occurs, the default error handling block is evaluated.
+     This error handler displays a descriptive message to the screen, sets
+     the ERRORLEVEL() to 1, then QUITs the program.
+
+     Since ERRORBLOCK() returns the current error handling block, it is
+     possible to specify an error handling block for an operation saving the
+     current error handling block, then restore it after the operation has
+     completed.  Also, error handlers specified as code blocks, can be passed
+     to procedures and user-defined functions, and RETURNed as values.
+
+     For more information on the structure and operations of error objects,
+     refer to the Error class entry in this chapter and the Error Handling
+     Strategies chapter in the Programming and Utilities guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment posts, then calls an error handling block
+        when there is an error within a BEGIN SEQUENCE construct:
+
+        LOCAL bErrorHandler, bLastHandler, objErr
+        bErrorHandler := { |objError| ;
+              MyErrorHandler(objError) }
+        //
+        // Save current handler
+        bLastHandler := ERRORBLOCK(bErrorHandler)
+        //
+        BEGIN SEQUENCE
+           .
+           . &lt;operation statements&gt;
+           .
+        // Receive error object from BREAK
+        RECOVER USING objErrorInfo
+           .
+           . &lt;recovery statements&gt;
+           .
+        END
+        ERRORBLOCK(bLastHandler)   // Restore handler
+        RETURN
+
+        FUNCTION MyErrorHandler( objError )
+           //
+           BREAK objError          // Return error object to RECOVER
+           RETURN NIL
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb558d.html">BEGIN SEQUENCE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,77 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4df99.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng4ecff.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MEMOTRAN()</B>
+ Replace carriage return/linefeeds in character strings
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MEMOTRAN(&lt;cString&gt;,</B>
+     <B>   [&lt;cReplaceHardCR&gt;],</B>
+     <B>   [&lt;cReplaceSoftCR&gt;]) --&gt; cNewString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string or memo field to search.
+
+     <B>&lt;cReplaceHardCR&gt;</B> is the character to replace a hard carriage
+     return/linefeed pair with.  If not specified, the default value is a
+     semicolon (;).
+
+     <B>&lt;cReplaceSoftCR&gt;</B> is the character to replace a soft carriage
+     return/linefeed pair with.  If not specified, the default value is a
+     space.
+
+ <B>Returns</B>
+
+     MEMOTRAN() returns a copy of &lt;cString&gt; with the specified carriage
+     return/linefeed pairs replaced.
+
+ <B>Description</B>
+
+     MEMOTRAN() is a memo function that converts a memo field or long
+     character string containing hard and soft carriage return/linefeed
+     characters into a form that can be displayed.  These two character
+     combinations are end of line formatting indicators placed in the string
+     by MEMOEDIT().  Soft carriage returns (CHR(141)) are inserted when a
+     line longer than the width of the MEMOEDIT() window wraps.  Hard
+     carriage returns (CHR(13)) are inserted when the user explicitly presses
+     Return.
+
+     MEMOTRAN() is particularly useful when displaying a memo field in a
+     REPORT FORM which does not wrap when a soft carriage return is
+     encountered.  MEMOTRAN() resolves this by converting soft carriage
+     returns to spaces.  Note, however, that you must declare MEMOTRAN() as
+     external using the REQUEST statement if it is used in a REPORT FORM and
+     not specified anywhere else in the current program.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example strips all end of line characters from a memo
+        field:
+
+        REPLACE Notes WITH MEMOTRAN(Notes)
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngba014.html">EXTERNAL*</A>
+<A HREF="ng3dee9.html">HARDCR()</A>
+<A HREF="ng9588b.html">REPORT FORM</A>
+<A HREF="ngc6799.html">REQUEST</A>
+<A HREF="ng687c7.html">STRTRAN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

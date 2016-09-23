@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng84ef3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng86199.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDKEYGOTO()</B>
+ Move to a record specified by its logical record number in the controlling
+ order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDKEYGOTO(&lt;nKeyNo&gt;) --&gt; lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nKeyNo&gt;</B> is the logical record number.  If the value specified does
+     not satisfy the scope or for condition for the order, the record pointer
+     is positioned at the end of file.
+
+ <B>Returns</B>
+
+     ORDKEYGOTO() returns true (.T.) if successful; otherwise, it returns
+     false (.F.).
+
+ <B>Description</B>
+
+     ORDKEYGOTO() is the complement to ORDKEYNO().  ORDKEYNO() returns the
+     logical record number (i.e., its position in the controlling order) of
+     the current record, and ORDKEYGOTO() moves the record pointer to the
+     specified logical record.
+
+     <B>Tip:  </B>This function can be useful when displaying scroll bars.  If
+     the user clicks on a certain position on the scroll bar, you can move to
+     the corresponding record by calling ORDKEYGOTO().
+
+     By default, this function operates on the currently selected work area.
+     It will operate on an unselected work area if you specify it as part of
+     an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows the difference between physical and logical
+        record number:
+
+        USE Customer
+        SET INDEX TO First   // Make records in first name
+                             // order
+        ORDKEYGOTO(100)      // Go to the 100th logical record
+        ? RECNO()            // Returns the physical record
+                             // number
+        ? ORDKEYNO()         // Returns 100, the logical
+                             // record no
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng84567.html">ORDKEYCOUNT()</A>
+<A HREF="ng86199.html">ORDKEYNO()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

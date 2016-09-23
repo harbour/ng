@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng88aaf.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng89ad4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDSCOPE()</B>
+ Set or clear the boundaries for scoping key values in the controlling order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDSCOPE(&lt;nScope&gt;,   [&lt;expNewValue&gt;]) --&gt; uCurrentValue</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nScope&gt;</B> is a number specifying the top (TOPSCOPE) or bottom
+     (BOTTOMSCOPE) boundary.
+
+     <B>Note: </B> To use the TOPSCOPE and BOTTOMSCOPE constants, you must
+     include (#include) the Ord.ch header file in your application.
+
+     <B>&lt;expNewValue&gt;</B> is the top or bottom range of key values that will be
+     included in the controlling order's current scope.  &lt;expNewValue&gt; can be
+     an expression that matches the data type of the key expression in the
+     controlling order or a code block that returns the correct data type.
+
+     Omitting &lt;expNewValue&gt; or specifying it as NIL has the special effect of
+     resetting the specified scope to its original default.  The default top
+     range is the first logical record in the controlling order, and the
+     default bottom range is the last logical record.
+
+ <B>Returns</B>
+
+     If &lt;expNewValue&gt; is not specified, ORDSCOPE() returns and clears the
+     current setting.  If &lt;expNewValue&gt; is specified, the function sets it
+     and the previous setting is returned.
+
+ <B>Description</B>
+
+     The range of values specified using ORDSCOPE() is inclusive.  In other
+     words, the keys included in the scope will be greater than or equal to
+     the top boundary and less than or equal to the bottom boundary.
+
+     <B>Note: </B> To return current settings without changing them, call the
+     DBORDERINFO() function using the DBOI_SCOPETOP and DBOI_SCOPEBOTTOM
+     constants.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates using ORDSCOPE() to set various
+        scoping limitations on an order:
+
+        USE Friends
+        SET INDEX TO Age
+
+        // Make 25 the lowest age in range
+        ORDSCOPE(TOPSCOPE, 25)
+
+        // Make 30 the highest age in range
+        ORDSCOPE(BOTTOMSCOPE, 30)
+        LIST Age                         // Shows records with
+                                         // 25 &lt;= Age &lt;= 30
+
+        // Change highest age to 35
+        ORDSCOPE(BOTTOMSCOPE, 35)
+        LIST Age                         // Shows records with
+                                         // 25 &lt;= Age &lt;= 35
+
+        // Reset top boundary
+        ORDSCOPE(TOPSCOPE, NIL)
+        LIST Age                         // Shows records with
+                                         // Age &lt;= 35
+
+
+        // Reset bottom boundary
+        ORDSCOPE(BOTTOMSCOPE, NIL)
+        LIST Age                         // Shows all records
+
+ <B>Files</B>   Library is CLIPPER.LIB, header file is Ord.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngeffb2.html">SET SCOPE</A>
+<A HREF="ngf06d8.html">SET SCOPEBOTTOM</A>
+<A HREF="ngf0b55.html">SET SCOPETOP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

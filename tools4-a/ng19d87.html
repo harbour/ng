@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng195bb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng1a90e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPWGRCE()</B>
+ Sets or queries the number of grace logins
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPWGRCE(&lt;cUser&gt;,[&lt;nNumber&gt;],[&lt;lMode&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;) --&gt; nNumber</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cUser&gt; </B> Designates the name of the user whose number of grace
+     logins is set or determined.
+
+     <B>&lt;nNumber&gt; </B> Designates the new number of grace logins for &lt;cUser&gt;.
+     The number of remaining grace logins or the maximum number of grace
+     logins is set depending on the parameter &lt;lMode&gt;.
+
+     <B>&lt;lMode&gt; </B> Designates if the number of remaining grace logins (.F.) or
+     the maximum number of grace logins (.T.) is set.  The default value is
+     .F..
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server to which &lt;cUser&gt;
+     has access.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPWGRCE() returns the currently valid number of grace logins for
+     &lt;cUser&gt;.  Dependent on the parameter &lt;lMode&gt;, the return value contains
+     the number of remaining grace logins (&lt;lMode&gt;=.F.) or the maximum number
+     of grace logins (&lt;lMode&gt;=.T.).  If a value has been passed for &lt;nNumber&gt;
+     and the return value does not match &lt;nNumber&gt;, the requesting user did
+     not have the rights for the modification.
+
+ <B>Description</B>
+
+     NOVELL NET PASSWORD GRACE LOGINS
+     NNETPWGRCE() indicates the number times a user can log in with an
+     expired password.  With each login under an expired password, Netware
+     reduces the number of remaining logins by 1.  However, the maximum
+     number of grace logins remains unchanged.
+
+     NNETPWGRCE() allows you to set or determine the number of remaining
+     grace logins or the maximum number of grace logins for &lt;cUser&gt;. If the
+     parameter &lt;lMode&gt; is not passed or is passed with .F.,  NNETPWGRCE()
+     returns the number of remaining grace logins.  If the &lt;lMode&gt; paramter
+     is passed with .T., the maximum number of grace logins can be set or
+     determined.  To query the number of grace logins, do not pass a value
+     for &lt;nNumber&gt;.  If &lt;nNumber&gt; contains a numeric value, NNETPWGRCE()
+     tries to set this value as new number of grace logins.  Supervisor
+     rights on the related file server are required to modify the number of
+     grace logins.  With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the number of
+     grace logins for users on any attached file server can be changed.  The
+     connection ID of a file server is returned by NNETATTACH() or
+     NNETLOGIN().
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the number of remaining grace logins for user MIKE:
+
+        ? NNETPWGRCE('MIKE')              // For example 4
+
+     <B>.</B>  Determine the maximum number of grace logins for user MIKE:
+
+        ? NNETPWGRCE('MIKE',,.T.)         // For example 6
+
+     <B>.</B>  Set the new maximum number of grace logins for user MIKE:
+
+        NNETPWLEN('MIKE',8,.T.)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng18e37.html">NNETPEXPD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

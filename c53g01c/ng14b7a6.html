@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng14b698.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng148df2.html">[^^Up^^]</A>
+<A HREF="ng14bdbc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>style                                         (Assignable)</B>
+
+        Contains a character string that indicates the delimiter characters
+        that are used by the push button's display() method.  The string must
+        contain either zero, two or eight characters.  The default is two
+        characters.  The first is the left delimiter.  Its default value is
+        the less than (&lt;) character.  The second character is the right
+        delimiter.  Its default value is the greater than (&gt;) character.
+
+        When the string is empty the button has no delimiters.
+
+        When the string length is two, the button has left and right
+        delimiters and occupies one row on the screen.  The first character
+        is the left delimiter.  The second character is the right delimiter.
+
+        When the string length is eight, the button is contained within a box
+        that occupies three rows on the screen.  A PushButton object may only
+        be either one or three lines in height.
+
+        <B>Standard Box Types</B>
+        ---------------------------------------------------------------------
+        <B>Constant            Description</B>
+        ---------------------------------------------------------------------
+        B_SINGLE            Single-line box
+        B_DOUBLE            Double-line box
+        B_SINGLE_DOUBLE     Single-line top/bottom, double-line sides
+        B_DOUBLE_SINGLE     Double-line top/bottom, single-line sides
+        ---------------------------------------------------------------------
+
+        Box.ch contains manifest constants for the PushButton:style value.
+
+        The default style for the PushButton class is "&lt;&gt;".
+
+        <B>Note:</B>  The style instance variable is ignored in graphic mode.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

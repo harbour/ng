@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2a296.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng272ab.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSEARCH()</B>
+ Determines the index of a search drive in the path variable
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSEARCH([&lt;cDrive&gt;]) --&gt; nSearchDrive</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cDrive&gt;</B>  Designates the drive (A to Z) for which the index in the
+     path variable is determined.  Without this parameter, the function uses
+     the default drive.
+
+ <B>Returns</B>
+
+     NNETSEARCH() returns a numeric value that indicates the position of
+     &lt;cDrive&gt; in the form "&lt;cDrive&gt;:.", in the path variable.  The return
+     value is between 0 and 16.  If &lt;cDrive&gt; is not a search drive, the
+     function returns 0.
+
+ <B>Description</B>
+
+     NOVELL NET SEARCH
+     NNETSEARCH() determines if the specified drive is a search drive and
+     returns the drive's position in the path environment variable.
+     NNETSEARCH() assumes that the path variable contains search drives in
+     the form "X:.", where "X" can be any drive designator from "A" to "Z".
+     If &lt;cDrive&gt; is not a search drive, NNETSEARCH() returns 0.
+
+ <B>Example</B>
+
+     Determine the search drive position for drive Z:
+
+     ? NNETSEARCH('Z')                     // Returns: 13
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng281fb.html">NNETMAP()</A>
+<A HREF="ng29235.html">NNETMAPINF()</A>
+<A HREF="ng29ba9.html">NNETMAPMOD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

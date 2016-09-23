@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1ca28.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETUSERID()</B>
+ Queries the established network user IDs
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETUSERID([&lt;cUser&gt;]) --&gt; cUserID</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cUser&gt; </B> Designates the name of an object of the type user (login
+     name).  The default value designates the logged-in user.
+
+ <B>Returns</B>
+
+     NNETUSERID() returns the ID of the designated object of the type user.
+
+ <B>Description</B>
+
+     NOVELL NET USER ID
+     With NNETUSERID(), the ID of an object of the type user can be
+     determined if the user is not logged in on any station.  The function is
+     always relative to the default file server.
+
+     The returned character string corresponds to a hexadecimal (eight place)
+     number that only occurs once within a network.
+
+     If the optional &lt;cUser&gt; parameter is not specified, the function returns
+     the ID for the name where one is currently logged in.  This corresponds
+     to a NNETUSERID(NNETWHOAMI) call.
+
+ <B>Note</B>
+
+     <B>.</B>  An object ID is automatically assigned by Novell software at
+        its creation.
+
+ <B>Example</B>
+
+     Deterine the ID of a login name:
+
+     ? NNETUSERID("JIM")      // e.g. "0A002300"
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng23dee.html">NNETSTANUM()</A>
+<A HREF="ng239bb.html">NNETSTAID()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

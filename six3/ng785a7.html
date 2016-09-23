@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng780ea.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng75ccf.html">[^^Up^^]</A>
+<A HREF="ng789a4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>CDXINFO.EXE:</B>
+
+  The CDXINFO utility will display the following information about a .CDX or
+  .IDX index file:
+
+    <B>.</B>  File Name
+    <B>.</B>  File Type
+    <B>.</B>  Tag Count
+
+
+  CDXINFO will also display the following information about each tag in a
+  .CDX index file, or for a single .IDX index file:
+
+    <B>.</B>  Tag Name
+    <B>.</B>  Expression
+    <B>.</B>  Conditional
+    <B>.</B>  Unique Status
+    <B>.</B>  RYO Status
+
+
+  The command-line syntax for using CDXINFO.EXE is as follows:
+
+    CDXINFO &lt;FileName&gt;[.CDX] [/p[PRGname]]
+
+    Where:  FileName = Name of the CDX/IDX file for which info is desired.
+
+                  /p = Creates a .PRG file containing the source to create
+                       the specified index file.  By default this file is
+                       called MAKECDX.PRG.
+
+  Examples:
+
+    // Displays information about tags in TEST.CDX
+    <B>CDXINFO test</B>
+
+    // Same as above, but also creates MAKECDX.PRG
+    <B>CDXINFO test /p</B>
+
+    // Same as above, but also creates BOGUS.PRG instead of MAKECDX.PRG
+    <B>CDXINFO test /pBOGUS</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7a23f.html">NSXINFO.EXE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

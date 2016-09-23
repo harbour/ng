@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Running and debugging protected mode programs</B>
+------------------------------------------------------------------------------
+
+
+ <B>Overview</B>
+
+ When Blinker creates a DOS extended program the format of the map file
+ changes to reflect the different program structure. The segments are
+ numbered sequentially starting at segment number 1, and many logical
+ segments may be merged into a single physical segment.
+
+ Running in a multitasking environment is probably the easiest method of
+ debugging, particularly as the operating systems provide some sort of task
+ isolation and crash protection so it is not necessary to reboot each time a
+ protection exception occurs.
+
+ When a protection exception or other protected mode error occurs, by default
+ all the registers are dumped to the screen, along with the .EXE segment
+ numbers associated with the segment registers. These segment numbers are the
+ ones displayed in the MAP file created with the MAP S,A option, so can be
+ used along with the offset registers IP, BX etc to quickly locate the
+ location and cause of the error. For more details refer to Chapter 7 under
+ .Debugging DOS extended programs..
+
+ The DOS extender has to perform much less work in a DPMI environment than it
+ does otherwise, so you are strongly advised to thoroughly test your programs
+ in all the different environments in which it is intended to run. These
+ should certainly include DPMI, VCPI and XMS. If they are only available in
+ the same environment as DPMI, then DPMI support can be disabled by setting
+ the BLINKER environment variable as described below.
+
+ The actual mode in which the DOS extender is running can be tested using the
+ DosGetHostMode() API function.
+
+ <B>Link script commands to control runtime</B>
+
+ Run time behaviour of a Blinker DOS extended program can be controlled at
+ link time using various link script file commands. The current commands and
+ their meanings are as follows (where there are choices the first setting
+ shown is the default, and is in bold print):
+
+    BLINKER EXTMEM BLOCK          Set extended memory block size
+    BLINKER EXTMEM LIMIT nnnn     Set maximum extended memory to use
+    BLINKER HOST DPMI ON | OFF    Enable / Disable DPMI host support
+    BLINKER HOST VCPI ON | OFF    Enable / Disable VCPI host support
+    BLINKER HOST XMS ON | OFF     Enable / Disable XMS host support
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngffffffffffffffff.html">Command Reference</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,181 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd4acc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngd675b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>READ</B>
+ Activate full-screen editing mode using Get objects
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>READ [SAVE] [MENU &lt;oMenu&gt;] [MSG AT &lt;nRow&gt;, &lt;nLeft&gt;,</B>
+     <B>   &lt;nRight&gt;] [MSG COLOR &lt;cColorString&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>SAVE</B> retains the contents of the current GetList after the READ
+     terminates.  Later, you can edit the same Get objects by issuing another
+     READ.  If not specified, the current GetList is assigned an empty array
+     deleting all of the previous Get objects when the READ terminates.
+
+     <B>MENU &lt;oMenu&gt;</B> specifies an optional Topbarmenu object that, when
+     supplied, permits menu selection during data entry.
+
+     <B>MSG AT &lt;nMsgRow&gt;</B>, <B>&lt;nMsgLeft&gt;</B>,<B> &lt;nMsgRight&gt;</B> specify the row,
+     left, and right margins where the Get object messages appear on the
+     screen.  If omitted, messages will not appear.
+
+     <B>MSG COLOR &lt;cMsgColor&gt;</B> defines the color setting of the message area.
+     It consists of a single foreground/background color pair.
+
+ <B>Description</B>
+
+     READ executes a full-screen editing mode using all Get objects created
+     and added to the current GetList since the most recent CLEAR, CLEAR
+     GETS, CLEAR ALL or READ commands.  If there is a format procedure
+     active, READ executes that procedure before entering the full-screen
+     editing mode.
+
+     Within a READ, the user can edit the buffer of each Get object as well
+     as move from one Get object to another.  Before the user can enter a Get
+     object, control passes to the associated WHEN &lt;lPreCondition&gt; if one has
+     been assigned to that Get object.  If &lt;lPreCondition&gt; returns true
+     (.T.), the user is allowed to edit the buffer of the Get object.
+     Otherwise, control passes to the next Get object in the GetList.  Within
+     a GET buffer, the user can edit using the full complement of editing and
+     navigation keys.  See the tables below.
+
+     When the user presses a GET exit key, control passes to the associated
+     RANGE or VALID postcondition if one has been specified.  If either
+     condition returns true (.T.), editing of the Get object is terminated
+     and control passes to the next Get object.  Otherwise, control remains
+     within the current Get object until a valid value is entered or the user
+     presses the Esc key.
+
+     When the user successfully enters a value into a Get object, the
+     associated variable is assigned the value of the Get object's buffer.
+
+     The following tables list active keys within a READ:
+
+     <B>READ Navigation Keys</B>
+     ------------------------------------------------------------------------
+     <B>Key                           Action</B>
+     ------------------------------------------------------------------------
+     Left arrow, Ctrl+S            Character left. Does not move cursor to
+                                   previous GET.
+     Right arrow, Ctrl+D           Character right.  Does not move cursor to
+                                   next GET.
+     Ctrl+Left arrow, Ctrl+A       Word left.
+     Ctrl+Right arrow, Ctrl+F      Word right.
+     Up arrow, Shift+Tab, Ctrl+E   Previous GET.
+     Down arrow, Tab, Ctrl+X,      Return, Ctrl+M Next GET.
+     Home                          First character of GET.
+     End                           Last character of GET.
+     Ctrl+Home                     Beginning of first GET.
+     ------------------------------------------------------------------------
+
+     <B>READ Editing Keys</B>
+     ------------------------------------------------------------------------
+     <B>Key                 Action</B>
+     ------------------------------------------------------------------------
+     Del, Ctrl+G         Delete character at cursor position
+     Backspace, Ctrl+H   Destructive backspace
+     Ctrl+T              Delete word right
+     Ctrl+Y              Delete from cursor position to end of GET
+     Ctrl+U              Restore current GET to original value
+     ------------------------------------------------------------------------
+
+     <B>READ Toggle Keys</B>
+     ------------------------------------------------------------------------
+     <B>Key            Action</B>
+     ------------------------------------------------------------------------
+     Ins, Ctrl+V    Toggle insert mode
+     ------------------------------------------------------------------------
+
+     <B>READ Exit Keys</B>
+     ------------------------------------------------------------------------
+     <B>Key                           Action</B>
+     ------------------------------------------------------------------------
+     Ctrl+W, Ctrl+C, PgUp, PgDn    Terminate READ saving current GET
+     Return, Ctrl+M                Terminate READ from last GET
+     Esc                           Terminate READ without saving current GET
+     Up arrow                      Terminate READ from first GET if
+                                   READEXIT()=.T.
+     Down arrow                    Terminate READ from last GET if
+                                   READEXIT()=.T.
+     ------------------------------------------------------------------------
+
+ <B>Notes</B>
+
+     <B>.  Nested READs:</B> To perform a nested READ within a SET KEY,
+        VALID, or WHEN procedure or user-defined function, declare or create
+        a new GetList, perform a series of @...GET statements, and then READ.
+        When the procedure terminates, the new GetList is released and the
+        previous GetList becomes visible again.  See the example below.
+
+     <B>.  Quick keys:</B> Pressing Home or End in quick succession goes to
+        the first or last nonblank character in a Get object's buffer.
+
+     <B>.  Terminating a READ:</B> A READ is terminated by executing a BREAK,
+        CLEAR, CLEAR GETS, or CLEAR ALL from within a SET KEY procedure or a
+        user-defined function initiated by VALID.
+
+     <B>.  UPDATED():</B> If any Get object buffer was changed during the
+        current READ, UPDATED() is set to true (.T.).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example defines several GETs then READs them:
+
+        CLEAR
+        cVar1 := cVar2 := cVar3 := SPACE(10)
+        @ 10, 10 SAY "Variable one:" GET cVar1 VALID ;
+              !EMPTY(cVar1)
+        @ 11, 10 SAY "Variable two:" GET cVar2 ;
+                 WHEN RTRIM(cVar1) !=  "One"
+        @ 12, 10 SAY "Variable three:" GET cVar3 VALID ;
+                 !EMPTY(cVar3)
+        READ
+
+     <B>.</B>  This example performs a nested READ within a SET KEY, WHEN, or
+        VALID procedure or user-defined function:
+
+        LOCAL cName := SPACE(10)
+        @ 10, 10 GET cName VALID SubForm( cName )
+        READ
+        RETURN
+
+        FUNCTION SubForm( cLookup )
+           LOCAL GetList := {}         // Create new GetList
+           USE Sales INDEX Salesman NEW
+           SEEK cLookup
+           IF FOUND()
+              @ 15, 10 GET Salesman    // Add Get objects to
+              @ 16, 10 GET Amount      // new GetList
+              READ                     // READ from new GetList
+           ENDIF
+           CLOSE Sales
+           RETURN .T.                  // Release new GetList
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ngc16d9.html">CLEAR GETS</A>
+<A HREF="ng64c89.html">LASTKEY()</A>
+<A HREF="ng9125b.html">READEXIT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

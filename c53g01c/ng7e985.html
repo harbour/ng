@@ -1,0 +1,193 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7d14d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng8059c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDCONDSET()</B>
+ Set the condition and scope for an order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDCONDSET([&lt;cForCondition&gt;],</B>
+     <B>   [&lt;bForCondition&gt;],</B>
+     <B>   [&lt;lAll&gt;],</B>
+     <B>   [&lt;bWhileCondition&gt;],</B>
+     <B>   [&lt;bEval&gt;],</B>
+     <B>   [&lt;nInterval&gt;],</B>
+     <B>   [&lt;nStart&gt;],</B>
+     <B>   [&lt;nNext&gt;],</B>
+     <B>   [&lt;nRecord&gt;],</B>
+     <B>   [&lt;lRest&gt;],</B>
+     <B>   [&lt;lDescend&gt;],</B>
+     <B>   [&lt;lAdditive&gt;],</B>
+     <B>   [&lt;lCurrent&gt;],</B>
+     <B>   [&lt;lCustom&gt;],</B>
+     <B>   [&lt;lNoOptimize&gt;]) --&gt; lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cForCondition&gt;</B> is a string that specifies the FOR condition for the
+     order.  This string is returned by DBORDERINFO(DBOI_CONDITION,
+     [&lt;cIndexFile&gt;], &lt;cOrder&gt;).  If you do not need this information, you can
+     specify a null string ("").
+
+     <B>&lt;bForCondition&gt;</B> is a code block that defines a FOR condition that
+     each record within the scope must meet in order to be processed.  If a
+     record does not meet the specified condition, it is ignored and the next
+     record is processed.  Duplicate key values are not added to the index
+     file when a FOR condition is used.  The default is NIL.
+
+     This condition (not &lt;cForCondition&gt;) is the one that is actually used to
+     create the order.  Unlike the WHILE condition and other scoping
+     information, the FOR condition is stored as part of the index file and
+     is used when updating or rebuilding the order with DBREINDEX().  Any
+     limitations on the FOR condition are determined by the RDD (see the
+     "Replaceable Database Driver Architecture" chapter in the Drivers Guide
+     for information about RDD limitations).
+
+     <B>&lt;lAll&gt;</B> is specified as true (.T.) to define a scope of all records.
+     Use false (.F.) if you want to indicate other record scoping conditions
+     (i.e., &lt;nNext&gt;, &lt;nRecord&gt;, or &lt;lRest&gt;).  The default is false (.F.).
+
+     <B>&lt;bWhileCondition&gt;</B> is a code block that defines a condition that each
+     record must meet in order to be processed.  If no scope is specified,
+     using a &lt;bWhileCondition&gt; changes the default scope to &lt;lRest&gt;.  As soon
+     as a record is encountered that causes the condition to fail, the
+     operation terminates.
+
+     The WHILE condition is used only to create the order.  It is not stored
+     in the index file or used for updating or reindexing purposes.  The
+     default is NIL.
+
+     <B>&lt;bEval&gt;</B> is a code block that is evaluated at intervals specified by
+     &lt;nInterval&gt;.  This is useful in producing a status bar or odometer that
+     monitors the ordering progress.  The return value of &lt;bEval&gt; must be a
+     logical value.  If &lt;bEval&gt; returns false (.F.), indexing halts.  The
+     default is NIL.
+
+     <B>&lt;nInterval&gt;</B> is a numeric expression that determines the number of
+     times &lt;bEval&gt; is evaluated.  This argument offers a performance
+     enhancement by evaluating the condition at intervals instead of
+     evaluating every record processed.  To step through every record, you
+     can specify a value of 0.  The default is 0.
+
+     <B>&lt;nStart&gt;</B> is the starting record number.  To start at the beginning
+     of the file, specify a value of 0.  The default is 0.
+
+     You define the scope using one of these three, mutually exclusive
+     arguments (use 0 or false (.F.) for the others).  The default is all
+     records.  Record scoping information is used only to create the order.
+     It is not stored in the index file or used for index updates and
+     reindexing purposes.
+
+     <B>&lt;nNext&gt;</B> is the number of records to process, starting at &lt;nStart&gt;.
+     Specify 0 to ignore this argument.
+
+     <B>&lt;nRecord&gt;</B> is a single record number to process.  Specify 0 to ignore
+     this argument.
+
+     <B>&lt;lRest&gt;</B> is specified as true (.T.) to process only records from
+     &lt;nStart&gt; to the end of the file.  False (.F.) processes all records.
+
+     <B>&lt;lDescend&gt;</B> specifies whether the keyed pairs should be sorted in
+     decreasing or increasing order of value.  True`.T.) results in
+     descending order and false (.F.) results in ascending order.  The
+     default is false (.F.).
+
+     <B>&lt;lAdditive&gt;</B> specifies whether open orders should remain open while
+     the new order is being created.  True (.T.) specifies that they should
+     remain open.  False (.F.) is the default and it specifies that all open
+     orders should be closed.
+
+     <B>&lt;lCurrent&gt;</B> specifies whether only records in the controlling order--
+     and within the current range as specified by ORDSETSCOPE()--will be
+     included in this order.  True (.T.) specifies that the controlling order
+     and range should be used to limit the scope of the newly created order.
+     False (.F.) is the default and it specifies that all records in the
+     database file are included in the order.
+
+     <B>&lt;lCustom&gt;</B> specifies whether the new order will be a custom built
+     order (for RDDs that use this feature).  True (.T.) specifies that a
+     custom built order will be created.  A custom built order is initially
+     empty, giving you complete control over order maintenance.  The system
+     does not automatically add and delete keys from a custom built order.
+     Instead, you explicitly add and delete keys using ORDKEYADD() and
+     ORDKEYDEL().  False (.F.) specifies a standard, system-maintained order.
+     The default is false (.F.).
+
+     <B>&lt;lNoOptimize&gt;</B> specifies whether the FOR condition will be optimized
+     (for RDDs that support this feature).  True (.T.) optimizes the FOR
+     condition, and false (.F.) does not.  The default is false (.F.).
+
+ <B>Returns</B>
+
+     ORDCONDSET() returns true (.T.) if successful; otherwise, it returns
+     false (.F.).
+
+ <B>Description</B>
+
+     By default ORDCONDSET() operates on the currently selected work area.
+     This function can be made to operate on an unselected work area by
+     specifying it within an aliased expression.
+
+     Unless you specify otherwise with ORDCONDSET(), new orders that you
+     create will use default scoping rules, processing all records in the
+     work area.  ORDCONDSET() allows you to specify conditions and scoping
+     rules that records must meet in order to be included in the next order
+     created.  Creating a new order automatically resets the work area to use
+     the default scoping rules.  Thus, if scoping is required, you must reset
+     ORDCONDSET() each time you create a new order.
+
+     This function is essential if you want to create conditional orders
+     using DBCREATEINDEX() because this function does not support arguments
+     to do this.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example sets the condition for the creation of
+        orders:
+
+        LOCAL cFor AS STRING
+        LOCAL lAll, lRest, lDescend AS LOGIC
+        LOCAL bForCondition, bWhileCondition, ;
+           bEval AS USUAL
+        LOCAL nStep, nStart, nNext, nRecord AS SHORTINT
+        // For condition string format
+        cFor := 'UPPER(Name) = "MELISSA"'
+        // Actual for condition
+        bForCondition := {|| UPPER(Name) = "MELISSA"}
+        lAll := .T.
+        bWhileCondition := {|| .T.}         // While all
+        bEval := {|| Name + City}           // Indexing code
+                                            // block
+        nStep := 0                          // Step through all
+        nStart := 0                         // From top
+        nNext := 0                          // All
+        nRecord := 0                        // All records
+
+        lRest := .F.                        // All
+        lDescend :=  .F.                    // Ascending
+        ORDCONDSET(cFor, bForCondition, lAll, ;
+           bWhileCondition, bEval, nStep, nStart, ;
+           nNext, nRecord, lRest, lDescend)
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2a6f6.html">DBORDERINFO()</A>
+<A HREF="ngcc94d.html">INDEX</A>
+<A HREF="ng83941.html">ORDKEYADD()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

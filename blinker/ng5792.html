@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng509e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng5da6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER ENVIRONMENT CLIPPER   Change name of CA-Clipper environment variable</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Change the name of the CA-Clipper environment variable</B></U>
+
+ <U>Syntax   : <B>BLINKER ENVIRONMENT CLIPPER &lt;cname&gt;</B></U>
+
+ <U>Example  : <B># Change the name of CLIPPER variable to Newclip</B></U>
+            <B>BLINKER ENVIRONMENT CLIPPER Newclip</B>
+
+ This command allows the developer to change the name of the CLIPPER
+ environment variable from the default setting of 'CLIPPER' to any string of
+ up to 16 characters, and thus avoid the remote site settings for the CLIPPER
+ environment variable.
+
+ Used in conjunction with the BLINKER ENVIRONMENT OVERRIDE command, this
+ allows the settings burnt in with the BLINKER EXECUTABLE CLIPPER command to
+ be overwritten at runtime by this newly created variable.
+
+ The choice of a unique name avoids any conflict with previous settings for
+ the CLIPPER environment variable.
+
+ For example, if a script file contains the following commands:
+
+    <B>BLINKER EXECUTABLE CLIPPER F31;X100</B>
+    <B>BLINKER ENVIRONMENT OVERRIDE</B>
+    <B>BLINKER ENVIRONMENT CLIPPER ACCSYS</B>
+
+ Even though the following statement may already have been set from DOS:
+
+    <B>SET CLIPPER=F21;</B>
+
+ this CLIPPER environment variable will be ignored by the application, and
+ the BLINKER EXECUTABLE CLIPPER setting can be overridden by the following
+ DOS command:
+
+    <B>SET ACCSYS=F99;</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5da6.html">BLINKER ENVIRONMENT NAME</A>
+<A HREF="ng6241.html">BLINKER ENVIRONMENT OVERRIDE</A>
+<A HREF="ng6b2f.html">BLINKER EXECUTABLE CLIPPER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

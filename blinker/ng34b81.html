@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng34698.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng351d8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosVerifyAccess()             Get read/write/code/data flags for selector</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get the read/write/code/data flags for a selector</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosVerifyAccess(SEL selector,</B></U>
+            <B>PUSHORT flags);</B>
+
+ <U>selector   <B>Selector (or any unsigned value).</B></U>
+
+ <U>flags      <B>Pointer to an integer to receive the attribute flags.</B></U>
+
+ <U>Return   : <B>The segment flags.</B></U>
+
+ DosVerifyAccess() is used to determine if the specified selector value is a
+ valid selector, and if so its type (code or data) and access rights (read or
+ write).
+
+ Example:
+
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void DumpFlags(SEL sel)</B>
+    <B>   {</B>
+    <B>   USHORT   flags;</B>
+    <B>   if (DosVerifyAccess(sel, &amp;flags) == 0)</B>
+    <B>      if (flags &amp; SEL_VALID) /* If a valid selector */</B>
+    <B>         {</B>
+    <B>         if (flags &amp; SEL_WRITABLE) printf("WRITABLE ");</B>
+    <B>         if (flags &amp; SEL_READABLE) printf("READABLE ");</B>
+    <B>         printf("%s\n", (flags &amp; SEL_CODE) ? "CODE" : "DATA");</B>
+    <B>         }</B>
+    <B>      else</B>
+    <B>         printf("NOT A SELECTOR\n");</B>
+    <B>   }</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>SEL         selector;</B>
+    <B>if (DosLockSeg(SELECTOROF(main)) == 0)</B>
+    <B>   if (DosCreateDSAlias(SELECTOROF(main),&amp;selector) == 0)</B>
+    <B>      {</B>
+    <B>      printf ("Code selector for main() is %04X\n",</B>
+    <B>         SELECTOROF (main));</B>
+    <B>      printf ("Data selector is  %04X\n", selector);</B>
+    <B>      printf ("Code selector flags : ");</B>
+    <B>      DumpFlags(SELECTOROF(main));</B>
+    <B>      printf ("Data selector flags : ");</B>
+    <B>      DumpFlags(selector);</B>
+    <B>      }</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng341b0.html">DosSetSegAttrib()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

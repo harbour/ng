@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2c476.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng2d028.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_IsMyROX():</B>
+
+  Syntax:   Sx_IsMyROX()
+
+  Returns:  .T. if a Read-Only lock has been set on the currently active
+            index (<U>using the Sx_ROXLock() function</U>) by you (meaning the
+            network workstation that is calling this function at the time);
+            .F. if not.
+
+  Description:  This function is used to test if the currently active index
+                has a Read-Only lock active on it that this work station
+                activated.  The only network user who can unlock the index
+                lock is the one who set it.  This function can't tell you
+                <B>who</B> locked the index, but it can tell you if it was the
+                user calling this function at the time.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    // This code snippet demonstrates a simple test that can be used to
+    // verify that you haven't left a Read-Only Lock active on an index.
+
+    IF Sx_IsROXLock()              // Is Read-Only Index Locking Active?
+      IF <B>Sx_IsMYROX()</B>              // If so, did this user lock the index?
+        Sx_ROXUnLock()             // If so, unlock the index
+      ELSE
+        Alert("Index was locked by another user!")  // Display message
+      ENDIF
+    ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng34f1d.html">Sx_ROXLock()</A>
+<A HREF="ng3572b.html">Sx_ROXUnlock()</A>
+<A HREF="ng2cb8b.html">Sx_IsMyROX()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

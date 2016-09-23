@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2b5a8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng2c41d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETDIRFRE()</B>
+ Determines the number of free directory entries in a volume
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETDIRFRE(&lt;nVolume&gt;) --&gt; nFreeDirectoryEntries</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nVolume&gt;</B>  Designates the selected volume number of the related
+     default file server.  This value can be from 0 to 31.
+
+ <B>Returns</B>
+
+     NNETDIRFRE() returns the number of directory entries still free on the
+     volume specified in &lt;nVolume&gt;.
+
+ <B>Description</B>
+
+     NOVELL NET DIRECTORY FREE
+     This function allows you to determine how many directory entries are
+     still available for each volume on the default file server.  This allows
+     you to determine if new files can be created on the related volume.  The
+     number of directory entries in the Novell network software installation
+     program can be increased if necessary.
+
+ <B>Note</B>
+
+     <B>.</B>  This function requires that the station have console
+        privileges.
+
+ <B>Example</B>
+
+     Determine if directory entries are still available for all volumes:
+
+     FOR I = 0 TO NNETVOLNUM()
+        ? NNETDIRFRE(I)         // Avail. entries, each volume
+     NEXT I
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng38d25.html">NNETVOLNUM()</A>
+<A HREF="ng3897d.html">NNETVOLNAM()</A>
+<A HREF="ng385ad.html">NNETVOLMAX()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2c6a2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2d07e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosGetBIOSSeg()               Get selector for 1kb BIOS data area.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get a selector for the 1kb BIOS data area.</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosGetBIOSSeg(PSEL biossel);</B></U>
+
+ <U>biossel    <B>Pointer to an integer to receive the protected mode selector to</B></U>
+            <B>the BIOS data area.</B>
+
+ <U>Return   : <B>Selector for the BIOS data area corresponding to real mode</B></U>
+            <B>segment 0x0040.</B>
+
+ Far pointers to the BIOS data area should be created using the selector
+ returned by this function. The selector returned by this function should
+ NEVER be freed.
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main (void)</B>
+    <B>{</B>
+    <B>SEL      biossel;</B>
+    <B>/* Get selector for BIOS data area */</B>
+    <B>if (DosGetBIOSSeg(&amp;biossel) != 0)</B>
+    <B>   {</B>
+    <B>   printf("DosGetBIOSSeg() failed\n");</B>
+    <B>   exit(255);</B>
+    <B>   }</B>
+    <B>printf("BIOS selector is : %04X\n",biossel);</B>
+    <B>}</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

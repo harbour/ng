@@ -1,0 +1,114 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng59c2b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5998f.html">[^^Up^^]</A>
+<A HREF="ng5b13b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DOS Extender Settings</B>
+------------------------------------------------------------------------------
+
+ <B>/DTnnn (dual mode threshold)</B>
+
+ This setting allows the dual mode threshold specified at link time to be
+ overridden. This can also be used during testing to force the program to run
+ in real mode by setting /DT20000 (or some suitably large figure). See the
+ BLINKER EXECUTABLE DUAL command for more details.
+
+ <B>/EBnnn (extended memory block size)</B>
+
+ This setting controls the size of the memory blocks allocated by the
+ extender from the host. The default size is 256KB. See the BLINKER EXTMEM
+ BLOCK command for more details.
+
+ <B>/ED+ and /ED- (extender debugging)</B>
+
+ This setting enables and disables certain debugging messages provided by the
+ extender, such as checking for aliasing of segments which are not locked or
+ not present, and freeing of selectors using a free memory function call. It
+ is advisable to test your programs running under a VCPI or XMS host (ie not
+ DPMI) with this option enabled to check for these circumstances. The default
+ is disabled.
+
+ <B>/EInnn[,nnn] (extender IPX buffers)</B>
+
+ This setting specifies the number of IPX ecb buffers, and optionally the
+ number of IPX send buffers, allocated by the extender's IPX module. See the
+ BLINKER EXECUTABLE IPX command for more details.
+
+ <B>/EK+ and /EK- (extender keyboard handling)</B>
+
+ This setting enables and disables special handling of certain keyboard BIOS
+ calls by the extender to prevent needless mode switching. When enabled, this
+ option can increase the performance of serial communications routines. When
+ disabled, this option may improve compatability with old TSRs which
+ manipulate the keyboard. The default is disabled.
+
+ <B>/ELnnnn (extended memory limit)</B>
+
+ This setting specifies the total amount of host memory that the extender
+ will allocate before the extender's VM system begins to swap to disk in
+ order to satisfy new allocation requests. This setting can be used to limit
+ the amount of host memory used, or to simulate running in lower memory
+ conditions. See the BLINKER EXTMEM LIMIT command for more details.
+
+ <B>/ETnnnn (extended memory threshold)</B>
+
+ This setting allows the extended mode threshold specified at link time to be
+ overridden. See the BLINKER EXECUTABLE EXTENDED command for more details.
+
+ <B>/HD+ and /HD- (host DPMI)</B>
+
+ This setting enables and disables the use of a DPMI host. See the BLINKER
+ HOST DPMI command for more details.
+
+ <B>/HM+ and /HM- (host messages)</B>
+
+ This setting enables and disables the displaying of status messages at
+ program start up. See the BLINKER HOST QDPMI command documented above for
+ more details. The default is disabled.
+
+ <B>/HP+ and /HP- (host passup)</B>
+
+ This setting enables or disables the Blinker extender's automatic pass up of
+ IRQ interrupts from real mode to protected mode. This setting should only be
+ necessary for debugging purposes when testing interrupt handlers. See also
+ the BLINKER HOST PASSUP command. The default is enabled.
+
+ <B>/HQ+ and /HQ- (host QDPMI)</B>
+
+ This setting enables and disables the use of the Quarterdeck QDPMI host. See
+ the BLINKER HOST QDPMI command for more details.
+
+ <B>/HV+ and /HV- (host VCPI)</B>
+
+ This setting enables and disables the use of a VCPI host. See the BLINKER
+ HOST VCPI command for more details.
+
+ <B>/HX+ and /HX- (host XMS)</B>
+
+ This setting enables and disables the use of an XMS host. See the BLINKER
+ HOST XMS command for more details.
+
+ <B>/LRnnn (lowmem reserve)</B>
+
+ This setting specifies the amount of conventional memory reserved for
+ program use, preventing Blinker's DOS extender from using it for other
+ purposes. See the BLINKER LOWMEM RESERVE command for more details.
+
+ <B>/WS+ and /WS- (Windows Soft-Ice)</B>
+
+ This setting enables or disables the extender's check for the presence of
+ the Soft-Ice/W debugger in protected mode running in a Windows enhanced mode
+ DOS box. The default is enabled.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

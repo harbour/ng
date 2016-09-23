@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng91f24.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng925d6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCSNDSIZE()</B>
+ Determines the size of a communication sending buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCSNDSIZE(&lt;nHandle&gt;) --&gt; nBytes</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication sending buffer.
+
+ <B>Returns</B>
+
+     PPCSNDSIZE() returns the size of the specified communication sending
+     buffer.  If an error occurs (for example, if the handle is invalid), the
+     function returns -1.
+
+ <B>Description</B>
+
+     PPCSNDSIZE() determines the size of a communication sending buffer,
+     independently of the protocol used (IPX, SPX, NetBIOS datagram, or
+     NetBIOS session).
+
+ <B>Example</B>
+
+     Determine the size of a communication sending buffer:
+
+     ? PPCSNDSIZE(nHandle)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng90722.html">PPCRECSIZE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

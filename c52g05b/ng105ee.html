@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng10467.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3cf.html">[^^Up^^]</A>
+<A HREF="ng10baa.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>168 NEW: Objects</B>
+--------------------------------------------------------------------------------
+
+     Objects are new in Clipper 5.0.  Objects are instances of classes.
+     Classes in turn define the behavior and structure of objects.  In
+     Clipper 5.0, there are four built-in classes of objects:
+
+     <B>Table: Clipper 5.0 Classes</B>
+     -----------------------------------------------------------------
+     <B>Class        Meaning</B>
+     -----------------------------------------------------------------
+     Error        Provides objects containing information about
+                  runtime errors
+     Get          Provides objects for interactive editing of database
+                  fields and memory variables
+     TBrowse      Provides objects for browsing table-oriented data
+     TBColumn     Provides column objects for TBrowse objects
+     -----------------------------------------------------------------
+
+     Each class has a function (xxxNew()) to create instances of
+     the class.  Each class also has a number of exported
+     instance variables and methods.  Instance variables
+     represent the data structure of the class and methods (like
+     functions and procedures) implement the operations an object
+     can perform.  Changes in state as well as requests for an
+     object to do something are performed by sending the object a
+     message using the send (:) operator, as follows:
+
+     <B>&lt;object&gt;:&lt;method&gt;(&lt;arg list&gt;)</B>
+
+     Note that all Clipper 5.0 classes are built-in.  There is no
+     way to define your own classes.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

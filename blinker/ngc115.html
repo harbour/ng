@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbbad.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ngc5cb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER INCREMENTAL PAD       Specify size of padding for CA-Clipper incremental linking</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify size of padding for CA-Clipper incremental linking</B></U>
+
+ <U>Syntax   : <B>BLINKER INCREMENTAL PAD &lt;nisize&gt;</B></U>
+
+ <U>Default  : <B>128 bytes</B></U>
+
+ <U>Example  : <B># Leave 200 bytes at end of every procedure</B></U>
+            <B>BLINKER INCREMENTAL PAD 200</B>
+
+ This command is used to set the size of the padding attached to the end of
+ each procedure when it is first linked incrementally. The parameter is a
+ decimal number indicating the size in bytes to be added at the end of each
+ procedure in order to leave room for expansion, and may be any size up to
+ 1024. (The default value is 128, which should leave a reasonable amount of
+ padding for the majority of simple changes made during final development of
+ a routine.)
+
+ Increasing this value allows the application to link incrementally more
+ often without having to do a full link, but it will reduce the amount of
+ memory available to the application at runtime during testing of real mode
+ programs.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb866.html">BLINKER INCREMENTAL FILE</A>
+<A HREF="ngbbad.html">BLINKER INCREMENTAL OFF</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

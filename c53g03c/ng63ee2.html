@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng639fd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng60e6f.html">[^^Up^^]</A>
+<A HREF="ng641ec.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gBmpLoad()</B>
+ Load a bitmap (.bmp) or icon (.ico) file into memory
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "llibg.api"</B>
+     <B>ITEM _gBmpLoad(</B>
+     <B>                char far * fpFileName</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>fpFileName</B> is a pointer to the .BMP or .ICO file name that you want
+     to load.
+
+ <B>Returns</B>
+
+     An array item which is the pointer to the VMM region containing the .BMP
+     or .ICO (not a black and white icon).  The first two elements of the
+     returned array contain the width and height of the .BMP or .ICO in
+     pixels.
+
+     <B>Important! </B> Do not modify this array before passing it to
+     _gBmpDisp().
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng639fd.html">_gBmpDisp()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

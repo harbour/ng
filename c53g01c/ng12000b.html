@@ -1,0 +1,241 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng11fd89.html">[^^Up^^]</A>
+<A HREF="ng122d3c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>#command | #translate </B>
+ Specify a user-defined command or translation directive
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>#command   &lt;matchPattern&gt; =&gt; &lt;resultPattern&gt;</B>
+     <B>#translate   &lt;matchPattern&gt; =&gt; &lt;resultPattern&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;matchPattern&gt;</B> is the pattern the input text should match.
+
+     <B>&lt;resultPattern&gt;</B> is the text produced if a portion of input text
+     matches the &lt;matchPattern&gt;.
+
+     The =&gt; symbol between &lt;matchPattern&gt; and &lt;resultPattern&gt; is, along with
+     #command or #translate, a literal part of the syntax that must be
+     specified in a #command or #translate directive.  The symbol consists of
+     an equal sign followed by a greater than symbol with no intervening
+     spaces.  Do not confuse the symbol with the &gt;= or the &lt;= comparison
+     operators in the CA-Clipper language.
+
+ <B>Description</B>
+
+     #command and #translate are translation directives that define commands
+     and pseudofunctions.  Each directive specifies a translation rule.  The
+     rule consists of two portions:  a match pattern and a result pattern.
+     The match pattern matches a command specified in the program (.prg) file
+     and saves portions of the command text (usually command arguments) for
+     the result pattern to use.  The result pattern then defines what will be
+     written to the result text and how it will be written using the saved
+     portions of the matching input text.
+
+     #command and #translate are similar, but differ in the circumstance
+     under which their match patterns match input text.  A #command directive
+     matches only if the input text is a complete statement, while #translate
+     matches input text that is not a complete statement.  #command defines a
+     complete command and #translate defines clauses and pseudofunctions that
+     may not form a complete statement.  In general, use #command for most
+     definitions and #translate for special cases.
+
+     #command and #translate are similar to but more powerful than the
+     #define directive.  #define, generally, defines identifiers that control
+     conditional compilation and manifest constants for commonly used
+     constant values such as INKEY() codes.  Refer to any of the header files
+     in the \CLIP53\INCLUDE directory for examples of manifest constants
+     defined using #define.
+
+     #command and #translate directives have the same scope as the #define
+     directive.  The definition is valid only for the current program (.prg)
+     file unless defined in Std.ch or the header specified with the /U option
+     on the compiler command line.  If defined elsewhere, the definition is
+     valid from the line where it is specified to the end of the program
+     file.  Unlike #define, a #translate or #command definition cannot be
+     explicitly undefined.  The #undef directive has no effect on a #command
+     or #translate definition.
+
+     As the preprocessor encounters each source line preprocessor, it scans
+     for definitions in the following order of precedence: #define,
+     #translate, and #command.  When there is a match, the substitution is
+     made to the result text and the entire line is reprocessed until there
+     are no matches for any of the three types of definitions.  #command and
+     #translate rules are processed in stack-order (i.e., last in-first out,
+     with the most recently specified rule processed first).
+
+     In general, a command definition provides a way to specify an English
+     language statement that is, in fact, a complicated expression or
+     function call, thereby improving the readability of source code.  You
+     can use a command in place of an expression or function call to impose
+     order of keywords, required arguments, combinations of arguments that
+     must be specified together, and mutually exclusive arguments at compile
+     time rather than at runtime.  This can be important since procedures and
+     user-defined functions can now be called with any number of arguments,
+     forcing any argument checking to occur at runtime.  With command
+     definitions, the preprocessor handles some of this.
+
+     All commands in CA-Clipper are defined using the #command directive and
+     supplied in the standard header file, Std.ch, located in the
+     \CLIP53\INCLUDE directory.  The syntax rules of #command and #translate
+     facilitate the processing of all CA-Clipper and dBASE-style commands
+     into expressions and function calls.  This provides CA-Clipper
+     compatibility, as well as avenues of compatibility with other dialects.
+
+     When defining a command, there are several prerequisites to properly
+     specifying the command definition.  Many preprocessor commands require
+     more than one #command directive because mutually exclusive clauses
+     contain a keyword or argument.  For example, the @...GET command has
+     mutually exclusive VALID and RANGE clauses and is defined with a
+     different #command rule to implement each clause.
+
+     This also occurs when a result pattern contains different expressions,
+     functions, or parameter structures for different clauses specified for
+     the same command (e.g., the @...SAY command).  In Std.ch, there is a
+     #command rule for @...SAY specified with the PICTURE clause and another
+     for @...SAY specified without the PICTURE clause.  Each formulation of
+     the command is translated into a different expression.  Because
+     directives are processed in stack order, when defining more than one
+     rule for a command, place the most general case first, followed by the
+     more specific ones.  This ensures that the proper rule will match the
+     command specified in the program (.prg) file.
+
+     For more information and a general discussion of commands, refer to the
+     "Basic Concepts" chapter in the Programming and Utilities Guide.
+
+ <B>Match Pattern</B>
+
+     The &lt;matchPattern&gt; portion of a translation directive is the pattern the
+     input text must match.  A match pattern is made from one or more of the
+     following components, which the preprocessor tries to match against
+     input text in a specific way:
+
+     <B>.  Literal values</B> are actual characters that appear in the match
+        pattern.  These characters must appear in the input text, exactly as
+        specified to activate the translation directive.
+
+     <B>.  Words</B> are keywords and valid identifiers that are compared
+        according to the dBASE convention (case-insensitive, first four
+        letters mandatory, etc.).  The match pattern must start with a Word.
+
+        #xcommand and #xtranslate can recognize keywords of more than four
+        significant letters.
+
+     <B>.  Match markers</B> are label and optional symbols delimited by
+        angle brackets (&lt;&gt;) that provide a substitute (idMarker) to be used
+        in the &lt;resultPattern&gt; and identify the clause for which it is a
+        substitute.  Marker names are identifiers and must, therefore, follow
+        the CA-Clipper identifier naming conventions.  In short, the name
+        must start with an alphabetic or underscore character, which may be
+        followed by alphanumeric or underscore characters.
+
+        This table describes all match marker forms:
+
+        <B>Match Markers</B>
+        ---------------------------------------------------------------------
+        <B>Match Marker             Name</B>
+        ---------------------------------------------------------------------
+        &lt;idMarker&gt;               Regular match marker
+        &lt;idMarker,...&gt;           List match marker
+        &lt;idMarker:word list&gt;     Restricted match marker
+        &lt;*idMarker*&gt;             Wild match marker
+        &lt;(idMarker)&gt;             Extended Expression match marker
+        ---------------------------------------------------------------------
+
+        <B>-  Regular match marker:</B> Matches the next legal expression in the
+           input text.  The regular match marker, a simple label, is the most
+           general and, therefore, the most likely match marker to use for a
+           command argument.  Because of its generality, it is used with the
+           regular result marker, all of the stringify result markers, and
+           the blockify result marker.
+
+        <B>-  List match marker:</B> Matches a comma-separated list of legal
+           expressions.  If no input text matches the match marker, the
+           specified marker name contains nothing.  You must take care in
+           making list specifications because extra commas will cause
+           unpredictable and unexpected results.
+
+           The list match marker defines command clauses that have lists as
+           arguments.  Typically these are FIELDS clauses or expression lists
+           used by database commands.  When there is a match for a list match
+           marker, the list is usually written to the result text using either the
+           normal or smart stringify result marker.  Often, lists are written
+           as literal arrays by enclosing the result marker in curly ({ })
+           braces.
+
+        <B>-  Restricted match marker:</B> Matches input text to one of the
+           words in a comma-separated list.  If the input text does not match
+           at least one of the words, the match fails and the marker name
+           contains nothing.
+
+           A restricted match marker is generally used with the logify result
+           marker to write a logical value into the result text.  If there is
+           a match for the restricted match marker, the corresponding logify
+           result marker writes true (.T.) to the result text; otherwise, it
+           writes false (.F.).  This is particularly useful when defining
+           optional clauses that consist of a command keyword with no
+           accompanying argument.  Std.ch implements the REST clause of
+           database commands using this form.
+
+        <B>-  Wild match marker:</B> Matches any input text from the current
+           position to the end of a statement.  Wild match markers generally
+           match input that may not be a legal expression, such as #command
+           NOTE &lt;*x*&gt; in Std.ch, gather the input text to the end of the
+           statement, and write it to the result text using one of the
+           stringify result markers.
+
+        <B>-  Extended expression match marker:</B> Matches a regular or
+           extended expression, including a file name or path specification.
+           It is used with the smart stringify result marker to ensure that
+           extended expressions will not get stringified, while normal,
+           unquoted string file specifications will.
+
+     <B>.  Optional match clauses</B> are portions of the match pattern
+        enclosed in square brackets ([ ]).  They specify a portion of the
+        match pattern that may be absent from the input text.  An optional
+        clause may contain any of the components allowed within a
+        &lt;matchPattern&gt;, including other optional clauses.
+
+        Optional match clauses may appear anywhere and in any order in the
+        match pattern and still match input text.  Each match clause may
+        appear only once in the input text.  There are two types of optional
+        match clauses: one is a keyword followed by match marker, and the
+        other is a keyword by itself.  These two types of optional match
+        clauses can match all of the traditional command clauses typical of
+        the CA-Clipper command set.
+
+        Optional match clauses are defined with a regular or list match
+        marker to match input text if the clause consists of an argument or a
+        keyword followed by an argument (see the INDEX clause of the USE
+        command in Std.ch).  If the optional match clause consists of a
+        keyword by itself, it is matched with a restricted match marker (see
+        the EXCLUSIVE or SHARED clause of the USE command in Std.ch).
+
+        In any match pattern, you may not specify adjacent optional match
+        clauses consisting solely of match markers, without generating a
+        compiler error.  You may repeat an optional clause any number of
+        times in the input text, as long as it is not adjacent to any other
+        optional clause.  To write a repeated match clause to the result
+        text, use repeating result clauses in the &lt;resultPattern&gt; definition.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng125847.html">#define</A>
+<A HREF="ng12a827.html">#xcommand</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

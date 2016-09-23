@@ -1,0 +1,142 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng27fc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng271.html">[^^Up^^]</A>
+<A HREF="ng3950.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CREATE CLASS</B>
+
+ <B>Synopsis</B>
+
+         Begin a class specification
+
+ <B>Syntax</B>
+
+         CREATE CLASS &lt;class name&gt;
+              [INHERIT &lt;superclass name&gt;]
+              [METACLASS &lt;metaclass name&gt;]
+              [STATIC][FUNCTION &lt;function name&gt;]
+
+ <B>Arguments</B>
+
+         <B>&lt;class name&gt;</B> is the name of the class to be created. This name
+         follows the same rules as those governing Clipper function names.
+
+         <B>&lt;superclass name&gt;</B> is the name of the class from which the new
+         class should be inherited. If omitted, the new class will have the
+         superclass <B>Object</B> (the default superclass of all classes). If
+         more than one class is specified (separated by commas), a multiply-
+         inherited class is created. See the section on <B>Multiple</B>
+         <B>Inheritance</B>.
+
+         <B>&lt;metaclass name&gt;</B> is the name of the metaclass which should be
+         used to instantiate this class. This is an advanced feature which
+         is not necessary in normal programming. See the section on
+         <B>Metaclasses</B> for more information.
+
+         <B>STATIC</B> specifies that the <B>class function</B> for this class
+         will be declared as a static function, thus will not be accessible
+         outside the current module.
+
+         <B>FUNCTION &lt;function name&gt;</B> specifies a name for the <B>class</B>
+         <B>function</B> which is different from the class name.
+
+ <B>Description</B>
+
+         Begins a class specification. A class specification is a sequence
+         of Class(y) commands, beginning with <B>CREATE CLASS</B> and ending
+         with <B>END CLASS</B>, which constitute the structure of a given
+         class, ie. the names of all variables, messages and methods
+         contained in that class.
+
+         Class members (variables, messages and methods) declared after a
+         <B>CREATE CLASS</B> command are considered hidden by default. This
+         means that they cannot be accessed outside the methods of their
+         class (see the <B>HIDDEN:</B> command). The <B>EXPORT:</B> and
+         <B>PROTECTED:</B> commands can be used to achieve a visibility other
+         than the default.
+
+         All of the commands defined in this chapter can be used after
+         <B>CREATE CLASS</B> to specify the structure of a class. Some of the
+         most commonly used commands are:
+
+              <B>VAR</B>
+              <B>METHOD</B>
+              <B>MESSAGE...METHOD</B>
+              <B>CLASS VAR</B>
+              <B>CLASS METHOD</B>
+              <B>CLASS MESSAGE...METHOD</B>
+              <B>EXPORT:</B>
+              <B>PROTECTED:</B>
+              <B>HIDDEN:</B>
+
+         These commands are collectively referred to as class declaration
+         commands. Refer to their individual entries for more information.
+
+         Once the desired class structure has been declared using these
+         commands, <B>END CLASS</B> is used to end the class specification.
+
+         After the <B>END CLASS</B> command has appeared, the <B>METHOD</B>
+         <B>definition</B> command can be used to define the methods which
+         were declared in the class specification.
+
+ <B>Example</B>
+
+         A complete definition of a simple Box class follows. The class
+         specification declares four instance variables and two methods.
+         The methods are defined after the class specification.
+
+           #include "class(y).ch"
+
+           CREATE CLASS Box
+              VAR top, left, bottom, right
+           EXPORT:
+              METHOD init
+              METHOD draw
+           END CLASS
+
+           METHOD init( nTop, nLeft, nBottom, nRight )
+              ::top    := nTop
+              ::left   := nLeft
+              ::bottom := nBottom
+              ::right  := nRight
+           RETURN self
+
+           METHOD draw()
+              DispBox(::top, ::left, ::bottom, ::right)
+           RETURN self
+
+ <B>Notes</B>
+
+         It is best to define only one class per module (single .PRG file).
+         This is to avoid problems in distinguishing between methods of the
+         same name, such as <U>init</U>, which most classes implement.
+
+         The <B>CREATE CLASS</B> command actually generates a Clipper function
+         with the same name as the class. This is explained further under
+         the <B>Class Functions </B>and<B> Class Objects</B> sections.
+
+ <B>See Also</B>
+
+         <B>END CLASS</B>, <B>Class Functions</B>, <B>Class Objects</B>,
+         <B>Multiple</B> <B>Inheritance</B>, <B>Metaclasses</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3950.html">END CLASS</A>
+<A HREF="ngc6e7.html">Class Functions</A>
+<A HREF="ngc303.html">Class Objects</A>
+<A HREF="ng1acb3.html">Multiple Inheritance</A>
+<A HREF="ng18fa3.html">Metaclasses</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

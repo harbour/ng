@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5cfda.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5b482.html">[^^Up^^]</A>
+<A HREF="ng5d788.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Reducing debugging information using CodeView areas</B>
+------------------------------------------------------------------------------
+
+ <B>CodeView areas</B>
+
+ When the CODEVIEW command is encountered in the link script, Blinker will
+ assume that you wish to debug all modules in the program. In order to limit
+ the number of modules for which this debugging information is processed and
+ stored in the .EXE file, you may wish to create CodeView areas that contain
+ only the program modules you wish to debug. This is accomplished through the
+ use of the CVON and CVOFF commands, which specify areas to be debugged.
+
+ For example:
+
+    <B>CODEVIEW                   # Enable CodeView</B>
+    <B>FILE start                 # Can be debugged</B>
+    <B>BEGINAREA</B>
+    <B>   SECTION INTO START      # External overlay required for</B>
+    <B>                           # CodeView support</B>
+    <B>   CVON</B>
+    <B>      FILE one             # Can be debugged</B>
+    <B>      FILE two             # Can be debugged</B>
+    <B>      FILE three           # Can be debugged</B>
+    <B>   CVOFF</B>
+    <B>   FILE four               # Cannot be debugged</B>
+    <B>   FILE five               # Cannot be debugged</B>
+    <B>   FILE six                # Cannot be debugged</B>
+    <B>   FILE seven              # Cannot be debugged</B>
+    <B>   FILE eight              # Cannot be debugged</B>
+    <B>   CVON</B>
+    <B>      FILE nine            # Can be debugged</B>
+    <B>   CVOFF</B>
+    <B>   LIB inhouse             # Cannot be debugged</B>
+    <B>ENDAREA</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

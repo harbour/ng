@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3d754.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3df28.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_TagUnique():</B>
+
+  Syntax:  Sx_TagUnique([[nTagNo | cTagName,] nOrder | cIndexName])
+
+           nTagNo     = Position of tag within compound index file
+           cTagName   = Name of the tag
+           nOrder     = Position of index in list of indexes
+           nIndexName = Name of the index
+
+           If no tag name or number is specified, the currently active tag
+           is assumed.
+
+  Returns:  Logical value.  .T. if the tag was created UNIQUE, .F. if not.
+
+  Description:  This function simply allows you to find out the UNIQUE
+                status of a particular tag.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"
+    INDEX ON last  TAG last UNIQUE
+    INDEX ON state TAG state
+    INDEX ON age   TAG age
+
+    ? <B>Sx_TagUnique( 1 )</B>        // Returns .T.
+    ? <B>Sx_TagUnique( 2 )</B>        // Returns .F.
+    ? <B>Sx_TagUnique( 3 )</B>        // Returns .F.
+    ? <B>Sx_TagUnique( "LAST" )</B>   // Returns .T.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

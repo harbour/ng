@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1d7e1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng1ef77.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIDBGHAN()                   Get / Set Blinker debug handle</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get / Set the Blinker debug handle</B></U>
+
+ <U>Syntax   : <B>nuValue = BLIDBGHAN([nuhandle])</B></U>
+
+ <U>Return   : <B>Previous debug Handle</B></U>
+
+ This function is used to get or set the Blinker overlay manager debug
+ handle. It returns the previous debug handle, and takes as an optional
+ parameter the new handle it should be set to.
+
+ The handle defaults to 1 for the screen unless it is overridden at link time
+ using the BLINKER DEBUG HANDLE command or at run time using the /DHn setting
+ in the BLINKER environment variable.
+
+ The new handle is not validated and may be either 1 to send output to the
+ screen, 2 to send output to the standard error device, 4 to send output to
+ the printer, or the DOS handle of a file opened by the program with a DOS
+ open file call.
+
+ This handle is used as the default output handle for a number of the other
+ Blinker debugging functions, so may be set once at the start of the program
+ rather than passing it as a parameter to each function individually.
+
+ Example:
+
+    <B>* Get the current debug handle</B>
+    <B>*</B>
+    <B>? "The debug handle is currently", BLIDBGHAN()</B>
+    <B>* Set the current debug handle to the printer</B>
+    <B>BLIDBGHAN(4)</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng470f.html">BLINKER DEBUG HANDLE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

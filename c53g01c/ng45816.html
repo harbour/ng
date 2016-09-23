@@ -1,0 +1,95 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng452cb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng460ca.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FIELDNAME()/FIELD()</B>
+ Return a field name from the current database (.dbf) file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FIELDNAME/FIELD(&lt;nPosition&gt;) --&gt; cFieldName</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nPosition&gt;</B> is the position of a field in the database file
+     structure.
+
+ <B>Returns</B>
+
+     FIELDNAME() returns the name of the specified field as a character
+     string.  If &lt;nPosition&gt; does not correspond to an existing field in the
+     current database file or if no database file is open in the current work
+     area, FIELDNAME() returns a null string ("").
+
+ <B>Description</B>
+
+     FIELDNAME() is a database function that returns a field name using an
+     index to the position of the field name in the database structure.  Use
+     it in data-independent applications where the field name is unknown.  If
+     information for more than one field is required, use AFIELDS() to create
+     an array of field information or COPY STRUCTURE EXTENDED to create a
+     database of field information.
+
+     If you need additional database file structure information, use TYPE()
+     and LEN().  To obtain the number of decimal places for a numeric field,
+     use the following expression:
+
+     LEN(SUBSTR(STR(&lt;idField&gt;), RAT(".", ;
+
+                 STR(&lt;idField&gt;)) + 1))
+
+     By default, FIELDNAME() operates on the currently selected work area as
+     shown in the example below.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate FIELDNAME() used with several other
+        functions:
+
+        USE Sales
+        ? FIELDNAME(1)              // Result: BRANCH
+        ? FCOUNT()                  // Result: 5
+        ? LEN(FIELDNAME(0))         // Result: 0
+        ? LEN(FIELDNAME(40))        // Result: 0
+
+     <B>.</B>  This example uses FIELDNAME() to list the name and type of
+        each field in Customer.dbf:
+
+        USE Customer NEW
+        FOR nField := 1 TO FCOUNT()
+           ? PADR(FIELDNAME(nField), 10),;
+                  VALTYPE(&amp;(FIELDNAME(nField)))
+        NEXT
+
+     <B>.</B>  This example accesses fields in unselected work areas using
+        aliased expressions:
+
+        USE Sales NEW
+        USE Customer NEW
+        USE Invoices NEW
+        //
+        ? Sales-&gt;(FIELDNAME(1))            // Result: SALENUM
+        ? Customer-&gt;(FIELDNAME(1))         // Result: CUSTNUM
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9ba7.html">AFIELDS()*</A>
+<A HREF="ngc4826.html">COPY STRU EXTE</A>
+<A HREF="ng34415.html">DBSTRUCT()</A>
+<A HREF="ng42bcf.html">FCOUNT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

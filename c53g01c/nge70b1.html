@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge677e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge78b0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET EXCLUSIVE*</B>
+ Establish shared or exclusive USE of database files
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET EXCLUSIVE ON | off | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> causes database files to be opened in exclusive (nonshared) mode.
+
+     <B>OFF</B> causes database files to be opened in shared mode.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     In a network environment, SET EXCLUSIVE determines whether a USE command
+     specified without the EXCLUSIVE or SHARED clause automatically opens
+     database, memo, and index files EXCLUSIVE.  When database files are
+     opened EXCLUSIVE, other users cannot USE them until they are CLOSEd.  In
+     this mode, file and record locks are unnecessary.
+
+     When EXCLUSIVE is ON (the default), all database and associated files
+     open in a nonshared (exclusive) mode unless the USE command is specified
+     with the SHARED clause.  Use EXCLUSIVE only for operations that
+     absolutely require EXCLUSIVE USE of a database file, such as PACK,
+     REINDEX, and ZAP.
+
+     When EXCLUSIVE is OFF, all files are open in shared mode unless the USE
+     command is specified with the EXCLUSIVE clause.  Control access by other
+     users programmatically using RLOCK() and FLOCK().
+
+     SET EXCLUSIVE is a compatibility command and not recommended.  It is
+     superseded by the EXCLUSIVE and SHARED clauses of the USE command.
+
+     Refer to the "Network Programming" chapter in the Programming and
+     Utilities Guide for more information.
+
+ <B>Notes</B>
+
+     <B>.  Error handling:</B> Attempting to USE a database file already
+        opened EXCLUSIVE by another user generates a runtime error and sets
+        NETERR() to true (.T.).  After control returns to the point of error,
+        you can test NETERR() to determine whether the USE failed.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng480be.html">FLOCK()</A>
+<A HREF="ng7afc4.html">NETERR()</A>
+<A HREF="ng96d06.html">RLOCK()</A>
+<A HREF="ngf8dbc.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

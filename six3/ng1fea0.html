@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1fa83.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng202c9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>sxLog():</B>
+
+  Syntax:     sxLog( [&lt;xLog&gt;] )
+
+  Returns:    A logical value based
+
+  Description:  This function is primarily intended for use in creating
+                a template for multi-key, free-format index files.
+
+                You can also use this function as a generic conversion
+                functions for insuring that a logical value is returned.
+                For example:
+
+                  ? sxLog( .T. )    // Returns .T.
+                  ? sxLog( "T" )    // Returns .T.
+                  ? sxLog( "Y" )    // Returns .T.
+                  ? sxLog( 1 )      // Returns .T.
+
+                  ? sxLog( .F. )    // Returns .F.
+                  ? sxLog( "F" )    // Returns .F.
+                  ? sxLog( "N" )    // Returns .F.
+                  ? sxLog( 0 )      // Returns .F.
+
+
+  <U>NOTE: Just by using this function in your INDEX command, you will create</U>
+  <U>      an empty Multi-Keyed, Free-Format RYO index.  The INDEX command's</U>
+  <U>      EMPTY clause is not needed and will have no effect if used.</U>
+
+
+   Example:  See the examples for sxChar() and sxNum() for examples that
+             can also be applied to the sxLog() function.
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2d4d1.html">Sx_KeyAdd()</A>
+<A HREF="ng1e7a8.html">sxChar()</A>
+<A HREF="ng1f251.html">sxNum()</A>
+<A HREF="ng1fa83.html">sxDate()</A>
+<A HREF="ng668e4.html">Multi-Key, Free-Format Indexes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

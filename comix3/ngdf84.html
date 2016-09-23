@@ -1,0 +1,188 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd88f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ngf112.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlSetLoHi()</B>           Add records in range to a RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlSetLoHi(rl, [loVal], [hiVal], [nOrder] | [cTag [, cBag]]) -&gt; nKeys
+
+<B>Arguments</B>
+
+    rl is the RecordList to which records are to be added.
+
+    loVal is the lowest value inclusive.  If omitted or NIL, then the
+    lowest possible value will be used.
+
+    hiVal is the highest value inclusive.  If omitted or NIL, then the
+    highest possible value will be used.
+
+    nOrder, cTag and cBag are optional parameters which specify the index.
+    If omitted, the current master index will be used.
+
+<B>Returns</B>
+
+    rlSetLoHi() returns the number of keys which fell within the range.
+
+<B>Description</B>
+
+    rlSetLoHi() allows you to quickly adds records to (set bits in) a
+    RecordList which for all records which have keys which fall in the given
+    lo/hi range.
+
+    This is the low-level routine which is used by the optimizer to
+    determine which records meet a condition.  The result of rlSetLoHi() is
+    then AND'd, OR'd and NOT'd to get a RecordList which meets the net
+    condition.
+
+<B>Example</B>
+
+    rlResult := simpleQuery("SC", 50000, 75000)
+    ? rlCount(rlResult), " people meet both conditions"
+    rlDestroy(rlResult)
+
+    *   Get a recordList with all people in the state and the salary range
+    function simpleQuery(state, loSal, hiSal)
+    local rlState, rlSalary, rlResult, rlNum
+
+    use demo index state, salary
+
+    *   Get all the people in the given state
+    rlState := rlNew()
+<B>    rlNum := rlSetLoHi(rlState, state, state, ordNumber("state"))</B>
+    ? rlNum, " people are in the state"
+
+    *   Get all the people in the given salary range
+    rlSalary := rlNew()
+<B>    rlNum := rlSetLoHi(rlSalary, loSal, hiSal, ordNumber("salary"))</B>
+    ? rlNum, " people are in the salary range"
+
+    ? rlCount(rlState), " people meet the state condition"
+    ? rlCount(rlSalary), " people meet the salary condition"
+
+    *   AND them together and return that as the result
+    return rlAnd(rlState, rlSalary)
+
+<B>Example</B>
+
+    *   Get a recordList with all people in the array of states (aState)
+    function addState(aState)
+
+    *   Create an empty recordList
+    local rl := rlNew()
+    local i
+
+    *   Make state the master index
+    set order tag state
+
+    *   For each state in the array
+    for i := 1 to len(aState)
+
+        *   Add all people in this state to the RecordList
+<B>        rlSetLoHi(rl, aState[i], aState[i])</B>
+    next i
+
+    *   Return the result
+    return rl
+
+<B>Example</B>
+
+    *   Generalization of addState() above to array of any type on any
+    *   tag
+    addArray(aValue, cTag)
+    local tagOrder := ordNumber(cTag)
+    local i
+    local rl := rlNew()
+
+    for i := 1 to len(aValue)
+<B>        rlSetLoHi(rl, aValue[i], aValue[i], tagOrder)</B>
+    next i
+
+    return rl
+
+<B>Example</B>
+
+    *   Eliminate people in aState[] from a RecordList
+    function elimStates(rl, aState)
+
+    *   addArray() gets all the people in the array of states
+    *   rlNot() of that gets a RecordList of all people NOT in those states
+    *   rlAnd() of that with rl leaves only people who are NOT in those states
+    return rlAnd(rl, rlNot(addArray(aState, "state")))
+
+<B>Example</B>
+
+    *   Set up the index
+    index on ' ' tag delOnly for deleted()
+
+    ...
+    *   Quickly eliminate all deleted records from the filter condition
+    elimDel()
+
+    *   List the non-deleted people
+    list last, first
+
+    *   Quickly eliminate all deleted records from any existing filter
+    function elimDel()
+    local rlp
+
+    *   If we have a filter RecordList (nothing to do if we don't)
+    if (rlGetFilter() &lt;&gt; 0)
+
+        *   Get a RecordList of all deleted records (only keys in delOnly
+        *   are those for deleted records)
+<B>        rlSetLoHi(rlp := rlNew(), NIL, NIL, ordNumber("delOnly"))</B>
+
+        *   NOT this to get has only records which are NOT deleted
+        rlp := rlNot(rlp)
+
+        *   AND with filter condition, so we have only NOT deleted recs
+        rlAnd(rlGetFilter(), rlp)
+    endif
+
+    return  
+
+<B>Example</B>
+
+    *   Set up the indexes
+    index on invoice tag unPaidInv for !paid
+    index on date tag date
+    ...
+
+    *   Get a RecordList of only unpaid invoices (get all the keys
+    *   in the index where only keys for unpaid records are present)
+    set order tag unPaidInv
+<B>    rlSetLoHi(rl := rlNew())</B>
+
+    ? "There are ", rlCount(rl), " unpaid invoices"
+
+    *   Do the low-level filter (not using cmFilter())
+    dbSetFilter({||!paid}, "!paid")
+
+    *   Set up the Filter RecordList
+    rlSetFilter(rl)
+    
+    *   Now output the unpaid invoices in date order
+    set order tag date
+    list date, paid             &amp;&amp; paid will always be .F.
+
+<B>See Also</B>
+
+    None
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng101b9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng10d5e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Enhanced Object Inspector</B>
+
+  Class(y) 2.4 provides an Enhanced Object Inspector which replaces the
+  Clipper debugger's default object inspector, providing a greatly enhanced
+  view of your objects.
+
+  To use it, link the library CSYINSP.LIB into your application (note that
+  the entire library can be overlaid). Since no functions in the library are
+  called directly, it is best to link the entire library into your
+  application, eg:
+
+    RTLINK FI MYAPP, CSYINSP.LIB LIB CLASSY
+
+  Then enter the debugger and examine your objects as normal.
+
+  Three columns are displayed. The second and third columns display the name
+  and value, respectively, of each of the object's variables. The first
+  column shows the class in which that variable was defined. All variables,
+  including variables inherited from superclasses, are displayed.
+
+  Values can be edited in the same way as values in Clipper's default object
+  inspector. Pressing ENTER on the value field will begin editing.
+
+  You can find out more about a variable or message, such as its scope, by
+  selecting and pressing ENTER on a message in the second column. This has
+  the effect of displaying the internal Class(y) object which refers to that
+  message or variable. The instance variable scopeDesc specifies the scope
+  of the item. Other data, such as class or type restrictions on instance
+  variables, are also displayed.
+
+  Class objects can also be examined by pressing ENTER in the first column.
+
+  If you don't link an application with CSYINSP.LIB, the standard
+  Clipper/Class(y) object inspector, described in the following section, is
+  used.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng10d5e.html">Standard Object Inspector</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

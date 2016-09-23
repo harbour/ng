@@ -1,0 +1,102 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng408dd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng41bf0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>INKEY()</B>
+ Extract a character from the keyboard buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>INKEY([&lt;nSeconds&gt;]) --&gt; nInkeyCode</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nSeconds&gt;</B> specifies the number of seconds INKEY() waits for a
+     keypress.  You can specify the value in increments as small as one-tenth
+     of a second.  Specifying zero halts the program until a key is pressed.
+     If &lt;nSeconds&gt; is omitted, INKEY() does not wait for a keypress.
+
+ <B>Returns</B>
+
+     INKEY() returns an integer numeric value from -39 to 386, identifying
+     the key extracted from the keyboard buffer.  If the keyboard buffer is
+     empty, INKEY() returns zero.  INKEY() returns values for all ASCII
+     characters, function, Alt-function, Ctrl-function, Alt-letter, and
+     Ctrl-letter key combinations.
+
+ <B>Description</B>
+
+     INKEY() is a keyboard function that extracts the next key pending in the
+     keyboard buffer and returns a value representing that key.  The value is
+     also saved internally and can be accessed using LASTKEY().  If the
+     &lt;nSeconds&gt; argument is specified and there are no pending keys in the
+     buffer, program execution pauses until a key appears in the keyboard
+     buffer, or &lt;nSeconds&gt; has elapsed.  The time INKEY() waits is based on
+     the operating system clock and is not related to the microprocessor
+     speed.  If &lt;nSeconds&gt; is zero, program execution pauses until a key is
+     placed into the buffer.  Note that INKEY() is not a wait state and
+     therefore SET KEYs are not active.
+
+     INKEY() is similar to the NEXTKEY() function.  Unlike, INKEY(), however,
+     NEXTKEY() reads but does not extract the key from the keyboard buffer.
+     This is useful when you need to test for a key without processing it.
+
+     INKEY() is the basic primitive of the CA-Clipper system for fetching
+     keys from the keyboard buffer.  It is used for polling the keyboard or
+     pausing program execution to wait for a keypress.  As an example, you
+     can use INKEY() to terminate commands with a record scope such as LIST,
+     LABEL FORM, and REPORT FORM by including it in a WHILE condition.  Refer
+     to the example below.
+
+     For a complete list of INKEY() codes and Inkey.ch constants, refer to
+     the Error Messages and Appendices guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example gets a key from the keyboard then displays its
+        character value followed by the INKEY() value:
+
+        #include "Inkey.ch"
+        //
+        LOCAL nInkeyCode := 0
+        DO WHILE LASTKEY() != K_ESC
+           ? "Press any key: "
+           nInkeyCode := INKEY(0)
+           ?? "Character:", CHR(nInkeyCode),;
+              "INKEY() code:", LTRIM(STR(nInkeyCode))
+        ENDDO
+        RETURN
+
+     <B>.</B>  This example uses INKEY() to poll for a user interrupt
+        keypress during a REPORT FORM.  If the user presses Esc during the
+        printing process, the REPORT FORM terminates:
+
+        #include "Inkey.ch"
+        //
+        USE Sales INDEX Salesman NEW
+        REPORT FORM Monthly FOR MONTH(SalesDate) = ;
+              MONTH(DATE());
+           WHILE INKEY() != K_ESC
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Inkey.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1295d.html">CHR()</A>
+<A HREF="ng43e47.html">LASTKEY()</A>
+<A HREF="ng53579.html">NEXTKEY()</A>
+<A HREF="nga5556.html">SET KEY</A>
+<A HREF="ngf8bf1.html">Inkey codes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

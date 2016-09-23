@@ -1,0 +1,99 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3e7ae.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng3f657.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>EMPTY()</B>
+ Determine if the result of an expression is empty
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>EMPTY(&lt;exp&gt;) --&gt; lEmpty</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp&gt;</B> is an expression of any data type.
+
+ <B>Returns</B>
+
+     EMPTY() returns true (.T.) if the expression results in an empty value;
+     otherwise, it returns false (.F.).  The criteria for determining whether
+     a value is considered empty depends on the data type of &lt;exp&gt; according
+     to the following rules:
+
+     <B>List of Empty Values</B>
+     ------------------------------------------------------------------------
+     <B>Data Type    Contents</B>
+     ------------------------------------------------------------------------
+     Array        Zero-length
+     Character    Spaces, tabs, CR/LF, or ("")
+     Numeric      0
+     Date         Null (CTOD(""))
+     Logical      False (.F.)
+     Memo         Same as character
+     NIL          NIL
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     The EMPTY() function has a number of uses.  You can use it to determine
+     if a user entered a value into a Get object before committing changes to
+     a database file.  It can also determine whether a formal parameter is
+     NIL or unsupplied.  In addition, it can test an array for zero-length.
+
+ <B>Notes</B>
+
+     <B>.  Space characters:</B> The EMPTY() function treats carriage
+        returns, line feeds, and tabs as space characters and removes these
+        as well.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate use of EMPTY() against several
+        different data types:
+
+        ? EMPTY(SPACE(5)), EMPTY("")        // Result: .T. .T.
+        ? EMPTY(0), EMPTY(CTOD(""))         // Result: .T. .T.
+        ? EMPTY(.F.), EMPTY(NIL)            // Result: .T. .T.
+
+     <B>.</B>  This example uses EMPTY() to determine whether the user
+        entered a value into the first Get object before writing the new
+        value to the database file:
+
+        LOCAL cCust := SPACE(15), nAmount := 0
+        USE Sales NEW
+        @ 10, 10 GET cCust
+        @ 11, 10 GET nAmount PICTURE "999.99"
+        READ
+        //
+        IF !EMPTY(cCust)
+           APPEND BLANK
+           REPLACE Sales-&gt;Cust WITH cCust, Sales-&gt;Amount ;
+              WITH nAmount
+        ENDIF
+
+     <B>.</B>  This example uses EMPTY() as part of the VALID clause to force
+        the user to enter data into the current Get object:
+
+        LOCAL cCode := SPACE(5)
+        @ 2, 5 SAY "Enter code" GET cCode VALID !EMPTY(cCode)
+        READ
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng663e8.html">LEN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

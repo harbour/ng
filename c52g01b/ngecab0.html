@@ -1,0 +1,82 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngec48d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="nged3b9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DELETE TAG command</B>
+ Delete a Tag
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     DELETE TAG &lt;cOrderName&gt; [IN &lt;xcOrderBagName&gt;]
+        [, &lt;cOrderName&gt; [IN xcOrderBagName] list&gt;]
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrderName&gt;</B> is a character string that represents the Order Name.
+
+     <B>&lt;xcOrderBagName&gt;</B> is the name of a disk file containing one or more
+     Orders.  You may specify &lt;xcOrderBagName&gt; as the filename with or
+     without the pathname or appropriate extension.  If you do not include
+     the extension as part of &lt;xcOrderBagName&gt; CA-Clipper uses the default
+     extension of the current RDD.
+
+     <B>&lt;cOrderName ...list&gt;</B> is an optional list of Order and Order Bag Name
+     pairs, separated by commas.  Any reference to &lt;cOrderName&gt; that results
+     in either a null string ("") or spaces is ignored.  You can specify each
+     Order as a literal expression or as a character expression enclosed in
+     parentheses.  If you specify no extension for the Order Bag Name, the
+     current database driver supplies a default extension.
+
+ <B>Description</B>
+
+     This command removes an Order from an Order Bag in the current or
+     specified work area.  If you do not specify an &lt;xcOrderBagName&gt;, all
+     Orders Bags are searched in the current or specified work area.  The
+     first occurrence of &lt;cOrderName&gt; is deleted.  A runtime recoverable
+     error is raised if the Order is not found.
+
+     If &lt;cOrderName&gt; is the active Order, the database in the current or
+     specified work area reverts to its identity Order (natural or entry)
+     order and SET FILTER scoping.
+
+     A runtime error is raised if &lt;xcOrderBagName&gt; does not exist or if it
+     exists but does not contain &lt;cOrderName&gt;.
+
+     The active RDD determines the Order capacity of an Order Bag.  The
+     default DBFNTX and the DBFNDX drivers only support single-Order Bags,
+     while other RDDs may support multiple-Order Bags (e.g., the DBFCDX and
+     DBFMDX drivers).
+
+ <B>Examples</B>
+
+     USE Customer VIA "DBFCDX" NEW
+     SET INDEX TO Customer
+
+     // Delete the Orders (Tags) Cust01 and Cust02 that
+     // exist in the index file Customer
+     DELETE TAG Cust01 IN Customer
+     DELETE TAG Cust02 IN Customer
+
+     // or
+     // DELETE TAG Cust01 IN Customer, Cust02 IN Customer
+
+ <B>Status:</B>  New
+
+ <B>See also:</B>  ORDDESTROY()
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf1b8c.html">ORDDESTROY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

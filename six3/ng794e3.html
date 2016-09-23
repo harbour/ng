@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng789a4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng75ccf.html">[^^Up^^]</A>
+<A HREF="ng79e26.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>DBFINFO.EXE:</B>
+
+  The DBFINFO utility will display the following information about a
+  database file:
+
+    <B>.</B>  Last Update
+    <B>.</B>  Data Offset
+    <B>.</B>  Record Size
+    <B>.</B>  Number of Records
+    <B>.</B>  Number of Fields
+  <U>*</U> <B>.</B>  Memo Type   (None, DBT, FPT, SMT, FlexFile, or Unknown)
+    <B>.</B>  Structure
+
+  <B>(*) - If an FPT or SMT memo file is being used, the memo-block size in</B>
+        <B>use will also be displayed.</B>
+
+  If the data file is encrypted, DBFINFO will display the string <B>[Encrypted]</B>
+  beside the database file name.
+
+  DBFINFO will attempt to verify the integrity of the data/memo file headers
+  and, if any corruptions are detected, will alert you to them.  Running
+  DBFINFO with the <B>/f</B> option will attempt to correct the header corruption
+  This modifies the file directly, so you should make sure you have a backup
+  of the file before using this switch.
+
+  DBFINFO will also optionally create a CA-Clipper .PRG file which contains
+  the source code for creating the specified database file, including any
+  associated memo file of the proper type and memo-block size.
+
+  The command-line syntax for using DBFINFO.EXE is as follows:
+
+    DBFINFO &lt;DBFname&gt;[.DBF] [Options]
+
+    Where:  &lt;DBFname&gt; = The name of the database file to be processed.
+
+    Options: /e = Check for and correct extra EOF markers.
+
+             /f = Attempt to fix any detected header corruption.  If an .FPT
+                  or .SMT memo file is to be corrected, an optional numeric
+                  value can be included to indicate the block size that the
+                  memo file should be using.  (Ex: /f16).  If no value is
+                  specified, the block size in the memo file header will not
+                  be modified.
+
+             /p = Create a .PRG file with Clipper source code to create the
+                  specified .DBF file.  (Ex: /pTEST).  If no name is
+                  specified, STRU.PRG will be created.
+
+      /r&lt;x&gt;:&lt;c&gt; = Rename a field. &lt;x&gt;=Old Name|Number, &lt;c&gt;=New Name.
+                  ( Ex: /rOLDNAME:NEWNAME  or  /r3:NEWNAME ).
+
+          /s&lt;n&gt; = Resize (REDUCE) .DBF to specified number of records.
+                  (Ex: /s100)
+
+  Examples:
+
+    // Display structure of TEST.DBF
+    <B>DBFINFO test</B>
+
+    // Display structure of TEST.DBF and correct any detected corruptions
+    <B>DBFINFO test /f</B>
+
+    // Display structure of TEST.DBF and create STRU.PRG
+    <B>DBFINFO test /p</B>
+
+    // Display structure of TEST.DBF and create FOO.PRG
+    <B>DBFINFO test /pFOO</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6b5cd.html">The OTTO Utility</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

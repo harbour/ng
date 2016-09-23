@@ -1,0 +1,98 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1555a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng1662f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCRTUSR()</B>
+ Creates a new user
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCRTUSR(&lt;cName&gt;,[&lt;cPass&gt;],[&lt;cFullName&gt;],[&lt;lSuper&gt;],</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cName&gt; </B> Designates the login name of the new user.
+
+     <B>&lt;cPass&gt; </B> Designates the password for &lt;cName&gt;.
+
+     <B>&lt;cFullName&gt; </B> Designates the full name for &lt;cName&gt;.
+
+     <B>&lt;lSuper&gt; </B> Designates whether the new user is granted supervisor
+     rights (.T.) or not (.F.).  The default value (.F.) indicates that the
+     new user is not granted supervisor rights.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server where the new user
+     is created.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETCRTUSR() returns .T. if the user has been added successfully.
+
+ <B>Description</B>
+
+     NOVELL NET CREATE USER
+     NNETCRTUSR() allows you to create a new user and to define the basic
+     characteristics for the user.  If NNETCRTUSR() is called only with the
+     parameter &lt;cName&gt;, a user of the type guest is created.  The guest user
+     can log into the file server without a password.  If &lt;cPass&gt; is passed,
+     the password is required to log into the file server.  The password can
+     also be defined later with the NNETCPASS() function.  With the argument
+     &lt;cFullName&gt;, the full name of the new user can be set.  Supervisor
+     rights can be granted to the new user by passing the &lt;lSuper&gt; with
+     (.T.).  The default value for &lt;lSuper&gt; (.F.) does not grant supervisor
+     rights.  Additional rights can be assigned to the user by adding the
+     user to a group (NNETADDGRP()) or by explicitly setting trustee rights.
+     With the parameters &lt;cServer&gt; or &lt;nConId&gt;, a new user can be added on
+     any attached file server.  The connection ID of a server can be
+     determined with NNETATTACH() or NNETLOGIN().
+
+     Supervisor rights are required to create a new user.
+
+ <B>Note</B>
+
+     <B>.</B>  NNETCRTUSR() is a high level function based on the low level
+        functions of the bindery access.  The CA-Clipper source code can be
+        found on the product disks.
+
+ <B>Examples</B>
+
+     <B>.</B>  Create user PAUL with password 190366 and the full name PAUL
+        SMITH  Give the new user supervisor rights:
+
+        IF NNETCRTUSR('PAUL','190366','Paul Smith',.T.)
+        ? 'User created successfully!'
+        ELSE
+        ? 'User could not be created!'
+        ENDIF
+
+     <B>.</B>  Create a new user, and then set the password to HELLO:
+
+        IF NNETCRTUSR('TEST')
+        NNETCPASS('TEST',,'','HELLO')
+        ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng13625.html">NNETADDGRP()</A>
+<A HREF="ng14a82.html">NNETCPASS()</A>
+<A HREF="ng7799.html">NNETDELOBJ()</A>
+<A HREF="ng369a3.html">NNETTRUST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

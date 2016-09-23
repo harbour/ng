@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4dd37.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng4e500.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>create()</B>
+ Create a data store (table) in the specified workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE create(</B>
+     <B>                WORKAREAP wa,</B>
+     <B>                DBOPENINFOP dbOpenInfo</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>dbOpenInfo</B> is a pointer to a structure containing information about
+     the workarea and the table to be created.
+
+ <B>Description</B>
+
+     Creates an empty data store in the workarea referenced by wa.
+
+ <B>Default Behavior</B>
+
+     At the workarea level, create() maps directly to open().
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If creation of the new data store fails, create() should
+        ensure that the workarea is in a usable state by calling SELFCLOSE()
+        before you generate a recoverable error.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40efb.html">DBOPENINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng4f456.html">open()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

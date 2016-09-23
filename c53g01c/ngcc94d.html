@@ -1,0 +1,280 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngcc35b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngcf693.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>INDEX</B>
+ Create an index file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>INDEX ON &lt;expKey&gt; [TAG &lt;cOrderName&gt;] [TO &lt;cOrderBagName&gt;]</B>
+     <B>   [FOR &lt;lCondition&gt;] [ALL]</B>
+     <B>   [WHILE &lt;lCondition&gt;] [NEXT &lt;nNumber&gt;]</B>
+     <B>   [RECORD &lt;nRecord&gt;] [REST]</B>
+     <B>   [EVAL &lt;bBlock&gt;] [EVERY &lt;nInterval&gt;]</B>
+     <B>   [UNIQUE] [ASCENDING|DESCENDING]</B>
+     <B>   [USECURRENT] [ADDITIVE]</B>
+     <B>   [CUSTOM] [NOOPTIMIZE]</B>
+
+     <B>Note: </B> Although both the TAG and the TO clauses are optional, you
+     must specify at least one of them.
+
+ <B>Arguments</B>
+
+     <B>&lt;expKey&gt;</B> is an expression that returns the key value to place in the
+     index for each record in the current work area.  &lt;expKey&gt; can be
+     character, date, logical, or numeric type.  The maximum length of the
+     index key expression is determined by the driver.
+
+     <B>TAG &lt;cOrderName&gt;</B> is the name of the order to be created.
+     &lt;cOrderName&gt; can be any CA-Clipper expression that evaluates to a string
+     constant.
+
+     <B>TO &lt;cOrderBagName&gt;</B> is the name of a disk file containing one or more
+     orders.  The active RDD determines the order capacity of an order bag.
+     The default DBFNTX driver only supports single-order bags, while other
+     RDDs may support multiple-order bags (e.g., the DBFCDX and DBFMDX
+     drivers).  You may specify &lt;cOrderBagName&gt; as the file name with or
+     without a path name or extension.  If an extension is not provided as
+     part of &lt;cOrderBagName&gt;, CA-Clipper will use the default extension of
+     the current RDD.
+
+     Both the TAG and the TO clauses are optional, but you must use at least
+     one of them.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records on which
+     to create the order.  Only those records that meet the condition are
+     included in the resulting order.  &lt;lCondition&gt; is an expression that may
+     be no longer than 250 characters under the DBFNTX and DBFNDX drivers.
+     The maximum value for these expressions is determined by the RDD.  The
+     FOR condition is stored as part of the order bag and used when updating
+     or recreating the index using the REINDEX command.  Duplicate key values
+     are not added to the order bag.
+
+     Drivers that do not support the FOR condition will produce an
+     "unsupported" error.
+
+     The FOR clause provides the only scoping that is maintained for all
+     database changes.  All other scope conditions create orders that do not
+     reflect database updates.
+
+     <B>ALL</B> specifies all orders in the current or specified work area.  ALL
+     is the default scope of INDEX .
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies another condition that must be met by
+     each record as it is processed.  As soon as a record is encountered that
+     causes the condition to fail, the INDEX command terminates.  If a WHILE
+     clause is specified, the data is processed in the controlling order.
+     The WHILE condition is transient (i.e., it is not stored in the file and
+     not used for index updates and REINDEXing purposes).  The WHILE clause
+     creates temporary orders, but these orders are not updated.
+
+     Drivers that do not support the WHILE condition will produce an
+     "unsupported" error.
+
+     Using the WHILE clause is more efficient and faster than using the FOR
+     clause.  The WHILE clause only processes data for which &lt;lCondition&gt; is
+     true (.T.) from the current position.  The FOR clause, however,
+     processes all data in the data source.
+
+     <B>NEXT &lt;nNumber&gt;</B> specifies the portion of the database to process.  If
+     you specify NEXT, the database is processed in the controlling order for
+     the &lt;nNumber&gt; number of identities.  The scope is transient (i.e., it is
+     not stored in the order and not used for REINDEXing purposes).
+
+     <B>RECORD &lt;nRecord&gt;</B> specifies the processing of the specified record.
+
+     <B>REST</B> specifies the processing of all records from the current
+     position of the record pointer to the end of file (EOF).
+
+     <B>EVAL &lt;bBlock&gt;</B> evaluates a code block every &lt;nInterval&gt;, where
+     &lt;nInterval&gt; is a value specified by the EVERY clause.  The default value
+     is 1.  This is useful in producing a status bar or odometer that
+     monitors the indexing progress.  The return value of &lt;bBlock&gt; must be a
+     logical data type.  If &lt;bBlock&gt; returns false (.F.), indexing halts.
+
+     <B>EVERY &lt;nInterval&gt;</B> is a clause containing a numeric expression that
+     modifies the number of times &lt;bBlock&gt; is EVALuated.  The EVERY option of
+     the EVAL clause offers a performance enhancement by evaluating the
+     condition for every nth record instead of evaluating every record
+     ordered.  The EVERY keyword is ignored if you specify no EVAL condition.
+
+     <B>UNIQUE</B> specifies that the key value of each record inserted into the
+     order be unique.  Duplicate key values are not added to the order.
+
+     <B>ASCENDING</B> specifies that the keyed pairs be sorted in increasing
+     order of value.  If neither ASCENDING nor DESCENDING is specified,
+     ASCENDING is assumed.  Although not stored as an explicit part of the
+     file, ASCENDING is an implicit file attribute that is understood by the
+     REINDEX command.
+
+     Drivers that do not support the ASCENDING condition will produce an
+     "unsupported" error.  The following keywords are new to CA-Clipper 5.3.
+
+     <B>DESCENDING</B> specifies that the keyed pairs be sorted in decreasing
+     order of value.  Using this keyword is the same as specifying the
+     DESCEND() function within &lt;expKey&gt;, but without the performance penalty
+     during order updates.  If you create a DESCENDING index, you will not
+     need to use the DESCEND() function during a SEEK.  DESCENDING is an
+     attribute of the file, where it is stored and used for REINDEXing
+     purposes.
+
+     Drivers that do not support the DESCENDING condition will produce an
+     "unsupported" error.
+
+     <B>USECURRENT</B> specifies that only records in the controlling order--and
+     within the current range as specified by ORDSETSCOPE()--will be included
+     in this order.  This is useful when you have already created a
+     conditional order and want to reorder the records which meet that
+     condition, and/or to further restrict the records meeting a condition.
+     If not specified, all records in the database file are included in the
+     order.
+
+     <B>ADDITIVE</B> specifies that any open orders should remain open.  If not
+     specified, all open orders are closed before creating the new one.
+     Note, however, that the production index file is never closed.
+
+     <B>CUSTOM</B> specifies that a custom built order will be created for RDDs
+     that support them.  A custom built order is initially empty, giving you
+     complete control over order maintenance.  The system does not
+     automatically add and delete keys from a custom built order.  Instead,
+     you explicitly add and delete keys using ORDKEYADD() and ORDKEYDEL().
+     This capability is excellent for generating pick lists of specific
+     records and other custom applications.
+
+     <B>NOOPTIMIZE</B> specifies that the FOR condition will not be optimized.
+     If NOOPTIMIZE is not specified, the FOR condition will be optimized if
+     the RDD supports optimization.
+
+ <B>Description</B>
+
+     The INDEX command adds a set of keyed pairs, ordered by &lt;expKey&gt; to a
+     file specified by &lt;cOrderBagName&gt; using the database open in the current
+     work area.
+
+     In RDDs that support production or structural indexes (e.g., DBFCDX,
+     DBFMDX), if you specify a tag but do not specify an order bag, the tag
+     is created and added to the order bag.  If no production or structural
+     index exists, it will be created and the tag will be added to it.
+
+     When using RDDs that support multiple order bags, you must explicitly
+     SET ORDER (or ORDSETFOCUS()) to the desired controlling order.  If you
+     do not specify a controlling order, the data file will be viewed in
+     natural order.
+
+     If &lt;cOrderBagName&gt; does not exist, it is created in accordance with the
+     RDD in the current or specified work area.
+
+     If &lt;cOrderBagName&gt; exists and the RDD specifies that order bags can only
+     contain a single order, &lt;cOrderBagName&gt; is erased and the new order is
+     added to the order bag and to the order list in the current or specified
+     work area.
+
+     If &lt;cOrderBagName&gt; exists and the RDD specifies that order bags can
+     contain multiple tags, &lt;cOrderName&gt; is created if it does not already
+     exist; otherwise, &lt;cOrderName&gt; is replaced in &lt;cOrderBagName&gt; and the
+     order is added to the order list in the current or specified work area.
+
+     ASCENDING or DESCENDING specifies the sequence of keyed pairs in the order.
+     If neither clause is specified, the default is ASCENDING.
+
+     If you specify the UNIQUE clause, the resulting order will contain only
+     unique records.  Some RDDs may do this by only including record
+     references to a key value once.  Others may produce a runtime
+     recoverable error as a non-unique key insertion is attempted.
+
+     The EVAL clause lets you specify a code block to be evaluated as each
+     record is placed in the order.  The EVERY clause lets you modify how
+     often &lt;bBlock&gt; is called.  Instead of evaluation as each record is
+     placed in the order, evaluation only occurs as every &lt;nInterval&gt; records
+     are placed in the order.
+
+     The INDEX command accepts certain clauses that let the user create
+     conditional and partial orders.  Some orders are intended to be
+     maintained across the application, others are considered "temporary"
+     orders.
+
+     The FOR clause provides the only order scoping that is permanent and can
+     be maintained across the life of the application.  The string passed as
+     the FOR condition is stored within the order for later use in
+     maintaining the order.  Though only accessing part of a database, orders
+     created using this clause exist as long as the database is active.  The
+     FOR clause lets you create maintainable scoped orders.
+
+     The WHILE, NEXT, REST and RECORD clauses process data from the current
+     position of the database cursor in the default or specified work area.
+     If you specify these clauses, the order list remains open and the active
+     order is used to organize the database while it is being created.  These
+     clauses let you create temporary (non-maintainable) orders.  Orders
+     created using these clauses contain records in which &lt;lCondition&gt; is
+     true (.T.) at the location of the record pointer.
+
+ <B>Notes</B>
+
+     <B>RDD support</B>:  Not all RDDs support all aspects of the INDEX command.
+     See the "Replaceable Database Driver Architecture" chapter in the
+     Drivers Guide for details on a particular RDD.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example creates a simple order (index) based on
+        one field (Acct):
+
+        USE Customer NEW
+        INDEX ON Customer-&gt;Acct TO CuAcct
+
+     <B>.</B>  This example creates a conditional order (index) based on a
+        FOR clause.  This index will contain only records whose field
+        TransDate contains a date greater than or equal to January 1, 1995:
+
+        USE Invoice NEW
+        INDEX ON Invoice-&gt;TransDate      ;
+           TO InDate      ;
+           FOR ( Invoice-&gt;TransDate &gt;= CTOD( "01/01/95" ) )
+
+     <B>.</B>  This example creates an order in a multiple-order bag (i.e., a
+        tag in
+        an index that can support multiple tags in an index file):
+
+        USE Customer NEW
+        INDEX ON Customer-&gt;Acct TAG CuAcct TO Customer
+
+     <B>.</B>  The following example creates an order that calls a routine,
+        MyMeter, during its creation:
+
+        #define MTR_INCREMENT   10
+
+        USE Customer NEW
+        INDEX ON Customer-&gt;Acct TO CuAcct EVAL ;
+              {|| MYMETER() } EVERY MTR_INCREMENT
+
+        FUNCTION MYMETER()
+
+           STATIC nRecsDone := 0
+
+           nRecsDone := += MTR_INCREMENT
+           ? ( nRecsDone/LASTREC() ) * 100
+
+           RETURN (.T.)
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc26c8.html">CLOSE</A>
+<A HREF="ng1fd41.html">DBCREATEIND()</A>
+<A HREF="ng2a6f6.html">DBORDERINFO()</A>
+<A HREF="ng2db8d.html">DBREINDEX()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

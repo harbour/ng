@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6a8da.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng6b856.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSLOUT()</B>
+ Logs out a print server from a file server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSLOUT(&lt;cPServer&gt;,&lt;cServer1&gt;,[&lt;lImmediate&gt;]</B>
+     <B>   [&lt;lJobMode&gt;],[&lt;cServer2&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is logged
+     out from &lt;cServer1&gt;.
+
+     <B>&lt;cServer1&gt;</B>  Designates the file server from which &lt;cPServer&gt; is
+     logged out.
+
+     <B>&lt;lImmediate&gt;</B>  Designates if the operation is executed immediately
+     (.T.) or if active jobs are completed (.F.).  The default value is .F..
+
+     <B>&lt;nJobMode&gt;</B>  Designates the mode of the job that will be active,
+     according to the following table.  This parameter is only taken into
+     account if &lt;lImmediate&gt; is designated .T..
+
+     <B>Table 27.7:  Job Modes</B>
+     ------------------------------------------------------------------------
+     <B>Value   CTPS.CH        Definition</B>
+     ------------------------------------------------------------------------
+     1       PSJ_RET2Q      Return job to queue
+     2       PSJ_THROWAWAY  Discard job
+     ------------------------------------------------------------------------
+
+     The default value for &lt;nJobMode&gt; is 1.  To return the job to the queue,
+     you must set its service restart flag (see NNETJFLAGS()).
+
+     <B>&lt;cServer2&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer2&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer2&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer2&gt;.
+
+ <B>Returns</B>
+
+     NNETPSLOUT() returns .T. if the function has been executed successfully.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER LOGOUT
+     NNETPSLOUT() performs a logout of &lt;cPServer&gt; from &lt;cServer1&gt;.  After a
+     successful logout, print queues on &lt;cServer1&gt; are no longer serviced by
+     &lt;cPServer&gt;.  NNETPSLOUT() requires operator rights on &lt;cPServer&gt;.
+
+ <B>Example</B>
+
+     Log out the print server PSERVER from file server TOOLS1 (make sure that
+     the active jobs are completed):
+
+     IF NNETPSLIN('PSERVER','TOOLS1')
+        ? 'Logout successful!'
+     ELSE
+        ? 'Error!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6a8da.html">NNETPSLIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

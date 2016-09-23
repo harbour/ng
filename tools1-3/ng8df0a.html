@@ -1,0 +1,189 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8d87a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng89afa.html">[^^Up^^]</A>
+<A HREF="ng8f7c4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DISKFORMAT()</B>
+ Formats disks, controlled through a UDF
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DISKFORMAT(&lt;cDrive&gt;, [&lt;nCapacity&gt;], [&lt;cUDF&gt;],</B>
+     <B>   [&lt;cBootText&gt;], [&lt;nRepetitions&gt;]) --&gt; nErrorCode</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDrive&gt;</B>  Designates the disk drive to format.  Only a floppy drive
+     is permitted.  You may optionally specify a colon (:).
+
+     <B>&lt;nCapacity&gt;</B>  Designates the appropriate disk capacity for the disk
+     you are about to format.  Possible values are 160, 180, 320, 360, and
+     1200 for 5.25"; 720 and 1440 for 3.5" disks.  The default is the maximum
+     drive capacity.
+
+     <B>&lt;cUDF&gt;</B>  Designates the name of a user-defined function call before
+     each format step (track or head change).  The default is no UDF called.
+
+     <B>&lt;cBootText&gt;</B>  This optional parameter designates text, with a maximum
+     of 255 characters, to display if the formatted disk is booted.  The
+     default is described in the "Notes" section on the following page.
+
+     <B>&lt;nRepetitions&gt;</B>  Designates the number of repeat attempts you should
+     make, to format a track before the function aborts.  The default is one
+     repetition.
+
+ <B>Returns</B>
+
+     The function returns 0 when the disk is successfully formatted.
+
+     <B>Table 7-5:  DISKFORMAT() Error Codes</B>
+     ------------------------------------------------------------------------
+     <B>Error Codes  Symb. constants     Definition</B>
+     ------------------------------------------------------------------------
+      0           NO_DISK_ERROR       Format successful
+     -1           DF_WRONG_DRIVE      Illegal drive, only A: and B:  allowed
+     -2           DF_WRONG_DISK_SIZ   kB value not supported
+     -3           DF_INTERRUPTED      Terminated by control UDF
+     -4           DF_WRITE            Write error
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     DISKFORMAT() formats a disk under full CA-Clipper program control, so
+     there is no need for a RUN FORMAT.  You cannot create bootable disks,
+     only data disks.
+
+     Since you can call a separate function (UDF) prior to every track and
+     head change and the respective track and head number are passed, you can
+     construct the visual display of the format process constructed as
+     desired.
+
+     You can only format floppy disks, so even with unforeseen incorrect
+     parameters, your hard disk is safe.  All the standard floppy types are
+     supported -- 160kB, 180kB, 320kB, 360kB, 1.2MB, 720kB, and 1.44MB.
+
+     DISKFORMAT() is useful for formatting disks, at least when the preset
+     repetition rate is retained or decreased.  After an unsuccessful attempt
+     to format a track, the process is repeated one more time.  If this
+     repetition also fails, the entire format is aborted.  If you want to be
+     as safe as possible about the quality of the disk in used, select a
+     repetition rate of 0.
+
+ <B>The Control UDF</B>
+
+     DISKFORMAT() calls the control UDF, which is specified as the third
+     parameter, prior to each head and track change.  Both values, head and
+     track, are passed as a parameter to the function.  As soon as all tracks
+     are formatted and DISKFORMAT() has initialized the FAT and directory
+     area, a value of -1 is passed for both parameters to the UDF.  Please be
+     aware that both parameters must be passed.
+
+     The numeric value returned for UDF can further influence DISKFORMAT():
+
+     <B>Table 7-6:  Control UDF Returned Values</B>
+     ------------------------------------------------------------------------
+     <B>Returned Value    Explanation</B>
+     ------------------------------------------------------------------------
+     0                 Continue format
+     1                 Do not format this track (parameter 1)
+     2                 Abort format
+     ------------------------------------------------------------------------
+
+ <B>Notes</B>
+
+     <B>.</B>  If the defined control UDF does not exist, the function
+        uninstalls itself and triggers a runtime error.  If an error message
+        concerning a missing procedure is required during linking, you can
+        specify EXTERNAL &lt;function&gt; in the program.
+
+     <B>.</B>  If you attempt to boot with a data disk created with
+        DISKFORMAT() and did not designate any other text for the &lt;cBootText&gt;
+        parameter, the following text is displayed:
+
+         "No system disk.  Insert new disk, press any key to continue"
+
+     <B>.</B>  DISKFORMAT() begins to format a disk with the highest track
+        number.  Therefore, an existing FAT and directory label are the last
+        items deleted.
+
+     <B>.</B>  DISKFORMAT() always reformats a track, even if it is already
+        formatted.  Therefore, when a format is successful, all the data is
+        deleted.
+
+     <B>.</B>  Each track is verified again after it is formatted.
+
+     <B>.</B>  After the last track is formatted, the function continues to
+        work a few seconds more.  The FAT and directory must be established
+        and the boot text must be written.
+
+ <B>Examples</B>
+
+     <B>.</B>  An example for formatting a disk in A: drive:
+
+        DISKFORMAT() first determines whether the desired capacity is
+        appropriate for the drive.  The control UDF "CONTROL" is concerned
+        with the display of the track and head that are currently being
+        formatted.  "This is a data diskette" is used as boot text for the
+        disk.  The repeat rate is highly effective at 0.  Only the highest-
+        quality disks are accepted.
+
+        To provide an additional example of the return value for the UDF,
+        only tracks 80 to 11 are formatted here, not the first 10:
+
+        CLEAR
+        cBootText  :=  "This is a data diskette"
+        @ 10, 02 SAY "Track:
+        "@ 11, 02 SAY "Head:
+        "IF FLOPPYTYPE("A:") = 2
+                                      // 1.2 MB disk
+           nErrCode := DISKFORMAT("A:", 1200", CONTROL", cBootText, 0)
+           IF nErrCode = 0
+              ? "Format successful!"
+           ENDIF
+        ENDIF
+        RETURN
+
+        FUNCTION CONTROL(nTrack, nHead)
+           LOCAL nRetval
+           IF Track &gt;= 11
+              @ 10, 08 SAY STR(nTrack)
+              @ 11, 08 SAY STR(nHead)
+              nRetval := 0            // Continue format
+           ELSE
+              nRetval := 2            // Abort
+           ENDIF
+           RETURN(nRetval)
+
+     <B>.</B>  Shown below is another variation of the UDF.  Press the ESC
+        key to abort the format.  If the format is completed, then the
+        function displays the FAT initialization and root directory:
+
+        FUNCTION CONTROL(nTrack, nHead)
+           LOCAL nRetval
+           IF INKEY() = 27
+              nRetval := 2            // Abort
+           ELSE
+              nRetval := 0            // Continue format
+           ENDIF
+           IF nTrack = -1
+              @ 10, 10 SAY "Initializing FAT and Root Directory!"
+           ENDIF
+           RETURN(nRetval)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng92566.html">DRIVETYPE()</A>
+<A HREF="ng9ae6a.html">FLOPPYTYPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

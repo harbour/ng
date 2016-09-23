@@ -1,0 +1,114 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngeec7d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngeffb2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET RELATION</B>
+ Relate two work areas by a key value or record number
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET RELATION TO [&lt;expKey&gt; | &lt;nRecord&gt; INTO &lt;xcAlias&gt;]</B>
+     <B>   [, [TO] &lt;expKey2&gt; | &lt;nRecord2&gt; INTO &lt;xcAlias2&gt;...]</B>
+     <B>   [ADDITIVE]</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;expKey&gt;</B> is an expression that performs a SEEK in the child work
+     area each time the record pointer moves in the parent work area.  For
+     this to work, the child work area must have an index in USE.
+
+     <B>TO &lt;nRecord&gt;</B> is an expression that performs a GOTO to the matching
+     record number in the child work area each time the record pointer moves
+     in the parent work area.  If &lt;nRecord&gt; evaluates to RECNO(), the
+     relation uses the parent record number to perform a GOTO to the same
+     record number in the child work area.  For a numeric expression type of
+     relation to execute correctly, the child work area must not have an
+     index in USE.
+
+     <B>INTO &lt;xcAlias&gt;</B> identifies the child work area and can be specified
+     either as the literal alias name or as a character expression enclosed
+     in parentheses.
+
+     <B>ADDITIVE</B> adds the specified child relations to existing relations
+     already set in the current work area.  If this clause is not specified,
+     existing relations in the current work area are released before the new
+     child relations are set.
+
+     SET RELATION TO with no arguments releases all relations defined in the
+     current work area.
+
+ <B>Description</B>
+
+     SET RELATION is a database command that links a parent work area to one
+     or more child work areas using a key expression, record number, or
+     numeric expression.  Each parent work area can be linked to as many as
+     eight child work areas.  A relation causes the record pointer to move in
+     the child work area in accordance with the movement of the record
+     pointer in the parent work area.  If no match is found in the child work
+     area, the child record pointer is positioned to LASTREC() + 1, EOF()
+     returns true (.T.), and FOUND() returns false (.F.).
+
+     The method of linking the parent and child work areas depends on the
+     type of &lt;expKey&gt; and presence of an active index in the child work area.
+     If the child work area has an active index, the lookup is a standard
+     SEEK.  If the child work area does not have an active index and the type
+     of &lt;expKey&gt; is numeric, a GOTO is performed in the child work area
+     instead.
+
+ <B>Notes</B>
+
+     <B>.  Cyclical relations:</B> Do not relate a parent work area to itself
+        either directly or indirectly.
+
+     <B>.  Soft seeking:</B> SET RELATION does not support SOFTSEEK and
+        always behaves as if SOFTSEEK is OFF even if SOFTSEEK is ON.  This
+        means that if a match is not found in the child work area, the child
+        record pointer is always positioned to LASTREC() + 1.
+
+     <B>.  Record number relations:</B> To relate two work areas based on
+        matching record numbers, use RECNO() for the SET RELATION TO
+        expression and make sure the child work area has no active indexes.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example relates three work areas in a multiple parent-
+        child configuration with Customer related to both Invoices and Zip:
+
+        USE Invoices INDEX Invoices NEW
+        USE Zip INDEX Zipcode NEW
+        USE Customer NEW
+        SET RELATION TO CustNum INTO Invoices, Zipcode INTO Zip
+        LIST Customer, Zip-&gt;City, Invoices-&gt;Number, ;
+                 Invoices-&gt;Amount
+
+     <B>.</B>  Sometime later, you can add a new child relation using the
+        ADDITIVE clause, like this:
+
+        USE BackOrder INDEX BackOrder NEW
+        SELECT Customer
+
+        SET RELATION TO CustNum INTO BackOrder ADDITIVE
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2dfcc.html">DBRELATION()</A>
+<A HREF="ng2f329.html">DBRSELECT()</A>
+<A HREF="ng49aff.html">FOUND()</A>
+<A HREF="ng94e69.html">RECNO()</A>
+<A HREF="nge93ab.html">SET INDEX</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

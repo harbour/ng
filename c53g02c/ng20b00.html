@@ -1,0 +1,33 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng207df.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng18790.html">[^^Up^^]</A>
+<A HREF="ng20ea9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1204:   overlay file &lt;filename&gt; does not match the .EXE file</B>
+
+     <B>Note:</B>  This error can occasionally result from the effects of a
+     virus.  In this case, first try external overlays (via the SECTION INTO
+     xxx command) marking the .EXE read-only, and then follow the procedures
+     outlined below.  If nothing else helps, perform an extensive check for
+     viruses and take the necessary measures for removal.
+
+     <B>Explanation:</B>  This message indicates that when the overlay manager
+     opened the overlay file specified and created at link time, it was not a
+     Blinker overlay file, or it was not prepared at the same time as the
+     currently executing .EXE file.  This indicates that the correct copy of
+     the overlay file has become overwritten by an older version, the newer
+     version cannot be found in the current PATH, or the previous link was
+     terminated before the overlay file was created correctly.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

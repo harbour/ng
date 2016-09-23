@@ -1,0 +1,95 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng348f5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng35adc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSALVAG()</B>
+ Recovers the files marked for deletion
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSALVAG(&lt;cOldFile&gt;,[&lt;cNewFile&gt;]) --&gt; cFile</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOldFile&gt;</B>  Designates the file that is marked for deletion, but
+     depends on the Netware version used.
+
+     Under Netware 3.x, &lt;cFile&gt; designates the file that is  recovered.  The
+     file name can contain a path, but the path must be unique.  Wildcard
+     characters are not allowed.
+
+     Under Netware 2.x, the operating system only permits files to be
+     salvaged sequentially for the entire volume.  If NNETSALVAG() determines
+     that the server is running under Netware 2.x after a server change is
+     implied by &lt;cOldFile&gt;, only the volume definition from the remaining
+     part of &lt;cOldFile&gt; is taken into account.  The first recoverable file is
+     salvaged.
+
+     <B>&lt;cNewFile&gt;</B>  Designates the name under which &lt;cOldFile&gt; is recovered.
+     This parameter is only taken into account if the function is called on a
+     Netware 3.x server.  &lt;cNewFile&gt; can only contain a file name (an eight-
+     character name, and a three-character extension).
+
+ <B>Returns</B>
+
+     NNETSALVAG() returns the name of the file that is recovered.  If an
+     error occurs, the function returns an empty string.
+
+ <B>Description</B>
+
+     NOVELL NET SALVAGE
+     Files on a server volume that are deleted within DOS or within an
+     application are logically marked for deletion.   These files can be
+     recovered with the function NNETSALVAG().  The function is supported
+     differently under Netware 2.x and 3.x.  Under Netware 3.x, files can be
+     salvaged individually.  Under Netware 2.x, only the first recoverable
+     file of the current user on the related volume is salvaged.  Files
+     cannot be recovered individually under Netware 2.x.
+
+ <B>Examples</B>
+
+     <B>.</B>  Salvage the file CLIENT.DBF on a Netware 3.x server:
+
+        NNETMAP('L','FSERVER386/SYS:DATA')
+
+        NNETSALVAG('L:CLIENT.DBF')
+
+     <B>.</B>  Salvage all recoverable files in the directory L:\DATA:
+
+        #include "ctnnet.ch"
+
+        aFiles=NNETSALLST('L:\DATA')
+
+        FOR i=1 TO LEN(aFiles)
+           NNETSALVAG('L:\DATA\'+aFiles[i,SAL_NAME])
+        NEXT i
+
+     <B>.</B>  Salvage all the files of the current user on volume SYS: of a
+        Netware 2.x server:
+
+        WHILE .T.
+           IF EMPTY(cFile:=NNETSALVAG('FSERVER286/SYS:'))
+              EXIT
+           ENDIF
+           ? cFile
+        ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng31a1d.html">NNETPURGE()</A>
+<A HREF="ng348f5.html">NNETSALLST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

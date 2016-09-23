@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng42d3d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng43ea1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHARADD()</B>
+ Adds the corresponding ASCII codes of two strings
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CHARADD(&lt;cString1&gt;,&lt;cString2&gt;) --&gt; cString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString1&gt;</B>  [@]  Designates the character string to which values
+     from a second character string &lt;cString2&gt; are added.
+
+     <B>&lt;cString2&gt;</B>  Designates the character string that is added, character
+     for character, to &lt;cString1&gt;.
+
+ <B>Returns</B>
+
+     The processed character string is returned.
+
+ <B>Description</B>
+
+     You can use CHARADD() to produce simple character string coding.  The
+     function can prove very useful when processes are coded by individual
+     characters in a string.
+
+ <B>Notes</B>
+
+     <B>.</B>  When both character strings are the same length, then the
+        first byte of &lt;cString1&gt; can be linked with the first byte of
+        &lt;cString2&gt;, and the second byte of &lt;cString1&gt; can be linked with the
+        second byte of &lt;cString2&gt;, and so on.  If &lt;cString2&gt; is shorter than
+        &lt;cString1&gt;, then as soon as the last byte of &lt;cString2&gt; is reached,
+        the process continues and starts again with the first byte of
+        &lt;cString2&gt;.  However, if &lt;cString1&gt; is shorter than &lt;cString2&gt;, the
+        process terminates with the end of &lt;cString1&gt;.
+
+     <B>.</B>  Values greater than 256 can result when adding values.  The
+        new value is then formed based on the following formula:
+
+           (ASC(Character1) + ASC(Character2))% 256.
+
+     <B>.</B>  Implementing CSETREF() can suppress the return value for this
+        function to save room in working memory.
+
+ <B>Examples</B>
+
+     <B>.</B>  Add a value of 1 to each character:
+
+        ? CHARADD("01234", CHR(1))        // "12345"
+
+     <B>.</B>  Adding a value of 255 to each character corresponds to
+        subtracting 1:
+
+        ? CHARADD("12345", CHR(255))      // "01234"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3dd95.html">ADDASCII()</A>
+<A HREF="ng4de80.html">CSETREF()</A>
+<A HREF="ng3d0d0.html">Introduction</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

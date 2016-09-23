@@ -1,0 +1,82 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4b951.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng4c464.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHARXOR()</B>
+ Joins corresponding ASCII codes of paired strings using an exclusive OR
+ operation
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CHARXOR(&lt;cString1&gt;,&lt;cString2&gt;) --&gt; cString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString1&gt;</B>  [@]  Designates the character string on which the
+     exclusive OR (XOR) operation is performed.
+
+     <B>&lt;cString2&gt;</B>  Designates the characters that are joined using XOR with
+     &lt;cString1&gt;.
+
+ <B>Returns</B>
+
+     The processed &lt;cString1&gt; is returned.
+
+ <B>Description</B>
+
+     The function performs an exclusive OR operation on each character in
+     &lt;cString1&gt; with the corresponding characters in &lt;cString2&gt;.
+
+     You can use CHARXOR() to code passwords and text.  The advantage of this
+     function is that it can be used for both encryption and decryption.
+
+ <B>Notes</B>
+
+     <B>.</B>  If both character strings are the same length, then the first
+        byte of &lt;cString1&gt; is linked with the first byte of &lt;cString2&gt;, and
+        the second byte of &lt;cString1&gt; is linked with the second byte of
+        &lt;cString2&gt;, etc..  If &lt;cString2&gt; is shorter than &lt;cString1&gt;, then
+        when the last byte of &lt;cString2&gt; is reached, it continues with the
+        first byte of &lt;cString2&gt;.  However, if &lt;cString1&gt; is shorter than
+        &lt;cString2&gt;, the process terminates at the end of &lt;cString1&gt;.
+
+     <B>.</B>  The return value of this function can be suppressed by
+        implementing CSETREF() to save room in working memory.
+
+ <B>Examples</B>
+
+     <B>.</B>  CHARXOR() returns the coded value once.  The password should
+        be as long as possible:
+
+        ? CHARXOR("Secret", "Password")
+
+     <B>.</B>  Call CHARXOR() twice to return the initial value:
+
+        ? CHARXOR(CHARXOR("Secret", "Password"), "Password")
+
+     <B>.</B>  A double encryption is also possible:
+
+        ? CHARXOR(CHARXOR("Secret", "Password"), "A12B44")
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4d41f.html">CRYPT()</A>
+<A HREF="ng43ea1.html">CHARAND()</A>
+<A HREF="ng47245.html">CHAROR()</A>
+<A HREF="ng45fb4.html">CHARNOT()</A>
+<A HREF="ng4de80.html">CSETREF()</A>
+<A HREF="ng3d0d0.html">Introduction</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6ec52.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng6faab.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSPSQ()</B>
+ Determines the list of printers that service a queue
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSPSQ(&lt;cPServer&gt;,&lt;cQueue&gt;,[&lt;cServer1&gt;],[&lt;cServer2&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; cPrinter</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;cQueue&gt;</B>  Designates a print queue.
+
+     <B>&lt;cServer1&gt;</B>  Designates the file server of &lt;cQueue&gt;.  The default
+     value designates the default server.
+
+     <B>&lt;cServer2&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer2&gt;.
+     Therefore, the access rights can therefore depend on the specified file
+     server.  Your workstation must be attached to &lt;cServer2&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer2&gt;.
+
+ <B>Return</B>s
+
+     NNETPSPSQ() returns a character string.  Each character (byte) indicates
+     the number of a print server printer.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER PRINTERS SERVICING QUEUE
+     NNETPSPSQ() determines the numbers of all the printers on &lt;cPServer&gt;
+     that service &lt;cQueue&gt; on &lt;cServer1&gt;.  The list of printers is returned
+     as a character string in which each character specifies a printer
+     number.
+
+ <B>Example</B>
+
+     Display a list that contains the printer number and printer name of all
+     the printers on PSERVER that service QUEUE1 on the default server:
+
+     cPrinters=NNETPSPSQ('PSERVER','QUEUE1')
+
+     FOR i=1 TO LEN(cPrinters)
+        nNum:=ASC(SUBSTR(cPrinters,i,1)
+        ? nNum,NNETPSPNAM('PSERVER',nNum)
+     NEXT i
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6e714.html">NNETPSPNAM()</A>
+<A HREF="ng704ac.html">NNETPSQL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

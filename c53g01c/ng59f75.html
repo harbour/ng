@@ -1,0 +1,150 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng59216.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng5ad22.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GSETCLIP()</B>
+ Define the allowed display area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GSETCLIP([&lt;nX1&gt;, &lt;nY1&gt;, &lt;nX2&gt;, &lt;nY2&gt;]) --&gt; aOldRegion</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nX1&gt;</B> is a numeric value representing the left X-axis (column)
+     position of the region in pixels.
+
+     <B>&lt;nY1&gt;</B> is a numeric value representing the top Y-axis (row) position
+     of the region in pixels.
+
+     <B>&lt;nX2&gt;</B> is a numeric value representing the right X-axis (column)
+     position of the region in pixels.
+
+     <B>&lt;nY2&gt;</B> is a numeric value representing the bottom Y-axis (row)
+     position of the region in pixels.
+
+     Either all parameters should be specified or none.
+
+ <B>Returns</B>
+
+     GSETCLIP() returns an array of four numbers representing the new
+     clipping region if you specify all arguments, and the current region if
+     you specify none.
+
+ <B>Description</B>
+
+     GSETCLIP() limits the active display to a portion of the screen.  This
+     function applies only to CA-Clipper graphic mode functions beginning
+     with "G", such as GRECT(), GLINE(), GBMPDISP().  Text emulation
+     functions such as DEVOUT() and QOUT() are not affected by setting
+     clipping regions.  To enhance redraw speed, clipping of the function for
+     rewriting text in GWRITEAT() graphic mode is simplified.  CA-Clipper
+     graphic mode checks whether each character displayed fits entirely in
+     the clipping region.  If it does, the character is displayed; otherwise,
+     it is not.
+
+ <B>Notes</B>
+
+     The clipping region is initialized to be the entire screen.  To specify
+     maximum clipping (which amounts to eliminating clipping altogether), you
+     need to pass parameters to GSETCLIP() corresponding to the entire
+     screen.  There are two ways to do this:
+
+     <B>.</B>  Save the clipping state immediately after the change.  This is
+        equivalent to the whole screen at that instant:
+
+        SET VIDEOMODE TO LLG_VIDEO_VGA_640_480_16
+        // Retrieve clipping value
+        aMaxClip := GSETCLIP()
+        // Execute clipping
+        GSETCLIP(&lt;nCoord list&gt;)
+        .
+        .
+        .
+        // Your code
+        .
+        .
+        .
+        // Retrieve clipping value
+        GSETCLIP(aMaxClip[1] , aMaxClip[2] , aMaxClip[3] , aMaxClip[4])
+
+     <B>.</B>  Use GMODE() which returns the screen size in pixels:
+
+        // Switch to graphic mode
+        SET VIDEOMODE TO LLG_VIDEO_VGA_640_480_16
+
+        // Perform clipping
+        GSETCLIP(&lt;nCoord list&gt;)
+        .
+        .
+        .
+        // Your code
+        .
+        .
+        .
+        // Retrieve clipping value
+        GSETCLIP(0, 0, ;
+        GMODE()[LLG_MODE_GRAPH_ROW], ;
+        GMODE()[LLG_MODE_GRAPH_COL])
+
+ <B>Examples</B>
+
+     <B>.</B>  This example restricts display to a portion of the screen:
+
+     // Switch to graphic mode
+        SET VIDEOMODE TO LLG_VIDEO_VGA_640_480_16
+
+
+        // Restrict the display region
+        GSETCLIP(100, 100, 300, 300)
+
+        DO WHILE ! (INKEY() == K_ESC)
+           AreaDraw()                 // Call a drawing function
+        ENDDO
+        QUIT                           // End of application
+
+     <B>.</B>  This example stores clipping region parameters for later use:
+
+        // Switch to graphic mode
+        SET VIDEOMODE TO LLG_VIDEO_VGA_640_480_16
+
+        // Retrieve current values
+        aOldRegion := GSETCLIP()
+
+        // Restrict display region to a portion of the screen
+        GSETCLIP(100,100,300,300)
+
+        DO WHILE !(INKEY() == K_ESC)
+           AreaDraw()
+           // Call a function that draws something
+        ENDDO
+
+        // Reset original clipping regions
+        GSETCLIP(aOldRegion[1],;
+           aOldRegion[2],;
+           aOldRegion[3],;
+           aOldRegion[4])
+        QUIT                        // End of application
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng55637.html">GLINE()</A>
+<A HREF="ng59216.html">GRECT()</A>
+<A HREF="ng5cee0.html">GWRITEAT()</A>
+<A HREF="ng4d165.html">GBMPDISP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

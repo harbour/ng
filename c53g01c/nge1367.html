@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngdfd56.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge1808.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET CONFIRM</B>
+ Toggle required exit key to terminate GETs
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET CONFIRM on | OFF | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> requires the user to press an exit key to leave a GET.
+
+     <B>OFF</B> allows the user to leave a GET by typing past the end without
+     pressing an exit key.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET CONFIRM determines whether an exit key is required to leave a GET.
+     If CONFIRM is OFF, the user can type past the end of a GET and the
+     cursor will move to the next GET, if there is one.  If there is not
+     another GET, the READ terminates.  If, however, CONFIRM is ON, an exit
+     key must be pressed to leave the current GET.
+
+     In all cases, attempting to leave the current GET executes the RANGE or
+     VALID clauses, unless the user presses the Esc key.
+
+     See @...GET for more information on the behavior of GETs.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngacf16.html">@...GET</A>
+<A HREF="ngd4eb5.html">READ</A>
+<A HREF="ngdf216.html">SET BELL</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

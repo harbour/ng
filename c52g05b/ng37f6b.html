@@ -1,0 +1,32 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng37ae3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng346a0.html">[^^Up^^]</A>
+<A HREF="ng38297.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>11  Symbol Tables</B>
+------------------------------------------------------------------------------------------
+
+     Clipper maintains symbol information at runtime in order to support
+     symbolic references to variables and functions.  Some symbol
+     information is embedded in the .EXE file (the Clipper 5.0 version of
+     .RTLink eliminates duplication among symbols from compiled Clipper
+     modules).  Other symbols are created dynamically at runtime.
+
+     Memory for symbol tables and related information is allocated using the
+     fixed memory allocator.  The symbols are allocated in blocks and do not
+     fragment memory.  However, excessive dynamic symbol creation (e.g.,
+     large numbers of MEMVAR variables created via macros) may cause the
+     symbol tables to grow, reducing swap space.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

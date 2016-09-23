@@ -1,0 +1,239 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Short Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1d3.html">[^^Up^^]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<A HREF="ng1638e.html"> <B>Release Note #2 -- Clipper 5.01 Change Summary</B></A>
+--------------------------------------------------------------------------------
+ <B>In General</B>
+
+<A HREF="ng16524.html"> 1   Memory Management</A>
+<A HREF="ng1676c.html"> 2   Linker</A>
+<A HREF="ng16840.html"> 3   Debugger</A>
+--------------------------------------------------------------------------------
+ <B>Data Types</B>
+
+<A HREF="ng16986.html"> 4   CHANGED: Maximum Character String Length</A>
+--------------------------------------------------------------------------------
+ <B>Standard Functions</B>
+
+<A HREF="ng16a94.html"> 5   NEW:     ALERT()</A>
+<A HREF="ng16b94.html"> 6   CHANGED: ALLTRIM()</A>
+<A HREF="ng16d2a.html"> 7   NEW:     ATAIL()</A>
+<A HREF="ng16e13.html"> 8   NEW:     DBAPPEND()</A>
+<A HREF="ng16ee8.html"> 9   NEW:     DBCLEARFILTER()</A>
+<A HREF="ng16fd9.html"> 10  NEW:     DBCLEARINDEX()</A>
+<A HREF="ng170b7.html"> 11  NEW:     DBCLEARRELATION()</A>
+<A HREF="ng171af.html"> 12  NEW:     DBCLOSEALL()</A>
+<A HREF="ng17286.html"> 13  NEW:     DBCLOSEAREA()</A>
+<A HREF="ng1735b.html"> 14  NEW:     DBCOMMIT()</A>
+<A HREF="ng1742a.html"> 15  NEW:     DBCOMMITALL()</A>
+<A HREF="ng17500.html"> 16  NEW:     DBCREATEINDEX()</A>
+<A HREF="ng175d9.html"> 17  NEW:     DBDELETE()</A>
+<A HREF="ng176a9.html"> 18  NEW:     DBGOBOTTOM()</A>
+<A HREF="ng17780.html"> 19  NEW:     DBGOTO()</A>
+<A HREF="ng17852.html"> 20  NEW:     DBGOTOP()</A>
+<A HREF="ng17920.html"> 21  NEW:     DBRECALL()</A>
+<A HREF="ng179f0.html"> 22  NEW:     DBREINDEX()</A>
+<A HREF="ng17ac3.html"> 23  NEW:     DBSEEK()</A>
+<A HREF="ng17b8b.html"> 24  NEW:     DBSELECTAREA()</A>
+<A HREF="ng17c63.html"> 25  NEW:     DBSETFILTER()</A>
+<A HREF="ng17d4d.html"> 26  NEW:     DBSETINDEX()</A>
+<A HREF="ng17e39.html"> 27  NEW:     DBSETORDER()</A>
+<A HREF="ng17f13.html"> 28  NEW:     DBSETRELATION()</A>
+<A HREF="ng1800f.html"> 29  NEW:     DBSKIP()</A>
+<A HREF="ng180d7.html"> 30  CHANGED: DBSTRUCT()</A>
+<A HREF="ng181d6.html"> 31  NEW:     DBUNLOCK()</A>
+<A HREF="ng182a6.html"> 32  NEW:     DBUNLOCKALL()</A>
+<A HREF="ng18380.html"> 33  NEW:     DBUSEAREA()</A>
+<A HREF="ng1844f.html"> 34  CHANGED: DEVOUT() color</A>
+<A HREF="ng1854a.html"> 35  CHANGED: DIRECTORY()</A>
+<A HREF="ng18652.html"> 36  NEW:     DISPBEGIN()</A>
+<A HREF="ng18774.html"> 37  NEW:     DISPBOX()</A>
+<A HREF="ng18866.html"> 38  NEW:     DISPEND()</A>
+<A HREF="ng18988.html"> 39  NEW:     DISPOUT() color</A>
+<A HREF="ng18a81.html"> 40  CHANGED: DOSERROR()</A>
+<A HREF="ng18b60.html"> 41  CHANGED: FIELDBLOCK() / FIELDWBLOCK()</A>
+<A HREF="ng18cc9.html"> 42  NEW:     FIELDPOS()</A>
+<A HREF="ng18ddf.html"> 43  NEW:     MLCTOPOS()</A>
+<A HREF="ng18f33.html"> 44  NEW:     MPOSTOLC()</A>
+<A HREF="ng19080.html"> 45  CHANGED: NETERR()</A>
+<A HREF="ng1915a.html"> 46  CHANGED: OS()</A>
+<A HREF="ng19240.html"> 47  CHANGED: RIGHT()</A>
+<A HREF="ng193d1.html"> 48  CHANGED: SCROLL()</A>
+<A HREF="ng19543.html"> 49  CHANGED: SET()</A>
+--------------------------------------------------------------------------------
+ <B>Standard Commands</B>
+
+<A HREF="ng19924.html"> 50  NEW:     @...BOX...COLOR</A>
+<A HREF="ng19a17.html"> 51  NEW:     @...GET...COLOR</A>
+<A HREF="ng19b37.html"> 52  NEW:     @...SAY...COLOR</A>
+<A HREF="ng19c3a.html"> 53  NEW:     @...TO...COLOR</A>
+<A HREF="ng19d2b.html"> 54  CHANGED: DISPLAY TO PRINTER</A>
+<A HREF="ng19e2b.html"> 55  CHANGED: INPUT</A>
+<A HREF="ng19fbd.html"> 56  CHANGED: LIST TO PRINTER</A>
+<A HREF="ng1a0ba.html"> 57  NEW:     SET ALTERNATE...ADDITIVE option</A>
+<A HREF="ng1a201.html"> 58  NEW:     SET PRINTER...ADDITIVE option</A>
+<A HREF="ng1a340.html"> 59  NEW:     USE VIA option</A>
+--------------------------------------------------------------------------------
+ <B>Statements</B>
+
+<A HREF="ng1a4e2.html"> 60  CHANGED: BEGIN SEQUENCE</A>
+--------------------------------------------------------------------------------
+ <B>Preprocessor Directives</B>
+
+<A HREF="ng1a6fd.html"> 61  NEW:     #xcommand | #xtranslate directives</A>
+<A HREF="ng1a882.html"> 62  NEW:     #error directive</A>
+--------------------------------------------------------------------------------
+ <B>Standard Classes</B>
+
+ <B>Error Class</B>
+<A HREF="ng1a988.html"> 63  NEW:     e:severity</A>
+<A HREF="ng1aac7.html"> 64  CHANGED: e:osCode</A>
+
+ <B>Get Class</B>
+<A HREF="ng1acae.html"> 65  NEW:     Get:subscript</A>
+<A HREF="ng1ae91.html"> 66  NEW:     Get:exitState</A>
+<A HREF="ng1b002.html"> 67  NEW:     Get:reader</A>
+<A HREF="ng1b238.html"> 68  NEW:     Get:colorDisp()</A>
+
+ <B>TBrowse Class</B>
+<A HREF="ng1b380.html"> 69  NEW:     TBrowse:insColumn()</A>
+<A HREF="ng1b4d7.html"> 70  NEW:     TBrowse:delColumn()</A>
+<A HREF="ng1b60c.html"> 71  NEW:     TBrowse:invalidate()</A>
+<A HREF="ng1b750.html"> 72  NEW:     TBrowse:leftVisible</A>
+<A HREF="ng1b85c.html"> 73  NEW:     TBrowse:rightVisible</A>
+<A HREF="ng1b96b.html"> 74  CHANGED: Display Behavior</A>
+<A HREF="ng1bac8.html"> 75  NEW:     TBrowse:colWidth()</A>
+
+ <B>TBColumn Class</B>
+<A HREF="ng1bc3a.html"> 76  CHANGED: TBColumn:width</A>
+--------------------------------------------------------------------------------
+ <B>Extend System</B>
+
+<A HREF="ng1bf7c.html"> 77  CHANGED: _parc()</A>
+<A HREF="ng1c0ae.html"> 78  NEW:     _xunlock()</A>
+--------------------------------------------------------------------------------
+ <B>Error System</B>
+
+<A HREF="ng1c1b0.html"> 79  NEW:     EG_NOVARMETHOD, EG_APPENDBLOCK, EG_MEM</A>
+<A HREF="ng1c4d7.html"> 80  CHANGED: Errorsys.prg</A>
+--------------------------------------------------------------------------------
+ <B>Get System</B>
+
+<A HREF="ng1c5eb.html"> 81  CHANGED: Getsys.prg</A>
+<A HREF="ng1c7a7.html"> 82  NEW:     GetReader()</A>
+<A HREF="ng1c8bb.html"> 83  NEW:     GetApplyKey()</A>
+<A HREF="ng1c994.html"> 84  NEW:     GetPreValidate()</A>
+<A HREF="ng1caa0.html"> 85  NEW:     GetPostValidate()</A>
+<A HREF="ng1cba3.html"> 86  NEW:     GetDoSetKey()</A>
+<A HREF="ng1cc88.html"> 87  CHANGED: Parameters to Get:preBlock</A>
+<A HREF="ng1cdc8.html"> 88  CHANGED: Parameters to Get:postBlock</A>
+--------------------------------------------------------------------------------
+ <B>Compiler</B>
+
+<A HREF="ng1cfc2.html"> 89  NEW:     /Z Option</A>
+<A HREF="ng1d0cd.html"> 90  NEW:     Error Messages</A>
+--------------------------------------------------------------------------------
+ <B>The Clipper Debugger</B>
+
+<A HREF="ng1d324.html"> 91  NEW:     INIT.CLD</A>
+<A HREF="ng1d54d.html"> 92  CHANGED: Script File Extensions</A>
+
+ <B>Debugger Commands</B>
+<A HREF="ng1d634.html"> 93  NEW:     Menu Commands</A>
+<A HREF="ng1d807.html"> 94  NEW:     ??</A>
+<A HREF="ng1d943.html"> 95  CHANGED: CALLSTACK</A>
+<A HREF="ng1da6f.html"> 96  CHANGED: DELETE</A>
+<A HREF="ng1db6d.html"> 97  CHANGED: GOTO</A>
+<A HREF="ng1dc4d.html"> 98  REMOVED: INSPECT CALLSTACK</A>
+<A HREF="ng1dd9a.html"> 99  REMOVED: INSPECT WP</A>
+<A HREF="ng1df78.html"> 100 CHANGED: LIST</A>
+<A HREF="ng1e072.html"> 101 REMOVED: NEW</A>
+<A HREF="ng1e18f.html"> 102 CHANGED: NEXT</A>
+<A HREF="ng1e283.html"> 103 CHANGED: NUM</A>
+<A HREF="ng1e3a0.html"> 104 REMOVED: PP</A>
+<A HREF="ng1e47b.html"> 105 CHANGED: PREV</A>
+<A HREF="ng1e563.html"> 106 CHANGED: SPEED</A>
+<A HREF="ng1e653.html"> 107 CHANGED: STEP</A>
+<A HREF="ng1e791.html"> 108 CHANGED: TP</A>
+<A HREF="ng1e87c.html"> 109 CHANGED: VIEW</A>
+<A HREF="ng1e968.html"> 110 CHANGED: WP</A>
+
+ <B>Debugger Keys</B>
+<A HREF="ng1ea53.html"> 111 REMOVED: F3</A>
+<A HREF="ng1ebfb.html"> 112 CHANGED: F6</A>
+<A HREF="ng1ed31.html"> 113 CHANGED: F10</A>
+<A HREF="ng1ee93.html"> 114 REMOVED: Shift-F9</A>
+<A HREF="ng1ef72.html"> 115 NEW:     Alt-X</A>
+<A HREF="ng1f03d.html"> 116 NEW:     Shift-Tab</A>
+
+ <B>Debugger Menus</B>
+<A HREF="ng1f110.html"> 117 CHANGED: File:View/Open</A>
+<A HREF="ng1f1df.html"> 118 CHANGED: File:Quit/Exit</A>
+<A HREF="ng1f305.html"> 119 CHANGED: View:Pre Code, Ex Scr, Line No</A>
+<A HREF="ng1f425.html"> 120 CHANGED: View:Application  Screen/App Screen</A>
+<A HREF="ng1f51f.html"> 121 NEW:     View:Sets</A>
+<A HREF="ng1f629.html"> 122 NEW:     View:Workareas</A>
+<A HREF="ng1f75c.html"> 123 CHANGED: View:Callstack</A>
+<A HREF="ng1f89e.html"> 124 CHANGED: Run:Restart Program/Restart</A>
+<A HREF="ng1f989.html"> 125 REMOVED: Run:Execute New EXE</A>
+<A HREF="ng1fa5c.html"> 126 CHANGED: Run:Animate Program/Animate</A>
+<A HREF="ng1fb47.html"> 127 NEW:     Run:Step</A>
+<A HREF="ng1fc31.html"> 128 NEW:     Run:Trace</A>
+<A HREF="ng1fd24.html"> 129 NEW:     Run:Go</A>
+<A HREF="ng1fe41.html"> 130 NEW:     Run:To Cursor</A>
+<A HREF="ng1ff89.html"> 131 CHANGED: Run:Step Speed/Speed</A>
+<A HREF="ng20066.html"> 132 CHANGED: Watch/Point</A>
+<A HREF="ng20125.html"> 133 REMOVED: Watch:Inspect</A>
+<A HREF="ng202b5.html"> 134 NEW:     Point:Breakpoint</A>
+<A HREF="ng203a8.html"> 135 CHANGED: Monitor Menu</A>
+<A HREF="ng20584.html"> 136 REMOVED: Callstack Menu</A>
+<A HREF="ng2070d.html"> 137 NEW:     Options Menu</A>
+<A HREF="ng20ba3.html"> 138 NEW:     Window Menu</A>
+<A HREF="ng20d00.html"> 139 NEW:     Help Menu</A>
+
+ <B>Debugger Windows</B>
+<A HREF="ng20e12.html"> 140 NEW:     Window Operations</A>
+<A HREF="ng2106c.html"> 141 CHANGED: Code Window</A>
+<A HREF="ng2117b.html"> 142 NEW:     Monitor Window</A>
+<A HREF="ng21336.html"> 143 CHANGED: Watch Window</A>
+<A HREF="ng214c7.html"> 144 CHANGED: Callstack Window</A>
+<A HREF="ng2162d.html"> 145 CHANGED: Command Window</A>
+<A HREF="ng21921.html"> 146 CHANGED: Help Window</A>
+<A HREF="ng21a8c.html"> 147 NEW:     View Sets Window</A>
+<A HREF="ng21bcf.html"> 148 CHANGED: View Workareas Window</A>
+<A HREF="ng21dce.html"> 149 NEW:     Set Colors Window</A>
+--------------------------------------------------------------------------------
+ <B>Runtime Environment</B>
+
+<A HREF="ng21f2a.html"> 150 NEW:     TEMPPATH, NOIDLE</A>
+<A HREF="ng22224.html"> 151 REMOVED: XHEAP, DYNK</A>
+--------------------------------------------------------------------------------
+ <B>Sample Programs</B>
+
+<A HREF="ng22329.html">152 CHANGED:  Array.prg</A>
+<A HREF="ng224f4.html">153 CHANGED:  Browse.prg</A>
+<A HREF="ng227bd.html">154 CHANGED:  Box.prg</A>
+<A HREF="ng228ad.html">155 NEW:      Dict.prg</A>
+<A HREF="ng22bbd.html">156 INCLUDED: EXAMPLEA.ASM</A>
+<A HREF="ng22d23.html">157 INCLUDED: EXAMPLEC.C</A>
+<A HREF="ng22e24.html">158 CHANGED:  Examplep.prg</A>
+<A HREF="ng22f94.html">159 CHANGED:  Fileio.prg</A>
+<A HREF="ng231df.html">160 CHANGED:  Gauge.prg</A>
+<A HREF="ng232ca.html">161 CHANGED:  Omenu.prg</A>
+<A HREF="ng23395.html">162 CHANGED:  Print.prg</A>
+<A HREF="ng235d2.html">163 CHANGED:  Stack.prg</A>
+<A HREF="ng2371f.html">164 CHANGED:  Tbdemo.prg</A>
+<A HREF="ng2384b.html">165 CHANGED:  Time.prg</A>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

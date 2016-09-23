@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng203d2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng20df9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBREINDEX()</B>
+ Recreate all active indexes for the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBREINDEX() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DBREINDEX() always returns NIL.
+
+ <B>Description</B>
+
+     DBREINDEX() rebuilds all active indexes associated with the current work
+     area.  After the indexes are recreated, the work area is moved to the
+     first logical record in the controlling order.
+
+     DBREINDEX() performs the same function as the standard REINDEX command.
+     For more information, refer to the REINDEX command.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example reindexes the work area:
+
+        cLast := "Winston"
+        DBUSEAREA( .T., "DBFNTX", "Sales", "Sales", .T. )
+        DBSETINDEX( "LASTNAME" )
+        //
+        IF ( Sales-&gt;(DBSEEK(cLast)) )
+           IF RLOCK()
+              DELETE FOR Sales-&gt;LastName == "Winston"
+              Sales-&gt;( DBREINDEX() )
+           ELSE
+              ? "Unable to lock record..."
+           ENDIF
+        ELSE
+           ? "Not found"
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng16369.html">DBCLEARIND()</A>
+<A HREF="ng19248.html">DBCREATEIND()</A>
+<A HREF="ng24195.html">DBSETINDEX()</A>
+<A HREF="ng2498c.html">DBSETORDER()</A>
+<A HREF="ng93235.html">REINDEX</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

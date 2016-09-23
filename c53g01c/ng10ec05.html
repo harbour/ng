@@ -1,0 +1,140 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng10e2d2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngfbcd2.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>STATIC</B>
+ Declare and initialize static variables and arrays
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>STATIC &lt;identifier&gt; [[:= &lt;initializer&gt;], ... ]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;identifier&gt;</B> is the name of the variable or array to declare static.
+     If the &lt;identifier&gt; is followed by square brackets ([ ]), it is created
+     as an array.  If the &lt;identifier&gt; is an array, the syntax for specifying
+     the number of elements for each dimension can be array[&lt;nElements&gt;,
+     &lt;nElements2&gt;,...] or array[&lt;nElements&gt;] [&lt;nElements2&gt;]...  The maximum
+     number of elements is 4096.  The maximum number of dimensions is limited
+     only by available memory.
+
+     <B>&lt;initializer&gt;</B> is the optional assignment of a value to a new static
+     variable.  An &lt;initializer&gt; for a static variable consists of the inline
+     assignment operator (:=) followed by a compile-time constant expression
+     consisting entirely of constants and operators or a literal array.  If
+     no explicit &lt;initializer&gt; is specified, the variable is given an initial
+     value of NIL.  In the case of an array, each element is NIL.  Array
+     identifiers cannot be given values with an &lt;initializer&gt;.
+
+     <B>Note: </B> The macro operator (&amp;) cannot be used in a STATIC declaration
+     statement.
+
+ <B>Description</B>
+
+     The STATIC statement declares variables and arrays that have a lifetime
+     of the entire program but are only visible within the entity that
+     creates them.  Static variables are visible only within a procedure or
+     user-defined function if declared after a PROCEDURE or FUNCTION
+     statement.  Static variables are visible to all procedures and functions
+     in a program (.prg) file (i.e., have filewide scope) if they are
+     declared before the first procedure or user-defined function definition
+     in the file.  Use the /N compiler option to compile a program with
+     filewide variable scoping.
+
+     All static variables in a program are created when the program is first
+     invoked, and all values specified in a static &lt;initializer&gt; are assigned
+     to the variable before the beginning of program execution.
+
+     Declarations of static variables within a procedure or user-defined
+     function must occur before any executable statement including PRIVATE,
+     PUBLIC, and PARAMETERS.  If a variable of the same name is declared
+     FIELD, LOCAL, or MEMVAR within the body of a procedure or user-defined
+     function, a compiler error occurs and no object (.OBJ) file is
+     generated.
+
+     The maximum number of static variables in a program is limited only by
+     available memory.
+
+ <B>Notes</B>
+
+     <B>.  Inspecting static variables within the Debugger:</B> To access
+        static variable names within the CA-Clipper debugger, you must
+        compile program (.prg) files using the /B option so that static
+        variable information is included in the object (.OBJ) file.
+
+     <B>.  Macro expressions:</B> You may not refer to static variables
+        within macro expressions or variables.  If a static variable is
+        referred to within a macro expression or variable, a private or
+        public variable of the same name will be accessed instead.  If no
+        such variable exists, a runtime error will be generated.
+
+     <B>.  Memory files:</B> Static variables cannot be SAVED to or RESTOREd
+        from memory (.mem) files.
+
+     <B>.  Type of a static local variable:</B> Since TYPE() uses the macro
+        operator (&amp;) to evaluate its argument, you cannot use TYPE() to
+        determine the type of a local or static variable or an expression
+        containing a local or static variable reference.  The VALTYPE()
+        function provides this facility by evaluating the function argument
+        and returning the data type of its return value.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example declares static variables both with and without
+        initializers:
+
+        STATIC aArray1[20, 10], aArray2[20][10]
+        STATIC cVar, cVar2
+        STATIC cString := "my string", var
+        STATIC aArray := {1, 2, 3}
+
+     <B>.</B>  This example manipulates a static variable within a user-
+        defined function.  In this example, a count variable increments
+        itself each time the function is called:
+
+        FUNCTION MyCounter( nNewValue )
+           STATIC nCounter := 0         // Initial value assigned once
+           IF nNewValue != NIL
+              nCounter:= nNewValue      // New value for nCounter
+           ELSE
+              nCounter++                // Increment nCounter
+           ENDIF
+           RETURN nCounter
+
+     <B>.</B>  This example demonstrates a static variable declaration that
+        has filewide scope.  In this code fragment, aArray is visible to both
+        procedures that follow the declaration:
+
+        STATIC aArray := {1, 2, 3, 4}
+
+        FUNCTION One
+           ? aArray[1]                  // Result: 1
+           RETURN NIL
+
+        FUNCTION Two
+           ? aArray[3]                  // Result: 3
+           RETURN NIL
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng10316b.html">FUNCTION</A>
+<A HREF="ng106eaa.html">LOCAL</A>
+<A HREF="ng108d37.html">PARAMETERS</A>
+<A HREF="ng10989f.html">PRIVATE</A>
+<A HREF="ng10a778.html">PROCEDURE</A>
+<A HREF="ng10cb5c.html">PUBLIC</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb3cfd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ZAP</B>
+ Remove all records from the current database file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ZAP</B>
+
+ <B>Description</B>
+
+     ZAP is a database command that permanently removes all records from
+     files open in the current work area.  This includes the current database
+     file, index files, and associated memo file.  Disk space previously
+     occupied by the ZAPped files is released to the operating system.  ZAP
+     performs the same operation as DELETE ALL followed by PACK but is almost
+     instantaneous.
+
+     To ZAP in a network environment, the current database file must be USEd
+     EXCLUSIVEly.  Refer to the Network Programming chapter in the
+     Programming and Utilities guide for more information.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates a typical ZAP operation in a network
+        environment:
+
+        USE Sales EXCLUSIVE NEW
+        IF !NETERR()
+           SET INDEX TO Sales, Branch, Salesman
+           ZAP
+           CLOSE Sales
+        ELSE
+           ? "Zap operation failed"
+           BREAK
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng85cb0.html">DELETE</A>
+<A HREF="ng90b67.html">PACK</A>
+<A HREF="ngb1e6f.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

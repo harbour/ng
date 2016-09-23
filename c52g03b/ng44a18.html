@@ -1,0 +1,116 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng446f0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng455fe.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FIELD</B>
+ Field (column) definitions
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct _FIELD_</B>
+     <B>{</B>
+     <B>   USHORT type;</B>
+     <B>   USHORT typeExtended;</B>
+     <B>   USHORT len;</B>
+     <B>   USHORT dec;</B>
+     <B>   USHORT area;</B>
+     <B>   FARP   sym;</B>
+     <B></B>
+     <B>   struct _FIELD_ * next;</B>
+     <B></B>
+     <B>} FIELD;</B>
+     <B></B>
+     <B>typedef FIELD far * FIELDP;</B>
+
+ <B>Notes</B>
+
+     The pointer to an array of FIELD structures is contained in the basic
+     workarea structure.  Each field is created by a call to the addField()
+     method for a given RDD.
+
+ <B>Elements</B>
+
+     <B>type</B>
+
+        Contains a literal constant indicating the column's CA-Clipper data
+        type.  The numeric constants used to indicate the data types are
+        defined in Extend.api and have the following meanings:
+
+        <B>FIELD Data Types</B>
+        ---------------------------------------------------------------------
+        <B>Constant     Meaning</B>
+        ---------------------------------------------------------------------
+        CHARACTER    A CA-Clipper character value
+        DATE         A CA-Clipper date value
+        DOUBLE       A CA-Clipper numeric value stored as an XDOUBLE by the
+                     Extend System
+        LOGICAL      A CA-Clipper logical value
+        MEMO         A CA-Clipper memo value
+        NUMERIC      A CA-Clipper numeric value stored as a LONG by the
+                     Extend System
+        UNDEF        The CA-Clipper NIL value
+        ---------------------------------------------------------------------
+
+     <B>typeExtended</B>
+
+        Contains a numeric value indicating a user defined column type.  This
+        member is used to provide support for column types not supported by
+        CA-Clipper's default database (.dbf) file format.  The intrinsically
+        supported column types are Character, Numeric, Date, Logical, and
+        Memo.  A non-zero value in this field indicates that the column type
+        is not one of the intrinsically supported types.  This allows the RDD
+        to support column types that are not intrinsically understood by
+        CA-Clipper.  Extended types must be translated into CA-Clipper types
+        by the RDD and typeExtended values are defined by the RDD.
+
+     <B>len</B>
+
+        Contains a numeric value representing the overall length of the
+        column.  RDDs supporting floating point column types should include
+        the decimal point in this value.  By convention, variable length
+        columns should store a zero (0) in this element.
+
+     <B>dec</B>
+
+        Contains a numeric value indicating the number of places to the right
+        of the decimal point.  This element is only meaningful when the
+        column is a floating point value.
+
+     <B>area</B>
+
+        Contains a numeric value indicating the workarea in which the field
+        resides.  The CA-Clipper runtime system uses this field to reference
+        the appropriate workarea.
+
+     <B>sym</B>
+
+        Contains a character data type value representing the column and
+        workarea to the runtime system.  The CA-Clipper runtime system will
+        interpret runtime requests (get or set actions) to this symbol as a
+        call to the your driver.
+
+     <B>next</B>
+
+        Reserved for possible future use.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   WORKAREA
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455fe.html">WORKAREA</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

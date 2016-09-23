@@ -1,0 +1,106 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Coding for protected mode</B>
+------------------------------------------------------------------------------
+
+
+ <B>Converting your code</B>
+
+ The major point on converting your code is that the higher level the
+ language, the easier it is to convert your code. High level languages such
+ as CA-Clipper require no code changes whatsoever as the code actually
+ executing is contained in the CLIPPER.LIB file itself. Medium level
+ languages such as C, PASCAL, FORTRAN etc in their pure form also require no
+ code changes. Almost the only time changes are needed is when the programmer
+ has hard coded direct access to system resources, such as using an absolute
+ pointer to a video buffer.
+
+ This type of code needs to be adapted slightly to store and use the pointer
+ in a variable which is set up at the beginning of the program. For example,
+ in the case of video writes, a system call would be made at start up to set
+ up a pointer to the video buffer. This would either be an absolute pointer
+ if the program is in real mode, or a selector if the program is in protected
+ mode. From then on, all video memory accesses are made using the same
+ pointer, regardless of the processor mode, so there is no further overhead
+ in code or execution time.
+
+ Assembly code is the most likely to require conversion, as it provides
+ direct access to system resources which may not be available in protected
+ mode. The code requiring conversion is similar in nature to that previously
+ described, it is simply more likely to be prevalent in assembly code.
+
+ A final construct requiring conversion relates to segment addresses. In
+ protected mode segments are not allocated sequentially and are not
+ contiguous, thus comparison of segment addresses is invalid. For example,
+ sequential allocation of segments from the DOS extender will at best produce
+ selectors separated by an increment of 8, and at worst produce them in a
+ seemingly random sequence. This is because the selectors are simply pointers
+ into an array known as a descriptor table, and the low three bits of the
+ selector are used to store control information. For more details see the
+ DosGetHugeShift() function in Chapter 10.
+
+ To put this conversion process in perspective, in case it sounds an enormous
+ task, we recently converted Blinker to run in dual mode. Blinker currently
+ consists of approximately 60,000 lines (4MB) of pure assembly code, which is
+ the worst kind of code to convert. The whole conversion to run in dual mode,
+ ie normal DOS mode OR protected mode under our own extender, took one
+ programmer less than a day. The code is now totally compatible with both
+ modes with no conditionally compiled code, and the extra overhead is less
+ than 100 lines called at various initialisation points at the beginning of
+ the program.
+
+ Debugging under protected mode makes the detection of code to convert
+ relatively simple, just run the code and see where it stops with a
+ protection exception. Typically an error message will be displayed
+ indicating the location and type of the error, and the program will return
+ to DOS. When running under Windows 3.x or OS/2 2.x this can be done many
+ times without requiring a reboot of the machine.
+
+ <B>Special considerations for protected mode code</B>
+
+ Incompatibilities with protected mode usually arise from certain
+ restrictions which were designed into the processor to provide better
+ protection and isolation between multiple programs running on the same
+ processor. High level language compilers can often detect code which will
+ break these restrictions, while other disallowed constructs will only become
+ apparent when the code is actually executed at run time. Restrictions on
+ coding techniques include :
+
+    .  Attempts to access addresses outside (i.e. past the end of) valid
+       segments will cause a protection exception.
+    .  Attempts to directly modify code during execution, or to directly
+       execute data, will cause a protection exception.
+    .  Using segment registers for any other purpose than as segment
+       registers. Some code uses the segment registers as a temporary store
+       rather than writing it to memory. Whenever the value of a segment
+       register is modified the value must be a valid selector or a
+       protection exception will occur.
+    .  Performing real mode address arithmetic e.g. pointer normalisation,
+       since segments are no longer contiguous or even adjacent. This usually
+       occurs when managing data items larger than 64kb, and must be
+       re-programmed.
+    .  All pointers to data buffers which will be passed to real mode code,
+       such as when issuing a software interrupt or communicating with a TSR,
+       must be valid real mode addresses, so the buffers must have been
+       allocated from real memory below 1 MB. The only exceptions to this are
+       the DOS INT 21 function calls which are handled transparently.
+
+ It should be emphasised again that occurrences of these coding constructs
+ are definitely the exception rather than the rule, and that the higher level
+ the language, the less likely one of these constructs is to occur.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

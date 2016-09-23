@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb5b3e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb0492.html">[^^Up^^]</A>
+<A HREF="ngb61fd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>KSETINS()</B>
+ Queries/sets the system setting for "INSERT"
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>KSETINS([&lt;lNewSwitch&gt;]) --&gt; lOldSwitch</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lNewSwitch&gt;</B>  Designates whether INSERT is on (.T.) or off (.F.).
+     The default value is the system setting.
+
+ <B>Returns</B>
+
+     KSETINS() returns the current setting for INSERT when no parameter is
+     specified; otherwise, it returns the previous setting.
+
+ <B>Description</B>
+
+     KSETINS() returns the current system setting for INSERT.  If the
+     &lt;lNewSwitch&gt; is specified; INSERT is set accordingly.
+
+ <B>Examples</B>
+
+     <B>.</B>  Query the INSERT function:
+
+        lInsert: = KSETINS()
+
+     <B>.</B>  Switch on INSERT and save the previous status:
+
+        lOldInsert: = KSETINS(.T.)
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb5b3e.html">KSETCAPS()</A>
+<A HREF="ngb61fd.html">KSETNUM()</A>
+<A HREF="ngb6565.html">KSETSCROLL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

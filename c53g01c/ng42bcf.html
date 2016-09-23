@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng42616.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng431be.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FCOUNT()</B>
+ Return the number of fields in the current .dbf file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FCOUNT() --&gt; nFields</B>
+
+ <B>Returns</B>
+
+     FCOUNT() returns the number of fields in the database file in the
+     current work area as an integer numeric value.  If there is no database
+     file open, FCOUNT() returns zero.
+
+ <B>Description</B>
+
+     FCOUNT() is a database function.  It is useful in applications
+     containing data-independent programs that can operate on any database
+     file.  These include generalized import/export and reporting programs.
+     Typically, you use FCOUNT() to establish the upper limit of a FOR...NEXT
+     or DO WHILE loop that processes a single field at a time.
+
+     By default, FCOUNT() operates on the currently selected work area.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates FCOUNT(), returning the number of
+        fields in the current and an unselected work area:
+
+        USE Sales NEW
+        USE Customer NEW
+        ? FCOUNT()                     // Result: 5
+        ? Sales-&gt;(FCOUNT())            // Result: 8
+
+     <B>.</B>  This example uses FCOUNT() to DECLARE an array with field
+        information:
+
+        LOCAL aFields := ARRAY(FCOUNT())
+        AFIELDS(aFields)
+
+     <B>.</B>  This example uses FCOUNT() as the upper boundary of a FOR loop
+        that processes the list of current work area fields:
+
+        LOCAL nField
+        USE Sales NEW
+        FOR nField := 1 TO FCOUNT()
+           ? FIELD(nField)
+        NEXT
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9ba7.html">AFIELDS()*</A>
+<A HREF="ng45816.html">FIELDNAME()</A>
+<A HREF="nga5f08.html">TYPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

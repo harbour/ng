@@ -1,0 +1,101 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4d5d3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng4e7d6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJSRV()</B>
+ Sets or determines the target or the processing print server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJSRV(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;cNewPServer&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; cPServer</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;cNewPServer&gt;</B>  Designates an optional parameter that contains a new
+     target print server that is set for &lt;nJob&gt;.  If &lt;nJob&gt; is already in
+     service on another print server, this parameter is meaningless.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     If &lt;nJob&gt; is not yet in service, NNETJSRV() returns the name of the new
+     target print server.  If an error occurs or if no specific printer is
+     set, the function returns an empty string.  With NNETERROR(), you can
+     determine if an error occurred.
+
+     If &lt;nJob&gt; is already in service, NNETJSRV() returns the name of the
+     processing print server.
+
+ <B>Description</B>
+
+     NOVELL NET JOB SERVER
+     The Queue Management System (QMS) allows you to set a target server for
+     each print job.  If more than one print server has access to &lt;cQueue&gt;,
+     you can define a specific print server for &lt;nJob&gt;.  To allow any print
+     server to process &lt;nJob&gt;, an empty string must be passed for
+     &lt;cNewPServer&gt;.  You can query the current target print server by calling
+     NNETJSRV() without a value for &lt;cNewPServer&gt;.
+
+     The required job is specified by its job number.  The job number has
+     nothing to do with the logical position of a job within a queue; for
+     example, the job with the highest priority in a queue is not
+     automatically job number 1.  The job number must be determined with
+     NNETCAPJOB() or NNETJLIST().
+
+ <B>Examples</B>
+
+     <B>.</B>  Query the target or the processing server for the first job in
+        the queue LINEPRINTER:
+
+        nJob=BIN2I(SUBSTR(NNETJLIST('LINEPRINTER'),5,2))
+        ? NNETJSRV('LINEPRINTER', nJob)
+
+     <B>.</B>  Set the target server for the first job in the queue
+        LINEPRINTER to PSERVER:
+
+        nJob=BIN2I(SUBSTR(NNETJLIST('LINEPRINTER'),5,2))
+        ? NNETJPOINT('LINEPRINTER', nJob, 'PSERVER')
+
+     <B>.</B>  Reset the target server for the first job in the queue
+        LINEPRINTER:
+
+        nJob=BIN2I(SUBSTR(NNETJLIST('LINEPRINTER'),5,2))
+        ? NNETJSRV('LINEPRINTER', '')
+
+     <B>.</B>  Wait until the first job in the queue LINEPRINTER is serviced,
+        and then display the name of the processing server:
+
+        nJob=BIN2I(SUBSTR(NNETJLIST('LINEPRINTER'),5,2))
+        DO WHILE .NOT. NNETJWORK('LINEPRINTER', nJob)
+        ENDDO
+        ? NNETJSRV('LINEPRINTER', nJob)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng50d90.html">NNETJWORK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

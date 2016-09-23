@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng72009.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng72c6c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSSTAT()</B>
+ Determines a print server.s status
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSSTAT(&lt;cPServer&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nStatus</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSSTAT() returns the status of &lt;cPServer&gt;:
+
+     <B>Table 27.14:  Return Values of NNETPSSTAT()</B>
+     ------------------------------------------------------------------------
+     <B>Value   CTPS.CH        Definition </B>
+     ------------------------------------------------------------------------
+     -1                     Call error
+     0       PSTAT_RUNNING  Normal operation mode
+     1       PSTAT_GO_DOWN  Deinitialization phase
+     2       PSTAT_DOWN     Deinitialized
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER STATUS
+     NNETPSSTAT() allows you to determine if &lt;cPServer&gt; is running in the
+     normal operation mode or if its availability is going to end.
+
+ <B>Example</B>
+
+     Determine and display the status of print server PSERVER:
+
+     #include "ctps.ch"
+
+     nStatus=NNETPSSTAT('PSERVER')
+     DO CASE
+        CASE nStatus=PSTAT_RUNNING
+           ? 'Normal operation mode!'
+        CASE nStatus=PSTAT_GO_DOWN
+           ? 'Deinitialization phase!'
+        CASE nStatus=PSTAT_DOWN
+           ? 'Deinitialized!'
+        OTHERWISE
+           ? 'Error!'
+     ENDCASE
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng65deb.html">NNETPSDOWN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng222fe.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng22bc8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIMEMAVL()                   Get CA-Clipper total free dynamic memory</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get CA-Clipper total free dynamic memory</B></U>
+
+ <U>Syntax   : <B>nlValue = BLIMEMAVL()</B></U>
+
+ <U>Return   : <B>Total available memory in bytes.</B></U>
+
+ This function returns the total dynamic memory available in bytes in the
+ CA-Clipper free pool. Dynamic memory is the memory used by CA-Clipper to
+ store all temporary values of variables and buffers while an application is
+ running.
+
+ Note that the CA-Clipper Summer '87 free pool is allocated from DOS on an
+ 'as-needed' basis, and unless MEMORY(0), BLIMEMPAK(-1) or BLIMEMBLK() are
+ executed (which cause CA-Clipper to allocate all available memory to the
+ free pool from DOS), the value returned by this function will reflect only
+ the currently allocated free pool.
+
+ Example:
+
+    <B>* Get the total available memory</B>
+    <B>*</B>
+    <B>? "There are", BLIMEMAVL()</B>
+    <B>?? " bytes available in CA-Clipper's free pool"</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng242f6.html">BLIMEMUSE()</A>
+<A HREF="ng2318f.html">BLIMEMMAX()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

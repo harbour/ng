@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng21e08.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng2286b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_Compress():</B>
+
+  Syntax:   Sx_Compress( &lt;cString&gt; )
+
+            cString = String of data to be compressed.
+
+  Returns:  A string containing the data compressed from cString.  If the
+            value passed to Sx_Compress() is not a character string, that
+            same value (unchanged) is returned.
+
+  Description:  Sx_Compress() and its related function Sx_Decompress()
+                provide an easy way to create and restore compressed
+                data.  Any valid string data can be handled by these
+                functions.  Memory requirements are very minimal.  Only
+                9k plus the size of the string is required to compress
+                and decompress the data.
+
+                The compression method utilized is a modified LZSS
+                algorithm.  This algorithm provides for a good balance
+                of speed and compression.
+
+                This function is the compression engine that is used in
+                Sx_File2BLOB() and Sx_BLOB2File().
+
+  Example:
+
+    // Routine to compress memo field contents (text) in entire .FPT
+
+    USE test VIA "SIXCDX"   // Open TEST.DBF and TEST.FPT
+    dbGoTop()               // Make sure we're at the top
+
+    WHILE !eof()
+      test-&gt;NOTES := <B>Sx_Compress( test-&gt;NOTES )</B>  // Compress NOTES field
+      dbSkip()                                   // Go to next record
+    ENDDO
+
+    Sx_MemoPack()  // Pack .FPT file to purge all of the newly freed blocks
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2397c.html">Sx_Decompress()</A>
+<A HREF="ng26d07.html">Sx_FCompress()</A>
+<A HREF="ng271f6.html">Sx_FDecompress()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

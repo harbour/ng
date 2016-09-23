@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng498b5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4a086.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>found()</B>
+ Determine outcome of the last search operation
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE found(</B>
+     <B>                  AREAP wa,</B>
+     <B>                  BOOLP isFound</B>
+     <B>               )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>isFound</B> determines the status of the last search operation.
+
+ <B>Description</B>
+
+     found() obtains the status of the last search operation for wa.  In the default
+     database driver, search operations are defined as seek() calls.  This
+     method provides the return value of the CA-Clipper FOUND() function.
+
+ <B>Default Behavior</B>
+
+     Copies wa-&gt;fFound to isFound.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Determine the setting of wa-&gt;fFound (if it is not
+        automatically set by your seek() implementation) and then call
+        SUPER_FOUND().
+
+     <B>.</B>  If your RDD supports relations, update relations with a
+        forceRel() prior to determining wa-&gt;fFound status.
+
+     <B>Warning!  isFound</B> must point to one byte of allocated memory.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng58f71.html">forceRel()</A>
+<A HREF="ng4b4dd.html">seek()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

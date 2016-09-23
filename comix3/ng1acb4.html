@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1a910.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng19942.html">[^^Up^^]</A>
+<A HREF="ng1b1e4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>What's the most efficient way to eliminate deleted records?</B>
+
+The elimDel() function provided below will quickly eliminate all deleted
+records:
+
+    *   Quickly eliminate all deleted records from any existing filter
+    function elimDel()
+        local rlp
+
+        *   If we have a filter RecordList (nothing to do if we don't)
+        if (rlGetFilter() &lt;&gt; 0)
+
+            *   Get a RecordList of all deleted records (only keys in delOnly
+            *   are those for deleted records)
+            rlSetLoHi(rlp := rlNew(), NIL, NIL, ordNumber("delOnly"))
+
+            *   NOT this to get has only records which are NOT deleted
+            rlp := rlNot(rlp)
+
+            *   AND with filter condition, so we have only NOT deleted recs
+            rlAnd(rlGetFilter(), rlp)
+        endif
+    return nil
+
+In order to use this function, you will need to set up the delOnly tag:
+
+    *   Set up the index
+    index on ' ' tag delOnly for deleted()
+
+Here's an example of using this function:
+
+    cmFilter("age &lt; 25 .and. last = 'J'")
+    elimDel()
+
+CmFilter() will quickly find only those records meeting the condition.
+ElimDel() will then eliminate all deleted records from the Filter
+RecordList.
+
+You can set up your own function which will automatically do this (or even
+modify the source for cmFilter() provided in cmFilt.prg).  For example:
+
+    function myFilter(cCond)
+        cmFilter(cCond)
+        elimDel()
+    return nil
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

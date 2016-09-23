@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2c1d9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2cc6c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosFreeSelector()             Free selector allocated with DosMapRealSeg(), DosCreateCSAlias() or DosCreateDSAlias()</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Free a selector allocated with DosMapRealSeg(),</B></U>
+            <B>DosCreateCSAlias() or DosCreateDSAlias()</B>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosFreeSelector(SEL selector);</B></U>
+
+ <U>selector   <B>Selector allocated through DosMapRealSeg(), DosCreateCSAlias() or</B></U>
+            <B>DosCreateDSAlias().</B>
+
+ <U>Return   : <B>None</B></U>
+
+ This function is used to free alias selectors (created with
+ DosCreateDSAlias() or DosCreateCSAlias()) or selectors created using
+ DosMapRealSeg(), and should not be used to free any other type of selector.
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B></B>
+    <B>#define VID_BUF 0xB800</B>
+    <B>#define VID_SIZE 0x8000l</B>
+    <B></B>
+    <B>unsigned char far *VideoBuffer;</B>
+    <B>void main (void)</B>
+    <B>{</B>
+    <B>SEL         selector;</B>
+    <B>ULONG       screen_address;</B>
+    <B>/* Get a selector that corresponds to the screen buffer */</B>
+    <B>if (DosMapRealSeg(VID_BUF,VID_SIZE,&amp;selector) != 0)</B>
+    <B>   {</B>
+    <B>   printf("Unable to map screen segment\n");</B>
+    <B>   exit(255);</B>
+    <B>   }</B>
+    <B>VideoBuffer = MK_FP(selector,0);</B>
+    <B>*VideoBuffer[0] = "X";        /* Write to screen */</B>
+    <B>if (DosFreeSelector(selector)==0)</B>
+    <B>   printf("Video buffer selector now invalid\n");</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2bc8a.html">DosFreeRealSeg()</A>
+<A HREF="ng2c1d9.html">DosFreeSeg()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

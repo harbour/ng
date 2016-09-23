@@ -1,0 +1,103 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4dca5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng4ec5c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SET FILTER:</B>
+
+  Syntax:
+
+  <B>SET FILTER TO [&lt;lCondition&gt;] [NOOPTIMIZE]</B>
+
+  <B>&lt;lCondition&gt;</B> is a logical expression that defines a specific set of
+  current work area records accessible for processing.
+
+  <B>NOOPTIMIZE</B>, preempts optimization and forces default Clipper processing.
+
+  <B>SET FILTER TO</B> without an argument deactivates the filter condition.
+
+  <B>Description:</B>
+
+  When a FILTER condition is SET, the current work area acts as if it
+  contains only the records that match the specified condition.  A filter
+  condition is one of the properties of a work area.  Once a FILTER has
+  been SET, the condition can be returned as a character string using the
+  DBFILTER() function.
+
+  Most commands and functions that move the record pointer honor the
+  current filter with the exception of those commands that access records
+  by record number.  This includes GOTO, commands specified with the
+  RECORD clause, and RELATIONs linked by numeric expression to a work
+  area with no active index.
+
+  Once a FILTER is SET, it is not activated until the record pointer is
+  moved from its current position.  You can use GO TOP to activate it.
+
+  As with SET DELETED, a filter has no effect on INDEX and REINDEX.
+  SUBINDEX will respect a filter.
+
+  <B>SET ORDER TO 0.</B>  Because Mach SIx internally caches filtered records
+  in natural record order optimal filter performance will be achieved with
+  SET ORDER TO 0.
+
+  -----------------------------------------------------------------------
+  <B>Note:  Non-optimizable filters</B>
+
+  Although SET FILTER makes the current work area appear as if it contains
+  a subset of records, it in fact processes all records in the work area
+  sequentially.  Because of this, the time required to process a filtered
+  work area will be the same as an unfiltered work area.
+  -----------------------------------------------------------------------
+
+  <B>---------------------------------| EXAMPLE |--------------------------------</B>
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates the SET FILTER command                                    *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  //.................................open Account database ( 10,000 records )
+  USE Account VIA "SIXCDX"
+
+  //..........open indexes: Age and State could also be a tags in a .CDX file
+  SET INDEX TO Age, State
+
+  //.............................set order to 0 for optimal filter performance
+  SET ORDER TO 0
+
+  <B>SET FILTER TO  Age &gt; 25 .AND. Age &lt; 30 .AND. State = "CA"</B>
+
+  //.................check filter optimization level, see also m6_IsOptimize()
+  ? "Filter optimization = "
+  ??  m6_IsFilter()           // 2
+
+  //......................................................activate the filter
+  GO TOP
+
+  // Check the number of records in the filter. This number will be exactly
+  // equal to the number of filtered records if the filter condition is fully
+  // optimizable and DELETED is OFF ( or if DELETED is ON and deleted records
+  // have been eliminated with an active index built on DELETED() ).
+
+  ? "Number of indexed records in filter = "
+  ?? m6_RecCount()            // 55
+
+  //...................................................view filtered records
+  Browse()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1402e.html">m6_IsFilter()</A>
+<A HREF="ng4bc19.html">REFRESH FILTER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

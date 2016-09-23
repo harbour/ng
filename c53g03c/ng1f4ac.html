@@ -1,0 +1,127 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1ec4e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng13657.html">[^^Up^^]</A>
+<A HREF="ng1fe69.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_itemSize()</B>
+ Determine an item's size
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "item.api"</B>
+     <B>USHORT _itemSize(</B>
+     <B>                  ITEM itmRef</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>itmRef</B> is the item whose size you want to determine.
+
+ <B>Returns</B>
+
+     _itemSize() returns an unsigned short integer value indicating the size
+     of the item referenced by itmRef.
+
+ <B>Description</B>
+
+     The _itemSize() function returns the storage size required for a
+     particular item.  For each CA-Clipper data type, length is determined
+     according to the table below:
+
+     <B>Return Size for Each Item Type</B>
+     ------------------------------------------------------------------------
+     <B>Item Type                  Size Returned</B>
+     ------------------------------------------------------------------------
+     ARRAY                      Number of elements in array.
+     CHARACTER or MEMO          Storage length of the string.
+     UNDEF                      Always returns zero.
+     ------------------------------------------------------------------------
+
+     <B>Note: </B> Size is determined from a one base, not zero, as are most
+     programming structures in C.  Thus, an array that has an _itemSize() of
+     42 actually contains 42 elements, and not 43 as one might expect.  An
+     array of length zero, however, may exist.
+
+ <B>Examples</B>
+
+     /*
+     *
+     * CharCount( cString, cChar )
+     *
+     * Count occurrences of a single character
+     * in a CA-Clipper string.
+     *
+     */
+
+     CLIPPER CharCount( void )
+     {
+        USHORT uiChars = 0;
+        USHORT uiLen;
+        USHORT i;
+        HANDLE vmhString;
+
+        BYTEP  cStringP;
+        BYTE   cFindMe;
+
+        ITEM   itmString, itmFindMe, itmRet;
+
+        if (PCOUNT != 2)
+        {
+           _ret();               // NOTE: Withhold service
+           return;               // Early return!
+        }
+
+        itmRet    = _itemPutNL( NULL, 0 );
+        itmString = _itemParam( 1 );
+        itmFindMe = _itemParam( 2 );
+
+        if ( (_itemType( itmString ) == CHARACTER) &amp;&amp;
+              (_itemType( itmFindMe ) == CHARACTER) )
+        {
+           _itemCopyC( itmFindMe, &amp;cFindMe, 1 );
+
+           vmhString = _xvalloc( _itemSize( itmString ), NULL );
+           cStringP = _xvlock( vmhString );
+
+           uiLen = _itemCopyC( itmString, cStringP, NULL );
+
+           for( i = 0; i &lt; uiLen; i++ )
+           {
+              if ( cStringP[i] == cFindMe )
+                 uiChars++;
+           }
+
+           _xvunlock( vmhString );
+           _xvfree( vmhString );
+
+           itmRet = _itemPutNL( itmRet, (long)uiChars );
+
+        }
+
+        _itemReturn( itmRet );
+
+        _itemRelease( itmRet );
+        _itemRelease( itmString );
+        _itemRelease( itmFindMe );
+
+        return;
+     }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Item.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1fe69.html">_itemType()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

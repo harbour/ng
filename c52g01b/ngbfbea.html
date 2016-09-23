@@ -1,0 +1,136 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbea74.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb4a83.html">[^^Up^^]</A>
+<A HREF="ngc101e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LOCAL</B>
+ Declare and initialize local variables and arrays
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LOCAL &lt;identifier&gt; [[:= &lt;initializer&gt;], ... ]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;identifier&gt;</B> is the name of a variable or array to declare local.
+     If the &lt;identifier&gt; is followed by square brackets ([ ]), it is created
+     as an array.  If the &lt;identifier&gt; is an array, the syntax for specifying
+     the number of elements for each dimension can be array[&lt;nElements&gt;,
+     &lt;nElements2&gt;,...] or array[&lt;nElements&gt;][&lt;nElements2&gt;]...  The maximum
+     number of elements per dimension is 4096.  The maximum number of
+     dimensions per array is limited only by available memory.
+
+     <B>&lt;initializer&gt;</B> is the optional assignment of a value to a new local
+     variable.  Array identifiers, however, cannot be given values with an
+     &lt;initializer&gt;.  An &lt;initializer&gt; for a local variable consists of the
+     inline assignment operator (:=) followed by any valid CA-Clipper
+     expression including a literal array.  If no explicit &lt;initializer&gt; is
+     specified, the variable is given an initial value of NIL.  In the case
+     of an array, each element is NIL.
+
+     <B>Note: </B> The macro operator (&amp;) cannot be used in a LOCAL declaration
+     statement.
+
+ <B>Description</B>
+
+     LOCAL is a declaration statement that declares one or more variables or
+     arrays local to the current procedure or user-defined function and must
+     occur before any executable statement including PRIVATE, PUBLIC, and
+     PARAMETERS.  Local variable declarations hide all inherited private
+     variables and visible public variables with the same name.  A LOCAL
+     statement, however, that declares a variable name which is already
+     declared causes a fatal compiler error and no object file (.OBJ) is
+     generated.  This error can happen as a result of two declarations for
+     the same variable name in the same routine, or as the result of
+     redeclaring a variable with filewide scope.  Declaration statements
+     include FIELD, MEMVAR, and STATIC.
+
+     Local variables are visible only within the current procedure or
+     user-defined function, and unlike private variables, are not visible
+     within invoked routines.  Local variables are created automatically each
+     time the procedure in which they were declared begins executing.  They
+     continue to exist and retain their values until the declaring procedure
+     or user-defined function returns control to the code that invoked it.
+     If a procedure or user-defined function is invoked recursively (calls
+     itself), each recursive activation creates a new set of local variables.
+
+     The initial value of local variables and array elements is NIL if not
+     explicitly initialized, either in the initializer list or by assignment.
+     The initializer expression can be any valid CA-Clipper expression,
+     including function calls.  Note that an array declaration cannot have an
+     initializer.
+
+     The maximum number of local variables in a program is limited only by
+     available memory.  Arrays, however, assigned to a local variable are
+     still limited to 4096 elements per dimension.
+
+     For more information on variable declarations and scoping, refer to the
+     Variables section in the Basic Concepts chapter of the Programming and
+     Utilities guide.
+
+ <B>Notes</B>
+
+     <B>.  Inspecting local variables within the Debugger:</B> To access
+        local variable names within The CA-Clipper Debugger, you must compile
+        program (.prg) files using the /B option so that local variable
+        information is included in the object file.
+
+     <B>.  Local parameters:</B> Declare a list of local parameters as a part
+        of a FUNCTION or PROCEDURE declaration by enclosing the list of
+        parameters in parentheses following the &lt;idFunction&gt;:
+
+        FUNCTION &lt;idFunction&gt;(&lt;idParam list&gt;)
+
+        Declaration of local parameters supersedes creation of private
+        parameters with the PARAMETERS statement.
+
+     <B>.  Macro expressions:</B> You cannot refer to local variables within
+        macro variables and expressions.  If you refer to a local variable
+        within a macro variable, a private or public variable with the same
+        name will be referenced instead.  If no such variable exists, a
+        runtime error will be generated.
+
+     <B>.  Memory files:</B> Local variables cannot be SAVED to or RESTOREd
+        from memory (.mem) files.
+
+     <B>.  Type of a local variable:</B> Since TYPE() uses the macro operator
+        (&amp;) to evaluate its argument, it cannot be used to determine the type
+        of a local or static variable or an expression containing a local or
+        static variable reference.  The VALTYPE() function provides this
+        facility.  VALTYPE() evaluates its argument and returns the type of
+        the return value.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example declares two local arrays and two local
+        variables:
+
+        LOCAL aArray1[20, 10], aArray2[20][10], var1, var2
+
+     <B>.</B>  This example declares two local variables with initializers.
+        The first is initialized to a date value and the second to a literal
+        array:
+
+        LOCAL dWhen := DATE()
+        LOCAL aVegies := {"Tomato", "Chickadee", "Butterbean"}
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbbed3.html">FUNCTION</A>
+<A HREF="ngc1a63.html">PARAMETERS</A>
+<A HREF="ngc25d0.html">PRIVATE</A>
+<A HREF="ngc34a3.html">PROCEDURE</A>
+<A HREF="ngc587f.html">PUBLIC</A>
+<A HREF="ngc78ff.html">STATIC</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

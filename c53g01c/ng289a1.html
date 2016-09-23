@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng28380.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng28fbc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBGOTOP()</B>
+ Move to the first logical record
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBGOTOP() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DBGOTOP() always returns NIL.
+
+ <B>Description</B>
+
+     DBGOTOP() moves to the first logical record in the current work area.
+
+     DBGOTOP() performs the same function as the standard GO TOP command.
+     For more information, refer to the GO TOP command.
+
+ <B>Notes</B>
+
+     <B>.  Logical records:</B> DBGOTOP() operates on logical records.  If
+        there is an active index, DBGOTOP() moves to the first record in
+        indexed order.  If a filter is set, only records which meet the
+        filter condition are considered.
+
+     <B>.  Controlling order:</B> If more than one index is active in the
+        work area, the operation is performed using the controlling order as
+        set by DBSETORDER() or the SET ORDER command.  For more information,
+        refer to the SET ORDER command.
+
+     <B>.  Network environment:</B> For a shared file on a network, moving to
+        a different record may cause updates to the current record to become
+        visible to other processes.  For more information, refer to the
+        "Network Programming" chapter in the Programming and Utilities Guide.
+        This function will not affect the locked status of any record.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates the typical use of DBGOTOP():
+
+        DBGOTOP()
+        WHILE ( !EOF() )
+           ? FIELD-&gt;Name
+           DBSKIP()
+        END
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng17b80.html">BOF()</A>
+<A HREF="ng27c3e.html">DBGOBOTTOM()</A>
+<A HREF="ng2ff8b.html">DBSEEK()</A>
+<A HREF="ng33c29.html">DBSKIP()</A>
+<A HREF="ng3f657.html">EOF()</A>
+<A HREF="ngcc35b.html">GO</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

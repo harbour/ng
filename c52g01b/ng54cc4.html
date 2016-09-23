@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng546a2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng55577.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PAD()</B>
+ Pad character, date, and numeric values with a fill character
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+
+     <B>PADL(&lt;exp&gt;, &lt;nLength&gt;, [&lt;cFillChar&gt;])</B>
+     <B>   --&gt; cPaddedString</B>
+     <B>PADC(&lt;exp&gt;, &lt;nLength&gt;, [&lt;cFillChar&gt;])</B>
+     <B>   --&gt; cPaddedString</B>
+     <B>PADR(&lt;exp&gt;, &lt;nLength&gt;, [&lt;cFillChar&gt;])</B>
+     <B>   --&gt; cPaddedString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp&gt;</B> is a character, numeric, or date value to pad with a fill
+     character.
+
+     <B>&lt;nLength&gt;</B> is the length of the character string to return.
+
+     <B>&lt;cFillChar&gt;</B> is the character to pad &lt;exp&gt; with.  If not specified,
+     the default is a space character.
+
+ <B>Returns</B>
+
+     PADC(), PADL(), and PADR() return the result of &lt;exp&gt; as a character
+     string padded with &lt;cFillChar&gt; to a total length of &lt;nLength&gt;.
+
+ <B>Description</B>
+
+     PADC(), PADL(), and PADR() are character functions that pad character,
+     date, and numeric values with a fill character to create a new character
+     string of a specified length.  PADC() centers &lt;exp&gt; within &lt;nLength&gt;
+     adding fill characters to the left and right sides; PADL() adds fill
+     characters on the left side; and PADR() adds fill characters on the
+     right side.  If the length of &lt;exp&gt; exceeds &lt;nLength&gt;, all of the PAD()
+     functions truncate cPaddedString to &lt;nLength&gt;.
+
+     PADC(), PADL(), and PADR() display variable length strings within a
+     fixed length area.  They can be used, for instance, to assure alignment
+     with consecutive ?? commands.  Another use is to display text to a
+     fixed-width screen area assuring that previous text is completely
+     overwritten.
+
+     PADC(), PADL(), and PADR() are the inverse of the ALLTRIM(), RTRIM(),
+     and LTRIM() functions which trim leading and trailing space from
+     character strings.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses PADR() to format a record number display on
+        a status line filling the allocated space:
+
+        IF EOF()
+           @ 23, 45 PADR("EOF/" + LTRIM(STR(LASTREC())), 20)
+        ELSEIF BOF()
+           @ 23, 45 PADR("BOF/" + LTRIM(STR(LASTREC())), 20)
+        ELSE
+           @ 23, 45 SAY PADR("Record " + LTRIM(STR(RECNO()) ;
+                 + "/" + LTRIM(STR(LASTREC())), 20)
+        ENDIF
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc28a.html">ALLTRIM()</A>
+<A HREF="ng467e1.html">LTRIM()</A>
+<A HREF="ng5f53e.html">RTRIM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

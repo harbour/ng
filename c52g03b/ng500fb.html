@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4fcf2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng50633.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>sort()</B>
+ Physically reorder a database
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE sort(</B>
+     <B>              WORKAREAP wa,</B>
+     <B>              DBSORTINFOP dbSortInfo</B>
+     <B>            )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>dbSortInfo</B> is a pointer to a structure containing information on how
+     to sort the workarea table.
+
+ <B>Description</B>
+
+     Performs a physical reorder of the database by copying records from the
+     current workarea to another database file in sorted order as specified
+     in dbSortInfo.  sort() performs as much of its operation as possible in
+     memory, then it spools to a uniquely named temporary disk file.  This
+     temporary file can be as large as the size of the source database file.
+     It then overwrites the original database with the newly sorted data.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Since a sort must traverse the entire data store, the buffer
+        for the current workarea must goCold() before any sort() operation
+        can take place.  Further, in a shared environment, you can only
+        implement this method after the proper locks are established.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng43712.html">DBSORTINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng4b56c.html">goCold()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

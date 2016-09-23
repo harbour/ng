@@ -1,0 +1,229 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng38a93.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng3aec0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPKEYBRD() / SWPKEYBRDBAS()  Stuff keystrokes into child process</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Stuff keystrokes into the child process</B></U>
+
+ <U>Syntax   : <B>niValue = SWPKEYBRD(cKeyString)</B></U>
+
+ <U>Return   : <B>0 String parsed OK</B></U>
+            <B>1 Error - mismatched quotes. There is an open quote in the input</B>
+            <B>string</B>
+            <B>2 Error - mismatched '{'. There is a mismatched '{' or '}'</B>
+            <B>(non-ASCII key delimiter).</B>
+            <B>nn Any other value indicates parsing failed at that position in</B>
+            <B>the input string.</B>
+
+ The SWPKEYBRD function allows the parent program to stuff the keyboard with
+ a series of keystrokes prior to executing the child program. Use of this
+ function will allow you complete control over the execution of the child
+ program.
+
+ SWPKEYBRD() should work with most child programs that use the BIOS keyboard
+ functions 0,1,10H and 11H to read keyboard input. Programs that access the
+ keyboard hardware directly (such as MS Word) will not see stuffed
+ keystrokes, and so cannot be controlled by this function.
+
+ The maximum number of keystrokes that can be stuffed is 250.
+
+ <B>SWPKEYBRD Parameters</B>
+
+ SWPKEYBRD takes a single string parameter made up of the following
+ components:
+
+    .  Embedded sub-strings
+    .  Embedded sub-strings within quotes
+    .  Special key combinations and keys that cannot be specified in ascii
+       form, such as {pgup} and (alt-f1}
+
+ Embedded sub-strings will usually contain ASCII characters found on the
+ keyboard, such as A-Z, a-z, 0-9, !@#$%&amp;*() and so on. These characters are
+ translated by SWPKEYBRD() into the keycodes associated with the keys that
+ bear the character legend on a US keyboard.
+
+ It is possible for an embedded sub-string to contain characters that are not
+ present on the US keyboard, such as international characters, box and line
+ characters and so on. When SWPKEYBRD() encounters such a character, it
+ generates a keystroke that is the equivalent &lt;alt-nnn&gt; keycode, where nnn is
+ the ascii value of the character in question.
+
+ <B>Quotes</B>
+
+ Embedded substrings may start and end with either a single (') or a double
+ (") quote, but they must match. This allows you to use either within the
+ quoted text:
+
+    <B>swpkeybrd("{enter}'he said "hello" twice'{enter}")</B>
+    <B>swpkeybrd('{enter}"Please press 'X' now!"{enter}')</B>
+
+ Note that most compilers will use the first and last quote within the string
+ as delimiters. The string you pass to SWPKEYBRD() must be within another set
+ of quotes.
+
+ <B>Non-ASCII Key combinations</B>
+
+ In addition to quoted text, SWPKEYBRD() can also pass other keystrokes that
+ cannot be represented by ASCII characters. Many of these keystrokes may be
+ used in conjunction with a shift state. The three available shift states
+ are:
+
+    <B>shift, ctrl, and alt</B>
+
+ When a shift state key is specified, it should precede the actual key
+ definition, and be separated from it by a '-' character. eg:
+
+    <B>{shift-f7}{ctrl-a}{alt-esc}</B>
+
+ You cannot use more than one shift state at a time - the BIOS does not
+ support this. If the child program uses multiple shift states
+ simultaneously, such as &lt;ctrl}+&lt;alt&gt;, &lt;ctrl&gt;+&lt;shift&gt;, you will not be able
+ to control it using SWPKEYBRD(), as it either directly accesses the keyboard
+ hardware, or it uses shift state information in the BIOS data area, which
+ SWPKEYBRD() does not attempt to emulate.
+
+ The following keys are available:
+
+    {f1} - {f12}
+    {shift-f1} - {shift-f12}
+    {ctrl-f1} - {ctrl-f12}
+    {alt-f1} - {alt-f12}
+    {ctrl-a} - {ctrl-z}
+    {alt-a} - {alt-z}
+    {ctrl-0} - {ctrl-9}
+    {esc} {tab} {bksp} {enter}
+    {space} {ins} {del}
+    {ctrl-esc} {ctrl-tab} {ctrl-bksp} {ctrl-enter}
+    {ctrl-space} {ctrl-ins} {ctrl-del}
+    {ctrl-prtscr}
+
+ Note that {ctrl-prtscr} is the only flavor of print screen that the bios
+ passes through, and so is the only one that can be stuffed.
+
+    {alt-esc} {alt-tab} {alt-bksp} {alt-enter} {alt-space}
+    {alt-ins} {alt-del}
+
+ <B>Numeric Keypad Cursor Control Keys</B>
+
+ Please note these keys are found on the numeric keypad.
+
+    {up} {down} {left} {right}
+    {home} {end} {pgup} {pgdn}
+    {ctrl-up} {ctrl-down} {ctrl-left} {ctrl-right} {ctrl-home} {ctrl-end}
+    {ctrl-pgup} {ctrl-pgdn}
+    {alt-up} {alt-down} {alt-left} {alt-right} {alt-home} {alt-end}
+    {alt-pgup} {alt-pgdn}
+
+ <B>Extended Cursor Control Keys</B>
+
+ These keys correspond to the separate gray keys found on 101/102 key
+ extended keyboards. The * character indicates these gray keys:
+
+    {*ins} {*del} {*end} {*pgup} {*pgdn} {*home}
+    {*up} {*down} {*right} {*left}
+    {ctrl-*ins} {ctrl-*del} {ctrl-*end} {ctrl-*pgup} {ctrl-*pgdn} {ctrl-*home}
+    {ctrl-*up} {ctrl-*down} {ctrl-*right} {ctrl-*left}
+    {alt-*ins} {alt-*del} {alt-*end} {alt-*pgup} {alt-*pgdn} {alt-*home}
+    {alt-*up} {alt-*down} {alt-*right} {alt-*left}
+
+ <B>Numeric Keypad Keys</B>
+
+ Normally, when you specify a number (0-9) as part of an embedded string, the
+ keystroke generated will be from the numeric keys along the top of the
+ keyboard. If you require to stuff keystrokes from the numeric pad, use the
+ following (the # indicates the keystroke is from the numeric pad):
+
+    {#0} {#1} {#2} {#3} {#4} {#5}
+    {#6} {#7} {#8} {#9} {#.}
+    {#/} {#*} {#-} {#+} {#enter}
+    {ctrl-#0} {ctrl-#1} {ctrl-#2} {ctrl-#3} {ctrl-#4}
+    {ctrl-#5} {ctrl-#6} {ctrl-#7} {ctrl-#8} {ctrl-#9}
+    {ctrl-#.} {ctrl-#/} {ctrl-#*} {ctrl-#-} {ctrl-#+} {ctrl-#enter}
+    {alt-#0} {alt-#1} {alt-#2} {alt-#3} {alt-#4}
+    {alt-#5} {alt-#6} {alt-#7} {alt-#8} {alt-#9}
+    {alt-#.} {alt-#/} {alt-#*} {alt-#-} {alt-#+} {alt-#enter}
+
+ You may separate strings and non-ASCII key combinations with spaces. eg:
+
+    <B>x = SWPKEYBRD(" &lt;tab&gt; 'Testing...' &lt;enter&gt;" )</B>
+
+ <B>International Keyboard Drivers</B>
+
+ Keystrokes supplied to the child process are passed directly from the swap
+ kernel, bypassing any international keyboard driver that may be loaded. This
+ has the effect of making the keys appear to have come from a US keyboard.
+ The international keyboard handler will regain control, as soon as
+ SWPKEYBRD() has stuffed all its keystrokes.
+
+ <B>Keystroke Translation</B>
+
+ There are two different types of BIOS call that a program may use to read
+ the keyboard, one type is for 'standard' keystrokes, and the other is for
+ 'extended keystrokes'. SWPKEYBRD() will automatically provide the correct
+ keycode for the BIOS call used.
+
+ <B>Clearing the keyboard buffer</B>
+
+ By default, SWPKEYBRD() fools the child program into thinking that the
+ keyboard buffer has been cleared between each keystroke. This will make key
+ stuffing operate more reliably with programs that clear the keyboard buffer
+ on a regular basis (and would otherwise cause subsequent stuffed keystrokes
+ to be lost). This behaviour can be changed using the function SWPKEYCLR().
+
+ <B>How SWPKEYBRD() works</B>
+
+ The string that is passed to SWPKEYBRD() is immediately translated into the
+ equivalent sequence of keystrokes. When SWPRUNCMD() is called to execute the
+ child program, the swap kernel (that part of SWPRUNCMD() that remains in
+ memory during the swap), takes over the BIOS keyboard interrupt, and feeds
+ these keycodes into the child program in response to BIOS calls made by the
+ child program (or DOS), as if they were coming directly from the keyboard.
+ Once all keys have been stuffed, the kernel allows normal keyboard input to
+ be passed through to the child program.
+
+ Most  programs that use either DOS or BIOS function calls to read keyboad
+ input should be controllable by SWPKEYBRD().
+
+ <B>Creating a text file using a popular text editor</B>
+
+ This example stuffs the first line, followed by the {enter} key, then the
+ second line, followed by another {enter}. Next the file is saved by stuffing
+ {alt-f} (file menu) and then 's' (save), finally the editor is exited with
+ {alt-x}.
+
+    <B>keystr := " 'Mary had a little lamb,' {enter} "</B>
+    <B>keystr := keystr + ' "It's fleece was ..." {enter}'</B>
+    <B>keystr := keystr + "{alt-f}'s'{alt-x}"</B>
+    <B>swpkeybrd(keystr)</B>
+    <B>swpruncmd("EDIT MARY",0,"","")</B>
+
+ <B>Entering data into a (fictitious) spreadsheet program</B>
+
+ This example stuffs the keyboard movements, enters the data, recalculates,
+ saves and quitts the spreadsheet.
+
+    <B>keystr = "{down}{down}{right}{right}"</B>
+    <B>keystr = keystr + " '2.75'{enter}"</B>
+    <B>keystr = keystr + " '!' {enter} "</B>
+    <B>keystr = keystr + " '/s' {enter} '/x' {enter} "</B>
+    <B>SWPKEYBRD(keystr)</B>
+    <B>SWPRUNCMD("SS TEST",0,"","")</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3aec0.html">SWPKEYCLR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

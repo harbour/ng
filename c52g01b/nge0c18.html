@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge08de.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngd8973.html">[^^Up^^]</A>
+<A HREF="nge1372.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>#ifdef</B>
+ Compile a section of code if an identifier is defined
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>#ifdef &lt;identifier&gt;</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>[#else]</B>
+     <B>   &lt;statements&gt;...</B>
+     <B>#endif</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;identifier&gt;</B> is the name of a definition whose existence is being
+     verified.
+
+ <B>Description</B>
+
+     #ifdef...#endif lets you perform a conditional compilation.  It does
+     this by identifying a section of source code to be compiled if the
+     specified &lt;identifier&gt; is defined.  The &lt;identifier&gt; can be defined
+     using either the #define directive or the /D compiler option which lets
+     you define an identifier or manifest constant from the compiler command line.
+
+     The #else directive specifies the code to compile if &lt;identifier&gt; is
+     undefined.  The #endif terminates the conditional compilation block.
+
+     Conditional compilation is particularly useful when maintaining many
+     different versions of the same program.  For example the demo code and
+     full system code could be included in the same program file and
+     controlled by a single #define statement.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment is a general skeleton for conditional
+        compilation with #ifdef:
+
+        #define DEMO
+        .
+        . &lt;statements&gt;
+        .
+        #ifdef DEMO
+           &lt;demo specific statements&gt;
+        #endif
+
+     <B>.</B>  This example controls conditional compilation with an
+        identifier defined on the compiler command line with the /D option:
+
+        In DOS:
+
+        C&gt;CLIPPER Myfile /DDEBUG
+
+        In the program (.prg) file:
+
+        #ifdef DEBUG
+           Assert(&lt;some condition&gt;)
+        #endif
+
+     <B>.</B>  This example defines a manifest constant to one value if it
+        does not exist and redefines it to another if it exists:
+
+        #ifdef M_MARGIN
+           #undef  M_MARGIN
+           #define M_MARGIN  15
+        #else
+           #define M_MARGIN  10
+        #endif
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngde423.html">#define</A>
+<A HREF="nge1372.html">#ifndef</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

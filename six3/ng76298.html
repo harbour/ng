@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng75ccf.html">[^^Up^^]</A>
+<A HREF="ng766b4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>DBT.OBJ</B>
+
+  By default, the SIx Driver's SIXCDX flavor uses FoxPro compatible memo
+  files (<B>.FPT's</B>), and the SIXNSX flavor uses SuccessWare's own <B>.SMT</B> memo
+  format.  Both formats allows for better memo field performance as well as
+  user-definable block size.
+
+  If, however, you want to use Clipper's <B>.DBT</B> format with SIXCDX and/or
+  SIXNSX, you must link the DBT.OBJ file into your application.
+
+  For example, to link an application called MYAPP to use .DBT memos under
+  SIXCDX, you would use the following link command:
+
+    RTLink:
+
+      <B>EXOSPACE FI myapp,sixcdx,dbt LIB six3,clipper</B>
+
+    Blinker:
+
+      <B>BLINKER FI myapp,sixcdx,dbt @six3 LIB clipper</B>
+
+    CauseWay:
+
+      <B>WL32 myapp sixcdx dbt,,,six3 clipper</B>
+
+
+  <B>NOTE:  If you are using both SIXCDX and SIXNSX in the same application,</B>
+  <B>       linking DBT.OBJ into the application will cause both drivers to</B>
+  <B>       use .DBT memo files instead of their normal defaults of .FPT and</B>
+  <B>       .SMT, respectively.</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng766b4.html">FPT.OBJ</A>
+<A HREF="ng76a77.html">SMT.OBJ</A>
+<A HREF="ng76e4b.html">NOMEMO.OBJ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

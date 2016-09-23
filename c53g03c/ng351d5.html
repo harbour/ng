@@ -1,0 +1,86 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng34d53.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng31a91.html">[^^Up^^]</A>
+<A HREF="ng35957.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_gtGetColorStr()</B>
+ Get the CA-Clipper color attributes setting
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "gt.api"</B>
+     <B>ERRCODE _gtGetColorStr(</B>
+     <B>                        BYTEP fpColorString</B>
+     <B>                      )</B>
+
+ <B>Arguments</B>
+
+     <B>fpColorString</B> is a null-terminated character string of at least 64
+     bytes that receives the current CA-Clipper color attributes setting.
+     The constant CLR_STRLEN can be used to allocate a string of correct
+     size.
+
+ <B>Returns</B>
+
+     _gtGetColorStr() returns zero if successful.  Any other value indicates
+     an error.
+
+ <B>Description</B>
+
+     _gtGetColorStr() saves the current CA-Clipper color attributes setting
+     as a null-terminated character string, fpColorString.  You can later use
+     fpColorString with _gtSetColorStr() to return the color setting to its
+     prior value.  For information on how fpColorString is formatted and the
+     meanings of the various color codes, see the _gtSetColorStr() entry in
+     this chapter.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example saves the current color setting before changing
+        it, displays a string using the new color setting, and restores the
+        original color setting:
+
+        #include "gt.api"
+
+        void PrintStr( USHORT uiRow, USHORT uiCol, BYTEP fpStr,
+                       BYTEP fpColor );
+
+        void PrintStr( USHORT uiRow, USHORT uiCol, BYTEP fpStr,
+                       BYTEP fpColor )
+        {
+           BYTE cSavColor[ CLR_STRLEN ];
+           USHORT uiSavRow;
+           USHORT uiSavCol;
+
+           _gtGetPos( &amp;uiSavRow, &amp;uiSavCol );    // Save coordinates
+           _gtGetColorStr( cSavColor );          // Save color setting
+
+           _gtSetColorStr( fpColor );
+           _gtSetPos( uiRow, uiCol );
+           _gtWrite( fpStr, strlen( fpStr ) );
+
+           _gtSetColorStr( cSavColor );          // Restore color setting
+           _gtSetPos( uiSavRow, uiSavCol );      // Restore coordinates
+        }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Gt.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3392b.html">_gtColorSelect()</A>
+<A HREF="ng35e1b.html">_gtGetPos()</A>
+<A HREF="ng36413.html">_gtIsColor()</A>
+<A HREF="ng3b8b6.html">_gtSetColorStr()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

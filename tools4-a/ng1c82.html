@@ -1,0 +1,88 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1859.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4ed.html">[^^Up^^]</A>
+<A HREF="ng24c9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NETREDIR()</B>
+ Redirects a local device to a server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NETREDIR(&lt;cLocalDevice&gt;, &lt;cServerDevice&gt;,</B>
+     <B>   [&lt;cPassword&gt;])    --&gt; lRedirection</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cLocalDevice&gt; </B> Designates the name of the local device (LPTn:,
+     PRN:, or d:).
+
+     <B>&lt;cServerDevice&gt; </B> Designates the complete path for the server
+     (\\&lt;Servername&gt;\&lt;Devicename&gt;).
+
+     <B>&lt;cPassword&gt; </B> Can designate a password when it is required by the
+     server.
+
+ <B>Returns</B>
+
+     NETREDIR() returns .T. when the specified local device has been
+     redirected to the selected server device.
+
+ <B>Description</B>
+
+     NETWORK REDIRECTION
+     Under PC LAN/MS-NET, server devices can be redirected to local devices
+     using the NET USE &lt;local&gt; &lt;remote&gt; command.  Exactly the same thing can
+     be accomplished using the NETREDIR() function from within an
+     application.  The function returns .T. when the redirection has been
+     carried out.  A return of .F. could occur for several reasons:
+
+     <B>.</B>  The designated drive is not accepted.  Either this drive is
+        already physically available or LASTDRIVE in CONFIG.SYS has to be set
+        higher.
+
+     <B>.</B>  The device is not available on the server.  Use NET SHARE on
+        the selected server to review all the devices available there.
+
+     <B>.</B>  The password is incorrect.  Check the password that the server
+        has designated for the device.
+
+     <B>.</B>  Too many devices have already been allocated.  In this
+        instance you must change some of the flags with the NET START command
+        (see PC LAN/MS-NET manual).
+
+ <B>Note</B>
+
+     <B>.</B>  The redirections accomplished here are not listed when you use
+        NET USE.
+
+ <B>Examples</B>
+
+     <B>.</B>  Create a new drive H:
+
+        ? NETREDIR("H:", "\\SERVER\DRIVEC")            // .T. if OK
+
+     <B>.</B>  In this example, the server device asks for a password:
+
+        ? NETREDIR("H:", "\\SERVER\DRIVEC", "SECRET")  // .T. if OK
+
+     <B>.</B>  Allocate a server printer to LPT2:
+
+        ? NETREDIR("LPT2:", "\\SERVER\PRINTER")        // .T. if OK
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga4f.html">NETCANCEL()</A>
+<A HREF="ng1369.html">NETLOCNAME()</A>
+<A HREF="ng24c9.html">NETRMTNAME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

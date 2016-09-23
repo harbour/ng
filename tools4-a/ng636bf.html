@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng62c42.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng63bf9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSCAND()</B>
+ Cancels the down request of a print server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSCAND(&lt;cPServer&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSCAND() returns .T. if a running down request of &lt;cPServer&gt; has
+     been canceled successfully.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER CANCEL DOWN (REQUEST)
+     If a print server receives a down request, it can continue to process
+     active jobs.  Within this time period, the down request can be canceled
+     with NNETPSCAND().  This function requires operator rights for
+     &lt;cPServer&gt;.
+
+ <B>Example</B>
+
+     Cancel the down request for the print server PSERVER:
+
+     // Start down request
+     NNETPSDOWN('PSERVER')
+
+     IF .NOT. NNETPSCAND('PSERVER')
+        ? 'Down request cannot be canceled!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng65deb.html">NNETPSDOWN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

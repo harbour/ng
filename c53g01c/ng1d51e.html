@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1d18b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng1d9f4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBCLOSEALL()</B>
+ Close all occupied work areas
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBCLOSEALL() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DBCLOSEALL() always returns NIL.
+
+ <B>Description</B>
+
+     DBCLOSEALL() releases all occupied work areas from use.  It is
+     equivalent to calling DBCLOSEAREA() on every occupied work area.
+     DBCLOSEALL() has the same effect as the standard CLOSE DATABASES
+     command.  For more information, refer to the USE and CLOSE commands.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example closes all work areas:
+
+        cLast := "Winston"
+        DBUSEAREA( .T., "DBFNTX", "Sales", "Sales", .T. )
+        DBSETINDEX( "SALEFNAM" )
+        DBSETINDEX( "SALELNAM" )
+        //
+        DBUSEAREA( .T., "DBFNTX", "Colls", "Colls", .T. )
+        DBSETINDEX( "COLLFNAM" )
+        DBSETINDEX( "COLLLNAM" )
+        //
+        DBSELECTAREA( "Sales" )      // select "Sales" work area
+        //
+
+        IF ( Sales-&gt;(DBSEEK(cLast)) )
+           IF Sales-&gt;( DELETED() )
+              IF RLOCK()
+                 Sales-&gt;( DBRECALL() )
+                 ? "Record deleted: ", Sales( DELETED() )
+              ENDIF
+           ENDIF
+        ELSE
+           ? "Not found"
+        ENDIF
+        DBCLOSEALL()                  // close all work areas
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc26c8.html">CLOSE</A>
+<A HREF="ng1d9f4.html">DBCLOSEAREA()</A>
+<A HREF="ng3575a.html">DBUSEAREA()</A>
+<A HREF="ngddba5.html">SELECT</A>
+<A HREF="ngf8dbc.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

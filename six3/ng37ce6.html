@@ -1,0 +1,47 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng372fc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng380bc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+ <B>Sx_SetTag():</B>
+
+  Syntax:   Sx_SetTag([cTag | nOrder] [,cIndexName])
+
+            cTag       = Name of the tag to make active
+            nOrder     = Position of order in the order list
+            cIndexName = Name of the file that contains the tag or order
+
+  Returns:  &lt;logical&gt; .T. if successful, .F. if an error occurred.
+
+  Description:    This function activates the specified tag in one of the
+                  currently active or specified indexes.  If cIndexName is
+                  specified, then only that file is searched for the
+                  specified tag.
+
+        <B>NOTE: This is a compatibility function. It works exactly like</B>
+        <B>      CA-Clipper's OrdSetFocus() function except that the return</B>
+        <B>      value is a logical indicating if the order was successfully</B>
+        <B>      set. Clipper's OrdSetFocus() returns the previous order.  See</B>
+        <B>      the CA-Clipper source code for this function in OBSOLETE.PRG.</B>
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1cc0f.html">OrdSetFocus()</A>
+<A HREF="ng1c1b8.html">OrdName()</A>
+<A HREF="ng517e3.html">SET TAG / ORDER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

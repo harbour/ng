@@ -1,0 +1,117 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd26f1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngd3e56.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MENU TO</B>
+ Execute a lightbar menu for defined PROMPTs
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MENU TO &lt;idVar&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idVar&gt;</B> is the name of the variable to be assigned the result of the
+     menu selection.  If the specified variable is not visible or does not
+     exist, a private variable is created and assigned the result.
+
+ <B>Description</B>
+
+     MENU TO is the selection mechanism for the CA-Clipper lightbar menu
+     system.  Before invoking MENU TO, first define the menu items and
+     associated MESSAGEs with a series of @...PROMPT commands.  Then,
+     activate the menu with MENU TO &lt;idVar&gt;.  If &lt;idVar&gt; does not exist or is
+     not visible, MENU TO creates it as a private variable and places the
+     highlight on the first menu item.  If &lt;idVar&gt; does exist, its initial
+     value determines the first menu item highlighted.
+
+ <B>Notes</B>
+
+     <B>.  Color:</B> Menu items are painted in the current standard color
+        with the highlighted menu item appearing in the current enhanced
+        color.
+
+     <B>.  Navigation and selection:</B> Pressing the arrow keys moves the
+        highlight to the next or previous menu item.  As each menu item is
+        highlighted the associated MESSAGE displays on the row specified with
+        SET MESSAGE.  If WRAP is ON, an Up arrow from the first menu item
+        moves the highlight to the last menu item.  Also, a Down arrow from
+        the last menu item moves the highlight to the first.
+
+        To make a selection, press Return or the first character of a menu
+        item.  MENU TO then returns the position of the selected menu item as
+        a numeric value into the specified memory variable.  Pressing Esc
+        aborts the menu selection and returns zero.  The table below
+        summarizes the active keys within MENU TO.
+
+     <B>.  SET KEY procedures:</B> A MENU TO command can be nested within a
+        SET KEY procedure invoked within a menu without clearing the pending
+        PROMPTs.
+
+        <B>MENU TO Active Keys</B>
+        ---------------------------------------------------------------------
+        <B>Key            Action</B>
+        ---------------------------------------------------------------------
+        Up arrow       Move to previous menu item
+        Down arrow     Move to next menu item
+        Home           Move to first menu item
+        End            Move to last item menu item
+        Left arrow     Move to previous menu item
+        Right arrow    Move to next menu item
+        PgUp           Select menu item, returning position
+        PgDn           Select menu item, returning position
+        Return         Select menu item, returning position
+        Esc            Abort selection, returning zero
+        First letter   Select first menu item with same first letter,
+                       returning position
+        ---------------------------------------------------------------------
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a simple vertical lightbar menu with
+        messages appearing centered on line 23.  When invoked, the highlight
+        defaults to the second menu item based on the initial value of
+        nChoice:
+
+        LOCAL nChoice := 2
+        SET WRAP ON
+        SET MESSAGE TO 23 CENTER
+        @ 6, 10 PROMPT "Add"  MESSAGE "New Acct"
+        @ 7, 10 PROMPT "Edit" MESSAGE "Change Acct"
+        @ 9, 10 PROMPT "Quit" MESSAGE "Return to DOS"
+        MENU TO nChoice
+        //
+        DO CASE
+        CASE nChoice = 0
+           QUIT
+        CASE nChoice = 1
+           NewAccount()
+        CASE nChoice = 2
+           ChangeAccount()
+        CASE nChoice = 3
+           QUIT
+        ENDCASE
+        RETURN
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb9ed4.html">@...PROMPT</A>
+<A HREF="ng45dc.html">ACHOICE()</A>
+<A HREF="ngeb81b.html">SET MESSAGE</A>
+<A HREF="ngf2d3f.html">SET WRAP*</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

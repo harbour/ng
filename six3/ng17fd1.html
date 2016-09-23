@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng17cb8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng18534.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>OrdBagName():</B>
+
+  Syntax:   OrdBagName( &lt;nOrder&gt; | &lt;cOrderName&gt; )
+
+       nOrder = A number representing the position in the Order List of the
+                selected Order.
+
+       cOrderName = A character string representing the name of the target
+                    Order (or tag) whose Order Bag name is sought.
+
+  Returns:
+
+     The Order Bag (or index file) name of the specific Order, as a character
+     string.
+
+  Description:
+
+     OrdBagName() is an Order management function that lets you access the
+     name of the Order Bag in which &lt;cOrderName&gt; resides.  You may identify
+     the Order as a character string or with an integer that represents its
+     position in the Order List.  In case of duplicate names, OrdBagName()
+     only recognizes the first matching name.
+
+  Example:
+
+     // Under SIXNTX, with three seperate .NTX files, using Order Numbers
+     USE test1 VIA "SIXNTX"
+     SET INDEX TO last, state, zip
+     ? <B>OrdBagName( 2 )</B>               // Returns: "STATE.NTX"
+     ? <B>OrdBagName( 1 )</B>               // Returns: "LAST.NTX"
+     ? <B>OrdBagName( 3 )</B>               // Returns: "ZIP.NTX"
+
+     // Under SIXNSX, with a compound .NSX file, using tag (Order) names
+     USE test2 VIA "SIXNSX" NEW
+     SET INDEX TO data               // Open DATA.NSX, witch has three tags
+     ? <B>OrdBagName( "STATE" )</B>         // Returns: "DATA.NSX"
+     ? <B>OrdBagName( "LAST" )</B>          // Returns: "DATA.NSX"
+     ? <B>OrdBagName( "ZIP" )</B>           // Returns: "DATA.NSX"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng17cb8.html">OrdBagExt()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

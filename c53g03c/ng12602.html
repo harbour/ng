@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng120b8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga179.html">[^^Up^^]</A>
+<A HREF="ng12bc5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_stornd()</B>
+ Assign a numeric value to a referenced variable using a double-precision type
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "extend.api"</B>
+     <B>int _stornd(</B>
+     <B>             double dNumber,</B>
+     <B>             int iParamNum</B>
+     <B>             [, int iArrayIndex]</B>
+     <B>           )</B>
+
+ <B>Arguments</B>
+
+     <B>dNumber</B> is a numeric expression of type double.
+
+     <B>iParamNum</B> is the one-based ordinal position in the parameter list of
+     the parameter to be assigned.
+
+     <B>iArrayIndex</B> is an array index that specifies a particular element if
+     the iParamNum parameter is an array.
+
+ <B>Returns</B>
+
+     _stornd() returns one if the function is successful; otherwise, it
+     returns zero.
+
+ <B>Description</B>
+
+     _stornd() stores a numeric value to a variable passed by reference as a
+     parameter from CA-Clipper.  If the parameter specified by iParamNum is
+     not passed by reference, _stornd() ignores the call and returns a value
+     of zero.
+
+ <B>Examples</B>
+
+     <B>.</B>  From C:
+
+        _stornd( (double)3.14, 1 );
+
+     <B>.</B>  From Assembly language:
+
+        EXTRN __stornd:FAR
+              mov   ax, 1
+              push  ax                   ; iParamNum
+              push  word ptr (MyPi+6)    ; push double number
+                                         ; (creation of MyPi not shown)
+              push  word ptr (MyPi+2)
+              push  word ptr (MyPi+4)
+              push  word ptr MyPi
+              call  __stornd
+              add   sp, 10               ; reset stack pointer
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Extend.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd499.html">_parnd()</A>
+<A HREF="ngfe1b.html">_retnd()</A>
+<A HREF="ng12bc5.html">_storni()</A>
+<A HREF="ng130f9.html">_stornl()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

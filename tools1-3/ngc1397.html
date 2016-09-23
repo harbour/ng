@@ -1,0 +1,109 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngc0ff1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbe570.html">[^^Up^^]</A>
+<A HREF="ngc1f85.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>KBDEMULATE()</B>
+ Inserts characters into the BIOS keyboard buffer to emulate keyboard input
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>KBDEMULATE(&lt;cListKeyValue&gt;) --&gt; nValue</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cListKeyValue&gt;</B>  Designates a keyboard input sequence to emulate.
+     Use a maximum of 15 characters.
+
+ <B>Returns</B>
+
+     KBDEMULATE() returns the number of key codes it could not place in the
+     BIOS buffer.
+
+ <B>Description</B>
+
+     KBDEMULATE() emulates keyboard input at a very low level.  This function
+     uses the BIOS input buffer to emulate input.  This emulated input can
+     then be used by another program.  For example, you might stuff the next
+     DOS command prior to the end of the application.  Keyboard input for
+     programs that use RUN() to be called is also feasible.  The buffer
+     capacity is a maximum of 15 characters.  Some of the key codes may vary
+     from keyboard to keyboard, but they still correspond to the values
+     returned by SCANKEY().  Construct the codes as follows:
+
+     CHR(ASCII code) + CHR(Scan code)
+
+     As a rule, a scan code that is transmitted this way cannot be
+     acknowledged by CA-Clipper or any subsequent program.  For example, a
+     DOS command can be passed as a string with spaces at each even position.
+     This emulation of a scan code with a value of 32, would only cause
+     problems when a subsequent program also checks the scan code (see
+     Examples on the next page).
+
+ <B>Notes</B>
+
+     <B>.</B>  You can find the symbolic constants for key codes in the
+        include file CTSCAN.CH.
+
+     <B>.</B>  Problems may arise if you have incompatible hardware/BIOS, or
+        programs that extend the keyboard buffer.
+
+     <B>.</B>  Even though these emulated inputs occur at a low level, the
+        code translations defined with SETKXLAT() still function.
+
+ <B>Examples</B>
+
+     <B>.</B>  These two programs always call each other reciprocally.
+        Before returning to DOS, each program wedges the keys necessary to
+        execute the other program in the BIOS buffer:
+
+        Program 1 (PROG1.EXE)
+        CLEAR
+           @ 10, 10 SAY "Here is program 1  !"
+           INKEY(5)                                // Wait a while...
+           KBDEMULATE("P R O G 2 " + CHR(13))      // Start PROG2 in DOS
+        RETURN
+
+        Program 2 (PROG2.EXE)
+        CLEAR
+           @ 10, 10 SAY "Here is program 2  !"
+           INKEY(5)                                // Wait a while...
+           KBDEMULATE("P R O G 1 " + CHR(13))      // Start PROG1 in DOS
+        RETURN
+
+     <B>.</B>  This program returns to DOS and then re-calls itself.  In this
+        case, the desired extra byte is created with the EXPAND() function.
+        The last token in the full path is the EXE name which includes the
+        file extension.  The first token is the file name:
+
+        xeName  :=  TOKEN(EXENAME(), ":\")
+        ExeName  :=  TOKEN(ExeName, ".", 1)
+        KBDEMULATE(EXPAND(ExeName + CHR(13)))      // Expansion with blanks
+        QUIT
+
+     <B>.</B>  The correct way to implement EXPAND():
+
+        * WRONG! No blank before CHR(13)
+        KBDEMULATE(EXPAND("TEST") + CHR(13))
+        * RIGHT! Blank before CHR(13)
+        KBDEMULATE(EXPAND("TEST" + CHR(13)))
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6b4f8.html">NUMLOW()</A>
+<A HREF="ng6b180.html">NUMHIGH()</A>
+<A HREF="ng1c8af.html">SETKXLAT()</A>
+<A HREF="ng18643.html">KEYSEND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

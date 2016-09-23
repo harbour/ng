@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng37210.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng37de5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DEVOUTPICT()</B>
+ Write a value to the current device using a picture clause
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DEVOUTPICT(&lt;exp&gt;, &lt;cPicture&gt;, [&lt;cColorString&gt;])</B>
+     <B>   --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp&gt;</B> is the value to display.
+
+     <B>&lt;cPicture&gt;</B> defines the formatting control for the display of &lt;exp&gt;.
+     The picture specified here is the same as one used with @...SAY or
+     TRANSFORM and can include both templates and functions.
+
+     <B>&lt;cColorString&gt;</B> is an optional argument that defines the display
+     color of &lt;exp&gt;.  If the current DEVICE is SCREEN, output displays in the
+     specified color.
+
+     If not specified, &lt;exp&gt; displays as the standard color of the current
+     system color as defined by SETCOLOR().  &lt;cColorString&gt; is a character
+     expression containing the standard color setting.  If you want to
+     specify a literal color setting, it must be enclosed in quote marks.
+
+ <B>Returns</B>
+
+     DEVOUTPICT() always returns NIL.
+
+ <B>Description</B>
+
+     DEVOUTPICT() is a full-screen display function that writes the value of
+     a single expression to the current device at the current cursor or
+     printhead position.  DEVOUTPICT() is used in combination with DEVPOS()
+     in Std.ch to implement the @...SAY command used with a PICTURE clause.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows the relationship between the DEVOUTPICT()
+        function and the @...SAY command:
+
+        DEVPOS(10, 10)
+        DEVOUTPICT("Hello there", "@!", "BG+/B"))
+        //
+        @ 10, 10 SAY "Hello there" PICTURE "@!" COLOR "BG+/B"
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ng19e0f.html">COL()</A>
+<A HREF="ng37210.html">DEVOUT()</A>
+<A HREF="ng37de5.html">DEVPOS()</A>
+<A HREF="ng8f431.html">QOUT()</A>
+<A HREF="ng97e75.html">ROW()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

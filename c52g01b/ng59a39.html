@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng59332.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng5a1a6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>READKEY()*</B>
+ Determine what key terminated a READ
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>READKEY() --&gt; nReadkeyCode</B>
+
+ <B>Returns</B>
+
+     READKEY() returns a code representing the key pressed to exit a READ.
+     In CA-Clipper, the following keys are the standard READ exit keys and
+     their READKEY() return codes:
+
+     <B>READKEY() Return Codes</B>
+     ------------------------------------------------------------------------
+     <B>Exit Key             Return Code</B>
+     ------------------------------------------------------------------------
+     Uparrow              5
+     Dnarrow              2
+     PgUp                 6
+     PgDn                 7
+     Ctrl-PgUp           31
+     Ctrl-PgDn           30
+     Esc                 12
+     Ctrl-End, Ctrl-W    14
+     Type past end       15
+     Return              15
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     READKEY() is a keyboard function that emulates the READKEY() function in
+     dBASE III PLUS.  Its purpose is to determine what key the user pressed
+     to terminate a READ.  If UPDATED() is true (.T.), READKEY() returns the
+     code plus 256.  Uparrow and Dnarrow exit a READ only if READEXIT()
+     returns true (.T.).  The default value is false (.F.).  To provide
+     complete compatibility for these keys, execute a READEXIT (.T.) at the
+     beginning of your main procedure.
+
+     READKEY() is supplied as a compatibility function and therefore its use
+     is strongly discouraged.  It is superseded entirely by LASTKEY() which
+     determines the last keystroke fetched from the keyboard buffer.  If the
+     keystroke was a READ exit key, LASTKEY() will return the INKEY() code
+     for that key.  To determine whether any Get object's buffer was modified
+     during a READ, it is superseded by the UPDATED() function.
+
+ <B>Files:</B>  Library is EXTEND.LIB, source file is SOURCE\SAMPLE\READKEY.PRG.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng73148.html">@...GET</A>
+<A HREF="ng43e47.html">LASTKEY()</A>
+<A HREF="ng91542.html">READ</A>
+<A HREF="ng58dbb.html">READEXIT()</A>
+<A HREF="ng6d294.html">UPDATED()</A>
+<A HREF="ngf8bf1.html">Inkey codes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

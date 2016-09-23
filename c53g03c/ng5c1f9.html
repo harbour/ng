@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5bee1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5c579.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>orderListFocus()</B>
+ Select the controlling order
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE orderListFocus(</B>
+     <B>                              AREAP wa,</B>
+     <B>                              USHORT order</B>
+     <B>                           )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>order</B> is a numeric value that indicates the order number to select.
+
+ <B>Description</B>
+
+     orderListFocus() selects the logical order of the table based on order.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Before you can attach an order to the work area, write the
+        work area's buffer to disk through a SELF_GOCOLD() call.
+
+     <B>.</B>  The number in order is the position of the order in the
+        controlling key list.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng50136.html">goCold()</A>
+<A HREF="ng5b99e.html">orderListAdd()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

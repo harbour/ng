@@ -1,0 +1,41 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6b005.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng69344.html">[^^Up^^]</A>
+<A HREF="ng6b59e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LIBRARY                       Create DLL and name it</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Create a DLL and name it</B></U>
+
+ <U>Syntax   : <B>LIBRARY [libname] [INITGLOBAL | INITINSTANCE]</B></U>
+            <B>[PRIVATELIB] [WINDOWAPI]</B>
+
+ <U>Example  : <B>LIBRARY mydll</B></U>
+
+ This command indicates that the resulting executable will in fact be a
+ dynamic link library. If a name is not specified then the name of the
+ executable file is taken.
+
+ The INITGLOBAL keyword tells Windows that it should keep one data area for
+ all instances of the DLL, while the INITINSTANCE keyword tells Windows to
+ keep separate data areas for each instance of the DLL. INITINSTANCE is the
+ default.
+
+ The PRIVATELIB keyword tells Windows that only one program can use the DLL.
+
+ The WINDOWAPI keyword tells Windows that the DLL conforms to the Windows
+ programming API, and is the default.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6419.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng70cd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmSetLinear()</B>         Set whether or not to use Linear Optimization
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmSetLinear(lOn) -&gt; lPrevLinear
+
+<B>Arguments</B>
+
+    lOn is a logical determining whether or not Linear Optimization should
+    automatically be used by cmFilter() and cmReFilter().  If lOn is .T.,
+    then Linear Optimization will be used;  if .F., then Linear Optimization
+    will not be used.
+
+<B>Returns</B>
+
+    cmSetLinear() the previous setting of Linear Optimization.
+
+<B>Description</B>
+
+    cmSetLinear() allows you to turn Linear Optimization on or off.  By
+    default, it is off.
+
+    See the discussion under cmDoLinear() for more information on
+    Linear Optimization.
+
+<B>Example</B>
+
+    ? cmGetLinear()         &amp;&amp; Returns .f. (default)
+<B>    cmSetLinear(.t.)        &amp;&amp; Turn Linear Optimization on.</B>
+    ? cmGetLinear()         &amp;&amp; Now returns .t.
+
+<B>See Also</B>
+
+    cmDoLinear(), cmGetLinear()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2810.html">cmDoLinear()</A>
+<A HREF="ng3fec.html">cmGetLinear()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

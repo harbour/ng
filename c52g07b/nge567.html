@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngdf29.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng9390.html">[^^Up^^]</A>
+<A HREF="ngec01.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBRLOCK() function</B>
+ Lock the record at the current or specified identity
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     DBRLOCK([&lt;xIdentity&gt;]) --&gt; lSuccess
+
+ <B>Arguments</B>
+
+     <B>&lt;xIdentity&gt;</B> is a unique value guaranteed by the structure of the
+     data file to reference a specific item in a data source (database).  In
+     a (.dbf) &lt;xIdentity&gt; is the record number.  In other data formats,
+     &lt;xIdentity&gt; is the unique primary key value.
+
+ <B>Returns</B>
+
+     DBRLOCK() returns lSuccess, a logical data type that is true (.T.) if
+     successful, false (.F.) if unsuccessful.
+
+ <B>Description</B>
+
+     DBRLOCK() is a database function that locks the record identified by the
+     value &lt;xIdentity&gt;.  In Xbase, &lt;xIdentity&gt; is the record number.
+
+     If you do not specify &lt;xIdentity&gt;, all record locks are released and the
+     current record is locked.  If you specify &lt;xIdentity&gt;, DBRLOCK()
+     attempts to lock it and, if successful, adds it to the locked record
+     list.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows two different methods for locking multiple
+        records:
+
+        FUNCTION dbRLockRange( nLo, nHi )
+
+           LOCAL nRec
+           FOR nRec := nLo TO nHi
+              IF ! DBRLOCK( nRec )
+                 DBRUNLOCK()         // Failed - unlock everything
+              ENDIF
+           NEXT
+           RETURN DBRLOCKLIST()      // Return array of actual locks
+
+        FUNCTION dbRLockArray( aList )
+
+           LOCAL nElement, nLen, lRet
+           lRet := .T.
+           nLen := LEN( aList )
+           FOR nElement := 1 TO nLen
+              IF ! DBRLOCK( aList[ nElement ] )
+                 DBRUNLOCK()         // Failed - unlock everything
+                 lRet := .F.
+              ENDIF
+           NEXT
+           RETURN DBRLOCKLIST()
+
+ <B>Status:</B>  New
+
+ <B>See also:</B>  DBUNLOCK(), DBUNLOCKALL(), FLOCK(), RLOCK(), UNLOCK
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

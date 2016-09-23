@@ -1,0 +1,92 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng582a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng6419.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmRestFilter()</B>        Restore a saved filter       
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmRestFilter(filtSave) -&gt; NIL
+
+<B>Arguments</B>
+
+    filtSave is a "saved filter" which has previously been obtained by
+    calling cmSaveFilter().
+
+<B>Returns</B>
+
+    NIL.
+
+<B>Description</B>
+
+    Restores the filter state using a saved version (previously set up by
+    cmSaveFilter()).
+
+    This allows you to stack filters, or swap filters without having to go
+    through the work which was spent in executing the original cmFilter().
+
+    cmRestFilter() will restore saved versions of:
+
+    o   The Filter Condition
+    o   The Filter RecordList
+    o   The Current Record Number
+
+    Please note that cmRestFilter() "destroys" the saved filter.  You can
+    only restore a saved filter once.
+
+<B>Example</B>
+
+    use demo index last, age
+    cmFilter("age = 30")                &amp;&amp; Restrict to the 30's
+    saveFilt := cmSaveFilter()          &amp;&amp; Save the filter
+    cmFilter("age = 31")                &amp;&amp; Set up a new filter
+    ? dbFilter()                        &amp;&amp; "age = 31"
+    list last, age                      &amp;&amp; All the 31's in last order
+<B>    cmRestFilter(saveFilt)              &amp;&amp; Restore the previous filter</B>
+    ? dbFilter()                        &amp;&amp; "age = 30"
+    list last, age                      &amp;&amp; All the 30's in last order
+
+<B>Example</B>
+
+    function tempQuery()
+    *   Save the current filter
+    local saveFilt := cmSaveFilter()
+    local newQuery := space(60)
+
+    *   Get the new condition
+    clear
+    @ 0, 0 say "Condition: " get newQuery
+    read
+
+    *   Set up the new condition and let user browse
+    cmFilter(newQuery)
+    dbedit()
+
+    *   Restore things as they were
+<B>    cmRestFilter(saveFilt)</B>
+    return
+
+
+<B>See Also</B>
+
+    cmDestroyFilter(), cmSaveFilter()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2359.html">cmDestroyFilter()</A>
+<A HREF="ng6419.html">cmSaveFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

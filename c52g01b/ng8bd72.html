@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng895a7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng8c446.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>INPUT</B>
+ Enter the result of an expression into a variable
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>INPUT [&lt;expPrompt&gt;] TO &lt;idVar&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;expPrompt&gt;</B> is an optional prompt displayed before the input area.
+     The prompt can be an expression of any data type.
+
+     <B>TO &lt;idVar&gt;</B> specifies the name of the variable to assign the
+     evaluation result.  If &lt;idVar&gt; is not visible or does not exist, a
+     private variable is created and assigned the result.
+
+ <B>Description</B>
+
+     INPUT is a console command and wait state that takes entry from the
+     keyboard in the form of a valid expression of up to 255 characters and
+     any data type.  When invoked, INPUT sends a carriage return/linefeed to
+     the screen, displays the prompt, and begins accepting keyboard input at
+     the first character position following the prompt.  Input greater than
+     MAXCOL() wraps to the next line.
+
+     Pressing Return terminates entry of the expression.  The expression is
+     then compiled and evaluated using the macro operator (&amp;), and the result
+     assigned to &lt;idVar&gt;.  If the variable is not visible or does not exist,
+     it is created as a private.  If no expression is entered, no action is
+     taken.
+
+     INPUT supports only two special keys: Backspace and Return.  Esc is not
+     supported.  Backspace deletes the last character typed.  Return confirms
+     entry and is the only key that can terminate an INPUT.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example INPUT assigns a keyboard entry to an existing
+        local variable:
+
+        LOCAL exp
+        INPUT "Expression: " TO exp
+        IF exp != NIL
+           ? exp
+        ELSE
+           ? "No expression entered"
+        ENDIF
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7a88e.html">ACCEPT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

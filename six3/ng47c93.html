@@ -1,0 +1,178 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng46fd4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng494a8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>INDEX:</B>
+
+  Syntax 1:
+
+  <B>INDEX ON &lt;expKey&gt; TO &lt;indexfile&gt;;</B>
+          <B>[FOR &lt;expCondition&gt;]    ;</B>
+          <B>[WHILE &lt;while&gt;]         ;</B>
+          <B>[ASCENDING | DESCENDING];</B>
+          <B>[UNIQUE]                ;</B>
+          <B>[EMPTY]                 ;</B>
+          <B>[SUBINDEX]              ;</B>
+          <B>[ADDITIVE]              ;</B>
+          <B>[EVAL   &lt;expUDF&gt; [EVERY &lt;nRecs&gt;]];</B>
+          <B>[OPTION &lt;expUDF&gt; [STEP &lt;nRecs&gt;]];</B>
+          <B>[FILTERON]              ;</B>
+          <B>[NOOPTIMIZE]</B>
+
+  Syntax 2:
+
+  <B>INDEX ON &lt;expKey&gt; TAG &lt;tagname&gt; [OF &lt;indexname&gt;] ;</B>
+          <B>[FOR &lt;expCondition&gt;]    ;</B>
+          <B>[WHILE &lt;while&gt;]         ;</B>
+          <B>[ASCENDING | DESCENDING];</B>
+          <B>[UNIQUE]                ;</B>
+          <B>[EMPTY]                 ;</B>
+          <B>[SUBINDEX]              ;</B>
+          <B>[ADDITIVE]              ;</B>
+          <B>[EVAL   &lt;expUDF&gt; [EVERY &lt;nRecs&gt;]];</B>
+          <B>[OPTION &lt;expUDF&gt; [STEP &lt;nRecs&gt;]];</B>
+          <B>[FILTERON]              ;</B>
+          <B>[NOOPTIMIZE]</B>
+
+  Syntax 1 will create a new compact .IDX index under SIXCDX and a single
+  order .NSX under SIXNSX, whereas syntax 2 will create a new tag in a
+  compound .CDX under SIXCDX or a compound .NSX under SIXNSX.
+
+  <B>&lt;expKey&gt;</B> is an expression that returns the key value to place in the
+  index for each record.  The expression can be any valid Clipper
+  expression (including UDF's) with a value whose type is character,
+  date, logical or numeric.
+
+  <B>TO &lt;indexfile&gt;</B> specifies the name of the index to create.  This clause is
+  used to create an a single .IDX index under SIXCDX, a single order .NSX
+  file under SIXNSX, or an .NTX file under SIXNTX.  If no extension is
+  specified, then .IDX is used for SIXCDX, .NSX for SIXNSX, and .NTX for
+  SIXNTX.
+
+  <B>TAG &lt;tagname&gt;</B> specifies the name of a new tag for a compound index
+  (.CDX/.NSX). The name can be up to 10 characters long with the same
+  constraints as field names.
+
+  <B>OF &lt;indexname&gt;</B> specifies the .CDX/.NSX that the specified tag is to be
+  created in.  If OF &lt;indexname&gt; is not specified, then the new tag is added
+  to the .CDX/&gt;NSX file with the same name as the table (also known as a
+  Structural or auto-open .CDX/.NSX).  The specified (or implied) .CDX/.NSX
+  file is created if it does not already exist.
+
+  <B>FOR &lt;expCondition&gt;</B> is an expression that returns a logical value (.T.
+  or .F.) to determine whether of not a key is included in the index.
+  Any valid Clipper expression (including UDF's) can be used.
+
+  <B>WHILE &lt;while&gt;</B> specifies another condition that each record processed
+   must meet; as soon as a record is encountered that causes the condition
+   to fail, the command terminates.  If a WHILE clause is specified, the
+   database file is processed in the controlling index order.  The WHILE
+   condition is transient (i.e., is not stored in the index file and not
+   used for index updates and REINDEXing purposes).
+
+  <B>ASCENDING</B> (default) specifies that the index should be built in ascending
+  order.
+
+  <B>DESCENDING</B> specifies that the index should be built in descending order.
+
+  <B>UNIQUE</B> specifies that only unique keys are to be included in the index.
+
+  <B>EMPTY</B> is used to create an empty index.  This is useful if you wish to
+  build your own custom index using Sx_KeyAdd() and Sx_KeyDrop().  If <B>EMPTY</B>
+  is specified then an empty index or tag is created, otherwise the index or
+  tag is created normally (default).  <B>NOTE:</B> The EMPTY clause is not for use
+  with Multi-Keyed indexes.  For creating Multi-Keyed indexes, see the
+  sxChar(), sxNum(), sxDate(), or sxLog() function.
+
+  <B>SUBINDEX</B> allows you to leave the current index active while creating
+  a new index file.  This effectively gives you the ability of creating
+  "Sub-Indexes" based on other conditional indexes.  Very handy on networks
+  or large datafiles!
+
+    <B>CAUTION:</B> Do NOT attempt to create a new index or tag of the same name
+    as the current index or tag.  For example, this must never happen:
+
+        <B>USE datafile</B>
+        <B>SET INDEX TO myindex</B>
+        <B>INDEX ON field1 TO myindex SUBINDEX</B>
+
+  <B>ADDITIVE</B> leaves any currently open indexes open after creating the new
+  index.  The newly-created index is placed at the end of the index order.
+
+  <B>OPTION &lt;expUDF&gt;</B> is an expression (normally a UDF) that is evaluated for
+  each record indexed.  This allows the program to display an some type of
+  completion/process meter without having the UDF embedded in the index
+  expression.
+
+  The expression is first eval'd at the beginning of the index process,
+  with the record pointer positioned at EOF.  The following eval's take
+  place at record 1, 2, etc. or whatever the STEP parameter has been set
+  to (see below).  The record number can be tested within your UDF using
+  RECNO().
+
+    <U>NOTE:  The EVAL keyword can be instead of OPTION under Clipper 5.2.</U>
+
+  <B>STEP &lt;nRecs&gt;</B> is used to specify how often the OPTION expression will be
+  eval'd.  &lt;nRecs&gt; is a numeric value representing the number of records
+  that will be processed before the OPTION expression is evaluated.  For
+  example:
+
+      <B>INDEX ON lname TO lname OPTION MyFunc() STEP 10</B>
+
+  In this example MyFunc() would be called every 10 records.  The default
+  step value is 1.
+
+    <U>NOTE:  The EVERY keyword can be instead of STEP under Clipper 5.2.</U>
+
+  <B>FILTERON</B> tells the SIx Driver to respect a FILTER condition when creating
+  the new index.  Only records which meet the filter condition will be added
+  into the index.  This would achieve similar results as if you had used a
+  FOR condition.
+
+  <B>NOOPTIMIZE</B> preempts optimization and forces default Clipper processing.
+
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"
+    <B>INDEX ON last TO last</B>           // Creates LAST.IDX and makes it active
+    <B>INDEX ON age  TO age ADDITIVE</B>   // Creates AGE.IDX and makes it active,
+                                    // but also keeps LAST.IDX open
+
+    <B>INDEX ON state TAG state</B>        // Creates a STATE tag within the
+                                    // TEST.CDX file.  This also creates
+                                    // the TEST.CDX file, if it didn't
+                                    // already exist.  Since the ADDITIVE
+                                    // clause was not used, the other two
+                                    // IDX files were closed.
+
+  <U>       See the RYODEMO.PRG program for an example of using standard RYO</U>
+  <U>       indexes (Created with the EMPTY clause).</U>
+
+  <U>       See the HYPER.PRG and MULTIKEY.PRG programs for examples of using</U>
+  <U>       Multi_Keyed, Free-Format RYO indexes.</U>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng535ee.html">SUBINDEX</A>
+<A HREF="ng4c02e.html">REINDEX</A>
+<A HREF="ng21829.html">Sx_ClearOrder()</A>
+<A HREF="ng18534.html">OrdCondSet()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

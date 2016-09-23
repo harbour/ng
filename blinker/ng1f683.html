@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1f290.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng20290.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIDISFRG()                   Display CA-Clipper Summer '87 free pool fragmentation</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Display CA-Clipper Summer '87 free pool fragmentation</B></U>
+
+ <U>Syntax   : <B>BLIDISFRG([nuHandle])</B></U>
+
+ <U>Return   : <B>None</B></U>
+
+ This function is used to display a summary of CA-Clipper Summer '87's
+ dynamic memory to show the degree of fragmentation, and takes as an optional
+ parameter the output destination file handle. Each character position
+ represents up to 512 bytes, and adjacent equal characters represent
+ contiguous blocks larger than 512 bytes.
+
+ Two memory areas are mapped by this function; the largest area is the far
+ heap, often referred to as the FREE POOL, where most of CA-Clipper's memory
+ allocations are made, and the near heap, a much smaller block of contiguous
+ memory (maximum size 64kb), which CA-Clipper will use if an allocation
+ cannot be satisfied from the free pool.
+
+ The _ and _ characters are used to indicate blocks of free memory which are
+ unused by CA-Clipper, and the two graphics characters _ and _ are used to
+ indicate blocks of memory which are in use, i.e. have been allocated. The
+ character . is used to indicate the point at which the next memory
+ allocation will occur. A key is shown below the memory map.The reason for
+ having two different characters for free blocks and two different characters
+ for used blocks is to show where a free or used area is made up of more than
+ one block of memory. If only one character was used for each then the
+ display would not show the full extent of fragmentation of memory into very
+ small blocks.
+
+ The relative sizes of blocks are shown by identical repeated characters,
+ since a single character indicates a memory block of less than 512 bytes,
+ and a row of four blocks indicates a memory block of approximately 2kb. The
+ relative fragmentation is shown by the proportion of free blocks to used
+ blocks and by the alternation between free and used blocks throughout the
+ display.
+
+ Once free areas are separated by used areas the free areas become virtually
+ unusable except for the storage of small temporary values, which is why
+ MEMORY(0) gradually deteriorates and operations which require larger blocks
+ of memory such as MEMOEDIT() or indexing will then fail.
+
+ The BLIDISFRG() function may be used during the execution of an application
+ to monitor the fragmentation of memory as execution continues. It may also
+ be used to view the improvements gained using the BLINKER MEMORY PACK
+ command and the BLIMEMPAK() function.
+
+ Note that the CA-Clipper Summer'87 free pool is allocated from DOS on an
+ 'as-needed' basis. Unless MEMORY(0), BLIMEMPAK(-1) or BLIMEMBLK() are
+ executed (which cause CA-Clipper to allocate all available memory to the
+ free pool from DOS), this function will reflect only the currently allocated
+ free pool.
+
+ Example:
+
+    <B>* Display the memory fragmentation</B>
+    <B>*</B>
+    <B>BLIDISFRG(4)      &amp;&amp; Send to the printer</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng222fe.html">BLILSTFRG()</A>
+<A HREF="ng27d1e.html">BLISTRFRG()</A>
+<A HREF="ngd7e1.html">BLINKER MEMORY PACK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

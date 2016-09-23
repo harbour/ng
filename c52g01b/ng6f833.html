@@ -1,0 +1,69 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6f3f9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>YEAR()</B>
+ Convert a date value to the year as a numeric value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>YEAR(&lt;dDate&gt;) --&gt; nYear</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;dDate&gt;</B> is the date value to convert.
+
+ <B>Returns</B>
+
+     YEAR() returns the year of the specified date value including the
+     century digits as a four-digit numeric value.  The value returned is not
+     affected by the current DATE or CENTURY format.  Specifying a null date
+     (CTOD("")) returns zero.
+
+ <B>Description</B>
+
+     YEAR() is a date conversion function that converts a date value to a
+     numeric year value.  Use it in calculations for things like periodic
+     reports or for formatting date displays.
+
+     YEAR() is a member of a group of functions that return components of a
+     date value as numeric values.  The group includes DAY() and MONTH()
+     which return the day and month values as numeric values.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate YEAR() using the system date:
+
+        ? DATE()                    // Result: 09/20/90
+        ? YEAR(DATE())              // Result: 1990
+        ? YEAR(DATE()) + 11         // Result: 2001
+
+     <B>.</B>  This example creates a user-defined function using YEAR() to
+        format a date value in the form: month day, year:
+
+        ? Mdy(DATE())               // Result: September 20, 1990
+
+        FUNCTION Mdy( dDate )
+           RETURN CMONTH(dDate) + " " + ;
+                 LTRIM(STR(DAY(dDate)));
+              + "," + STR(YEAR(dDate))
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1534a.html">DAY()</A>
+<A HREF="ng51b6c.html">MONTH()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

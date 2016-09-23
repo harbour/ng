@@ -1,0 +1,56 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd44c1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngd4eb5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>QUIT</B>
+ Terminate program processing
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>QUIT | CANCEL*</B>
+
+ <B>Description</B>
+
+     QUIT and CANCEL both terminate program processing, close all open files,
+     and return control to the operating system.  Each of these commands can
+     be used from anywhere in a program system.  A RETURN executed at the
+     highest level procedure or a BREAK, with no pending SEQUENCE, also QUITs
+     the program.
+
+ <B>Notes</B>
+
+     <B>.  Return code:</B> When a CA-Clipper program terminates, the return
+        code is set to 1 if the process ends with a fatal error.  If the
+        process ends normally, the return code is set to zero or the last
+        ERRORLEVEL() set in the program.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses QUIT in a dialog box:
+
+        IF DialogYesNo(10, 10, "Quit to DOS", "BG+/B,B/W", 2)
+           QUIT
+        ENDIF
+        RETURN
+
+ <B>Files:</B>     Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfc7b7.html">BEGIN SEQUENCE</A>
+<A HREF="ng40eee.html">ERRORLEVEL()</A>
+<A HREF="ng10e2d2.html">RETURN</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

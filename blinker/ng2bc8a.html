@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2b508.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2c1d9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosFreeRealSeg()              Free selector previously allocated with DosAllocRealSeg()</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Free a selector previously allocated with DosAllocRealSeg()</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosFreeRealSeg(SEL selector);</B></U>
+
+ <U>selector   <B>Protected mode selector of a conventional memory block allocated</B></U>
+            <B>through DosAllocRealSeg().</B>
+
+ <U>Return   : <B>None</B></U>
+
+ This function is used to free conventional memory blocks allocated through
+ DosAllocRealSeg(), and should not be used to free any other type of
+ selector.
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>SEL         selector;</B>
+    <B>USHORT      paragraph;</B>
+    <B>/* Allocate a 4 Kb block */</B>
+    <B>if (DosAllocRealSeg(4096, &amp;paragraph, &amp;selector) != 0)</B>
+    <B>   {</B>
+    <B>   printf("DosAllocRealSeg() failed\n");</B>
+    <B>   exit(255);</B>
+    <B>   }</B>
+    <B>printf("4 Kb conventional block allocated\n");</B>
+    <B>printf("Selector for block : %04X\n",selector);</B>
+    <B>printf("Segment of block : %04X\n",paragraph);</B>
+    <B>if (DosFreeRealSeg(selector) != 0)</B>
+    <B>   {</B>
+    <B>   printf("DosFreeRealSeg() failed - selector = %04X\n",</B>
+    <B>      selector);</B>
+    <B>   exit(254);</B>
+    <B>   }</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2c1d9.html">DosFreeSeg()</A>
+<A HREF="ng2c6a2.html">DosFreeSelector()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

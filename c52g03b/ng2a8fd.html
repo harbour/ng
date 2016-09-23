@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2a198.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng29720.html">[^^Up^^]</A>
+<A HREF="ng2ae2e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_fsDelete()</B>
+ Delete a file
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "filesys.api"</B>
+     <B>void _fsDelete(</B>
+     <B>                BYTEP fpFilename</B>
+     <B>              )</B>
+
+ <B>Arguments</B>
+
+     <B>fpFilename</B> is the name of the file to delete specified as a null-
+     terminated string.  The fpFilename must be fully qualified, including
+     the drive letter, path, and extension.
+
+ <B>Returns</B>
+
+     _fsDelete() has no return value.
+
+ <B>Description</B>
+
+     This function deletes the file fpFilename.  It is equivalent to the
+     CA-Clipper function FERASE().  Use the _fsError() function to determine
+     if the file delete operation resulted in an error.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following code fragment illustrates the use of
+        _fsDelete().  Note that error handling should be performed at each
+        step.  Refer to The Error System API Reference chapter of this guide
+        for details on communicating with the CA-Clipper Error system:
+
+        #include "filesys.api"
+
+        FHANDLE hFile;
+
+        // Create a temporary read/write file
+        hFile = _fsCreate( "Temp", FC_NORMAL );
+
+        if (! _fsError() )
+        {
+           .
+           .
+           .
+           _fsClose( hFile );  // Can't delete an open file
+           _fsDelete( "Temp" );
+        }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Filesys.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2ae2e.html">_fsError()</A>
+<A HREF="ng2e998.html">_fsRename()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

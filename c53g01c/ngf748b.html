@@ -1,0 +1,71 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf6736.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf7b8a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TYPE</B>
+ Display the contents of a text file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TYPE &lt;xcFile&gt; [TO PRINTER] [TO FILE &lt;xcOutFile&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcFile&gt;</B> is the name of the file, including extension, to be
+     displayed to the screen.  This argument may be specified as a literal
+     file name or as a character expression enclosed in parentheses.
+     &lt;xcFile&gt; must be specified with an extension if it has one.
+
+     <B>TO PRINTER</B> echoes the display to the printer.
+
+     <B>TO FILE &lt;xcOutFile&gt;</B> echoes the display to the specified file.
+     &lt;xcOutFile&gt; may be specified either as a literal file name or as a
+     character expression enclosed in parentheses.  If no extension is
+     specified, .txt is added.
+
+ <B>Description</B>
+
+     TYPE is a console command that displays the contents of a text file to
+     the screen, optionally echoing the display to the printer and/or another
+     text file.  To suppress output to the screen while printing or echoing
+     output to a file, SET CONSOLE OFF before the TYPE invocation.
+
+     If &lt;xcFile&gt; is specified without a path and/or drive designator, TYPE
+     searches the current DEFAULT directory, and then, the current PATH.  If
+     &lt;xcOutFile&gt; is specified without a path and/or drive designator, TYPE
+     creates the file in the current DEFAULT directory.
+
+     TYPE performs no special formatting on the listing.  There are no
+     special headings or pagination when the output is sent to the printer.
+
+     To pause output, use Ctrl-S.  Note that you cannot interrupt a listing
+     with Esc.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates the TYPE command:
+
+        TYPE Main.prg TO PRINTER
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc3bb3.html">COPY FILE</A>
+<A HREF="nge3619.html">SET DEFAULT</A>
+<A HREF="ngecec7.html">SET PATH</A>
+<A HREF="nged8e1.html">SET PRINTER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng212d3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng21e08.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_ClearOrder():</B>
+
+  Syntax:   Sx_ClearOrder( &lt;nOrder&gt; )
+
+            nOrder = The order of the index to close.
+
+
+  Returns:  Logical value indicating success or failure of the action.
+
+  Description:  Allows you to selectively close a single index without
+                closing any other open indexes.  Any indexes in a greater
+                order position will be moved up one order position.
+
+    <B>NOTE:  If you clear the active order, order is set to zero (0).</B>
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    LOCAL nX := 0
+
+    USE test VIA "SIXCDX"                          // Open Database
+
+    INDEX ON last  TO last                         // Create LAST.IDX
+    INDEX ON state TO state ADDITIVE               // Create STATE.IDX
+    INDEX ON age   TO age   ADDITIVE               // Create AGE.IDX
+    INDEX ON zip   TO zip   ADDITIVE               // Create ZIP.IDX
+
+    ? "Displaying indexes open in each order:"
+    ? "--------------------------------------"
+    FOR nX := 1 TO Sx_IndexCount()                   // Loop thru index order
+      ? AllTrim( Str( nX )) + " " + Sx_IndexName(nX) //  displaying each one
+    NEXT
+
+    // 1 LAST.IDX
+    // 2 STATE.IDX
+    // 3 AGE.IDX
+    // 4 ZIP.IDX
+
+    ?
+    ? "Now close the second index (STATE.IDX) only:"
+    ? "--------------------------------------------"
+    <B>Sx_ClearOrder(2)</B>                                 // Close just STATE.IDX
+
+    FOR nX := 1 TO Sx_IndexCount()                   // Loop thru index order
+      ? AllTrim( Str( nX )) + " " + Sx_IndexName(nX) //  displaying each one
+    NEXT
+
+    // 1 LAST.IDX
+    // 2 AGE.IDX
+    // 3 ZIP.IDX
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng455ad.html">CLEAR ORDER</A>
+<A HREF="ng1bc51.html">OrdListClear()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

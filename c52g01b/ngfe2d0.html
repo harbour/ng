@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>dBASE Commands and Functions Not Supported by CA-Clipper</B>
+------------------------------------------------------------------------------
+
+ Some dBASE commands and functions are not supported by CA-Clipper.
+ CA-Clipper does not support any of the commands that are used primarily
+ in the interactive or "dot prompt" mode.  In the interactive mode, you
+ may instantly query the various databases without writing a program,
+ however, CA-Clipper has been designed to compile and execute programs
+ significantly faster than can be accomplished in the interactive mode.
+ The dBASE commands and functions that are not supported by CA-Clipper
+ are listed in the table below.
+
+<B> CA-Clipper Equivalents of dBASE Commands &amp; Functions:</B>
+-------------------------------------------------------------------------------
+<B> dBASE Command/Function</B>   | <B>CA-Clipper Equivalent</B>
+                          |
+ APPEND                   | DBU.EXE
+ ASSIST                   | DBU.EXE
+ BROWSE                   | BROWSE(), DBEDIT(), TBrowse Class
+ CHANGE                   | DBU.EXE
+ CLEAR FIELDS             | n/a
+ CREATE/MODIFY LABEL      | RL.EXE
+ CREATE/MODIFY QUERY      | n/a
+ CREATE/MODIFY REPORT     | RL.EXE
+ CREATE/MODIFY SCREEN     | n/a
+ CREATE/MODIFY STRUCTURE  | DBU.EXE
+ CREATE/MODIFY VIEW       | DBU.EXE
+ EDIT                     | DBU.EXE
+ ERROR()                  | Error:genCode, Error:osCode,
+                          | Error:SubCode messages
+ EXPORT TO                | n/a
+ HELP                     | The Guide To CA-Clipper
+ IMPORT FROM              | n/a
+ INSERT                   | n/a
+ LIST/DISPLAY FILES       | DBU.EXE
+ LIST/DISPLAY HISTORY     | The CA-Clipper Debugger
+ LIST/DISPLAY MEMORY      | The CA-Clipper Debugger
+ LIST/DISPLAY STATUS      | The CA-Clipper Debugger
+ LIST/DISPLAY STRUCTURE   | The CA-Clipper Debugger
+ LOAD                     | RTLINK.EXE
+ LOGOUT                   | n/a
+ MESSAGE()                | Error:description message
+ MODIFY COMMAND           | PE.EXE
+ ON ERROR                 | ERRORBLOCK()
+ ON ESCAPE                | SET KEY User function
+ ON KEY                   | SET KEY User function
+ RESUME                   | RETURN false (.F.) from an error handling block
+                          | if Error:canDefault contains true (.T.)
+ RETRY                    | RETURN true (.T.) from an error handling block
+                          | if Error:canRetry contains true (.T.)
+ RETURN TO MASTER         | BEGIN SEQUENCE...BREAK...END
+ SET                      | The CA-Clipper Debugger
+ SET CARRY                | n/a
+ SET CATALOG              | n/a
+ SET COLOR ON | OFF       | n/a
+ SET DEBUG                | ALTD()
+ SET DOHISTORY            | The CA-Clipper Debugger
+ SET ECHO                 | The CA-Clipper Debugger
+ SET ENCRYPTION           | n/a
+ SET FIELDS               | DBU.EXE
+ SET HEADING              | n/a
+ SET HELP                 | n/a
+ SET HISTORY              | n/a
+ SET MEMOWIDTH            | MEMOLINE(), MEMOEDIT(), MLCOUNT()
+ SET MENUS                | n/a
+ SET MESSAGE              | n/a
+ SET SAFETY               | n/a
+ SET STATUS               | n/a
+ SET TALK                 | The CA-Clipper Debugger
+ SET TITLE                | n/a
+ SET VIEW                 | DBU.EXE
+-------------------------------------------------------------------------------
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

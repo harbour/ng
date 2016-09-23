@@ -1,0 +1,136 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Overview</B>
+------------------------------------------------------------------------------
+
+
+ <B>Protected mode</B>
+
+ Protected mode refers to the enhanced mode of the 80286 and above. These
+ processors were designed with backwards compatibility as being of primary
+ importance, but with the need to extend the address space beyond 1 Mb.
+
+ When these processors are powered up they start running in 8086 mode, known
+ as real mode, and in the absence of any special software will continue to
+ run as an 8086, only with better performance due to their increased clock
+ speeds and reduced instruction execution times.
+
+ Specific software instructions may be used to switch the processor into one
+ of its enhanced modes at any time, at which point the processor starts to
+ function as a more advanced processor with a number of extra capabilities,
+ including the ability to access more than 1 Mb of memory. The processor may
+ be switched in and out of protected mode at any time if required, although
+ the 80286 requires a significant amount of time (milliseconds) each time a
+ switch to protected mode is requested.
+
+ When running in 80286 protected mode, rather than interpreting the segment
+ as an absolute memory address the processor interprets it as an index into a
+ look up table which contains 24-bit physical base addresses for all the
+ memory segments in the system. Using this 24 bit base address and a 16 bit
+ offset allows the processor to address 16 Mb of physical memory. The memory
+ is still segmented, however, with the largest segment still being 64 Kb.
+
+ <B>DOS Extenders</B>
+
+ The 80286 processor and above will run in real mode until otherwise
+ instructed, and DOS itself is written in such a way that it can only run in
+ real mode. The idea behind a DOS extender is to run the actual program in
+ protected mode, giving it access to all the extra memory and features
+ available, and then temporarily switch back to real mode whenever a DOS or
+ BIOS service is required which cannot be fielded in protected mode.
+
+ A DOS extender will typically have a real mode code portion loaded in DOS
+ conventional memory and a protected mode code portion loaded in extended
+ memory. The real mode portion will load and execute the user program, and
+ will receive control any time a request for, or access to, a system resource
+ is made by the program. The protected mode portion will usually contain
+ replacement code for some of the services offered by DOS or the BIOS, so in
+ many cases it will perform the function and then return to the user program
+ without having to leave protected mode.
+
+ If the request will require DOS or the BIOS to be activated, however, the
+ DOS extender will save the current protected mode status of the processor,
+ switch back to real mode and then invoke its real mode portion. This portion
+ may then field the request itself or pass it on to DOS or BIOS in the normal
+ way. Once the request has been processed, control returns to the real mode
+ portion which will return to protected mode and the protected mode portion.
+ This can now restore the protected mode status and continue execution of the
+ user program.
+
+ DOS extenders are able to use the specific features of the 80286 or the
+ 80386, and obviously require a minimum of the processor for which they have
+ been written. In all cases, because the 80x86 processors are backwards
+ compatible, the DOS extender will also run on any processor more advanced
+ than the one for which it is written.
+
+ 80286 DOS extenders run in 16 bit protected mode, which provides access to
+ up to 16 Mb of memory in 64 Kb segments. Because it is still managed in 64
+ Kb segments, most high level language code will run in 16 bit protected mode
+ with only minor modifications and incompatibilities. Typically a recompile
+ and relink with some replacement .OBJ and .LIB files provided as part of the
+ DOS extender will allow a program to be up and running in 16 bit protected
+ mode, at which point the programmer can start to iron out the
+ incompatibilities.
+
+ 80386 DOS extenders run in 32 bit protected mode, which provides up to 4 Gb
+ of memory in one or more segments, so most programs will treat the memory as
+ a linear address space contained in one segment. Because the address space
+ is linear and segments are not limited in size to 64 Kb, more major
+ incompatibilities in existing programs will arise. In the case of high level
+ languages, 32 bit versions of the compiler are usually necessary in order to
+ make use of 32 bit protected mode, and these compilers will automatically
+ prohibit most of the constructs which are not allowed when executing in
+ protected mode.
+
+ Windows 3.x enhanced mode is actually this 32 bit protected mode. We will
+ make no further mention of 32 bit protected mode as the DOS extender
+ provided with Blinker is a 286 DOS extender which will run on any processor
+ from an 80286 processor with 2MB of memory up to the largest Pentium.
+
+ Because of the potential problems in a DOS environment of multiple programs
+ wishing to switch back and forth into protected mode, particularly between
+ EMS emulators and DOS extenders, two major programming interfaces were
+ proposed to manage protected mode switching. The first of these was the
+ Virtual Control Program Interface (VCPI) which is specific to 80386 and
+ 80486 processors, and the second and more general is DOS Protected Mode
+ Interface (DPMI), which applies to the 80286 and above. Please refer to
+ Appendix C - Further reading - for more details on these specifications and
+ how to program to them.
+
+ <B>Performance implications</B>
+
+ Programs running under a 286 DOS extender have transparent access to up to
+ 16MB of directly addressable memory. Memory intensive programs, particularly
+ those using large numbers of data structures e.g. arrays, will therefore run
+ significantly faster in protected mode. Also, since there is usually no need
+ for overlaying of code, execution of the code itself is faster because
+ pauses to load code from disk are rare.
+
+ On the other hand, programs running under a DOS extender which heavily
+ access DOS, the BIOS or other external resources will often be continually
+ switching between real and protected mode, so may run slower than in real
+ mode. This is extremely program dependent. The overhead of switching between
+ real and protected mode varies significantly between different machines, and
+ reduces drastically when moving from a 286 to a 386 and 486 processor.
+
+ Language compiler memory managers sometimes perform inefficiently when given
+ megabytes of data, since they were only designed to manage a few hundred Kb
+ of data. This is another area where performance may be adversely affected.
+ For this reason Blinker provides replacement memory management functions for
+ some of the more popular compilers.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

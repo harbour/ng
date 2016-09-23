@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng24d80.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng24507.html">[^^Up^^]</A>
+<A HREF="ng257ab.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCAPBEG()</B>
+ Activates the capture mode for an LPT device
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCAPBEG(&lt;nPrinter&gt;)    --&gt; lActivate</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nPrinter&gt;</B>  Designates the LPT device for which the capture mode is
+     activated.  LPT1(1) to LPT3(3) are possible.
+
+ <B>Returns</B>
+
+     NNETCAPBEG() returns .T. when the capture mode for the designated LPT
+     device can be activated.
+
+ <B>Description</B>
+
+     NOVELL NETWORK CAPTURE BEGIN
+     With NNETCAPBEG(), the capture mode for a particular LPT device can be
+     activated directly from within a CA-Clipper application.  Optimal
+     control of print output within a Novell network is possible in
+     conjunction with other NNETCAPXXX() functions.
+
+     All print output parameters (flags) can be selected using the
+     NNETCAPSSF() function.  These parameters must be set before every BEGIN
+     CAPTURE command.  In this way, the auto form feed, the banner page, and
+     other settings can be carried out from within the CA-Clipper program.
+
+     By contrast, the print queue can be selected using the NNETSETQ()
+     function, where another server had been previously selected using
+     NNETSETSRV().
+
+ <B>Example</B>
+
+     Activate the capture mode for LPT2:
+
+     SET PRINTER TO LPT2
+     ? NNETCAPBEG(2)                  // .T., when active
+     SET PRINT ON
+        ? "That is a test 234"
+     SET PRINT OFF
+     NNETCAPEND(2)                    // End capture mode
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2674f.html">NNETCAPSSF()</A>
+<A HREF="ng552c4.html">NNETSETQ()</A>
+<A HREF="ng22fc1.html">NNETSETSRV()</A>
+<A HREF="ng25cb2.html">NNETCAPEND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

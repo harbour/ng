@@ -1,0 +1,108 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng54cc4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng56137.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PCOL()</B>
+ Return the current column position of the printhead
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PCOL() --&gt; nColumn</B>
+
+ <B>Returns</B>
+
+     PCOL() returns an integer numeric value representing the last printed
+     column position, plus one.  The beginning column position is zero.
+
+ <B>Description</B>
+
+     PCOL() is a printer function that reports the column position of the
+     printhead after the last print operation.  PCOL() is updated only if
+     either SET DEVICE TO PRINTER or SET PRINTER ON is in effect.  PCOL() is
+     the same as COL() except that it relates to the printer rather than the
+     screen.  PCOL() is updated in the following ways:
+
+     <B>.</B>  Application startup sets PCOL() to zero
+
+     <B>.</B>  EJECT resets PCOL() to zero
+
+     <B>.</B>  A print operation sets PCOL() to the last column print
+        position plus one
+
+     <B>.</B>  SETPRC() sets PCOL() to the specified column position
+
+     PCOL(), used with PROW(), prints a value relative to the last value
+     printed on the same line.  This makes it easier to align columns when
+     printing a columnar report.  A value is printed in the next column by
+     specifying its position as PCOL() + &lt;column offset&gt;.  Note that PCOL()
+     is effective for alignment only if the column values are fixed-width.
+     To guarantee fixed-width column values, format the output using
+     TRANSFORM(), the PICTURE clause of @...SAY, or any of the PAD()
+     functions.
+
+ <B>Notes</B>
+
+     <B>.  Printer control codes:</B> Sending control codes to the printer
+        causes PCOL() to become out of sync with the printhead position.
+        Although control codes do not print, this discrepancy happens because
+        CA-Clipper counts all characters sent to the printer regardless of
+        how the printer treats them.  To make the necessary adjustment, save
+        the current PROW() and PCOL() values, send the control codes, then
+        use SETPRC() to restore the original PROW() and PCOL() values.
+
+     <B>.  SET MARGIN:</B> PCOL() cannot reliably be used with SET MARGIN to
+        print with @...SAY.  When printing with @...SAY, the current MARGIN
+        value is always added to the specified column position before output
+        is sent to the printer.  This effectively adds the MARGIN value to
+        PCOL() for each invocation of @...SAY to the same print line.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, PCOL() creates a simple report that prints a
+        listing of Customer names, addresses, and phone numbers:
+
+        LOCAL nLine := 99, nPage := 1
+        USE Customer INDEX CustName NEW
+        SET DEVICE TO PRINTER
+        DO WHILE !EOF()
+           IF nLine &gt; 55
+              PageTop(nPage)
+              nLine := 1
+              nPage++
+           ENDIF
+           @ nLine, 10 SAY CustName
+           @ nLine, PCOL() + 2;
+              SAY RTRIM(City) + ", " + RTRIM(State) + ZipCode;
+                    PICTURE REPLICATE("X", 35)
+           @ nLine, PCOL() + 2;
+              SAY Phone;
+                    PICTURE "@R (999) 999-9999"
+           nLine++
+           SKIP
+        ENDDO
+        SET DEVICE TO SCREEN
+        CLOSE
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng13297.html">COL()</A>
+<A HREF="ng54cc4.html">PAD()</A>
+<A HREF="ng57877.html">PROW()</A>
+<A HREF="ng5ee92.html">ROW()</A>
+<A HREF="nga0ae0.html">SET DEVICE</A>
+<A HREF="ng66490.html">SETPRC()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

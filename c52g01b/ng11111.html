@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng10b1e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng11922.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BOF()</B>
+ Determine when beginning of file is encountered
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>BOF() --&gt; lBoundary</B>
+
+ <B>Returns</B>
+
+     BOF() returns true (.T.) after an attempt to SKIP backward beyond the
+     first logical record in a database file; otherwise, it returns false
+     (.F.).  If there is no database file open in the current work area,
+     BOF() returns false (.F.).  If the current database file contains no
+     records, BOF() returns true (.T.).
+
+ <B>Description</B>
+
+     BOF() is a database function used to test for a boundary condition when
+     you are moving the record pointer backward through a database file using
+     the SKIP command.  A simple usage example is a descending order record
+     list with an ascending order index file.  A more sophisticated example
+     is a screen paging routine that pages forward or backward through the
+     current database file based on the key the user presses.  When the user
+     attempts to page backward, you would use BOF() to test for a beginning
+     of file condition before using the SKIP command to move the record
+     pointer and repaint the screen.
+
+     Once BOF() is set to true (.T.), it retains its value until there is
+     another attempt to move the record pointer.
+
+     By default, BOF() operates on the currently selected work area.  It can
+     be made to operate on an unselected work area by specifying it within an
+     aliased expression (see example below).
+
+     The SKIP command is the only record movement command that can set BOF()
+     to true (.T.).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates BOF() by attempting to move the
+        record pointer before the first record:
+
+        USE Sales NEW
+        ? RECNO(), BOF()               // Result: 1 .F.
+        SKIP -1
+        ? RECNO(), BOF()               // Result: 1 .T.
+
+     <B>.</B>  This example uses aliased expressions to query the value of
+        BOF() in unselected work areas:
+
+        USE Sales NEW
+        USE Customer NEW
+        USE Invoices NEW
+        ? Sales-&gt;(BOF()), Customer-&gt;(BOF())
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2fa9c.html">EOF()</A>
+<A HREF="ngac2d7.html">SKIP</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

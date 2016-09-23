@@ -1,0 +1,28 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3ce6e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng3d15b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1112    Read value larger than 64kb</B>
+
+     <B>Explanation:</B>  A read of a variable with length larger than 64kb was
+     attempted.  The limit for character variables and memo fields is 64kb.
+
+     <B>Action:</B>  This read error could indicate an index access failure
+     indicating a bad FIELD type, i.e., INDEXing on a MEMO or large character
+     field.  Look into third-party RDD or any "in house" C/ASM code.  Make
+     sure the REQUESTed database driver was linked and check the .LIBrary
+     link order.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

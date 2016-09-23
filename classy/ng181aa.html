@@ -1,0 +1,95 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng17ce1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng18fa3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Instantiation</B>
+
+  This section will examine in detail how an object gets created. Class(y)'s
+  instantiation mechanism is very open and flexible, and can be customized
+  if necessary.
+
+  We will examine what happens when the <U>new()</U> message is sent to a class
+  object, as in the following statement:
+
+    oWin := Window():new( 7, 4, 18, 25 )
+
+  1. The <U>new()</U> message is sent to the class. Assuming the class does not
+     have a class method named <U>new</U>, the predefined <U>new</U> method in the
+     Class class will be invoked.
+
+  2. The <U>new</U> method in the Class class creates an empty instance of the
+     class described by the class object which received the message. The
+     empty instance is created with the Class method <U>basicNew()</U>, which
+     creates a new instance of a class but does not initialize it. Another
+     example of the use of <U>basicNew()</U> can be found in the <U>copy()</U>
+     method in the Object class.
+
+  3. Having created an empty instance of the correct class, the next step is
+     to initialize it. This is done by sending the <U>init()</U> message to the
+     newly created object, along with the parameters received by <U>new()</U>.
+     This invokes the <U>new</U> method defined in the class (the initializer),
+     which should initialize its instance variables appropriately, and
+     return. It returns to the Class <U>new</U> method, which returns the
+     initialized object to the caller.
+
+  Here is a slightly simplified version of the source to the <U>new()</U>
+  method in the Class class:
+
+    METHOD new
+       // create an instance of the class described by SELF.
+       LOCAL newObj := ::basicNew()
+       // invoke the initializer method for that object
+       newObj:init()
+    RETURN newObj
+
+  One thing is missing from the above code: parameters. Usually, a <U>new()</U>
+  message is accompanied by parameters specific to the class being
+  instantiated. Under the 2.4 architecture, these parameters would usually
+  be passed to the <U>new()</U> method in Class, but in fact it is the
+  initializer method in the class being instantiated that needs the
+  parameters. Accordingly, all parameters supplied to the Class new() method
+  are passed through to the new object's <U>init()</U> method unchanged. To
+  achieve this efficiently, the Class <U>new()</U> method is actually
+  implemented in C.
+
+  One further twist requires explanation: constructors with names other than
+  <U>new</U>. This allows multiple constructor methods for different
+  instantiation requirements. A class which supports constructor methods
+  other than <U>new</U> needs a definition for the corresponding messages in
+  both the class and the metaclass. If we examine the relevant command
+  definition in CLASS(Y).CH, we will see something like this:
+
+    #xcommand   METHOD &lt;method&gt; CONSTRUCTOR ;
+          =&gt;                           ;
+          METHOD &lt;method&gt;                   ;;
+          CLASS MESSAGE &lt;method&gt; IS altNew
+
+  An ordinary method is declared using the METHOD command - this is the
+  actual constructor method which will initialize the parameter. Then a
+  class message is declared which is mapped onto the <U>altNew</U> message,
+  defined in the Class class.
+
+  When a constructor message other than <U>new</U> is sent to such a class, the
+  <U>altNew()</U> method in Class will be invoked, via the synonym which was
+  declared.
+
+  There is thus no longer anything special about constructor methods
+  themselves other than the fact that ones other than <U>new</U> require a
+  class message mapped onto the <U>altNew </U>method.
+
+  Note that the <B>CONSTRUCTOR</B> clause in the <B>METHOD</B> command is only
+  required when declaring constructor methods other than <U>new()</U>.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

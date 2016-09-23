@@ -1,0 +1,98 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>With the Contains ( $ ) Operator</B>
+
+  Mach SIx uses the Contains ($) Operator in a totally different manner than
+  straight Clipper.  Keep in mind that in order for Mach SIx to optimize an
+  expression, the value in the expression must be one that you could perform
+  a SEEK on.  Since you cannot SEEK for a value contained in the middle of a
+  key, Mach SIx cannot optimize a query based on a value that is truly <B>con-</B>
+  <B>tained within</B> a field.  Instead, Mach SIx allows you to use the contains
+  operator to simplify a search for different values within the same field.
+
+  For example, to set a filter for all records where the STATE field is
+  equal to "CA", "AZ", or "NY" you could either do this:
+
+    <B>SET FILTER TO STATE=="CA" .OR. STATE=="AZ" .OR. STATE=="NY"</B>
+
+  Or you could do this:
+
+    <B>SET FILTER TO STATE $ "CA AZ NY"</B>
+
+  As you can see, the second method is much simpler.  In this example, the
+  spaces separate the values just to keep Mach SIx from mistakenly looking
+  for other values we don't want.
+
+  Say, for example, that we wanted to look at all records where STATE was
+  equal to "NC", "AL", or "AZ".  If we did this:
+
+    <B>SET FILTER TO STATE $ "NCALAZ"</B>
+
+  ...Mach SIx would set the filter for all records where the STATE field was
+  equal to "NC", "CA", "AL", "LA", and "AZ".
+
+  Mach SIx takes the length of the field and moves one byte at a time
+  through the search string, reading in the same number of bytes as the
+  search field is wide.  In this example, the STATE field is two bytes
+  wide.
+
+  With this in mind, you MUST insure that any search strings are padded
+  with spaces to the length of the field being searched.  For example, if
+  you wanted to look at all records where the LAST field (10 bytes wide)
+  contained either the name Smith, Jones, or Thompson, you'd need to do
+  this:
+
+                                   1         2         3
+                          123456789012345678901234567890
+    <B>SET FILTER TO LAST $ "Smith    Jones     Thompson  "</B>
+
+  To summarize, using the contains operator you can optimize queries on a
+  single field with a list of items.  In order to be optimized the query
+  must take on the form of the examples below.
+
+       // Assumes the STATE field is two characters long
+       <B>COUNT TO nCount FOR STATE $ "CA,NC,FL,SC,IL,GA"</B>
+
+       // Assumes the PAYDATE field is four characters long
+       <B>COPY TO Temp FOR PAYTYPE $ "CASH CHCK CRED"</B>
+
+       // Assumes the LAST field is ten characters long
+       <B>SET FILTER TO LAST $ "Smith     Jones     Thompson  "</B>
+
+  The field must be listed to the left of the "$" and the list ( or
+  string ) must be greater than or equal to the width of the field.
+  Queries like the following are not optimizable:
+
+         <B>SUM Amount TO nAmount FOR "S" $ Last</B>
+
+  Note that the items in the "list" need not be delimited with a common
+  character.  The "," and " " were placed in the string to prevent
+  erroneous matches.  The following is an example of a query using a
+  single character indexed field DEBTCODE that is optimizable without
+  specifying any delimiters.
+
+        <B>COUNT TO nCount FOR  DebtCode $ "ABCDEFG"</B>
+
+  If there is ever a question whether a query condition is optimizable,
+  check its optimization level with the m6_IsOptimize() function.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng14b57.html">m6_IsOptimize()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

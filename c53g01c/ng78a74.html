@@ -1,0 +1,119 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng77bfc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MSTATE()</B>
+ Return the current mouse state
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MSTATE() --&gt; aState | 0</B>
+
+ <B>Returns</B>
+
+     <B>MSTATE() Return Array</B>
+     ------------------------------------------------------------------------
+     <B>Position                 Description</B>
+     ------------------------------------------------------------------------
+     LLM_STATE_X              State of X position.
+     LLM_STATE_Y              State of Y position.
+     LLM_STATE_ROW            State of column position.
+     LLM_STATE_COL            State of line position.
+     LLM_STATE_LEFT           State of left mouse button.  LLM_BUTTON_DOWN
+                              means down and LLM_BUTTON_UP means up.
+     LLM_STATE_RIGHT          State of right mouse button.  LLM_BUTTON_DOWN
+                              means down and LLM_BUTTON_UP means up.
+     LLM_STATE_VISIBLE        State of mouse pointer.  True (.T) means
+                              visible and false (.F) means invisible.  (See
+                              MSHOW() and MHIDE() for more information.)
+     LLM_STATE_DRIVER         Indicates version of mouse driver.
+     LLM_STATE_SHAPE          Mouse cursor shape.  (See note below.)
+     LLM_STATE_CLICKS_LEFT    Number of left clicks since last MSTATE() call.
+     LLM_STATE_CLICKS_RIGHT   Number of right clicks since last MSTATE()
+                              call.
+     ------------------------------------------------------------------------
+
+     <B>Note:</B>  The following are the possible values predefined for this
+     return array position:  LLM_CURSOR_ARROW, LLM_CURSOR_SIZE_NS,
+     LLM_CURSOR_SIZE_WE, LLM_CURSOR_SIZE_NW_SE, LLM_CURSOR_SIZE_NE_SW,
+     LLM_CURSOR_HAND, LLM_CURSOR_FINGER, LLM_CURSOR_CROSS, LLM_CURSOR_WAIT.
+     For a description of these values see the MSHOW() table of Cursor Shape
+     Constants.
+
+     If the mouse is missing, 0 is returned.
+
+     The number of clicks (i.e., aState[LLM_STATE_CLICKS_LEFT] and
+     aState[LLM_STATE_CLICKS_RIGHT]) is reset each time MSTATE() is called.
+     Use MSTATE() to reset the mouse settings when needed.
+
+ <B>Description</B>
+
+     MSTATE() returns information on the mouse state, i.e., the current
+     screen position of the pointer, the state of the left and right mouse
+     buttons, the visibility status of the mouse pointer, and the version of
+     the mouse driver.
+
+ <B>Notes</B>
+
+     If the version of the mouse driver (i.e., aState[LLM_STATE_DRIVER]) is
+     NULL (""), this indicates that the mouse is not connected or is
+     configured incorrectly.  Do not hesitate to insert a version check such
+     as the following:
+
+        IF MSTATE()[LLM_STATE_DRIVER]&lt;=500
+           // Consider the mouse to be absent
+        ELSE
+           // Consider the mouse to be present
+        ENDIF
+
+     <B>Warning! </B> Old mouse drivers are usually unreliable and can cause odd
+     behavior in your application, such as a poorly drawn pointer and
+     unsatisfactory saves and restores of the pointer and underlying pixels.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows how to use MSTATE() function:
+
+        // Show the mouse pointer
+        MSHOW()
+        DO WHILE INKEY() != K_ESC
+                       // Retrieve mouse state
+           aState := MSTATE()
+                       // Line position
+           @ 24,  0 SAY aState[LLM_STATE_ROW]
+                       // Column position
+           @ 24, 10 SAY aState[LLM_STATE_COL]
+                       // State of left button
+           @ 24, 20 SAY "Left" + If(aState[LLM_STATE_LEFT]==LLM_BUTTON_DOWN,;
+           "Down"  ,;
+           "Up")
+                       // State of right button
+           @ 24, 40 SAY "Right " + If(aState[LLM_STATE_RIGHT]==    ;
+           LLM_BUTTON_DOWN ,;
+           "Down"  ,;
+           "Up")
+        ENDDO
+           // Hide the mouse pointer
+        MHIDE()
+
+ <B>Files</B>   Library is LLIBG.LIB, header file is Llibg.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng727bc.html">MHIDE()</A>
+<A HREF="ng77742.html">MSETCURSOR()</A>
+<A HREF="ng77bfc.html">MSHOW()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

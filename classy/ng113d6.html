@@ -1,0 +1,87 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng11238.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng11e15.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Error Reporting</B>
+
+  A function called METHODNAME() is provided. It is similar in behavior to,
+  and can be used instead of, Clipper's PROCNAME(). It is intended to
+  provide more informative error traces. The following old-style error trace
+  was obtained with MENUDEMO.EXE:
+
+    Called from: obj:EXEC(71)
+    Called from: obj:EXEC(73)
+    Called from: obj:EXEC(53)
+    Called from: obj:EXEC(72)
+    Called from: obj:EXEC(73)
+    Called from: obj:EXEC(53)
+    Called from: obj:EXEC(72)
+    Called from: MAIN(49)
+
+  By using METHODNAME() in ERRORSYS, you can get the following more
+  informative listing:
+
+    Called from: POPUPMENU():EXEC(71)
+    Called from: POPUPMENU:EXEC(73)
+    Called from: MENUITEM:EXEC(53)
+    Called from: PULLDNMENU/POPUPMENU():EXEC(72)
+    Called from: PULLDNMENU/POPUPMENU:EXEC(73)
+    Called from: MENUITEM:EXEC(53)
+    Called from: MENUBAR/BASEMENU:EXEC(72)
+    Called from: MAIN(49)
+
+  A file called CYERRSYS.OBJ is provided with Class(y) to implement this. It
+  is a recompiled version of a very slightly modified ERRORSYS.PRG. It can
+  be linked in along with the other object files in an application,
+  automatically resulting in the enhanced error trace.
+
+  If you have your own modified version of ERRORSYS, all you need to do is
+  change one line to obtain the enhanced error trace. In the original
+  ERRORSYS, there is a line similar to the following (usually line 131):
+
+    ? "Called from", Trim(ProcName(i)) + ;
+
+  Merely change the PROCNAME(i) call to METHODNAME(i), as follows:
+
+    ? "Called from", Trim(MethodName(i)) + ;
+
+  Recompile the module. Link this module with your system to obtain the
+  enhanced error trace.
+
+  The general format of the string returned by  METHODNAME() is as follows:
+
+    &lt;recvClass&gt;[/&lt;implClass&gt;][()]:&lt;message&gt;[(*)]
+
+  &lt;recvClass&gt;    Class of the object receiving the message
+
+  &lt;implClass&gt;    Class in which the method is implemented. This will be
+            omitted if it is the same as the receiver's class. When present,
+            it will always be an ancestor class of the receiver.
+
+  ()        an up-arrow is included if the method concerned is actually
+            implemented in a class higher up the inheritance tree than the
+            one displayed. This can occur when the <B>super</B> message, or an
+            explicit class name message, is used to override the normal
+            behavior of a message search.
+
+  (*)       an asterisk appears after the message name if the message could
+            not be found in the class. This means one of two things:
+
+            <B>.</B>  The message name was not the same as the method name; i.e.,
+                it was declared with the <B>MESSAGE...METHOD</B> command.
+
+            <B>.</B>  The message does not exist.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1b334.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng1be8c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>OrdListClear():</B>
+
+  Syntax:   OrdListClear()
+
+  Returns:  NIL
+
+  Description:
+
+     OrdListClear() is an Order management function that removes all Orders
+     from the Order List for the current or aliased work area.  When you are
+     done, the Order List is empty.
+
+     This function supersedes the function dbClearIndex().
+
+  Example:
+
+     USE test VIA "SIXNSX"
+     SET INDEX TO last, state, zip
+     .
+     . &lt; statements &gt;
+     .
+     <B>OrdListClear()</B>      // Closes all the current indexes
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng21829.html">Sx_ClearOrder()</A>
+<A HREF="ng4ec5c.html">SET INDEX</A>
+<A HREF="ng1a349.html">OrdDestroy()</A>
+<A HREF="ng31ca5.html">Sx_KillTag()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

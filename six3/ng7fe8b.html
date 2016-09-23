@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7fa24.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng800cb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>How do I change the current RDD?:</B>
+
+  The current RDD (database driver) can be changed either by using the VIA
+  clause when opening a database (driver becomes active for the workarea
+  the database is opened in), or by changing the default RDD using Clipper's
+  RDDSetDefault() function.
+
+  To open a table with a specific RDD:
+
+     <B>USE &lt;.dbf&gt; VIA "&lt;rdd&gt;"</B>
+
+  Example:
+
+     <B>USE MYTABLE VIA "SIXNSX"</B>
+
+
+  To change the default RDD:
+
+     <B>RDDSetDefault( "&lt;rdd&gt;" )</B>
+
+  Example:
+
+     <B>RDDSetDefault( "SIXNSX" )</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7e974.html">How Do I Specify An RDD?</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

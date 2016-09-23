@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng11b06.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng12c13.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER PROCEDURE DEPTH       Specify maximum depth of CA-Clipper procedure nesting</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify the maximum depth of CA-Clipper procedure nesting</B></U>
+
+ <U>Syntax   : <B>BLINKER PROCEDURE DEPTH &lt;nuDepth&gt;</B></U>
+
+ <U>Default  : <B>50</B></U>
+
+ <U>Example  : <B># Increase stack size for 3rd party libraries</B></U>
+            <B>BLINKER PROCEDURE DEPTH 60</B>
+
+ This command is provided as a convenience to CA-Clipper programmers to allow
+ the setting of the program stack based on the maximum procedure nesting
+ depth which will occur in the application at runtime. This depth is the
+ number of procedure calls that are executed before a procedure return. For
+ example, if procedure A calls procedure B which calls procedure C, the
+ maximum depth is 3. But, if procedure B returns to procedure A which then
+ calls procedure C, the maximum depth is 2.
+
+ The default depth is 50 procedures, but this may be increased if it is
+ possible for more nesting to occur. For instance, a recursive procedure (one
+ that calls itself) will often require a greater depth. The size of the stack
+ set is approximately 1kb per 10 levels. Thus the default of 50 procedures
+ has an overhead of approximately 5kb, and this will rise proportionally as
+ the PROCEDURE DEPTH is increased.
+
+ Since both this command and the STACK command control the size of the
+ application stack, only one of these commands should be used (the last one
+ specified is the one that is processed). Programmers using languages other
+ than CA-Clipper should use the STACK command directly, since the calculation
+ that Blinker performs to compute the final stack size with this command is
+ based on the stack requirements for CA-Clipper procedures.
+
+ Blinker can only check the stack when executing overlaid code. However, some
+ applications making use of third party libraries linked into the root,
+ especially in a network environment, may require an increase in the
+ PROCEDURE DEPTH. Symptoms indicating this include erratic hanging of the
+ machine, spurious characters on the screen and other fatal errors which do
+ not happen regularly.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1c20b.html">STACK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

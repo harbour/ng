@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng23000.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng206af.html">[^^Up^^]</A>
+<A HREF="ng23805.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_errGetTries()</B>
+ Get the value of the retry counter tries
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "error.api"</B>
+     <B>USHORT _errGetTries(</B>
+     <B>                     ERRORP pError</B>
+     <B>                   )</B>
+
+ <B>Arguments</B>
+
+     <B>pError</B> is a pointer to the Error object from which the value is to
+     be retrieved.
+
+ <B>Returns</B>
+
+     _errGetTries() returns the value of tries.
+
+ <B>Description</B>
+
+     _errGetTries() retrieves the value of the tries counter, indicating how
+     many times the operation has been tried.  If the error can be rectified,
+     tries is incremented each time the operation is retried.  See
+     _errPutTries() for additional details about the tries counter.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment increments the retry counter tries:
+
+        #include "error.api"
+           .
+           .
+           .
+           _errPutTries( pError, _errGetTries( pError )++ );
+           .
+           .
+           .
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Error.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng28243.html">_errPutTries()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

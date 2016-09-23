@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga2c64.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="nga38e8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET FIXED</B>
+ Toggle fixing of the number of decimal digits displayed
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET FIXED on | OFF | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> fixes the decimal places display at the number of digits
+     specified by SET DECIMALS.
+
+     <B>OFF</B> allows the operation or function to determine the number of
+     decimal places to display.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET FIXED toggles control of the display of decimal digits by the
+     current DECIMALS setting.  When FIXED is ON, display of all numeric
+     output is fixed at the DECIMALS setting (two places if the SET DECIMALS
+     default value is in effect).  When FIXED is OFF, numeric output displays
+     according to the default rules for numeric display.  These are described
+     in the Basic Concepts chapter of the Programming and Utilities guide.
+
+     Note that SET FIXED and SET DECIMALS affect only the display format of
+     numeric values and not the actual numeric precision of calculations.
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng325c8.html">EXP()</A>
+<A HREF="ng45d33.html">LOG()</A>
+<A HREF="ng9efaa.html">SET DECIMALS</A>
+<A HREF="ng6784e.html">SQRT()</A>
+<A HREF="ng6e459.html">VAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

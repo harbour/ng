@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng17b80.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng18740.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BREAK()</B>
+ Branch out of a BEGIN SEQUENCE...END construct
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>BREAK(&lt;exp&gt;) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp&gt;</B> is the value passed to the RECOVER clause, if any.  Note that
+     &lt;exp&gt; is not optional.  NIL may be specified if there is no break value.
+
+ <B>Returns</B>
+
+     BREAK() always returns NIL.
+
+ <B>Description</B>
+
+     The BREAK() function is identical in functionality to the BREAK
+     statement.  The function must be executed during a SEQUENCE.  BREAK()
+     has the advantage that, as an expression, it can be executed from a code
+     block.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates exiting a SEQUENCE from a code block:
+
+        bSave := ERRORBLOCK( {|x| BREAK(x)} )
+
+        BEGIN SEQUENCE
+           .
+           .
+           .
+        RECOVER USING objError
+           .
+           .
+           .
+        END
+
+        ERRORBLOCK(bSave)
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngfc7b7.html">BEGIN SEQUENCE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

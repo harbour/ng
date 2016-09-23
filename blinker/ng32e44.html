@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng328ee.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng33723.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosSetExceptionHandler()      Install protected mode exception handler</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Install a protected mode exception handler</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosSetExceptionHandler( USHORT excno, PEHANDLER</B></U>
+            <B>newhandler, PEHANDLER _far *prevhandler);</B>
+
+ <U>excno      <B>Exception number (0-13).</B></U>
+
+ <U>newhandler <B>Pointer to new handler.</B></U>
+
+ <U>prevhandler<B>Pointer to a function pointer to receive the address of the</B></U>
+            <B>previous exception handler.</B>
+
+ <U>Return   : <B>Address of the previous exception handler.</B></U>
+
+ DosSetExceptionHandler() installs a protected mode handler for processor
+ exceptions.
+
+ The exceptions it is possible to handle are:
+
+    0x00  Divide by zero
+    0x01  Debug
+    0x03  Breakpoint
+    0x04  Overflow
+    0x05  Bounds check
+    0x06  Invalid opcode
+    0x07  287/387 not available
+    0x08  Double fault
+    0x0A  Invalid task switch segment
+    0x0B  Segment not present
+    0x0C  Stack fault
+    0x0D  General protection fault
+
+ Example :
+
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>PEXCHAN prevhandler;</B>
+    <B>void printstr (char *s)    /* Cannot use C screen i/o */</B>
+    <B>   {</B>
+    <B>   char c;</B>
+    <B>   while (c = *(s++))         /* Until end of string */</B>
+    <B>      {</B>
+    <B>      _asm mov ah,0eh</B>
+    <B>      _asm mov al,c</B>
+    <B>      _asm int 10h            /* Display teletype */</B>
+    <B>      }</B>
+    <B>   }</B>
+    <B>void _interrupt far gphandler(EXCEP_FRAME ef)</B>
+    <B>   {</B>
+    <B>   char        msg [80];</B>
+    <B>   printstr ("Replacement GPF handler\n\r");</B>
+    <B>   printstr ("-----------------------\n\r");</B>
+    <B>   sprintf (msg,"Error code = %04x\n\r",ef.error_code);</B>
+    <B>   printstr (msg);</B>
+    <B>   sprintf (msg," CS:IP = %04x:%04x\n\r", ef.ret_cs, </B>
+    <B>      ef.ret_ip);</B>
+    <B>   printstr (msg);</B>
+    <B>   DosSetExceptionHandler (0x0d,prevhandler,NULL);</B>
+    <B>   exit (255);</B>
+    <B>}</B>
+    <B>void main (void)</B>
+    <B>{</B>
+    <B>PEXCHAN        newhandler;</B>
+    <B>newhandler = gphandler;</B>
+    <B>if (DosSetExceptionHandler (0x0d, newhandler,&amp;prevhandler) </B>
+    <B>   == 0)</B>
+    <B>   {</B>
+    <B>   *((USHORT far *) 0x22222222L) = 1;     /* Cause exception */</B>
+    <B>   printf("Somehow no exception occurred\n");</B>
+    <B>   DosSetExceptionHandler (0x0d,prevhandler,NULL);</B>
+    <B>   }</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2d07e.html">DosGetExceptionHandler()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

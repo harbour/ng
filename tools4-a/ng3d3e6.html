@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3c9df.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng39198.html">[^^Up^^]</A>
+<A HREF="ng3dcb9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSNDCON()</B>
+ Sends a message to the server console
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSNDCON(&lt;cMessage&gt;,[&lt;lNoSender&gt;],</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cMessage&gt;</B>  Designates the message that is sent to the server
+     console.  The message can be up to 60 characters long (including
+     information about the sender) and can only contain characters that have
+     an ASCII value between 32 and 127.
+
+     <B>&lt;lNoSender&gt;</B>  Designates an optional parameter that allows you to
+     suppress the sender information (from ...) when designated (.T.).  When
+     this parameter is designated .F., the sender information is generated
+     automatically.  The default value is .F..
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server to which the
+     message is sent.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETSNDCON() returns .T. if the message has been sent successfully.  If
+     an error occurs, the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET SEND CONSOLE
+     NNETSNDCON() allows you to send a message (&lt;cMessage&gt;) of up to 60
+     characters to the console of a file server.  The message is displayed by
+     the file server on a connected screen.  If the parameter &lt;lNoSender&gt; is
+     set to .F. or if no parameter is set, the message contains information
+     about the sender.  The information consists of the word "from", the name
+     of the sender, and the connection ID.  By passing &lt;lNoSender&gt; with .T.,
+     the sender information can be suppressed.
+
+     With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the message can be sent to
+     any attached file server.  The connection ID of a server is returned by
+     NNETATTACH() or NNETLOGIN().
+
+ <B>Examples</B>
+
+     <B>.</B>  Send a message to the default server:
+
+        IF NNETSNDCON('Start of the accounting system')
+        ? 'Message sent successfully!'
+        ELSE
+        ? 'Message could not be sent'
+        ENDIF
+
+     <B>.</B>  Send a message to server MAIL under the wrong sender:
+
+        NNETSNDCON('From Mick[99] : Hi, guys!',.T.,'MAIL')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3c9df.html">NNETSNDALL()</A>
+<A HREF="ng3dcb9.html">NNETSNDGRP()</A>
+<A HREF="ng3e858.html">NNETSNDLOG()</A>
+<A HREF="ng3f1d4.html">NNETSNDUSR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,101 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng105ee.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3cf.html">[^^Up^^]</A>
+<A HREF="ng11a55.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>169 NEW: Compiler</B>
+--------------------------------------------------------------------------------
+
+     With Clipper 5.0, a completely new compiler has been supplied.
+     This compiler is considerably more complex than the Summer '87
+     compiler with many more options and some new behaviors.  The
+     following is a list of some of the major changes this compiler
+     represents over the Summer '87 compiler:
+
+     1. <B>Preprocessor:</B>  The Clipper 5.0 compiler includes a built-in
+        preprocessor that automatically runs each time a program (.prg)
+        file is compiled.  Its basic function is similar to that of a C
+        compiler preprocessor: it scans the text of the program you are
+        compiling, searching and replacing text according to rules
+        defined by preprocessor directives.  Refer to the list of
+        directives above.
+
+     2. <B>Commands:</B>  All commands in Clipper 5.0 are defined by the
+        preprocessor directives #command and #translate.
+
+     3. <B>Standard Commands:</B>  All Clipper 5.0 standard commands are
+        defined in the header file STD.CH.
+
+     4. <B>Command-line options:</B>  All compiler options can be specified
+        prefaced by the backslash (/) character as well as the dash (-)
+        character.
+
+     5. <B>Options:</B>  All new (and modified) compiler options are
+        summarized below:
+
+        <B>Table: New and Changed Compiler Options</B>
+        -----------------------------------------------------------------
+        <B>Option    Meaning</B>
+        -----------------------------------------------------------------
+        /A        Automatic MEMVAR declaration
+        /B        Include debugging information in object file
+        /CREDIT   Display the Clipper 5.0 credits
+        /D        Define an identifier to the pre-processor
+        /I        Specify an #include file search path
+        /N        Specify no implicit starting procedure
+        /P        In previous releases, this option allowed you to load
+                  the compiler and switch disks.  This feature is no
+                  longer supported.  The /P option is now used to
+                  generate a pre-processed output (.ppo) file.
+        /R        Request linker to search named library
+        /U        Specify a user-defined standard header file
+        /V        Assume references to undeclared or unaliased variable
+                  names are public or private variables
+        /W        Enable warning messages for undeclared variables, etc.
+        -----------------------------------------------------------------
+
+     6. <B>Environment variables:</B>  In addition to command-line options,
+        the Clipper 5.0 compiler can now use environment variables to
+        control compiler operations as follows:
+
+        <B>Table: Compiler Environment Variables</B>
+        -----------------------------------------------------------------
+        <B>Variable     Meaning</B>
+        -----------------------------------------------------------------
+        CLIPPERCMD   Defines default compiler command-line options
+        INCLUDE      Specifies a path list to search for header files
+        TMP          Specifies a directory for creating temporary files
+        -----------------------------------------------------------------
+
+     7. <B>(.clp) files:</B>  There are two changes that have been made to
+        compiler (.clp) script files.  First, files specified in a
+        (.clp) file can include a drive and path spec.  Second, files
+        specified in a (.clp) file can optionally include an extension.
+
+     8. <B>Pickiness:</B>  As a general principle, the Clipper 5.0 compiler
+        provides a high degree of compatibility with the Summer '87
+        compiler.  However, it adheres to a more rigorously defined
+        semantic model and, therefore, is pickier in some cases about
+        syntax that was accepted by the Summer '87 compiler.
+
+     9. <B>Optimization:</B>  The Clipper 5.0 compiler performs several types
+        of optimization including:
+
+        <B>.</B>  Shortcutting
+        <B>.</B>  Constant folding
+        <B>.</B>  Dead code removal
+
+        Refer to Release Note #4 for more details on this subject.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

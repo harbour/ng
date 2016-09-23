@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng54712.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng55229.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>orderInfo()</B>
+ Provides information about order management
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE orderInfo(</B>
+     <B>                   WORKAREAP wa,</B>
+     <B>                   USHORT message,</B>
+     <B>                   FARP value</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>message</B> is a value that determines the type of information to be
+     provided.
+
+     <B>value</B> is a pointer to some data structure indicating the status of
+     message.  The data type pointed to be value depends on the value of
+     message.
+
+ <B>Description</B>
+
+     The orderInfo() method returns information about the current Order.  The
+     information requested is defined by the value passed in message.  Some
+     suggested values for message and their associated meanings are provided
+     in the header file Rdd.api.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If your implementation of orderInfo() cannot determine the
+        return value based on the value of message, you should allow the
+        workarea default implementation to attempt it by calling
+        SUPERORDINFO().
+
+     <B>.</B>  The first 1000 possible values for message are reserved by
+        CA-Clipper.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng424a9.html">DBORDERINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

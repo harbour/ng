@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng14f89.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng15882.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DAY()</B>
+ Return the day of the month as a numeric value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DAY(&lt;dDate&gt;) --&gt; nDay</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;dDate&gt;</B> is a date value to convert.
+
+ <B>Returns</B>
+
+     DAY() returns a number in the range of zero to 31 as an integer numeric
+     value.  If the month is February, leap years are considered.  If the
+     date argument is February 29 and the year is not a leap year, DAY()
+     returns zero.  If the date argument is empty, DAY() returns zero.
+
+ <B>Description</B>
+
+     DAY() is a date conversion function used to convert a date value to the
+     day of a month.  This function is used in combination with CMONTH() and
+     YEAR() to format dates.  In addition, it is often used in various date
+     calculations.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples show the DAY() function used several ways:
+
+        ? DATE()                       // Result: 09/01/90
+        ? DAY(DATE())                  // Result: 1
+        ? DAY(DATE()) + 1              // Result: 2
+        ? DAY(CTOD(""))                // Result: 0
+
+     <B>.</B>  This example uses DAY() in combination with CMONTH() and
+        YEAR() to format a date value:
+
+        ? CMONTH(DATE()) + STR(DAY(DATE())) +;
+           "," + STR(YEAR(DATE()))     // Result: June 15, 1990
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng125c4.html">CDOW()</A>
+<A HREF="ng12ecd.html">CMONTH()</A>
+<A HREF="ng2e26c.html">DOW()</A>
+<A HREF="ng51b6c.html">MONTH()</A>
+<A HREF="ng67c35.html">STR()</A>
+<A HREF="ng6f833.html">YEAR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

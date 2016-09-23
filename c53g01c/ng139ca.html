@@ -1,0 +1,102 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng12b3a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng1439e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLOBDIRECTPUT()</B>
+ Put data in a BLOB file without referencing a specific field
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>BLOBDIRECTPUT(&lt;nOldPointer&gt;, &lt;uBLOB&gt;) --&gt; nNewPointer</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nOldPointer&gt;</B> is a reference to previously stored BLOB data.  This
+     reference can be obtained using BLOBDIRECTPUT(), BLOBDIRECTIMPORT(), or
+     DBFIELDINFO(DBS_BLOB_POINTER, &lt;nFieldPos&gt;).  If other than zero (0), the
+     data referenced by &lt;nOldPointer&gt; is replaced by &lt;uBLOB&gt;; otherwise,
+     &lt;uBLOB&gt; is added to the current contents of the BLOB file.
+
+     <B>Important! </B> If specified, BLOBDIRECTPUT() releases the space
+     associated with &lt;nOldPointer&gt; for reuse by other data.  Therefore, it is
+     illegal to use &lt;nOldPointer&gt; with any of the BLOB functions after
+     passing it as an argument to this function.  Use the function's return
+     value to refer to the newly stored data.
+
+     <B>&lt;uBLOB&gt;</B> is the data you want to put into the BLOB file.  &lt;uBLOB&gt; can
+     be any CA-Clipper data type except code block or an object.
+
+ <B>Returns</B>
+
+     BLOBDIRECTPUT() returns a numeric pointer to the &lt;uBLOB&gt; data.
+
+ <B>Description</B>
+
+     BLOBDIRECTPUT() stores variable length BLOB data without creating a link
+     with a particular memo field in a database file.  After adding data to a
+     BLOB file using BLOBDIRECTPUT(), you should store the function's return
+     value, as this is the only way to access the data from the BLOB file.
+     It is up to you, the developer, to provide permanent storage for this
+     reference (see BLOBROOTPUT()).
+
+     By default, this function operates on the currently selected work area.
+     It can be made to operate on an unselected work area by specifying it
+     within an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates storing setup information in a BLOB
+        file, then selectively retrieving the stored information:
+
+        FUNCTION PutSettings(aColors,;
+           aPaths, aPassWords)
+
+           LOCAL aSettings
+
+           USE Setup NEW VIA "DBFMEMO"
+
+           aSettings := {}
+           AADD(aSettings, BLOBDIRECTPUT(0, aColors))
+
+           AADD(aSettings, BLOBDIRECTPUT(0, aPaths))
+           AADD(aSettings, BLOBDIRECTPUT(0, aPassWords))
+
+           BLOBROOTPUT(aSettings)
+
+           CLOSE
+
+        FUNCTION GETCOLORS()
+           LOCAL aSettings
+           LOCAL aColors
+
+           USE Setup NEW VIA "DBFMEMO"
+
+           aSettings := BLOBROOTGET()
+           aColors := BLOBDIRECTGET(aSettings[1])
+
+           CLOSE
+
+           RETURN aColors
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng12129.html">BLOBDIRECTGET()</A>
+<A HREF="ng1439e.html">BLOBEXPORT()</A>
+<A HREF="ng14d61.html">BLOBGET()</A>
+<A HREF="ng1583f.html">BLOBIMPORT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

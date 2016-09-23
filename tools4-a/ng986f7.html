@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng982c4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng97123.html">[^^Up^^]</A>
+<A HREF="ng98c8c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPFUNCO()</B>
+ Determines the control sequences of a function definition
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPFUNCO(&lt;cDevice&gt;,&lt;cFunc&gt;,[&lt;cServer&gt;,&lt;nConId&gt;])</B>
+     <B>   --&gt; cControl</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDevice&gt;</B>  Designates the name of the device that is processed.
+
+     <B>&lt;cFunc&gt;</B>  Designates the name of a function that is established for
+     &lt;cDevice&gt;.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server for which the
+     device definitions are used.  Your workstation must be attached to
+     &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPFUNCO() returns the control sequence defined in NET$PRN.DAT for the
+     function &lt;cFunc&gt; of &lt;cDevice&gt;.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT FUNCTION CODES
+     Netware allows you to manage printer and form information in a database
+     (NET$PRN.DAT).  For each device, functions are defined to put the device
+     into specific modes.  With NNETPFUNCO(), you can determine the control
+     sequence for &lt;cFunc&gt; of &lt;cDevice&gt;.  This allows you to link the printer
+     control to the Netware printer management within your application.
+
+ <B>Example</B>
+
+     Determine the control sequence for the reset function of the device
+     HPLJ, and send it to the printer:
+
+     PRINTSEND(NNETPFUNCO('HPLJ', 'RESET'))
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng98c8c.html">NNETPFUNCS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

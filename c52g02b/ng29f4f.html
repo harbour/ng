@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng29a47.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng182ca.html">[^^Up^^]</A>
+<A HREF="ng2a46a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>5304    Conventional memory exhausted</B>
+
+     <B>Explanation:</B>  This is an "out of memory" message that indicates that
+     the CA-Clipper application no longer has sufficient conventional memory
+     available to continue.
+
+     Specifically, this error occurs when a function attempts to allocate
+     conventional memory and fails.  This error can be received as a result
+     of the failure of _xgrab() in Extend System functions.
+
+     <B>Action:</B>  Make more conventional memory available to the VM system.
+     This can be done in several ways:
+
+     <B>.</B>  Increase the amount of conventional memory available before
+        running the application (by removing TSRs, making use of a 386 memory
+        manager, etc.)
+
+     <B>.</B>  Use a third-party linker that can dynamically overlay C and
+        assembly language code.  C and assembly language code is not
+        automatically overlaid by .RTLink and therefore sits in conventional
+        memory throughout the execution of the application.
+
+     <B>.</B>  Ensure that any C or assembly language code in use is making
+        use of the virtual memory system if it is doing dynamic memory
+        allocation.  Any memory allocated using the Fixed Memory Allocator
+        function (_xalloc() and _xgrab()) reduces the amount of conventional
+        memory available if it is not immediately freed.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

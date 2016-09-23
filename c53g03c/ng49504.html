@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng483ef.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng498b5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>bof()</B>
+ Determine logical beginning of file
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE bof(</B>
+     <B>               AREAP wa,</B>
+     <B>               BOOLP isBof</B>
+     <B>             )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>isBof</B> is used to determine the logical beginning of file.
+
+ <B>Description</B>
+
+     bof() indicates whether the current cursor for wa is at the logical beginning
+     of file.  This method provides the return value of the CA-Clipper BOF()
+     function.
+
+ <B>Default Behavior</B>
+
+     Copies wa-&gt;fBof to isBof.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Determine wa-&gt;fBof status and then call SUPER_BOF().
+
+     <B>.</B>  If your RDD supports relations, update relations with a
+        forceRel() prior to determining wa-&gt;fBof status.
+
+     <B>Warning!  isBof</B> must point to sizeof(BOOL) bytes of allocated
+     memory.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng498b5.html">eof()</A>
+<A HREF="ng58f71.html">forceRel()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

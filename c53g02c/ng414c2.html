@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng412c1.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>VM Integrity failure</B>
+
+     <B>Explanation:</B>  This error indicates a misuse of the VM System has
+     occurred by either an internal or external (third-party) subsystem.
+
+     <B>Action:</B>  Test the following suggestions to help eliminate the
+     problem:
+
+     1. Check for memory conflicts that could result in virtual memory
+        corruption.
+
+     2. Check for incorrect data type passed to the IAMBS (VMM) or a GET
+        instance variable.
+
+     3. Check third party .LIBraries for compatibility and version.
+
+     4. Test using a simple .LNK script to create the .EXE.
+
+     5. Resolve 100% of all warnings and errors occurring at link time.
+        Link with VERBOSE while redirecting to an error output file.
+
+     6. Attempt to extract a test without using built-in, add-on, or
+        third party .LIBrary functions, and see if the error still occurs.
+
+     7. Create a protected mode version of the application linking with
+        MAP S, N, A.  Identify the runtime address reported by comparing it
+        with the named module for the most closely matched address listed in
+        the .MAP.
+
+     <B>See Also:</B>  Error 999 and 5302, "Linking" and "Debugger" chapters of
+     the Programming and Utilities Guide, "VM API" in the Technical Reference
+     Guide.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

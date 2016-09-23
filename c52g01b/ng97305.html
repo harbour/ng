@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng96a22.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng97a85.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RESTORE SCREEN*</B>
+ Display a saved screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RESTORE SCREEN [FROM &lt;cScreen&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>FROM &lt;cScreen&gt;</B> specifies a character expression to display to the
+     screen.
+
+ <B>Description</B>
+
+     RESTORE SCREEN is a command synonym for the RESTSCREEN() function that
+     redisplays a previously saved screen, and is used with SAVE SCREEN to
+     avoid repainting the original screen painted with @...SAY, @...GET, and
+     ? commands.
+
+     RESTORE SCREEN works in two ways depending on whether or not you specify
+     the FROM clause .  If the you specify the FROM clause, the SCREEN is
+     RESTOREd FROM &lt;cScreen&gt;.  &lt;cScreen&gt; is a character expression, usually a
+     variable assigned a screen image by SAVE SCREEN.  If you do not specify
+     the FROM clause, the SCREEN is RESTOREd from the default save screen
+     buffer created by SAVE SCREEN specified without the TO clause.
+
+     SAVESCREEN() and RESTORESCREEN() functions supersede SAVE SCREEN and
+     RESTORE SCREEN commands.
+
+     RESTORE SCREEN is a compatibility command and not recommended.
+
+     <B>Warning! </B> SAVE SCREEN, RESTORE SCREEN, SAVESCREEN(), and
+     RESTSCREEN() are supported when using the default (IBM PC memory mapped)
+     screen driver.  Other screen drivers may not support saving and
+     restoring screens.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example displays a small alert popup box using SAVE and
+        RESTORE SCREEN:
+
+        IF FileAlert()
+           COPY FILE Them.txt TO My.txt
+        ELSE
+           BREAK
+        ENDIF
+        RETURN
+
+        FUNCTION FileAlert
+           LOCAL lAnswer := .F., cScreen
+           SAVE SCREEN TO cScreen
+           @ 10, 10 CLEAR TO 12, 45
+           @ 10, 10 TO 12, 45 DOUBLE
+           @ 11, 12 SAY "File exists, overwrite? (y/n) ";
+                  GET lAnswer PICTURE "Y"
+           READ
+           RESTORE SCREEN FROM cScreen
+           RETURN lAnswer
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng96a22.html">RESTORE</A>
+<A HREF="ng5ce37.html">RESTSCREEN()</A>
+<A HREF="ng983ea.html">SAVE</A>
+<A HREF="ng5fc0d.html">SAVESCREEN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

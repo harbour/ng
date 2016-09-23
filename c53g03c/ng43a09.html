@@ -1,0 +1,155 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4346c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng4484f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBORDERCONDINFO</B>
+ Information needed for the creation of a conditional order
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct _DBORDERCONDINFO</B>
+     <B>{</B>
+     <B>   BOOL  fActive;</B>
+     <B>   BYTEP abFor;</B>
+     <B>   ITEM  itmCobFor;</B>
+     <B>   ITEM  itmCobWhile;</B>
+     <B>   ITEM  itmCobEval;</B>
+     <B>   LONG  lStep;</B>
+     <B>   LONG  lStartRecno;</B>
+     <B>   LONG  lNextCount;</B>
+     <B>   LONG  lRecno;</B>
+     <B>   BOOL  fRest;</B>
+     <B>   BOOL  fDescending;</B>
+     <B>   BOOL  fScoped;</B>
+
+     <B>   BOOL  fAll;</B>
+     <B>   BOOL  fAdditive;</B>
+     <B>   BOOL  fUseCurrent;</B>
+     <B>   BOOL  fCustom;</B>
+     <B>   BOOL  fNoOptimize;</B>
+     <B>   FARP  lpvCargo;</B>
+     <B>} DBORDERCONDINFO;</B>
+     <B></B>
+     <B>typedef DBORDERCONDINFO far * LPDBORDERCONDINFO;</B>
+
+ <B>Elements</B>
+
+     <B>fActive</B>
+
+        Contains a boolean value indicating whether one or more valid
+        conditions have been specified in the structure.
+
+     <B>abFor / itmCobFor</B>
+
+        Contain a CA-Clipper-level reference to a string and a matching code
+        block containing the key expression defining the FOR condition to be
+        used for the creation and maintenance of the order.
+
+     <B>itmCobWhile</B>
+
+        Contains a CA-Clipper-level reference to a code block defining the
+        WHILE condition to be used for the creation of the order.  If NIL, no
+        WHILE condition is being specified.
+
+     <B>itmCobEval</B>
+
+        Contains a CA-Clipper-level reference to a code block defining the
+        expression to be evaluated every lStep rows (records) during the
+        creation of the order.  The code block referenced should always
+        evaluate to either TRUE (indicating that creation of the order should
+        continue normally) or FALSE (indicating that order creation should
+        terminate).  A return value of FALSE from itmCobEval does not
+        constitute an error condition but rather is the mechanism by which an
+        RDD is informed that no more rows are to be included in the order.
+
+     <B>lStep</B>
+
+        Contains a numeric value determining the frequency of the evaluation
+        of itmCobEval.
+
+     <B>lStartRecno</B>
+
+        Contains a numeric value indicating the row at which to begin
+        processing when either the lNextCount or fRest scoping options are
+        specified.
+
+     <B>lNextCount</B>
+
+        Contains a numeric value indicating the number of rows to process for
+        order creation.
+
+     <B>lRecno</B>
+
+        Contains a numeric value indicating a single row to include in the
+        order.
+
+     <B>fRest</B>
+
+        Contains a boolean value indicating that only the rows specified by
+        lStartRecno through end of file (EOF) are to be included in the
+        order.
+
+     <B>fDescending</B>
+
+        Contains a boolean value indicating whether the order should be
+        created in descending order.
+
+     <B>fScoped</B>
+
+        Contains a boolean value indicating whether the order is to be
+        scoped.  fScoped will be TRUE if any of itmCobWhile, lNextCount,
+        lRecno, fRest, or fAll are specified.
+
+     <B>fAll</B>
+
+        Contains a boolean value indicating whether all rows are to be
+        processed during order creation.
+
+     <B>fAdditive</B>
+
+        Contains a boolean value indicating whether open orders should remain
+        open while the new order is being created.
+
+     <B>fUseCurrent</B>
+
+        Contains a boolean value indicating whether only rows in the
+        controlling order will be included in this order.
+
+     <B>fCustom</B>
+
+        Contains a boolean value indicating whether the new order will be a
+        custom-built order.
+
+     <B>fNoOptimize</B>
+
+        Contains a boolean value indicating whether the FOR condition will be
+        optimized.
+
+     <B>lpvCargo</B>
+
+        Contains a pointer to a value of any data type provided as a user-
+        definable slot.  It may be used by the RDD developer as an all-
+        purpose holder.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+ <B>Used By</B>    DBORDERCREATEINFO, orderCreate()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4484f.html">DBORDERCREATEINFO</A>
+<A HREF="ng5ae78.html">orderCreate()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

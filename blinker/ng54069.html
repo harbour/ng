@@ -1,0 +1,31 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng53d72.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3dfc5.html">[^^Up^^]</A>
+<A HREF="ng5431e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1217: overlay vector corrupted during execution</B>
+------------------------------------------------------------------------------
+
+ This message indicates that the overlay manager has detected an invalid
+ overlay vector. The most likely cause of this is corruption at runtime due
+ to an invalid pointer or attempting to overlay a non-overlayable module.
+
+ Another possible cause is the use of a debugger to place breakpoints in the
+ code after an overlay call, since this replaces the vector data with a
+ debugger breakpoint.
+
+ Use of the MURPHY command for debugging overlays may help to identify
+ whether non-overlayable modules are responsible for this message.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

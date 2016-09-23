@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng489d5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng49445.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>addField()</B>
+ Add a column (field) to the workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE addField(</B>
+     <B>                  WORKAREAP wa,</B>
+     <B>                  DBFIELDINFOP dbFieldInfo</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>dbFieldInfo</B> is a pointer to a structure containing information about
+     a column in the workarea.
+
+ <B>Description</B>
+
+     Adds a column specified by dbFieldInfo to the wa workarea.
+
+ <B>Default Behavior</B>
+
+     addField() inserts the column referred to by dbFieldInfo into the data
+     table referenced by the WORKAREA structure.  The new column is added to
+     the end of the wa-&gt;fields structure.  wa-&gt;fieldCount is updated to
+     reflect the addition.
+
+     <B>Note:</B>  Call setFieldExtent() prior to adding fields to the WORKAREA
+     structure.  setFieldExtent() sizes and clears the wa-&gt;fields structure,
+     readying it for use.
+
+     <B>Warning! </B> wa-&gt;fieldCount must be less than wa-&gt;fieldExtent or an
+     assertion error will be raised.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Most implementations should use the default behavior for
+        addField().  However, if you change the addField() implementation, be
+        aware of the order imposed on adding fields to the workarea
+        structures.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3ee37.html">DBFIELDINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng4d5da.html">setFieldExtent()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

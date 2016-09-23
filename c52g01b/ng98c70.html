@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng983ea.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng994cb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SAVE SCREEN*</B>
+ Save current screen to a buffer or variable
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SAVE SCREEN [TO &lt;idVar&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;idVar&gt;</B> specifies a variable to contain the current screen
+     contents as a character value.  If &lt;idVar&gt; is not visible or does not
+     exist, a private memory variable is created and assigned to the screen.
+
+ <B>Description</B>
+
+     SAVE SCREEN is a command synonym for the SAVESCREEN() function that
+     saves the screen from 0, 0 to MAXROW(), MAXCOL() in a the default screen
+     buffer, or an optional variable.  If the screen is saved to a variable,
+     the variable can be any storage class including field, local, static, or
+     an array element.  Note, however, you cannot SAVE an array or local or
+     static variable to (.mem) files to save multiple screens to disk.
+
+     SAVE SCREEN is used with RESTORE SCREEN to eliminate repainting an
+     original screen that has been temporarily replaced.  You may save
+     multiple screens by assigning each screen to a separate variable.
+
+     SAVE SCREEN is a compatibility command and not recommended.  It is
+     superseded by the SAVESCREEN() function which can save partial or full
+     screens.
+
+     <B>Warning! </B> SAVE SCREEN, RESTORE SCREEN, SAVESCREEN(), and
+     RESTSCREEN() are supported when using the default (IBM PC memory mapped)
+     screen driver.  Other screen drivers may not support saving and
+     restoring screens.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code skeleton uses a static array to store saved screens:
+
+        STATIC aScreens[10]
+        SAVE SCREEN TO aScreens[1]
+        //
+        &lt;statements&gt;...
+        //
+        RESTORE SCREEN FROM aScreens[1]
+
+     <B>.</B>  This example saves and restores screens using a database file:
+
+        USE Screens INDEX Name NEW
+        APPEND BLANK
+
+        Screens-&gt;Name := "Screen001"          // Save the screen name
+        SAVE SCREEN TO Screens-&gt;Image         // Save a new screen image
+        //
+        &lt;statements&gt;...
+        //
+        SEEK "Screen001"                      // Find the screen
+        RESTORE SCREEN FROM Screens-&gt;Image    // Restore it
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng96a22.html">RESTORE</A>
+<A HREF="ng5ce37.html">RESTSCREEN()</A>
+<A HREF="ng983ea.html">SAVE</A>
+<A HREF="ng5fc0d.html">SAVESCREEN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

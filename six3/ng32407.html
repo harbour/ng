@@ -1,0 +1,88 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng31ca5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng32ac6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_LockRetry():</B>
+
+  Syntax:  Sx_LockRetry( [&lt;nRetryVal&gt;] )
+
+           nRetryVal = Number of time to retry a record or file lock before
+                       generating a timeout error.  The default value is 0
+                       (Infinite retry).
+
+  Returns:  Current retry value as a numeric.
+
+  Description:  This function will set or retrieve the retry value when
+                attempting to apply a record or file lock.  By default, an
+                application will continue to try and apply the lock, unless
+                this is set to some value.  If you want to set it to retry
+                until it gets the lock, pass a zero (0) as the retry value.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    // Create a file-wide variable to hold our Error Block
+    STATIC bDefError
+
+    //---------------------------------------------------------------//
+    FUNC main()
+
+    LOCAL nCount := 0
+
+    // Assign error block
+    bDefError := ErrorBlock( { |e| LockErrHandler( e )})
+
+    // Assuming TEST.DBF has a LAST.IDX file
+    USE test INDEX last VIA "SIXCDX" SHARED
+
+    // Generate an error after five tries at locking the index
+    <B>Sx_LockRetry(5)</B>
+
+    FOR nCount := 1 TO 1000
+      dbSeek( "BogusValue" )        // Lookin' for EOF here!
+    NEXT
+
+    Return(NIL)
+
+    //---------------------------------------------------------------//
+    FUNC LockErrHandler( oErr )
+
+    LOCAL cOldColor, cScrn
+
+    // If retry count was reached, display message
+    IF oErr:genCode == 680
+      cScrn := SaveScreen( 11, 19, 13, 58 )
+      cOldColor := SetColor("w+/r")
+      @ 11,19 TO 13,58 DOUBLE
+      @ 12,22 SAY "Index in use.  Waiting for lock..."
+      Inkey(2)
+      SetColor( cOldColor )
+      RestScreen( 11, 19, 13, 58, cScrn )
+      Return(.T.)
+    ENDIF
+
+    Return( Eval( bDefError, oErr ))
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng34f1d.html">Sx_ROXLock()</A>
+<A HREF="ng3572b.html">Sx_ROXUnLock()</A>
+<A HREF="ng2c476.html">Sx_IsROXLock()</A>
+<A HREF="ng2cb8b.html">Sx_IsMyROX()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

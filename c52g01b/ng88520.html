@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng88076.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng88b8c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FIND*</B>
+ Search an index for a specified key value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FIND &lt;xcSearchString&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcSearchString&gt;</B> is part or all of the index key of a record to
+     search for and can be specified either as a literal string or as a
+     character expression enclosed in parentheses.  If an expression is
+     specified instead of a literal string, FIND operates the same as SEEK.
+
+ <B>Description</B>
+
+     FIND is a database command that searches an index for the first key
+     matching the specified character string and positions the record pointer
+     to the corresponding record.
+
+     If SOFTSEEK is OFF and FIND does not find a record, the record pointer
+     is positioned to LASTREC() + 1, EOF() returns true (.T.), and FOUND()
+     returns false (.F.).
+
+     If SOFTSEEK is ON, the record pointer is positioned to the record with
+     the first key value greater than the search argument and FOUND() returns
+     false (.F.).  In this case, EOF() returns true (.T.) only if there are
+     no keys in the index greater than the search argument.
+
+     FIND is a compatibility command and not recommended.  Its usage is
+     superseded entirely by the SEEK command.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples show simple FIND results:
+
+        USE Sales INDEX Branch NEW
+        FIND ("500")
+        ? FOUND(), EOF(), RECNO()         // Result: .F. .T. 85
+        FIND 200
+        ? FOUND(), EOF(), RECNO()         // Result: .T. .F. 5
+        FIND "100"
+        ? FOUND(), EOF(), RECNO()         // Result: .T. .F. 1
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2fa9c.html">EOF()</A>
+<A HREF="ng39f03.html">FOUND()</A>
+<A HREF="ng994cb.html">SEEK</A>
+<A HREF="nga6e00.html">SET ORDER</A>
+<A HREF="ngaa868.html">SET SOFTSEEK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

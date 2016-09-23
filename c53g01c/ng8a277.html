@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng89ad4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng8acee.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+area to the current work area
+ <B>ORDSETRELATION()</B>
+ Relate a specified work area to the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDSETRELATION(&lt;nArea&gt; | &lt;cAlias&gt;,&lt;bKey&gt;, [&lt;cKey&gt;])</B>
+     <B>    --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nArea&gt;</B> is the number of the child work area.
+
+     <B>&lt;cAlias&gt;</B> is the alias of the child work area.
+
+     <B>&lt;bKey&gt;</B> is a code block that expresses the relational expression in
+     executable form.
+
+     <B>&lt;cKey&gt;</B> is an optional string value that expresses the relational
+     expression in textual form.  If &lt;cKey&gt; is supplied, it must be
+     equivalent to &lt;bKey&gt;.  If &lt;cKey&gt; is omitted, ORDSETRELATION() returns a
+     null string ("") for the relation.
+
+ <B>Returns</B>
+
+     ORDSETRELATION() always returns NIL.
+
+ <B>Description</B>
+
+     ORDSETRELATION() relates the work area specified by &lt;nArea&gt; or &lt;cAlias&gt;
+     (the child work area) to the current work area (the parent work area).
+     Any existing relations remain active.
+
+     Relating work areas synchronizes the child work area with the parent
+     work area.  This is achieved by automatically repositioning the child
+     work area whenever the parent work area moves to a new record.  If there
+     is a controlling order in the child work area, moving the parent work
+     area causes an automatic seek operation in the child work area; the seek
+     key is based on the expression specified by &lt;bKey&gt; and/or &lt;cKey&gt;.  If
+     the child work area has no controlling order, moving the parent work
+     area causes an automatic "go to" in the child work area; the record
+     number for the "go to" is based on the expression specified by &lt;bKey&gt;
+     and/or &lt;cKey&gt;.
+
+     ORDSETRELATION() is identical to DBSETRELATION() (and the SET RELATION
+     command), but it also sets up a scope on the order in the child work
+     area.  This means that whenever you select the child work area, only the
+     records related to the current parent record will be visible.  This
+     allows straightforward handling of one-to-many relationships.  Refer to
+     DBSETRELATION() for more information.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example displays each invoice with its related line
+        items:
+
+        USE LineTtem NEW VIA "DBFCDX"
+        SET ORDER TO TAG InvNo
+
+        USE Invoice NEW VIA "DBFCDX"
+
+        // Set a selective relation from Invoice into
+        // LineItem
+        ORDSETRELATION("LineItem", {|| Invoice-&gt;InvNo}, ;
+           "Invoice-&gt;InvNo")
+
+        GO TOP
+        DO WHILE !EOF()
+           ? InvNo, InvDate            // Display invoice fields
+
+           SELECT LineItem
+           // Only records for current invoice # are visible
+           LIST "   ", PartNo, Qty, Price
+           SELECT Invoice               // On to next invoice
+           SKIP
+        ENDDO
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng15fb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng406.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Additional Programs</B>
+------------------------------------------------------------------------------
+
+ <B>Security</B>
+
+     If CA-Clipper Tools functions that change interrupts are not properly
+     uninstalled or if the Extended Driver is not implemented, you could use
+     the INTSAVE.EXE and INTOFF.EXE programs as additional security.
+
+     <B>INTSAVE</B>
+
+     &lt;Drive&gt;:INTSAVE[/S|/R[&lt;FileName&gt;]]&lt;RETURN&gt;
+
+     INTSAVE saves all 256 interrupt vectors to a file called INSAVE.TAB.
+     Alternatively, a different filename can be selected, if multiple
+     applications need to access the same path in a network.  A call with the
+     /S switch saves the interrupt vectors,while a call with /R restores
+     them.
+
+     If the program is called without parameters, it explains its operation
+     on the screen and, if required, displays a list of interrupt vectors
+     that have been changed.
+
+     <B>INTOFF</B>
+
+     &lt;Drive&gt;:INTOFF &lt;RETURN&gt;
+
+     This program represents an "emergency brake".  It sets the vectors
+     described below to an IRET in the system ROM, so that there is no danger
+     of a system crash as a result of erroneous interrupt vectors.  The mouse
+     interrupt (033h) is also newly initialized and the timer tic rate is
+     reset.  Memory resident programs are uncoupled from their interrupt
+     vectors as well and are thereby rendered unusable. The program sets the
+     following interrupt vectors to harmless IRETs:
+
+     ------------------------------------------------------------------------
+     <B>Operation    Vector         Use in CA-Clipper Tools</B>
+     ------------------------------------------------------------------------
+     IRET         Timer 1C       KEYSEC(), SHOWIME()
+                  Alarm 4A       KEYTIME()
+                  COM1 0C        V24 Functions
+                  COM2 0B        V24 Functions
+     INIT         Mouse 33       If foreign routines linked in
+                  Timerspeed     SETTIC()
+     ------------------------------------------------------------------------
+
+     Both programs could be linked into a batch job which starts your
+     CA-Clipper application. This would look as follows:
+
+     ECHO OFF
+     INTSAVE /S INTSAVE1.TAB
+
+        CLIPPROG
+     INTSAVE /R INTSAVE1.TAB
+     ECHO ON
+
+     With INTOFF, it would look like this:
+
+     ECHO OFF
+        CLIPPROG
+        INTOFF
+     ECHO ON
+
+     This will avoid later system crashes.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

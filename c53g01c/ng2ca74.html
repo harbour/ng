@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2a6f6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng2d04f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBRECALL()</B>
+ Reinstate a record marked for deletion
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBRECALL() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DBRECALL() always returns NIL.
+
+ <B>Description</B>
+
+     DBRECALL() causes the current record to be reinstated if it is marked
+     for deletion.
+
+     DBRECALL() performs the same function as the RECALL command.  For more
+     information, refer to the DELETE and RECALL commands.
+
+ <B>Notes</B>
+
+     <B>.  Logical records:</B> Reinstating a deleted record affects the
+        record's logical visibility if the global _SET_DELETED status is true
+        (.T.).  For more information, refer to the DBDELETE() function and
+        the DELETE and RECALL commands.
+
+     <B>.  Network environment:</B> For a shared database on a network,
+        DBRECALL() requires the current record to be locked.  For more
+        information, refer to the "Network Programming" chapter in the
+        Programming and Utilities Guide.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example recalls a record if it is deleted and
+        attempts to lock the record if successful:
+
+        cLast := "Winston"
+        DBUSEAREA( .T., "DBFNTX", "Sales", "Sales", .T. )
+        DBSETINDEX( "LASTNAME" )
+        //
+        IF ( Sales-&gt;(DBSEEK(cLast)) )
+           IF Sales-&gt;( DELETED() )
+              IF Sales( RLOCK() )
+                 Sales( DBRECALL() )
+                 ? "Record recalled"
+              ELSE
+                 "Unable to lock record..."
+              ENDIF
+           ENDIF
+        ELSE
+           ? "Not found"
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2078f.html">DBDELETE()</A>
+<A HREF="ngc8a1c.html">DELETE</A>
+<A HREF="ngd675b.html">RECALL</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

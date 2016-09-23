@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng434c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng4ebf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmKeyGoto()</B>           Goto the specified logical key number (filtered)
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmKeyGoto(nKeyno) -&gt; NIL
+
+<B>Arguments</B>
+
+    nKeyno is the number of the key to go to.
+
+<B>Returns</B>
+
+    NIL.
+
+<B>Description</B>
+
+    cmKeyGoto() goes to the n'th filtered key.  This is useful when using
+    scroll bars, and you want to quickly get to the n'th key when the user
+    clicks on a certain position on the scroll bar.
+
+    cmKeyGoto() obeys the current index scope (if any).  For example,
+    cmKeyGoto(1) will go to the first record which meets the condition _and_
+    falls within the index scope.
+
+<B>Example</B>
+
+    index on age to age
+    index on last to last
+    use demo index age, last
+
+    cmFilter("last = 'J'")
+    cnt := cmFiltCount()
+
+    *   Go to the halfway point in the list
+<B>    cmKeyGoto(cnt / 2)</B>
+    
+<B>See Also</B>
+
+    cmKeyCount(), cmKeyNo(), cmKeySkip()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng434c.html">cmKeyCount()</A>
+<A HREF="ng4ebf.html">cmKeyNo()</A>
+<A HREF="ng542c.html">cmKeySkip()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

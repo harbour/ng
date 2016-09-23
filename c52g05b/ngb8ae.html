@@ -1,0 +1,33 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb7b6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3cf.html">[^^Up^^]</A>
+<A HREF="ngbb7a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>127 NEW: BEGIN SEQUENCE</B>
+--------------------------------------------------------------------------------
+
+     BEGIN SEQUENCE has been enhanced with two added clauses that increase
+     the ability to generate and handle runtime errors and exceptions:
+
+     1. <B>RECOVER USING:</B>  The RECOVER [USING &lt;idVar&gt;] clause defines
+        an error recovery mechanism within the SEQUENCE construct where
+        control branches after a BREAK.
+
+     2. <B>BREAK:</B>  The BREAK &lt;exp&gt; clause now allows a return value to
+        be specified that can be captured by the RECOVER USING clause.
+        This is generally an error object to be passed to the RECOVER
+        &lt;idVar&gt; where it may be used to determine the nature of the
+        error.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

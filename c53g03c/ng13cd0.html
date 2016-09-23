@@ -1,0 +1,107 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng13657.html">[^^Up^^]</A>
+<A HREF="ng144a9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_evalLaunch()</B>
+ Call CA-Clipper code blocks from C
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "item.api"</B>
+     <B>ITEM _evalLaunch(</B>
+     <B>                  EVALINFOP evalInfoP</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>evalInfoP</B> is a properly set EVALINFO structure (as set by _evalNew()
+     and _evalPutParam()).
+
+ <B>Returns</B>
+
+     The item that is the result of the evaluation.
+
+ <B>Description</B>
+
+     The _evalLaunch() function allows you to call any code that can be
+     defined in a code block from C.  Note also that you may call a
+     particular symbol by name if you pass a character string item to
+     _evalNew() when creating the EVALINFO structure.
+
+     _evalLaunch() requires a EVALINFO structure properly initialized via
+     _evalNew() with parameters placed in the structure via _evalPutParam().
+     Failure to follow this protocol exactly will result in catastrophe.
+
+     During the process of launching an evaluation, the Item API creates new
+     item references for each item placed in the parameter list.  After an
+     _evalLaunch() call is made, you must call _evalRelease() to individually
+     release all of the references, or the items used as parameters will
+     never be released from object memory for the garbage collector.
+
+ <B>Examples</B>
+
+     /*
+     * USERDO()
+     * --------
+     */
+
+     CLIPPER userDO( void )
+     {
+        EVALINFO info;
+        USHORT   uiParam;
+        ITEM     retP;
+
+        /* Get evaluation expression */
+
+        if ( PCOUNT &lt; 1 )
+        {
+           _ret();
+           return;
+        }
+        else
+        {
+           _evalNew( &amp;info, _itemParam( 1 ) );
+        }
+
+        /* Get parameters */
+
+        for ( uiParam=2; uiParam &lt;= PCOUNT; uiParam++ )
+        {
+           _evalPutParam( &amp;info, _itemParam(uiParam) );
+        }
+
+        /* Launch evaluation information */
+
+        retP = _evalLaunch( &amp;info );
+
+        /* Release ITEMs associated w/eval info */
+
+        _evalRelease( &amp;info );
+
+        _itemReturn ( retP );
+        _itemRelease( retP );
+
+        return;
+     }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Item.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng144a9.html">_evalNew()</A>
+<A HREF="ng14a59.html">_evalPutParam()</A>
+<A HREF="ng151cd.html">_evalRelease()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

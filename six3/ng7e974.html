@@ -1,0 +1,84 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7dfac.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng7f36e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>How Do I Specify An RDD:</B>
+
+  A Replaceable Database Driver (RDD) can be specified in three ways:
+
+  <B>1.  The table can be opened using the USE command with the VIA clause.</B>
+
+      For example, to open a table called CUST using the SIx Driver's SIXNSX
+      flavor you could use the following command:
+
+        <B>USE CUST VIA "SIXNSX"</B>
+
+      Note that the RDD name must be a character string.  You can use a
+      variable in the command instead of a literal string, but it is
+      important that the driver name be spelled correctly.  The VIA clause
+      is defined as part of the USE command in STD.CH.
+
+      Once a table is opened in a workarea, then the RDD used for that
+      workarea is automatically used for all operations on the table in
+      that workarea (except commands and functions that create a new
+      table).  Any command or function that creates a new table (i.e., SORT,
+      CREATE FROM, DBCREATE(), etc.) will use the default RDD.
+
+      After a default RDD is set using RDDSetDefault(), then all USE commands
+      that don't explicitly specify an RDD using the VIA clause will use
+      the default RDD.  Also, all commands and functions that create a new
+      table will use the default RDD.
+
+
+  <B>2.  Clipper's RDDSetDefault() function can be used to set the default</B>
+  <B>    driver.</B>
+
+      By calling RDDSetDefault(), passing it the name of the RDD you want
+      to select, any database files you open or create after that will be
+      handled via that driver.  For example:
+
+        <B>RDDSetDefault("SIXCDX")</B>     // Select SIXCDX driver
+        USE test INDEX age          // Opens TEST.DBF and AGE.IDX via SIXCDX
+        INDEX ON last TO last       // Creates LAST.IDX
+
+        <B>RDDSetDefault("SIXNTX")</B>     // Select DBFNTX driver
+        USE test INDEX age         // Opens TEST.DBF and AGE.NTX via SIXNTX
+        INDEX ON last TO last      // Creates LAST.NTX
+
+
+  <B>3.  The normal default RDD (DBFNTX) can be replaced by linking in either</B>
+  <B>    SIXCDX.OBJ, SIXNSX.OBJ, SIXMDX.OBJ, or SIXNTX.OBJ.</B>
+
+      Normally, Clipper's startup default RDD is DBFNTX.  By linking
+      SIXCDX.OBJ into your application you can change the default RDD to
+      SIXCDX.  This reduces the size of your application, if you do not
+      require DBFNTX in your application.
+
+    <U>NOTE:  If you link in one of these .OBJ files, you'll never need to use</U>
+    <U>       use the VIA clause of the USE command or the RDDSetDefault()</U>
+    <U>       function, since the selected flavor of the SIx Driver will become</U>
+    <U>       the "default" driver, and will prevent DBFNTX from being linked</U>
+    <U>       in at all.</U>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng76298.html">DBT.OBJ</A>
+<A HREF="ng7725a.html">SIXCDX.OBJ</A>
+<A HREF="ng779a2.html">SIXNSX.OBJ</A>
+<A HREF="ng77d46.html">SIXNTX.OBJ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3c853.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng3d17b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DISPEND()</B>
+ Display buffered screen updates
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DISPEND() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DISPEND() always returns NIL.
+
+ <B>Description</B>
+
+     DISPEND() is a screen function that informs the CA-Clipper display
+     output system that the application has finished performing a series of
+     display operations.
+
+     DISPEND() is used with DISPBEGIN() so the display output system can
+     buffer display updates.  This can be important for applications in which
+     complex screen displays are slow and the appearance of performance is
+     desired.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example buffers screen output, updates the screen, and
+        then displays the buffered screen output:
+
+        DISPBEGIN()            // Start screen buffering
+        //
+        SETPOS(10, 10)
+        DISPOUT("A display update")
+        SETPOS(11, 10)
+        DISPOUT("Another display update")
+        //
+        DISPEND()               // Display buffered screen data
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3ac35.html">DISPBEGIN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

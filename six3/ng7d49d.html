@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7d370.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng7dc04.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Why am I getting IE1010 Errors and/or lockups?:</B>
+
+  A common cause of IE1010 errors, lockups, and other odd behavior is if
+  your stack size is set too low in your link script file.
+
+  The SIXNSX flavor of the SIx Driver <B>requires</B> 7k of stack space, which
+  we "burn" into the SIX3.LIB file.  SIXCDX and SIXNTX do not require any
+  additional stack space (over what DBFNTX would normally require).
+
+  However, if you have an explicit STACK or PROCEDURE DEPTH setting in your
+  link script file, it will override the one burned into our library.  Also,
+  if your application is using other add-on libraries written in C/ASM, it
+  may require additional stack space above and beyond what the SIx Driver
+  itself requires.
+
+  If you get an IE1010 Error, check your link script file.  If you have a
+  STACK line, make sure it is set to at least 7168.  For example:
+
+    <B>STACK 7068</B>
+
+  If it is set lower than 7068, try setting it to 7068 or higher and
+  relinking your application.
+
+  If you are not using the STACK command, but are instead using the
+  PROCEDURE DEPTH command, it should be set to 70 or above.  For example:
+
+    <U>For Blinker:</U>
+
+      <B>BLINKER PROCEDURE DEPTH 70</B>
+
+    <U>For ExoSpace:</U>
+
+      <B>EXOSPACE PROCEDURE DEPTH 70</B>
+
+
+  Note that the STACK and PROCEDURE DEPTH commands both achieve the same
+  result, but in two different ways.  Only one of the two commands needs
+  to be used at a time.  You should not use both in the same link script.
+
+  As mentioned above, the SIXNSX driver is the most common flavor that you
+  may need to adjust your stack size for.  However, if you experience IE1010
+  errors under SIXCDX and/or SIXNTX as well, the first thing to try is the
+  suggestions listed above.
+
+  After relinking your application with the revised stack size setting, you
+  should also rebuild your index files.
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng577c9.html">SIX???/1010  Read Error</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

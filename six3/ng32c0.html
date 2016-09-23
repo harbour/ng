@@ -1,0 +1,105 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3231.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng409f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_Add():</B>
+
+  Purpose:  Adds a text string entry to a HiPer-SEEK index file.
+
+   Syntax:  hs_Add( &lt;hIndex&gt;, &lt;bExpr&gt; )
+
+    Where:  &lt;hIndex&gt; is an integer handle of a HiPer-SEEK index file.
+
+            &lt;bExpr&gt; is a code block that will be evaluated for the current
+              record to extract the key data to be added to the index.
+
+     Note:  There is no length limit to the index string, however, strings
+            of length of less than 4000 characters usually provide the
+            best results.  Strings longer than this can result in higher
+            alias rates and sometimes in unsatisfactory performance.  It
+            is often worthwhile to experiment with the SIZE FACTOR
+            parameter of hs_Create() in order to optimize performance.
+
+  Returns:  An integer representing the record number.  Errors are
+            indicated by integers less than zero. This value can be used
+            to insure that the index file is being built correctly. See
+            comment 5 below.
+
+  Errors Returned:
+
+      -4 (BADSEEK) Error while attempting seek during buffer flushing.
+      -6 (BADWRITE) Error while attempting write during buffer flush.
+     -16 (BADPARMS) Invalid parameters were passed to the function.
+     -18 (BADHANDLE) Invalid handle was passed to the function.
+
+  Comments:
+
+    1.  Return values start with one and increase. This integer is an
+    internally incremented counter and indicated the record position within
+    the index file. The first time hs_Add() is called it will return a 1,
+    the second time, a 2, and so on. These return values represent the
+    position within the index file held by the key for the string passed.
+    These numbers will always increase by one for each add, even if records
+    are deleted in the interim. In most cases the first time hs_Add() is
+    called it will receive a string (&lt;cExpr&gt;) from .DBF record number 1; the
+    second time from .DBF record number 2, and so on. If this method is
+    continued, all index record numbers will directly correspond to .DBF
+    record numbers.
+
+    2.  If possible, when adding a large number of records, try to add them
+    consecutively without calling other HiPer-SEEK functions in between
+    adds.  This allows maximum buffering to occur and results in increased
+    speed.
+
+    3.  When first adding records to a newly created index file remember to
+    SET DELETED OFF and SET ORDER TO 0. This is to insure that no records
+    are passed over and that records are added in natural order.  These two
+    commands are not necessary when adding individual records because both
+    the .DBF and index records will be added to the end of the files.
+
+    4.  Care should be taken when laying out the logic for adding records to
+    .DBFs and .HSX index files. Interruption of the process might result in
+    a record being added to the .DBF and not being added to the .HSX file;
+    or, a record being added to the .HSX index and not to the .DBF.  The
+    first situation will eventually result in a -7 (RECBOUND) error. The
+    second situation will result in inaccurate searches.
+
+    5.  It is a very good idea to compare the value of the return from
+    hs_Add() with the current .DBF record number. These values should be
+    equal. Unequal values indicate that the primary .DBF file and its .HSX
+    index file are out of sync.
+
+
+  Example:
+
+    USE test EXCL
+    h := hs_Open( "SALES.HSX", 10, 1 )
+    bExpr := { || Trim( test-&gt;FIRST ) + " " + Trim( test-&gt;LAST ) }
+    DO WHILE !eof()
+      nRec := <B>hs_Add( h, bExpr )</B>
+      IF nRec &lt; 1 .OR. nRec != RecNo()
+        ? "Error adding record " + LTrim( Str( RecNo() )) + "!"
+      ENDIF
+      SKIP
+    ENDDO
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5e0e.html">hs_Delete()</A>
+<A HREF="ng9e41.html">hs_Replace()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

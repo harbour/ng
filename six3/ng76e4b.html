@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng76a77.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng75ccf.html">[^^Up^^]</A>
+<A HREF="ng7725a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>NOMEMO.OBJ</B>
+
+  If your application does not use memo fields at all, or if you use an
+  alternate memo support RDD (e.g. FlexFile), you can save memory by linking
+  in the NOMEMO.OBJ file.  It will "stub" out all of the SIx Driver's normal
+  memo support code.
+
+  For example, to link a SIXNSX application called MYAPP that does not use
+  .DBT, .FPT, or .SMT memo files at all, you would use the following link
+  command:
+
+    RTLink:
+
+      <B>EXOSPACE FI myapp,sixnsx,nomemo LIB six3,clipper</B>
+
+    Blinker:
+
+      <B>BLINKER FI myapp,sixnsx,nomemo @six3 LIB clipper</B>
+
+    CauseWay:
+
+      <B>WL32 myapp sixnsx nomemo,,,six3 clipper</B>
+
+
+  <B>NOTE:  This .OBJ file affects ALL SIx Driver workareas in the application.</B>
+  <B>       if you have some databases with memo files and some without, do NOT</B>
+  <B>       link in the .OBJ file in an effort to "reduce memory in those work-</B>
+  <B>       areas that don't have memo fields."  It doesn't work like that.  It</B>
+  <B>       is an "All or Nothing" choice.</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng76298.html">DBT.OBJ</A>
+<A HREF="ng766b4.html">FPT.OBJ</A>
+<A HREF="ng76a77.html">SMT.OBJ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,43 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Smart Translations:</B>
+
+  In some cases Mach SIx can translate a non-indexed expression into one
+  that can be optimized.  The table below shows exactly when a smart
+  translation could be used to optimize what would seem to be a non-indexed
+  expression.  The first column shows the expression as it would appear in
+  the FOR condition.  The second column lists the possible index keys that
+  could be used to optimize the first expression.  As long as you have an
+  index built on the translation (the second column), the expression in the
+  first column is optimizable.  One final note,  Mach SIx will only
+  translate keys listed to the left of the relational operator.
+
+                                <B>Optimized using</B>
+      <B>Expression                index key</B>
+      <B>-----------               ---------------</B>
+
+      <B>empty( Last )             Last</B>
+
+      <B>year( Date )              dtos( Date )</B>
+                                <B>Date</B>
+
+      <B>Last = "HEW"              upper( Last )</B>
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

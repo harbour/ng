@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng128d78.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng11fd89.html">[^^Up^^]</A>
+<A HREF="ng12a323.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>#stdout</B>
+ Send literal text to the standard output device
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>#stdout [&lt;messageText&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;messageText&gt;</B> is the text of the message to display.  &lt;messageTest&gt;
+     is a literal character string.  Do not enclose the message in quotation
+     marks unless you want them to appear as part of the display.
+
+ <B>Description</B>
+
+     #stdout causes the compiler to output the literal text to the standard
+     output device (stdout) during compilation.  If &lt;messageText&gt; is not
+     specified, a carriage return/line feed pair echoes to stdout.
+
+     <B>Warning!</B>  Manifest constants are not translated in #stdout.
+     Implementation is identical to #error with the following exceptions:
+     output is written to STDOUT and no compiler error is generated.
+
+ <B>Examples</B>
+
+     This example demonstrates use of #stdout:
+
+     #ifdef DEBUG
+        #stdout Compiling debugging version...
+     #endif
+
+     PROCEDURE Main()
+
+     ? "Hello world"
+     RETURN
+
+     #stdout End of "Hello World" program
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng127d15.html">#error</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7c53c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng7cb04.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDBAGEXT()</B>
+ Return the default order bag RDD extension
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDBAGEXT() --&gt; cBagExt</B>
+
+ <B>Returns</B>
+
+     ORDBAGEXT() returns a character expression.
+
+ <B>Description</B>
+
+     ORDBAGEXT() is an order management function that returns a character
+     expression that is the default order bag extension of the current or
+     aliased work area.  cBagExt is determined by the RDD active in the
+     current work area.
+
+ <B>Notes</B>
+
+     <B>.</B>  ORDBAGEXT() supersedes the INDEXEXT() function, which is not
+        recommended.
+
+     <B>.</B>  ORDBAGEXT() returns the default index extension of the driver
+        loaded, not the actual index file extension.
+
+ <B>Examples</B>
+
+     USE sample VIA "DBFNTX"
+     ? ORDBAGEXT()      //  Returns .ntx
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7cb04.html">ORDBAGNAME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

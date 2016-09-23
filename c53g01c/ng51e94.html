@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng51838.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng52630.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>GETREADER()</B>
+ Execute standard READ behavior for a Get object
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>GETREADER(&lt;oGet&gt;, &lt;GetList&gt;, &lt;oMenu&gt;, &lt;nMsgRow&gt;,</B>
+     <B>   &lt;nMsgLeft&gt;, &lt;nMsgRight&gt;, &lt;cMsgColor&gt;) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;oGet&gt;</B> is a reference to a Get object.
+
+     <B>&lt;GetList&gt;</B> is an array of all the Get objects in the current Get
+     list.
+
+     <B>&lt;oMenu&gt;</B> is a reference to a TopBarMenu object.
+
+     <B>&lt;nMsgRow&gt;</B> is a numeric value representing the row number on the
+     screen where the message bar is located.
+
+     <B>&lt;nMsgLeft&gt;</B> is a numeric value representing the left border of the
+     row bar.
+
+     <B>&lt;nMsgRight&gt;</B> is a numeric value representing the right border of the
+     row bar.
+
+     <B>&lt;cMsgColor&gt;</B> is a character string representing the color string to
+     be used for the message bar.
+
+ <B>Returns</B>
+
+     GETREADER() always returns NIL.
+
+ <B>Description</B>
+
+     GETREADER() is a GET function that implements the standard READ behavior
+     for GETs.  By default, READMODAL() uses the GETREADER() function to read
+     Get objects.  GETREADER() in turn uses other functions in Getsys.prg to
+     do the work of reading the Get object.
+
+ <B>Notes</B>
+
+     <B>.</B>  If a Get object's Get:reader instance variable contains a code
+        block, READMODAL() will evaluate that block in lieu of the call to
+        GETREADER().  For more information refer to the Get:reader reference.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example sets the current Get object to the first GET in
+        the Get list.  Then, a READ is performed on this GET which has no
+        menu object, but includes a message bar at row 25 from column 0 to
+        column 80.  The color of the text on the message bar is white with a
+        red background.
+
+        oGet := GetList [1]
+        GETREADER (oGet, Getlist, NIL,25,;
+                       0,80,"W+/R")
+
+ <B>Files</B>   Library is CLIPPER.LIB, source file is Getsys.prg.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4fcb8.html">GETAPPLYKEY()</A>
+<A HREF="ng5048e.html">GETDOSETKEY()</A>
+<A HREF="ng512fb.html">GETPOSTVALID()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,102 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2b376.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng27ce3.html">[^^Up^^]</A>
+<A HREF="ng2c489.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Passwords and Security</B>
+------------------------------------------------------------------------------
+
+     Although the Paradox DBMS cannot be considered a data dictionary system,
+     it does have some special characteristics that make it more suitable to
+     networks than the standard Xbase tables.  One of these features is the
+     level of security available.
+
+     There are two methods to make sure that your data is secure: master
+     passwords and auxiliary passwords.  As the owner of a table, you can
+     limit access by attaching a master password to it.  Auxiliary passwords
+     can also be identified to establish access to the table and its family.
+
+     Once any type of password is identified for a table, its is encrypted.
+     This protects it not only from unauthorized Paradox users but also from
+     anyone trying to dissect it at the DOS file level.  The encryption
+     method used by Paradox is literally unbreakable and if you (or your
+     users) forget a table password, there is no way to recover that
+     information.
+
+     Auxiliary passwords allow access control at the table and field levels.
+     Access to tables can be restricted to:
+
+     <B>.</B>  ReadOnly:  No changes to the table can be made
+
+     <B>.</B>  Update:  Changes to nonkey fields are allowed, no records can
+        be added or deleted
+
+     <B>.</B>  Entry:  Same as update except that new records can be added
+
+     <B>.</B>  InsertDelete:  Same as Entry except that records can be
+        inserted and deleted
+
+     <B>.</B>  All:  Full access including restructuring and table deletion
+
+     Access to the fields can be identified as:
+
+     <B>.</B>  None:  This field data cannot be displayed to the user
+
+     <B>.</B>  ReadOnly:  User can see the field value, but cannot change it
+
+     <B>.</B>  All:  Full access
+
+     With DBPX, you may perform basic database operations on Paradox tables
+     without code changes.
+
+     Note that because Paradox tables can have primary indexes which are
+     actually part of the table structure specification, when you open a
+     Paradox table, its associated primary index (if applicable) is also
+     opened and activated.  The only exception to this rule is if you
+     indicate that you want a secondary index to be activated at the time you
+     open the table.  If no primary index is available and no secondary index
+     is specified, the table is opened in natural sequence order.
+
+     You can have up to twenty-four Paradox tables open simultaneously.
+     These may be separate tables or the same table repeatedly or any
+     variation in between.  This might be important if you want to have more
+     than one secondary index active for a single table, allowing you to move
+     from one work area to another with the only change being the index order
+     of the data in the table.  Be careful with this type of multiviewed
+     approach, however, since you will be eating up memory for each work
+     area, despite the fact that they refer to the same table.
+
+ <B>Sharing Data in Networks</B>
+
+     The DBPX driver supports the native CA-Clipper  single-lock locking
+     scheme.  Therefore, in a shared environment, your application and
+     Paradox will not see each other's record locks.  This may result in some
+     concurrency corruption and errors.
+
+     In a shared environment, DBPX performs no record buffering; immediately
+     writing all changes to disk.
+
+     Concurrency is an issue whenever your application is running either on a
+     network or in some other shared environment.  One example of a non-
+     network shared environment is when your application is called from
+     another program (like Paradox, Quatro Pro, etc.) that also has access to
+     the Paradox tables.  Even if you don't have any plans to use your
+     program on a network, you should design it to be smart enough not to
+     become a problem if faced with this type of shared example.
+
+     Also be aware that many networks have different rights and privilege
+     restrictions and you should know what they are and how to handle them.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

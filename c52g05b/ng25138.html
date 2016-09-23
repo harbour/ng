@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng25013.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2391b.html">[^^Up^^]</A>
+<A HREF="ng25611.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHANGED:  Database error handling</B>
+------------------------------------------------------------------------------
+
+     In CA-Clipper 5.01, using database commands without an open work area
+     would not cause an error.  With the following exceptions, CA-Clipper 5.2
+     now produces a "Work area not in use" error.
+
+     The following table shows state query functions that do not produce a
+     "Work area not in use" error.  This list indicates the return value of
+     these functions when executed without an open work area.
+
+     <B>Table:  State query functions and their return value</B>
+     <B>        with no open work area</B>
+     ------------------------------------------------------------------------
+     <B>Function     Return value</B>
+     ------------------------------------------------------------------------
+     EOF()        --&gt;  .T.
+     BOF()        --&gt;  .T.
+     FOUND()      --&gt;  .F.
+     DELETED()    --&gt;  .F.
+     RECNO()      --&gt;   0 (zero)
+     LASTREC()    --&gt;   0 (zero)
+     FIELDNAME(1) --&gt;  ""
+     FCOUNT()     --&gt;   0 (zero)
+     INDEXORD()   --&gt;   0 (zero)
+     INDEXKEY()   --&gt;  ""
+     DBSTRUCT()   --&gt;  {} (empty array)
+     HEADER()     --&gt;   0 (zero)
+     RECSIZE()    --&gt;   0 (zero)
+     LUPDATE()    --&gt;    /  /   (empty date)
+     ------------------------------------------------------------------------
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

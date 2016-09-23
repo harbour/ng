@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng19116.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng19a13.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CHR()</B>
+ Convert an ASCII code to a character value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CHR(&lt;nCode&gt;) --&gt; cChar</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nCode&gt;</B> is an ASCII code in the range of zero to 255.
+
+ <B>Returns</B>
+
+     CHR() returns a single character value whose ASCII code is specified by
+     &lt;nCode&gt;.
+
+ <B>Description</B>
+
+     CHR() is a numeric conversion function that converts an ASCII code to a
+     character.  It is the inverse of ASC().  CHR() serves a number of common
+     tasks including:
+
+     <B>.</B>  Sending control codes and graphics characters to the screen or
+        printer
+
+     <B>.</B>  Ringing the bell
+
+     <B>.</B>  Converting INKEY() return values to characters
+
+     <B>.</B>  Stuffing the keyboard buffer
+
+ <B>Notes</B>
+
+     <B>.  The null character:</B> CHR(0) has a length of one (1) and is
+        treated like any other character.  This lets you send it to any
+        device or file, including a database file.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate CHR() with various arguments:
+
+        ? CHR(72)                    // Result: H
+        ? CHR(ASC("A") + 32)         // Result: a
+        ? CHR(7)                     // Result: bell sounds
+
+     <B>.</B>  These lines of code show the difference between a null string
+        and the null character:
+
+        ? LEN("")                   // Result: 0
+        ? LEN(CHR(0))               // Result: 1
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd56f.html">ASC()</A>
+<A HREF="ng61b6e.html">INKEY()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

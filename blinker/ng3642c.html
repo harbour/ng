@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng35f87.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng35608.html">[^^Up^^]</A>
+<A HREF="ng3690b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SWPADDSTR() / SWPADDSTRBAS()  Return string to previous parent program</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Return a string to a previous parent program</B></U>
+
+ <U>Syntax   : <B>niValue = SWPADDSTR(cPID, cString)</B></U>
+
+ <U>Return   : <B>A logical value</B></U>
+
+ SWPADDSTR() can be used to return a string of up to 127 bytes from the child
+ program to a parent. The string to be returned may not contain any NULLs, -
+ the first NULL will be interpreted as a string terminator.
+
+ The parent to receive the string is identified using the program ID of the
+ parent program (set in the parent using SWPSETPID()). The string may be
+ retrieved by the parent program using SWPGETSTR().
+
+ Example :
+
+    <B>success := SWPADDSTR("TEST","OK")</B>
+
+ returns the string "OK" to the program that has set a program ID of "TEST".
+
+ The return value is a logical indicating success or failure. There are three
+ possible reasons for failure:
+
+    1 - the named parent program kernel is not currently in memory
+    2 - the string to be returned is longer than 127 bytes
+    3 - the parent was linked with a version of Blinker prior to 2.10
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng386b5.html">SWPGETPID()</A>
+<A HREF="ng38a93.html">SWPGETSTR()</A>
+<A HREF="ng3cb8d.html">SWPSETPID()</A>
+<A HREF="ng3cf4e.html">SWPSETSTR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,116 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf2d3f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf3e11.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SKIP</B>
+ Move the record pointer to a new position
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SKIP [&lt;nRecords&gt;] [ALIAS &lt;idAlias&gt; | &lt;nWorkArea&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nRecords&gt;</B> is a numeric expression specifying the number of records
+     to move the record pointer from the current position.  A positive value
+     moves the record pointer forward and a negative value moves the record
+     pointer backward.
+
+     <B>ALIAS &lt;idAlias&gt;|&lt;nWorkArea&gt;</B> specifies the alias name as a literal
+     identifier or the work area as a numeric expression.
+
+     SKIP specified with no arguments moves the record pointer forward one
+     record.
+
+ <B>Description</B>
+
+     SKIP moves the record pointer to a new position relative to the current
+     position in the current work area and within the current filter, if
+     there is one.  SKIP is generally used for operations, such as reporting,
+     that need to go to the next record in a database file.
+
+     If the alias clause is specified, the pointer can be moved in another
+     work area without SELECTing that work area.  SKIP can move either
+     forward or backward.  If there is no active index, SKIP moves the record
+     pointer relative to the current position in the target database file.
+     If there is an active index, SKIP moves the pointer relative to the
+     current position in the index instead of the database file.
+
+     Attempting to SKIP forward beyond the end of file positions the record
+     pointer at LASTREC() + 1, and EOF() returns true (.T.).  Attempting to
+     SKIP backward beyond the beginning of file moves the pointer to the
+     first record, and BOF() returns true (.T.).
+
+     In a network environment, any record movement command, including SKIP,
+     makes changes to the current work area visible to other applications if
+     the current file is shared and the changes were made during an RLOCK().
+     To force an update to become visible without changing the current record
+     position, use SKIP 0.  If, however, the changes were made during an
+     FLOCK(), visibility is not guaranteed until the lock is released, a
+     COMMIT is performed, or the file is closed.  Refer to the "Network
+     Programming" chapter in the Programming and Utilities Guide for more
+     information.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses SKIP with various arguments and shows their
+        results:
+
+        USE Customers NEW
+        SKIP
+        ? RECNO()                  // Result: 2
+        SKIP 10
+        ? RECNO()                  // Result: 12
+        SKIP -5
+        ? RECNO()                  // Result: 7
+
+     <B>.</B>  This example moves the record pointer in a remote work area:
+
+        USE Customers NEW
+        USE Invoices NEW
+        SKIP ALIAS Customers
+
+     <B>.</B>  This example prints a report using SKIP to move the record
+        pointer sequentially through the Customer database file:
+
+        LOCAL nLine := 99
+        USE Customers NEW
+        SET PRINTER ON
+        DO WHILE !EOF()
+           IF nLine &gt; 55
+              EJECT
+              nLine := 1
+           ENDIF
+              ? Customer, Address, City, State, Zip
+              nLine++
+              SKIP
+           ENDDO
+        SET PRINTER OFF
+        CLOSE Customers
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng17b80.html">BOF()</A>
+<A HREF="ngc2cd8.html">COMMIT</A>
+<A HREF="ng33c29.html">DBSKIP()</A>
+<A HREF="ng3f657.html">EOF()</A>
+<A HREF="ngcc35b.html">GO</A>
+<A HREF="ngd26f1.html">LOCATE</A>
+<A HREF="ng94e69.html">RECNO()</A>
+<A HREF="ngdd095.html">SEEK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

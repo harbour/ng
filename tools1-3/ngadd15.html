@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngad7c3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga5aad.html">[^^Up^^]</A>
+<A HREF="ngae0b3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>WEEK()</B>
+ Returns the calendar week for a date
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>WEEK([&lt;dDate&gt;]) --&gt; nWeekOfYear</B>
+
+ <B>Argument</B>
+
+     <B>&lt;dDate&gt;</B>  Designates a date for which the week it lies in, is
+     determined.  The default is the system date.
+
+ <B>Returns</B>
+
+     WEEK() returns a sequential week number that designates in which week of
+     the year &lt;dDate&gt; lies.
+
+ <B>Description</B>
+
+     The week of the year in which a day lies is information required by a
+     number of technical financial calculations or wage accounting.  This
+     function determines this week and acknowledged all calendar rules.
+
+ <B>Note</B>
+
+     <B>.</B>  When no date is specified, then WEEK() uses the system date.
+        An empty date leads to a 0 result.
+
+ <B>Example</B>
+
+     Determine the week for a date:
+
+     dDate  :=  CTOD("03/14/92")
+
+     ? "This date is in week:  ", WEEK(dDate)
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

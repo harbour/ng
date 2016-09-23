@@ -1,0 +1,106 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng853e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng9b63.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>AEVAL()</B>
+ Execute a code block for each element in an array
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>AEVAL(&lt;aArray&gt;, &lt;bBlock&gt;,</B>
+     <B>   [&lt;nStart&gt;], [&lt;nCount&gt;]) --&gt; aArray</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aArray&gt;</B> is the array to traverse.
+
+     <B>&lt;bBlock&gt;</B> is a code block to execute for each element encountered.
+
+     <B>&lt;nStart&gt;</B> is the starting element.  If not specified, the default is
+     element one.
+
+     <B>&lt;nCount&gt;</B> is the number of elements to process from &lt;nStart&gt;.  If not
+     specified, the default is all elements to the end of the array.
+
+ <B>Returns</B>
+
+     AEVAL() returns a reference to &lt;aArray&gt;.
+
+ <B>Description</B>
+
+     AEVAL() is an array function that evaluates a code block once for each
+     element of an array, passing the element value and the element index as
+     block parameters.  The return value of the block is ignored.  All
+     elements in &lt;aArray&gt; are processed unless either the &lt;nStart&gt; or the
+     &lt;nCount&gt; argument is specified.
+
+     AEVAL() makes no assumptions about the contents of the array elements it
+     is passing to the block.  It is assumed that the supplied block knows
+     what type of data will be in each element.
+
+     AEVAL() is similar to DBEVAL() which applies a block to each record of a
+     database file.  Like DBEVAL(), AEVAL() can be used as a primitive for
+     the construction of iteration commands for both simple and complex array
+     structures.
+
+     Refer to the Code Blocks section in the Basic Concepts chapter of the
+     Programming and Utilities guide for more information on the theory and
+     syntax of code blocks.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses AEVAL() to display an array of filenames and
+        file sizes returned from the DIRECTORY() function:
+
+        #include "Directry.ch"
+        //
+        LOCAL aFiles := DIRECTORY("*.dbf"), nTotal := 0
+        AEVAL(aFiles,;
+           { | aDbfFile |;
+              QOUT(PADR(aDbfFile[F_NAME], 10), aDbfFile[F_SIZE]),;
+              nTotal += aDbfFile[F_SIZE]);
+           } )
+        //
+        ?
+        ? "Total Bytes:", nTotal
+
+     <B>.</B>  This example uses AEVAL() to build a list consisting of
+        selected items from a multidimensional array:
+
+        #include "Directry.ch"
+        //
+        LOCAL aFiles := DIRECTORY("*.dbf"), aNames := {}
+        AEVAL(aFiles,;
+           { | file | AADD(aNames, file[F_NAME]) };
+           )
+
+     <B>.</B>  This example changes the contents of the array element
+        depending on a condition.  Notice the use of the codeblock
+        parameters: */
+
+        LOCAL aArray[6]
+        AFILL(aArray,"old")
+        AEVAL(aArray,;
+        {|cValue,nIndex| IF(cValue == "old",;
+                         aArray[nIndex] := "new",)})
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1d373.html">DBEVAL()</A>
+<A HREF="ng31d53.html">EVAL()</A>
+<A HREF="ng58006.html">QOUT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

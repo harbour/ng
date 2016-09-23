@@ -1,0 +1,100 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngaf01a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ngb0563.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TOTAL</B>
+ Summarize records by key value to a (.dbf) file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TOTAL ON &lt;expKey&gt; FIELDS &lt;idField list&gt;</B>
+     <B>   TO &lt;xcDatabase&gt;</B>
+     <B>   [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>ON &lt;expKey&gt;</B> defines the group of records that produce a new record
+     in the target database file.  To make the summarizing operation
+     accurate, the source database file should be INDEXed or SORTed on this
+     expression.
+
+     <B>FIELDS &lt;idField list&gt;</B> specifies the list of numeric fields to TOTAL.
+     If the FIELDS clause is not specified, no numeric fields are totaled.
+     Instead each numeric field in the target file contains the value for the
+     first record matching the key expression.
+
+     <B>TO &lt;xcDatabase&gt;</B> is the name of the target file that will contain the
+     copy of the summarized records.  Specify this argument as a literal
+     filename or as a character expression enclosed in parentheses.  Unless
+     otherwise specified, TOTAL assumes a (.dbf) extension.
+
+     <B>&lt;scope&gt;</B> is the portion of the current database file to TOTAL.  The
+     default is ALL records.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to TOTAL
+     within the given scope.
+
+ <B>Description</B>
+
+     TOTAL is a database command that sequentially processes the current
+     database file summarizing records by the specified key value and copying
+     them to a new database file.  TOTAL works by first copying the structure
+     of the current database file to &lt;xcDatabase&gt;, except for memo fields.
+     It then sequentially scans the current database file within the
+     specified scope of records.  As each record with a unique &lt;expKey&gt; value
+     is encountered, that record is copied to the new database file.  The
+     values of numeric fields specified in &lt;idField list&gt; from successive
+     records with the same &lt;expKey&gt; value are added to fields with the same
+     names in &lt;xcDatabase&gt;.  Summarization proceeds until a record with a new
+     key value is encountered.  The process is then repeated for this record.
+
+     Since TOTAL processes the source database file sequentially, it must be
+     INDEXed or SORTed in &lt;expKey&gt; order for the summarization to be correct.
+
+     To successfully TOTAL numeric fields, the source numeric fields must be
+     large enough to hold the largest total possible for that numeric field.
+     If not, a runtime error is generated.
+
+ <B>Notes</B>
+
+     <B>.  Deleted source records:</B> If DELETED is OFF, deleted records in
+        the source file are TOTALed.  Records in the target &lt;xcDatabase&gt;
+        inherit the deleted status of the first matching record in the source
+        file, just as nontotaled fields inherit their values.  If DELETED is
+        ON, however, none of the deleted source records are TOTALed.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example, a database file is TOTALed ON the key
+        expression of the controlling index using a macro expression.  When
+        the macro expression is encountered, the expression is evaluated and
+        the resulting character string is substituted for the TOTAL &lt;expKey&gt;
+        argument:
+
+        USE Sales INDEX Branch NEW
+        TOTAL ON &amp;(INDEXKEY(0)) FIELDS Amount TO Summary
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7cf1a.html">AVERAGE</A>
+<A HREF="ng895a7.html">INDEX</A>
+<A HREF="ngacef0.html">SORT</A>
+<A HREF="ngae9a4.html">SUM</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

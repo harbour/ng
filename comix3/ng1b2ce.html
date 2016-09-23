@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1b1e4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng19942.html">[^^Up^^]</A>
+<A HREF="ng1b859.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>When should I use INDEX ON .. FOR vs. cmFilter()?</B>
+
+Usually, the only time you would want to create a conditional index is when
+you want to keep the index updated and available.  For example, if you want
+to keep track of records that are not paid and want records to drop out of
+that index as soon as they are marked paid, then a conditional index is
+ideal.
+
+For temporary (ad hoc) conditions, cmFilter() is faster than creating a
+conditional index because it only reads indexes, it does not have to create
+them.
+
+There is one relatively obscure exception to consider (don't worry about
+this until you actually experience a slowdown).  If only a very small
+percentage (0.1% or less) of records meet the condition, then you may want
+to create a conditional index for faster record to record access.  Here's
+why:
+
+ClipMore skips by getting the next record number from the controlling index
+and checking to see if that record is in the Filter RecordList.  If it isn't
+then ClipMore gets the next record number from the index, etc. until it
+finds one that is in the Filter RecordList.
+
+If only 0.1% of the records meet the condition, ClipMore may have to go
+through 1000 keys in the index in order to find the next matching record. 
+This can take some time.
+
+With a conditional index, however, the next record in the index always meets
+the condition, so record to record skipping is very fast.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

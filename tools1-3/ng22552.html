@@ -1,0 +1,105 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng21e3e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge404.html">[^^Up^^]</A>
+<A HREF="ng22ffc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETTAB()</B>
+ Sets the tab widths for CA-Clipper screen outputs
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETTAB([&lt;cTabTable&gt;|&lt;nTabWidth&gt;]) --&gt; lAccepted</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cTabTable&gt;</B>  Designates a character string with tab definitions in a
+     format as defined below.  Can be a maximum of 32 characters long.
+
+     or:
+
+     <B>&lt;nTabWidth&gt;</B>  Designates (as an exception) an individual numeric
+     value for the tab value.  A blank is then used for the tab setting.
+
+     ()  If you call the function without parameters, the tab settings from
+     the CA-Clipper console output are uninstalled.
+
+ <B>Returns</B>
+
+     SETTAB() returns .T. when the character string that contains the tab
+     settings is installed successfully.
+
+ <B>Description</B>
+
+     Using this function, you can switch to a mode in which CA-Clipper
+     console output (with the exception of @..SAY) can interpret tab
+     characters.  This function allows tabs to be blanks or any other
+     character you choose.  The tab positions and the character used for each
+     tab jump are passed in a character string with the following format:
+
+     CHR(tab-pos) + CHR(character) + CHR(tab-pos) + CHR(character)...
+
+     You do not need to specify every tab position within a line.  Any tab
+     position that is not specified is worked out as follows:
+
+     &lt;previous Tab Pos.&gt; + &lt;previous Tab Pos.&gt;
+
+     For example, if the first position is 0, the second is 8, and no other
+     positions are specified, then the tab positions are 16, 24, 32 etc.
+
+     When you call the function with &lt;nTabWidth&gt;, only one tab width can be
+     specified.  All positions are calculated as multiples of this value.  A
+     space is used as the tab character.
+
+ <B>Notes</B>
+
+     <B>.</B>  A tab position within a string can never be less than one
+        previously designated.  The function returns .F., indicating an
+        error.
+
+     <B>.</B>  If the difference between the last and the next to last tab
+        positions is 0, or if the last position specified is 0, then
+        additional tabs on this line are not taken into account.
+
+     <B>.</B>  The tabs are exclusively for screen output, not for printer or
+        ALTERNATE files.
+
+ <B>Examples</B>
+
+     <B>.</B>  Set tabs that expand to spaces with a tab width of 8:
+
+        SETTAB(8)
+
+     <B>.</B>  Set tabs for positions 8, 16, 24, etc.  Use a "." as the tab
+        character:
+
+        cTab := CHR(9)
+        cTabString := CHR(8) + "." + CHR(16) + "."
+        SETTAB(cTabString)
+
+        ? "AAAA" + cTab + "BBB" + cTab + "CCCCCC" + cTab + "DDD"
+
+
+        * The resulting output: AAAA. . . .BBB. . . . .CCCCCC. .DDD
+
+     <B>.</B>  Format the output in conjunction with LIST:
+
+        USE &lt;file&gt;
+        LIST OFF cTab + FIELD1 + cTab + FIELD2 + cTab + FIELD3
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng170da.html">GETTAB()</A>
+<A HREF="ng5c415.html">TABEXPAND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

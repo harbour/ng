@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5b475.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5bee1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>orderListAdd()</B>
+ Opens an order bag in the indicated work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE orderListAdd(</B>
+     <B>                           AREAP wa,</B>
+     <B>                           LPDBORDERINFO lpdbOrderInfo</B>
+     <B>                        )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpdbOrderInfo</B> is a pointer to a structure containing information
+     about the order bag to be opened.
+
+ <B>Description</B>
+
+     orderListAdd() opens an order bag with all its associated orders in the
+     work area.  This functionality is analogous to the CA-Clipper SET INDEX
+     TO...ADDITIVE command.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Before an order can be attached to the work area, the
+        work area's buffer should be written to disk in a SELF_GOCOLD() call.
+
+     <B>.</B>  It is recommended that you place a limit on the number of open
+        orders per work area since memory is a finite resource, even if you
+        tap the power of the Virtual Memory API to supply you with memory.
+
+     <B>.</B>  By convention, once the order is set, a SELF_GOTOP() should be
+        issued to remain consistent with the CA-Clipper DML.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng44e33.html">DBORDERINFO</A>
+<A HREF="ng50136.html">goCold()</A>
+<A HREF="ng4b135.html">goTop()</A>
+<A HREF="ng5bee1.html">orderListClear()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

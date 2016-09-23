@@ -1,0 +1,95 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf4ea5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngf5f21.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RDDLIST() function</B>
+ Return an array of the available Replaceable Database Drivers
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     RDDLIST([&lt;nRDDType&gt;]) --&gt; aRDDList
+
+ <B>Arguments</B>
+
+     <B>&lt;nRDDType&gt;</B> is an integer that represents the type of the RDD you
+     wish to list.  The constants RDT_FULL and RDT_TRANSFER represent the two
+     types of RDDs currently available.
+
+     <B>RDDType Summary</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Value     Meaning</B>
+     ------------------------------------------------------------------------
+     RDT_FULL       1         Full RDD implementation
+     RDT_TRANSFER   2         Import/Export only driver
+     ------------------------------------------------------------------------
+
+     RDT_FULL identifies full-featured RDDs that have all the capabilities
+     associated with an RDD.
+
+     RDT_TRANSFER identifies RDDs of limited capability.  They can only
+     transfer records between files.  You cannot use these limited RDD
+     drivers to open a file in a work area.  The SDF and DELIM drivers are
+     examples of this type of RDD.  They are only used in the implementation
+     of APPEND FROM and COPY TO with SDF or DELIMITED files.
+
+ <B>Returns</B>
+
+     RDDLIST() returns a one-dimensional array of the RDD names registered
+     with the application as &lt;nRDDType&gt;.
+
+ <B>Description</B>
+
+     RDDLIST() is an RDD function that returns a one-dimensional array that
+     lists the available RDDs.
+
+     If you do not supply &lt;nRDDType&gt;, all available RDDs, regardless of type,
+     are returned.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example RDDLIST() returns an array containing the
+        character strings, "DBF", "SDF", "DELIM", "DBFCDX", and "DBFNTX":
+
+        REQUEST DBFCDX
+
+        .
+        . &lt; statements &gt;
+        .
+
+        aRDDs := RDDLIST()
+
+              // Returns {"DBF", SDF", "DELIM", "DBFCDX", "DBFNTX" }
+
+     <B>.</B>  In this example, RDDLIST() returns an array containing the
+        character strings, "SDF" and "DELIM":
+
+        #include "rddsys.ch"
+        .
+        . &lt; statements &gt;
+        .
+        aImpExp := RDDLIST( RDT TRANSFER )
+
+ <B>Files:</B>  RDDSYS.CH
+
+ <B>Status:</B>  New
+
+ <B>See also:</B>  DBSETDRIVER(), RDDNAME(), RDDSETDEFAULT()
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng23276.html">DBSETDRIVER()</A>
+<A HREF="ngf5f21.html">RDDNAME()</A>
+<A HREF="ngf62aa.html">RDDSETDEFAULT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

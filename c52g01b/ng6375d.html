@@ -1,0 +1,177 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng62fe9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng64ce8.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETCOLOR()</B>
+ Return the current colors and optionally set new colors
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETCOLOR([&lt;cColorString&gt;]) --&gt; cColorString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cColorString&gt;</B> is a character string containing a list of color
+     attribute settings for subsequent screen painting.  The following is a
+     list of settings and related scopes:
+
+     <B>Color Settings</B>
+     ------------------------------------------------------------------------
+     <B>Setting        Scope</B>
+     ------------------------------------------------------------------------
+     Standard       All screen output commands and functions
+     Enhanced       GETs and selection highlights
+     Border         Border around screen, not supported on EGA and VGA
+     Background     Not supported
+     Unselected     Unselected GETs
+     ------------------------------------------------------------------------
+
+     Each setting is a foreground and background color pair separated by the
+     slash (/) character and followed by a comma.  All settings are optional.  If a
+     setting is skipped, its previous value is retained with only new values
+     set.  Settings may be skipped within the list or left off the end as
+     illustrated in the examples below.
+
+ <B>Returns</B>
+
+     SETCOLOR() returns the current color settings as a character string.
+
+ <B>Description</B>
+
+     SETCOLOR() is a screen function that saves the current color setting or
+     sets new colors for subsequent screen painting.  A color string is made
+     from several color settings, each color corresponding to different
+     regions of the screen.  As stated above, each setting is made up of a
+     foreground and background color.  Foreground defines the color of
+     characters displayed on the screen.  Background defines the color
+     displayed behind the character.  Spaces and nondisplay characters
+     display as background.
+
+     In CA-Clipper, the settings that define color behavior are:
+
+     <B>Standard:</B> The standard setting governs all console, full-screen, and
+     interface commands and functions when displaying to the screen.  This
+     includes commands such as @...PROMPT, @...SAY, and ?, and functions such
+     as ACHOICE(), DBEDIT(), and MEMOEDIT().
+
+     <B>Enhanced:</B> The enhanced setting governs highlighted displays.  This
+     includes GETs with INTENSITY ON, and the MENU TO, DBEDIT(), and
+     ACHOICE() selection highlight.
+
+     <B>Border:</B> The border is an area around the screen that cannot be
+     written to.
+
+     <B>Background:</B> The background is not supported.
+
+     <B>Unselected:</B> The unselected setting indicates input focus by
+     displaying the current GET in the enhanced color while other GETs are
+     displayed in the unselected color.
+
+     In addition to colors, foreground settings can have high intensity
+     and/or blinking attributes.  With a monochrome display, high intensity
+     enhances brightness of painted text.  With a color display, high
+     intensity changes the hue of the specified color.  For example, "N"
+     displays foreground text as black where "N+" displays the same text as
+     gray.  High intensity is denoted by "+".  The blinking attribute causes
+     the foreground text to flash on and off at rapid intervals.  Blinking is
+     denoted with "*".  The attribute character can occur anywhere in the
+     setting string, but is always applied to the foreground color regardless
+     of where it occurs.
+
+     The following colors are supported:
+
+     <B>List of Colors</B>
+     ------------------------------------------------------------------------
+     <B>Color          Letter    Monochrome</B>
+     ------------------------------------------------------------------------
+     Black          N, Space  Black
+     Blue           B         Underline
+     Green          G         White
+     Cyan           BG        White
+     Red            R         White
+     Magenta        RB        White
+     Brown          GR        White
+     White          W         White
+     Gray           N+        White
+     Bright Blue    B+        Bright Underline
+     Bright Green   G+        Bright White
+     Bright Cyan    BG+       Bright White
+     Bright Red     R+        Bright White
+     Bright Magenta RB+       Bright White
+     Yellow         GR+       Bright White
+     Bright White   W+        Bright White
+     Black          U         Underline
+     Inverse Video  I         Inverse Video
+     Blank          X         Blank
+     ------------------------------------------------------------------------
+
+ <B>Notes</B>
+
+     <B>.  Arguments are not specified:</B> Unlike SET COLOR TO, SETCOLOR()
+        with no argument does not restore colors to their default values.
+
+     <B>.  Color numbers:</B> SETCOLOR() supports color letter combinations,
+        but not color number combinations.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example assigns the current color setting to the
+        variable, cColor:
+
+        cColor:= SETCOLOR()
+
+     <B>.</B>  This example uses SETCOLOR() to save the current color setting
+        and set a new one.
+
+        cNewColor:= "BR+/N, R+/N"
+        cOldColor:= SETCOLOR(cNewColor)
+
+     <B>.</B>  This example uses SET COLOR TO to reset the default colors:
+
+        SET COLOR TO
+        ? SETCOLOR()            // Result: W/N, N/W, N, N, N/W
+
+     <B>.</B>  These two examples specify SETCOLOR() with missing settings:
+
+        // Settings left off the end
+        SETCOLOR("W/N, BG+/B")
+        //
+        // Settings skipped within the list
+        SETCOLOR("W/N, BG+/B,,,W/N")
+
+     <B>.</B>  This example uses SETCOLOR() with ISCOLOR() to set the colors,
+        depending on the screen type:
+
+        FUNCTION DefaultColors
+           IF ISCOLOR()
+              cForm := "W+/N, BG+/B,,,W/N"
+              cDialog := "N/N+, BG+/B,,,N/N+"
+              cAlert := "W+/R, BG+/B,,,W+/R"
+           ELSE
+              cForm := "W+/N, N/W,,,W/N"
+              cDialog := "W+/N, N/W,,,W/N"
+              cAlert := "W+/N, N/W,,,W/N"
+           ENDIF
+           RETURN NIL
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42381.html">ISCOLOR()</A>
+<A HREF="ng9bcee.html">SET COLOR*</A>
+<A HREF="nga506b.html">SET INTENSITY</A>
+<A HREF="ngf99ac.html">Colors</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

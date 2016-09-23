@@ -1,0 +1,110 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4c02e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng4d6c5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>REPLACE:</B>
+
+  Syntax:
+
+  <B>REPLACE &lt;idField&gt; WITH &lt;exp&gt; [,&lt;idField2&gt; WITH &lt;exp2&gt;...]</B>
+  <B>        [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]</B>
+  <B>        [NOOPTIMIZE]</B>
+
+  <B>&lt;idField&gt;</B> is the name of the field variable to assign a new value. If
+  &lt;idField&gt; is prefaced with an alias, the assignment takes place in the
+  designated work area.
+
+  <B>&lt;exp&gt;</B> is the value to assign to &lt;idField&gt;.
+
+  <B>&lt;scope&gt;</B> is the portion of the current database file to REPLACE. The
+  default is the current record, or NEXT 1.  Specifying a condition changes
+  the default to ALL records in the current work area.  Mach SIx will only
+  optimize the ALL scope.
+
+  <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the condition
+  from the current record until the condition fails.  Mach SIx does not
+  support the WHILE condition.
+
+  <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to REPLACE
+  within the given scope.  Mach SIx will optimize any FOR condition, that
+  contains one or more active index keys.
+
+  <B>NOOPTIMIZE</B>, preempts optimization and forces default Clipper processing.
+
+  <B>Description:</B>
+
+  REPLACE is a database command that assigns new values to the contents of
+  one or more field variables in the current record in the specified work
+  areas.  The target field variables can be character, date, logical, memo,
+  or numeric.  REPLACE performs the same function as the assignment (:=)
+  operator except that it assumes that an unaliased reference is to a field
+  variable.  This means that you can assign new values to field variables
+  using assignment statements provided that the field variable references are
+  prefaced with an alias, the FIELD alias, or declared using the FIELD
+  declaration statement.
+
+  The default scope of REPLACE is the current record unless a scope or
+  condition is specified.  If a scope or condition is specified, the replace
+  operation is performed on each record matching the scope and/or condition.
+
+  The REPLACE command my be optimized by specifying one or more active index
+  keys in the FOR condition.  Note that Mach SIx will only optimize the
+  REPLACE command when use with a FOR condition and a SCOPE of ALL.  WHILE
+  conditions, and alternate scopes cannot be optimized by Mach SIx.
+
+  -----------------------------------------------------------------------
+  Warning:
+
+  When you REPLACE a key field, the index is updated and the relative
+  position of the record pointer within the index is changed.  This means
+  that REPLACEment of a key field with a scope or a condition may yield an
+  erroneous result.  To update a key field, SET ORDER TO 0 before the
+  REPLACE.  This insures that the record pointer moves sequentially in
+  natural order.  All open indexes, however, are updated if the key field
+  is REPLACEd.
+  -----------------------------------------------------------------------
+
+  In a network environment, a REPLACE of the current record requires an
+  RLOCK().  A REPLACE with a scope and/or condition requires an FLOCK()
+  or EXCLUSIVE USE of the current database file.  If a field is being
+  REPLACEd in another work area by specifying its alias, that record must
+  also be locked with an RLOCK(). Refer to the Network Programming
+  chapter in Clipper's Programming and Utilities book for more information.
+
+  <B>---------------------------------| EXAMPLE |--------------------------------</B>
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates optimized REPLACE command                                 *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX.CH"
+
+  USE Account VIA "SIXCDX"  // Structural index ACCOUNT.CDX opened
+                            // automatically
+  CLEAR SCREEN
+  ? "Example of an optimized REPLACE command."
+  ?
+
+  // Set order to 0 to enhance performance, and prevent erroneous
+  // results replacing a controlling index key value.
+  SET ORDER TO 0
+
+  // Fully optimized update of Account numbers, for North Carolina
+  <B>REPLACE AcctNo WITH AcctNo + 1000000 FOR State = "NC"</B>
+  CLOSE ALL
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

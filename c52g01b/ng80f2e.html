@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng80787.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng81504.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COPY FILE</B>
+ Copy a file to a new file or to a device
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>COPY FILE &lt;xcSourceFile&gt; TO &lt;xcTargetFile&gt;|&lt;xcDevice&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcSourceFile&gt;</B> is the name of the source file to COPY including the
+     extension.
+
+     <B>&lt;xcTargetFile&gt;</B> is the name of the target file including the
+     extension.
+
+     Both arguments can be specified as literal filenames or as character
+     expressions enclosed in parentheses.  COPY FILE supplies no default
+     extensions.
+
+     <B>&lt;xcDevice&gt;</B> is the name of the device where all subsequent output
+     will be sent.  You can specify a device name as a literal character
+     string or a character expression enclosed in parentheses.  Additionally,
+     a device can be either local or network.  If you COPY TO a non-existing
+     device you create a file with the name of the device.  When specifying
+     device names, do not use a trailing colon.
+
+ <B>Description</B>
+
+     COPY FILE is a file command that copies files to and from the CA-Clipper
+     default drive and directory unless you specify a drive and/or path.  If
+     the &lt;xcTargetFile&gt; exists, it is overwritten without warning or error.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example copies a file to a new file and then tests for
+        the existence of the new file:
+
+        COPY FILE Test.prg TO Real.prg
+        ? FILE("Real.prg")                  // Result: .T.
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8258a.html">COPY TO</A>
+<A HREF="ng943cc.html">RENAME</A>
+<A HREF="ng9f58d.html">SET DEFAULT</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

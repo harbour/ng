@@ -1,0 +1,109 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8cf5b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="ng8e457.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LABEL FORM</B>
+ Display labels to the console
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LABEL FORM &lt;xcLabel&gt;</B>
+     <B>   [TO PRINTER] [TO FILE &lt;xcFile&gt;] [NOCONSOLE]</B>
+     <B>   [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]</B>
+     <B>   [SAMPLE]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcLabel&gt;</B> is the name of the label (.lbl) file that contains the
+     FORM definition of the LABEL and can be specified either as a literal
+     filename or as a character expression enclosed in parentheses.  If an
+     extension is not specified (.lbl) is assumed.
+
+     <B>TO PRINTER</B> echoes output to the printer.
+
+     <B>TO FILE &lt;xcFile&gt;</B> echoes output to &lt;xcFile&gt;.  Specify &lt;xcFile&gt; as a
+     literal filename or as a character expression enclosed in parentheses.
+     If an extension is not specified, (.txt) is added.
+
+     <B>NOCONSOLE</B> suppresses all LABEL FORM output to the console.  If not
+     specified, output automatically displays to the console unless SET
+     CONSOLE is OFF.
+
+     <B>&lt;scope&gt;</B> is the portion of the current database file to display
+     labels.  The default is ALL records.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies to LABEL FORM, the conditional set of
+     records within the given scope.
+
+     <B>SAMPLE</B> displays test labels as rows of asterisks.  Each test label
+     has the same number of columns and rows as the label definition.  Then,
+     following each test label display, is the query, "Do you want more
+     samples?"  Answering "Y" forces another test label display.  Answering
+     "N" causes LABEL FORM to display the actual labels for the specified
+     scope and condition.
+
+ <B>Description</B>
+
+     LABEL FORM is a console command that sequentially accesses records in
+     the current work area, displaying labels using a definition stored in a
+     (.lbl) file.  Create the (.lbl) using RL.EXE or by dBASE III PLUS.
+     Refer to the Report and Label Utility chapter in the Programming and
+     Utilities guide for more information about creating label definitions.
+
+     When invoked, output is sent to the screen, and optionally, to the
+     printer and/or a file.  To suppress output to the screen while printing
+     or echoing output to a file, SET CONSOLE OFF before invocation of LABEL
+     FORM.
+
+     When invoked, LABEL FORM searches the current SET PATH drive and
+     directory, if the &lt;xcLabel&gt; file is not found in the current directory,
+     and the path is not specified.
+
+ <B>Notes</B>
+
+     <B>.  Interrupting LABEL FORM:</B> To interrupt a LABEL FORM, use
+        INKEY() as a part of the FOR condition, to test for an interrupt key
+        press.  See the example below.
+
+     <B>.  Printer margin:</B> LABEL FORM obeys the current SET MARGIN for
+        output echoed to the printer.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example prints a set of labels and writes them to a file
+        with a single command.  Two forms of the command are shown:
+
+        LOCAL cLabel := "Sales", cFile := "Sales"
+        USE Sales INDEX Sales NEW
+        LABEL FORM Sales TO PRINTER TO FILE Sales
+        LABEL FORM (cLabel) TO PRINTER TO FILE (cFile)
+
+     <B>.</B>  This example interrupts LABEL FORM using INKEY() to test if
+        the user pressed the Esc key:
+
+        #define K_ESC  27
+        USE Sales INDEX Sales NEW
+        LABEL FORM Sales WHILE INKEY() != K_ESC
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9588b.html">REPORT FORM</A>
+<A HREF="nga7dcb.html">SET PRINTER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

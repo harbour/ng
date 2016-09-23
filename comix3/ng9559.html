@@ -1,0 +1,83 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9110.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng9b48.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlHasMaybe()</B>          Determine if the RecordList has any Maybe's
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlHasMaybe(rl) -&gt; lHasMaybe
+
+<B>Arguments</B>
+
+    rl is the RecordList for which the Maybe test is being performed.
+
+<B>Returns</B>
+
+    rlHasMaybe() returns .T. if rl has any Maybe's, .F. otherwise.
+
+<B>Description</B>
+
+    rlHasMaybe() returns whether or not the given RecordList has any
+    Maybe's.
+
+    The only place you can get Maybe's is from rlNewQuery() being passed a
+    condition which is not fully optimizable.
+
+<B>Example</B>
+
+    *   Age is the only index
+    use demo index age
+
+    rl := rlNewQuery("age &lt; 25")
+<B>    ? rlHasMaybe(rl)                    &amp;&amp; .F. (fully optimizable condition)</B>
+    rlDestroy(rl)
+
+    rl := rlNewQuery("age &lt; 25 .and. salary &lt;= 25000")
+<B>    ? rlHasMaybe(rl)                    &amp;&amp; .T. (NOT fully optimizable because</B>
+                                        &amp;&amp; we don't have an index no Salary)
+
+    *   Set up a RecordList which has only the Maybe's
+    *
+    *   NOT Maybe is still Maybe so an rl AND'd with a NOT of itself will
+    *   will have only Maybe's left
+    *
+    *   Truth Table:
+    *
+    *   rl      NOT rl      (rl) AND (NOT rl)
+    *   --      ------      -----------------
+    *   No      Yes         No
+    *   Maybe   Maybe       Maybe &lt;-- only these remain
+    *   Yes     No          No
+    *
+    rlMaybe := rlAnd(rlNewDup(rl), rlNot(rlNewDup(rl)))
+
+    *   Say how many Maybe's there are
+    ? "There are ", rlCount(rlMaybe), " maybe's"
+
+    rlDestroy(rlMaybe)                  &amp;&amp;  Now clean up
+    rlDestroy(rl)
+
+<B>See Also</B>
+
+    rlMaybeEval(), rlNewQuery()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9b48.html">rlMaybeEval()</A>
+<A HREF="ngc16d.html">rlNewQuery()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,115 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng234ed.html">[^^Up^^]</A>
+<A HREF="ng24459.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Symbol Class Overview</B>
+------------------------------------------------------------------------------
+
+    The Symbol class allows messages to be treated as objects.  This allows
+    messages to be sent to an object without hard-coding the name of the
+    message to be sent.
+
+    The following code fragment illustrates how the Symbol class can be
+    used.  It allows the user to select a message from an array of message
+    strings, and sends the selected message to the <B>self</B> object.
+
+    METHOD move( nDistance )
+        LOCAL i, nOpt, oMsg
+        LOCAL acMessages := { "goNorth", "goSouth", "goEast", "goWest" }
+
+        // Display a menu of the messages available
+        // A 2-D array would allow us to map more readable prompts to the
+        // message names, but this is not necessary for this example
+        CLEAR
+        FOR i := 1 TO 4
+            @ i, 0 PROMPT acMessages[i]
+        NEXT i
+
+        // allow user to select a message
+        MENU TO nOpt
+
+        IF nOpt &lt;&gt; 0
+            // create a Symbol object referring to the selected message
+            oMsg := Symbol():new( acMessages[nOpt] )
+
+            // using the predefined <B>perform</B> message, send the selected
+            // message to <B>self</B> with one parameter, <B>nDistance</B>.
+            self:perform( oMsg, nDistance )
+        ENDIF
+    RETURN
+
+    As can be seen in the above example, the Symbol class is designed to
+    work with the predefined <B>perform</B> message (see also).
+
+    The Symbol class is very useful when designing data driven (or table
+    driven) systems.  It allows message names to be stored in data files
+    and manipulated like any other data, but still to be sent to objects as
+    messages when necessary.
+
+    The reason the class is called <B>Symbol</B> as opposed to <B>Message</B> is
+    that each Symbol object corresponds to an entry in the Clipper symbol
+    table.  It can be used for purposes other than sending messages.  The
+    Symbol <B>exec</B> method is an example of this, causing the function with
+    the same name as the receiving Symbol object to be executed.
+
+    A special feature of the Symbol class is that it does not require that
+    symbol names be specified as a string.  For example, to create a Symbol
+    object referring to a message called <B>foo</B>, we can use either of the
+    following two syntaxes:
+
+        oMsg := Symbol():new( "foo" )
+    or:
+        oMsg := Symbol():foo()
+
+    Even though <B>foo</B> is not a message in the Symbol class, whenever the
+    Symbol class is sent a message it does not recognize, it reacts by
+    returning a Symbol object referring to that message.  The only message
+    for which this will not work is <B>new, since it is defined as a Symbol</B>
+    class message.  To obtain a Symbol object referring to the <B>new</B>
+    message, use:
+
+        oMsg := Symbol():new( "new" )
+
+    The ability to create symbols without requiring strings can be useful
+    in examples like the one given earlier.  We could create an array of
+    Symbol objects and corresponding menu descriptions as follows:
+
+        aMenu := { { "Move North", Symbol():goNorth() }, ;
+                   { "Move South", Symbol():goSouth() }, ;
+                   { "Move West",  Symbol():goWest()  }, ;
+                   { "Move East",  Symbol():goEast()  } }
+
+    Since we know the names of the messages we want (ie. they are not
+    coming from a data file), we have included them directly in the program
+    code above, rather than storing them in character strings.  We could
+    then use the above array as follows:
+
+        FOR i := 1 to LEN(aMenu)
+            @ i, 0 PROMPT aMenu[i][1]
+        NEXT i
+
+        MENU TO nOpt
+
+        self:perform( aMenu[i][2], nDistance )
+
+    The Symbol class has many possible uses.  A file is provided on the
+    Class(y) distribution disk called SYMTEST.PRG which demonstrates some
+    more esoteric ways to use the class.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2478e.html">new()</A>
+<A HREF="ng1498e.html">perform</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

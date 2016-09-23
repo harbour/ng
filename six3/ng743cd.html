@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng74032.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6dbf4.html">[^^Up^^]</A>
+<A HREF="ng74abf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Debugging:</B>
+
+  Use of HiPer-SEEK can generally be broken into three main parts: Building
+  the index, searching the index, and verifying the index returns. If
+  problems arise, the HiPer-SEEK related code should be examined in that
+  order.
+
+  To build a valid HiPer-SEEK index -- unless you're simply using
+  hs_Index() -- you should make sure that the string passed to hs_Add() is
+  in fact a string (no numeric types), trim the string right before passing
+  it to hs_Add() or hs_Index(), set order to 0 (so the index is built in
+  the natural order of the primary .DBF) and set deleted off (so deleted
+  records are included).  The HiPer-SEEK index file should contain one
+  record for each record in the primary .DBF. The number of records in a
+  HiPer-SEEK index can be calculated like this:
+
+    <B>Number_of_Records == (File_Size - 512)/Index_Key_Size</B>
+
+    <B>Example: 1000 == (32512 - 512)/32</B>
+
+  On the search side, first determine if hs_Next() is returning valid
+  numbers.  If not, and you have determined that the index file is good,
+  examine the code that gets the search string and passes it to hs_Set().
+  Remember to trim it right before hs_Set().
+
+  If hs_Next() is returning good values, then examine the verification
+  procedure. Be sure the source and target values are constructed properly.
+  Check again that the index was built in natural order and that it
+  contains entries for all the .DBF records. When this is not the case, the
+  number returned by hs_Next() will not correspond the correct record
+  number, hs_Verify() will receive the source value from the wrong record
+  and the it will only satisfy the verification process by coincidence.
+  Most problems are related to simple logic errors and are easily
+  corrected.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

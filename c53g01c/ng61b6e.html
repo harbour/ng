@@ -1,0 +1,99 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6147b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng62a06.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>INKEY()</B>
+ Extract a character from the keyboard buffer or a mouse event
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>INKEY([&lt;nSeconds&gt;] [,&lt;nEventMask&gt;]) --&gt; nInkeyCode</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nSeconds&gt;</B> specifies the number of seconds INKEY() waits for a
+     keypress or mouse event.  You can specify the value in increments as
+     small as one-tenth of a second.  Specifying zero halts the program until
+     a key is pressed or an unmasked event occurs.  If &lt;nSeconds&gt; is omitted,
+     INKEY() does not wait for a keypress or mouse event.
+
+     <B>&lt;nEventMask&gt;</B> specifies which events should be returned.  If
+     &lt;nEventMask&gt; is omitted, the value represented by the
+     SET EVENTMASK command will be used.  If there is no
+     SET EVENTMASK command issued, the default value that will be used is 128
+     (keyboard events only).
+
+     This parameter can be any combination of the following values.  The
+     constant values listed below are defined in Inkey.ch.
+
+     <B>Inkey Constants</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Value     Descripiton</B>
+     ------------------------------------------------------------------------
+     INKEY_MOVE     1         Mouse Events
+     INKEY_LDOWN    2         Mouse Left Click Down
+     INKEY_LUP      4         Mouse Left Click Up
+     INKEY_RDOWN    8         Mouse Right Click Down
+     INKEY_RUP      16        Mouse Right Click Up
+     INKEY_KEYBOARD 128       Keyboard Events
+     INKEY_ALL      159       All Mouse and Keyboard Events
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     INKEY() returns an integer value from -39 to 386 for keyboard events and
+     integer values from 1001 to 1007 for mouse events.  This value
+     identifies either the key extracted from the keyboard buffer or the
+     mouse event that last occurred.  If the keyboard buffer is empty, and no
+     mouse events are taking place, INKEY() returns 0.  INKEY() returns
+     values for all ASCII characters, function, Alt+Function, Ctrl+Function,
+     Alt+Letter, and Ctrl+Letter key combinations.
+
+ <B>Description</B>
+
+     INKEY() is a keyboard function that extracts the next key pending in the
+     keyboard buffer or the next mouse event and returns a value representing
+     the appropriate event.  The value is also saved internally and can be
+     accessed using LASTKEY().  If the &lt;nSeconds&gt; argument is specified and
+     there are no pending keys in the buffer, program execution pauses until
+     a key appears in the keyboard buffer, or an appropriate mouse event
+     occurs, or &lt;nSeconds&gt; has elapsed.  The time INKEY() waits is based on
+     the operating system clock and is not related to the microprocessor
+     speed.  If &lt;nSeconds&gt; is zero, program execution pauses until a key is
+     pressed or an unmasked mouse event occurs.  Note that INKEY() is not a
+     wait state and, therefore, SET KEYs are not active.
+
+     INKEY() is similar to the NEXTKEY() function.  Unlike INKEY(), however,
+     NEXTKEY() reads, but does not extract the key or mouse event.  This is
+     useful when you need to test for a key or mouse event without processing
+     it.
+
+     INKEY() is the basic primitive of the CA-Clipper system for fetching
+     keys and mouse events.  It is used for polling the keyboard, polling the
+     mouse, or pausing program execution.  As an example, you can use INKEY()
+     to terminate commands with a record scope such as LIST, LABEL FORM, and
+     REPORT FORM by including it in a WHILE condition.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example will inform INKEY() to terminate if the
+        left mouse button has been clicked or the right mouse button has been
+        clicked.  If no events of this type occur within 10 seconds, INKEY()
+        will terminate.
+
+        ? INKEY( 10 , INKEY_LDOWN + INKEY_RDOWN )
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

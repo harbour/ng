@@ -1,0 +1,51 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5aeda.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng561bb.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SIX???/690  Cannot open structural index</B>
+
+  <B>Problem:</B>  Two things usually cause this error:
+
+             1.  The database file used to have a structural .CDX/.NSX file,
+                 and it has been deleted.
+
+             2.  Another user on the network has just built the .CDX/.NSX
+                 file, and it still has a file lock active.
+
+
+  <B>Solution:</B>  Respective to the problems listed above:
+
+             1.  Rebuild the .CDX/.NSX file.
+
+             2.  After creating a structural .CDX/.NSX file on a network,
+                 you should close and reopen the database file to unlock
+                 the newly-created .CDX/.NSX file.  This will allow other
+                 network users to access the new index file.
+
+
+  <B>NOTE:</B>  This is not a fatal error.  Of the three options you have when
+         this error comes up, if you select QUIT, you'll drop to DOS.  If
+         you select RETRY, it will try to open the .CDX/.NSX file again.  If
+         you select DEFAULT, it will forget about trying to open the index
+         file and will just open the database file without it.
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3afa4.html">Sx_StrxCheck()</A>
+<A HREF="ng202c9.html">Sx_AutoOpen()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

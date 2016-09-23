@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng552df.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng55ac6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>packRec()</B>
+ Copy a single row back to the current work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE packRec(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     LONG lRecno,</B>
+     <B>                     USHORTP lpfWritten</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lRecno</B> is the number of a record which has to remain within the
+     file.
+
+     <B>lpfWritten</B> is a pointer to a boolean flag indicating whether the
+     record will remain within the file.
+
+ <B>Description</B>
+
+     packRec() copies a single row back to the work area and is called from
+     within the pack() method.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Within the pack() method, call packRec() for each single row
+        that you want to copy back to the original database file.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng552df.html">pack()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

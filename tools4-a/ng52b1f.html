@@ -1,0 +1,87 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng52317.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng5340d.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETQSTAT()</B>
+ Sets or reads a print queue status
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETQSTAT(&lt;cQueue&gt;,[&lt;nStatus&gt;],[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; nStatus</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is processed.
+
+     <B>&lt;nStatus&gt;</B>  Designates an optional parameter that sets the queue
+     status.  &lt;nStatus&gt; must be passed as a bit-coded value according to
+     table 25.3.  To change more attributes, the decimal values of the
+     required definitions must be added.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETQSTAT() returns a bit-coded value which describes the queue status.
+     The following table contains the definitions of the bits:
+
+     <B>Table 25.3:  Queue Status Coding </B>
+     ------------------------------------------------------------------------
+     <B>Bit     Value     Definition</B>
+     ------------------------------------------------------------------------
+     2       2         No new jobs can be added to queue.
+     3       4         Currently, no further print servers can be logged in
+                       at queue currently.
+     5       16        No jobs are being serviced in queue currently
+     ------------------------------------------------------------------------
+
+     If an error occurs (for example, if &lt;cQueue&gt; does not exist), the
+     function returns -1.
+
+ <B>Description</B>
+
+     NOVELL NET QUEUE STATUS
+     NNETQSTAT() allows you not only to query, but also to set a new queue
+     status.  For example, this can be used to stop the print output for a
+     queue temporarily.  To change the queue status, the requesting user must
+     have access to the queue as an operator.
+
+ <B>Note</B>
+
+     <B>.</B>  This function requires that the requesting user have access to
+        the queue as a user or an operator.
+
+ <B>Examples</B>
+
+     <B>.</B>  Check to see if jobs can be added to the queue LINEPRINTER:
+
+        IF ISBIT(NNETQSTAT('LINEPRINTER'),2)
+        ? 'No new jobs can be added!'
+        ELSE
+        ? 'New jobs can be added!'
+        ENDIF
+
+     <B>.</B>  Prevent the servicing of jobs in the queue LINEPRINTER:
+
+        NNETQSTAT('LINEPRINTER',16)
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

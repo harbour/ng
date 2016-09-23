@@ -1,0 +1,121 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga506b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="nga6392.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET KEY</B>
+ Assign a procedure invocation to a key
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET KEY &lt;nInkeyCode&gt; TO [&lt;idProcedure&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nInkeyCode&gt;</B> is the INKEY() value of the key that receives the
+     assignment.
+
+     <B>TO &lt;idProcedure&gt;</B> specifies the name of a procedure that executes
+     when the user presses the assigned key.  If &lt;idProcedure&gt; is not
+     specified, the current &lt;nInkeyCode&gt; definition is released.
+
+ <B>Description</B>
+
+     SET KEY is a keyboard command that allows a procedure to be executed
+     from any wait state when a designated key is pressed.  A wait state is
+     any mode that extracts keys from the keyboard except for INKEY().  These
+     modes include ACHOICE(), DBEDIT(), MEMOEDIT(), ACCEPT, INPUT, READ and
+     WAIT.  After a key is redefined, pressing it executes the specified
+     procedure, passing three automatic parameters corresponding to:
+     PROCNAME(), PROCLINE(), and READVAR().  The procedure and variable
+     parameters are character data type, while the line number is numeric
+     data type.
+
+     You may define a maximum of 32 keys at one time.  At startup, the system
+     automatically defines the F1 key to execute Help.  If a procedure with
+     this name is linked into the current program and it is visible, pressing
+     F1 from a wait state invokes it.
+
+     Note that SET KEY procedures should preserve the state of the
+     application (i.e., screen appearance, current work area, etc.) and
+     restore it before exiting.
+
+     <B>Warning! </B> In CA-Clipper, SET FUNCTION is preprocessed into the SET
+     KEY and KEYBOARD commands.  This means that SET FUNCTION has the effect
+     of clearing any SET KEY for the same key number and vice versa.  This is
+     incompatible with previous releases, which maintained separate lists of
+     SET FUNCTION keys and SET KEY keys.
+
+ <B>Notes</B>
+
+     <B>.  Precedence:</B> SET KEY definitions take precedence over SET
+        ESCAPE and SETCANCEL().
+
+     <B>.  CLEAR with a SET KEY procedure:</B> Do not use CLEAR to clear the
+        screen within a SET KEY procedure since it also CLEARs GETs and,
+        therefore, terminates READ.  When you need to clear the screen, use
+        CLEAR SCREEN or CLS instead.
+
+     <B>.  Terminating a READ from a SET KEY procedure:</B> The following
+        table illustrates several ways to terminate a READ from within a SET
+        KEY procedure.
+
+        <B>Terminating a READ from a SET KEY Procedure</B>
+        ---------------------------------------------------------------------
+        <B>Command             Action</B>
+        ---------------------------------------------------------------------
+        CLEAR GETS          Terminates READ without saving current GET
+        BREAK               Terminates READ without saving current GET
+        KEYBOARD Ctrl-W     Terminates READ and saves the current GET
+        KEYBOARD Esc        Terminates READ without saving current GET
+        ---------------------------------------------------------------------
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses SET KEY to invoke a procedure that presents
+        a picklist of account identification numbers when the user presses F2
+        while entering data into the account identification field:
+
+        #include   "Inkey.ch"
+
+        //
+        SET KEY K_F2 TO ScrollAccounts
+        USE Accounts NEW
+        USE Invoices NEW
+        @ 10, 10 GET Invoices-&gt;Id
+        READ
+        RETURN
+
+        PROCEDURE ScrollAccounts( cProc, nLine, cVar )
+           IF cVar = "ID"
+              SAVE SCREEN
+              Accounts-&gt;(DBEDIT(10, 10, 18, 40, {"Company"}))
+              KEYBOARD CHR(K_CTRL_Y) + Accounts-&gt;Id + ;
+                       CHR(K_HOME)
+              RESTORE SCREEN
+           ELSE
+              TONE(100, 2)
+           ENDIF
+           RETURN
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Inkey.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40fd0.html">INKEY()</A>
+<A HREF="ng8cf5b.html">KEYBOARD</A>
+<A HREF="ng91542.html">READ</A>
+<A HREF="ng6547d.html">SETKEY()</A>
+<A HREF="ngf8bf1.html">Inkey codes</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

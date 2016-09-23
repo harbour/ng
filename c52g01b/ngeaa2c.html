@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge9124.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nge63b8.html">[^^Up^^]</A>
+<A HREF="ngeaf9e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBAPPEND() function</B>
+ Append a new record to the database open in the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     DBAPPEND(<B>[&lt;lReleaseRecLocks&gt;]</B>) --&gt; NIL
+
+ <B>Arguments</B>
+
+     <B>&lt;lReleaseRecLocks&gt;</B>  is a logical data type that if true (.T.),
+     clears all pending record locks, then appends the next record.  If
+     &lt;lReleaseRecLocks&gt; is false (.F.), all pending record locks are
+     maintained and the new record is added to the end of the Lock List.  The
+     default value of &lt;lReleaseRecLocks&gt; is true (.T.).
+
+ <B>Returns</B>
+
+     DBAPPEND() always returns NIL.
+
+ <B>Description</B>
+
+     DBAPPEND() is a database function that lets you add records to the
+     current database.  The enhancement to this function lets you maintain
+     multiple record locks during an append.
+
+     DBAPPEND(), without a parameter, as in earlier versions of CA-Clipper,
+     clears all pending record locks prior to an append.  This is the same as
+     DBAPPEND(.T.).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example appends a blank record to the database, Sales,
+        without releasing the record locks in the current Lock List, then
+        checks for a network error:
+
+        USE Sales NEW
+        SET INDEX TO Sales
+
+        DBAPPEND(.F.)
+
+        IF NETERR()
+           ? "A network error has occurred!"
+        ENDIF
+
+ <B>Status:</B>  Enhanced
+
+ <B>See also:</B>  APPEND BLANK
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7af04.html">APPEND BLANK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

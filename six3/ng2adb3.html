@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2aa8b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng2b0ce.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_IndexType():</B>
+
+  Syntax:   Sx_IndexType( [nOrder | cIndexName] )
+
+            nOrder     = The index order
+            cIndexName = The index name
+
+  Returns:  Numeric value as follows:
+
+             <B>*</B>  1 = Non-Compact IDX
+               2 = Compact IDX or a single-tag NSX
+               3 = Compound (CDX or NSX)
+
+             (<B>*</B>  This format is no longer supported by the SIx Driver.)
+
+  Description:  This function returns a numeric value signifying the type
+                of the current or specified index.
+
+    NOTE:  This function is NOT supported under SIXNTX.
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX"
+
+    INDEX ON test-&gt;AGE TO AGE                 // Creates AGE.IDX
+    ? <B>Sx_IndexType()</B>                          // 2
+
+    INDEX ON test-&gt;STATE TAG STATE            // Creates TEST.CDX
+    ? <B>Sx_IndexType()</B>                          // 3
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2aa8b.html">Sx_IndexName()</A>
+<A HREF="ng3c65e.html">Sx_TagInfo()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

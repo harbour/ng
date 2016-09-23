@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga0ac4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng89afa.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>VOLUME()</B>
+ Establishes a volume label for a floppy or hard disk
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>VOLUME(&lt;cDiskName&gt;) --&gt; lEstablished</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cDiskName&gt;</B>  Designates a name to use on a new volume label.  A
+     drive designation is allowed; path designation and wildcards are not.
+
+ <B>Returns</B>
+
+     VOLUME() returns .T. when the new volume entry is created.
+
+ <B>Description</B>
+
+     DOS provides a volume label as a disk identifier.  With the VOLUME()
+     function you can establish this label.  There is never more than one
+     label per floppy or hard disk.  A volume label can be up to 11
+     characters long, but when you use a period (.) it must always follow the
+     eighth character.
+
+     You can query the volume label with FILESEEK(), since the value 8 is
+     assigned as the volume attribute.
+
+ <B>Notes</B>
+
+     <B>.</B>  A new volume label is always created in the root directory.
+
+     <B>.</B>  The function acknowledges the CSETSAFETY() setting and, if
+        necessary, does not overwrite an existing label.
+
+ <B>Examples</B>
+
+     <B>.</B>  Establish a volume label for A: drive:
+
+     <B>.</B>  Query the A: drive volume label:
+
+        ? FILESEEK("A:\*.*", 8)      // Based on example 1 "VOLO815"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng97ad4.html">FILESEEK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

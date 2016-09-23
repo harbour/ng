@@ -1,0 +1,116 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2eae5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2980a.html">[^^Up^^]</A>
+<A HREF="ng2fc83.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_fsOpen()</B>
+ Open a file
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "filesys.api"</B>
+     <B>FHANDLE _fsOpen(</B>
+     <B>                     BYTEP fpFilename,</B>
+     <B>                     USHORT uiFlags</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>fpFilename</B> is the name of the file to open specified as a null-
+     terminated string.  The fpFilename must be fully qualified, including
+     the drive letter, path, and extension.
+
+     <B>uiFlags</B> contains the file open attribute bits that indicate how the
+     file is to be opened.  The following constants are defined for uiFlags:
+
+     <B>Access Flags</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Flag      Description</B>
+     ------------------------------------------------------------------------
+     FO_READ        0x0000    File is opened for reading
+     FO_WRITE       0x0001    File is opened for writing
+     FO_READWRITE   0x0002    File is opened for reading and writing
+     ------------------------------------------------------------------------
+
+     <B>Sharing Flags</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Flag      Description</B>
+     ------------------------------------------------------------------------
+     FO_COMPAT      0x0000    No sharing specified
+     FO_COMPAT      0x0000    No sharing specified
+     FO_EXCLUSIVE   0x0010    Subsequent attempts to open the file are not
+                              allowed
+     FO_DENYWRITE   0x0020    Deny subsequent attempts to open the file for
+                              writing
+     FO_DENYREAD    0x0030    Deny subsequent attempts to open the file for
+                              reading
+     FO_DENYNONE    0x0040    Do not deny subsequent attempts to open the
+                              file in shared mode
+     FO_SHARED      0x0040    Same as FO_DENYNONE
+     ------------------------------------------------------------------------
+
+     <B>Inheritance Flags</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Flag      Description</B>
+     ------------------------------------------------------------------------
+     FO_INHERITED   0x0000    Spawned processes can inherit
+     FO_PRIVATE     0x0080    Spawned processes cannot inherit
+     ------------------------------------------------------------------------
+
+     To specify multiple flags, combine them with the bitwise OR operator
+     (e.g., FO_READWRITE | FO_EXCLUSIVE | FO_INHERITED).
+
+ <B>Returns</B>
+
+     _fsOpen() returns a DOS handle to the newly created file or FS_ERROR, if
+     an error occurs.
+
+ <B>Description</B>
+
+     This function opens the file specified by fpFilename.  The value of the
+     specified uiFlags determines the mode in which the file is opened.
+     _fsOpen() is equivalent to the CA-Clipper function FOPEN().
+
+ <B>Examples</B>
+
+     <B>.</B>  The following code fragment illustrates the use of _fsOpen().
+        Note that error handling should be performed at each step.  Refer to
+        the "Error System API Reference" chapter of this guide for details on
+        communicating with the CA-Clipper Error system:
+
+        #include "filesys.api"
+
+        FHANDLE hFile;
+
+        hFile = _fsOpen( "Foo", FO_READWRITE | FO_EXCLUSIVE );
+
+        // Check for an open error before using the file
+        if (! _fsError() )
+        {
+           .
+           .
+           .
+           _fsClose( hFile );
+        }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Filesys.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2a328.html">_fsClose()</A>
+<A HREF="ng2abaa.html">_fsCreate()</A>
+<A HREF="ng2bee3.html">_fsError()</A>
+<A HREF="ng2c5cd.html">_fsExtOpen()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

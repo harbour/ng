@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng28243.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng206af.html">[^^Up^^]</A>
+<A HREF="ng28b88.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_errRelease()</B>
+ Destroy an Error object
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "error.api"</B>
+     <B>void _errRelease(</B>
+     <B>                  ERRORP pError</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>pError</B> is a pointer to the Error object to be destroyed.
+
+ <B>Returns</B>
+
+     _errRelease() has no return value.
+
+ <B>Description</B>
+
+     _errRelease() destroys the Error object pError and releases the memory
+     used by it.
+
+     <B>Warning! </B> _errRelease() does not release memory referenced by the
+     pointers it contains.  You as the subsystem programmer must free this
+     memory as necessary.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code fragment shows the destruction of an Error object:
+
+        #include "error.api"
+           ERRORP pError;
+           pError = _errNew();
+           .
+           .
+           .
+           _errRelease( pError );
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Error.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng23805.html">_errLaunch()</A>
+<A HREF="ng24258.html">_errNew()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

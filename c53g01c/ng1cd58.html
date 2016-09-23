@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1c934.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng1d18b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBCLEARINDEX()</B>
+ Close all indexes for the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBCLEARINDEX() --&gt; NIL</B>
+
+ <B>Returns</B>
+
+     DBCLEARINDEX() always returns NIL.
+
+ <B>Description</B>
+
+     DBCLEARINDEX() closes any active indexes for the current work area.  Any
+     pending index updates are written and the index files are closed.
+
+     DBCLEARINDEX() performs the same function as the standard SET INDEX
+     command with no indexes specified.  For more information, refer to the
+     SET INDEX command.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example clears index files if any are set:
+
+        cFirst := "Winston"
+        DBUSEAREA( .T., "DBFNTX", "Sales", "Sales", .T. )
+        DBSETINDEX( "FIRSTNAM" )
+        DBSETINDEX( "LASTNAME" )
+        //
+        IF INDEXORD() &gt; 0               // is there an index?
+           DBCLEARINDEX()               // clear index files
+        ELSE
+           COPY TO FILE TEMP SDF      // copy to SDF in natural
+        ENDIF                           // order
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1fd41.html">DBCREATEIND()</A>
+<A HREF="ng2db8d.html">DBREINDEX()</A>
+<A HREF="ng3228f.html">DBSETINDEX()</A>
+<A HREF="ng328c0.html">DBSETORDER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

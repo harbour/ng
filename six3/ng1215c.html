@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng11b64.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng12804.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>m6_FiltSkip():</B>
+
+  Purpose:  Positions internal filter pointer to the next record set
+            in the specified filter.  This function will not reposition the
+            database record pointer.  Think of it as a SKIP, but applied to a
+            filter.
+
+   Syntax:  m6_FiltSkip( &lt;nHandle&gt;, [&lt;nSkipCount&gt;] )
+
+    Where:  &lt;nHandle&gt;     --  Is a handle to a previously allocated
+                              filter.
+
+            &lt;nSkipCount&gt;  --  Is the number of records to skip. One is
+                              the default.  A negative values indicates
+                              a backwards skip.
+
+  Returns:  The value of the record this function positioned to.  A return
+            value of 0 indicates an error or that there are no more records in
+            the filter.
+
+     Note:  Filters are always stored in record number order. Therefore when
+            you skip forward you should expect the filter record numbers to
+            increase, and likewise decrease when you skip backwards.
+
+            *Always free RYO filters that are no longer being used.*
+  Example:
+
+         #include "SIXCDX.CH"
+         #include "MACHSIX.CH"
+
+         //.............................................use customer file
+         USE Customer via "SIXCDX"
+
+         //.............................................create RYO filter
+         nHandle := m6_NewFilter()
+
+         //......................................add records to the filter
+         ? m6_FiltAddRec( nHandle,  5 )  // .T.
+         ? m6_FiltAddRec( nHandle, 10 )  // .T.
+
+         //............................position filter pointer to record 2
+         ? m6_FiltGoRec( nHandle 2 )        //   2
+
+         //....................................skip to next filter record
+         ? <B>m6_FiltSkip( nHandle )</B>       //   5
+         ? <B>m6_FiltSkip( nHandle )</B>       //  10
+         ? <B>m6_FiltSkip( nHandle )</B>       //   0
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng159ed.html">m6_NewFilter()</A>
+<A HREF="ngdc96.html">m6_FiltAddRec()</A>
+<A HREF="ng13251.html">m6_FiltTop()</A>
+<A HREF="ng12c69.html">m6_FiltGoRec()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1c1b8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng1cc0f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>OrdNumber():</B>
+
+  Syntax:  OrdNumber( [&lt;cOrderName&gt;] [, &lt;cIndexFile&gt;] )
+
+       cOrderName = The name of the specific Order whose position in the
+                    Order List is sought.
+
+       cIndexFile = The name of the index file containing one or more Orders.
+                    You may specify &lt;cIndexFile&gt; as the filename with or
+                    without the pathname or appropriate extension.  If you do
+                    not include the extension as part of &lt;cIndexFile&gt;, the
+                    default extension of the currently active RDD is assumed.
+
+  Returns:
+
+     A numeric value indicating the position of the specified Order in the
+     Order List.
+
+  Description:
+
+     OrdNumber() is an Order management function that lets you determine the
+     position in the current Order List of the specified Order.  OrdNumber()
+     searches the Order List in the current work area and returns the
+     position of the first Order that matches &lt;cOrderName&gt;.
+
+     If &lt;cOrderName&gt; is not found OrdNumber() raises a recoverable runtime
+     error.
+
+  Example:
+
+     USE test VIA "SIXCDX"
+     SET INDEX TO last, state, age
+     ? <B>OrdNumber( "STATE" )</B>     // Returns: 2
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1cc0f.html">OrdSetFocus()</A>
+<A HREF="ng517e3.html">SET TAG / ORDER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

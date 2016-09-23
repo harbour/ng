@@ -1,0 +1,117 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2d4c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng11a0.html">[^^Up^^]</A>
+<A HREF="ng3de4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_xvheapfree()</B>
+ Free an allocated block of segment heap memory
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "vm.api"</B>
+     <B>void _xvheapfree(</B>
+     <B>                  HANDLE hSegment,</B>
+     <B>                  USHORT uiOffset</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>hSegment</B> is the VM segment handle returned by _xvheapnew().
+
+     <B>uiOffset</B> is the offset of the allocated memory block returned by
+     _xvheapalloc().
+
+ <B>Returns</B>
+
+     _xvheapfree() has no return value.
+
+ <B>Description</B>
+
+     _xvheapfree() frees a memory block previously allocated in a segment
+     heap by _xvheapalloc() and then invalidates the offset for that memory
+     block.
+
+     <B>Note: </B> _xvheapfree() only frees blocks of memory allocated within
+     the segment heap.  After all allocated blocks of memory within the
+     segment heap have been freed, use _xvheapdestroy() to free the entire
+     segment heap.
+
+     <B>Warning! </B> Do not use _xvheapfree() to free a locked memory block.
+     Unlock the memory block first using _xvheapunlock().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example creates a segment heap with _xvheapnew() and
+        allocates a memory block in the segment heap.  The block is then
+        locked and the string is copied into it.  Later, the memory block is
+        unlocked, the memory freed, and the heap destroyed:
+
+        // CA-Clipper include files
+        #include "extend.api"
+        #include "vm.api"
+
+        // Microsoft C include files
+        #include "string.h"
+
+        // Prototype
+        Boolean VMHeapExample(char * spSrc);
+
+        #define HEAP_SIZE   4096
+
+        Boolean VMHeapExample(char * spSrc)
+        {
+           HANDLE hSegment;
+           unsigned uiStringOffset;
+           unsigned uiBufflen;
+           char * spString;
+           Boolean bResult = FALSE;
+
+           if (hSegment = _xvheapnew(HEAP_SIZE))
+              {
+              uiBufflen = strlen(spSrc) + 1;
+              uiStringOffset = _xvheapalloc(hSegment, uiBufflen);
+              if (uiStringOffset)
+                 {
+                 spString = _xvheaplock(hSegment, uiStringOffset);
+                 if (spString != NULL)
+                    {
+                    strcpy(spString, spSrc);
+
+                    .
+                    . &lt;statements&gt;
+                    .
+
+                    bResult = TRUE;
+
+                    _xvheapunlock(hSegment, uiStringOffset);
+                    }
+                 _xvheapfree(hSegment, uiStringOffset);
+                 }
+              _xvheapdestroy(hSegment);
+
+              }
+
+           return (bResult);
+        }
+
+ <B>Files</B>  Library is CLIPPER.LIB, header file is Vm.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2341.html">_xvheapalloc()</A>
+<A HREF="ng2d4c.html">_xvheapdestroy()</A>
+<A HREF="ng492c.html">_xvheapnew()</A>
+<A HREF="ng59a3.html">_xvheapunlock()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

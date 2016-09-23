@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngccf74.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngc8ba2.html">[^^Up^^]</A>
+<A HREF="ngce0fd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>++</B>
+ Increment--unary                                (Mathematical)
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>++&lt;idVar&gt;         (prefix increment)</B>
+     <B>&lt;idVar&gt;++         (postfix increment)</B>
+
+ <B>Type</B>
+
+     Date, numeric
+
+ <B>Operands</B>
+
+     <B>&lt;idVar&gt;</B> is any valid CA-Clipper identifier including a field
+     variable.  If &lt;idVar&gt; is a field, it must either be prefaced with an
+     alias or declared with the FIELD statement.
+
+     The prefix increment can only be performed on an initialized value of
+     numeric or date data type.
+
+ <B>Description</B>
+
+     The increment operator (++) increases the value of its operand by one.
+     This operator adds one to the value of &lt;idVar&gt; and assigns the new value
+     to &lt;idVar&gt;.
+
+     The ++ operator can appear before or after &lt;idVar&gt;.  Specifying the
+     operator before &lt;idVar&gt; increments and assigns the value before &lt;idVar&gt;
+     is used.  This, prefix notation, is the most common usage.  Specifying
+     the operator after &lt;idVar&gt;, postfix notation, increments and assigns the
+     value after &lt;idVar&gt; is used.  Stated differently, postfix notation
+     delays the assignment portion of the operation until the rest of the
+     expression is evaluated, and prefix notation gives the assignment
+     precedence over all other operations in the expression.
+
+     If the reference to &lt;idVar&gt; is ambiguous (i.e., not declared at compile
+     time and not explicitly qualified with an alias) &lt;idVar&gt; is always
+     assumed to be MEMVAR.  You can assign field variables by declaring the
+     field variable name in a FIELD statement or referring to the field name
+     prefaced by the FIELD-&gt; alias or the name of the work area.
+
+ <B>Examples</B>
+
+     <B>.</B>  This code uses the prefix increment operator in an assignment
+        statement.  Therefore, both variables have the same value when
+        queried:
+
+        nValue := 0
+        nNewValue := ++nValue
+        ? nNewValue              // Result:   1
+        ? nValue                 // Result:   1
+
+     <B>.</B>  In this example, the postfix increment operator increases the
+        first operand of the multiplication operation by one, making its
+        value 11; however, the assignment of this new value to the nValue
+        variable will not take place until the entire expression is
+        evaluated.  Therefore, its value is still 10 when the multiplication
+        operation occurs, and the result of 11 * 10 is 110.  Finally, when
+        nValue is queried again after the expression is evaluated, the
+        postfix increment assignment is reflected in its new value, 11.
+
+        nValue := 10
+        ? nValue++ * nValue      // Result: 110
+        ? nValue                 // Result:  11
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngccf74.html">+</A>
+<A HREF="ngcea39.html">--</A>
+<A HREF="ngd1e96.html">:=</A>
+<A HREF="ngd42aa.html">= (compound)</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

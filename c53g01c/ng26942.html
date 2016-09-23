@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng25f44.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng2731e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBFILEPUT()</B>
+ Insert the contents of a file into a field
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DBFILEPUT(&lt;nFieldPos&gt;, &lt;cSourceFile&gt;)</B>
+     <B>   --&gt; lSuccess</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nFieldPos&gt;</B> is the position of the field in the database file
+     structure.
+
+     <B>&lt;cSourceFile&gt;</B> is the name of the file containing the data to insert
+     into the specified field, including an optional drive, directory and
+     extension.  See SetDefault() and SetPath() for file searching rules. No
+     default extension is assumed.
+
+     This function attempts to open &lt;cSourceFile&gt; in shared mode. If the file
+     does not exist, a runtime error is raised.  If the file is successfully
+     opened, the operation proceeds.  If access is denied because, for
+     example, another process has exclusive use of the file, NetErr() is set
+     to true (.T.).
+
+     <B>Note: </B> There are no restrictions on the size of &lt;cSourceFile&gt; except
+     that you must have enough disk space to make the copy.
+
+ <B>Returns</B>
+
+     DBFILEPUT() returns true (.T.) if successful; otherwise, it returns
+     false (.F.).
+
+ <B>Description</B>
+
+     DBFILEPUT() provides a mechanism for copying the contents of a file into
+     a field.  By default, this function operates on the currently selected
+     work area.  It can be made to operate on an unselected work area by
+     specifying it within an aliased expression.
+
+     DBFILEPUT() is used in conjunction with DBFILEGET() to transfer data
+     back and forth between files and database fields.  You can use
+     DBFILEPUT() with a variety of field types, including graphics images,
+     word processor files, and printer fonts.  These two functions are
+     excellent for creating databases of documents, graphics, sounds, etc.
+
+     <B>Note:</B> DBFieldInfo ( DBS_BLOB_TYPE, &lt;nFieldPos&gt; ) will return "C"
+     (string) for any memo field created using DBFILEPUT().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example imports information from a word processing
+        document into a field, then uses BLOBGet() to extract the first 25
+        characters of the field:
+
+        FUNCTION Populate()
+           USE customer NEW VIA "DBFCDX"
+           DO WHILE .NOT. EOF()
+              GetPix( "Pix", Substr(LastName, 1, 4) + CustID)
+              Customer-&gt;DBSkip()
+           ENDDO
+
+        FUNCTION GetPix(cPixField, cPixFile)
+           LOCAL nPos
+           nPos := FieldPos(cPixField)
+
+           // Import the picture field into the indicated field
+           IF ! DBFILEPUT(nPos, cPixFile)
+              Alert("Import of picture " + cPixFile + ;
+                    " failed!")
+           ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng25f44.html">DBFILEGET()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

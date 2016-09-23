@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7d921.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng7decd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MAXFONT()</B>
+ Determines the number of available fonts
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MAXFONT() --&gt; nFontCount</B>
+
+ <B>Returns</B>
+
+     MAXFONT() returns the number of fonts you can load simultaneously within
+     the screen card in use.
+
+ <B>Description</B>
+
+     Depending upon the screen adapter and its available memory, a various
+     number of screen fonts can be loaded simultaneously.  MAXFONT() returns
+     the maximum number of loadable fonts and is very helpful when used in
+     conjunction with FONTLOAD() or SETFONT().
+
+ <B>Note</B>
+
+     <B>.</B>  As a rule, EGA adapters support four different font areas and
+        VGA adapters support eight.
+
+ <B>Examples</B>
+
+     <B>.</B>  Load a font in the highest font area available...
+
+        FONTLOAD("ITALIC.016", MAXFONT())
+
+     <B>.</B>  ...and then select that font:
+
+        FONTSELECT(MAXFONT())
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng76af3.html">FONTLOAD()</A>
+<A HREF="ng84972.html">SETFONT()</A>
+<A HREF="ng795e6.html">FONTSELECT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

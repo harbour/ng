@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng574ef.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng57b63.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>lock()</B>
+ Perform a network lock in the workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE lock(</B>
+     <B>              WORKAREAP wa,</B>
+     <B>              DBLOCKINFOP lockInfo</B>
+     <B>            )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lockInfo</B> is a pointer to a structure containing information about
+     the lock to be obtain.
+
+ <B>Description</B>
+
+     Performs a network lock in the workarea.  The type of lock to be
+     obtained is defined in lockInfo.  See DBLOCKINFO for more information on
+     the lock types available.
+
+ <B>Default Behavior</B>
+
+     You must implement the default behavior of this method through a
+     subclass.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  Your implementation of lock() should determine the type of
+        lock to be obtained by checking lockInfo-&gt;method and return a success
+        code in lockInfo-&gt;result as TRUE is successful or FALSE if not.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng409ca.html">DBLOCKINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng57b63.html">unlock()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

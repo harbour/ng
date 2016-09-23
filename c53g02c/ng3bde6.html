@@ -1,0 +1,35 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3bc44.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng3c194.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>998     Missing function</B>
+
+     <B>Explanation:</B>  CA-Clipper has attempted to execute a function or UDF
+     that is not recognized as valid CA-Clipper code.  This error can occur
+     if an attempt is made to execute code compiled with a new version of
+     CA-Clipper under an older version, or because of a corrupted or invalid
+     executable.
+
+     <B>Action:</B>  Make sure that all code is compiled under the same version
+     of CA-Clipper, and is being linked with the correct version of the
+     libraries.  If a third-party linker is used, see if the error occurs
+     when using the real mode linker for CA-Clipper.  If a corrupted
+     executable is suspected, recompile all .OBJ files and relink.  Declare
+     UDFs or built-in functions hidden from the compiler in macro or INDEXing
+     commands with REQUEST if they are not called elsewhere in the code.
+     Link in missing .OBJs.  Make sure all linker warnings and errors are
+     resolved.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

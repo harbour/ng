@@ -1,0 +1,82 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>The Extender API</B>
+------------------------------------------------------------------------------
+
+
+ <B>Naming conventions</B>
+
+ All the extender API functions are prefixed with the letters `Dos' to
+ indicate that they are part of the DOS extender API and are covered in more
+ detail in the alphabetical function reference in Chapter 10. All these
+ functions are intended to be called from languages which can use the Pascal
+ calling conventions, precluding certain high level languages such as
+ CA-Clipper.
+
+ Blinker also provides a generic get status function BLIMGRSTS() which can be
+ used in all languages to obtain certain status information about the
+ currently executing program. By its very nature this information will have
+ been fixed at program start up, so no equivalent function to set these
+ values is available, although they can all be controlled from the BLINKER
+ environment variable.
+
+ Since BLIMGRSTS() can be called from any language, it uses the normal
+ calling conventions for the language being used, and takes an integer
+ parameter indicating the type of status information required. #defines or
+ their equivalents are included in the header files BLX286.* for each of the
+ major compilers and languages.
+
+ In the subsequent discussions and examples, the following terms are used:
+
+ <U>Descriptor <B>A structure containing the size, base and attributes of a</B></U>
+            <B>protected mode segment.</B>
+
+ <U>Paragraph  <B>The segment portion of a real mode address , e.g. the paragraph</B></U>
+            <B>of the colour adapter is B800h.</B>
+
+ <U>Segment    <B>The actual code or data unit as allocated and stored in memory.</B></U>
+
+ <U>Selector   <B>The value used to identify a segment when running in protected</B></U>
+            <B>mode, i.e. that is passed to and from the protected mode memory</B>
+            <B>allocation functions.</B>
+
+ <B>Calling conventions</B>
+
+ All the API functions use the Pascal calling convention, except where
+ otherwise noted. This means that the function arguments are pushed onto the
+ stack from left to right, and the code calling the function is NOT
+ responsible for removing them from the stack.
+
+ Far calls must be used with all the API functions, and all pointers must
+ also be of type far.
+
+ All the API functions return an unsigned integer (short) in AX to indicate
+ the success or failure of the function. A zero value indicates success and
+ any other value is an error code. All other registers are preserved. If the
+ function is required to return any other value or result, it will take as a
+ parameter one or more pointers to variables in which to store the results.
+
+ <B>Header files</B>
+
+ Header files defining prototypes for the API functions and their parameters
+ are provided for interfacing to C/C++, Pascal and Modula. These files can be
+ found in the appropriate language subdirectory and are named BLX286.*.
+
+ The header files also contain definitions of any data structures required by
+ the API, along with a number of macros to simplify their use.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7667e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng76d8f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MSETBOUNDS()</B>
+ Set screen boundaries for the mouse cursor
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MSETBOUNDS( [&lt;nTop&gt;], [&lt;nLeft&gt;], [&lt;nBottom&gt;],</B>
+     <B>   [&lt;nRight&gt;] ) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B> defines the uppermost allowable screen row for the mouse
+     cursor or 0 if omitted.  This value may range from 0 to the value of
+     &lt;nBottom&gt;.
+
+     <B>&lt;nLeft&gt;</B> defines the leftmost allowable screen column for the mouse
+     or 0 if omitted.  This value may range from 0 to the value of &lt;nRight&gt;.
+
+     <B>&lt;nBottom&gt;</B> defines the bottommost screen row for the mouse cursor or
+     MaxRow() if omitted.  This value may range from the value of &lt;nTop&gt; to
+     MaxRow().
+
+     <B>&lt;nRight&gt;</B> defines the rightmost allowable screen column for the mouse
+     or MaxCol() if omitted.  This value may range from the value of &lt;nLeft&gt;
+     to MaxCol().
+
+ <B>Returns</B>
+
+     MSETBOUNDS() always returns NIL.
+
+ <B>Description</B>
+
+     MSETBOUNDS() is a function that is used for setting the region of the
+     screen that the mouse cursor is restricted to.  The default at startup
+     is the entire screen.  This setting is automatically maintained by the
+     runtime's mouse subsystem when the screen mode is changed, for example,
+     from the 50-line mode to the 25-line mode.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

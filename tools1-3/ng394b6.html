@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng38e8f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng26a91.html">[^^Up^^]</A>
+<A HREF="ng39950.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COM_SOFT_S()</B>
+ Tests to see if the buffer has automatically sent an XOFF character
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>COM_SOFT_S(&lt;nComPort&gt;) --&gt; lXOFFFlag</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nComPort&gt;</B>  Designates the port (1 to 4) for which the XOFF flag is
+     tested.
+
+ <B>Returns</B>
+
+     This function returns .T. when the remote station indicates that the
+     buffer is 75% or more full.
+
+ <B>Description</B>
+
+     If the software handshake has been selected and the buffer is more than
+     75% full, an XOFF character is automatically transmitted to the remote
+     station.  This is noted with an internal flag, which can be queried
+     using COM_SOFT_S().  When the buffer empties to 50% or less, it
+     generates the transmission of an XON character, and this flag is reset.
+
+ <B>Note</B>
+
+     <B>.</B>  When selecting the size of the buffer, decide whether the
+        remaining 25% will be sufficient at high baud rates.
+
+ <B>Example</B>
+
+     Test to see if a 75% full buffer automatically transmits an XOFF
+     character:
+
+     IF = COM_SOFT_S(1)
+        ? "It's time to empty the buffer! "
+        ...
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng33674.html">COM_READ()</A>
+<A HREF="ng38762.html">COM_SOFT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng29002.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng29f80.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosAllocHuge()                Allocate extended memory block of up to 16MB.</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Allocate an extended memory block of up to 16MB.</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosAllocHuge(USHORT segcount,</B></U>
+            <B>USHORT lastsize, PSEL selector, USHORT segmax,</B>
+            <B>USHORT flags);</B>
+
+ <U>segcount   <B>Count of full 64kb segments to allocate.</B></U>
+
+ <U>lastsize   <B>Size of the last segment in bytes (0-65535).</B></U>
+
+ <U>selector   <B>Pointer to an integer to receive the initial selector for the</B></U>
+            <B>block.</B>
+
+ <U>segmax     <B>Maximum number of 64kb blocks which may later be allocated to the</B></U>
+            <B>block in a call to DosReallocHuge(). (This can be 0, see below).</B>
+
+ <U>flags      <B>Reserved. Must be zero.</B></U>
+
+ <U>Return   : <B>The base selector of the huge block.</B></U>
+
+ DosAllocHuge() allocates a memory block of up to 16MB and returns a selector
+ that points to the base of the block. When the block is larger than 64kb a
+ contiguous block of selectors is allocated and one selector is assigned to
+ each complete or partial segment. The increment used to move from one
+ selector to the next is calculated using DosGetHugeShift().
+
+ Segmax specifies the maximum number of 64kb blocks that the block can be
+ resized to. Enough contiguous selectors are allocated by DosAllocHuge() to
+ ensure subsequent reallocations will succeed. Specifying a segmax value of 0
+ will cause DosAllocHuge() to compute a segmax value equal to the required
+ inital allocation size, so preventing the block from being reallocated
+ beyond (segcount+1) 64kb segments.
+
+ Example:
+
+    <B>#include &lt;stdlib.h&gt;</B>
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;string.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>SEL         selector;</B>
+    <B>USHORT      hshift ;</B>
+    <B>int         selinc ;</B>
+    <B>char        *fp;</B>
+    <B>/* Allocate a 1MB block */</B>
+    <B>if (DosAllocHuge(16,0,&amp;selector,0,0) != 0)</B>
+    <B>   {</B>
+    <B>   printf("DosAllocHuge() failed\n");</B>
+    <B>   exit(255);</B>
+    <B>   }</B>
+    <B>DosGetHugeShift(&amp;hshift);</B>
+    <B>selinc = 1 &lt;&lt; hshift ;</B>
+    <B>/* fill each 64kb block with NULLS */</B>
+    <B>tmpsel = selector;</B>
+    <B>for (cnt = 0, cnt &lt;16; cnt++,tmpsel += selinc);</B>
+    <B>   {</B>
+    <B>   fp = MK_FP(tmpsel,0);</B>
+    <B>   *fp = 0;          /* Fill first character */</B>
+    <B>   fp++;                /* Advance to next character */</B>
+    <B>   memset(fp, 0, 0xFFFFh);</B>
+    <B>   printf("Cleared segment : %04X\n",tmpsel);</B>
+    <B>   }</B>
+    <B>/* Free the block */</B>
+    <B>DosFreeSeg(selector);</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2c1d9.html">DosFreeSeg()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

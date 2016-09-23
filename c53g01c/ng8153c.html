@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8059c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng81f01.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDDESCEND()</B>
+ Return and optionally change the descending flag of an order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDDESCEND([&lt;cOrder&gt; | &lt;nPosition&gt;],[&lt;cIndexFile&gt;],</B>
+     <B>   [&lt;lNewDescend&gt;]) --&gt; lCurrentDescend</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrder&gt; | &lt;nPosition&gt;</B> is the name of the order or a number
+     representing its position in the order list.  Using the order name is
+     the preferred method since the position may be difficult to determine
+     using multiple-order index files.  If omitted or NIL, the controlling
+     order is assumed.
+
+     Specifying an invalid value will raise a runtime error.
+
+     <B>&lt;cIndexFile&gt;</B> is the name of an index file, including an optional
+     drive and directory (no extension should be specified).  Use this
+     argument with &lt;cOrder&gt; to remove ambiguity when there are two or more
+     orders with the same name in different index files.
+
+     If &lt;cIndexFile&gt; is not open by the current process, a runtime error is
+     raised.
+
+     <B>&lt;lNewDescend&gt;</B> is a logical value that if true (.T.) dynamically
+     turns on the descending flag for the order, resulting in descending
+     order.  False (.F.) dynamically turns the flag off, resulting in
+     ascending order.
+
+ <B>Returns</B>
+
+     If &lt;lNewDescend&gt; is not specified, ORDDESCEND() returns the current
+     setting.  If &lt;lNewDescend&gt; is specified, the previous setting is
+     returned.
+
+ <B>Description</B>
+
+     ORDDESCEND() changes the ascending/descending flag at runtime only--it
+     does not change the descending flag stored in the actual index file.  To
+     change the descending flag in the index file, see the INDEX command in
+     the Reference Guide, Volume 1.
+
+     By default, this function operates on the currently selected work area.
+     It will operate on an unselected work area if you specify it as part of
+     an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example illustrates ORDDESCEND().  Every order
+        can be both ascending and descending:
+
+        USE Customer VIA "DBFCDX"
+        INDEX ON LastName TAG Last
+        INDEX ON FirstName TAG First DESCENDING
+
+        SET ORDER TO TAG Last
+        // Last was originally created in ascending order
+
+        // Swap it to descending
+        ORDDESCEND(,, .T.)
+        // Last will now be processed in descending order
+
+        SET ORDER TO TAG First
+        // First was originally created in descending order
+
+        // Swap it to ascending
+        ORDDESCEND(,, .F.)
+        // First will now be processed in ascending order
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngcc94d.html">INDEX</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

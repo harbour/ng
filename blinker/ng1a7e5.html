@@ -1,0 +1,48 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1a4a0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng1acc9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>OVERLAY                       Specify which segment classes are to be overlaid</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify which segment classes are to be overlaid</B></U>
+
+ <U>Syntax   : <B>OVERLAY &lt;classname&gt; [,&lt;classname&gt; ...]</B></U>
+
+ <U>Default  : <B>The class of the first segment encountered in the link</B></U>
+            <B>process.</B>
+
+ <U>Example  : <B>OVERLAY CODE</B></U>
+
+ The OVERLAY command is used to specify to the linker which segment class or
+ classes from the object files are to be placed in the overlay sections.
+
+ The overlay class defaults to the first segment class processed during
+ linking and is displayed to the screen at the end of the first pass when
+ VERBOSE mode is selected. It should be unnecessary to use this command for
+ high level language compilers as they automatically place all code segments
+ at the start of the .OBJ.
+
+ Assembler programmers have complete control over the segment classes and
+ their order in the .OBJ files, so they may have need of the OVERLAY command
+ to force overlaying of code not in segments of class CODE.
+
+ Blinker only supports dynamic overlaying of program code, so use this
+ command with care, and do not attempt to overlay data segments.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1310a.html">CODECLASS</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

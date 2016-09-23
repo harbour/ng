@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3dd7e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng3e7ae.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DTOC()</B>
+ Convert a date value to a character string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>DTOC(&lt;dDate&gt;) --&gt; cDate</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;dDate&gt;</B> is the date value to convert.
+
+ <B>Returns</B>
+
+     DTOC() returns a character string representation of a date value.  The
+     return value is formatted in the current date format.  The default
+     format is mm/dd/yy.  A null date returns a string of spaces equal in
+     length to the current date format.
+
+ <B>Description</B>
+
+     DTOC() is a date conversion function used for formatting purposes when
+     you want to display the date in the SET DATE format and when a character
+     expression is required (in a LABEL FORM, for example).  If you need a
+     specialized date format, you can use TRANSFORM() or a custom expression.
+
+     If you are INDEXing a date in combination with a character string, use
+     DTOS() instead of DTOC() to convert the date value to a character
+     string.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples show general uses of DTOC():
+
+        ? DATE()                  // Result: 09/01/90
+        ? DTOC(DATE())            // Result: 09/01/90
+        ? "Today is " + DTOC(DATE())
+                                // Result: Today is 09/01/90
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1acdd.html">CTOD()</A>
+<A HREF="ng1baff.html">DATE()</A>
+<A HREF="ng3e7ae.html">DTOS()</A>
+<A HREF="ngdf6fb.html">SET CENTURY</A>
+<A HREF="nge26bd.html">SET DATE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

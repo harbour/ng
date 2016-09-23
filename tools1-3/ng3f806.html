@@ -1,0 +1,112 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3f384.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b7f6.html">[^^Up^^]</A>
+<A HREF="ng40378.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ATADJUST()</B>
+ Adjusts the beginning position of a sequence within a string
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ATADJUST(&lt;cSearchFor&gt;,&lt;cString&gt;,&lt;nEndpoint&gt;,</B>
+     <B>   [&lt;nCounter&gt;],[&lt;nIgnore&gt;],[&lt;nCharacter|</B>
+     <B>   &lt;cCharacter&gt;]) --&gt; cString</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cSearchFor&gt;</B>  Designates the character string for which the function
+     searches, or the character string that provides the reference point for
+     adjustment.
+
+     <B>&lt;cString&gt;</B>  Designates the character string within which the
+     adjustment occurs.
+
+     <B>&lt;nTargetPosition&gt;</B>  Designates from which position within the
+     character string the search expression is adjusted.
+
+     <B>&lt;nCounter&gt;</B>  Designates which occurrence of the &lt;Searchexpression&gt; is
+     taken into account.  The default value is for the last occurrence.
+
+     <B>&lt;nIgnore&gt;</B>  Designates the number of characters at the beginning of
+     the search string that are removed.  The default value is none.
+
+     <B>&lt;nCharacter|cCharacter&gt;</B>  Designates a character, as necessary, to
+     carry out the adjustment.  It can be an individual character or an ASCII
+     value between 0 and 255.  The default value is a space CHR(32).
+
+ <B>Returns</B>
+
+     ATADJUST() returns the modified character string.
+
+ <B>Description</B>
+
+     The function first looks for the &lt;cSearchFor&gt; parameter within the
+     character string.  From this point, the rest of the &lt;cString&gt; is moved
+     (adjusted) by either inserting or removing blanks until the
+     &lt;nTargetPosition&gt; is reached.  In lieu of blanks, &lt;nCharacter&gt;|
+     &lt;cCharacter&gt; can be used as a fill character.
+
+     Additionally you can specify that the nth occurrence of &lt;cSearchFor&gt; be
+     used and whether or not a specific number of characters at the beginning
+     of the search string is eliminated.
+
+ <B>Note</B>
+
+     <B>.</B>  Using CSETATMUPA() can influence how the search is performed.
+        Using SETATLIKE() permits the use of wild cards within the search
+        sequence.
+
+ <B>Examples</B>
+
+     <B>.</B>  Align comments at column 60.  The search is for the first
+        occurrence of "//".  Since there is usually at least one space before
+        each "//", search for " //":
+
+        ? ATADJUST(" //", Line, 60, 1)
+
+     <B>.</B>  Move the extensions for the following list of file names to
+        position 10 and eliminate the ".":
+
+        WINDOW.DBF
+        PLZ.DBF
+        BACK.DBF
+        HELP.DBF
+        LOG.DBF
+
+        CHARREM(".", ATADJUST(".", File, 10))
+
+        WINDOW      DBF
+
+        PLZ         DBF
+        BACK        DBF
+        HELP        DBF
+        LOG         DBF
+
+     <B>.</B>  Use ATADJUST() with CSETATMUPA().  There is always a problem
+        determining whether "AA" occurs twice or three times in "AAA".
+        Depending on CSETATMUPA(), the function searches behind the last
+        character, or starts from the last character of a located sequence:
+
+        CSETATMUPA(.F.)
+        ? ATADJUST("AA", "123AAABBB", 7, 2)       // Sequence not found
+
+        CSETATMUPA(.T.)
+        ? ATADJUST("AA", "123AAABBB", 7, 2)       // "123A  AABBB"
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5a43c.html">SETATLIKE()</A>
+<A HREF="ng4d968.html">CSETATMUPA()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

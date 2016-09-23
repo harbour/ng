@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng67e05.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng639de.html">[^^Up^^]</A>
+<A HREF="ng68c5e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>FPT/SMT memo files reuse discarded blocks:</B>
+
+  Unlike Clipper or FoxPRO, the SIx Driver keeps a "free block" list in the
+  header of its FPT/SMT memo files, which lets it know which blocks within
+  the file have been freed.  Blocks can be freed up either by simply deleting
+  the associcated record in the DBF file, or by adding enough data to the
+  memo that makes it require more blocks than it's already using.
+
+  For example, with Clipper's DBT memo files, if you have just the word
+  "Bogus" stored in a memo field, that tiny little five byte word is taking
+  up <B>512 bytes</B>!  That's the block size used by Clipper's DBT files.  Now,
+  if you delete that record, those 512 bytes do <B>not</B> get deleted from the
+  memo file, even if you do a PACK.<B>  Also, if you add another 600 characters</B>
+  to that memo field, they no longer fit into that one block.  Unless you're
+  lucky, and that was the last block in the memo file, Clipper abandons that
+  block, and moves all 605 of those new bytes to two <B>new</B> 512 byte blocks at
+  the bottom of the memo file.  Now that old 512 byte block is laying around
+  making your DBT file fatter than it was before.
+
+  Well...not only do the SIx Driver's FPT/SMT memo files use default block
+  sizes of 32 and 1 (respectively) to reduce excess memo bloat, but it also
+  will automatically check the "free block list" in the memo file header
+  for an abandoned block to reuse before adding a new one to the bottom of
+  the memo file.  Cool, eh?
+
+  And, if you happen to free up more blocks at one time than the SIx Driver
+  can keep track of in the header (about 80 or so), we have even provided
+  you with the handy <B>MEMOPACK</B> command or the <B>Sx_MemoPack()</B> function.
+  These work on DBT memo files as well as on FPT and SMT memo files.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4a866.html">MEMOPACK</A>
+<A HREF="ng338a6.html">Sx_MemoPack()</A>
+<A HREF="ng68c5e.html">Can perform a PACK on FPT/SMT/DBT memo files</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

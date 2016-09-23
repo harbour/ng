@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng431cc.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng43d8c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJBAN()</B>
+ Determines if a banner page is printed for a job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJBAN(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;lNewTitle&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; lTitle</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;lNewTitle&gt;</B>  Designates whether a banner page for &lt;nJob&gt; is printed
+     (.T.) or not (.F.).
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJBAN() returns .T. if a banner page is printed.
+
+ <B>Description</B>
+
+     NOVELL NET JOB BANNER PAGE
+     Under Netware, a banner page can be printed before each print job to
+     show the user name.  However, if a banner page is not necessary, it can
+     be suppressed by passing the parameter &lt;lNewTitle&gt; with .F..
+
+     The required job is specified by its job number.  The job number has
+     nothing to do with the logical position of a job within a queue; for
+     example, the job with the highest priority in a queue is not
+     automatically job number 1.  The job number must be determined with
+     NNETCAPJOB() or NNETJLIST().
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine if a banner page is printed for the first job in the
+        queue LINEPRINTER:
+
+        nJob = BIN2I(LEFT(NNETJLIST('LINEPRINTER'), 2))
+        ? NNETJBAN('LINEPRINTER', nJob)
+
+     <B>.</B>  Suppress the banner page for the first job in the queue
+        LINEPRINTER:
+
+        nJob = BIN2I(LEFT(NNETJLIST('LINEPRINTER'), 2))
+        ? NNETJBAN('LINEPRINTER', nJob, .F.)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng43d8c.html">NNETJBFILE()</A>
+<A HREF="ng567a8.html">NNETPJBAN()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

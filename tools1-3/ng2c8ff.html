@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2c314.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng26a91.html">[^^Up^^]</A>
+<A HREF="ng2cf66.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COM_ERRCHR()</B>
+ Defines the replacement character for a character that is not received
+ correctly
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>COM_ERRCHR(&lt;nComPort&gt;,[&lt;nErrorCharacter|cErrorCharacter&gt;])</B>
+     <B>   --&gt; lChanged</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nComPort&gt;</B>  Designates the port (1 to 4) where an external line
+     termination character is established.
+
+     <B>&lt;nErrorCharacter|cErrorCharacter&gt;</B>  Designates the individual error
+     character, which can be given as a number or a character.  When it is
+     not specified, the port functions do not set any error character in the
+     buffer.
+
+ <B>Returns</B>
+
+     COM_ERRCHR() returns .T. when the opened port is addressed.
+
+ <B>Description</B>
+
+     It is always possible that characters received during a file
+     transmission from the port, UART, are recognized inaccurately.  In such
+     cases either an error procedure must be called (i.e.  COM_KEY()) or the
+     inaccurate character must be flagged.  During remote transmission, a
+     "trash" character is output.  CHR(177) is the default "trash" character;
+     however, you can use whatever error character you choose or you can
+     suppress the output of a "trash" character entirely.
+
+ <B>Note</B>
+
+     <B>.</B>  The Line Status Register (LSR) setting is used to determine
+        whether or not characters were inaccurately received.
+
+ <B>Examples</B>
+
+     <B>.</B>  Use CHR(250) as an error character for port 2:
+
+        ? COM_ERRCHR(2, 250)       // .T., when accepted
+
+     <B>.</B>  Switch off the use of an error character for port 4:
+
+        ? COM_ERRCHR(4)            // .T., when accepted
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng33674.html">COM_READ()</A>
+<A HREF="ng309eb.html">COM_LSR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

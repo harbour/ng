@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng46721.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng478a3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETJEDATE()</B>
+ Determines the entry date of a job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETJEDATE(&lt;cQueue&gt;,&lt;nJob&gt;,[&lt;cServer&gt;|&lt;nConId&gt;])</B>
+     <B>   --&gt; dDate</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the name of the print queue that is accessed.
+
+     <B>&lt;nJob&gt;</B>  Designates the job number of the job that is processed in
+     &lt;cQueue&gt;.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which &lt;cQueue&gt;
+     is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETJEDATE() returns the date when &lt;nJob&gt; was placed in &lt;cQueue&gt;.  If an
+     error occurs (for example, if &lt;cQueue&gt; does not exist), the function
+     returns an empty date.
+
+ <B>Description</B>
+
+     NOVELL NET JOB ENTRY DATE
+     The Queue Management System (QMS) provides each new job with a date and
+     time stamp.  With NNETJEDATE(), you can determine the entry date of
+     &lt;nJob&gt; in &lt;cQueue&gt;.  The required job is specified by its job number.
+     The job number has nothing to do with the logical position of a job
+     within a queue.  The job number can be determined with NNETCAPJOB() or
+     NNETJLIST().
+
+ <B>Note</B>
+
+     <B>.</B>  This function requires that the requesting user have access to
+        the queue as a user or an operator.
+
+ <B>Example</B>
+
+     Determine the entry date of the first job in the queue LINEPRINTER:
+
+     nJob=BIN2I(LEFT(NNETJLIST('LINEPRINTER'),2))
+     ? NNETJEDATE('LINEPRINTER',nJob)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng42436.html">NNETCAPJOB()</A>
+<A HREF="ng478a3.html">NNETJETIME()</A>
+<A HREF="ng49eec.html">NNETJLIST()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

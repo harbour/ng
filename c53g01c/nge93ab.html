@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge8d89.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge9b51.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET INDEX</B>
+ Open one or more order bags in the current work area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET INDEX TO [&lt;xcOrderBagName list&gt;] [ADDITIVE]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrderBagName list&gt;</B> specifies order bags to be emptied into the
+     order list of the current work area.
+
+     <B>ADDITIVE</B> adds order bags to an existing order list.
+
+ <B>Description</B>
+
+     By default, SET INDEX, without the ADDITIVE clause, clears the currently
+     active order list, and then constructs a new order list from the orders
+     in the specified order bags in the current work area.  When several
+     order bags are opened, the first order in the first order bag becomes
+     the controlling order (has focus).  The record pointer is initially
+     positioned at the first logical identity in this order.
+
+     If an order list exists when you SET INDEX ... ADDITIVE, the orders in
+     the new order bag are added to the end of the order list.  The previous
+     controlling order continues to be the controlling order.
+
+     If no order list exists when you SET INDEX ... ADDITIVE, the first order
+     in the first order bag in &lt;cOrderBagName list&gt; becomes the controlling
+     order.
+
+     During database processing, all open orders are updated whenever a key
+     value is appended or changed, unless the order was created using a
+     scoping condition and the key value does not match.  To change the
+     controlling order without issuing another SET INDEX command, use SET
+     ORDER or ORDSETFOCUS().  To add orders without closing the currently
+     open orders, use the ADDITIVE clause.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example opens a database and its associated indexes:
+
+        USE Sales NEW
+        SET INDEX TO Sales, Sales1, Sales2
+
+     <B>.</B>  This example opens an index without closing any indexes that
+        are already open:
+
+        SET INDEX TO Sales3 ADDITIVE
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc26c8.html">CLOSE</A>
+<A HREF="ng1cd58.html">DBCLEARIND()</A>
+<A HREF="ng3228f.html">DBSETINDEX()</A>
+<A HREF="ngcc94d.html">INDEX</A>
+<A HREF="ngd6dd9.html">REINDEX</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng76d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4ed.html">[^^Up^^]</A>
+<A HREF="ngf97.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NETCANCEL()</B>
+ Releases the redirection of a local device
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NETCANCEL(&lt;cLocalDevice&gt;) --&gt; lReleased</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cLocalDevice&gt; </B> Designates the name for the local device, for which
+     an existing redirection in the network is released.
+
+ <B>Returns</B>
+
+     NETCANCEL() returns .T. when a redirection existed for the designated
+     device and it was released.
+
+ <B>Description</B>
+
+     NETWORK CANCEL REDIRECTION
+     With NETCANCEL(), an existing redirection for a local device can be
+     released.  You call the function by simply specifying the device name,
+     d: or LPTn:.
+
+     If the return value is .F., the device did not exist or was not
+     previously redirected.
+
+ <B>Note</B>
+
+     <B>WARNING! </B> Make sure that no drive on which files are still open is
+     rendered invalid when you use NETCANCEL().  This situation leads to
+     problems, and under certain circumstances, to data loss.
+
+ <B>Example</B>
+
+     Make all redirected printer devices local
+
+     nCounter    :=  0
+     cLocalName  :=  NETLOCNAME(nCounter)
+     DO WHILE .NOT. EMPTY(cLocalName)
+        IF cLocalName $"LPT1:LPT2:LPT3:PRN:"   // Is device a printer?
+           NETCANCEL(cLocalName)
+        ENDIF
+        nCounter    := nCounter +1
+        cLocalName  := NETLOCNAME(nCounter)
+     ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1c82.html">NETREDIR()</A>
+<A HREF="ng1369.html">NETLOCNAME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

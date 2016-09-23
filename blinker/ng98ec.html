@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng966e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng9e51.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER EXECUTABLE SERIAL     Specify serial number to encrypt into .EXE</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify serial number to encrypt into the .EXE</B></U>
+
+ <U>Syntax   : <B>BLINKER EXECUTABLE SERIAL &lt;cSerialNumber&gt;</B></U>
+
+ <U>Example  : <B>BLINKER EXECUTABLE SERIAL 001001 5 Blink, Inc.</B></U>
+
+ This command is used to encrypt a serial number and other information of up
+ to 100 characters into the executable file which can then be examined by the
+ program using the BLISERNUM() function at runtime.
+
+ This information is encrypted into the executable file and can be used to
+ hide a serial number and licensee name in the executable file as a form of
+ copy protection. Any information following the BLINKER EXECUTABLE SERIAL
+ command on the same line of the script file is encrypted into the .EXE file
+ up to a limit of 100 characters. An identical string is returned in the same
+ format by the BLISERNUM() function at run time.
+
+ The serial number in the above example can be examined by assigning the
+ serial number to a string and then manipulating it using a substring
+ function, for example:
+
+    <B>TMPSTRVAR = BLISERNUM()</B>
+    <B>? "Serial number :", SUBSTR(TMPSTRVAR,1,8)</B>
+    <B>? "Number of users :", VAL(SUBSTR(TMPSTRVAR,10,1))</B>
+    <B>? "Licensed to :", SUBSTR(TMPSTRVAR,12,20)</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng27801.html">BLISERNUM()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

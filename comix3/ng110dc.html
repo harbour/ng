@@ -1,0 +1,238 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng10395.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf477.html">[^^Up^^]</A>
+<A HREF="ng133bc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>Advance Overview</B>
+------------------------------------------------------------------------------
+
+This chapter describes the advanced capabilities (RecordList functions)
+provided by ClipMore.
+
+These are intended to provide you with the ultimate in flexibility. However,
+these functions _are_ complex and are _not_ necessary to use ClipMore.
+
+We strongly recommend that you work with "cm" functions first, and then
+progress to the "rl" functions when you require it.  You should skip this
+chapter until you have worked with cm*() level functions.
+
+
+<B>Low-Level Functions Background</B>
+
+With ClipMore 1.0 and 1.1, we attempted to do everything for the developer.
+ClipMore provided a simple interface (cmFilter()) and did many things very
+well and easily.
+
+However many developers want to do more.  It is impossible for us to
+automatically meet all possible developer requirements.
+
+To solve this problem, we have developed the "RecordList" interface.  Many
+developers will not need to use this, but we have attempted to give you
+complete flexibility to attack your application requirements in the best way
+possible.
+
+The RecordList interface is intended to provide you with the full "building
+block" capabilities of the optimizer.  In other words, ClipMore now gives
+you direct access to the low-level tools we have used to implement the
+cmFilter() function itself.
+
+We will continue to strive to make the optimizer more and more intelligent
+in being able to automatically determine the best way to use your indexes.
+In the meantime the RecordList interface provides you with complete
+flexibility and control over the optimization process.
+
+
+<B>Detail on ClipMore's Operation</B>
+
+ClipMore works by analyzing your condition, matching up parts of your
+condition with indexes, and scanning the indexes to determine which records
+meet the condition.
+
+For example, suppose you have the following condition: "age &lt;= 25 .and. salary
+&gt;= 900000", and further assume that you have an index on age and salary.
+
+ClipMore will analyze the condition and determine that you have an index an
+index on age.  It will then scan the age index to determine all records
+which have an age &lt;= 25.  This information (the records which meet this
+condition) is stored in a RecordList.
+
+It will then scan the salary index to determine all records which have a
+salary &gt;= 900000, generating another RecordList.
+
+These two RecordList's are then AND'd together to give you a single
+RecordList of records which meet both conditions.
+
+This resultant RecordList is then used to filter the records.  Records which
+are not contained within the RecordList are never accessed.  Only records in
+the RecordList are accessed.
+
+
+<B>RecordList Interface</B>
+
+Let's revisit the problem above using the RecordList interface.  We want all
+records which meet the condition: "age &lt;= 25 .and. salary &gt;= 900000".
+
+Using the RecordList interface, here's what it looks like:
+
+    use demo
+    set index to age, salary
+
+    *   Get a RecordList which contains only the age &lt;= 25 records
+    rlp1 := rlNew()
+    rlSetLoHi(rlp1, nil, 25, "age")
+
+    *   Get a RecordList which contains only the salary &gt;= 900000 records
+    rlp2 := rlNew()
+    rlSetLoHi(rlp2, 900000, nil, "salary")
+
+    *   Get a RecordList which only has the records which meet both
+    rlResult := rlAnd(rlp1, rlp2)
+
+    *   Make this the filter (only records in this RecordList are considered)
+    rlSetFilter(rlResult)
+
+rlSetLoHi(), rlAnd(), and rlSetFilter() are the same tools used by ClipMore
+itself to implement the cmFilter() function.  (We have provided the source
+code to virtually of the cm*() functions).
+
+This may seem like a lot more work than just using the cmFilter() function
+(and it is).  However, it gives you unlimited flexibility.  If it's possible
+to do it with a query optimizer (i.e., resolve a condition or determine a
+value by using indexes), ClipMore now lets you do it.
+
+
+<B>Filter RecordList</B>
+
+There is one Filter RecordList per workarea.  The Filter RecordList controls
+which records Clipper will actually access when moving through the database.
+
+When a Filter RecordList has been set up, Clipper will only access records
+which are contained in the Filter RecordList.  This is identical in effect
+to a SET FILTER TO.
+
+The difference is that when you do a SET FILTER TO, Clipper will actually
+read the record to determine if the record meets the condition (and then go
+on if it doesn't meet the condition).  When using a Filter RecordList,
+ClipMore just checks to see if the record is in the RecordList _before_
+accessing it.  If it isn't, then it goes onto the next record until it finds
+a record which _is_ in the RecordList.
+
+This process is very fast, since no time is spent retrieving non-matching
+records.
+
+rlSetFilter() allows you to make a RecordList be used as the Filter
+RecordList for the workarea.
+
+
+<B>Memory Allocation</B>
+
+When you construct (create) a new RecordList, memory is allocated for the
+RecordList.
+
+A RecordList consists of a small amount of memory which is allocated to
+store information about the RecordList.  This in turn has a pointer to a
+Virtual Memory block which contains the bit-map.  The use of Virtual Memory
+means that almost no real memory is used by a RecordList.
+
+When you construct a RecordList (e.g., using rlNew()), a numeric value (a
+long) is returned.  This long is a actually a pointer in memory to the
+RecordList.
+
+When you are done using a RecordList, you need to destroy (free) the
+RecordList in order to free up the memory which has been allocated for it.
+
+The one exception to this is discussed in the next section.
+
+
+<B>Ownership</B>
+
+When you create a RecordList, you own it and you are responsible for
+destroying it to free the memory which has been allocated for the
+RecordList.
+
+However, when you use the rlSetFilter() function, you transfer ownership to
+ClipMore.  At that point, ClipMore is responsible for destroying the
+RecordList.  ClipMore will do this automatically when a new Filter
+RecordList is set up (or the database is closed).
+    
+rlExFilter() (Extract Filter) reverses this process.  It allows you to get a
+RecordList from ClipMore, so that you then own it.  When you have
+rlExFilter()'d the filter RecordList, ownership of the RecordList transfers
+to you, and you are then responsible for destroying it.
+
+
+<B>Maybe's</B>
+
+Maybe's are probably the hardest concept to understand in working with
+RecordList's.
+
+In a RecordList, a YES indicates that the record definitely meets the
+condition.  A NO indicates that the record definitely does NOT meet the
+condition.  This is relatively straightforward.
+
+A MAYBE indicates that the record may meet the condition, or may not meet
+the condition.
+
+Suppose that you have the following condition:
+
+    "age &lt; 25 .and. last = 'J'"
+
+and that you have an index on "age", but no index on "last".
+
+In this case, ClipMore will _not_ be able to determine which records meet
+the "last = 'J'" part of the condition by using the indexes.  These will be
+Maybe's.
+
+This is what is meant by a condition being "Partially Optimizable."  We know
+which records meet the "age &lt; 25" part of the condition, but we don't know
+which records meet the "last = 'J'" part of the condition.  If we had an
+index on "last", then the condition would be "Fully Optimizable" (i.e., we
+could fully determine which records meet the condition solely by looking at
+the indexes).
+
+The only way to resolve Maybe's is to actually look at the records
+themselves and determine whether or not they meet the condition.
+
+Please note that in the example above we do know for _certain_ that many
+records do not meet the condition (by using the age index).  Therefore, we
+would only inspect records which are known to meet the "age &lt; 25" condition.
+We would not have to check all records in the database.
+
+
+<B>Optimization Techniques</B>
+
+ClipMore employ several optimization techniques in order to give your
+application the best possible performance in a variety of conditions.
+
+<B>Index Optimization</B> is a technique whereby the index is scanned to
+determine which records meet a condition (rather than looking at the records
+themselves).  This is always the fastest technique, but does require that
+appropriate indexes be available.
+
+<B>Linear Optimization</B> is a technique for rapidly examining _all_ of the
+Maybe records, and resolving them (i.e., making them either YES or NO's).
+
+<B>Smart Filtering</B> is a technique where each of the Maybe records is
+examined incrementally (as opposed to Linear Optimization which removes
+_all_ of the Maybe's in a batch).  When a record is retrieved, ClipMore
+determines if it meets the condition.  If it doesn't, the record is removed
+from the Filter RecordList and never revisited.  This is called "Smart
+Filtering", because ClipMore never retrieves a non-matching record twice.
+
+Smart Filtering can make major improvements in the performance of filtered
+TBrowse's even when no Index Optimization can be performed.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

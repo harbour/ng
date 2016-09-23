@@ -1,0 +1,92 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngba031.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngb7bb9.html">[^^Up^^]</A>
+<A HREF="ngbaf45.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ERRORCODE()</B>
+ Identifies a DOS error that has occurred previously
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ERRORCODE([&lt;lKeep&gt;]) --&gt; nDosErrorCode</B>
+
+     <B>Warning! </B> This function requires DOS 3.1 or higher.
+
+ <B>Argument</B>
+
+     <B>&lt;lKeep&gt;</B>  When this parameter is designated as .T., the function
+     returns the internal error code memory value.
+
+ <B>Returns</B>
+
+     ERRORCODE() returns a value that represents the error code that occurred
+     during the most-recently executed DOS function.
+
+ <B>Description</B>
+
+     If you do not specify a parameter or if the parameter is .F., then
+     ERRORCODE() calls the DOS error function (INT 21h, 59h) and returns the
+     code value stored for the most-recent error.  DOS stores the most-recent
+     error code until a new error occurs.  If your operation is error free,
+     this value is not  reset.
+
+     To take this situation into account, ERRORCODE() can alternatively be
+     called with &lt;lkeep&gt; set to .T..  If called like this, the error code
+     always relates to the last CA-Clipper Tools function that was executed.
+     Since the respective CA-Clipper Tools function behavior is stored at an
+     internal memory location, it is impossible to implement this option with
+     regular CA-Clipper functions.
+
+ <B>Note</B>
+
+     <B>.</B>  You can find a table that contains all the error codes in
+        Appendix B:  Error Codes.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example attempts to copy a file.  If an error occurs,
+        FILECOPY() returns a value of 0 which offers no specific error
+        information:
+
+        nBytes  :=  FILECOPY("TEST\TEST.PRG", "NEW.PRG")
+        IF nBytes = 0 .AND. ERRORCODE() = 3
+           ? "File path not found!"
+        ENDIF
+
+     <B>.</B>  An example of two file copies is illustrated below:
+
+       The first file is unsuccessful, but the second file is not:
+
+        FILECOPY("XXXXX.TXT", "YYYY.TXT")
+        ? ERRORCODE(.T.)                  // 2 - File not found
+        ? ERRORCODE()                     // 2 - File not found
+        FILECOPY("SOURCE.TXT", "TARGET.TXT")
+        ? ERRORCODE(.T.)                  // 0 - Last Tools
+                                          // function was successful
+        ? ERRORCODE()                     // 2 - File not found
+
+     <B>Warning! </B> Any CA-Clipper Tools function that contains a DOS call
+     resets the internal variable retrieved by setting &lt;lKeep&gt; .  The
+     following call series never returns the desired result, because the
+     first call of ERRORCODE() contains a DOS call:
+
+     ? ERRORCODE(), ERRORCODE(.T.)        // Result: x, 0
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngb9a7f.html">ERRORACT()</A>
+<A HREF="ngba031.html">ERRORBASE()</A>
+<A HREF="ngbaf45.html">ERRORORG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

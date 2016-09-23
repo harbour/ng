@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng7971.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng271.html">[^^Up^^]</A>
+<A HREF="ng90e4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>VAR...IS</B>
+
+ <B>Synopsis</B>
+
+         Define alternate name for inherited variable
+
+ <B>Syntax</B>
+
+         VAR &lt;variable name&gt; IS &lt;original name&gt;
+
+ <B>Arguments</B>
+
+         <B>&lt;variable name&gt;</B> is the alternative name that the inherited
+         variable will be given in the current class
+
+         <B>&lt;original name&gt;</B> is the name of an inherited variable (a
+         variable defined in an ancestor class) which the declared
+         alternative name will be mapped to.
+
+ <B>Description</B>
+
+         This command allows an alternative name to be defined for an
+         existing variable. The existing variable must be defined in an
+         ancestor class of the class being created. The command allows a
+         class to be tailored so that its message names match its behavior.
+
+ <B>Example</B>
+
+         Assume that a Vehicle class defines a variable called <U>width</U>.
+         We would like to define a subclass of Vehicle, called Boat.
+         However, the width of a boat at its widest point is usually
+         referred to as its <B>beam</B>. We could handle this by writing a
+         method in the Boat class:
+
+           METHOD beam
+           RETURN ::width
+
+         This handles access to the <U>width</U> variable via the <U>beam</U>
+         message. As discussed under the <B>MESSAGE...IS</B> command, this
+         could be done more efficiently in the class specification as
+         follows:
+
+           MESSAGE beam IS width
+
+         However, neither of these solutions handles assignment via the
+         <U>beam</U> message. To support assignment statements of the form:
+
+           oBoat:beam := x
+
+         we can use the <B>VAR...IS</B> command in the class specification as
+         follows:
+
+           CREATE CLASS Boat FROM Vehicle
+              // ...
+              VAR beam IS width
+
+         This will allow both access and assignment to the <U>width</U>
+         variable via the <U>beam</U> message.
+
+ <B>Note</B>
+
+         The <B>VAR...IS</B> command can only be used to define an alternative
+         name for a variable in an ancestor class. Currently, an
+         alternative name for a variable in the current class cannot be
+         defined directly. A method can be defined to do this if necessary.
+
+ <B>See Also</B>
+
+         <B>MESSAGE...IS</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4170.html">MESSAGE...IS</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

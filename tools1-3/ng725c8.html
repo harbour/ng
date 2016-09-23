@@ -1,0 +1,109 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng71d44.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6e113.html">[^^Up^^]</A>
+<A HREF="ng73100.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CLEARWIN()</B>
+ Clears a screen area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CLEARWIN([&lt;nTopLine&gt;], [&lt;nLeftCol&gt;], [&lt;nBottomLine&gt;],</B>
+     <B>   [&lt;nRightCol&gt;], [&lt;cAttr|nAttr&gt;],</B>
+     <B>   [&lt;cCharacter|nCharacter&gt;]) --&gt; cNull</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTopLine&gt;</B>  Designates the topmost line where clearing is to begin.
+     The default value is the cursor line.
+
+     <B>&lt;nLeftCol&gt;</B>  Designates the leftmost column from which clearing is to
+     begin.  The default value is the cursor column.
+
+     <B>&lt;nBottomLine&gt;</B>  Designates the bottommost line to clear.  The default
+     is the last screen line or window line.
+
+     <B>&lt;nRightCol&gt;</B>  Designates the rightmost column to clear.  The default
+     is the right screen border or window border.
+
+     <B>&lt;cAttr|nAttr&gt;</B>  Designates the attribute to use to clear.  The
+     default is the standard attribute CLEARA.
+
+     <B>&lt;cCharacter|nCharacter&gt;</B>  Designates the character to use to clear.
+     The default is the standard character CLEARB.
+
+ <B>Returns</B>
+
+     CLEARWIN() always returns a null string.
+
+ <B>Description</B>
+
+     CLEARWIN() clears a specified screen area.  This area extends from
+      &lt; nTopLine&gt;  to &lt;nBottomLine&gt; and from &lt;nLeftCol&gt; to &lt;nRightCol&gt;.
+     Without these parameters, the line and column that correspond to the
+     current cursor position for &lt;nTopLine&gt; and &lt;nLeftCol&gt;, and the
+     bottommost line and rightmost column are used for &lt;nBottomLine&gt; and
+     &lt;nRightCol&gt;.
+
+     You can clear with the standard attribute and character (CLEARA and
+     CLEARB), or with the &lt;cAttr|nAttr&gt; attribute and the
+     &lt;cCharacter|nCharacter&gt; character.
+
+ <B>Notes</B>
+
+     <B>.</B>  The &lt;cAttr|nAttr&gt; attribute and &lt;cCharacter|nCharacter&gt;
+        character are specified in different ways.  Please refer to the
+        Introduction of this chapter for more details
+
+     <B>.</B>  The standard attribute and character are set with SETCLEARA()
+        and SETCLEARB().
+
+     <B>.</B>  If no parameters are specified for the line or column, the
+        function automatically orients itself to the current cursor position.
+
+ <B>Examples</B>
+
+     <B>.</B>  Clear from the cursor position to the end of the line with the
+        CLEARB character and CLEARA attribute:
+
+        CLEARWIN()
+
+     <B>.</B>  Do the same for line 23 from the current cursor position:
+
+        CLEARWIN(23)
+
+     <B>.</B>  Clear a window between line 23, column 15 and line 24, column
+        70:
+
+        CLEARWIN(23, 15, 24, 70)
+
+     <B>.</B>  You can specify the attributes in different ways.  In the
+        following three examples, the CLEARB() clear character is used.
+
+        CLEARWIN(23, 15, 24, 70, 4)            // red on black&lt;
+        CLEARWIN(23, 15, 24, 70, "4/7")        // red on white
+        CLEARWIN(23, 15, 24, 70, "B/W")        // blue on white
+
+     <B>.</B>  Clear when specifying attribute and character:
+
+        CLEARWIN(23, 15, 24, 70, "B/W", "+")   // blue on white
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7385f.html">CLWIN()</A>
+<A HREF="ng840a3.html">SETCLEARA()</A>
+<A HREF="ng844da.html">SETCLEARB()</A>
+<A HREF="ng6f15a.html">Introduction</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

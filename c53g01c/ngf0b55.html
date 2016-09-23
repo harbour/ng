@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf06d8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf0fac.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET SCOPETOP</B>
+ Change the top boundary for scoping key values in the controlling order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET SCOPETOP TO [&lt;expNewTop&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;expNewTop&gt;</B> is the top range of key values that will be included in
+     the controlling order's current scope.  &lt;expNewTop&gt; can be an expression
+     that matches the data type of the key expression in the controlling
+     order or a code block that returns the correct data type.
+
+ <B>Description</B>
+
+     SET SCOPETOP, when used with the &lt;expNewTop&gt; argument, is functionally
+     equivalent to ORDSCOPE(0, &lt;expNewTop&gt;).  SET SCOPETOP, when used with no
+     argument, is functionally equivalent to ORDSCOPE(0, NIL).  Refer to the
+     ORDSCOPE() function for more information.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example illustrates the SET SCOPETOP command:
+
+        USE Inventor NEW
+        INDEX ON PartNo TO Parts
+
+        SET SCOPETOP TO 1000
+        // Only part numbers greater than or equal to 1000
+        // will be used.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8915c.html">ORDSCOPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

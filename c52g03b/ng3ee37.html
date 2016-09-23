@@ -1,0 +1,93 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3eab9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng3f77f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBFIELDINFO</B>
+ Information needed to define a column (field) to the workarea
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   BYTEP  name;</B>
+     <B>   USHORT type;</B>
+     <B>   USHORT typeExtended</B>
+     <B>   USHORT len;</B>
+     <B>   USHORT dec;</B>
+     <B>} DBFIELDINFO;</B>
+     <B></B>
+     <B>typedef DBFIELDINFO far * DBFIELDINFOP;</B>
+
+ <B>Elements</B>
+
+     <B>name</B>
+
+        Contains a pointer to the null-terminated symbol name to assign to
+        the column.  When the CA-Clipper runtime encounters this symbol, it
+        assumes a reference to the column defined by this structure.  The
+        format of this column must conform to the symbolic representation
+        rules of CA-Clipper.
+
+     <B>type</B>
+
+        Contains a literal constant indicating the column's CA-Clipper data
+        type.  The numeric constants used to indicate the data types are
+        defined in Extend.api and have the following meanings:
+
+        <B>DBFIELDINFO Field Data Types</B>
+        ---------------------------------------------------------------------
+        <B>Constant     Meaning</B>
+        ---------------------------------------------------------------------
+        CHARACTER    A CA-Clipper character value
+        DATE         A CA-Clipper date value
+        DOUBLE       A CA-Clipper numeric value stored as an XDOUBLE by the
+                     Extend System
+        LOGICAL      A CA-Clipper logical value
+        MEMO         A CA-Clipper memo value
+        NUMERIC      A CA-Clipper numeric value stored as a LONG by the
+                     Extend System
+        UNDEF        The CA-Clipper NIL value
+        ---------------------------------------------------------------------
+
+     <B>typeExtended</B>
+
+        Contains a numeric value indicating a user-defined column type.  This
+        member is used to provide support for column types not supported by
+        CA-Clipper's default database (.dbf) file format.  The intrinsically
+        supported column types are Character, Numeric, Date, Logical, and
+        Memo.
+
+     <B>len</B>
+
+        Contains a numeric value representing the overall length of the
+        column.  RDDs supporting floating point column types should include
+        the decimal point in this value.  By convention, variable length
+        columns should store a zero (0) in this element.
+
+     <B>dec</B>
+
+        Contains a numeric value indicating the number of places to the right
+        of the decimal point.  This element is only meaningful when the
+        column is a floating point value.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+ <B>Used by:</B>   addField()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng48eee.html">addField()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

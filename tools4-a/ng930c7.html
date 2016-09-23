@@ -1,0 +1,58 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng929cb.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng935a2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SPXCONTARG()</B>
+ Determines the target internet address of an SPX communication
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SPXCONTARG(&lt;nHandle&gt;) --&gt; cInterNetAddr</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication buffer.
+
+ <B>Returns</B>
+
+     SPXCONTARG() returns the destination's internet address.  If &lt;nHandle&gt;
+     does not specify an SPX communication buffer or the SPX connection is
+     not active, the function returns an empty string.
+
+ <B>Description</B>
+
+     SPXCONTARG() allows you to determine the destination's internet address
+     after a successful call of SPXLISTCON().  The address is returned as a
+     20-character hexadecimal string that contains 10 bytes in hexadecimal
+     form.  The leading eight characters indicate the destination's network
+     number.  The following 12 characters indicate the station ID (node
+     address).
+
+ <B>Example</B>
+
+     Wait for an SPX connection in the background.  After the connection has
+     been set up, display the destination's internet address:
+
+     nHandle=SPXLISTCON(20000,1000,1000)
+     WHILE .NOT. PPCCONACT(nHandle)
+     ENDDO
+     ? 'Connection set up with ',SPXCONTARG(nHandle)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng958ca.html">SPXLISTCON()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

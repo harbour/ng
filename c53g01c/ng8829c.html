@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng87f8f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng88aaf.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDNAME()</B>
+ Return the name of an order in the order list
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDNAME(&lt;nOrder&gt;[,&lt;cOrderBagName&gt;]) --&gt; cOrderName</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nOrder&gt;</B> is an integer that identifies the position in the order
+     list of the target order whose database name is sought.
+
+     <B>&lt;cOrderBagName&gt;</B> is the name of a disk file containing one or more
+     orders.  You may specify &lt;cOrderBagName&gt; as the file name with or
+     without the path name or appropriate extension.  If you do not include
+     the extension as part of &lt;xcOrderBagName&gt;, CA-Clipper uses the default
+     extension of the current RDD.
+
+ <B>Returns</B>
+
+ ORDNAME() returns the name of the specified order in the current order list
+ or the specified order bag if opened in the current order list.
+------------------------------------------------------------------------------
+ <B>Description</B>
+
+     ORDNAME() is an order management function that returns the name of the
+     specified order in the current order list.
+
+     If &lt;cOrderBagName&gt; is an order bag that has been emptied into the
+     current order list, only those orders in the order list that correspond
+     to &lt;cOrderBagName&gt; order bag are searched.
+
+     The active RDD determines the order capacity of an order bag.  The
+     default DBFNTX and the DBFNDX drivers only support single-order bags,
+     while other RDDs may support multiple-order bags (e.g., the DBFCDX and
+     DBPX drivers).
+
+     <B>Note: </B> ORDNAME(0) works as ORDNAME(INDEXORD()).
+
+ <B>Examples</B>
+
+     <B>.</B>  This example retrieves the name of an order using its position
+        in the order list:
+
+        USE Customer NEW
+        SET INDEX TO CuAcct, CuName, CuZip
+        ORDNAME(2)                     // Returns: CuName
+
+     <B>.</B>  This example retrieves the name of an order given its position
+        within a specific order bag in the order list:
+
+        USE Customer NEW
+        SET INDEX TO Temp, Customer
+        // Assume Customer contains CuAcct, CuName, CuZip
+        ORDNAME(2, "Customer")      // Returns: CuName
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng824b9.html">ORDFOR()</A>
+<A HREF="ng83270.html">ORDKEY()</A>
+<A HREF="ng88aaf.html">ORDNUMBER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

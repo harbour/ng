@@ -1,0 +1,47 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2351d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng242f6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIMEMSIZ()                   Get size of CA-Clipper Summer '87 dynamic memory area</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get the size of the CA-Clipper Summer '87 dynamic memory area</B></U>
+
+ <U>Syntax   : <B>nlValue = BLIMEMSIZ()</B></U>
+
+ <U>Return   : <B>Total size of the free pool in bytes</B></U>
+
+ This function returns the total size in bytes of the dynamic memory area.
+ Dynamic memory is the memory used by CA-Clipper to store all temporary
+ values of variables and buffers while an application is running.
+
+ Note that the CA-Clipper Summer '87 free pool is allocated from DOS on an
+ 'as-needed' basis, and unless MEMORY(0), BLIMEMPAK(-1) or BLIMEMBLK() are
+ executed (which cause CA-Clipper to allocate all available memory to the
+ free pool from DOS), the value returned by this function will reflect only
+ the currently allocated free pool.
+
+ Example:
+
+    <B>* Get the total free pool size</B>
+    <B>*</B>
+    <B>? "The total size of CA-Clipper's free pool is"</B>
+    <B>?? BLIMEMSIZ(), "bytes"</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng242f6.html">BLIMEMUSE()</A>
+<A HREF="ng2279d.html">BLIMEMAVL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

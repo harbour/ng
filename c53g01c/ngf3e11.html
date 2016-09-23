@@ -1,0 +1,100 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf31ef.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngf4a23.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SORT</B>
+ Copy to a database (.dbf) file in sorted order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SORT TO &lt;xcDatabase&gt; ON &lt;idField1&gt; [/[A | D][C]]</B>
+     <B>   [, &lt;idField2&gt; [/[A | D][C]]...]</B>
+     <B>   [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;xcDatabase&gt;</B> is the name of the target file for the sorted
+     records and can be specified either as a literal file name or as a
+     character expression enclosed in parentheses.  Unless otherwise
+     specified, the new file is assigned a (.dbf) extension.
+
+     <B>ON &lt;idField&gt;</B> is the sort key and must be a field variable.
+
+     <B>/[A|D][C]</B> specifies how &lt;xcDatabase&gt; is to be sorted.  /A sorts in
+     ascending order.  /D sorts in descending order.  /C sorts in dictionary
+     order by ignoring the case of the specified character field.  The
+     default SORT order is ascending.
+
+     <B>&lt;scope&gt;</B> is the portion of the current database file to SORT.  The
+     default is ALL records.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the current record until the condition fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to SORT
+     within the given scope.
+
+ <B>Description</B>
+
+     SORT is a database command that copies records from the current work
+     area to another database file in sorted order.  CA-Clipper SORTs
+     character fields in accordance with the ASCII value of each character
+     within the string unless the /C option is specified.  This option causes
+     the database file to be sorted in dictionary order--capitalization is
+     ignored.  Numeric fields are sorted in numeric order, date fields are
+     sorted chronologically, and logical fields are sorted with true (.T.) as
+     the high value.  Memo fields cannot be sorted.
+
+     SORT performs as much of its operation as possible in memory, and then,
+     it spools to a uniquely named temporary disk file.  This temporary file
+     can be as large as the size of the source database file.  Note also that
+     a SORT uses up three file handles: the source database file, the target
+     database file, and the temporary file.
+
+     In a network environment, you must lock the database file to be SORTed
+     with FLOCK() or USE it EXCLUSIVEly.
+
+ <B>Notes</B>
+
+     <B>.  Deleted source records:</B> If DELETED is OFF, SORT copies deleted
+        records to the target database file; however, the deleted records do
+        not retain their deleted status.  No record is marked for deletion in
+        the target file regardless of its status in the source file.
+
+        If DELETED is ON, deleted records are not copied to the target
+        database file.  Similarly, filtered records are ignored during a SORT
+        and are not included in the target file.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example copies a sorted subset of a mailing list to a
+        smaller list for printing:
+
+        USE Mailing INDEX Zip
+        SEEK "900"
+        SORT ON LastName, FirstName TO Invite WHILE Zip = "900"
+        USE Invite NEW
+        REPORT FORM RsvpList TO PRINTER
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngec5c.html">ASORT()</A>
+<A HREF="ng480be.html">FLOCK()</A>
+<A HREF="ngcc94d.html">INDEX</A>
+<A HREF="ngf8dbc.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

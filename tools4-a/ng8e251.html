@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8d688.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7e043.html">[^^Up^^]</A>
+<A HREF="ng8ecf0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>PPCREAD()</B>
+ Reads data from a communication receiving buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>PPCREAD(&lt;nHandle&gt;,[&lt;nLength&gt;],[&lt;lNotDelete&gt;])</B>
+     <B>    --&gt; cString</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nHandle&gt;</B>  Designates the communication buffer from which the
+     receiving buffer is read.
+
+     <B>&lt;nLength&gt;</B>  Designates the number of characters that are read.  The
+     default value reads all characters.
+
+     <B>&lt;lNotDelete&gt;</B>  Designates whether the characters are deleted (.F.) or
+     not (.T.) after the buffer has been read.  The default value (.F.)
+     indicates that the characters are deleted.
+
+ <B>Returns</B>
+
+     PPCREAD() returns a character string that contains the characters that
+     have been read from the receiving buffer.  If an error occurs (for
+     example, if the handle is invalid or the communication buffer has no
+     receiving buffer), the function returns an empty string.
+
+ <B>Description</B>
+
+     PPCREAD() allows you to read data from the receiving buffer of any
+     communication buffer, independently of the protocol used (IPX, SPX,
+     NetBIOS datagram, or NetBIOS session).  The handle of the communication
+     buffer must be specified with &lt;nHandle&gt;.  If only one communication
+     handle is passed, the function returns all characters of the receiving
+     buffer.  By designating &lt;nLength&gt;, a defined number of characters can be
+     read.  With the parameter &lt;lNotDelete&gt;, you can specify if the buffer is
+     cleared (.F.) or not (.T.) after the characters have been read.
+
+     Reading only a defined number of characters can be useful if the header
+     of a data packet is also transmitted to the receiving buffer during an
+     IPX or SPX communication.  In this case, the header can be read first
+     (30 or 42 characters).  The header contains information about the length
+     of the data range that can then be read with a new call of PPCREAD()
+     (see the introduction to this chapter).  In this way, the data that is
+     read can be packet oriented.
+
+ <B>Note</B>
+
+     <B>.</B>  Between a call of PPCRECCNT() and PPCREAD(), new data can be
+        transmitted to the receiving buffer.
+
+ <B>Examples</B>
+
+     <B>.</B>  Read and display all the characters from a receiving buffer:
+
+        ? PPCREAD(nHandle)
+
+     <B>.</B>  Read the header and the data range of an IPX packet
+        separately:
+
+        // Open communication buffer
+        // Force header transfer
+
+        nHandle=IPXOPEN(20000,5000,,,,,.T.)
+
+        // Read IPX header (30 bytes)
+        cHeader=PPCREAD(nHandle,30)
+
+        // Determine data range length
+        // (Attention: high, low sequence)
+        nLen=BIN2I(CHARMIRR(SUBSTR(cHeader,3,2)))-30
+        // Read data range
+        cData=PPCREAD(nHandle,nLen)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8ecf0.html">PPCRECCNT()</A>
+<A HREF="ng929cb.html">PPCWRITE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

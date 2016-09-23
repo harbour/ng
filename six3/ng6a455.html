@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6a172.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6a0ba.html">[^^Up^^]</A>
+<A HREF="ng6aafb.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Weakly-Typed VariFields:</B>
+
+  Weakly-typed VariFields allow you to store a portion of any character
+  data in the .DBF field itself, with any additional amount, if any, being
+  automatically stored in the MEMO file. This substantially reduces the
+  amount of disk space required to store the data.  This is sort of a cross
+  between using a CHARACTER field and a MEMO field at the same time.
+
+  A 6 byte pointer is maintained at the end of the weakly-typed "V" field
+  entry within the DBF file.  When you define the field width for a new
+  database file, keep in mind that weakly-typed "V" fields require this
+  additional 6 bytes at the end.  The Sx_dbCreate() function will do this
+  calculation automatically for you.
+
+  For example, if you create your database with a "V" field of 16 bytes,
+  the first 10 bytes are considered 'significant' and can be indexed on.
+  The last six bytes are for the pointer information.  If you store 30
+  characters of text into this field, the first 10 characters are stored
+  within the DBF field, with the remaining 20 characters being
+  automatically stored in the memo file.  No special functions are required
+  to store or retrieve the field data in this manner.
+
+  If, however, you store only 14 bytes into your 16 byte "V" field, nothing
+  will be written to the memo file.  Nothing needs to.  In this case, the
+  VariField system is smart enough to see that, had the four byte pointer
+  to the memo not been in the way, the whole entry would fit in the .DBF
+  field alone.  So, it gives up the four bytes to your data.  The last two
+  bytes, however, are always reserved to store the length of the text in
+  the "V" field.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

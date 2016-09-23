@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng60b43.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng613f6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSACC()</B>
+ Determines the access rights to a print server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSACC(&lt;cPServer&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; nAccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSACC() returns the access rights to &lt;cPServer&gt;.
+
+     <B>Table 27.1:  Access Rights</B>
+     ------------------------------------------------------------------------
+     <B>Value   Definition</B>
+     ------------------------------------------------------------------------
+     -1      Error
+     0       Restricted access
+     1       Print server user
+     2       Print server operator
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER ACCESS
+     NNETPSACC() allows you to determine the operations that the current user
+     can execute on &lt;cPServer&gt;.  While simple operations (like status query)
+     can be done by any user, critical operations (like print server
+     controlling and configuration) require operator rights.
+
+ <B>Example</B>
+
+     Determine the access rights to print server PSERVER1:
+
+     ? NNETPSACC('PSERVER1')
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

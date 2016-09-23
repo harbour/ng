@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng43a09.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng44e33.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBORDERCREATEINFO</B>
+ Information needed to create a new order for the work area
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   LPDBORDERCONDINFO lpdbOrdCondInfo;</B>
+     <B>   BYTEP             abBagName;</B>
+     <B>   BYTEP             atomBagName;</B>
+     <B>   ITEM              itmOrder;</B>
+     <B>   BOOL              fUnique;</B>
+     <B>   ITEM              itmCobExpr;</B>
+     <B>   ITEM              abExpr;</B>
+     <B>} DBORDERCREATEINFO;</B>
+     <B></B>
+     <B>typedef DBORDERCREATEINFO far * LPDBORDERCREATEINFO;</B>
+
+ <B>Elements</B>
+
+     <B>lpdbOrdCondInfo</B>
+
+        Contains a pointer to information about the condition (if any) for
+        the order.
+
+     <B>abBagName</B>
+
+        Contains a pointer to a null-terminated string containing the index
+        file name to create.
+
+     <B>atomBagName</B>
+
+        Reserved CA-Clipper compatibility slot.
+
+     <B>itmOrder</B>
+
+        Contains a CA-Clipper-level reference to a null-terminated string
+        containing the order name or number to create in abBagName.
+
+     <B>fUnique</B>
+
+        Contains a boolean value specifying whether the order should contain
+        only unique keys.
+
+     <B>itmCobExpr / abExpr</B>
+
+        Contain a CA-Clipper-level reference to a code block and a matching
+        string containing the key expression defining the order imposed on
+        the work area.
+
+     <B>Warning!</B>  You should perform code block evaluations with great
+     caution.  Save any states that are likely to change as a result of re-
+     entrance, so you can restore them after the code evaluation.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+ <B>Used By</B>    orderCreate()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5ae78.html">orderCreate()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

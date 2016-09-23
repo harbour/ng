@@ -1,0 +1,60 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1b370.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng1bd88.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Name conflicts</B>
+
+  As mentioned, repeated inheritance is handled by treating repeatedly
+  inherited classes as a single class. This prevents any possibility of
+  naming conflicts due to repeated inheritance. However, naming conflicts
+  can still occur between classes.
+
+  A naming conflict occurs when a message of the same name is inherited from
+  two different branches of the hierarchy. When this occurs, the default
+  behavior for the duplicate message will be determined by whichever class
+  is first in the linearized superclass precedence list described earlier.
+  In other words, one message will override the other.
+
+  In such situations, it is usually necessary to be able to access both
+  messages. One mechanism for doing this is the scope resolution message, of
+  the form:
+
+    <U>obj:&lt;className&gt;:&lt;message&gt;</U>
+
+  to access the non-default message. For example, assuming a method
+  <U>show()</U> was defined in TextWindow and BorderedWindow, and we wish to
+  invoke the <U>show()</U> method from BorderedWindow, we would use:
+
+    ::BorderedWindow:show()
+
+  The default inheritance sequence can be overridden for specific messages,
+  by including the appropriate statement in the class specification. For
+  example, in the class BordTextWindow, we could include the following
+  statement:
+
+    MESSAGE show IN BorderedWindow
+
+  This would cause BorderedWindow's <U>show</U> to be invoked by default when
+  the <U>show</U> message is sent to an instance of BordTextWindow.
+
+  You can also provide an alias for a message as follows:
+
+    MESSAGE borderedShow IS show IN BorderedWindow
+
+  This allows both <U>show</U> messages to be accessed without resorting to the
+  use of a scope resolution message. Since a scope resolution message
+  involves an extra message send, using message aliases is more efficient.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

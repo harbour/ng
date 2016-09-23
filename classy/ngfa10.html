@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf58a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng101b9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Initializer Methods</B>
+
+  If a class defines a method named <U>init</U>, that method will be invoked
+  automatically when new objects of that class are created. The <U>init</U>
+  method is referred to as an initializer method. Its purpose is to
+  initialize a new object to a valid initial state, usually based on
+  arguments supplied to the constructor.
+
+  When writing the code for an initializer, if the class has a superclass,
+  it is usually necessary to invoke the superclass' constructor to
+  initialize the part of the object defined by the superclass. Class(y)
+  provides an automatic mechanism for doing this. The <B>METHOD definition</B>
+  command has an extended form which allows a second parameter list to be
+  included. Including this second parameter list causes the corresponding
+  superclass method to be invoked first, with the specified parameters. The
+  syntax for this is as follows:
+
+    METHOD &lt;name&gt;(&lt;params,...&gt;), [&lt;superName&gt;](&lt;superParm,...&gt;)]
+
+  where:
+
+  &lt;name&gt;    is the name of the initializer method.
+
+  &lt;params&gt;  the parameters which the method expects to receive.
+
+  &lt;superName&gt;    is the name of the superclass' initializer. This can and
+            should be omitted when the superclass method being invoked has
+            the same name as the method being defined. In particular, when
+            defining an <U>init</U> method it is not necessary to specify the
+            name of the superclass method unless it is other than <U>init</U>.
+
+  &lt;superParm&gt;    are the parameters expected by the superclass' constructor.
+            These would typically be a subset of the first parameter list.
+
+  Sometimes a subclass may not need to perform any work to initialize itself
+  (perhaps because it has no instance variables). In such cases, it is not
+  necessary to define an initializer for that class. If a superclass defines
+  an initializer, it will be inherited by the subclass and used during
+  initialization.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngf58a.html">Constructor Messages</A>
+<A HREF="nga87f.html">METHOD (definition)</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

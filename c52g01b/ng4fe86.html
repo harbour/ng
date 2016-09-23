@@ -1,0 +1,85 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4fa2d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng50765.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MLCOUNT()</B>
+ Count the number of lines in a character string or memo field
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MLCOUNT(&lt;cString&gt;, [&lt;nLineLength&gt;],</B>
+     <B>   [&lt;nTabSize&gt;], [&lt;lWrap&gt;]) --&gt; nLines</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the character string or memo field to count.
+
+     <B>&lt;nLineLength&gt;</B> specifies the number of characters per line and can
+     range from four to 254.  If not specified, the default line length is
+     79.
+
+     <B>&lt;nTabSize&gt;</B> defines the tab size.  If not specified, the default
+     value is four.  If &lt;nTabSize&gt; is greater than or equal to &lt;nLineLength&gt;,
+     then the tab size is automatically converted to &lt;nLineLength&gt; - 1.
+
+     <B>&lt;lWrap&gt;</B> toggles word wrap on and off.  Specifying true (.T.) toggles
+     word wrap on; false (.F.) toggles it off.  If not specified, the default
+     value is true (.T.).
+
+ <B>Returns</B>
+
+     MLCOUNT() returns the number of lines in &lt;cString&gt; depending on the
+     &lt;nLineLength&gt;, the &lt;nTabSize&gt;, and whether word wrapping is on or off.
+
+ <B>Description</B>
+
+     MLCOUNT() is a memo function used with MEMOLINE() to print character
+     strings and memo fields based on the number of characters per line.  In
+     the basic operation, use MLCOUNT() to return the number of lines in the
+     character string or memo field.  Then, using MEMOLINE() to extract each
+     line, loop through the memo field until there are no lines left.
+
+     If &lt;lWrap&gt; is true (.T.) and an end of line position breaks a word, it
+     is word wrapped to the next line and the next line begins with that
+     word.  If &lt;lWrap&gt; is false (.F.), MLCOUNT() counts the number of
+     characters specified by &lt;nLineLength&gt; as the current line.  The next
+     line begins with the character following the next hard or soft carriage
+     return.  Intervening characters are ignored.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example displays the contents of each Notes memo field in
+        the Sales database file, one line at a time:
+
+        USE Sales NEW
+        nLineLength = 65
+        //
+        DO WHILE !EOF()
+           nLines = MLCOUNT(Sales-&gt;Notes, nLineLength)
+           FOR nCurrLine = 1 TO nLines
+              ? MEMOLINE(Sales-&gt;Notes, nLineLength, nCurrLine)
+           NEXT
+           SKIP
+           ?
+        ENDDO
+
+ <B>Files:</B>  Library is EXTEND.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4cb68.html">MEMOLINE()</A>
+<A HREF="ng4e55c.html">MEMOTRAN()</A>
+<A HREF="ng50e03.html">MLPOS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

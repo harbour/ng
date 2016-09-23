@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng83941.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng84ef3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ORDKEYCOUNT()</B>
+ Return the number of keys in an order
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ORDKEYCOUNT([&lt;cOrder&gt; | &lt;nPosition&gt;],</B>
+     <B>   [&lt;cIndexFile&gt;]) --&gt; nKeys</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cOrder&gt; | &lt;nPosition&gt;</B> is the name of the order or a number
+     representing its position in the order list.  Using the order name is
+     the preferred method since the position may be difficult to determine
+     using multiple-order index files.  If omitted or NIL, the controlling
+     order is assumed.
+
+     Specifying an invalid order will raise a runtime error.
+
+     <B>&lt;cIndexFile&gt;</B> is the name of an index file, including an optional
+     drive and directory (no extension should be specified).  Use this
+     argument with &lt;cOrder&gt; to remove ambiguity when there are two or more
+     orders with the same name in different index files.
+
+     If &lt;cIndexFile&gt; is not open by the current process, a runtime error is
+     raised.
+
+ <B>Returns</B>
+
+     ORDKEYCOUNT() returns the number of keys in the specified order.
+
+ <B>Description</B>
+
+     ORDKEYCOUNT() counts the keys in the specified order and returns the
+     result as a numeric value.  If the order is not conditional and no scope
+     has been set for it, ORDKEYCOUNT() is identical to RECCOUNT(), returning
+     the number of records in the database file.  However, for a conditional
+     order, there may be fewer keys than there are records, since some
+     records may not meet the order's for condition or may not fall inside
+     the scope specified by ORDSCOPE()--in counting the keys, ORDKEYCOUNT()
+     respects the currently defined scope and for condition.
+
+     By default, this function operates on the currently selected work area.
+     It will operate on an unselected work area if you specify it as part of
+     an aliased expression.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates using ORDKEYCOUNT() with various
+        orders:
+
+        USE customer
+        // Assume 1000 total records,
+        // 500 less than thirty years old, and
+        // 895 making less than 50,000
+
+        INDEX ON Age TO Age
+
+        INDEX ON First TO First FOR Age &lt; 30
+        INDEX ON Last TO Last FOR Salary &lt; 50000
+
+        // Age is the controlling order
+        SET INDEX TO Age, First, Last
+
+        ? RECCOUNT()                     // Result: 1000
+        ? ORDKEYCOUNT()                  // Result: 1000
+
+        ? ORDKEYCOUNT("First")         // Result: 500
+        ? ORDKEYCOUNT(3)               // Result: 895
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng85b3e.html">ORDKEYGOTO()</A>
+<A HREF="ng86199.html">ORDKEYNO()</A>
+<A HREF="ng8915c.html">ORDSCOPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,248 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngdb920.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngd8973.html">[^^Up^^]</A>
+<A HREF="nge08de.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>#define</B>
+ Define a manifest constant or pseudofunction
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>#define &lt;idConstant&gt; [&lt;resultText&gt;]</B>
+     <B>#define &lt;idFunction&gt;([&lt;arg list&gt;]) [&lt;exp&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idConstant&gt;</B> is the name of an identifier to define.
+
+     <B>&lt;resultText&gt;</B> is the optional replacement text to substitute whenever
+     a valid &lt;idConstant&gt; is encountered.
+
+     <B>&lt;idFunction&gt;</B> is a pseudofunction definition with an optional
+     argument list (&lt;arg list&gt;).  If you include &lt;arg list&gt;, it is delimited
+     by parentheses (()) immediately following &lt;idFunction&gt;.
+
+     <B>&lt;exp&gt;</B> is the replacement expression to substitute when the
+     pseudofunction is encountered.  Enclose this expression in parentheses
+     to guarantee precedence of evaluation when the pseudofunction is
+     expanded.
+
+     <B>Note: </B> #define identifiers are case-sensitive, where #command and
+     #translate identifiers are not.
+
+ <B>Description</B>
+
+     The #define directive defines an identifier and, optionally, associates
+     a text replacement string.  If specified, replacement text operates much
+     like the search and replace operation of a text editor.  As each source
+     line from a program file is processed by the preprocessor, the line is
+     scanned for identifiers.  If a currently defined identifier is
+     encountered, the replacement text is substituted in its place.
+
+     Identifiers specified with #define follow most of the identifier naming
+     rules in CA-Clipper .  Defined identifiers can contain any combination
+     of alphabetic and numeric characters, including underscores.  Defined
+     identifiers, however, differ from other identifiers by being
+     case-sensitive.  As a convention, defined identifiers are specified in
+     uppercase to distinguish them from other identifiers used within a
+     program.  Additionally, identifiers are specified with a one or two
+     letter prefix to group similar identifiers together and guarantee
+     uniqueness.  Refer to one of the supplied header files in the
+     \CLIPPER5\INCLUDE directory for examples.
+
+     When specified, each definition must occur on a line by itself.  Unlike
+     statements, more than one directive cannot be specified on the same
+     source line.  You may continue a definition on a subsequent line by
+     employing a semicolon (;).  Each #define directive is specified followed
+     by one or more white space characters (spaces or tabs), a unique
+     identifier, and optional replacement text.  Definitions can be nested,
+     allowing one identifier to define another.
+
+     A defined identifier has lexical scope like a filewide static variable.
+     It is only valid in the program (.prg) file in which it is defined
+     unless defined in STD.CH or the header file specified on the compiler
+     command line with the /U option.  Unlike a filewide static variable, a
+     defined identifier is visible from the point where it is defined in the
+     program file until it is either undefined, redefined, or the end of the
+     program file is reached.
+
+     You can redefine or undefine existing identifiers.  To redefine an
+     identifier, specify a new #define directive with the identifier and the
+     new replacement text as its arguments.  The current definition is then
+     overwritten with the new definition, and a compiler warning is issued in
+     case the redefinition is inadvertent.  To undefine an identifier,
+     specify an #undef directive with the identifier as its argument.
+     #define directives have three basic purposes:
+
+     <B>.</B>  To define a control identifier for #ifdef and #ifndef
+
+     <B>.</B>  To define a manifest constant--an identifier defined to
+        represent a constant value
+
+     <B>.</B>  To define a compiler pseudofunction
+
+     The following discussion expands these three purposes of the #define
+     directive in your program.
+
+     <B>Preprocessor Identifiers</B>
+
+     The most basic #define directive defines an identifier with no
+     replacement text.  You can use this type of identifier when you need to
+     test for the existence of an identifier with either the #ifdef or
+     #ifndef directives.  This is useful to either exclude or include code
+     for conditional compilation.  This type of identifier can also be
+     defined using the /D compiler option from the compiler command line.
+     See the examples below.
+
+     <B>Manifest Constants</B>
+
+     The second form of the #define directive assigns a name to a constant
+     value.  This form of identifier is referred to as a manifest constant.
+     For example, you can define a manifest constant for the INKEY() code
+     associated with a key press:
+
+     #define K_ESC  27
+     IF LASTKEY() = K_ESC
+        .
+        . &lt;statements&gt;
+        .
+     ENDIF
+
+     Whenever the preprocessor encounters a manifest constant while scanning
+     a source line, it replaces it with the specified replacement text.
+
+     Although you can accomplish this by defining a variable, there are
+     several advantages to using a manifest constant: the compiler generates
+     faster and more compact code for constants than for variables; variables
+     have memory overhead where manifest constants have no runtime overhead,
+     thus saving memory and increasing execution speed; using a variable to
+     represent a constant value is conceptually inconsistent.  A variable by
+     nature changes and a constant does not.
+
+     Use a manifest constant instead of a constant for several reasons.
+     First, it increases readability.  In the example above, the manifest
+     constant indicates more clearly the key being represented than does the
+     INKEY() code itself.  Second, manifest constants localize the definition
+     of constant values, thereby making changes easier to make, and
+     increasing reliability.  Third, and a side effect of the second reason,
+     is that manifest constants isolate implementation or environment
+     specifics when they are represented by constant values.
+
+     To further isolate the effects of change, manifest constants and other
+     identifiers can be grouped together into header files allowing you to
+     share identifiers between program (.prg) files, applications, and groups
+     of programmers.  Using this methodology, definitions can be standardized
+     for use throughout a development organization.  Merge header files into
+     the current program file by using the #include directive.
+
+     For examples of header files, refer to the supplied header files in the
+     \CLIPPER5\INCLUDE directory.
+
+     <B>Compiler Pseudofunctions</B>
+
+     In addition to defining constants as values, the #define directive can
+     also define pseudofunctions that are resolved at compile time.  A
+     pseudofunction definition is an identifier immediately followed by an
+     argument list, delimited by parentheses, and the replacement expression.
+     For example:
+
+     #define AREA(nLength, nWidth)  (nLength * nWidth)
+     #define SETVAR(x, y)           (x := y)
+     #define MAX(x, y)              (IF(x &gt; y, x, y))
+
+     Pseudofunctions differ from manifest constants by supporting arguments.
+     Whenever the preprocessor scans a source line and encounters a function
+     call that matches the pseudofunction definition, it substitutes the
+     function call with the replacement expression.  The arguments of the
+     function call are transported into the replacement expression by the
+     names specified in the argument list of the identifier definition.  When
+     the replacement expression is substituted for the pseudofunction, names
+     in the replacement expression are replaced with argument text.  For
+     example, the following invocations:
+
+     ? AREA(10, 12)
+     SETVAR(nValue, 10)
+     ? MAX(10, 9)
+
+     are replaced by :
+
+     ? (10 * 12)
+     nValue := 10
+     ? (IF(10 &gt; 9, 10, 9)
+
+     It is important when defining pseudofunctions, that you enclose the
+     result expression in parentheses to enforce the proper order of
+     evaluation.  This is particularly important for numeric expressions.  In
+     pseudofunctions, you must specify all arguments.  If the arguments are
+     not specified, the function call is not expanded as a pseudofunction and
+     exits the preprocessor to the compiler as encountered.
+
+     Pseudofunctions do not entail the overhead of a function call and are
+     therefore generally faster.  They also use less memory.
+     Pseudofunctions, however, are more difficult to debug within the
+     debugger, have a scope different from declared functions and procedures,
+     do not allow skipped arguments, and are case-sensitive.
+
+     You can avoid some of these deficiencies by defining a pseudofunction
+     using the #translate directive.  #translate pseudofunctions are not
+     case-sensitive, allow optional arguments, and obey the dBASE four-letter
+     rule.  See the #translate directive reference in this chapter for more
+     information.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example a manifest constant conditionally controls the
+        compilation of debugging code:
+
+        #define DEBUG
+        .
+        . &lt;statements&gt;
+        .
+        #ifdef DEBUG
+           Assert(FILE("System.dbf"))
+        #endif
+
+     <B>.</B>  This example defines a manifest constant and substitutes it
+        for an INKEY() value:
+
+        #define K_ESC  27
+        .
+        . &lt;statements&gt;
+        .
+        IF INKEY() != K_ESC
+           DoIt()
+        ELSE
+           StopIt()
+        ENDIF
+
+     <B>.</B>  This example defines pseudofunctions for the standard
+        CA-Clipper functions, MAX() and ALLTRIM():
+
+        #define MAX(arg1, arg2)   (IF(arg1 &gt; arg2, ;
+           arg1, arg2))
+        #define ALLTRIM(cString)  (RTRIM(LTRIM(cString)))
+        .
+        . &lt;statements&gt;
+        .
+        ? MAX(1, 2)
+        ? ALLTRIM("  Hello  ")
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngd8bff.html">#command</A>
+<A HREF="nge0c18.html">#ifdef</A>
+<A HREF="nge1372.html">#ifndef</A>
+<A HREF="nge2ef5.html">#undef</A>
+<A HREF="nge33f3.html">#xcommand</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

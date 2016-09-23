@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng257ab.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng24507.html">[^^Up^^]</A>
+<A HREF="ng26147.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETCAPEND()</B>
+ Terminates the capture mode for an LPT device
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETCAPEND(&lt;nPrinter&gt;) --&gt; lTerminate</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nPrinter&gt;</B>  Designates the LPT device for which the capture mode is
+     terminated.  LPT1(1) to LPT3(3) are possible.
+
+ <B>Returns</B>
+
+     NNETCAPEND() returns .T. when an existing capture mode for the
+     designated LPT device has been terminated.
+
+ <B>Description</B>
+
+     NOVELL NETWORK CAPTURE END
+     This function can terminate an active capture mode.  Subsequent print
+     output occurs on the local printer.  Print jobs still open are
+     terminated and transferred to "service".
+
+ <B>Note</B>
+
+     <B>.</B>  If you want to abort the output for the last print job "in
+        progress", use NNETCAPCAN().
+
+ <B>Example</B>
+
+     Activate the capture mode for LPT1, and turn it off after the ensuing
+     print output:
+
+     SET PRINTER TO LPT1
+     ? NNETCAPBEG(1)                // .T. when active
+     SET DEVICE TO PRINT
+        @ 10, 10 SAY "This is a test 234"
+     SET DEVICE TO SCREEN
+     EJECT
+     NNETCAPEND(1)                  // Terminate LPT1 capture
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng251b9.html">NNETCAPBEG()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

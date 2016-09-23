@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2279d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng2318f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIMEMBLK()                   Get CA-Clipper Summer '87 free memory down to blocksize</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get CA-Clipper Summer '87 free memory down to blocksize</B></U>
+
+ <U>Syntax   : <B>nuValue = BLIMEMBLK([nuBlocksize])</B></U>
+
+ <U>Return   : <B>Free memory in kb of blocks that are &gt;= [nuBlocksize]</B></U>
+
+ This function returns the total dynamic memory available in kilobytes of
+ blocks at least as large as the block specified in kb as a parameter.
+ Dynamic memory is the memory used by CA-Clipper to store all temporary
+ values of variables and buffers while an application is running.
+
+ If no parameter is specified a default block size of 4kb is used, which
+ simulates the value returned by a call to CA-Clipper's MEMORY(0). In all
+ cases the function will emulate MEMORY(0) and attempt to allocate blocks of
+ size 63 Kb, then 48 Kb, then 32 Kb, then 16 Kb, then 8, 4, 2 and 1Kb until
+ no block larger or equal to the parameter or default can be allocated. The
+ value returned will be the total size of the blocks successfully allocated.
+
+ BLIMEMBLK() executes many times faster than MEMORY(0), so may be used to
+ monitor memory in places where MEMORY(0) is found to slow the application
+ too much, for example during indexing or profiling.
+
+ Example:
+
+    <B>* Get the available memory in minimum of 8 Kb blocks</B>
+    <B>*</B>
+    <B>? "Memory available in at least 8Kb blocks is "</B>
+    <B>?? BLIMEMBLK(8), "Kb"</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

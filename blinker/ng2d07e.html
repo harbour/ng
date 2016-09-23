@@ -1,0 +1,50 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2cc6c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng2d443.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosGetExceptionHandler()      Get protected mode address of exception handler</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get the protected mode address of an exception handler</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosGetExceptionHandler( USHORT exception,</B></U>
+            <B>PEXCHAN far *handler);</B>
+
+ <U>exception  <B>Exception number (0-13).</B></U>
+
+ <U>handler    <B>Pointer to a function pointer to receive the address of the</B></U>
+            <B>exception handler.</B>
+
+ <U>Return   : <B>Address of the exception handler.</B></U>
+
+ DosGetExceptionHandler() returns the address of the current handler for the
+ specified exception number.
+
+ Example:
+
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>EXCHAN   handler;</B>
+    <B>/* Get current exception handler */</B>
+    <B>if (DosGetExceptionHandler(0x0D, &amp;handler) == 0)</B>
+    <B>   printf("Exception 13 handler : %Fp\n",handler);</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng32e44.html">DosSetExceptionHandler()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

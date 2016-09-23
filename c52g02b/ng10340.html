@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ngf3b9.html">[^^Up^^]</A>
+<A HREF="ng10b1b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+     This section is a summary of error messages possible when linking with
+     .RTLink.  The messages are divided into categories according to severity
+     and the point in the linking process where the error occurs.  Each
+     category is described below, followed by a list of all messages in each
+     category.  For specific information on the syntax and operation of the
+     linker, see The CA-Clipper Linker--RTLINK.EXE chapter in the Programming
+     and Utilities guide.
+
+     The listed linker error and warning messages are a subset of all the
+     possible messages the linker can display and represent the most likely
+     problems that will be encountered during linking.
+
+ <B>.RTLink Warning Messages</B>
+
+     As a category, .RTLink warnings are less severe than errors. They
+     indicate potential errors when the program is executed but do not
+     prevent the generation of the executable file (.EXE).  The DOS return
+     code is set to 1 by the unresolved symbol warning (wrt0022) when
+     generating an .EXE file; otherwise, the return code is unaffected by
+     warnings.
+
+     The general format of an .RTLink warning message is as follows:
+
+     <B>warning wrtxxxx: messagetext</B>
+
+ <B>.RTLink Error Messages</B>
+
+     .RTLink error messages identify problems such as the inability to find a
+     file needed by the linker, a syntax error on the RTLINK.EXE command
+     line, or an .OBJ or .LIB file error.  The linker usually cannot continue
+     until the error is corrected, and no executable file is generated.  When
+     this happens, the DOS return code is set to 1.
+
+     The general format of an .RTLink error message is as follows:
+
+     <B>error ertxxxx: messagetext</B>
+
+ <B>.RTLink Miscellaneous Error Messages</B>
+
+     Miscellaneous errors are just like other .RTLink errors.  The linker
+     usually cannot continue until the error is corrected, and no executable
+     file (.EXE) is generated.  The DOS return code is set to 1.
+
+     The general format of an .RTLink miscellaneous error message is as
+     follows:
+
+     <B>error eutxxxx: messagetext</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

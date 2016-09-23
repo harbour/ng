@@ -1,0 +1,38 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3dd42.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3b69f.html">[^^Up^^]</A>
+<A HREF="ng3eb40.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>13  The _storc() and _storclen() Functions</B>
+--------------------------------------------------------------------------------
+
+     The Extend system's _storc() function is used to assign a new
+     character value to a Clipper variable (if passed by reference) or
+     an array element.
+
+     To do this, _storc() first allocates space for the data and copies
+     the specified string into it.  It then creates a new VALUE
+     containing an OREF to the newly allocated area.  It then looks into
+     the Eval Stack to find the specified parameter.  If the parameter
+     is a reference to a variable (a VREF), _storc() locates the
+     variable and overwrites its VALUE with the new VALUE.  If the
+     specified parameter is an array, _storc() uses the array's OREF to
+     locate the array.  It then overwrites the specified array element
+     with the new VALUE.  If the specified parameter is neither a VREF
+     nor an array, _storc() simply copies the new VALUE over the
+     parameter's Eval Stack entry.  This changes the parameter value (as
+     seen, for example, by _parc() ) but has no effect on any variable
+     or array element.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

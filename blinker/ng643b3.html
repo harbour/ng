@@ -1,0 +1,194 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+[^^Up^^]
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Dual mode</B>
+------------------------------------------------------------------------------
+
+
+ <B>Overview</B>
+
+ The ability to create dual mode programs simply by adding a single command
+ to the link script file is a major breakthrough. Dual mode programs detect
+ at startup whether there are enough system resources to run in protected
+ mode. If there are insufficient resources then the same program will run as
+ a normal dynamically overlaid program.
+
+ The .EXE still only consists of one program capable of operating in either
+ mode, it is not two separate copies joined together in some way. There is
+ negligible increase in .EXE size over a single mode program, and a similarly
+ negligible overhead in execution speed, since the whole program is loaded
+ into memory when running in protected mode.
+
+ For this dual mode to work and be effective, all code must be written to
+ execute in both real and protected mode. High level languages, such as CA-
+ Clipper, require no code changes whatsoever to run in protected mode, and
+ changes for C, PASCAL and FORTRAN are the exception rather than the rule.
+ This requirement should only effect high level C and ASM programmers. In the
+ worst case the code should be able to test for the processor mode each time
+ it is executed and then jump to the appropriate code.
+
+ We suggest that C and ASM programmers DO NOT create a protected mode library
+ separate from the real mode library, since both types of code will have to
+ be linked in at link time to create a dual mode program. The benefits of
+ writing dual mode code and creating a dual mode library include :
+
+    .  Only one copy of the source code and one library to maintain.
+    .  Less disk space requirement for distribution.
+    .  Less technical support with people linking the wrong library.
+
+ <B>Coding for dual mode</B>
+
+ This section details the suggested way to adapt code to run in both real and
+ protected mode, rather than coding specifically for one or the other.
+
+ When linking DOS extended or dual mode programs it is always necessary to
+ include an additional Blinker library for the appropriate compiler. This
+ library contains replacement .OBJs for any compiler library .OBJs which are
+ not protected mode compatible.
+
+ The Blinker libraries all have names of the form BLXcccnn, where ccc
+ indicates the vendor and compiler, and nn indicates the compiler version
+ number. They are all compiled as large model and so should only be used with
+ large model programs.
+
+ The appropriate compiler library must always be SEARCHed just before the
+ standard compiler library or the script file containing the compiler
+ library.
+
+ For example, with Microsoft Visual C++:
+
+    <B>SEARCH BLXMVC15      # Blinker library</B>
+    <B>LIB LLIBCE           # MSVC library</B>
+
+ or with CA-Clipper 5.2:
+
+    <B>SEARCH BLXCLP52      # Blinker library </B>
+    <B>LIB CLIPPER       # CA-Clipper library</B>
+
+ or:
+
+    <B>SEARCH BLXCLP52      # Blinker library </B>
+    <B>@CL520MID            # Script containing CA-Clipper library</B>
+
+ If the compiler library is not explicitly mentioned then place the SEARCH of
+ the Blinker library as the last library in the link file.
+
+ When using third-party libraries please ensure that they are protected mode
+ or dual mode compatible before attempting to use them in a DOS extended
+ program. Blinkinc cannot guarantee that any particular library is either
+ overlayable or protected mode compatible or both. Please refer to the file
+ 3RDPARTY.DOC for up-to-date details on compatibility issues which we are
+ aware of. The third party libraries should typically be placed before the
+ SEARCH of the Blinker library unless otherwise documented in the third party
+ product.
+
+ As stated before, most code will actually run in both modes without
+ modification. Most of the remaining code will run in either mode after being
+ modified to use a variable set up with the appropriate value at start up.
+ For example, in the case of directly accessing the video buffer, in C we
+ would write:
+
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>BYTE ProcMode;</B>
+    <B>static SEL Selector;</B>
+    <B>static unsigned char far *VideoBuffer;</B>
+    <B>...</B>
+    <B>if (DosGetMachineMode(&amp;ProcMode) == 0)</B>
+    <B>   switch (ProcMode)</B>
+    <B>      {</B>
+    <B>      case 0:</B>
+    <B>         printf ("\nReal mode - absolute pointers ok\n");</B>
+    <B>         VideoBuffer = MK_FP(0xb800,0);</B>
+    <B>         break;</B>
+    <B>      case 1:</B>
+    <B>         printf ("\n286 Protected mode - plenty memory\n");</B>
+    <B>         if (DosMapRealSeg (0xb800, 4000l, &amp;Selector))</B>
+    <B>            {</B>
+    <B>            printf ("\nTrouble\n");</B>
+    <B>            exit (1);</B>
+    <B>            }</B>
+    <B>         VideoBuffer = MK_FP(Selector,0);</B>
+    <B>         break;</B>
+    <B>      default:</B>
+    <B>         printf ("\nOther mode - interesting\n");</B>
+    <B>         exit(1);</B>
+    <B>   }</B>
+
+ Then:
+
+    <B>*VideoBuffer[0] = `*';     /* Display a `*' in top left */</B>
+    <B>                              /* corner of screen */</B>
+
+ As can be seen, there is no extra overhead in code or execution speed once
+ the initialisation has been done.
+
+ In the exceptional case where the code is totally different for the two
+ modes, one of two approaches can be used. The first is to use a simple `if'
+ or `switch' statement on a global variable, as is used in the example above
+ for the initialisation code. If the choice has to be made throughout your
+ code the second method of using a function pointer is more appropriate.
+
+    <B>#include &lt;blx286.h&gt;</B>
+    <B></B>
+    <B>int (*DoCode) (int);       /* Variable for function pointer*/</B>
+    <B>int ProtCode (int);        /* Protected mode code function */</B>
+    <B>int RealCode (int);        /* Real mode code function */</B>
+    <B>...</B>
+    <B>if (ProcMode)              /* If protected mode */</B>
+    <B>   DoCode = ProtCode;</B>
+    <B>else                       /* Real mode */</B>
+    <B>   DoCode = RealCode;</B>
+    <B></B>
+    <B>int ProtCode (int abc)</B>
+    <B>   {</B>
+    <B>   printf ("ProtCode %d\n",abc);</B>
+    <B>   return (abc * 2);</B>
+    <B>   }</B>
+
+ Then:
+
+    <B>DoCode(1234);              /* Execute the appropriate code */</B>
+
+ It should be noted that in the unusual cases where an overhead is necessary,
+ it is absolutely minimal, less than a millionth of a second in C even on a
+ 286. In the case of a higher level language such as CA-Clipper, which
+ executes hundreds of these tests for each `if' clause in the CA-Clipper
+ source, the relative overhead is so small as to be totally irrelevant.
+
+ There is a common misconception that this type of construct will slow down a
+ program written in a high level language program such as CA-Clipper. As
+ anyone who has traced these things under an assembly language debugger will
+ know, even passing a simple logical or integer variable from CA-Clipper to C
+ or ASM requires hundreds of CPU instructions, including a large number of
+ test and jump instructions like the one above.
+
+ The only time that the overhead is even vaguely an issue is when the code is
+ executed hundreds of thousands of times without interacting with, i.e.
+ calling or returning to, the high level language.
+
+ <B>Low level programming</B>
+
+ As an alternative to using the API functions described in Chapter 10, a
+ subset of the DPMI API is also provided by the Blinker DOS extender if a
+ DPMI host is not available. This means that programs can be written to
+ directly access the DPMI functions to allocate and manage segments. The
+ benefit is that the code is then not specific to a particular extender.
+
+ The down side is that the functions are typically at a lower level than
+ those provided by the extender API functions, so more work may be required
+ on the part of the programmer.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

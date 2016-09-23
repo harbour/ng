@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng33de9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2852a.html">[^^Up^^]</A>
+<A HREF="ng34698.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DosSetSegAttrib()             Set segment attributes for selector</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Set segment attributes for a selector</B></U>
+
+ <U>Syntax   : <B>USHORT BLXAPI DosSetSegAttrib(SEL selector, USHORT attr);</B></U>
+
+ <U>selector   <B>Selector of segment to modify.</B></U>
+
+ <U>attr       <B>New attributes for segment.</B></U>
+
+ DosSetSegAttrib() can be used to alter the type of a segment from code to
+ data or from data to code, and also to modify the read/write/execute
+ attributes of the segment. The allowable attributes are declared in
+ BLX286.H.
+
+ Unlike DosCreateCSAlias() and DosCreateDSAlias(), DosSetSegAttrib() does NOT
+ create a new descriptor - instead the existing descriptor is modified
+ directly.
+
+ Example:
+
+    <B>#include &lt;stdio.h&gt;</B>
+    <B>#include &lt;blx286.h&gt;</B>
+    <B>unsigned char far array[] = { 1, 2, 3, 4};</B>
+    <B>void main(void)</B>
+    <B>{</B>
+    <B>/* Set array segment to read only */</B>
+    <B>if (DosSetSegAttrib(SELECTOROF(array[0]), DATA16_NOWRITE) == 0)</B>
+    <B>   printf("Segment containing array is now read only\n");</B>
+    <B>/* Put it back */</B>
+    <B>if (DosSetSegAttrib(SELECTOROF(array[0]), DATA16) == 0)</B>
+    <B>   printf("Segment is now read/write\n");</B>
+    <B>}</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng34b81.html">DosVerifyAccess()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6efc7.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng6fd0b.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MEMORY()</B>
+ Determine the amount of available free pool memory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MEMORY(&lt;nExp&gt;) --&gt; nKbytes</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nExp&gt;</B> is a numeric value that determines the type of value MEMORY()
+     returns as follows:
+
+     <B>MEMORY() Argument Values</B>
+     ------------------------------------------------------------------------
+     <B>Value     Meaning</B>
+     ------------------------------------------------------------------------
+     0         Estimated total space available for character values
+     1         Largest contiguous block available for character values
+     2         Area available for RUN commands
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     MEMORY() returns an integer numeric value representing the amount of
+     memory available, in one -kilobyte increments.
+
+ <B>Description</B>
+
+     MEMORY() is an environment function that reports various states of free
+     pool memory.  (Free pool is the dynamic region of memory that stores
+     character strings and executes RUN commands.)
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses MEMORY() before a RUN command to determine
+        if there is enough memory available to execute the external program:
+
+        #define MEM_CHAR   0
+        #define MEM_BLOCK   1
+        #define MEM_RUN      2
+        //
+        IF MEMORY(MEM_RUN) &gt;= 128
+           RUN MYPROG
+        ELSE
+           ? "Not enough memory to RUN"
+           BREAK
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

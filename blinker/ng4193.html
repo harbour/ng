@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3bc3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng470f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER CLIPPER PAGE          Enable / Disable automatic CA-Clipper 5.x code paging</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Enable / Disable automatic CA-Clipper 5.x code paging</B></U>
+
+ <U>Syntax   : <B>BLINKER CLIPPER PAGE ON | OFF</B></U>
+
+ <U>Default  : <B>ON (if BLINKER INCREMENTAL OFF)</B></U>
+            <B>OFF (if BLINKER INCREMENTAL ON)</B>
+
+ This command can be used to disable the CA-Clipper 5.x dynamic paging system
+ for CA-Clipper code. The only reason for ever wishing to do this is if a
+ CA-Clipper 5.x program with no overlays is required, for example to create
+ an installation program. The paging system is automatically disabled by
+ Blinker when incremental linking is enabled, since the two options are
+ mutually exclusive.
+
+ When linking with BLINKER INCREMENTAL OFF, the paging system is normally
+ automatically enabled, unless this command is used.
+
+ It is highly recommended that the CA-Clipper 5.x paging system be used in
+ all CA-Clipper 5.x programs, as it is often much faster than conventional
+ dynamic overlaying.
+
+ Note: Use of the BLINKER CLIPPER PAGE OFF command will result in
+ symbol-table compression and automatic overlaying of CA-Clipper code (as
+ with BLINKER INCREMENTAL OFF), but the overlaying will be handled by
+ Blinker's overlay manager rather than CA-Clipper's dynamic paging system.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbbad.html">BLINKER INCREMENTAL OFF</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

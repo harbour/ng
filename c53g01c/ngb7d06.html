@@ -1,0 +1,153 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngb5961.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngb93cd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>@...GET RADIOGROUP</B>
+ Create a new radio button group Get object and display it to the screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>@ &lt;nTop&gt;, &lt;nLeft&gt;, &lt;nBottom&gt;, &lt;nRight&gt;</B>
+     <B>   GET &lt;nVar|cVar&gt;</B>
+     <B>   RADIOGROUP &lt;aGroup&gt;</B>
+     <B>      [CAPTION&lt;cCaption&gt;]</B>
+     <B>      [MESSAGE &lt;cMessage&gt;]</B>
+     <B>      [COLOR &lt;cColorString&gt;]</B>
+     <B>      [FOCUS] &lt;fblock&gt;</B>
+     <B>      [WHEN &lt;lPreExpression&gt;]</B>
+     <B>      [VALID &lt;lPostExpression&gt;]</B>
+     <B>      [SEND &lt;msg&gt;]</B>
+     <B>      [GUISEND &lt;guimsg&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B> and <B>&lt;nRight&gt;</B> specify the
+     screen position for the radio button group and its caption.  Output
+     which extends beyond the visible extent of the display is clipped and
+     does not appear.
+
+     <B>GET &lt;nVar|cVar&gt;</B> specifies the name of the variable associated with
+     the GET.  Its value indicates which radio button (if any) in the group
+     is selected.  A numeric value refers to the position in the group of the
+     selected button.  A value of 0 indicates no selected button.  A
+     character string value refers to the data or text contained within the
+     selected button.  A character string that does not refer to any item in
+     the list indicates no selected item.
+
+     <B>RADIOGROUP &lt;aGroup&gt;</B> specifies an array of RadioButto objects.
+
+     <B>CAPTION &lt;cCaption&gt;</B> specifies a character string that concisely
+     describes the GET on the screen.  Caption differs from the SAY argument
+     in two ways.  The first is that the caption is displayed each time the
+     GET is shown on the screen.  The other difference is that the caption,
+     along with its screen position is maintained within the Get object.
+     This allows the GET to receive input when the mouse's left button is
+     clicked and its cursor is on the caption.  By default, the caption
+     appears in the top-left border of the GET.  Use the Get object's capRow
+     or capCol variable to change the screen position of the caption.
+
+     When present, the <B>&amp;</B> character specifies that the character
+     immediately following it in the caption is the radio group's accelerator
+     key. The accelerator key provides a quick and convenient mechanism for
+     the user to move input focus from one data input control to the radio
+     group.  The case of an accelerator key is ignored.
+
+     <B>MESSAGE &lt;cMessage&gt;</B> specifies a character string that is displayed on
+     the Get system's status bar line when the GET has input focus.
+     Typically, it describes the anticipated contents or user response of the
+     GET.  Refer to the READ command for details pertaining to the Get
+     system's status bar.
+
+     <B>COLOR &lt;cColorString&gt;</B> defines the color settings for the radio button
+     group.  &lt;cColorString&gt; is a character expression containing exactly
+     three color settings.
+
+     <B>RadioGroup Color Attributes</B>
+     ------------------------------------------------------------------------
+     <B>Position     Applies To                             Default Value from</B>
+     <B>in colorSpec                                        System Color Setting</B>
+     ------------------------------------------------------------------------
+     1            The radio group's border                   Border
+     2            The radio group's caption                  Standard
+     3            The radio group caption's accelerator key  Background
+     ------------------------------------------------------------------------
+
+     <B>FOCUS &lt;fblock&gt;</B> specifies a code block that is evaluated each time
+     the radio button group receives focus.  The code block takes no implicit
+     arguments.  Use the RadioGroup:hasFocus instance variable to determine
+     if the radio group has focus.
+
+     <B>WHEN &lt;lPreExpression&gt;</B> specifies an expression that must be satisfied
+     before the cursor can enter the GET during a READ.  The expression can
+     optionally be a code block.  The Get object is passed as a parameter to
+     the code block.
+
+     <B>VALID &lt;lPostExpression&gt;</B> specifies an expression that must be
+     satisfied before the cursor can leave the GET during a READ.  The
+     expression can optionally be a code block.  The Get object is passed as
+     a parameter to the code block.
+
+     <B>Note: </B> There is no STATE clause for the @...GET RADIOGROUP command.
+     Instead each radio button in the group can have its own sBlock instance
+     variable.  See  sBlock under RadioButto class for more details.
+
+     <B>SEND &lt;msg&gt;</B> sends the specified message to the Get object.  &lt;msg&gt; is
+     sent before the GET is displayed.  Any message can be sent, including
+     method calls and instance variable assignments.  Method calls must
+     include parentheses even if no arguments are passed.
+
+     <B>GUISEND &lt;guimsg&gt;</B> can be used to send a message (such as the
+     display() method) to a GUI object.  The GUI objects available in
+     CA-Clipper are check boxes, list boxes, push buttons, and radio button
+     groups.  To send a message to a non-GUI object, such as standard GETs
+     and TBrowses, use the SEND clause.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates how to add a radio button group to a
+        data entry screen.  It utilizes a position-oriented method of
+        selection:
+
+        nColor := 1            //default to the first item.
+        aGroup := ARRAY( 3 )
+        aGroup[ 1 ] := RadioButto( 6, 22, "&amp;Red" )
+        aGroup[ 2 ] := RadioButto( 7, 22, "&amp;Green" )
+        aGroup[ 3 ] := RadioButto( 8, 22, "&amp;Blue" )
+        @ 5, 20, 9, 40 GET nColor RADIOGROUP aGroup
+
+       The nColor variable will return a position, in this case 1, 2, or 3.
+
+     <B>.</B>  This example demonstrates a radio button group that utilizes a
+        data-oriented method of selection:
+
+        cColor := "R"          //default to red.
+        aGroup := ARRAY( 3 )
+        aGroup[ 1 ] := RadioButto( 6, 22, "&amp;Red", "R" )
+        aGroup[ 2 ] := RadioButto( 7, 22, "&amp;Green", "G" )
+        aGroup[ 3 ] := RadioButto( 8, 22, "&amp;Blue", "B" )
+        @ 5, 15, 9, 40 GET cColor RADIOGROUP aGroup
+
+       The nColor variable will return data, in this case "R", "G", or "B".
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1358ad.html">Get class</A>
+<A HREF="ng14cec7.html">RadioButto class</A>
+<A HREF="ng15053a.html">RadioGroup class</A>
+<A HREF="ngd4eb5.html">READ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

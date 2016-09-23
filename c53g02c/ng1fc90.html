@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1f9ec.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng18790.html">[^^Up^^]</A>
+<A HREF="ng207df.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1202:   DOS read error in file &lt;filename&gt;</B>
+
+     <B>Note:</B>  This error can occasionally result from the effects of a
+     virus.  In this case, first try external overlays (via the SECTION INTO
+     xxx command) marking the .EXE read-only, and then follow the procedures
+     outlined below.  If nothing else helps, perform an extensive check for
+     viruses and take the necessary measures for removal.
+
+     <B>Explanation:</B>  This message indicates that DOS returned an error
+     while reading an overlay file.  A number of situations can cause this
+     error to occur frequently and consistently:
+
+     1. The most common is the use of a 'file handles' routine within the
+        program to increase the maximum number of file handles available to
+        the program under DOS versions 3.0 to 3.2.  If this 'file handle'
+        routine is called after Blinker has opened the overlay file and
+        loaded one or more overlays from the file, the file handle table is
+        recreated, wiping out Blinker's existing file handle for the
+        overlays.
+
+        <B>Note: </B> A combination of three factors can cause this to occur in
+        a CA-Clipper application--Calling any handle table expanding routine
+        from an overlay, using versions of DOS 3.3 or above, and specifying
+        the CLIPPER Fn environment parameter.  Since the handle-increasing
+        routine is only needed for DOS versions 3.0 to 3.2, this error can be
+        avoided by checking the DOS version before calling that routine.
+
+     2. This error can also occur when non-overlayable modules are placed in
+        the overlay area.
+
+     3. Should the program stack overflow, it can overwrite the nearby file
+        handle area, resulting in this error.
+
+     4. A network could be configured to deny access to the .EXE once it had
+        been loaded, preventing Blinker's overlay manager from reading an
+        internal overlay.  Also swap functions can result in this error if
+        the file handle table has not been restored correctly.
+
+     5. Finally, if this error occurs sporadically, it is possible that the
+        overlay file has been closed by an external influence such as a TSR
+        or being logged off a network, or the overlay file has become corrupt
+        because of a disk error and should be reinstalled.
+
+     <B>Action:</B>  Some suggestions to resolve this error are:
+
+     1. ensure that the handles function is called from the root before
+        Blinker has loaded any overlays.
+
+     2. If there are any .OBJ or .LIB files in the overlay area which are not
+        known to be overlayable, these should be moved to the root and the
+        program relinked.  If the program then runs successfully, this
+        indicates that the file(s) are not currently overlayable.
+
+     3. Try increasing the size of the stack with either the STACK or BLINKER
+        PROCEDURE DEPTH command.
+
+     <B>See also:</B>  The Linker Reference Commands section in the "CA-Clipper
+     Real Mode Linker--BLINKER.EXE" chapter of the Programming and Utilities
+     Guide.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

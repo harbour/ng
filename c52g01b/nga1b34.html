@@ -1,0 +1,89 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga1778.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="nga2467.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET EXACT*</B>
+ Toggle exact matches for character strings
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET EXACT on | OFF | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> enforces exact comparison of character strings, including length.
+
+     <B>OFF</B> resumes normal character string comparison.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET EXACT determines how two character strings are compared using the
+     relational operators (=, &gt;, &lt;, =&gt;, =&lt;).  When EXACT is OFF, strings are
+     compared according to the following rules; assume two character strings
+     cLeft and cRight where the expression to test is (cLeft = cRight):
+
+     <B>.</B>  If cRight is a null string (""), return true (.T.).
+
+     <B>.</B>  If LEN(cRight) is greater than LEN(cLeft), return false (.F.).
+
+     <B>.</B>  Otherwise, compare all characters in cRight with cLeft.  If
+        all characters in cRight equal cLeft, return true (.T.); otherwise
+        return false (.F.).
+
+     With EXACT ON, all relational operators except the double equal operator
+     (==) treat two strings as equal, if they match exactly, excluding
+     trailing spaces.  With the double equal operator (==), all characters in
+     the string are significant, including trailing spaces.
+
+     SET EXACT is a compatibility command and not recommended.
+
+ <B>Notes</B>
+
+     <B>.  Compatibility:</B> In CA-Clipper, unlike other dialects, SET EXACT
+        has no effect on operations other than relational operators.  This
+        includes the SEEK and FIND commands.  If you need to seek exact
+        matches of character keys, use the example user-defined function
+        SeekExact() in the SEEK command reference.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples show various results of the equal operator (=)
+        with SET EXACT:
+
+        SET EXACT OFF
+        ? "123" = "12345"            // Result: .F.
+
+        ? "12345" = "123"            // Result: .T.
+        ? "123" = ""                 // Result: .T.
+        ? "" = "123"                 // Result: .F.
+        ? "123" = "123  "            // Result: .F.
+        //
+        SET EXACT ON
+        ? "123" = "12345"            // Result: .F.
+        ? "12345" = "123"            // Result: .F.
+        ? "123" = ""                 // Result: .F.
+        ? "" = "123"                 // Result: .F.
+        ? "123" = "123  "            // Result: .T.
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng994cb.html">SEEK</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng779a2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng75ccf.html">[^^Up^^]</A>
+<A HREF="ng780ea.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SIXNTX.OBJ:</B>
+
+  If you link this object file into your application, it will make the SIx
+  Driver (SIXNTX flavor) the default driver and prevent the standard DBFNTX
+  driver from being linked into your application at all.  This will eliminate
+  the need to open database files VIA "SIXNTX" or call the
+  RDDSetDefault("SIXNTX") function.
+
+  Note:  If your application will no longer use .NTX indexes, you should
+         link this object file into your application to reduce your EXE
+         load size and run-time memory requirements.
+
+  For example, to link an application called MYAPP to make the SIx Driver's
+  SIXNTX flavor the default RDD, you would use the following link commands:
+
+  RTLink:
+
+     <B>EXOSPACE FI myapp,sixntx LIB six3,clipper</B>
+
+  Blinker:
+
+     <B>BLINKER FI myapp,sixntx @six3 LIB clipper</B>
+
+  CauseWay:
+
+     <B>WL32 myapp sixntx,,,six3 clipper</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng7725a.html">SIXCDX.OBJ</A>
+<A HREF="ng775fe.html">SIXMDX.OBJ</A>
+<A HREF="ng779a2.html">SIXNSX.OBJ</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

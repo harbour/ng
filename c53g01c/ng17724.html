@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng16f2f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng17b80.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLOBROOTUNLOCK()</B>
+ Release the lock on a BLOB file's root area
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>BLOBROOTUNLOCK() --&gt; NIL</B>
+
+ <B>Description</B>
+
+     Use BLOBROOTUNLOCK() to release a lock previously obtained using
+     BLOBROOTLOCK().
+
+     By default, this function operates on the currently selected work area.
+     It can be made to operate on an unselected work area by specifying it
+     within an aliased expression.
+
+     <B>Note: </B> The only functions that require the use of BLOBROOTLOCK() or
+     BLOBROOTUNLOCK() are BLOBROOTGET() and BLOBROOTPUT().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example illustrates how to properly lock and unlock the
+        root area of a BLOB file for a database file opened in shared mode:
+
+        FUNCTION GETSETTINGS()
+           LOCAL aCustSettings
+
+           // Open a customer file in shared mode
+           USE customer NEW SHARED VIA DBFCDX
+
+           IF BLOBROOTLOCK()
+              aCustSettings := BLOBROOTGET()
+              BLOBROOTUNLOCK()
+           ELSE
+              Alert("Could not obtain root lock of Customer;
+                 file")
+           ENDIF
+
+           CLOSE
+
+           RETURN aCustSettings
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng16a78.html">BLOBROOTLOCK()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

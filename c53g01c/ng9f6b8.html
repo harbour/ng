@@ -1,0 +1,95 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9f30f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="nga0031.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SETPRC()</B>
+ Set PROW() and PCOL() values
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SETPRC(&lt;nRow&gt;, &lt;nCol&gt;) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nRow&gt;</B> is the new PROW() value.
+
+     <B>&lt;nCol&gt;</B> is the new PCOL() value.
+
+ <B>Returns</B>
+
+     SETPRC() always returns NIL.
+
+ <B>Description</B>
+
+     SETPRC() is a printer function that sends control codes to the printer
+     without changing the tracking of the printhead position.  When
+     CA-Clipper prints, it updates the PCOL() value with the number of
+     characters sent to the printer.  There is no discrimination between
+     printable or nonprintable characters.  If, for example, a string of ten
+     characters sent to the printer contains two characters interpreted by
+     the printer as a control code, the CA-Clipper PCOL() value is
+     incremented by ten, while the true printhead position is moved only by
+     eight.  This can lead to alignment problems.  Using SETPRC(), you can
+     compensate for control codes by resetting PCOL() as shown in the example
+     below.
+
+     SETPRC() also suppresses page ejects when printing with @...SAY.  This
+     is important when the next row position is smaller than the current row
+     and an EJECT has not been issued.  In this situation, CA-Clipper issues
+     an automatic page eject if the next row print position is less than the
+     current PROW() value.  Using SETPRC(), you can set PROW() to a number
+     less than the current row, thus suppressing the automatic EJECT.
+
+ <B>Examples</B>
+
+     <B>.</B>  This user-defined function, PrintCodes(), uses SETPRC() to
+        send control codes to the printer without affecting PROW() and PCOL()
+        values:
+
+        #include "Set.ch"
+        #define ITALICS_ON   CHR(27) + "I"
+        #define ITALICS_OFF   CHR(27) + "E"
+        //
+        SET DEVICE TO PRINTER
+        @ 12, 10 SAY "This is an"
+        @ PROW(), PCOL() + 2 SAY PrintCodes(ITALICS_ON) + ;
+                 "important"
+        @ PROW(), PCOL() + 2 SAY PrintCodes(ITALICS_OFF) + ;
+                 "meeting"
+        SET DEVICE TO SCREEN
+        RETURN
+
+        FUNCTION PrintCodes( cCtrlCode )
+           LOCAL nRow, nCol, lPrinter
+           lPrinter := SET(_SET_PRINTER, .T.)    // SET PRINTER ON
+           nRow:= PROW()                         // Save printhead position
+           nCol:= PCOL()
+           //
+           ?? cCtrlCode                          // Send control code
+           //
+           SETPRC(nRow, nCol)
+           SET(_SET_PRINTER, lPrinter)           // Restore printer setting
+           RETURN ""                             // Return a null string
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng8c995.html">PCOL()</A>
+<A HREF="ng8eca6.html">PROW()</A>
+<A HREF="nge50f8.html">SET DEVICE</A>
+<A HREF="ng9a836.html">SET()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,80 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng78e7d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng773df.html">[^^Up^^]</A>
+<A HREF="ng79c18.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETTTSBEG()</B>
+ Starts an explicit transaction
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETTTSBEG([&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cServer&gt;</B> Designates the name of the file server that is used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETTTSBEG() returns .T. if a transaction on &lt;cServer&gt; has been opened
+     successfully.  If an error occurs, the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET TRANSACTION TRACKING SYSTEM BEGIN
+     A call of NNETTTSBEG() starts an explicit transaction on &lt;cServer&gt;.
+     After a transaction has been started, each write access to a marked,
+     transactional file (the extended attribute transactional is set) is
+     protocolled and becomes valid if the transaction is terminated.  During
+     a running transaction, all file modifications can be undone.  If a
+     failure occurs during a transaction (for example, a workstation crash),
+     the Transactional Tracking System (TTS) backs up the transaction
+     immediately.
+
+     Only one transaction can be active per workstation.  This transaction
+     includes all transactional files into which the data is written.
+
+     A file on a server volume can be marked 'transactional' with
+     NNETEXTATT().
+
+ <B>Note</B>
+
+     <B>.</B>  When you use the TTS, always take into account that other
+        stations might not be able to read files attached by the transaction
+        (see the Introduction to this chapter).
+
+ <B>Example</B>
+
+     Mark the file CLIENT.DBF as transactional, and start an explicit
+     transaction:
+
+     #include "ctnnet.ch"
+
+     NNETEXTATT('CLIENT.DBF',EXA_TTS)
+
+     IF .NOT. NNETTTSBEG()
+        ? 'Transaction could not be started!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng78e7d.html">NNETTTSAB()</A>
+<A HREF="ng79c18.html">NNETTTSEND()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

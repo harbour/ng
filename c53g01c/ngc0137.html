@@ -1,0 +1,111 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngbfa7f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngc0ec3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CALL* </B>
+ Execute a C or Assembler procedure
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CALL &lt;idProcedure&gt; [WITH &lt;exp list&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;idProcedure&gt;</B> is the name of the external procedure to CALL.
+
+     <B>WITH &lt;exp list&gt;</B> is an optional list of up to seven expressions of
+     any data type to pass to the external procedure.
+
+ <B>Description</B>
+
+     CALL executes a separately compiled or assembled procedure.  The
+     procedure must be defined as FAR and end with a FAR return instruction.
+     Place parameters on the stack using the C parameter passing convention.
+     Each parameter consists of a FAR (four-byte) pointer to the actual
+     parameter value.  When necessary you may use the WORD() function to pass
+     a two-byte binary value in the WITH expression.  The DX:BX and ES:BX
+     registers also contain a copy of the first four bytes of parameter
+     information.
+
+     The procedure must preserve the BP, SS, SI, DI, ES, and DS registers as
+     well as clear the direction flag.
+
+     CALL is a compatibility command and therefore not recommended.  It is
+     superseded by the Extend system which provides functions for passing
+     data to and from CA-Clipper.
+
+ <B>Notes</B>
+
+     <B>.  Character strings: </B> Pass a character argument as a FAR pointer
+        to a null-terminated string (a string with a 00 hex byte at the end).
+
+     <B>.  Numeric values: </B> Pass each numeric argument as a FAR pointer
+        to an eight-byte IEEE floating point value.  To pass a parameter as
+        an integer, use the WORD() function.  The WORD() function converts
+        the numeric value to a two-byte binary integer, and passes the
+        integer value directly rather than through a pointer.  Note that
+        WORD() will not work for values outside of the #32,767 range since
+        these values cannot be accurately represented as two-byte integers.
+
+     <B>.  Date values: </B> Pass each date argument as a FAR pointer to a
+        four-byte (long) integer containing a Julian day number.
+
+     <B>.  Logical values: </B> Pass each logical argument as a FAR pointer
+        to a two-byte binary integer containing zero for false (.F.) and one
+        for  true (.T.) .
+
+     <B>.  Compiling and linking: </B> CALLed programs must conform to the
+        following rules:
+
+        <B>-</B>  Procedures must be in INTEL 8086 relocatable object file
+           format with the .OBJ file extension.
+
+        <B>-</B>  Procedures must follow the C calling and parameter passing
+           conventions.
+
+        <B>-</B>  Procedures must be available to the linker at link time, along
+           with the library of the source compiler.  You will need runtime
+           support for any language other than assembly language.  See your
+           compiler manual for further information.
+
+     <B>.  Screen position: </B> When using a CALL statement to access a C or
+        Assembler routine, the cursor is set to the current screen position
+        within the C or Assembler routine.
+
+     <B>.  Microsoft C:</B> Microsoft C versions 5.0 and above place a
+        leading underscore on function names when they are compiled.  To call
+        them, therefore, you must CALL _&lt;function&gt;.
+
+     <B>.  dBASE III PLUS:</B> To convert a dBASE III PLUS load module to a
+        CA-Clipper-compatible module, add the following statements to your
+        .asm file:
+
+        PUBLIC &lt;proc&gt;
+
+        and
+
+        push ds
+        mov ds, dx
+
+     <B>Warning! </B> Modifying the parameter values may produce incorrect or
+     unexpected results and, therefore, is strongly discouraged.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="nga8d87.html">WORD()*</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

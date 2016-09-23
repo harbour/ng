@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge302a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge3d1f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET DEFAULT</B>
+ Set the CA-Clipper default drive and directory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET DEFAULT TO [&lt;xcPathspec&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;xcPathspec&gt;</B> identifies a disk drive and the directory as the
+     default and can be specified either as a literal path specification or
+     as a character expression enclosed in parentheses.  If you specify both
+     a drive and directory, a colon must be included after the drive letter.
+
+     SET DEFAULT TO specified without an argument defaults to the current DOS
+     drive and directory.
+
+ <B>Description</B>
+
+     SET DEFAULT sets the drive and directory where the application program
+     creates and saves files, with the exception of temporary files and files
+     created with the low-level file functions.
+
+     SET DEFAULT does not change the DOS drive and directory.  When
+     attempting to access files, the DEFAULT drive and directory are searched
+     first.  To set additional search paths for file access, use SET PATH.
+
+ <B>Notes</B>
+
+     <B>.  Initial Default:</B> When a CA-Clipper program starts, the default
+        drive and directory are the current DOS drive and directory.  Within
+        the program, you can change this with SET DEFAULT.
+
+     <B>.  Running external programs:</B> Executing a RUN command accesses
+        the current DOS drive and directory.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows a typical use of SET DEFAULT:
+
+        SET PATH TO
+        ? FILE("Sales.dbf")      // Result: .F.
+        //
+        SET DEFAULT TO C:\CLIPPER\FILES
+        ? FILE("Sales.dbf")      // Result: .T.
+        //
+        SET DEFAULT TO C:        // Change default drive
+        SET DEFAULT TO \         // Change to root directory
+
+        SET DEFAULT TO ..        // Change to parent directory
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1b556.html">CURDIR()</A>
+<A HREF="ngecec7.html">SET PATH</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,97 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng99700.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng89afa.html">[^^Up^^]</A>
+<A HREF="ng9aa3f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>FILETIME()</B>
+ Determines a file's time
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>FILETIME([&lt;cFileMap&gt;, [&lt;nFileAttr&gt;]]) --&gt; cFileClockTime</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cFileMap&gt;</B>  Designates the file name, including the path and drive
+     designation.
+
+     <B>&lt;nFileAttr&gt;</B>  Designates the file attribute explained in the table
+     below.  The default value is 0.
+
+     ()  If the function is called without parameters, it returns the file
+     time from the current FILESEEK() buffer.
+
+ <B>Returns</B>
+
+     FILETIME() returns the clock time for the "searched for" entry, the
+     clock time from the FILESEEK() buffer (when called without parameters),
+     or a null string.
+
+ <B>Description</B>
+
+     Implement FILETIME() alone or  in conjunction with FILESEEK().  If the
+     function is called with the &lt;cFileMap&gt; parameter, it returns the time of
+     the first entry found.  If no matching entry is available, a null string
+     is returned.
+
+     When called without parameters, FILETIME() returns the clock time of the
+     last file found with FILESEEK().  You can also determine the clock time
+     of file groups (wildcards) when the function is used in conjunction with
+     FILESEEK().
+
+     You can designate the attribute for the desired file in numeric form:
+
+     <B>Table 7-17:  Coding the File Attribute</B>
+     ------------------------------------------------------------------------
+     <B>Value   Symb. constants     Assigned attribute</B>
+     ------------------------------------------------------------------------
+     0       FA_NORMAL
+     1       FA_READONLY         READ ONLY (Read-only)
+     2       FA_HIDDEN           HIDDEN (Hidden files)
+     4       FA_SYSTEM           SYSTEM (System files)
+     16      FA_DIRECTORY        (Subdirectory)
+     32      FA_ARCHIVE          ARCHIVE (Changes since last backup)
+     ------------------------------------------------------------------------
+
+     Only the SYSTEM, HIDDEN, VOLUME, or DIR attributes must be specified for
+     an entry to be found.  If multiple attributes are implemented
+     simultaneously, the table values are added accordingly.  Of course, not
+     all combinations are useful.
+
+ <B>Examples</B>
+
+     <B>.</B>  The clock time of a particular file:
+
+        ? FILETIME("C:\TEXT\TEXT.TXT")      // File clock time or ""
+
+     <B>.</B>  The clock time of an ARCHIVE/HIDDEN file:
+
+        ? FILETIME("C:\HIDE.TXT", 34")      // File clock time or ""
+
+     <B>.</B>  Used in conjunction with FILESEEK():
+
+        cFile  :=  FILESEEK(C:\TEXT.TXT")
+        DO WHILE .NOT. EMPTY(cFile)
+           ? cFile, FILETIME()              // File name and clock time
+           cFile  := FILESEEK()             // Search for next entry
+        ENDDO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng97ad4.html">FILESEEK()</A>
+<A HREF="ng935ab.html">FILEATTR()</A>
+<A HREF="ng96256.html">FILEDATE()</A>
+<A HREF="ng98d54.html">FILESIZE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

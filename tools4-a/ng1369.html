@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngf97.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4ed.html">[^^Up^^]</A>
+<A HREF="ng1859.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NETLOCNAME()</B>
+ Determines the name of a local redirected device
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NETLOCNAME(&lt;nDevice&gt;) --&gt; cDeviceName</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nDevice&gt; </B> Designates the location within the DOS redirection table.
+
+ <B>Returns</B>
+
+     NETLOCNAME() returns the local name for the designated location in the
+     DOS redirection table (&lt;nDevice&gt;), or a null string if no name is
+     available.
+
+ <B>Description</B>
+
+     NETWORK LOCAL NAME
+     Under PC LAN/MS-NET, server devices can be redirected to local devices
+     using the NET USE &lt;local&gt; &lt;remote&gt; command.  DOS logs these redirections
+     in its redirection table.  In this way, NETLOCNAME() allows you to
+     determine all the local devices that have been redirected to a server
+     device.
+
+ <B>Note</B>
+
+     <B>.</B>  Using NETRMTNAME() allows you to determine the name of the
+        corresponding server device.
+
+ <B>Example</B>
+
+     Determine all the local devices that have been redirected to a server
+     device:
+
+     nCounter    :=  0
+     cLocalName  :=  NETLOCNAME(nCounter)
+     DO WHILE .NOT. EMPTY(cLocalName)
+        ? cLocalName                      // Display local device
+        nCounter    := nCounter +1
+        cLocalName  := NETLOCNAME(nCounter)
+     ENDDO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng24c9.html">NETRMTNAME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

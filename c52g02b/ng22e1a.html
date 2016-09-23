@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng22a62.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng182ca.html">[^^Up^^]</A>
+<A HREF="ng231ea.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBFNTX/1003  Open error (index)</B>
+
+     <B>Default Behavior:</B>  Program continues without opening the index file
+     (.ntx).
+
+     <B>Explanation:</B>  The specified index file could not be opened.
+
+     <B>Action:</B>  Check to make sure that the specified file exists.  If the
+     file is not in the directory where the application runs, use SET DEFAULT
+     or SET PATH to make the file accessible or specify the full path name
+     where the file can be found.  In a network environment, make sure the
+     application has the necessary rights to access the file.  If the file is
+     available only for read access, use the READONLY clause on the USE or
+     SET INDEX command.
+
+     CA-Clipper's default error handler (Errorsys.prg) will set NETERR() to
+     true (.T.) and will ask DBFNTX to default if the error was due to a
+     sharing violation on the network.
+
+     <B>See Also:</B>  USE command, SET INDEX command, Network Programming
+     chapter in the Programming and Utilities guide
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

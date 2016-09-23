@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng228fd.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d4ed.html">[^^Up^^]</A>
+<A HREF="ng23373.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETSETSRV()</B>
+ Sets an attached server as the default server
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETSETSRV(&lt;cServerName&gt;) --&gt; lLoggedIn</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cServerName</B>&gt; Designates the name of the server that is redirected
+     as the default server.
+
+ <B>Returns</B>
+
+     NNETSETSRV() returns .T. when the designated name has been found in the
+     attached server table and designated as the default server.
+
+ <B>Description</B>
+
+     NOVELL NET SET SERVER
+     With NNETSETSRV(), it is possible to designate an attached server as the
+     default server.  Then all NNETXXXXXX() functions except NNETSLIST()
+     (list of the attached servers) and NNETSTAID() (station ID) relate to
+     this server specifically.
+
+ <B>Example</B>
+
+     Switch from CA1 server to CA2 server:
+
+     ? NNETSNAME()                        // "CA1"
+     ? NNETSETSRV("CA2")                  // .T., if OK.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng236eb.html">NNETSNAME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

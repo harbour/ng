@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng46d91.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng47811.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBTRANSITEM</B>
+ Define a single transfer item from one work area to another
+------------------------------------------------------------------------------
+ <B>Structure</B>
+
+     <B>typedef struct</B>
+     <B>{</B>
+     <B>   USHORT uiSource;</B>
+     <B>   USHORT uiDest;</B>
+     <B>} DBTRANSITEM;</B>
+     <B></B>
+     <B>typedef DBTRANSITEM far * LPDBTRANSITEM;</B>
+
+ <B>Elements</B>
+
+     <B>uiSource</B>
+
+        Contains a numeric value; an index into the AREA-&gt;lpFields structure
+        indicating the field that is to be transferred to the destination
+        work area.
+
+     <B>uiDest</B>
+
+        Contains a numeric value; an index into the AREA-&gt;lpfields structure
+        indicating the field that is to be the recipient of the row being
+        transferred from the source work area.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+ <B>Used By</B>    DBTRANSINFO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng46d91.html">DBTRANSINFO</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

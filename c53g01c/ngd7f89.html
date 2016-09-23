@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngd7830.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngd874f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RENAME</B>
+ Change the name of a file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RENAME &lt;xcOldFile&gt; TO &lt;xcNewFile&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcOldFile&gt;</B> is the name of the file to be renamed including an
+     extension, and optionally is preceded by a drive and/or path designator.
+     &lt;xcOldFile&gt; can be a literal string or a character expression enclosed
+     in parentheses.
+
+     <B>TO &lt;xcNewFile&gt;</B> specifies the new file name including extension and
+     optionally prefaced by a drive and/or path designator.  &lt;xcNewFile&gt; can
+     be a literal string or a character expression enclosed in parentheses.
+
+ <B>Description</B>
+
+     RENAME is a file command that changes the name of a specified file to a
+     new name.  If the source directory is different from the target
+     directory, the file moves to the new directory.  RENAME does not use SET
+     DEFAULT and SET PATH to locate &lt;xcOldFile&gt;.  Instead, the &lt;xcOldFile&gt; is
+     renamed only if it is located in the current DOS directory or in the
+     specified path.
+
+     In the instance that either &lt;xcNewFile&gt; exists or is currently open,
+     RENAME does nothing.  To trap this condition as an error, use the FILE()
+     function before executing the command.  See the example.
+
+     <B>Warning! </B> Files must be CLOSEd before renaming.  Attempting to
+     rename an open file will produce unpredictable results.  When a database
+     file is RENAMEd, remember that any associated memo (.dbt) file must also
+     be RENAMEd.  Failure to do so may compromise the integrity of your
+     program.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example renames a file, checking for the existence of the
+        target file before beginning the RENAME operation:
+
+        xcOldFile := "OldFile.txt"
+        xcNewFile := "NewFile.txt"
+        IF !FILE(xcNewFile)
+           RENAME (xcOldFile) TO (xcNewFile)
+           ELSE
+        ? "File already exists"
+        ENDIF
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc3bb3.html">COPY FILE</A>
+<A HREF="ng1b556.html">CURDIR()</A>
+<A HREF="ngcb7da.html">ERASE</A>
+<A HREF="ng474c3.html">FILE()</A>
+<A HREF="ng43d36.html">FERASE()</A>
+<A HREF="ng4b4f4.html">FRENAME()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

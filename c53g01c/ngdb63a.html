@@ -1,0 +1,90 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngdaeb4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngdbfa2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>RUN</B>
+ Execute a DOS command or program
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>RUN | !* &lt;xcCommandLine&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;xcCommandLine&gt;</B> is any executable program including resident DOS
+     commands and COMMAND.COM.  It may be specified either as a literal
+     string or as a character expression enclosed in parentheses.
+
+ <B>Description</B>
+
+     RUN executes a DOS command or program from within a compiled
+     application.  When you RUN a DOS program, CA-Clipper executes another
+     copy of COMMAND.COM, passing the DOS command line at the same time.
+     This has two implications.  First, you must have enough memory for
+     COMMAND.COM (5K for DOS 6.2) and the program you wish to execute.
+     Second, COMMAND.COM must be available on the path specified by COMSPEC
+     (the default is the root directory of the disk where you boot DOS).  If
+     COMMAND.COM is not located on this disk or the disk is changed, SET
+     COMSPEC to the new location prior to running the CA-Clipper application.
+     Note that SET DEFAULT and SET PATH have no effect on RUN.
+
+     The ! form of the RUN command is provided for compatibility purposes
+     only and, therefore, is not recommended.
+
+     <B>Warning! </B> Do not RUN memory-resident programs from within CA-Clipper
+     since you may lose memory when the control returns to your application
+     program.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses RUN with MEMOREAD() and MEMOWRIT() to create
+        a user-defined function that calls a text editor with the current
+        memo field:
+
+        lSuccess = EditorMemo("Qedit", "Notes")
+        RETURN
+
+        FUNCTION EditorMemo( cEditor, cMemofld )
+           IF MEMOWRIT("Clipedit.tmp", &amp;cMemofld.)
+              RUN (cEditor + " Clipedit.tmp")
+              REPLACE &amp;cMemofld. WITH MEMOREAD("Clipedit.tmp")
+              ERASE Clipedit.tmp
+              RETURN .T.
+           ELSE
+              RETURN .F.
+           ENDIF
+
+     <B>.</B>  One of the options you may want to give your users is direct
+        access to DOS.  Do this with:
+
+        RUN COMMAND
+
+        To make it easier for the user to return to the application program,
+        change the DOS prompt in the application batch file like this:
+
+        REM Application Batch File
+
+        ECHO OFF
+        PROMPT DOS Access: Type EXIT to return to ;
+                 application$_$p$g
+        &lt;your application program&gt;
+        PROMPT $p$g
+
+        Then, instruct the user to execute the application batch file in
+        place of the application .EXE file.
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

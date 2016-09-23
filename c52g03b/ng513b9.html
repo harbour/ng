@@ -1,0 +1,64 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng50d66.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3d1e3.html">[^^Up^^]</A>
+<A HREF="ng51822.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>transRec()</B>
+ Copy a single row (record) to another workarea
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE transRec(</B>
+     <B>                  WORKAREAP wa,</B>
+     <B>                  DBTRANSINFOP dbTransInfo</B>
+     <B>                )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>dbTransInfo</B> is a pointer to a structure containing information about
+     the transfer of data.
+
+ <B>Description</B>
+
+     Copies a single row to another table.
+
+ <B>Default Behavior</B>
+
+     Copies the current row from wa to the database specified by dbTransInfo.
+
+     <B>Note:</B>  If an error occurs, the new record in dbTransInfo-&gt;dest is
+     deleted by a call to SELFDELETE().
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If your RDD supports relations, update them in the source
+        workarea with a forceRel() prior to attempting to perform the copy.
+
+     <B>.</B>  You should append the new copy to the target workarea.
+
+     <B>.</B>  A reimplementation of transRec() should check locks and read-
+        only status in the target database.
+
+ <B>Files:</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng44010.html">DBTRANSINFO</A>
+<A HREF="ng455fe.html">WORKAREA</A>
+<A HREF="ng52cb2.html">forceRel()</A>
+<A HREF="ng50d66.html">trans()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

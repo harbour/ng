@@ -1,0 +1,149 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Short Entry</TITLE></HEAD>
+<BODY>
+
+[^^Up^^]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>Data Structures</B>
+
+<A HREF="ng40f6b.html"> AREA               Information to administrate the work area</A>
+<A HREF="ng41e34.html"> DBEVALINFO         Information needed for code block evaluation on each row</A>
+<A HREF="ng421a9.html"> DBFIELDINFO        Information needed to define a column to the work area</A>
+<A HREF="ng42aff.html"> DBFILTERINFO       Specifies filter condition to hide specified rows</A>
+<A HREF="ng42f2a.html"> DBLOCKINFO         Information necessary to lock a row or table for exclusive access</A>
+<A HREF="ng4346c.html"> DBOPENINFO         Information about a data store to be opened in work area</A>
+<A HREF="ng43a09.html"> DBORDERCONDINFO    Information needed for the creation of a conditional order</A>
+<A HREF="ng4484f.html"> DBORDERCREATEINFO  Information needed to create a new order for the work area</A>
+<A HREF="ng44e33.html"> DBORDERINFO        Information needed to open/address an order in work area</A>
+<A HREF="ng45304.html"> DBRELINFO          List of relational information</A>
+<A HREF="ng45972.html"> DBSCOPEINFO        References to all CA-Clipper Xbase-style scope clause</A>
+<A HREF="ng46495.html"> DBSORTINFO         Information needed to perform a physical sort on work area</A>
+<A HREF="ng46803.html"> DBSORTITEM         Array of items indicating key values to use when sorting</A>
+<A HREF="ng46d91.html"> DBTRANSINFO        Define global transfer of data items</A>
+<A HREF="ng474f5.html"> DBTRANSITEM        Define single transfer item from one work area to another</A>
+<A HREF="ng47811.html"> FIELD              Field (column) definitions</A>
+<A HREF="ng483ef.html"> RDDFUNCS           The virtual method table for the work area</A>
+-------------------------------------------------------------------------------
+ <B>Work Area Methods</B>
+
+<A HREF="ng49504.html"> bof()              Determine logical beginning of file</A>
+<A HREF="ng498b5.html"> eof()              Determine logical end of file</A>
+<A HREF="ng49c3b.html"> found()            Determine outcome of the last search operation</A>
+<A HREF="ng4a086.html"> go()               Position cursor at a specific physical identity (record)</A>
+<A HREF="ng4a677.html"> goBottom()         Position cursor at the last logical identity (record)</A>
+<A HREF="ng4aa2c.html"> goToId()           Position the cursor to a specific, physical identity</A>
+<A HREF="ng4b135.html"> goTop()            Position cursor at the first logical identity (record)</A>
+<A HREF="ng4b4dd.html"> seek()             Position cursor at first row with matching key value</A>
+<A HREF="ng4ba0d.html"> skip()             Reposition cursor relative to current position</A>
+<A HREF="ng4bf54.html"> skipFilter()       Reposition cursor respecting any filter setting</A>
+<A HREF="ng4c2a5.html"> skipRaw()          Reposition cursor, regardless of filter</A>
+-------------------------------------------------------------------------------
+ <B>Data Management Methods</B>
+
+<A HREF="ng4c7bf.html"> addField()         Add a column (field) to the work area</A>
+<A HREF="ng4cd3f.html"> append()           Append a row (record) to the work area</A>
+<A HREF="ng4d122.html"> createFields()     Add all columns defined in an array to the work area</A>
+<A HREF="ng4d577.html"> delete()           Mark a row (record) for deletion</A>
+<A HREF="ng4d9e0.html"> deleted()          Determine deleted status for a row (record)</A>
+<A HREF="ng4dd8b.html"> fieldCount()       Determine the number of columns (fields) in the work area</A>
+<A HREF="ng4e10a.html"> fieldDisplay()     This method is reserved for future use</A>
+<A HREF="ng4e1af.html"> fieldInfo()        Retrieve information about a column</A>
+<A HREF="ng4ebe3.html"> fieldName()        Determine the name associated with a column (field) number</A>
+<A HREF="ng4f10f.html"> flush()            Write data buffer to the data store</A>
+<A HREF="ng4f428.html"> getRec()           Retrieve the pointer to the RDD's record data buffer</A>
+<A HREF="ng4f70d.html"> getValue()         Obtain the current value of a column (field)</A>
+<A HREF="ng4fc71.html"> getVarLen()        Obtain the length of a column (field) value</A>
+<A HREF="ng50136.html"> goCold()           Perform a write of work area memory to the data store</A>
+<A HREF="ng505f9.html"> goHot()            Mark the work area data buffer as hot</A>
+<A HREF="ng50b76.html"> putRec()           Replace the current row (record)</A>
+<A HREF="ng50efd.html"> putValue()         Assign a value to the current column (field)</A>
+<A HREF="ng51501.html"> recall()           Undelete the current row (record)</A>
+<A HREF="ng519be.html"> reccount()         Obtain number of rows (records) in work area's table</A>
+<A HREF="ng51d77.html"> recInfo()          Retrieve the information about a row</A>
+<A HREF="ng52834.html"> recno()            Get row number at current work area cursor position</A>
+<A HREF="ng52c65.html"> setFieldExtent()   Establish extent of the array of fields for a work area</A>
+-------------------------------------------------------------------------------
+ <B>Work Area/Database Management Methods</B>
+
+<A HREF="ng530d9.html"> alias()            Obtain the alias of the work area</A>
+<A HREF="ng533d0.html"> close()            Close the table in the work area</A>
+<A HREF="ng538ab.html"> create()           Create a data store (table) in the specified work area</A>
+<A HREF="ng53cfb.html"> dbEval()           Evaluate code block for each row (record) in work area</A>
+<A HREF="ng54425.html"> info()             Retrieve information about the current driver</A>
+<A HREF="ng54aa4.html"> new()              Clear the work area for use</A>
+<A HREF="ng54de4.html"> open()             Open a data store (table) in the work area</A>
+<A HREF="ng552df.html"> pack()             Remove rows (records) marked for deletion from a database</A>
+<A HREF="ng5570a.html"> packRec()          Copy a single row back to the current work area</A>
+<A HREF="ng55ac6.html"> readDBHeader()     Read the database file header record in the work area</A>
+<A HREF="ng55ca4.html"> release()          Release all references to a work area</A>
+<A HREF="ng560c2.html"> sort()             Physically reorder a database</A>
+<A HREF="ng5661a.html"> structSize()       Retrieve the size of the work area structure</A>
+<A HREF="ng56941.html"> sysName()          Obtain name of replaceable database driver (RDD) subsystem</A>
+<A HREF="ng56d06.html"> trans()            Copy one or more rows from one work area to another</A>
+<A HREF="ng57370.html"> transRec()         Copy a single row (record) to another work area</A>
+<A HREF="ng577ed.html"> writeDBHeader()    Write database file header record in work area back to disk</A>
+<A HREF="ng57a94.html"> zap()              Physically remove all rows from data store</A>
+-------------------------------------------------------------------------------
+ <B>Relational Operation Methods</B>
+
+<A HREF="ng57d50.html"> childEnd()         Report end of relation</A>
+<A HREF="ng58332.html"> childStart()       Report initialization of a relation</A>
+<A HREF="ng586ff.html"> childSync()        Post a pending relational movement</A>
+<A HREF="ng58bd3.html"> clearRel()         Clear all relations in the specified work area</A>
+<A HREF="ng58f71.html"> forceRel()         Force relational seeks in the specified work area</A>
+<A HREF="ng59420.html"> relArea()          Obtain the logical number of the specified work area</A>
+<A HREF="ng5988e.html"> relEval()          Evaluate block against relation in specified work area</A>
+<A HREF="ng59dd8.html"> relText()          Obtain the character expression of the specified relation</A>
+<A HREF="ng5a25e.html"> setRel()           Set a relation in the parent file</A>
+<A HREF="ng5a6d4.html"> syncChildren()     Force relational movement in child work areas</A>
+-------------------------------------------------------------------------------
+ <B>Order Management Methods</B>
+
+<A HREF="ng5aab5.html"> orderCondition()   Set or delete a condition for subsequent order creation</A>
+<A HREF="ng5ae78.html"> orderCreate()      Create new order</A>
+<A HREF="ng5b475.html"> orderInfo()        Provides information about order management</A>
+<A HREF="ng5b99e.html"> orderListAdd()     Opens an order bag in the indicated work area</A>
+<A HREF="ng5bee1.html"> orderListClear()   Clear the current order list</A>
+<A HREF="ng5c1f9.html"> orderListFocus()   Select the controlling order</A>
+<A HREF="ng5c579.html"> orderListRebuild() Rebuild all orders in the specified work area</A>
+-------------------------------------------------------------------------------
+ <B>Filter and Scoping Methods</B>
+
+<A HREF="ng5ca21.html"> clearFilter()      Clear the active filter expression</A>
+<A HREF="ng5cd1e.html"> clearLocate()      Clear the active locate expression</A>
+<A HREF="ng5d077.html"> clearScope()       Clear the scope setting for the specified work area</A>
+<A HREF="ng5d295.html"> filterText()       Return filter condition of the specified work area</A>
+<A HREF="ng5d5f4.html"> setFilter()        Set the filter condition for the specified work area</A>
+<A HREF="ng5d9ad.html"> setLocate()        Set the locate scope for the specified work area</A>
+-------------------------------------------------------------------------------
+ <B>Network Operation Methods</B>
+
+<A HREF="ng5dd19.html"> lock()             Perform a network lock in the specified work area</A>
+<A HREF="ng5e121.html"> rawLock()          Perform various locks and unlocks</A>
+<A HREF="ng5e701.html"> unlock()           Release network locks in the specified work area</A>
+-------------------------------------------------------------------------------
+ <B>Memo File Management Methods</B>
+
+<A HREF="ng5eadd.html"> blobInfo()         Retrieve information about a memo column</A>
+<A HREF="ng5ee39.html"> closeMemFile()     Close a memo file in the specified work area</A>
+<A HREF="ng5f0e2.html"> createMemFile()    Create a memo file in the work area</A>
+<A HREF="ng5f418.html"> getValueFile()     Retrieve current value of column and put it into a file</A>
+<A HREF="ng5f724.html"> openMemFile()      Open a memo file in the specified work area</A>
+<A HREF="ng5fa55.html"> putValueFile()     Assign value to specified column at cursor position</A>
+-------------------------------------------------------------------------------
+ <B>Miscellaneous Methods</B>
+
+<A HREF="ng5fd45.html"> compile()          Compile a character expression</A>
+<A HREF="ng601fe.html"> error()            Raise a runtime error</A>
+<A HREF="ng6083c.html"> evalBlock()        Evaluate a code block</A>
+<A HREF="ng60c76.html"> whoCares()         A user-defined slot within function table reserved</A>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

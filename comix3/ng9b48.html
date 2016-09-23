@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9559.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="nga15e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlMaybeEval()</B>         Remove Maybe's from a RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlMaybeEval(rl, bBlock) -&gt; nRecs
+
+<B>Arguments</B>
+
+    rl is the RecordList from which Maybe's are to be removed.
+
+    bBlock is the CodeBlock to be evaluated for each Maybe record.  It
+    should return a logical (.T. if the record meets the condition, .F.
+    otherwise).
+
+<B>Returns</B>
+
+    rlMaybeEval() returns the number of Maybe records visited.
+
+<B>Description</B>
+
+    rlMaybeEval() removes Maybe's from a RecordList (makes them either Yes
+    or No).
+
+    rlNewQuery() will return a RecordList containing Maybe's if the
+    condition is not fully optimizable (see the discussion under
+    cmDoLinear()).
+
+    rlMaybeEval() will evaluate bBlock for all records which are Maybe's in
+    rl.  This allows you to evaluate the condition for each record, and
+    determine if it meets the condition or not.
+
+    Note that if the RecordList has no Maybe's, then this function does
+    nothing.
+
+    The source code for cmDoLinear() gives you a good example of the use of
+    this function.
+
+<B>Example</B>
+
+    *   Use demo (only index is age)
+    use demo index age
+
+    *   No index on salary, so can't optimize that"
+    rl := rlNewQuery("age &lt; 25 .and. salary &lt;= 25000")
+    ? "Approximate count: ", rlCount(rl)
+
+    *   Clear off the Maybe's
+<B>    rlMaybeEval(rl, {|| age &lt; 25 .and. salary &lt;= 25000})</B>
+
+    *   Now give the exact count
+    ? "      Exact count: ", rlCount(rl)
+
+<B>See Also</B>
+
+    rlHasMaybe(), rlNewQuery()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc16d.html">rlNewQuery()</A>
+<A HREF="ng9559.html">rlHasMaybe()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

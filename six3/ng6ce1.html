@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng652f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng720f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>hs_IfDel():</B>
+
+  Purpose:  Determines if a HiPer-SEEK record has been marked as deleted.
+
+   Syntax:  hs_Ifdel( &lt;hIndex&gt;, &lt;nVal&gt; )
+
+    Where:  &lt;hIndex&gt; is an integer handle of a HiPer-SEEK index file.
+
+            &lt;nVal&gt; is an integer representing the record number to be tested.
+
+  Returns:  Returns 1 ( TRUE ) if the specified record is marked as deleted.
+            If not, returns 0 ( FALSE ).  A negative return value indicates
+            an error.
+
+  Errors Returned:
+
+      -4 (BADSEEK) Error while attempting seek during buffer flushing.
+      -5 (BADREAD) System generated a read error while reading.
+      -6 (BADWRITE) Error while attempting write during buffer flush.
+      -7 (RECBOUND) &lt;nVal&gt; is not valid. It is either too low or
+         greater than the total number of records indexed.
+     -16 (BADPARMS) Invalid parameters were passed to the function.
+     -18 (BADHANDLE) Invalid handle was passed to the function.
+
+  Example:
+
+    USE sales EXCL
+    h := hs_Open( "SALES.HSX", 20, 1 )
+    DO WHILE !eof()
+      IF Deleted()                         // If DBF record is deleted
+        IF <B>hs_IfDel( h, RecNo() )</B> == 0     // And HiPer-SEEK record is not
+
+          nVal := hs_Delete( h, RecNo() )  // Delete it in HiPer-SEEK index
+          IF nVal &lt; 1
+            ? "Error adding record " + LTrim( Str( RecNo() )) + "!"
+          ENDIF
+
+        ENDIF
+      ENDIF
+      SKIP
+    ENDDO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5e0e.html">hs_Delete()</A>
+<A HREF="ngace9.html">hs_UnDelete()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

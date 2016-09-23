@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5e45e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5575e.html">[^^Up^^]</A>
+<A HREF="ng5f185.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPJTXT()</B>
+ Sets or queries the text or binary mode for a print job
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPJTXT([&lt;cJob&gt;],[&lt;lNewText&gt;],[&lt;cUser&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; lText</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cJob&gt;</B>  Designates the selected print job definition.  The default
+     value designates the default job.
+
+     <B>&lt;lNewMode&gt;</B>  Designates an optional parameter that indicates whether
+     text (.T.) or binary (.F.) jobs are created after the definition &lt;cJob&gt;
+     has been activated.
+
+     <B>&lt;cUser&gt;</B>  Designates the name of the user whose print job definition
+     is processed.  The default value designates the current user.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server on which the
+     operation is processed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     The return value of NNETPJTXT() specifies the data type in the job
+     definition &lt;cJob&gt;.  A return value of .F. indicates binary data, and a
+     return value of .T. indicates text data.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT JOB TEXT
+     The Queue Management System (QMS) differentiates between text and binary
+     jobs.  NNETJTXT() allows you to query or set the mode for a job
+     definition &lt;cJob&gt;.
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the mode for the default job:
+
+        IF NNETPJTXT()
+        ? 'Text mode'
+        ELSE
+        ? 'Binary mode'
+        ENDIF
+
+     <B>.</B>  Set the text mode for the default job:
+
+        ? NNETPJTXT(, .T.)
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5e45e.html">NNETPJTABS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

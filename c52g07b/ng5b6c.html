@@ -1,0 +1,141 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng50f3.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2471.html">[^^Up^^]</A>
+<A HREF="ng7269.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>User Interface Levels</B>
+------------------------------------------------------------------------------
+
+     We want to make it easy for you to quickly take advantage of the added
+     functionality provided in CA-Clipper 5.2. In order to effectively use
+     the RDDs, you should read the following discussions.  They are provided
+     as a means of identifying the degree of programming knowledge or
+     CA-Clipper experience that will let you effectively use the RDD
+     features.
+
+     For this purpose the RDD feature set is arbitrarily divided into levels
+     A and B.  Tables listing the commands or functions that comprise these
+     access levels are also supplied.  In addition, an RDD Features Summary
+     is provided in table form which outlines the features available in each
+     driver.  The commands and functions in both of these levels of access
+     are described in the Reference chapter of this guide.
+
+ <B>Level A - Command-Level Interface</B>
+
+     <B>Level A.</B>  a simple command-level interface very similar to those
+     found in other languages (e.g., dBASE IV, FoxPro).  This is the primary
+     access for new CA-Clipper users who may or may not be familiar with
+     other languages.
+
+     The following table lists the commands and functions accessible by the
+     CA-Clipper programmer with background in languages such as dBASE or
+     FoxPro.  The commands and functions in this table provide access to the
+     additional features without requiring an advanced knowledge of
+     CA-Clipper or other programming concepts.
+
+     <B>Basic Commands and Functions</B>
+     ------------------------------------------------------------------------
+     <B>Command/Function  Changes</B>
+     ------------------------------------------------------------------------
+     DELETE TAG        Delete a Tag
+     GOTO              Move the pointer to the specified identity
+     INDEX             Create an index file
+     SEEK              Search an Order for a specified key value
+     SET INDEX         Open one or more Order Bags in the current work area
+     SET ORDER         Select the controlling Order
+     DBAPPEND()        Append a new record to the current Lock List
+     DBRLOCK()         Lock the record at the current or specified identity
+     DBRLOCKLIST()     Return an array of the current Lock List
+     DBRUNLOCK         Release all or specified record locks
+     ------------------------------------------------------------------------
+
+ <B>Level B - Function-Level Interface</B>
+
+     <B>Level B.</B>  CA-Clipper also adds a function level interface that not
+     only allows access to the enhanced functionality of the drivers, but
+     permits the building of higher-level functions using these composing
+     behaviors.  This level is meant for more experienced CA-Clipper users
+     who need to take advantage of the full power of the driver and Order
+     Management System.
+
+     The following table lists the DML and Order Management functions
+     recommended to the intermediate to advanced CA-Clipper programmer.
+     These functions provide the greatest flexibility in accessing the
+     extended features of these drivers
+
+     <B>Advanced Functions (including Order Management)</B>
+     ------------------------------------------------------------------------
+     <B>Command/Function    Description</B>
+     ------------------------------------------------------------------------
+     DBAPPEND()          Append a new record to the current Lock List
+     DBRLOCK()           Lock the record at the current or specified identity
+     DBRLOCKLIST()       Return an array of the current Lock List
+     DBRUNLOCK()         Release all or specified record locks
+     ORDBAGEXT()         Return the default Order Bag RDD extension
+     ORDBAGNAME()        Return the Order Bag name of a specific Order
+     ORDCREATE()         Create an Order in an Order Bag
+     ORDDESTROY()        Remove a specified Order from an Order Bag
+     ORDFOR()            Return the FOR expression of an Order
+     ORDKEY()            Return the Key expression of an Order
+     ORDLISTADD()        Add Order Bag contents or single Order to the Order
+                         List
+     ORDLISTCLEAR()      Clear the current Order List
+     ORDLISTREBUILD()    Rebuild all Orders in the Order List of the current
+                         work area
+     ORDNAME()           Return the name of an Order in the work area
+     ORDNUMBER()         Return the position of an Order in the current Order
+                         List
+     ORDSETFOCUS()       Set focus to an Order in an Order List
+     RDDLIST()           Return an array of the available Replaceable
+                         Database Drivers
+     RDDNAME()           Return the name of the RDD active in the current or
+                         specified work area
+     RDDSETDEFAULT()     Set or return the default RDD for the application
+     ------------------------------------------------------------------------
+
+ <B>RDD Features </B>
+
+     The following decision table summarizes the availability of key features
+     across RDDs.  It lists the features available in each RDD so you can use
+     it as an aid in correct RDD implementation and data access.
+
+     <B>RDD Features Summary</B>
+     ------------------------------------------------------------------------
+     <B>Item                                NTX   NDX   MDX   CDX  DBPX</B>
+     ------------------------------------------------------------------------
+     Implicit record unlocking in        Yes   Yes   Yes   Yes  Yes
+     single lock mode
+     Multiple Record Locks               Yes   Yes   Yes   Yes  No
+     Number of Concurrent Record Locks   *1    *1    *1    *1   1
+     Order Management (Tag support)      Yes   Yes   Yes   Yes  No
+     Orders (Tags) per Order Bag (File)  1     1     47    50   N/A
+     Number of Order Bags (Files)        15    15    15    15   N/A
+     per work area
+     Conditional Indexes (FOR clause)    Yes   No    Yes   Yes  No
+     Temporary (Partial) Indexes         Yes   No    No    Yes  No
+     (WHILE, ... )
+     Descending via DESCENDING clause    Yes   No    Yes   Yes  No
+     Unique via the UNIQUE clause        Yes   Yes   Yes   Yes  No
+     EVAL and EVERY clause support       Yes   No    No    Yes  No
+     Production/Structural Indexes       No    No    Yes   Yes  No
+     Maximum Key Expression length       256   256   220   255  N/A
+     (bytes)
+     Maximum FOR Condition length        256   N/A   261   255  N/A
+     (bytes)
+     ------------------------------------------------------------------------
+
+     *1 determined by available memory.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

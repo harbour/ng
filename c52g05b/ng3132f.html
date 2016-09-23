@@ -1,0 +1,40 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng311d0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2f9e1.html">[^^Up^^]</A>
+<A HREF="ng317c0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>4   What is .RTLink error "eut0032"?</B>
+--------------------------------------------------------------------------------
+
+     This message appears to have three possible causes:
+
+     1.  There are Summer '87 compiled .OBJs or .LIBs in the current
+         directory, or they appear in directories referenced in the LIB or
+         OBJ environment variables, or Summer '87 .OBJs or .LIBs are
+         referenced via a DOS APPEND command.  The Clipper version of
+         .RTLink is not compatible with Summer '87 compiled programs.
+
+     2.  A function or procedure has been defined twice.  Removal of the
+         duplicate declaration will solve the problem.
+
+     3.  Some reports indicate this error may occur because a single object
+         module was very large.  If neither of the above solutions
+         eliminates this error message, and you have one or more .OBJ files
+         larger than 64K, try compiling your (.prg) files individually using
+         the /M compiler option.  Make sure to supply all of the resultant
+         .OBJ files to .RTLink for linking.  For more information on
+         compiler options and linking multiple .OBJ files, refer to Chapters
+         3 and 4 of your Programming and Utilities Guide.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

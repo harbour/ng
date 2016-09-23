@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng494a8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng4a866.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>LOCATE:</B>
+
+  Syntax:
+
+  <B>LOCATE [&lt;scope&gt;] FOR &lt;lCondition&gt;</B>
+   <B>[WHILE &lt;lCondition&gt;] [NOOPTIMIZE]</B>
+
+  <B>&lt;scope&gt;</B> is the portion of the current database file in which to
+  perform a LOCATE. The default scope is ALL records. Mach SIx supports
+  the ALL scope only.
+
+  <B>FOR &lt;lCondition&gt;</B> specifies the next record to LOCATE. Mach SIx will
+  optimize any FOR condition that contains one or more active index keys.
+
+  <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+  condition from the current record until the condition fails.  Mach SIx
+  does not support the WHILE condition.
+
+  <B>NOOPTIMIZE</B>, preempts optimization and forces default Clipper
+  processing.
+
+  <B>Description: </B>
+
+  LOCATE is a database command that searches from the top of the scope for
+  the first record that matches the specified condition(s). It stops when
+  a match is found or the end of the scope is reached.
+
+  If LOCATE is successful, the matching record becomes the current record
+  and FOUND() returns true (.T.).  If it is unsuccessful, FOUND() returns
+  false (.F.). In this case the record pointer will be at eof() if the
+  controlling scope is the default ALL. If the controlling scope is other
+  than the default, the record pointer will be at the bottom of the scope.
+
+  Each work area can have its own LOCATE condition.  The condition remains
+  active until you execute another LOCATE command in that work area or the
+  application terminates.
+
+  LOCATE works with CONTINUE.  Once a LOCATE has been issued, you can
+  resume the search from the current record pointer position with
+  CONTINUE.
+
+
+  <B>Example: </B>
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX.CH"
+
+  USE claims
+  INDEX on amt_paid TAG amt_paid
+  INDEX on region TAG region
+
+  // show claims greater than 500,000 by region
+
+  <B>LOCATE for AMT_PAID &gt;= 500000</B>
+  DO WHILE FOUND()
+    ? "Region: ", region, " Amount: ", amt_paid
+    CONTINUE
+  ENDDO
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng421a4.html">CONTINUE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

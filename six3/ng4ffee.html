@@ -1,0 +1,105 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng4f80c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng50a71.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SET RECHECK:</B>
+
+  Syntax:
+
+  <B>SET RECHECK ON/OFF/&lt;lExp&gt;</B>
+
+  <B>ON</B> forces the non-optimizable portion of a filter condition to
+     be re-tested against each record found to meet the optimizable
+     portion.
+
+  <B>OFF</B> disables re-testing. This is the default.
+
+  &lt;xlToggle&gt; is a logical expression that must be enclosed in parentheses.
+  A value of true (.T.) is the same as ON, and a value of false (.F.) is
+  the same as OFF.
+
+  <B>Description:</B>
+
+  The RECHECK command allows you to control the re-testing of the
+  partially optimizable portions of a filter condition with each
+  optimizable record.  By default, records found not meeting the partially
+  optimizable portion of the query are eliminated from the filter record
+  list.  This process of eliminating records will actually increase
+  performance as you move throughout the file.
+
+  ---------------------------------| EXAMPLE |--------------------------------
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  *  Demonstrates the SET RECHECK command                                 *
+  *::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+
+  #include "SIXCDX.CH"
+  #include "MACHSIX3.CH"
+
+  USE Test VIA "SIXCDX"
+
+  //........................................create index to optimize filter
+  INDEX ON State TO State
+
+  //................................Set order to 0 for the best performance
+  SET ORDER TO 0
+
+  //......................................................Set re-checking on
+  <B>SET RECHECK ON</B>
+
+  //..............Set a filter condition. Note: "Married" is not optimizable
+  SET FILTER TO State = "CA" .AND. Married
+
+  //...............Traverse the database to visit all records in the filter
+  GO TOP
+  nCount:=0
+  DO WHILE !Eof()
+    nCount++
+    SKIP
+  ENDDO
+
+  //...............................Get information about the current filter
+  aInfo:= m6_FiltInfo()
+
+  //..Display number records in filter list.  This is the number that = "CA"
+  ? "Number of records in filter list ="
+  ?? aInfo[ INFO_COUNT ]                                           // 4
+
+  //...............Now display the number of records actually in the filter.
+  ? "Number of records meeting filter condition ="
+  ?? nCount                                                        // 2
+
+
+  //................Set recheck off to eliminate records in the filter list
+  <B>SET RECHECK OFF</B>
+
+  //.......................................Visit all records one more time
+  GO TOP
+  DO WHILE !Eof()
+    SKIP
+  ENDDO
+
+  //.......................................Get information about the filter
+  aInfo:= m6_FiltInfo()
+
+  //....................Note two records were removed from the filter list
+  ? "Number of records in filter list="
+  ?? aInfo[ INFO_COUNT ]                                          // 2
+
+  !seealso: sx_func.eho:m6_FiltInfo()
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

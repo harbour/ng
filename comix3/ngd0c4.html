@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngcd6e.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ngd5dc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlPrevRecno()</B>         Get the previous record in a RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlPrevRecno(rl, nRecno) -&gt; nPrevRecno
+
+<B>Arguments</B>
+
+    rl is the RecordList to be scanned.
+
+    nRecno is the record number to start looking at (exclusive).  I.e., the
+    scan will start at nRecno - 1.
+
+<B>Returns</B>
+
+    rlPrevRecno() returns the previous record number in rl.
+
+    rlPrevRecno() will return 0 when there are no more record numbers in
+    rl.
+
+<B>Description</B>
+
+    rlPrevRecno() allows you to get the record number before nRecno which is
+    contained in the recordList.
+
+<B>Example</B>
+
+    rl := rlNew(100)
+    rlSet(rl, 25)
+    rlSet(rl, 75)
+    rlFastOutput(rl)
+    rlSlowOutput(rl)
+    return
+
+    *   This quickly outputs all the records contained in rl (backwards)
+    function rlFastOutput(rl)
+    local curRec := rlLen(rl) + 1
+<B>    do while ((curRec := rlPrevRecno(rl, curRec)) != 0)</B>
+        ? curRec
+    enddo
+    return
+
+    *   This does the same thing, but is slower (since you have to go through
+    *   one iteration of the loop for the entire rlLen())
+    function rlSlowOutput(rl)
+    local curRec
+    for curRec := rlLen(rl) to 1 step -1
+        if (rlTest(rl, curRec))
+            ? curRec
+        endif
+    next curRec
+    return
+
+<B>See Also</B>
+
+    rlNextRecno()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc8c6.html">rlNextRecno()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

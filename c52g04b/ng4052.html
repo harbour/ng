@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Utilities - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2a8b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d0.html">[^^Up^^]</A>
+<A HREF="ng4575.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CA-Clipper Program Editor--(PE.EXE)</B>
+
+ <B>Overview</B>
+
+     Creates and edits simple program files.
+
+ <B>Syntax</B>
+
+     <B>PE [&lt;filename&gt;]</B>
+
+ <B>Command Line Arguments</B>
+
+     <B>&lt;filename&gt;</B> is the name of the text file to edit or create.  The
+     default extension is (.prg).  If a filename is not specified, PE
+     prompts you for one.
+
+ <B>System Architecture</B>
+
+     Like the DBU and RL utilities, PE is written in CA-Clipper and
+     provided in source code form.  If you installed CA-Clipper using the
+     default configuration, a single source file named Pe.prg is located
+     in the \CLIPPER5\SOURCE\PE directory.  PE.EXE is installed in
+     \CLIPPER5\BIN and this directory is included in the PATH statement in
+     your AUTOEXEC.BAT.  You should, therefore, be able to access PE from
+     any drive and/or directory.
+
+     To facilitate maintenance of the PE program file, the make file,
+     PE.RMK, is also installed in the PE source directory.  Provided you
+     do not add new source files or make changes in the existing file
+     dependencies, issuing the following command at the DOS prompt:
+
+     C&gt;RMAKE PE
+
+     will compile and link the PE source files to create a new PE.EXE
+     executable file.  See the Program Maintenance--RMAKE.EXE chapter in
+     Programming and Utilties guide for more information about make files.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

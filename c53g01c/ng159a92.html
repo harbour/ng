@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1597a2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng157b2e.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+     <B>setstyle(&lt;nStyle&gt;, [&lt;lSetting&gt;]) --&gt; self</B>
+
+        TBColumn:setStyle() maintains a dictionary within a TBColumn object.
+        This dictionary, which is simply an array, contains a set of logical
+        values that determine behaviors associated with a TBrowse column.
+        &lt;nStyle&gt; refers to the element in the dictionary that contains the
+        style.  &lt;lSetting&gt; indicates whether the style should be permitted or
+        denied.  Set to true (.T.) to allow the behavior to occur; otherwise,
+        set to false (.F.) to prohibit it.  CA-Clipper reserves the first
+        three elements of the dictionary for predefined styles.
+
+        You may add custom styles to a TBColumn object by specifying any
+        unused element of the dictionary.  A maximum of 4096 definitions is
+        available.  When adding new styles to the dictionary, use the
+        TBC_CUSTOM constant to ensure that the new styles will not interfere
+        with the predefined ones.  This guarantees that if more predefined
+        styles are added in future releases of CA-Clipper, the positions of
+        your styles in the dictionary will be adjusted automatically.
+
+        Styles are used by neither the TBColumn object nor the TBrowse
+        object.  The style dictionary is merely a convenient method of
+        associating behaviors with a TBColumn object. The functions that
+        query and implement these behaviors are external to the object.  An
+        example of this can be found in BrowSys.prg in the clip53\samples
+        subdirectory.
+
+        <B>TBColumn Styles</B>
+        ---------------------------------------------------------------------
+        <B>Number  TBrowse.ch     Meaning</B>
+        ---------------------------------------------------------------------
+        1       TBC_READWRITE  Can the user modify the data in the column's
+                               cells?
+        2       TBC_MOVE       Can the user move the column to another
+                               position in the browse?
+        3       TBC_SIZE       Can the user modify the width of the column?
+        4       TBC_CUSTOM     First available element for custom styles.
+        ---------------------------------------------------------------------
+
+        Tbrowse.ch contains manifest constants for TBColumn:SetStyle().
+
+     <B>Note: </B> TBC_MOVE and TBC_SIZE are not implemented in CA-Clipper 5.3.
+     They are reserved for future usage.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

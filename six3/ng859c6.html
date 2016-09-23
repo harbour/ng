@@ -1,0 +1,49 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng85706.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng7c739.html">[^^Up^^]</A>
+<A HREF="ng85cb9.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>What commands can I optimize?:</B>
+
+  Mach SIx includes built-in support for the following Clipper commands:
+
+          <B>AVERAGE</B>
+          <B>CONTINUE</B>
+          <B>COUNT</B>
+          <B>COPY [SDF] [DELIMITED]</B>
+          <B>DELETE</B>
+          <B>DISPLAY</B>
+          <B>INDEX ON</B>
+          <B>LABEL</B>
+          <B>LIST</B>
+          <B>LOCATE</B>
+          <B>RECALL</B>
+          <B>REPLACE</B>
+          <B>REPORT</B>
+          <B>SET FILTER</B>
+          <B>SORT</B>
+          <B>SUM</B>
+          <B>TOTAL</B>
+
+
+  Mach SIx will optimize any of the above commands, that contain one or more
+  active index key expressions in the FOR condition.  Note that Mach SIx
+  will only optimize commands with a FOR condition and the ALL scope ( the
+  ALL scope is the default for all supported commands).   Specifying a WHILE
+  condition or alternate scope will cancel the benefits of optimization.
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

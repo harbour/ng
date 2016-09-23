@@ -1,0 +1,108 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6c7b8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng6efc7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MEMOLINE()</B>
+ Extract a line of text from a character string or memo field
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MEMOLINE(&lt;cString&gt;,</B>
+     <B>   [&lt;nLineLength&gt;],</B>
+     <B>   [&lt;nLineNumber&gt;],</B>
+     <B>   [&lt;nTabSize&gt;],</B>
+     <B>   [&lt;lWrap&gt;]) --&gt; cLine</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cString&gt;</B> is the memo field or character string from which a line of
+     text is to be extracted.
+
+     <B>&lt;nLineLength&gt;</B> specifies the number of characters per line and can be
+     between four and 254.  If not specified, the default line length is 79.
+
+     <B>&lt;nLineNumber&gt;</B> is the line number to be extracted.  If not specified,
+     the default value is one.
+
+     <B>&lt;nTabSize&gt;</B> defines the tab size.  If not specified, the default
+     value is four.  If &lt;nTabSize&gt; is greater than or equal to &lt;nLineLength&gt;,
+     then the tab size is automatically converted to &lt;nLineLength&gt; - 1.
+
+     <B>&lt;lWrap&gt;</B> toggles word wrap on and off.  Specifying true (.T.) toggles
+     word wrap on; false (.F.) toggles it off.  If not specified, the default
+     value is true (.T.).
+
+ <B>Returns</B>
+
+     MEMOLINE() returns the line of text specified by &lt;nLineNumber&gt; in
+     &lt;cString&gt; as a character string.  If the line has fewer characters than
+     the indicated length, the return value is padded with blanks.  If the
+     line number is greater than the total number of lines in &lt;cString&gt;,
+     MEMOLINE() returns a null string ("").
+
+     If &lt;lWrap&gt; is true (.T.) and the indicated line length breaks the line
+     in the middle of a word, that word is not included as part of the return
+     value but shows up at the beginning of the next line extracted with
+     MEMOLINE().
+
+     If &lt;lWrap&gt; is false (.F.), MEMOLINE() returns only the number of
+     characters specified by the line length.  The next line extracted by
+     MEMOLINE() begins with the character following the next hard carriage
+     return, and all intervening characters are not processed.
+
+ <B>Description</B>
+
+     MEMOLINE() is a memo function used with MLCOUNT() to extract lines of
+     text from character strings and memo fields based on the number of
+     characters per line.  It is the most basic facility provided by
+     CA-Clipper to display memo fields and long strings.
+
+     The basic method of operation is to determine the number of lines in the
+     memo field or character string using MLCOUNT() with the same number of
+     characters per line, tab size, and wrapping behavior as you intend to
+     use with MEMOLINE().  Using this value as the upper boundary of a
+     FOR...NEXT, each line of the memo field or character string can be
+     extracted with MEMOLINE() and processed with any combination of output
+     commands and functions required.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates the general method for displaying
+        memo fields and long character strings using the combination of
+        MLCOUNT() and MEMOLINE():
+
+        LOCAL nLineLength := 40, nTabSize := 3, lWrap := .T.
+        LOCAL nLines, nCurrentLine
+        USE Customer INDEX CustName NEW
+        //
+        nLines := MLCOUNT(CustNotes, nLineLength,;
+              nTabSize, lWrap)
+        //
+        SET PRINTER ON
+        FOR nCurrentLine := 1 TO nLines
+           ? MEMOLINE(CustNotes, nLineLength, nCurrentLine,;
+                  nTabSize, lWrap)
+        NEXT
+        SET PRINTER OFF
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng69599.html">MEMOEDIT()</A>
+<A HREF="ng7311a.html">MLCOUNT()</A>
+<A HREF="ng74326.html">MLPOS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

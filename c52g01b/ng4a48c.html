@@ -1,0 +1,263 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng47e75.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng4cb68.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+        A mode value of 3 indicates that MEMOEDIT() is in initialization
+        mode.  When you specify &lt;cUserFunction&gt;, MEMOEDIT() makes a call to
+        the user function immediately after being invoked.  At this point,
+        you RETURN a request to set MEMOEDIT()'s various text formatting
+        modes: word wrap, scroll, or insert.  MEMOEDIT() calls the user
+        function repeatedly, remaining in the initialization mode until you
+        RETURN 0.  The text buffer is then displayed, and the user enters the
+        edit mode set by &lt;lEditMode&gt;.  Note that if word wrap is on when
+        MEMOEDIT() changes from initialization to edit mode, the entire text
+        buffer is formatted with &lt;nLineLength&gt;.  To prevent this initial
+        formatting, toggle word wrap off during initialization.  Note also
+        that the toggles for scroll and word wrap are not assigned to any
+        key, but can be assigned to a key from the user function.
+
+        Modes 1 and 2 indicate that MEMOEDIT() has fetched an unrecognizable
+        or configurable key from the keyboard buffer.  Configurable keys are
+        processed by RETURNing 0 to execute the MEMOEDIT() default action.
+        RETURNing a different value executes another key action, thereby
+        redefining the key.  If the key is an unrecognizable key you can
+        define an action for it by RETURNing a value requesting a key action
+        or perform an action of your own definition.
+
+        Mode 0 indicates that MEMOEDIT() is now idle with no more keys to
+        process.  Whenever, MEMOEDIT() becomes idle, it always make a call to
+        the user function.  At this point, you generally update line and
+        column number displays.
+
+        The other two parameters, current line and column, indicate the
+        current cursor position in the text buffer when the user function is
+        called.  The line parameter begins with position one, and column
+        begins with position zero.
+
+        When the mode is either 1, 2, or 3, you can return a value
+        instructing MEMOEDIT() what action to perform next.  The following
+        table summarizes the possible return values and their consequences:
+
+        <B>MEMOEDIT() User Function Return Values</B>
+        ---------------------------------------------------------------------
+        <B>Value   Memoedit.ch         Action</B>
+        ---------------------------------------------------------------------
+        0       ME_DEFAULT          Perform default action
+        1-31    ME_UNKEY            Process requested action corresponding to
+                                    key value
+        32      ME_IGNORE           Ignore unknown key
+        33      ME_DATA             Treat unknown key as data
+        34      ME_TOGGLEWRAP       Toggle word wrap mode
+        35      ME_TOGGLESCROLL     Toggle scroll mode
+        100     ME_WORDRIGHT        Perform word-right operation
+        101     ME_BOTTOMRIGHT      Perform bottom-right operation
+        ---------------------------------------------------------------------
+
+     <B>.  Header files:</B> To make the mode and request values easier to
+        remember and use, the header file Memoedit.ch is supplied in
+        \CLIPPER5\INCLUDE.  Additionally Inkey.ch, which contains manifest
+        constants for all the INKEY() values, is also located in the same
+        directory.
+
+ <B>Notes</B>
+
+     <B>.  Configuring keys:</B> If the &lt;cUserFunction&gt; is specified, the
+        keys in the table below are configurable.
+
+        <B>MEMOEDIT() Configurable Keys</B>
+        ---------------------------------------------------------------------
+        <B>Key            Default Action</B>
+        ---------------------------------------------------------------------
+        Ctrl-Y         Delete the current line
+        Ctrl-T         Delete word right
+        Ctrl-B         Reform Paragraph
+        Ctrl-V/Ins     Toggle insert mode
+        Ctrl-W         Finish editing with save
+        Esc            Abort edit and return original
+        ---------------------------------------------------------------------
+
+        If the key is configurable, RETURNing 0 executes the MEMOEDIT()
+        default action.  RETURNing a different value, however, executes
+        another key action thereby redefining the key.  If the key is not a
+        configurable key recognized by MEMOEDIT(), you can define an action
+        for it also by RETURNing a value requesting a key action from the
+        table above.
+
+     <B>.  Word wrap:</B> Word wrap is a formatting mode you can toggle by
+        RETURNing 34 from the user function.  When word wrap is on (the
+        default), MEMOEDIT() inserts a soft carriage return/linefeed at the
+        closest word break to the window border or line length, whichever
+        occurs first.  When word wrap is off, MEMOEDIT() scrolls text buffer
+        beyond the edge of the window until the cursor reaches the end of
+        line.  At this point, the user must press Return (inserting a hard
+        carriage return/linefeed) to advance to the next line.
+
+     <B>.  Reforming paragraphs:</B> Pressing Ctrl-B or RETURNing a 2 from a
+        user function reformats the text buffer until a hard carriage return
+        (end of paragraph) or the end of the text buffer is reached.  This
+        happens regardless of whether word wrap is on or off.
+
+     <B>.  Soft carriage returns:</B> In CA-Clipper, the insertion of soft
+        carriage return/linefeed characters is never allowed to change the
+        significant content of the text.  That is, when a soft carriage
+        return/linefeed is inserted between two words, the space characters
+        between the two words are preserved.  When text is reformatted, any
+        soft carriage return/linefeed characters are removed.  This leaves
+        the text in its original form and properly handles the case where a
+        soft carriage return/linefeed has been inserted in the middle of a
+        word.
+
+        In the Summer '87 version of MEMOEDIT(), when a soft carriage
+        return/linefeed is inserted, a single space character is removed from
+        the text at that point.  If the text is later reformatted using a
+        different line width, each soft carriage return/linefeed is replaced
+        by a single space.  However, if the text string is reformatted using
+        any of the CA-Clipper text handling functions, words that were
+        separated by a soft carriage return/linefeed will be run together
+        because the soft carriage return/linefeed is not replaced with a
+        space.
+
+        To prevent this, text that was formatted using Summer '87 MEMOEDIT()
+        should be processed to change any soft carriage return/linefeed pairs
+        into space characters.  This can be accomplished using the STRTRAN()
+        function as follows.
+
+        STRTRAN( &lt;text&gt;, CHR(141)+CHR(10), " " )
+
+        To convert memo values in an existing database, the following two
+        line program can be used:
+
+        USE &lt;xcDatabase&gt;
+        REPLACE ALL &lt;idMemo&gt; WITH ;
+           STRTRAN( &lt;idMemo&gt;, CHR(141)+CHR(10), " " )
+
+        Because of the (.dbt) file format, replacing all occurrences of a
+        memo field can cause the (.dbt) file to grow significantly.  The
+        (.dbt) file can be reduced by copying the (.dbf) to a new file.
+
+        For very large (.dbt) files, it may not be feasible to perform the
+        above procedure.  The supplied utility program, DBT50.EXE located in
+        \CLIPPER5\BIN, may be useful in these cases.  DBT50 scans an entire
+        (.dbt) file, replacing any soft carriage return/linefeed pairs with
+        two spaces.  Although this has the undesirable effect of causing
+        certain words to be separated by two spaces instead of one, it allows
+        the file to be processed in place without using additional disk
+        space.  DBT50 modifies only soft carriage return/linefeed pairs in
+        the target file.  Other text is unaffected.
+
+     <B>.  Editing text files:</B> MEMOEDIT() edits text files if the text
+        file can be read into a CA-Clipper character variable.  This can be
+        done with the MEMOREAD() function.  After editing the contents of the
+        text file held in the character variable, write it back to the file
+        using MEMOWRIT().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example lets you browse a memo field but prevents any
+        changes to the text buffer:
+
+        USE Customer NEW
+        SET CURSOR OFF
+        MEMOEDIT(CustNotes, 5, 10, 20, 69, .F.)
+        SET CURSOR ON
+
+     <B>.</B>  This example allows editing of a memo field, assigning the
+        changes back to the memo field:
+
+        USE Customer NEW
+        REPLACE CustNotes WITH ;
+              MEMOEDIT(CustNotes, 5, 10, 20, 69)
+
+     <B>.</B>  This example creates a character string using MEMOEDIT():
+
+        LOCAL cNotes
+        cNotes = MEMOEDIT()
+
+     <B>.</B>  This example is a user-defined function that edits a character
+        string in a boxed window displayed with a title:
+
+        FUNCTION EditMemo( cString, cTitle,;
+                 nTop, nLeft, nBottom, nRight )
+           LOCAL cScreen := SAVESCREEN(nTop, nLeft,;
+
+                 nBottom, nRight)
+           @ nTop - 1, nLeft - 2 CLEAR TO nBottom + 1,;
+                 nRight + 2
+           @ nTop - 1, nLeft - 2 TO nBottom + 1, nRight + 2
+           @ nTop - 1, nLeft SAY "[" + cTitle + "]"
+           cString = MEMOEDIT(cString, nTop, nLeft,;
+                 nBottom, nRight)
+           RESTSCREEN(nTop, nLeft, nBottom, nRight, cScreen)
+           RETURN (cString)
+
+     <B>.</B>  This example reads the contents of a text file into a
+        character variable, edits it, then writes it back to disk:
+
+        LOCAL cString := MEMOREAD("Text.txt")
+        cString := MEMOEDIT(cString)
+        IF !MEMOWRIT("Text.txt", cString)
+           ? "Write error"
+           BREAK
+        ENDIF
+        RETURN
+
+     <B>.</B>  This example contains a user-defined function that displays a
+        message describing the current MEMOEDIT() mode.  Additionally, while
+        in ME_UNKEY mode, the function will perform either a ME_WORDRIGHT or
+        ME_BOTTOMRIGHT action depending on which associated function key is
+        pressed:
+
+        #include "memoedit.ch"
+        #include "inkey.ch"
+
+        PROCEDURE Main()
+           USE Customer NEW
+           REPLACE CustNotes WITH;
+           MEMOEDIT( CustNotes, 5, 5, 15, 75, .T., "MemoUDF" )
+        RETURN
+
+        FUNCTION MemoUDF( nMode, nLine, nCol )
+           LOCAL nKey := LASTKEY()
+           LOCAL nRetVal := ME_DEFAULT         // Default return action
+
+           DO CASE
+           CASE nMode == ME_IDLE
+              @ 20, 5 SAY "MemoMode is ME_IDLE  "
+           CASE nMode == ME_UNKEY
+              @ 20, 5 SAY "MemoMode is ME_UNKEY "
+              DO CASE
+              CASE nKey == K_F2
+                 nRetVal := ME_WORDRIGHT
+              CASE nKey == K_F3
+                 nRetVal := ME_BOTTOMRIGHT
+              ENDCASE
+              CASE nMode == ME_UNKEYX
+              @ 20, 5 SAY "MemoMode is ME_UNKEYX"
+           OTHERWISE
+
+              @ 20, 5 SAY "MemoMode is ME_INIT  "
+           ENDCASE
+
+        RETURN nRetVal
+
+ <B>Files:</B>  Library is EXTEND.LIB, header files are Memoedit.ch and Inkey.ch.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng43e47.html">LASTKEY()</A>
+<A HREF="ng4d81f.html">MEMOREAD()</A>
+<A HREF="ng4e55c.html">MEMOTRAN()</A>
+<A HREF="ng4ecff.html">MEMOWRIT()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

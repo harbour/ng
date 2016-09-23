@@ -1,0 +1,110 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng49da.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng271.html">[^^Up^^]</A>
+<A HREF="ng62d5.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MESSAGE...[IS...] TO</B>
+
+ <B>Synopsis</B>
+
+         Forward message to variable
+
+ <B>Syntax</B>
+
+         MESSAGE &lt;message name&gt; [IS &lt;target name&gt;]
+              TO &lt;target variable&gt;
+
+ <B>Arguments</B>
+
+         <B>&lt;message name&gt;</B> is the name of the message being declared.
+
+         <B>&lt;target name&gt;</B> is the name of the message to be forwarded to
+         the target variable. This argument should be omitted if its value
+         is the same as <B>&lt;message name&gt;</B>.
+
+         <B>&lt;target variable&gt;</B> is the name of the instance variable that
+         the message is being forwarded to. The variable must already be
+         defined in the current class or an ancestor class. Two special
+         keywords can be used instead of specifying a target variable:
+         <B>CLASS &lt;className&gt;</B> and <B>SENDER</B>. Their use is described
+         below.
+
+ <B>Description</B>
+
+         This command causes the specified message to be forwarded to the
+         object referred to by the specified target variable. This allows
+         messages to be redirected automatically without requiring methods
+         to be written. See <B>Message Forwarding</B> for more information.
+
+         Instead of being forwarded to an instance variable in the current
+         class, messages can be forwarded to an object's class using the
+         <B>CLASS</B> <B>&lt;className&gt;</B> clause in place of the <B>&lt;target</B>
+         <B>variable&gt;</B>. The name of the class being forwarded to should
+         always be the name of the current class; other values will be
+         ignored. This feature will be made more flexible in future
+         versions.
+
+         Examples of message forwarding are given below. Taken further,
+         message forwarding can be used to implement a technique called
+         <B>delegation</B>, which in its fullest sense involves communication
+         in both directions between delegator and delegatee. One way to
+         achieve this bi-directional communication, in a class which is
+         designed to act as a target for delegation, is to use the keyword
+         <B>SENDER</B> as the <B>&lt;target variable&gt;</B> in this command. This
+         causes the specified message to be forwarded to the sending object
+         (the delegator), allowing the receiver of a delegated message to
+         communicate with the object which delegated the message. This is
+         discussed further in the <B>Delegation</B> section.
+
+ <B>Example</B>
+
+
+           CLASS Graph
+              VAR oWin // refers to Window object
+              MESSAGE close TO oWin
+              ...
+           END CLASS
+
+         This class specification would cause instances of the Graph class,
+         upon receiving the <U>close</U> message, to reroute the message,
+         including any parameters, to the object referred to by the
+         instance variable <U>oWin</U>.
+
+         Here is another example which makes use of the <B>IS</B> clause:
+
+           CLASS Window
+              VAR oCursor // refers to Cursor object
+              MESSAGE hideCursor IS hide TO oCursor
+              MESSAGE showCursor IS show TO oCursor
+              MESSAGE updateCurs IS update TO oCursor
+              ...
+           END CLASS
+
+         Based on these declarations, objects of class Window will respond
+         to the messages <U>hideCursor</U>, <U>showCursor</U> and
+         <U>updateCursor</U> by sending the message <U>hide</U>, <U>show</U>, or
+         <U>update</U> respectively to the object referred to by the instance
+         variable <U>oCursor</U>.
+
+ <B>See Also</B>
+
+         <B>VAR...[IS...] TO</B>, <B>Message Forwarding</B>, <B>Delegation</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng9f4c.html">VAR...[IS...] TO</A>
+<A HREF="ng14440.html">Message Forwarding</A>
+<A HREF="ng15e21.html">Delegation</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

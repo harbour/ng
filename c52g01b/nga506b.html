@@ -1,0 +1,57 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga475d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="nga5556.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET INTENSITY</B>
+ Toggle enhanced display of GETs and PROMPTs
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET INTENSITY ON | off | &lt;xlToggle&gt;</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> enables both standard and enhanced display colors.
+
+     <B>OFF</B> disables enhanced display color.  All screen output then uses
+     the current standard color.
+
+     <B>&lt;xlToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+ <B>Description</B>
+
+     SET INTENSITY toggles the display of GETs and menu PROMPTs between
+     enhanced and standard color settings.  When INTENSITY is OFF, GETs and
+     SAYs appear in the standard color setting.  When INTENSITY is ON, GETs
+     appear in the enhanced color setting.
+
+     When INTENSITY is OFF, all menu PROMPTs appear in the standard color
+     setting, and the cursor appears at the current PROMPT.  If INTENSITY is
+     ON (the default), the current PROMPT appears in the enhanced color
+     setting, and the cursor is hidden.
+
+     Note that INTENSITY has no effect on ACHOICE() or DBEDIT().
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng73148.html">@...GET</A>
+<A HREF="ng77580.html">@...PROMPT</A>
+<A HREF="ng78049.html">@...SAY</A>
+<A HREF="ng6375d.html">SETCOLOR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng2595.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng2b16.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>@ (nested script)             Specify name of script file</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Specify the name of a script file</B></U>
+
+ <U>Syntax   : <B>@&lt;scriptname&gt;</B></U>
+
+ <U>Example  : <B># Process the link script 'Myscript' here</B></U>
+            <B>@Myscript</B>
+
+ Blinker supports nested script files of any size to a depth of 5 levels. The
+ processing of nested script files is similar to a program function call:
+ when Blinker encounters a nested script command, the current script file is
+ suspended, the second script is processed, and then Blinker returns to the
+ first script and resumes processing.
+
+ When searching for a script, Blinker will first look in the current
+ directory, and then in the path specified in the LIB environment variable.
+ This will allow frequently used scripts which are rarely modified, (such as
+ scripts for overlaying a particular library), to be stored in a common
+ directory for convenience.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

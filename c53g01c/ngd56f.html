@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngcd9d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ngd969.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ASC()</B>
+ Convert a character to its ASCII value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>ASC(&lt;cExp&gt;) --&gt; nCode</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cExp&gt;</B> is the character expression to be converted to a number.
+
+ <B>Returns</B>
+
+     ASC() returns an integer numeric value in the range of zero to 255,
+     representing the ASCII value of &lt;cExp&gt;.
+
+ <B>Description</B>
+
+     ASC() is a character conversion function that returns the ASCII value of the
+     leftmost character in a character string.  ASC() is used primarily on
+     expressions requiring numeric calculations on the ASCII value of a
+     character.  CHR() and ASC() are inverse functions.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate various results of ASC():
+
+        ? ASC("A")                     // Result: 65
+        ? ASC("Apple")                 // Result: 65
+        ? ASC("a")                     // Result: 97
+        ? ASC("Z") - ASC("A")          // Result: 25
+        ? ASC("")                      // Result: 0
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng194af.html">CHR()</A>
+<A HREF="ng61b6e.html">INKEY()</A>
+<A HREF="nga0e79.html">STR()</A>
+<A HREF="nga7e04.html">VAL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

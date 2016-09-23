@@ -1,0 +1,108 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9170.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="nga7c2.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>AFIELDS()*</B>
+ Fill arrays with the structure of the current database file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>AFIELDS([&lt;aFieldNames&gt;], [&lt;aTypes&gt;],</B>
+     <B>   [&lt;aWidths&gt;], [&lt;aDecimals&gt;]) --&gt; nFields</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;aFieldNames&gt;</B> is the array to fill with field names.  Each element
+     is a character string.
+
+     <B>&lt;aTypes&gt;</B> is the array to fill with the type of fields in
+     &lt;aFieldNames&gt;.  Each element is a character string.
+
+     <B>&lt;aWidths&gt;</B> is the array to fill with the widths of fields in
+     &lt;aFieldNames&gt;.  Each element is numeric data type.
+
+     <B>&lt;aDecimals&gt;</B> is the array to fill with the number of decimals defined
+     for fields in &lt;aFieldNames&gt;.  Each element is numeric data type.  If the
+     field type is not numeric, the &lt;aDecimals&gt; element is zero.
+
+ <B>Returns</B>
+
+     AFIELDS() returns the number of fields or the length of the shortest
+     array argument, whichever is less.  If no arguments are specified, or if
+     there is no file in USE in the current work area, AFIELDS() returns
+     zero.
+
+ <B>Description</B>
+
+     AFIELDS() is an array function that fills a series of arrays (structure
+     attribute arrays) with the structure of the database file currently
+     open, one element in each array per field.  AFIELDS() works like ADIR(),
+     filling a series of existing arrays with information.  To use AFIELDS(),
+     you must first create the arrays to hold the database structure
+     information, each with the same number of elements as the number of
+     fields (i.e. FCOUNT()).  Once the structure attribute arrays are
+     created, you can then invoke AFIELDS() to fill the structure arrays with
+     information about each field.
+
+     By default, AFIELDS() operates on the currently selected work area.  It
+     can  operate on an unselected work area if you specify it within an
+     aliased expression (see example below).
+
+     AFIELDS() is a compatibility function and therefore is not recommended.
+     It is superseded by DBSTRUCT(), which does not require the existence of
+     any arrays prior to invocation and returns a multidimensional array
+     containing the current database file structure.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates how AFIELDS() and ACHOICE() can be
+        used together to create a fields picklist:
+
+        USE Sales NEW
+        PRIVATE aFieldNames[FCOUNT()]
+        AFIELDS(aFieldNames)
+        @ 1, 0 TO 10, 10 DOUBLE
+        nChoice := ACHOICE(2, 1, 9, 9, aFieldNames)
+        @ 12, 0 SAY IF(nChoice != 0, aFieldNames[nChoice],;
+                        "None selected")
+        RETURN
+
+     <B>.</B>  This example uses AFIELDS() with an aliased expression to fill
+        arrays with the structure of Sales.dbf, open in an unselected work
+        area:
+
+        LOCAL aFieldNames, aTypes, aWidths, aDecimals
+        USE Sales NEW
+        USE Customer NEW
+        //
+        aFieldNames := Sales-&gt;(ARRAY(FCOUNT()))
+        aTypes := Sales-&gt;(ARRAY(FCOUNT()))
+        aWidths := Sales-&gt;(ARRAY(FCOUNT()))
+        aDecimals := Sales-&gt;(ARRAY(FCOUNT()))
+        //
+        Sales-&gt;(AFIELDS(aFieldNames, aTypes, ;
+                 aWidths, aDecimals))
+
+ <B>Files</B>   Library is EXTEND.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng45dc.html">ACHOICE()</A>
+<A HREF="ng8587.html">ADIR()*</A>
+<A HREF="ng9170.html">AEVAL()</A>
+<A HREF="ngd969.html">ASCAN()</A>
+<A HREF="ng1ec28.html">DBCREATE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

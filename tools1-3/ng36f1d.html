@@ -1,0 +1,67 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng36483.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng26a91.html">[^^Up^^]</A>
+<A HREF="ng373e7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>COM_SFLUSH()</B>
+ Deletes the sending background buffer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>COM_SFLUSH(&lt;nComPort&gt;) --&gt; lDeleted</B>
+
+ <B>Argument</B>
+
+     <B>&lt;nComPort&gt;</B>  Designates the port (1 to 4) for which the sending
+     buffer is deleted.
+
+ <B>Returns</B>
+
+     If the selected sending buffer is successfully deleted, the function
+     returns a .T.
+
+ <B>Description</B>
+
+     COM_SFLUSH() eliminates all the characters in a sending buffer.  This
+     can be useful when the send routine has been futilely waiting for an XON
+     character (bad software handshake).
+
+ <B>Notes</B>
+
+     <B>.</B>  A COM_SFLUSH() to a closed port does not work.
+
+     <B>.</B>  It is not necessary to test for characters in the sending
+        buffer to carry out a COM_SFLUSH().
+
+ <B>Example</B>
+
+     When the sending buffer is waiting for an XON character and the
+     transmission has been delayed 30 seconds, the sending buffer is deleted:
+
+     nStart  := SECONDS()                    // When sent
+
+     COM_SEND(2, cSendText)
+
+     IF ISBIT(COM_SMODE(2), 2)               // Waiting for XON?
+        IF SECONDS() - nStart &gt; 30           // 30 second delay ...
+           COM_SFLUSH(2)                     // Delete sending buffer
+        ENDIF
+     ENDIF
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng34d50.html">COM_SCOUNT()</A>
+<A HREF="ng37f88.html">COM_SMODE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

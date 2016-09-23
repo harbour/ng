@@ -1,0 +1,87 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng29db8.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng29720.html">[^^Up^^]</A>
+<A HREF="ng2a8fd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>_fsCreate()</B>
+ Create a file
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>#include "filesys.api"</B>
+     <B>FHANDLE _fsCreate(</B>
+     <B>                   BYTEP fpFilename,</B>
+     <B>                   USHORT uiAttribute</B>
+     <B>                 )</B>
+
+ <B>Arguments</B>
+
+     <B>fpFilename</B> is the name of the file to create specified as a null-
+     terminated string.  The fpFilename must be fully qualified, including
+     the drive letter, path, and extension.
+
+     <B>uiAttribute</B> is one of the DOS archive attributes shown in the table
+     below:
+
+     <B>File Create Flags</B>
+     ------------------------------------------------------------------------
+     <B>Constant       Flag      Description</B>
+     ------------------------------------------------------------------------
+     FC_NORMAL      0x0000    No file attributes are set
+     FC_READONLY    0x0001    Read-only file attribute is set
+     FC_HIDDEN      0x0002    Hidden file attribute is set
+     FC_SYSTEM      0x0004    System file attribute is set
+     ------------------------------------------------------------------------
+
+ <B>Returns</B>
+
+     _fsCreate() returns a DOS handle to the newly created file or FS_ERROR
+     if an error occurs.
+
+ <B>Description</B>
+
+     This function creates a file named fpFilename according to the value of
+     uiAttribute.  It is equivalent to the CA-Clipper function FCREATE().
+
+ <B>Examples</B>
+
+     <B>.</B>  The following code fragment illustrates the use of
+        _fsCreate().  Note that error handling should be performed at each
+        step.  Refer to The Error System API Reference chapter of this guide
+        for details on communicating with the CA-Clipper Error system:
+
+        #include "filesys.api"
+
+        FHANDLE hFile;
+
+        // Create a normal read/write file
+        hFile = _fsCreate( "Foo", FC_NORMAL );
+
+        if (! _fsError() )
+        {
+           .
+           .
+           .
+           _fsClose( hFile );
+        }
+
+ <B>Files:</B>  Library is CLIPPER.LIB, header file is Filesys.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng29916.html">_fsClose()</A>
+<A HREF="ng2ae2e.html">_fsError()</A>
+<A HREF="ng2d62a.html">_fsOpen()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng364a2.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng372fc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_SetPass():</B>
+
+  Syntax:   Sx_SetPass( &lt;cString&gt; )
+
+        cString = String of data to be used in all subsequent Sx_Encrypt()
+                  and Sx_Decrypt() calls.  The string may be up to 8 bytes
+                  long.  This value is case-sensitive.  For example, a
+                  string encrypted with the password "BOGUS" would be
+                  different than if the password "bogus" were used.
+
+                  To clear the password, pass a null string ("") as the
+                  parameter.
+
+      <B>NOTE:  Make sure to trim all trailing spaces from the password before</B>
+      <B>       passing it on to the Sx_SetPass() function, unless the spaces</B>
+      <B>       are intended to be part of the password.</B>
+
+  Returns:  Nothing.
+
+  Description:  A single call to Sx_SetPass() should be made prior to
+                any encryption or decryption functions.
+
+                After setting a password with Sx_SetPass(), all new records
+                appended in the current workarea will be encrypted as they
+                are stored.
+
+                If a file or string was encrypted without first setting the
+                security code via Sx_SetPass(), it would also need to be
+                decrypted without calling Sx_SetPass().  That way the same
+                code, in this case eight ASCII 0's, will be used for both
+                encryption and decryption.
+
+                For additional security the security code is stored in
+                memory in an encrypted form.  Therefore, the security code
+                is not easily accessed at runtime.
+
+     <B>NOTE:  The password set by Sx_SetPass() is workarea-specific.  It is</B>
+     <B>       NOT global.</B>
+
+
+  Example:
+
+    // Open TEST.DBF and set FOOBAR as the encryption password for this
+    // workarea.  Then, encrypt TEST.DBF
+
+    USE test VIA "SIXCDX" EXCLUSIVE
+    <B>Sx_SetPass( "FOOBAR" )</B>
+    ? "Encrypting TEST.DBF: "
+    ?? iif( Sx_DBFencrypt(), "OK", "ERROR" )
+
+    // Open TEST2.DBF and set BOGUS as the encryption password for this
+    // workarea.  Then, encrypt TEST2.DBF.
+
+    USE test2 VIA "SIXCDX" NEW EXCLUSIVE
+    <B>Sx_SetPass( "BOGUS" )</B>
+    ? "Encrypting TEST2.DBF: "
+    ?? iif( Sx_DBFencrypt(), "OK", "ERROR" )
+
+
+  <B>NOTE:  If you accidentally decrypt a DBF file with the wrong password,</B>
+  <B>       you'll need to follow these steps to decrypt it properly:</B>
+
+  <B>        1.  Re-Encrypt the table using the same WRONG password.</B>
+  <B>        2.  Now decrypt the DBF file with the correct password.</B>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng26347.html">Sx_Encrypt()</A>
+<A HREF="ng23f2f.html">Sx_Decrypt()</A>
+<A HREF="ng23407.html">Sx_DBFencrypt()</A>
+<A HREF="ng22e80.html">Sx_DBFdecrypt()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,78 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng13625.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng14651.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETAEXPD()</B>
+ Determines or sets the expiration date of an access account
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETAEXPD(&lt;cUser&gt;,[&lt;dDate&gt;],[&lt;cServer&gt;|&lt;nConId&gt;)</B>
+     <B>   --&gt; dExpiration</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cUser&gt; </B> Designates the name of the user.
+
+     <B>&lt;dDate&gt; </B> Designates the new expiration date for the access account
+     of &lt;cUser&gt;.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server where &lt;cUser&gt; is
+     established.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETAEXPD() returns the valid expiration date for the access account of
+     &lt;cUser&gt;. If &lt;dDate&gt; has been passed and the returned date does not match
+     &lt;dDate&gt;, the user of the NNETAEXPD() did not have the requested rights
+     for the modification (see the description).
+
+ <B>Description</B>
+
+     NOVELL NET ACCOUNT EXPIRATION DATE
+     NNETAEXPD() allows you to query and set the expiration date for the
+     access account of &lt;cUser&gt;.  Any attempt by &lt;cUser&gt; to log in after the
+     account expires disables the account.  To query the expiration date, do
+     not pass a date for &lt;dDate&gt;.  If a value is passed for &lt;dDate&gt;,
+     NNETAEXPD() tries to modify the expiration date.  However, supervisor
+     rights on &lt;cServer&gt; are required to set a new expiration date.  An
+     expiration date can be removed by passing an empty date.  With the
+     parameters &lt;cServer&gt; or &lt;nConId&gt;, the expiration date of users on any
+     file server can be queried or set.  The connection ID of a file server
+     can be determined with the functions NNETATTACH() or NNETLOGIN().
+
+ <B>Examples</B>
+
+     <B>.</B>  Determine the expiration date for user MIKE:
+
+        ? NNETAEXPD('MIKE')   // z.B. 03/19/92
+
+     <B>.</B>  Set the new expiration date for the account of user MIKE:
+
+        NNETAEXPD('MIKE',CTOD('06/01/92'))
+
+     <B>.</B>  Remove the expiration date for the account of user MIKE:
+
+        NNETAEXPD("MIKE",CTOD(""))
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng12eb4.html">NNETACCDIS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,75 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6e459.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng6f227.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>VALTYPE()</B>
+ Determine the data type returned by an expression
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>VALTYPE(&lt;exp&gt;) --&gt; cType</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp&gt;</B> is an expression of any type.
+
+ <B>Returns</B>
+
+     VALTYPE() returns a single character representing the data type returned
+     by &lt;exp&gt;.  VALTYPE() returns one of the following characters:
+
+     <B>VALTYPE() Return Values</B>
+     ------------------------------------------------------------------------
+     <B>Returns    Meaning</B>
+     ------------------------------------------------------------------------
+     A          Array
+     B          Block
+     C          Character
+     D          Date
+     L          Logical
+     M          Memo
+     N          Numeric
+     O          Object
+     U          NIL
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     VALTYPE() is a system function that takes a single argument, evaluates
+     it, and returns a one character string describing the data type of the
+     return value.  It is similar to TYPE(), but differs by actually
+     evaluating the specified argument and determining the type of the return
+     value.  For this reason, you can determine the type of local and static
+     variables, user-defined functions, and EXTEND.LIB functions.  TYPE(), by
+     contrast, uses the macro operator (&amp;) to evaluate the type of its
+     argument.  Note that if the argument does not exist an error ("undefined
+     error") will occur, unlike TYPE which will return "U."
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples show the return values for several data types:
+
+        ? VALTYPE(1)                // Result: N
+        ? VALTYPE("GOOB")           // Result: C
+        ? VALTYPE(NIL)              // Result: U
+        ? VALTYPE(array)            // Result: A
+        ? VALTYPE(block)            // Result: B
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng6c53d.html">TYPE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

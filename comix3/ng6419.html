@@ -1,0 +1,129 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng5d8a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng6d03.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>cmSaveFilter()</B>        Save the current filter state
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    cmSaveFilter() -&gt; saveFilt
+
+<B>Arguments</B>
+
+    None.
+
+<B>Returns</B>
+
+    cmSaveFilter() returns a string describing the current filter state.
+
+<B>Description</B>
+
+    Returns a variable (a character string) which describes the current
+    filter state.  The information saved is:
+
+    o   Filter Condition
+    o   Filter RecordList
+    o   Current Record Number
+
+    This function actually allocates a RecordList to save the current Filter
+    RecordList (it duplicates it).  Because of this, you _must_ either
+    restore the filter (using cmRestFilter()), or destroy the filter (using
+    cmDestroyFilter()) when you are done using it.
+
+<B>Example</B>
+
+    static filtArray[10]
+    static filtPos := 0
+
+    function pushFilter()
+<B>    filtArray[++filtPos] := cmSaveFilter()</B>
+    return
+
+    function popFilter()
+    local retVal := .f.
+    if (filtPos &gt; 0)
+        cmRestFilter(filtArray[filtPos--])
+        retVal := .t.
+    endif
+    return retVal
+
+    function popAll()
+
+    *   Destroy all filters saved on the stack
+    do while (filtPos &gt; 0)
+        cmDestroyFilter(filtArray[filtPos--])
+    enddo
+    return
+
+    function usePushPop()
+    local newQuery
+    do while .t.
+
+        *   Get the new query
+        clear
+        newQuery := space(60)
+        @ 0, 0 say "Condition: " get newQuery
+        read
+
+        *   If he hit ESC to exit the read
+        if (lastKey() == K_ESC)
+
+            *   Pop the filter (instantly back to the previous filter), and
+            *   if nothing more to pop, then exit loop
+            if (!popFilter())
+                exit
+            endif
+
+        *   Else if he hit K (Kill it)
+        else if (lastKey() == K_CTRL_K)
+
+            *   Discard all saved filters and exit the loop
+            popAll()
+            exit
+
+        *   Otherwise, he must want us to filter it
+        else
+
+            *   Make sure it's a logical, and if not repeat the loop
+            if (type(newQuery) &lt;&gt; 'L')
+                @ 1, 0 say "Condition is not a logical.  Any key to continue."
+                inkey(0)
+                continue
+            endif
+
+            *   Otherwise, save the current filter
+            pushFilter()
+
+            *   And further pare down the records
+            cmReFilter(newQuery)
+        endif
+
+        *   Let user look at the records meeting total condition
+        @ 0, 0 say "Filter: " + dbFilter()
+        dbedit(1)
+    enddo
+    return
+
+<B>See Also</B>
+
+    cmDestroyFilter(), cmRestFilter()
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng2359.html">cmDestroyFilter()</A>
+<A HREF="ng5d8a.html">cmRestFilter()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,126 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng76e0.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng271.html">[^^Up^^]</A>
+<A HREF="ng8907.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>VAR</B>
+
+ <B>Synopsis</B>
+
+         Declare instance variable(s)
+
+ <B>Syntax</B>
+
+         VAR &lt;variable name list&gt;
+              [CLASS &lt;class&gt; | TYPE &lt;type&gt;]
+              [READONLY | RO | ASSIGN &lt;assign&gt;]
+
+ <B>Arguments</B>
+
+         <B>&lt;variable name list&gt;</B> is a list of names of one or more
+         variable to be included in the class being defined.
+
+         <B>CLASS &lt;class&gt;</B> specifies the name of the class which values
+         assigned to the declared variable(s) must belong. Any attempt to
+         assign values of a different class will result in a runtime error.
+         Under the Class(y) 2.4 error system, a <U>wrongClass</U> message will
+         be sent to the object which caused the error.
+
+         <B>TYPE &lt;type&gt;</B> specifies the type of value which can be assigned
+         to the variable(s) being declared. <B>&lt;type&gt;</B> can be any one of
+         the following seven Clipper data types: <U>Array</U>, <U>Block</U>,
+         <U>Character</U>, <U>Date</U>, <U>Integer</U>, <U>Logical</U> or <U>Numeric</U>.
+         An <U>Integer</U> type restriction will only accept integer values,
+         whereas <U>Numeric</U> accepts both integer and floating-point
+         values. The types <U>Character</U> and <U>Numeric</U> can be abbreviated
+         to <U>Char</U> and <U>Num</U>.
+
+         <B>READONLY</B> or <B>RO</B> restricts assignment to the variable(s)
+         being declared. If the the declared variable(s) are exported
+         (declared after the <B>EXPORT:</B> command), assignment will only be
+         permitted from the current class and its subclasses, ie.
+         assignment will have protected visibility. If the variable(s) are
+         protected, assignment will only be permitted in the current class,
+         ie. assignment will be hidden. If the variable(s) are hidden, the
+         <B>READONLY</B> clause has no effect.
+
+         <B>ASSIGN &lt;assign&gt;</B> allows more control over the restriction of
+         assignment than the <B>READONLY</B> clause. <B>&lt;assign&gt;</B> can be one
+         of the following three values: <B>HIDDEN</B>, <B>PROTECTED</B>, or
+         <B>EXPORTED</B>. The value specified will determine the visibility of
+         assignment to the variable(s) being declared.
+
+ <B>Description</B>
+
+         Includes the named variables, as instance variables, in the class
+         being created. Each object (instance of a class) created contains
+         its own copy of the instance variables of that class.
+
+         The <B>VAR</B> command is usually used inside a class specification
+         (<B>CREATE CLASS...END CLASS</B> block).
+
+         If the optional <B>READONLY</B> clause (abbreviation <B>RO</B>) is
+         included, Class(y) will prevent the variable from being assigned
+         to, except in methods of that class. This has no meaning when used
+         with variables declared hidden with the <B>HIDDEN:</B> command.
+
+         If an assignment occurs which is illegal because a variable has
+         been flagged as read-only, a Class(y) error will be generated. The
+         error will take the form of a <U>readOnlyErr</U> message being sent
+         to the object concerned.
+
+ <B>Examples</B>
+
+           CREATE CLASS Dialog
+              VAR id
+              VAR nTop, nLeft TYPE Numeric
+              VAR oWin CLASS Window
+
+           PROTECTED:
+              VAR nCount READONLY
+           EXPORT:
+              VAR cTitle TYPE Char READONLY
+
+              //...
+           END CLASS
+
+         In this class specification, the first <B>VAR</B> statement declares
+         a variable named id. The next statement declares two variables,
+         nTop and nLeft which are restricted to numeric values. Then a
+         variable named oWin is declared, which is only permitted to refer
+         to objects of class Window. After the <B>PROTECTED:</B> statement, a
+         variable named nCount is declared as <B>READONLY</B>. Since the
+         variable is protected, declaring it read-only prevents assignment
+         to the variable outside the methods of the Dialog class. Finally,
+         an exported variable named cTitle is declared, restricted to
+         containing character data and, since it is exported but read-only,
+         it is not assignable outside methods of the Dialog class or its
+         subclasses.
+
+ <B>Note</B>
+
+         Instance variable names are only significant up to 9 characters,
+         as opposed to Clipper's usual 10. See the section entitled
+         <B>Length</B> <B>of Variable Names</B>.
+
+ <B>See Also</B>
+
+         <B>CLASS VAR</B>, <B>Length of Variable Names</B>
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng195b.html">CLASS VAR</A>
+<A HREF="ng1346f.html">Length of Variable Names</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

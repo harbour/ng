@@ -1,0 +1,69 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngfa66.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng4bf.html">[^^Up^^]</A>
+<A HREF="ng10871.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLINKER OVERLAY OPSIZE        Request size for overlay pool</B>
+------------------------------------------------------------------------------
+
+ <U>Purpose  : <B>Request a size for the overlay pool</B></U>
+
+ <U>Syntax   : <B>BLINKER OVERLAY OPSIZE &lt;niSize&gt;</B></U>
+
+ <U>Default  : <B>40 kb</B></U>
+
+ <U>Example  : <B># Increase the overlay pool size to 60kb</B></U>
+            <B>BLINKER OVERLAY OPSIZE 60</B>
+
+ This command is used to set the operating size of the overlay pool at run
+ time in kb. It can be set to any value between 12 and 128. The default
+ operating size is 40kb. This may be made smaller to save memory or larger to
+ reduce the number of disk accesses made by the overlay manager to re-load
+ overlaid procedures.
+
+ When overlays are specified in the link script file, Blinker will determine
+ the size of the smallest possible overlay pool by adding approximately 8kb
+ to the size of the largest overlay unit (a segment for most compilers). This
+ minimum value will be displayed along with the value specified in the
+ BLINKER OVERLAY OPSIZE command. If the minimum value is greater than the
+ value specified, the minimum value will override the value specified.
+
+ The overlay opsize may be adjusted at runtime through the use of the BLINKER
+ environment variable (see the 'Environment Variable' section in Chapter 2).
+ For a discussion of how the overlay pool is used at runtime, see the
+ 'Overlay Pool' section in Chapter 4.
+
+ <B>Notes for CA-Clipper Summer '87:</B>
+
+ When using CA-Clipper Summer '87 and the DYNAMIC overlay allocation method
+ (see BLINKER OVERLAY DYNAMIC), the minimum OPSIZE is not displayed as it
+ cannot be calculated at link time. The actual OPSIZE required while
+ executing the program can be determined by setting it to a small value such
+ as 10kb, running through all the options of the application WITHOUT
+ performing a BLIOVLCLR(), and then checking the value of the Blinker
+ function BLIOVLOPS() just before quitting the program. The value returned by
+ the BLIOVLOPS() function will be the minimum value for the OPSIZE.
+
+ The reason for this is that with the DYNAMIC method all active overlays must
+ remain in memory at a given time. The minimum overlay OPSIZE is therefore
+ the total size of the active overlays when the program is at its deepest
+ level of nesting. The method described above may be used to establish this
+ value, and setting it to a smaller value will simply cause the value to be
+ overridden at runtime.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng5da6.html">BLINKER ENVIRONMENT NAME</A>
+<A HREF="ng25542.html">BLIOVLOPS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

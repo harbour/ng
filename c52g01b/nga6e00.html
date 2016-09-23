@@ -1,0 +1,72 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga6945.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6fdf7.html">[^^Up^^]</A>
+<A HREF="nga73b7.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET ORDER</B>
+ Set a new controlling index
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET ORDER TO [&lt;nIndex&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>TO &lt;nIndex&gt;</B> specifies the new controlling index by pointing to its
+     position in the list of open indexes in the current work area.  This
+     number can be in the range of zero to 15.
+
+     If &lt;nIndex&gt; is not specified, ORDER is SET to zero.
+
+ <B>Description</B>
+
+     When you SET ORDER TO a new controlling index, all indexes are properly
+     updated when you either append or edit records.  This is true even if
+     you SET ORDER TO 0.  After a change of controlling indexes, the record
+     pointer still points to the same record.
+
+     SET ORDER TO 0 or SET ORDER TO with no argument restores the database
+     file to natural order (record number order), leaving all indexes open.
+
+     To determine which index is the current controlling index, use
+     INDEXORD().
+
+ <B>Examples</B>
+
+     <B>.</B>  This example shows typical uses of the SET ORDER command:
+
+        USE Customers NEW
+        INDEX ON Lastname TO Names
+        INDEX ON City + State TO Region
+        SET INDEX TO Names, Region
+        //
+        SET ORDER TO 2
+        ? INDEXKEY(INDEXORD())      // Result: City + State
+        //
+        SET ORDER TO 0
+        ? INDEXKEY(INDEXORD())      // Result: null value
+        //
+        SET ORDER TO 1
+        ? INDEXKEY(INDEXORD())      // Result: Lastname
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng895a7.html">INDEX</A>
+<A HREF="ng408dd.html">INDEXORD()</A>
+<A HREF="ng994cb.html">SEEK</A>
+<A HREF="nga475d.html">SET INDEX</A>
+<A HREF="ngb1e6f.html">USE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

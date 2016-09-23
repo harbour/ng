@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngeb81b.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngec1fc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET OPTIMIZE</B>
+ Change the setting that determines whether to optimize using the open orders
+ when processing a filtered database file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET OPTIMIZE ON | OFF | (&lt;lToggle&gt;)</B>
+
+ <B>Arguments</B>
+
+     <B>ON</B> enables optimization.
+
+     <B>OFF</B> disables optimization.
+
+     <B>&lt;lToggle&gt;</B> is a logical expression that must be enclosed in
+     parentheses.  A value of true (.T.) is the same as ON, and a value of
+     false (.F.) is the same as OFF.
+
+     <B>Note: </B> The initial default of this setting depends on the RDD.
+
+ <B>Description</B>
+
+     For RDDs that support optimization, such as DBFCDX, SET OPTIMIZE
+     determines whether to optimize filters based on the orders open in the
+     current work area.  If this flag is ON, the RDD will optimize the search
+     for records that meet the filter condition to the fullest extent
+     possible, minimizing the need to read the actual data from the database
+     file.
+
+     If this flag is OFF, the RDD will not optimize.
+
+ <B>Examples</B>
+
+     <B>.</B>  The following example enables optimization for the Inventor
+        database file using the SET OPTIMIZE command:
+
+        USE Inventor NEW VIA "DBFCDX"
+        SET OPTIMIZE ON
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng317d5.html">DBSETFILTER()</A>
+<A HREF="nge78b0.html">SET FILTER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng39407.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng3a170.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_SkipUnique():</B>
+
+  Syntax:  Sx_SkipUnique( [nSkipVal] )
+
+           nSkipVal = Optional numeric value indicating the direction to be
+                      skipped.  The default value is 1, and will skip ahead
+                      to the next greater key value.  A value of -1 would
+                      skip to the first key of lesser value in the order.
+
+  Returns:  NIL
+
+  Description:  Sx_SkipUnique() allows you to SKIP through a non-UNIQUE
+                index order as if it had been created with the UNIQUE clause.
+                This eliminates the need to have a full index and a UNIQUE
+                index built on the same expression.  For those cases, you
+                can now use one index to handle both situations.
+
+  Example:
+
+    #include "SIXNSX.CH"
+
+    CLS
+    USE test EXCL VIA "SIXNSX"
+    INDEX ON state TO state
+
+    // Display STATE field for ALL records (and index keys)
+    WAIT "Press any key to see all STATE values in index..."
+    GO TOP
+    DO WHILE !eof()
+      ? test-&gt;STATE
+      dbSkip()
+    ENDDO
+    ?
+
+    // Display STATE field for first records (and index key) of UNIQUE value
+    WAIT "Press any key to see only one of each STATE value in the index..."
+    GO TOP
+    DO WHILE !eof()
+      ? test-&gt;STATE
+      <B>Sx_SkipUnique()</B>
+    ENDDO
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

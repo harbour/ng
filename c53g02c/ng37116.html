@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng37056.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng37557.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBFNTX/1210  Corruption detected</B>
+
+     <B>Explanation:</B>  The index and the database files are "out of sync"
+     with each other.  This is usually due to the index key expression
+     evaluating to a variable length.
+
+     <B>Action:</B>  Some suggestions to resolve the problem are:
+
+     1. Recreate the indices for the database. Ensure that all indices are
+        open when the database is updated.  Check for other causes of
+        corruption as well (EMS memory, network problems, improper RDD,
+        etc.).
+
+     2. Check that ALL index key expressions are a constant length.  Usage of
+        LTRIM(), RTRIM(), TRIM(), ALLTRIM(), STR(), DTOC() can all produce
+        expressions that are not a constant length.  The xTRIM() functions
+        should all be padded out to a constant width using PADR().
+
+     3. Use all 3 arguments to STR().
+
+     4. Use DTOS() instead of DTOC() in index key expressions.  DTOC() is
+        dependent upon the SET DATE FORMAT.
+
+     5. Using a field or expression aliased into a different work area will
+        also cause this error--e.g., area2-&gt;field1 or area2-&gt;( str( fld1, 5,
+        0 ) ).
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

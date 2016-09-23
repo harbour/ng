@@ -1,0 +1,66 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng512d9.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3fd75.html">[^^Up^^]</A>
+<A HREF="ng51ed0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETQDIR()</B>
+ Determines the queue directory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETQDIR(&lt;cQueue&gt;,[&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; cDir</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cQueue&gt;</B>  Designates the queue for which the directory is
+     determined.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used.  Your
+     workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETQDIR() returns the directory of the job files of &lt;cQueue&gt;. If an
+     error occurs, the function returns an empty string.
+
+ <B>Description</B>
+
+     NOVELL NET QUEUE DIRECTORY
+     Netware stores the contents of a job in a separate file.  The queue only
+     contains references to these files.  NNETQDIR() allows you to determine
+     the directory of the job files.  By default, the job directory is a
+     subdirectory of SYS:SYSTEM.  The name of the subdirectory consists of
+     the queue ID and the extension .QDR.
+
+ <B>Note</B>
+
+     <B>.</B>  NNETQDIR() is a high level function based on the low level
+        functions of the bindery access.  The CA-Clipper source code can be
+        found on the product disks.
+
+ <B>Example</B>
+
+     Display the directory for the print queue QUEUE1:
+
+     ? NNETQDIR('QUEUE1')
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng47f2a.html">NNETJFILE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

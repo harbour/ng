@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ngab504.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="ngaca2c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>@...BOX</B>
+ Draw a box on the screen
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>@ &lt;nTop&gt;, &lt;nLeft&gt;, &lt;nBottom&gt;, &lt;nRight&gt;</B>
+     <B>   BOX &lt;cBoxString&gt; [COLOR &lt;cColorString&gt;]</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;nTop&gt;</B>, <B>&lt;nLeft&gt;</B>, <B>&lt;nBottom&gt;</B>, <B>&lt;nRight&gt;</B> define the
+     coordinates of the box.  @...BOX draws a box using row values from zero
+     to MAXROW(), and column values from zero to MAXCOL().  If &lt;nBottom&gt; and
+     &lt;nRight&gt; are larger than MAXROW() and MAXCOL(), the bottom-right corner
+     is drawn off the screen.
+
+     <B>BOX &lt;cBoxString&gt;</B> defines a string of eight border characters and a
+     fill character.  If &lt;cBoxString&gt; is specified as a single character,
+     that character draws the whole box.
+
+     <B>COLOR &lt;cColorString&gt;</B> defines the display color of the drawn box.  If
+     not specified, the box is drawn using the standard color setting of the
+     current system color as defined by SETCOLOR().  Note that &lt;cColorString&gt;
+     is a character expression containing the standard color setting.  If you
+     want to specify a literal color setting, enclose it within quote marks.
+
+ <B>Description</B>
+
+     @...BOX draws a box on the screen using configurable border and fill
+     characters.  @...BOX draws the box using &lt;cBoxString&gt; starting from the
+     upper left-hand corner, proceeding clockwise and filling the screen
+     region with the ninth character.  If the ninth character is not
+     specified, the screen region within the box is not painted.  Existing
+     text and color remain unchanged.
+
+     After @...BOX executes, the cursor is located in the upper corner of the
+     boxed region at &lt;nTop&gt; + 1 and  &lt;nLeft&gt; + 1.  ROW() and COL() are also
+     updated to reflect the new cursor position.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples draw two boxes using box manifest constants
+        defined in the supplied header file, Box.ch.  The first example draws
+        a box using the specified characters for the border, but leaves all
+        other areas of the screen intact.  The second example draws the same
+        box filling the box region with space characters.
+
+        #include "Box.ch"
+        // Draw a box with a double-line top with a
+        // single-line side
+        @ 1, 1, 22, 79 BOX B_DOUBLE_SINGLE
+        // Draw the same box filling the box region with
+        // spaces
+        @ 1, 1, 22, 79 BOX B_DOUBLE_SINGLE + SPACE(1)
+
+ <B>Files</B>   Library is CLIPPER.LIB, header file is Box.ch.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngaca2c.html">@...CLEAR</A>
+<A HREF="ngbca2f.html">@...TO</A>
+<A HREF="ng3b4f1.html">DISPBOX()</A>
+<A HREF="ng99438.html">SCROLL()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

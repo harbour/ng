@@ -1,0 +1,52 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng694ba.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng64deb.html">[^^Up^^]</A>
+<A HREF="ng69b1f.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>LTON()</B>
+ Converts a logical value into a numeric value
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>LTON([&lt;lValue&gt;]) --&gt; nLogicalValue</B>
+
+ <B>Argument</B>
+
+     <B>&lt;lValue&gt;</B>  Designates the logical expression to convert.  The default
+     value is .F..
+
+ <B>Returns</B>
+
+     If you designate a .T., LTON() returns a 1; with .F., it returns a 0.
+
+ <B>Description</B>
+
+     LTON() converts a logical value into a numeric value.  This allows
+     indexing on a logical field.
+
+ <B>Note</B>
+
+     <B>.</B>  The function treats a missing parameter as .F..
+
+ <B>Example</B>
+
+     Determines the number of days in a year:
+
+     ? "The year has " + STR(365 + LTON(ISLEAP()), 3) + "  days."
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng67089.html">CTON()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

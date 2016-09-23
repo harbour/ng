@@ -1,0 +1,111 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1053d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2c37.html">[^^Up^^]</A>
+[Next Entry&gt;&gt;]
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETWRTITM()</B>
+ Writes a segment of an item property
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETWRTITM(&lt;cObjName&gt;,[&lt;nObjType&gt;],&lt;cProperty&gt;,</B>
+     <B>   &lt;cPropValue&gt;,[&lt;nSegment&gt;],[&lt;lDelete&gt;],</B>
+     <B>   [&lt;cServer&gt;|&lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cObjName&gt; </B> Designates the name of the bindery object that is
+     processed.
+
+     <B>&lt;nObjType&gt; </B> Designates a numeric value that indicates the object
+     type.  The header file CTNNET.CH contains symbolic constants for the
+     object types defined by Novell for use with the bindery functions of
+     CA-Clipper Tools.  The default value indicates object value OBJ_USER.
+
+     <B>&lt;cProperty&gt; </B> Designates the name of an item property of the object
+     &lt;cObjName&gt;.
+
+     <B>&lt;cPropValue&gt; </B> Designates the value that is stored.  The value must
+     be passed as a character string of up to 128 characters.
+
+     <B>&lt;nSegment&gt; </B> Designates the segment of &lt;cProperty&gt; in which
+     &lt;cPropValue&gt; is written.  The default value is the first segment.
+
+     <B>&lt;lDelete&gt; </B> Designates whether the segments following &lt;nSegment&gt; are
+     deleted (.T.) or saved (.F.).  The default value (.F.) saves the
+     segments that follow &lt;nSegment&gt;.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server for which the
+     bindery is accessed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETWRTITM() returns .T. if the operation was completed successfully.
+     If an error occurs, the Novell error code can be queried with the
+     NNETERROR() function.
+
+ <B>Description</B>
+
+     <B>Important!</B>  NNETWRITITM() is a low level bindery function and should
+     be used only with extensive knowledge of the bindery concept and the
+     Novell API.
+
+     NOVELL NET WRITE PROPERTY ITEM
+     Internally, Novell Netware defines two different property types: item
+     and set properties.  Item properties consist of segments that can accept
+     up to 128 characters.  The number of segments within an item property
+     can vary.
+
+     A typical example of an item property is the IDENTIFICATION property
+     that contains a user or user group's full name (unlike the login name).
+     NNETWRTITM() allows you to write information to a segment of an item
+     property.
+
+     The parameters &lt;cName&gt; and  &lt;cType&gt; specify the object that is
+     processed.  &lt;cProperty&gt; is the name of the property.  The property must
+     have been created before (for example, with NNETCRTPRP()).  &lt;cPropValue&gt;
+     is the character string that is written to &lt;nSegment&gt; of &lt;cProperty&gt;.
+     With the parameter &lt;lDelete&gt;, you can determine whether segments that
+     follow &lt;nSegment&gt; are deleted (.T.) or not (.F.).
+
+     With the parameters &lt;cServer&gt; or &lt;nConId&gt;, the bindery of any attached
+     server can be accessed.  The connection ID of a server is returned by
+     NNETATTACH() or NNETLOGIN().
+
+     To achieve results with NNETWRTITM(), sufficient bindery and property
+     access rights are required.  The necessary property access rights depend
+     on the property security of the property that is modified.  For
+     efficiency reasons, user defined object types must be passed in the high-
+     low format.
+
+ <B>Example</B>
+
+     Set the full name for user MICK:
+
+     IF NNETWRTITM('MICK',,'IDENTIFICATION','Michael Smith')
+     ? 'Full name set successfully!'
+     ELSE
+     ? 'Full name could not be set!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng3a10.html">NNETADDSET()</A>
+<A HREF="ng6abb.html">NNETCRTPRP()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

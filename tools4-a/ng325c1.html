@@ -1,0 +1,68 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng31a1d.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng2ac41.html">[^^Up^^]</A>
+<A HREF="ng32b57.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETRENDIR()</B>
+ Renames a directory on a volume
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETRENDIR(&lt;cPath&gt;,&lt;cNewDir&gt;) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPath&gt;</B>  Designates an existing directory on a server volume.  The
+     path can contain a server name.
+
+     <B>&lt;cNewDir&gt;</B>  Designates the new name for the directory specified by
+     &lt;cPath&gt;.  This character string can contain a maximum of an eight-
+     character name, a period, and a three-character extension.
+
+ <B>Returns</B>
+
+     NNETRENDIR() returns .T. if the directory has been renamed successfully.
+
+ <B>Description</B>
+
+     NOVELL NET RENAME DIRECTORY
+     NNETRENDIR() allows you to rename an existing directory (&lt;cPath&gt;) on any
+     server volume.  The volume must not be mapped to a drive.  Under Netware
+     2.x, the rights MODIFY and PARANTEL are required to rename a directory.
+     Under Netware 3.x, the right MODIFY for the parent directory of &lt;cPath&gt;
+     is required to rename a directory.
+
+ <B>Note</B>
+
+     <B>.</B>  The default directories on volume SYS: (LOGIN, PUBLIC, MAIL,
+        SYSTEM) cannot be renamed.
+
+ <B>Examples</B>
+
+     Rename the directory ACCOUNT/VOL1:DATEN/ACT to
+     ACCOUNT/VOL1:DATEN/BACKUP:
+
+     IF NNETRENDIR('ACCOUNT/VOL1:DATEN/ACT','BACKUP')
+     ? 'Directory has been renamed successfully!'
+     ELSE
+     ? 'Failure during rename!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng30b91.html">NNETMKDIR()</A>
+<A HREF="ng343e6.html">NNETRMDIR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

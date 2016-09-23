@@ -1,0 +1,131 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3842c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng435.html">[^^Up^^]</A>
+<A HREF="ng39407.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>Sx_SetTrigger():</B>
+
+  Syntax:   Sx_SetTrigger( &lt;nAction&gt; [,&lt;cTriggerName&gt;] )
+
+         nAction = A numeric value indicating the action to be taken with
+                   the currently active or specified trigger function.
+                   These values are defined as manifest constants in the
+                   SIXCDX.CH file, and are as follows:
+
+                     TRIGGER_ENABLE   = Activate an installed trigger
+                     TRIGGER_DISABLE  = Deactivate an installed trigger
+                     TRIGGER_REMOVE   = Uninstall an installed trigger
+                     TRIGGER_INSTALL  = Install a new trigger function.
+                                        A newly installed trigger automatic-
+                                        ally uninstalls any previously
+                                        installed trigger.  The new trigger
+                                        also becomes ENABLEd automatically.
+
+                   <U>NOTE:</U>  Although these constants preprocess into numeric
+                          values, you should not use the numeric values in
+                          your source code.  Instead, you should use the
+                          constants, as defined above.  This will insure
+                          compatibility with all future releases of the
+                          SIx Driver.
+
+    cTriggerName = Optional name of a trigger function to install.  This
+                   parameter is only required if the first parameter is
+                   TRIGGER_INSTALL.
+
+  Returns:  The currently active trigger name.
+
+  Description:  This function allows the developer to activate (or install)
+                a function to handle each triggerable event.  This is
+                done by using the TRIGGER_INSTALL constant as the first
+                parameter, and passing the new function name as the second
+                parameter.  The specified function would then handle all
+                subsequent triggerable events for that workarea, until it is
+                disabled or uninstalled.
+
+                An installed trigger function can be temporarily disabled,
+                by using the TRIGGER_DISABLE constant.  This would result
+                in all triggerable events being controlled by the default
+                actions in Sx_DefTrigger().
+
+                A disabled trigger function can be reactivated by using the
+                TRIGGER_ENABLE constant.
+
+                To totally remove a previously installed trigger function,
+                use the TRIGGER_REMOVE constant.
+
+  Example:
+
+
+    /*
+       The following example uses a custom trigger function that handles
+       special operations for two different events:
+
+        1.  Looks for and, if found, reads in a &lt;cDBFname&gt;.INI file for
+            each database file that is opened.  (See the ".INI Files"
+            section for more details on their use.)
+
+        2.  Prompts the user for a password upon opening a data file.  If
+            the password is not kosher, it transfers trigger control to a
+            different user-defined trigger function "LimitTrig()".  (The
+            source for LimitTrig() is not shown.)
+
+        3.  Displays an "Are you sure?" message whenever a ZAP command is
+            issued.
+    */
+
+    #include "INKEY.CH"
+    #include "SIXCDX.CH"
+
+    Sx_SetPass( "Pengo" )
+    USE test VIA "SIXCDX" TRIGGER "CustomTrig"
+    browse()
+
+    //----------------------------------------------------------//
+    FUNC CustomTrig( nEvent, nArea, nFieldPos, xTrigVal )
+
+       LOCAL nKey := 0, cPassWord := Space(10)
+       LOCAL GetList := {}
+
+       DO CASE
+
+          CASE nEvent == EVENT_PREUSE
+
+             _sx_INIinit( nArea )         // Read in .INI file information
+
+             @ MaxRow(),0 SAY "PASSWORD:" GET cPassWord
+             READ
+
+             IF LastKey() == K_ESC .or. cPassWord != "FooBar"
+                <B>Sx_SetTrigger( TRIGGER_INSTALL, "LimitTrig" )</B>
+             ENDIF
+
+          CASE nEvent == EVENT_ZAP
+
+             nKey := Alert( "ZAP : Are you sure?", {"Yes","No"} )
+             if nKey == 1
+                Return( .T. )  // Okay to ZAP
+             else
+                Return( .F. )  // Don't ZAP
+             endif
+
+       ENDCASE
+
+    Return( .T. )
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng24704.html">Sx_DefTrigger()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng58f71.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng5988e.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>relArea()</B>
+ Obtain the logical number of the specified work area
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE relArea(</B>
+     <B>                     AREAP wa,</B>
+     <B>                     USHORT relNum,</B>
+     <B>                     USHORTP nArea</B>
+     <B>                  )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>relNum</B> is an unsigned short integer that specifies the relation
+     number for which to obtain the work area number.
+
+     <B>nArea</B> is a pointer to an unsigned short value that determines the
+     number of the work area.
+
+ <B>Description</B>
+
+     relArea() obtains the CA-Clipper SELECT() area of the child relation
+     referenced by relNum.  relNum is a one-based number.
+
+ <B>Default Behavior</B>
+
+     relArea() implements the behavior of the CA-Clipper function
+     DBRSELECT().  It scans relations for the work area at wa and returns the
+     area number of the child work area.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  If this method is reimplemented, be careful to return the area
+        number for the relation at relNum-1 since relNum is a one-based
+        number.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng59dd8.html">relText()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

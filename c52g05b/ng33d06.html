@@ -1,0 +1,46 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng33ba5.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng33abb.html">[^^Up^^]</A>
+<A HREF="ng34305.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>1   Overlays on a Network</B>
+--------------------------------------------------------------------------------
+
+     .RTLink produces overlays containing compiled program code.  By default,
+     all compiled Clipper code is placed in dynamic overlays.  Additionally,
+     static overlaying may be requested for C or Assembler code.
+
+     By default, overlays are appended to the end of the application's  .EXE
+     file (the code may be written to a separate overlay file by using the
+     INTO clause in the overlaying directive).  During execution, the runtime
+     system opens the .EXE file and reads overlays as required.
+
+     When the runtime system needs to read overlays, it opens the .EXE file
+     for shared, read-only access.  On a network, this allows multiple
+     processes to read the file at the same time.
+
+     On some networks, however, a problem can arise if an attempt is made to
+     run the .EXE when another process has opened it to read overlays.  The
+     error occurs because the DOS EXEC function (used by COMMAND.COM to
+     execute programs) opens .EXE files using a sharing mode called
+     "compatibility mode."  On some networks, this causes a sharing violation
+     if the file is already in use by another process, even if the other
+     process has specified that it wishes to share the file.
+
+     If this conflict occurs, it can usually be resolved by marking the
+     affected file read-only on the disk.  A small utility program, RO.COM,
+     is supplied for this purpose.  RO toggles the read-only status of a
+     specified file.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,59 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng57d50.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3f081.html">[^^Up^^]</A>
+<A HREF="ng586ff.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>childStart()</B>
+ Report initialization of a relation
+------------------------------------------------------------------------------
+ <B>Prototype</B>
+
+     <B>ERRCODE childStart(</B>
+     <B>                        AREAP wa,</B>
+     <B>                        LPDBRELINFO lpdbRelInfo</B>
+     <B>                     )</B>
+
+ <B>Arguments</B>
+
+     <B>wa</B> is a pointer to self.
+
+     <B>lpdbRelInfo</B> is a pointer to a structure containing information on a
+     relation.
+
+ <B>Description</B>
+
+     childStart() informs the child work area referenced by wa that it will
+     be attached to the parent specified in lpdbRelInfo.
+
+ <B>Default Behavior</B>
+
+     Increments the wa-&gt;uiParents field.  Parents can be sent relation
+     information for initialization with the setRel() method.
+
+ <B>Implementation Notes</B>
+
+     <B>.</B>  A call to SELF_CHILDSYNC() should be made within any
+        implementation of this method to force the child work area to begin
+        life in sync with its parent.
+
+ <B>Files</B>  Header file is Rdd.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng40f6b.html">AREA</A>
+<A HREF="ng45304.html">DBRELINFO</A>
+<A HREF="ng57d50.html">childEnd()</A>
+<A HREF="ng5a25e.html">setRel()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

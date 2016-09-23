@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>Class(y) v2.4 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng15b61.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngbc41.html">[^^Up^^]</A>
+<A HREF="ng164ea.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+  <B>Delegation</B>
+
+  In object-oriented programming, the term <B>delegation</B> can be defined in
+  various ways.
+
+  At one end of the scale, <B>message forwarding</B>, in which an object
+  forwards a message to another object, can be described as delegation, if
+  the first object is delegating responsibility for responding to the
+  message to the second object. Message forwarding is very simple to
+  implement, using the <B>MESSAGE...[IS...] TO</B> command, as described in the
+  section on <B>Message Forwarding</B>.
+
+  At the other end of the scale, some (mostly academic or experimental)
+  object-oriented languages use delegation to completely eliminate the need
+  for classes or class inheritance. To achieve this, such languages usually
+  handle the self variable differently. When the receiver of a delegated
+  message (the delegatee) sends a message to self, the message is sent to
+  the original delegator.
+
+  Although class-based languages do not behave this way, this behavior is
+  important in that it gives the delegatee a means of communicating with the
+  delegator, allowing polymorphism to be achieved so that the delegator can
+  override methods defined in the delegatee.
+
+  Class(y) provides a facility to help simulate this behavior, by allowing
+  messages to be sent to the <B>sender</B>, or delegator, of a message. This
+  can be done in one of two ways: by using the <B>SENDER()</B> function to
+  obtain a reference to the sender (delegator), or by using the
+  <B>MESSAGE...[IS...] TO SENDER</B> command to define messages which are
+  automatically forwarded to the sender.
+
+  The following sections cover these topics in more detail.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng14440.html">Message Forwarding</A>
+<A HREF="ng5663.html">MESSAGE...[IS...] TO</A>
+<A HREF="ng9f4c.html">VAR...[IS...] TO</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

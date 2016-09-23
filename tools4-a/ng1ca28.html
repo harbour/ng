@@ -1,0 +1,70 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1c43a.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1239a.html">[^^Up^^]</A>
+<A HREF="ng1cfff.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETVPASS()</B>
+ Verifies a password for a bindery object
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETVPASS(&lt;cName&gt;,[&lt;nType&gt;],&lt;cPass&gt;,[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cName&gt; </B> Designates the name of the bindery object that is
+     processed.
+
+     <B>&lt;nType&gt; </B> Designates the object type of &lt;cName&gt;.  The header file
+     CTNNET.CH contains symbolic constants for a number of object types.  The
+     default value designates the object type OBJ_USER.
+
+     <B>&lt;cPass&gt; </B> Designates the password that is verified for &lt;cName&gt;.
+
+     <B>&lt;cServer&gt; </B> Designates the name of the file server for which the
+     bindery is accessed.  Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt; </B> Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETVPASS() returns .T. if the password &lt;cPass&gt; and the password of
+     &lt;cName&gt; in the bindery are identical.  If these passwords are not
+     identical, the function returns .F..
+
+ <B>Description</B>
+
+     NOVELL NET VERIFY BINDERY OBJECT PASSWORD
+     NNETVPASS() allows you to check to see if a character string matches the
+     password of a bindery object.  For example, the function can be used to
+     verify a user's password.
+
+ <B>Example</B>
+
+     Check to see if the password HONEY is valid for user JIM:
+
+     IF NNETVPASS('JIM',,'HONEY')
+     ? 'Valid password!'
+     ELSE
+     ? 'Invalid password!'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng14a82.html">NNETCPASS()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

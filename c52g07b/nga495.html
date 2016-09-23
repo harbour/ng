@@ -1,0 +1,195 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Drivers Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng9c92.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng9390.html">[^^Up^^]</A>
+<A HREF="ngc0f4.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>APPEND FROM command</B>
+ Import records from a (.dbf) or ASCII file
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     APPEND FROM &lt;xcFile&gt;
+        [FIELDS &lt;idField list&gt;]
+        [&lt;scope&gt;] [WHILE &lt;lCondition&gt;] [FOR &lt;lCondition&gt;]
+        [SDF | DELIMITED [WITH BLANK | &lt;xcDelimiter&gt;] <B>|</B>
+        <B>[VIA &lt;xcDriver&gt;]</B>]
+
+ <B>Arguments</B>
+
+     <B>FROM &lt;xcFile&gt;</B> specifies the name of the source file.  You can
+     specify &lt;xcFile&gt; either as a literal filename or as a character
+     expression enclosed in parentheses.  If a file extension is not
+     specified, (.dbf) is the default input file type.  If SDF or DELIMITED
+     is specified, the file extension is assumed to be (.txt) unless
+     otherwise specified.
+
+     <B>FIELDS &lt;idField list&gt;</B> specifies the list of fields to copy from
+     &lt;xcFile&gt;.  The default is all fields.
+
+     <B>&lt;scope&gt;</B> is the portion of the source database file to APPEND FROM.
+     NEXT &lt;n&gt; APPENDs the first &lt;n&gt; records.  RECORD &lt;n&gt; APPENDs only record
+     number &lt;n&gt; from &lt;xcFile&gt;.  The default scope is ALL records in &lt;xcFile&gt;.
+
+     <B>WHILE &lt;lCondition&gt;</B> specifies the set of records meeting the
+     condition from the first record in the source file until the condition
+     fails.
+
+     <B>FOR &lt;lCondition&gt;</B> specifies the conditional set of records to APPEND
+     FROM within the given scope.
+
+     <B>SDF</B> identifies a System Data Format ASCII file.  Records and fields
+     are fixed length.
+
+     <B>DELIMITED</B> identifies an ASCII text file, where character fields are
+     enclosed in double quote marks (the default delimiter).  Note that
+     delimiters are not required and CA-Clipper correctly APPENDs character
+     fields not enclosed in them.  Fields and records are variable length.
+
+     <B>DELIMITED WITH BLANK</B> identifies an ASCII text file in which fields
+     are separated by one space and character fields are not enclosed in
+     delimiters.
+
+     <B>DELIMITED WITH &lt;xcDelimiter&gt;</B> identifies a delimited ASCII text file,
+     where character fields are enclosed using the specified delimiter.  You
+     can specify &lt;xcDelimiter&gt; as a literal character or as a character
+     expression enclosed in parentheses.
+
+     See the tables below for more information regarding the format
+     specification requirements for ASCII text files that you want to APPEND
+     using these arguments.
+
+     <B>VIA &lt;xcDriver&gt;</B> specifies the replaceable database driver (RDD) to
+     use to import the desired data.  &lt;cDriver&gt; is name of the RDD specified
+     as a character expression.  If &lt;cDriver&gt; is specified as a literal
+     value, it must be enclosed in quotes.
+
+     If the VIA clause is omitted, APPEND FROM uses the driver in the current
+     work area.  If you specify the VIA clause, you must REQUEST the
+     appropriate RDDs be linked into the application.
+
+     <B>Warning! </B> If the DELIMITED WITH clause is specified on a COPY TO or
+     APPEND FROM command line, it must be the last clause specified.
+
+ <B>Description</B>
+
+     APPEND FROM adds records to the current database file from an ASCII text
+     file or another database file.  Only fields with the same names and
+     types are APPENDed.  Fields with the same name from both the current
+     database file and &lt;xcFile&gt; must be the same data type.  If they are not,
+     a runtime error occurs when the APPEND FROM command is invoked.
+
+     Any date information in &lt;xcFile&gt; must be in the format yyyymmdd to be
+     properly APPENDed.
+
+     In a network environment, APPEND FROM does not require that the current
+     database file be USEed EXCLUSIVEly or locked with FLOCK() to perform its
+     operation.  As each record is added, CA-Clipper automatically arbitrates
+     contention for the new record.
+
+     When you invoke APPEND FROM, CA-Clipper attempts to open &lt;xcFile&gt; shared
+     and read-only.  If access is denied, APPEND FROM terminates with a
+     runtime error.  Refer to the Network Programming chapter in the
+     Programming and Utilities guide for more information.  No error is
+     raised if you attempt to open a (.dbf) file that is already open.
+
+     This table shows the format specifications for SDF text files.
+
+     <B>SDF Text File Format Specifications</B>
+     ------------------------------------------------------------------------
+     <B>File Element        Format</B>
+     ------------------------------------------------------------------------
+     Character fields    Padded with trailing blanks
+     Date fields         yyyymmdd
+     Logical fields      T or F
+     Memo fields         Ignored
+     Numeric fields      Padded with leading blanks or zeros
+     Field separator     None
+     Record separator    Carriage return/linefeed
+     End of file marker  1A hex or CHR(26)
+     ------------------------------------------------------------------------
+
+     This table shows the format specifications for DELIMITED and DELIMITED
+     WITH &lt;xcDelimiter&gt; ASCII text files.
+
+     <B>DELIMITED Text File Format Specifications</B>
+     ------------------------------------------------------------------------
+     <B>File Element        Format</B>
+     ------------------------------------------------------------------------
+     Character fields    May be delimited, with trailing blanks truncated
+     Date fields         yyyymmdd
+     Logical fields      T or F
+     Memo fields         Ignored
+     Numeric fields      Leading zeros may be truncated
+     Field separator     Comma
+     Record separator    Carriage return/linefeed
+     End of file marker  1A hex or CHR(26)
+     ------------------------------------------------------------------------
+
+     This table shows the format specifications for DELIMITED WITH BLANK
+     ASCII text files.
+
+     <B>DELIMITED WITH BLANK Text File Format Specifications</B>
+     ------------------------------------------------------------------------
+     <B>File Element        Format</B>
+     ------------------------------------------------------------------------
+     Character fields    Not delimited, trailing blanks may be truncated
+     Date fields         yyyymmdd
+     Logical fields      T or F
+     Memo fields         Ignored
+     Numeric fields      Leading zeros may be truncated
+     Field separator     Single blank space
+     Record separator    Carriage return/linefeed
+     End of file marker  1A hex or CHR(26)
+     ------------------------------------------------------------------------
+
+ <B>Notes</B>
+
+     <B>.  Deleted records:</B> If DELETED is OFF, deleted records in
+        &lt;xcFile&gt; are APPENDed to the current database file and retain their
+        deleted status.  If DELETED is ON, however, none of the deleted
+        &lt;xcFile&gt; records are APPENDed.
+
+     <B>.  Unmatched field widths:</B> If a field in the current database
+        file is character type and has a field length greater than the
+        incoming &lt;xcFile&gt; data, CA-Clipper pads the &lt;xcFile&gt; data with
+        blanks.  If the current field is character data type and its field
+        length is less than the incoming &lt;xcFile&gt; data, the &lt;xcFile&gt; data is
+        truncated to fit.  If the current field is numeric type and the
+        incoming &lt;xcFile&gt; data has more digits than the current field length,
+        a runtime error occurs.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example demonstrates an APPEND FROM command using a
+        fields list and a condition:
+
+        USE Sales NEW
+        APPEND FROM BranchFile FIELDS Branch, Salesman, Amount;
+           FOR Branch = 100
+
+     <B>.</B>  This example demonstrates how a &lt;scope&gt; can be specified to
+        import a particular record from another database file:
+
+        APPEND RECORD 5 FROM Temp
+
+ <B>Files:</B>  Library is CLIPPER.LIB.
+
+ <B>Status:</B>  Enhanced
+
+ <B>See also:</B>  COPY TO
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngc0f4.html">COPY TO</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

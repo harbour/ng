@@ -1,0 +1,74 @@
+<HTML>
+<HEAD><TITLE>SIx Driver RDD v3.00 - Reference Guide - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng50a71.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng40c12.html">[^^Up^^]</A>
+<A HREF="ng517e3.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+
+  <B>SET SCOPETOP:</B>
+  <B>SET SCOPEBOTTOM:</B>
+
+  Syntax:
+
+  <B>SET SCOPETOP TO    [&lt;value&gt;]</B>
+  <B>SET SCOPEBOTTOM TO [&lt;value&gt;]</B>
+
+  <B>&lt;value&gt;</B> specifies the high/low boundary values to establish the range
+  of available keys within the current index.  This allows you to set a
+  scope smaller than the current index without creating another
+  conditional index file.
+
+  Use <B>SET SCOPETOP</B> to set the starting key value (inclusive), and <B>SET</B>
+  <B>SCOPEBOTTOM</B> to set the ending key value (inclusive).  SCOPETOP and
+  SCOPEBOTTOM are designed to emulate the actual TOP and BOTTOM of the
+  current index.  This means that descending indexes will have a higher
+  SCOPETOP value than SCOPEBOTTOM value.
+
+  The specified scope is active as soon as the record pointer is
+  repositioned using <B>GO TOP</B>, <B>GO BOTTOM</B> or <B>SEEK</B>.  Using <B>GOTO</B> will
+  allow the record pointer to be positioned outside the active scope.
+
+  The specified scope is identified with the current index or tag and
+  remains in effect until the scope is cleared (using <B>CLEAR SCOPE</B> or <B>SET</B>
+  <B>SCOPETOP TO</B> and <B>SET SCOPEBOTTOM TO</B>) or the index is closed.
+
+    <U>NOTE: For those situations where SET SCOPE cannot be used, such as when</U>
+    <U>      a compound condition is needed, our Mach SIx query optimizer can</U>
+    <U>      optimize SET FILTER with nearly the speed of SET SCOPE.</U>
+
+    NOTE:  This command is NOT supported under SIXNTX.
+
+
+  Example:
+
+    #include "SIXCDX.CH"
+
+    USE test VIA "SIXCDX        // Open TEST.DBF
+    INDEX ON age TAG age        // Create an index on the AGE field
+    <B>SET SCOPETOP TO 21</B>          // Sets the top SCOPE value to 21
+    <B>SET SCOPEBOTTOM TO 30</B>       // Sets the bottom SCOPE value to 30
+    Browse()                    // Browse all records with ages from 21-30
+    CLEAR SCOPE                 // Clears the SCOPE
+
+
+  <U>NOTE:  See the SCOPE.PRG program for a more detailed, practical example.</U>
+
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng50a71.html">SET SCOPE</A>
+<A HREF="ng459dd.html">CLEAR SCOPE</A>
+<A HREF="ng372fc.html">Sx_SetScope()</A>
+<A HREF="ng21e08.html">Sx_ClrScope()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

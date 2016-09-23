@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng10340.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf3b9.html">[^^Up^^]</A>
+<A HREF="ng10fe1.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>wrt0003 memory model mismatch in COMENT record ('&lt;model known before&gt;' !=</B>
+         <B>'&lt;model encountered&gt;', COMENT record at 0x&lt;offset, file '&lt;file&gt;'</B>
+
+     <B>Explanation:</B>  There are many types of COMENT records which provide
+     descriptive information about the object but do not usually affect the
+     output of a linker.  These records are similar to a comment which you
+     might place in a source file.  One type of COMENT record is a memory
+     model specification that does not affect the running of .RTLink.
+
+     The message indicates that the data portion of this COMENT record did
+     not match the data in these records which the linker encountered
+     previously.  Since the format of this particular COMENT record is
+     unpublished, and since many compiler manufacturers embed more
+     information than just the memory model in this record (compiler version
+     numbers seem to affect the data also), the condition is not normally an
+     error.  The message is displayed only to let you know that the data in
+     these records differ.
+
+     <B>Action:</B>  Make sure that the objects and libraries which you are
+     linking together are of the same memory model.  If you are sure that
+     they are, ignore the warning.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

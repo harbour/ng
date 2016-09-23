@@ -1,0 +1,79 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Technical Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng6fd72.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng6d7d4.html">[^^Up^^]</A>
+<A HREF="ng70f8a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>ExoSegCSAlias()</B>
+ Creates a code descriptor for the given data segment
+------------------------------------------------------------------------------
+ <B>C Prototype</B>
+
+     <B>void *ExoSegCSAlias(void *pm_ptr)</B>
+
+ <B>Returns</B>
+
+     This function returns a function pointer to the same linear address as
+     pm_ptr, or NULL if an error occurred.
+
+ <B>Description</B>
+
+     The new descriptor created by ExoSegCSAlias points to the segment base
+     of pm_ptr.  This function enables you to execute code in a data segment.
+     To store data in a code segment, use ExoSegDSAlias().  Because
+     ExoSegCSAlias() is run with interrupts enabled, realtime applications
+     should not call it from an external interrupt handler.
+
+     The offset of the alias will ALWAYS equal the offset of the original
+     pointer.
+
+     ExoFreeSelector() MUST be called to free the selector allocated with
+     ExoSegCSAlias().  Selectors are a limited resource and repeated calls to
+     ExoSegCSAlias() as well as ExoSegDSAlias() and ExoProtectedPtr() could
+     use up all the available selectors causing the program to crash.  Once
+     you are done with a pointer created with ExoSegCSAlias(), free the
+     selector unless you will be using the pointer throughout the program.
+
+ <B>Examples</B>
+
+     This code fragment calls executable machine code written by the program
+     to a data buffer.
+
+     char writablecode[100];
+     void (*funcptr(void));
+
+     /* during execution the program would write executable machine
+        code to the 100 byte writablecode buffer */
+
+     /* create a selector that is a code segment alias to the data
+        segment containing the variable writablecode */
+
+     funcptr = ExoSegCSAlias(writablecode);
+
+     /* set the offset of the function pointer to the offset of the
+        writablecode buffer */
+     FP_OFF(funcptr) = FP_OFF(writablecode);
+
+     /* call the code written to the writablecode buffer */
+     *funcptr();
+
+     /* cancel the code segment selector */
+     ExoFreeSelector(FP_SEG(funcptr));
+
+ <B>Files</B>   Library is EXOSPACE.LIB, header file is Exospace.api.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng70f8a.html">ExoSegDSAlias()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,53 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Release Notes - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng35ca4.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng346a0.html">[^^Up^^]</A>
+<A HREF="ng36700.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>5   Object Memory (SVOS)</B>
+------------------------------------------------------------------------------------------
+
+     An <B>object memory</B> is a special type of memory manager designed to
+     manage complex data values such as character strings and arrays.
+
+     The Clipper 5.0 object memory is called the Segmented Virtual Object
+     Store (SVOS).  SVOS uses virtual memory to store data values, including
+     character strings, arrays, and dynamically created (macro-compiled)
+     code blocks.
+
+     SVOS provides two important functions beyond the basic capabilities
+     offered by the VMM:
+
+     <B>.  Memory compaction:</B>  Stored values are automatically compacted
+        on an ongoing basis.  This eliminates fragmentation of the virtual
+        memory and reduces swapping.
+
+     <B>.  Garbage collection:</B>  Some Clipper 5.0 values (e.g., arrays)
+        may be referred to by several program variables (or array elements)
+        at the same time.  The garbage collection algorithms automatically
+        reclaim space occupied by <B>unreachable</B> values (values which are
+        no longer accessible through any variable or array).
+
+     To minimize delays associated with memory compaction and garbage
+     collection, the SVOS algorithms are dynamically adjusted based on the
+     type, size, and persistence of data being stored, the amount of memory
+     available (real and EMM), and the overall performance of the system.
+     The algorithms attempt to manage memory in such a way that the VMM can
+     swap out infrequently used data, freeing up real address space for
+     time-critical operations.
+
+     The dynamic nature of the SVOS algorithms makes it difficult to
+     precisely state its maximum capacity.  The worst case capacity is in
+     excess of 1MB.  The theoretical maximum is in excess of 16MB.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

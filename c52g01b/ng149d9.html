@@ -1,0 +1,65 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2e . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng14152.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng3ca.html">[^^Up^^]</A>
+<A HREF="ng14f89.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>CURDIR()</B>
+ Return the current DOS directory
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>CURDIR([&lt;cDrivespec&gt;]) --&gt; cDirectory</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDrivespec&gt;</B> specifies the letter of the disk drive to query.  If
+     not specified, the default is the current DOS drive.
+
+ <B>Returns</B>
+
+     CURDIR() returns the current DOS directory of the drive specified by
+     &lt;cDrivespec&gt; as a character string without either leading or trailing
+     backslash (\) characters.
+
+     If an error occurs, or the current directory of the specified drive is
+     the root directory, CURDIR() returns a null string ("").
+
+ <B>Description</B>
+
+     CURDIR() is an environment function that gives you the name of the
+     current DOS directory, ignoring the SET DEFAULT and SET PATH settings.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples illustrate various CURDIR() results:
+
+        ? CURDIR("E:")     // Result: null string--root directory
+        ? CURDIR("C")      // Result: CLIPPER5\SOURCE
+        ? CURDIR("C:")     // Result: CLIPPER5\SOURCE
+        ? CURDIR()         // Result: null string--root directory
+        ? CURDIR("A")      // Result: null string--drive not ready
+
+     <B>.</B>  This example changes the current DOS directory to a new value
+        if it does not match a specified directory:
+
+        IF CURDIR("C:") != "CLIPPER5\SOURCE"
+           RUN CD \CLIPPER5\SOURCE
+        ENDIF
+
+ <B>Files</B> Library is EXTEND.LIB, source file is SOURCE\SAMPLE\EXAMPLEA.ASM.
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng378ce.html">FILE()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,55 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng848c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngeba.html">[^^Up^^]</A>
+<A HREF="ng8a55.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>rlDestroy()</B>           Destroy (free memory for) a RecordList
+------------------------------------------------------------------------------
+
+<B>Synopsis</B>
+
+    rlDestroy(rl) -&gt; NIL
+
+<B>Arguments</B>
+
+    rl is the RecordList to be destroyed.
+
+<B>Returns</B>
+
+    NIL.
+
+<B>Description</B>
+
+    rlDestroy() destroys the memory allocated for a RecordList.
+
+    Anytime you create a new RecordList (using one of the rlNew*()
+    functions), you must eventually destroy it.
+
+    rlDestroy() allows you to discard a RecordList once you are done
+    using it.
+
+<B>Example</B>
+
+    rl1 := rlNew()          &amp;&amp; Create a new RecordList
+    rl2 := rlNew()          &amp;&amp; Create another RecordList
+    rl1 := rlAnd(rl1, rl2)  &amp;&amp; AND them together (this will automatically
+                            &amp;&amp; destroy rl2)
+<B>    rlDestroy(rl1)          &amp;&amp; Now destroy rl1 (we're all cleaned up)</B>
+
+<B>See Also</B>
+
+    None.
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

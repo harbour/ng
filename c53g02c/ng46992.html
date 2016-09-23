@@ -1,0 +1,33 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng46844.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng44772.html">[^^Up^^]</A>
+<A HREF="ng46c0a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>DBG0100 Unable to connect to Windows/DOS communications Pipe.</B>
+
+     <B>Explanation:</B>  CA-Clipper Workbench could not establish contact with
+     the CA-Clipper program.
+
+     <B>Action:</B>  Place the following line in the [386Enh] section of the
+     SYSTEM.INI file: Device = CAWDCI.386
+
+     The file CAWDCI.386 has been installed to the Windows system directory
+     upon installation of the CA-Clipper Workbench.  Be sure that this file
+     exists in this directory.  Be sure that an environment variable named
+     PIPEHANDLE exists. If it does not, add the following line to the
+     AUTOEXEC.BAT file:
+
+     SET PIPEHANDLE=0
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

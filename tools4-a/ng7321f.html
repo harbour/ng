@@ -1,0 +1,82 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Book 4-Appendices - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng72c6c.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng5fee8.html">[^^Up^^]</A>
+<A HREF="ng739b6.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>NNETPSTOP()</B>
+ Stops a print server printer
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>NNETPSTART(&lt;cPServer&gt;,&lt;nPrinter&gt;,[&lt;nMode&gt;],[&lt;cServer&gt;|</B>
+     <B>   &lt;nConId&gt;]) --&gt; lSuccess</B>
+
+     <B>Netware: 2.2 and 3.11</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cPServer&gt;</B>  Designates the name of the print server that is
+     accessed.
+
+     <B>&lt;nPrinter&gt;</B>  Designates the number of the printer on &lt;cPServer&gt;.
+     Values between 0 and 15 are possible.
+
+     <B>&lt;nMode&gt;</B>  Designates the currently active job mode.
+
+     <B>Table 27.15:  Job Modes</B>
+     ------------------------------------------------------------------------
+     <B>Value   CTPS.CH        Definition</B>
+     ------------------------------------------------------------------------
+     0       PSJ_HOLD       Stop job
+     1       PSJ_RET2Q      Return job to queue
+     2       PSJ_THROWAWAY  Discard job
+     ------------------------------------------------------------------------
+
+     The default value for &lt;nMode&gt; is 0, the stop job mode.
+
+     <B>&lt;cServer&gt;</B>  Designates the name of the file server used to access
+     &lt;cPServer&gt;.  The print server checks login information on &lt;cServer&gt;.
+     Therefore, the access rights can depend on the specified file server.
+     Your workstation must be attached to &lt;cServer&gt;.
+
+     <B>&lt;nConId&gt;</B>  Designates the connection ID of your workstation on
+     &lt;cServer&gt;.
+
+ <B>Returns</B>
+
+     NNETPSTOP returns .T. if the function has been completed successfully.
+
+ <B>Description</B>
+
+     NOVELL NET PRINT SERVER (PRINTER) STOP
+     NNETPSTOP() allows you to stop &lt;nPrinter&gt; on &lt;cPServer&gt;.  In this state
+     no additional print server outputs are processed on &lt;nPrinter&gt;.  By
+     passing a value for &lt;nMode&gt;, you can specify what happens to a job that
+     is currently being processed.  NNETPSTOP() requires operator rights for
+     &lt;cPServer&gt;.
+
+ <B>Example</B>
+
+     Stop printer 0 on print server PSERVER:
+
+     IF NNETPSTOP('PSERVER',0)
+        ? 'Printer 0 stopped!'
+     ELSE
+        ? 'Error'
+     ENDIF
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng72c6c.html">NNETPSTART()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

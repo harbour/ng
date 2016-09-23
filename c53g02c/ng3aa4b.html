@@ -1,0 +1,39 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng3a998.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng221ce.html">[^^Up^^]</A>
+<A HREF="ng3ad2a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>667     Eval stack crashed</B>
+
+     <B>Explanation:</B>  The evaluation stack (containing LOCALs, etc.) and/or
+     Memvar table has been exceeded, causing an attempt to access a locked VM
+     segment in near memory.
+
+     <B>Action:</B>  Some suggestions to resolve this problem are:
+
+     1. Decrease the stack or PROCEDURE DEPTH setting for the linker.
+
+     2. Decrease the number of LOCAL, STATIC or PRIVATE variables in use at
+        one time. i.e., use arrays instead of individual variables.
+
+     3. Decrease the number of ITEMS allocated if using ITEM.API of
+        CA-Clipper.
+
+     4. Free more conventional memory for use by the VM System.
+
+     <B>Note:</B> There could be an error in the runtime error handler.
+
+     <B>See Also:</B>  Error 650.
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

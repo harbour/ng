@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>Blinker 4.0 Online Reference - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng1ea28.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng1d014.html">[^^Up^^]</A>
+<A HREF="ng1f290.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>BLIDEMDTE() / BLIDEMDTEBAS()  Get demonstration date</B>
+------------------------------------------------------------------------------
+
+ <U>Function : <B>Get demonstration date</B></U>
+
+ <U>Syntax   : <B>cValue = BLIDEMDTE()</B></U>
+
+ <U>Return   : <B>Demonstration date as a string</B></U>
+
+ This function returns the demonstration date limit of the program if it was
+ set at link time, and returns it as a string in the form YYYYMMDD.
+
+ A null string will be returned if the demonstration date limit has not been
+ set.
+
+ Example:
+
+    <B>* Display the expiration date if there is one</B>
+    <B>*</B>
+    <B>TMPDEMDTE = BLIDEMDTE()    &amp;&amp; Get the date limit</B>
+    <B>IF LEN(TMPDEMDTE) &gt; 0</B>
+    <B>   ? "The expiration date of this program is "</B>
+    <B>   ?? TMPDEMDTE</B>
+    <B>ENDIF</B>
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng4a1f.html">BLINKER DEMONSTRATION DATE</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

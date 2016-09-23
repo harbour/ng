@@ -1,0 +1,94 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nge2189.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="nga979b.html">[^^Up^^]</A>
+<A HREF="nge302a.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>SET DATE</B>
+ Set the date format for input and display
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>SET DATE FORMAT [TO] &lt;cDateFormat&gt;</B>
+     <B>SET DATE [TO] AMERICAN | ansi | British | French</B>
+     <B>   | German | Italian | Japan | USA</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;cDateFormat&gt;</B> is a character expression that directly specifies the
+     date format when the FORMAT clause is specified.  &lt;cDateFormat&gt; must
+     evaluate to a string of 12 or fewer characters.
+
+     When specified, &lt;cDateFormat&gt; is analyzed to determine the proper
+     placement and number of digits for the day, month, and year.  The
+     position of the day, month, and year digits is determined by scanning
+     the string for one or more occurrences of the letters d, m, and y,
+     respectively.  Other characters in the string are copied verbatim into
+     displayed date values.
+
+     When FORMAT is not used, one of several keywords describes the date
+     format.  The following table shows the format for each keyword setting:
+
+     <B>SET DATE Formats</B>
+     ------------------------------------------------------------------------
+     <B>SETting   Format</B>
+     ------------------------------------------------------------------------
+     AMERICAN  mm/dd/yy
+     ANSI      yy.mm.dd
+     BRITISH   dd/mm/yy
+     FRENCH    dd/mm/yy
+     GERMAN    dd.mm.yy
+     ITALIAN   dd-mm-yy
+     JAPAN     yy/mm/dd
+     USA       mm-dd-yy
+     ------------------------------------------------------------------------
+
+ <B>Description</B>
+
+     SET DATE is an environment command that sets the display format for date
+     values.  SET DATE is a global setting that affects the behavior of dates
+     throughout a program, allowing you to control date formatting in a way
+     that facilitates porting applications to foreign countries.
+
+ <B>Examples</B>
+
+     <B>.</B>  In this example the FORMAT clause directly specifies the date
+        format:
+
+        SET DATE FORMAT "yyyy:mm:dd"
+
+     <B>.</B>  This example configures the date setting at runtime by passing
+        a DOS environment variable to the program, retrieving its value with
+        GETENV(), and setting DATE with the retrieved value:
+
+        C&gt;SET CLIP_DATE=dd/mm/yy
+
+        In the configuration section of the application program, the date
+        format is set like this:
+
+        FUNCTION AppConfig
+           SET DATE FORMAT TO GETENV("CLIP_DATE")
+           RETURN NIL
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng1acdd.html">CTOD()</A>
+<A HREF="ng1baff.html">DATE()</A>
+<A HREF="ng3e298.html">DTOC()</A>
+<A HREF="ng3e7ae.html">DTOS()</A>
+<A HREF="ngdf6fb.html">SET CENTURY</A>
+<A HREF="nge5761.html">SET EPOCH</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

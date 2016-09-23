@@ -1,0 +1,63 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.2 . Error Messages - Long Entry</TITLE></HEAD>
+<BODY>
+
+[&lt;&lt;Previous Entry]
+<A HREF="ng228.html">[^^Up^^]</A>
+<A HREF="ng2092.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+     This section is a summary of error messages possible when compiling a
+     program file (.prg) with CLIPPER.EXE.  The messages are divided into
+     categories according to severity and the point where the error occurs in
+     the compilation process.  Each category is described below, followed by
+     a listing of all messages organized by category.
+
+     The listed compiler error and warning messages are a subset of all the
+     possible messages the compiler can display, and represent the most
+     likely problems that will be encountered during compilation.
+
+ <B>Compiler Warning Messages</B>
+
+     Compiler warning messages indicate potential program errors that are not
+     fatal to the compilation process.  After a warning, compilation
+     continues with no effect on the generation of the output object (.OBJ)
+     file.  The DOS return code is not set when a compiler warning is
+     generated.
+
+     The general format of a compiler warning message is as follows:
+
+     <B>&lt;filename&gt;(&lt;line&gt;):  Error C1xxx &lt;message text&gt;[: &lt;symbol&gt;]</B>
+
+ <B>Compiler Error Messages</B>
+
+     Compiler error messages identify program errors that may be fatal to the
+     compilation process.  After a compilation error, the compiler attempts
+     to recover and continue.  In most cases, however, recovery will not be
+     possible and compilation terminates with no object file generated.  The
+     DOS return code is set to 1 when a compiler error is generated.
+
+     The general format of a compiler error message is as follows:
+
+     <B>&lt;filename&gt;(&lt;line&gt;):  Error C2xxx &lt;message text&gt;[: &lt;symbol&gt;]</B>
+
+ <B>Compiler Fatal Error Messages</B>
+
+     Compiler fatal error messages indicate a very serious problem has
+     occurred during the compilation of a program file (.prg). Because of the
+     severity, compilation terminates immediately and no object file is
+     generated.  The DOS return code is set to 1 when a fatal compiler error
+     is generated.
+
+     The general format of a fatal error message is as follows:
+
+     <B>&lt;filename&gt;(&lt;line&gt;):  Error C3xxx &lt;message text&gt;[: &lt;symbol&gt;]</B>
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

@@ -1,0 +1,61 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper Tools . Books 1-3 - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga042f.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng89afa.html">[^^Up^^]</A>
+<A HREF="nga0f6c.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>VOLSERIAL()</B>
+ Determines the DOS disk serial number
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>VOLSERIAL([&lt;cDrive&gt;]) --&gt; nVolSerial</B>
+
+ <B>Argument</B>
+
+     <B>&lt;cDrive&gt;</B>  Designates the drive whose volume serial number is
+     queried.  The default is the current disk drive.
+
+ <B>Returns</B>
+
+     VOLSERIAL() returns the volume serial number of the DOS  disk, hard
+     disk, or a 0, when you are not dealing with a DOS 4.0 or higher disk
+     (see Notes).  When the current drive is unavailable, it returns -1.
+
+ <B>Description</B>
+
+     VOLUME SERIAL NUMBER
+     Beginning with DOS version 4.0, every floppy or hard disk receives a
+     volume serial number during formatting.  This is a 32-bit number is
+     created by DOS using the date, clock time, and a counter.
+
+ <B>Notes</B>
+
+     <B>.</B>  Incompatibilities are possible.
+
+     <B>.</B>  The function always returns a value from the disk parameter
+        block of a floppy or hard disk.  Based on the Microsoft
+        recommendation for DOS versions prior to 4.0, a value of 0 is
+        returned.
+
+ <B>Example</B>
+
+     Query the volume serial number:
+
+     ? VOLSERIAL()            // 0, when no DOS 4.x disk
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngbd694.html">OSVER()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

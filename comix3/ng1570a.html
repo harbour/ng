@@ -1,0 +1,81 @@
+<HTML>
+<HEAD><TITLE>ClipMore 3.0 Reference Manual - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng15637.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ngf477.html">[^^Up^^]</A>
+<A HREF="ng15de0.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+<B>Advanced Topics</B>
+------------------------------------------------------------------------------
+
+This chapter is a catch-all for items not covered elsewhere in this manual.
+
+<B>Known Limitations</B>
+
+These are known limitations of the current version of ClipMore:
+
+o   You cannot reference locals or statics.  See the cm2Str() function
+    for a clean way to work around this.
+
+o   You cannot reference array elements.  See the cm2Str() function for a
+    clean way to work around this.
+
+
+<B>Multi-User Considerations</B>
+
+When cmFilter() is called, it effectively takes a "snap-shot" of the
+database at that point in time.  This means that records which didn't meet
+the condition when cmFilter() was executed will _not_ be reexamined, and
+will never be considered to meet the filter condition.
+
+As an example of this behavior consider the following:
+
+Time 1:
+
+    Record 100:     Bobo    50
+
+Time 2 (Workstation A):
+
+    use demo index age
+    cmFilter("age = 49")
+    (record 100 does NOT meet the condition)
+
+Time 3 (Workstation B):
+
+    use demo index age
+    goto 100
+    rlock()
+    replace age with 49
+    unlock
+
+Time 4 (Workstation A):
+
+    Still won't display record 100 (since it didn't meet the condition
+    at Time 2 when the condition was evaluated).
+
+Based on _lots_ of experience, this is _not_ an important issue in most
+cases.  This is similar to what you encounter when you display records in a
+TBrowse.  The records displayed are a "snap-shot" from an earlier time.
+
+In the event that this is critical for your application, we recommend that
+you define a user key which allows them to "refresh" their snap-shot of
+the database.  For example:
+
+    function cmRefresh()
+
+            //  Re-evaluate the current condition
+        cmFilter(dbFilter())
+    return nil
+
+
+</PRE>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

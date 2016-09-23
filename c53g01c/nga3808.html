@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="nga2eba.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="nga3bfd.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>TIME()</B>
+ Return the system time
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>TIME() --&gt; cTimeString</B>
+
+ <B>Returns</B>
+
+     TIME() returns the system time as a character string in the form
+     hh:mm:ss.  hh is hours in 24-hour format, mm is minutes, and ss is
+     seconds.
+
+ <B>Description</B>
+
+     TIME() is a time function that displays the system time on the screen or
+     prints it on a report.  TIME() is related to SECONDS() which returns the
+     integer value representing the number of seconds since midnight.
+     SECONDS() is generally used in place of TIME() for time calculations.
+
+ <B>Examples</B>
+
+     <B>.</B>  These examples show the results of TIME() used with SUBSTR()
+        to extract the hour, minutes, and seconds digits:
+
+        ? TIME()                       // Result: 10:37:17
+        ? SUBSTR(TIME(), 1, 2)         // Result: 10
+        ? SUBSTR(TIME(), 4, 2)         // Result: 37
+        ? SUBSTR(TIME(), 7, 2)         // Result: 17
+
+ <B>Files</B>   Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng99e31.html">SECONDS()</A>
+<A HREF="nga2eba.html">SUBSTR()</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

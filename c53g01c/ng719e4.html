@@ -1,0 +1,110 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng712a6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng34b.html">[^^Up^^]</A>
+<A HREF="ng727bc.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>MENUMODAL()</B>
+ Activate a top bar menu
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>MENUMODAL(&lt;oTopBar&gt;, &lt;nSelection&gt;, &lt;nMsgRow&gt;,</B>
+     <B>   &lt;nMsgLeft&gt;, &lt;nMsgRight&gt;, &lt;cMsgColor&gt;) --&gt; MenuID</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;oTopBar&gt;</B> is a TopBarMenu object created from the TopBarMenu class.
+
+     <B>&lt;nSelection&gt;</B> is the TopBarMenu item selected by default.
+
+     <B>&lt;nMsgRow&gt;</B> is the row number where menu item messages will appear.
+
+     <B>&lt;nMsgLeft&gt;</B> specifies the left border for menu item messages.
+
+     <B>&lt;nMsgRight&gt;</B> specifies the right border for menu item messages.
+
+     <B>&lt;cMsgColor&gt;</B> defines the color string for the menu item messages.  It
+     consists of a single foreground/background pair.
+
+ <B>Returns</B>
+
+     MENUMODAL() returns the menu ID of the chosen menu item.  Menu IDs are
+     assigned using the MenuItem class.
+
+ <B>Description</B>
+
+     MENUMODAL() is a user-interface function that implements the pull-down
+     menu system in CA-Clipper.  It is part of the open architecture Get
+     system of CA-Clipper.  MENUMODAL() is similar to the READ command in
+     that it waits for the user to perform an action.  However, the
+     MENUMODAL() function will only respond to menu actions.
+
+     To implement a menu object at the same time as other objects, use the
+     READMODAL() function which has one of its arguments as TopBarMenu
+     object.
+
+     When the user chooses a menu item, control is passed to the code block
+     associated with that particular menu item.  Code blocks are defined
+     using the MenuItem class.
+
+     The menu items can be selected by using either the keyboard or the
+     mouse.  To select a menu item with the mouse, simply select its
+     TopBarMenu item with the mouse and then choose the appropriate PopUp
+     menu item.
+
+     <B>Note:</B>  The MENUMODAL() function will take one menu event from the
+     user and then terminate.  To avoid this, the following can be used, and
+     the same will allow the program to continuously accept menu events:
+
+     DO WHILE (MENUMODAL(themenu,...) &lt;&gt; ExitMenu)
+     ENDDO
+
+     The following table lists the active keys that can be used during
+     MENUMODAL():
+
+     <B>MENUMODAL() Navigation Keys</B>
+     ------------------------------------------------------------------------
+     <B>Key                 Action</B>
+     ------------------------------------------------------------------------
+     Left arrow, Ctrl+S  Move to the next TopBarMenu item to the left.  If
+                         there are no more items to the left, the rightmost
+                         TopBarMenu item will be selected.
+     Right arrow, Ctrl+D Move to the next TopBarMenu item to the right.  If
+                         there are no more items to the right, the leftmost
+                         TopBarMenu will be selected.
+     Up arrow, Ctrl+E    Move to the previous PopUp menu item.  If there are
+                         no more items above the current item, the menu item
+                         on the bottom will be selected.
+     Down arrow, Ctrl+X  Move to the next PopUp menu item.  If there are no
+                         more items below the current item, the menu item on
+                         the top will be selected.
+     ------------------------------------------------------------------------
+
+ <B>Examples</B>
+
+     See the Menu.prg sample file in the \CLIP53\SOURCE\SAMPLE directory.
+     This example demonstrates combining TopBarMenu, PopUpMenu, and MenuItem
+     objects to create a menu with a number of available choices.  See
+     "Introduction to the Menu System" in the Programming and Utilities Guide
+     for more information about using this function.
+
+ <B>Files</B>   Library is CLIPPER.LIB, source file is SOURCE\SYS\MENUSYS.PRG
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ng141fe8.html">MenuItem class</A>
+<A HREF="ng143d7a.html">PopUpMenu class</A>
+<A HREF="ng162392.html">TopBarMenu class</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>

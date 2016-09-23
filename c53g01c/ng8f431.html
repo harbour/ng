@@ -1,0 +1,73 @@
+<HTML>
+<HEAD><TITLE>CA-Clipper 5.3 . Guide To CA-Clipper - Long Entry</TITLE></HEAD>
+<BODY>
+
+<A HREF="ng8eca6.html">[&lt;&lt;Previous Entry]</A>
+<A HREF="ng797cd.html">[^^Up^^]</A>
+<A HREF="ng8fb99.html">[Next Entry&gt;&gt;]</A>
+<A HREF="menu.html" >[Menu]</A>
+<A HREF="info.html">[About The Guide]</A>
+<HR>
+<PRE>
+ <B>QOUT()</B>
+ Display a list of expressions to the console
+------------------------------------------------------------------------------
+ <B>Syntax</B>
+
+     <B>QOUT([&lt;exp list&gt;]) --&gt; NIL</B>
+     <B>QQOUT([&lt;exp list&gt;]) --&gt; NIL</B>
+
+ <B>Arguments</B>
+
+     <B>&lt;exp list&gt;</B> is a comma-separated list of expressions (of any data
+     type other than array or block) to display to the console.  If no
+     argument is specified and QOUT() is specified, a carriage return/line
+     feed pair is displayed.  If QQOUT() is specified without arguments,
+     nothing displays.
+
+ <B>Returns</B>
+
+     QOUT() and QQOUT() always return NIL.
+
+ <B>Description</B>
+
+     QOUT() and QQOUT() are console functions.  These are the functional
+     primitives that create the ? and ?? commands, respectively.  Like the ?
+     and ?? commands, they display the results of one or more expressions to
+     the console.  QOUT() outputs carriage return and line feed characters
+     before displaying the results of &lt;exp list&gt;.  QQOUT() displays the
+     results of &lt;exp list&gt; at the current ROW() and COL() position.  When
+     QOUT() and QQOUT() display to the console, ROW() and COL() are updated.
+     If SET PRINTER is ON, PROW() and PCOL() are updated instead.  If &lt;exp
+     list&gt; is specified, both QOUT() and QQOUT() display a space between the
+     results of each expression.
+
+     You can use QOUT() and QQOUT() for console display within an expression.
+     This is particularly useful for blocks, iteration functions such as
+     AEVAL() and DBEVAL(), and in a list of statements in the output pattern
+     of a user-defined command definition.
+
+ <B>Examples</B>
+
+     <B>.</B>  This example uses QOUT() with AEVAL() to list the contents of
+        a literal array to the console:
+
+        LOCAL aElements := { 1, 2, 3, 4, 5 }
+        AEVAL(aElements, { |element| QOUT(element) })
+
+ <B>Files:</B>     Library is CLIPPER.LIB.
+
+</PRE>
+<HR>
+<B>See Also:</B>
+<A HREF="ngab504.html">?|??</A>
+<A HREF="ngba99e.html">@...SAY</A>
+<A HREF="ngde71b.html">SET ALTERNATE</A>
+<A HREF="nge1808.html">SET CONSOLE</A>
+<A HREF="nged8e1.html">SET PRINTER</A>
+<HR>
+This page created by ng2html v1.05, the Norton guide to HTML conversion utility.
+Written by <A HREF="http://www.acemake.com/hagbard">Dave Pearson</A>
+<HR>
+</BODY>
+</HTML>
